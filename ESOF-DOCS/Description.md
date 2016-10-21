@@ -7,4 +7,5 @@ course we will be evaluating models and pattern present in this project, in orde
 Each week we will be given an assignement with a given description:
 
 [Week 1: Software Process Models](https://github.com/PedroTav/mage/blob/master/ESOF-DOCS/Week1.md)
+
 [Week 2: Requirements Elicitation](https://github.com/PedroTav/mage/blob/master/ESOF-DOCS/Week2.md)
