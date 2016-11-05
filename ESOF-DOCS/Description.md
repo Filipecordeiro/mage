@@ -1,6 +1,6 @@
-#MageX
+#XMage
 
-This project is about the game Magic: The Gathering. The name of this particular build is MageX and it simulates the
+This project is about the game Magic: The Gathering. The name of this particular build is XMage and it simulates the
 card game. It has constant updates with new content(that is, cards). It provides online multiplayer support. During this
 course we will be evaluating models and pattern present in this project, in order to contribute ourselves by the end of it.
 
