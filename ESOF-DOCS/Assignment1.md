@@ -1,4 +1,4 @@
-#Week 1
+#Assignment 1
 
 During this first week, we have contacted a project admin in order to find out what sort of 
 software process models were used in the making of XMage. We established contact through a forum
