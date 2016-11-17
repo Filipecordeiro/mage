@@ -2,3 +2,19 @@
 
 During this third assignement we were given the task of researching on the project's arquitectural view model. We discovered
 what arquitectural patterns were followed and discussed their impact on the project itself.
+
+__Arquitectural Patterns__
+
+This project has a few patterns that are easily noticable when it comes to its arquitecture. For starters, the entire project is divided in several components that are built individually, but work together to have the entire game running. Instead of having a huge project with several different things in it, they separate what they feel is important to avoid confusion. Therefore, there are things like the Mage Client, the Mage Server or the Chat that interact with each other through several interfaces. However, all of these are subsystems of their own and have some sort of independence.
+
+__Logical View__
+
+The Logical view for this project follows:
+
+![alt text](http://i.imgur.com/9aBDE77.png "Use case")
+
+__Implementation View__
+
+The implementation view is shown below:
+
+![alt text](http://i.imgur.com/XOssgcg.png "Use case")
