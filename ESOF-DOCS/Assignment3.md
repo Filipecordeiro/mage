@@ -18,3 +18,16 @@ __Implementation View__
 The implementation view is shown below:
 
 ![alt text](http://i.imgur.com/XOssgcg.png "Use case")
+
+__Deployment View__
+
+We now take a look at the Deployment View:
+
+![alt text](http://i.imgur.com/yncv0pD.png "Use case")
+
+__Process View__
+
+Finally we present the Process View:
+
+![alt text](http://i.imgur.com/nCz6tqd.png "Use case")
+
