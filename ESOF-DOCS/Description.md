@@ -11,3 +11,5 @@ Each week we will be given an assignement with a given description:
 [Assignment 2: Requirements Elicitation](https://github.com/PedroTav/mage/blob/master/ESOF-DOCS/Assignment2.md)
 
 [Assignment 3: Software Design](https://github.com/PedroTav/mage/blob/master/ESOF-DOCS/Assignment3.md)
+
+[Assignment 4: Verification and Validation](https://github.com/PedroTav/mage/blob/master/ESOF-DOCS/Assignment4.md)
