@@ -9,6 +9,11 @@ When it comes to testing, XMage has several features that help developers with t
 
 __Test Statistics__
 
+In order to understand just how good testing is in the project, we analysed the automated tests implemented by developers. We ran the tests and check their coverage.
+The test coverage numbers are not very positive, as a mere 20% of all classes are actually tested. However, a lot of it has to do with the proportions of the project. For example, the package that contains all the cards has 20147 classes, from which only 3106 are tested. If we put this in contrast with the amount of classes in other packages such as the package that contains game logic (262 classes, from which 144 are tested) we see that the numbers reflected by the coverage results are strongly affected by the cards, not the game logic.
+There is a total of 1732 tests across the project, which is a relatively low number considering the complexity of XMage.
+This test results lead us to conclude that testing in XMage is mostly done manually. This comes as no surprise as,after all,the developers have created their own testing mode which allows contributors to play the game with that mode, which allows them to test pretty much everything. In fact, on the developer notes regarding testing, they actually encourage contributors to use their testing mode. They briefly mention the automated tests. However they also say that these tests cover mainly game logic and other core aspects of the game. This also doesn't come as a shock, considering that only 20% of the classes withing the project were tested, and the 80% that weren't were mainly cards.
+
 __Bugs__
 
 __Team Contribution__
