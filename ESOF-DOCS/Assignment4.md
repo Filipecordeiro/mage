@@ -15,7 +15,7 @@ There is a total of 1732 tests across the project, which is a relatively low num
 This test results lead us to conclude that testing in XMage is mostly done manually. This comes as no surprise as, after all, the developers have created their own testing mode which allows contributors to play the game with that mode, which, in turn, gives them the chance to test pretty much everything. In fact, on the developer notes regarding testing, they actually encourage contributors to use their testing mode. They briefly mention the automated tests. However they also say that these tests cover mainly game logic and other core aspects of the game. This also doesn't come as a shock, considering that only 20% of the classes withing the project were tested, and the 80% that weren't were mainly cards.
 Given all of this assessments, we were able to conclude that testing in XMage is mainly done with its own testing tool. However, automated tests come in handy to test if a new change to the software has any impact in the main mechanics of the game.
 
-[Test coverage log](https://github.com/PedroTav/mage/blob/master/ESOF-DOCS/CoverageReport/index.html)
+[Test coverage log](http://htmlpreview.github.io/?https://github.com/PedroTav/mage/blob/master/ESOF-DOCS/CoverageReport/index.html)
 
 __Bugs__
 
