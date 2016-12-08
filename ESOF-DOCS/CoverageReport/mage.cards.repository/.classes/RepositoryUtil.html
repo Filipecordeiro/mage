@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RepositoryUtil</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RepositoryUtil (mage.cards.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RepositoryUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (21/ 33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.cards.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.j256.ormlite.dao.Dao;
+<i>4</i>&nbsp;import com.j256.ormlite.dao.DaoManager;
+<i>5</i>&nbsp;import com.j256.ormlite.stmt.DeleteBuilder;
+<i>6</i>&nbsp;import com.j256.ormlite.stmt.QueryBuilder;
+<i>7</i>&nbsp;import com.j256.ormlite.stmt.SelectArg;
+<i>8</i>&nbsp;import com.j256.ormlite.support.ConnectionSource;
+<i>9</i>&nbsp;import com.j256.ormlite.table.TableUtils;
+<i>10</i>&nbsp;import java.sql.SQLException;
+<i>11</i>&nbsp;import java.util.List;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;/**
+<i>14</i>&nbsp; *
+<i>15</i>&nbsp; * @author North
+<i>16</i>&nbsp; */
+<b class="nc"><i>17</i>&nbsp;public class RepositoryUtil {</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public static boolean isDatabaseObsolete(ConnectionSource connectionSource, String entityName, long version) throws SQLException {
+<b class="fc"><i>20</i>&nbsp;        TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);</b>
+<b class="fc"><i>21</i>&nbsp;        Dao&lt;DatabaseVersion, Object&gt; dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);</b>
+<i>22</i>&nbsp;
+<b class="fc"><i>23</i>&nbsp;        QueryBuilder&lt;DatabaseVersion, Object&gt; queryBuilder = dbVersionDao.queryBuilder();</b>
+<b class="fc"><i>24</i>&nbsp;        queryBuilder.where().eq(&quot;entity&quot;, new SelectArg(entityName)).and().eq(&quot;version&quot;, version);</b>
+<b class="fc"><i>25</i>&nbsp;        List&lt;DatabaseVersion&gt; dbVersions = dbVersionDao.query(queryBuilder.prepare());</b>
+<i>26</i>&nbsp;
+<b class="fc"><i>27</i>&nbsp;        if (dbVersions.isEmpty()) {</b>
+<b class="nc"><i>28</i>&nbsp;            DatabaseVersion dbVersion = new DatabaseVersion();</b>
+<b class="nc"><i>29</i>&nbsp;            dbVersion.setEntity(entityName);</b>
+<b class="nc"><i>30</i>&nbsp;            dbVersion.setVersion(version);</b>
+<b class="nc"><i>31</i>&nbsp;            dbVersionDao.create(dbVersion);</b>
+<i>32</i>&nbsp;        }
+<b class="fc"><i>33</i>&nbsp;        return dbVersions.isEmpty();</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    public static void updateVersion(ConnectionSource connectionSource, String entityName, long version) throws SQLException {
+<b class="fc"><i>37</i>&nbsp;        TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);</b>
+<b class="fc"><i>38</i>&nbsp;        Dao&lt;DatabaseVersion, Object&gt; dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);</b>
+<i>39</i>&nbsp;
+<b class="fc"><i>40</i>&nbsp;        QueryBuilder&lt;DatabaseVersion, Object&gt; queryBuilder = dbVersionDao.queryBuilder();</b>
+<b class="fc"><i>41</i>&nbsp;        queryBuilder.where().eq(&quot;entity&quot;, new SelectArg(entityName));</b>
+<b class="fc"><i>42</i>&nbsp;        List&lt;DatabaseVersion&gt; dbVersions = dbVersionDao.query(queryBuilder.prepare());</b>
+<i>43</i>&nbsp;
+<b class="fc"><i>44</i>&nbsp;        if (!dbVersions.isEmpty()) {</b>
+<b class="fc"><i>45</i>&nbsp;            DeleteBuilder&lt;DatabaseVersion, Object&gt; deleteBuilder = dbVersionDao.deleteBuilder();</b>
+<b class="fc"><i>46</i>&nbsp;            deleteBuilder.where().eq(&quot;entity&quot;, new SelectArg(entityName));</b>
+<b class="fc"><i>47</i>&nbsp;            deleteBuilder.delete();</b>
+<i>48</i>&nbsp;        }
+<b class="fc"><i>49</i>&nbsp;        DatabaseVersion databaseVersion = new DatabaseVersion();</b>
+<b class="fc"><i>50</i>&nbsp;        databaseVersion.setEntity(entityName);</b>
+<b class="fc"><i>51</i>&nbsp;        databaseVersion.setVersion(version);</b>
+<b class="fc"><i>52</i>&nbsp;        dbVersionDao.create(databaseVersion);</b>
+<b class="fc"><i>53</i>&nbsp;    }</b>
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public static long getDatabaseVersion(ConnectionSource connectionSource, String entityName) throws SQLException {
+<b class="nc"><i>56</i>&nbsp;        Dao&lt;DatabaseVersion, Object&gt; dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);</b>
+<i>57</i>&nbsp;
+<b class="nc"><i>58</i>&nbsp;        QueryBuilder&lt;DatabaseVersion, Object&gt; queryBuilder = dbVersionDao.queryBuilder();</b>
+<b class="nc"><i>59</i>&nbsp;        queryBuilder.where().eq(&quot;entity&quot;, new SelectArg(entityName));</b>
+<b class="nc"><i>60</i>&nbsp;        List&lt;DatabaseVersion&gt; dbVersions = dbVersionDao.query(queryBuilder.prepare());</b>
+<b class="nc"><i>61</i>&nbsp;        if (dbVersions.isEmpty()) {</b>
+<b class="nc"><i>62</i>&nbsp;            return 0;</b>
+<i>63</i>&nbsp;        } else {
+<b class="nc"><i>64</i>&nbsp;            return dbVersions.get(0). getVersion();</b>
+<i>65</i>&nbsp;        }
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

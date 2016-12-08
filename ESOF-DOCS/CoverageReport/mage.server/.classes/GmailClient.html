@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GmailClient</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.server</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GmailClient (mage.server)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GmailClient</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.server;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.google.api.client.auth.oauth2.Credential;
+<i>4</i>&nbsp;import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+<i>5</i>&nbsp;import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+<i>6</i>&nbsp;import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+<i>7</i>&nbsp;import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+<i>8</i>&nbsp;import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+<i>9</i>&nbsp;import com.google.api.client.http.HttpTransport;
+<i>10</i>&nbsp;import com.google.api.client.json.JsonFactory;
+<i>11</i>&nbsp;import com.google.api.client.json.jackson2.JacksonFactory;
+<i>12</i>&nbsp;import com.google.api.client.util.Base64;
+<i>13</i>&nbsp;import com.google.api.client.util.store.FileDataStoreFactory;
+<i>14</i>&nbsp;import com.google.api.services.gmail.Gmail;
+<i>15</i>&nbsp;import com.google.api.services.gmail.Gmail.Builder;
+<i>16</i>&nbsp;import com.google.api.services.gmail.GmailScopes;
+<i>17</i>&nbsp;import com.google.api.services.gmail.model.Message;
+<i>18</i>&nbsp;import java.io.ByteArrayOutputStream;
+<i>19</i>&nbsp;import java.io.FileReader;
+<i>20</i>&nbsp;import java.io.IOException;
+<i>21</i>&nbsp;import java.security.GeneralSecurityException;
+<i>22</i>&nbsp;import java.util.Collections;
+<i>23</i>&nbsp;import java.util.Properties;
+<i>24</i>&nbsp;import javax.mail.MessagingException;
+<i>25</i>&nbsp;import javax.mail.Session;
+<i>26</i>&nbsp;import javax.mail.internet.InternetAddress;
+<i>27</i>&nbsp;import javax.mail.internet.MimeMessage;
+<i>28</i>&nbsp;import mage.server.util.ConfigSettings;
+<i>29</i>&nbsp;import org.apache.log4j.Logger;
+<i>30</i>&nbsp;
+<b class="nc"><i>31</i>&nbsp;public class GmailClient {</b>
+<i>32</i>&nbsp;
+<b class="nc"><i>33</i>&nbsp;    private static final Logger logger = Logger.getLogger(Main.class);</b>
+<b class="nc"><i>34</i>&nbsp;    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();</b>
+<b class="nc"><i>35</i>&nbsp;    private static final java.io.File DATA_STORE_DIR = new java.io.File(System.getProperty(&quot;user.home&quot;), &quot;.store/xmage&quot;);</b>
+<i>36</i>&nbsp;    private static FileDataStoreFactory dataStoreFactory;
+<i>37</i>&nbsp;    private static HttpTransport httpTransport;
+<i>38</i>&nbsp;    private static Credential credential;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    public static boolean initilize() {
+<i>41</i>&nbsp;        try {
+<b class="nc"><i>42</i>&nbsp;            dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);</b>
+<b class="nc"><i>43</i>&nbsp;            httpTransport = GoogleNetHttpTransport.newTrustedTransport();</b>
+<i>44</i>&nbsp;
+<b class="nc"><i>45</i>&nbsp;            GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new FileReader(&quot;client_secrets.json&quot;));</b>
+<b class="nc"><i>46</i>&nbsp;            if (clientSecrets.getDetails().getClientId().startsWith(&quot;Enter&quot;)</b>
+<b class="nc"><i>47</i>&nbsp;                    || clientSecrets.getDetails().getClientSecret().startsWith(&quot;Enter &quot;)) {</b>
+<b class="nc"><i>48</i>&nbsp;                logger.error(&quot;client_secrets.json not found&quot;);</b>
+<b class="nc"><i>49</i>&nbsp;                return false;</b>
+<i>50</i>&nbsp;            }
+<i>51</i>&nbsp;
+<b class="nc"><i>52</i>&nbsp;            GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(</b>
+<i>53</i>&nbsp;                    httpTransport, JSON_FACTORY, clientSecrets,
+<b class="nc"><i>54</i>&nbsp;                    Collections.singleton(GmailScopes.GMAIL_COMPOSE)).setDataStoreFactory(</b>
+<b class="nc"><i>55</i>&nbsp;                            dataStoreFactory).build();</b>
+<i>56</i>&nbsp;
+<b class="nc"><i>57</i>&nbsp;            credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize(&quot;user&quot;);</b>
+<b class="nc"><i>58</i>&nbsp;            return true;</b>
+<b class="nc"><i>59</i>&nbsp;        } catch (IOException | GeneralSecurityException ex) {</b>
+<b class="nc"><i>60</i>&nbsp;            logger.error(&quot;Error initializing GmailClient&quot;, ex);</b>
+<i>61</i>&nbsp;        }
+<b class="nc"><i>62</i>&nbsp;        return false;</b>
+<i>63</i>&nbsp;    }
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    public static boolean sendMessage(String email, String subject, String text) {
+<b class="nc"><i>66</i>&nbsp;        if (email.isEmpty()) {</b>
+<b class="nc"><i>67</i>&nbsp;            logger.info(&quot;Email is not sent because the address is empty&quot;);</b>
+<b class="nc"><i>68</i>&nbsp;            return false;</b>
+<i>69</i>&nbsp;        }
+<i>70</i>&nbsp;        try {
+<b class="nc"><i>71</i>&nbsp;            Gmail gmail = new Builder(httpTransport, JSON_FACTORY, credential).setApplicationName(&quot;XMage Server&quot;).build();</b>
+<i>72</i>&nbsp;
+<b class="nc"><i>73</i>&nbsp;            MimeMessage mimeMessage = new MimeMessage(Session.getDefaultInstance(new Properties()));</b>
+<b class="nc"><i>74</i>&nbsp;            mimeMessage.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(email));</b>
+<b class="nc"><i>75</i>&nbsp;            mimeMessage.setSubject(subject);</b>
+<b class="nc"><i>76</i>&nbsp;            mimeMessage.setText(text);</b>
+<i>77</i>&nbsp;
+<b class="nc"><i>78</i>&nbsp;            ByteArrayOutputStream baos = new ByteArrayOutputStream();</b>
+<b class="nc"><i>79</i>&nbsp;            mimeMessage.writeTo(baos);</b>
+<b class="nc"><i>80</i>&nbsp;            Message message = new Message();</b>
+<b class="nc"><i>81</i>&nbsp;            message.setRaw(Base64.encodeBase64URLSafeString(baos.toByteArray()));</b>
+<i>82</i>&nbsp;
+<b class="nc"><i>83</i>&nbsp;            gmail.users().messages().send(ConfigSettings.getInstance().getGoogleAccount()</b>
+<b class="nc"><i>84</i>&nbsp;                    + (ConfigSettings.getInstance().getGoogleAccount().endsWith(&quot;@gmail.com&quot;) ? &quot;&quot; : &quot;@gmail.com&quot;), message).execute();</b>
+<b class="nc"><i>85</i>&nbsp;            return true;</b>
+<b class="nc"><i>86</i>&nbsp;        } catch (MessagingException | IOException ex) {</b>
+<b class="nc"><i>87</i>&nbsp;            logger.error(&quot;Error sending message&quot;, ex);</b>
+<i>88</i>&nbsp;        }
+<b class="nc"><i>89</i>&nbsp;        return false;</b>
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

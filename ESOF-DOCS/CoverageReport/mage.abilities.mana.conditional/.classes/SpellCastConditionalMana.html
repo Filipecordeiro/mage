@@ -1,0 +1,161 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SpellCastConditionalMana</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.mana.conditional</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SpellCastConditionalMana (mage.abilities.mana.conditional)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SpellCastConditionalMana</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.abilities.mana.conditional;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.UUID;
+<i>9</i>&nbsp;import mage.ConditionalMana;
+<i>10</i>&nbsp;import mage.MageObject;
+<i>11</i>&nbsp;import mage.Mana;
+<i>12</i>&nbsp;import mage.abilities.Ability;
+<i>13</i>&nbsp;import mage.abilities.SpellAbility;
+<i>14</i>&nbsp;import mage.abilities.condition.Condition;
+<i>15</i>&nbsp;import mage.abilities.costs.Cost;
+<i>16</i>&nbsp;import mage.abilities.mana.builder.ConditionalManaBuilder;
+<i>17</i>&nbsp;import mage.filter.FilterSpell;
+<i>18</i>&nbsp;import mage.game.Game;
+<i>19</i>&nbsp;import mage.game.stack.StackObject;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;/**
+<i>22</i>&nbsp; *
+<i>23</i>&nbsp; * @author LevelX2
+<i>24</i>&nbsp; */
+<i>25</i>&nbsp;public class ConditionalSpellManaBuilder extends ConditionalManaBuilder {
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    private final FilterSpell filter;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public ConditionalSpellManaBuilder(FilterSpell filter) {
+<i>30</i>&nbsp;        this.filter = filter;
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Override
+<i>34</i>&nbsp;    public ConditionalMana build(Object... options) {
+<i>35</i>&nbsp;        this.mana.setFlag(true); // indicates that the mana is from second ability
+<i>36</i>&nbsp;        return new SpellCastConditionalMana(this.mana, filter);
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @Override
+<i>40</i>&nbsp;    public String getRule() {
+<i>41</i>&nbsp;        return &quot;Spend this mana only to cast &quot; + filter.getMessage() + &quot;.&quot;;
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;}
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;class SpellCastConditionalMana extends ConditionalMana {
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    SpellCastConditionalMana(Mana mana, FilterSpell filter) {
+<b class="fc"><i>48</i>&nbsp;        super(mana);</b>
+<b class="fc"><i>49</i>&nbsp;        staticText = &quot;Spend this mana only to cast &quot; + filter.getMessage() + &quot;.&quot;;</b>
+<b class="fc"><i>50</i>&nbsp;        addCondition(new SpellCastManaCondition(filter));</b>
+<b class="fc"><i>51</i>&nbsp;    }</b>
+<i>52</i>&nbsp;}
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;class SpellCastManaCondition extends ManaCondition implements Condition {
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    private final FilterSpell filter;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public SpellCastManaCondition(FilterSpell filter) {
+<i>59</i>&nbsp;        this.filter = filter;
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    @Override
+<i>63</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>64</i>&nbsp;        if (source instanceof SpellAbility) {
+<i>65</i>&nbsp;            MageObject object = game.getObject(source.getSourceId());
+<i>66</i>&nbsp;            if (object != null &amp;&amp; (object instanceof StackObject)) {
+<i>67</i>&nbsp;                return filter.match((StackObject) object, source.getSourceId(), source.getControllerId(), game);
+<i>68</i>&nbsp;            }
+<i>69</i>&nbsp;        }
+<i>70</i>&nbsp;        return false;
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    @Override
+<i>74</i>&nbsp;    public boolean apply(Game game, Ability source, UUID originalId, Cost costToPay) {
+<i>75</i>&nbsp;        return apply(game, source);
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

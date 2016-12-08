@@ -1,0 +1,225 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SkyshipWeatherlightEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.s</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SkyshipWeatherlightEffect (mage.cards.s)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SkyshipWeatherlightEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.cards.s;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.UUID;
+<i>9</i>&nbsp;import mage.MageObject;
+<i>10</i>&nbsp;import mage.abilities.Ability;
+<i>11</i>&nbsp;import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+<i>12</i>&nbsp;import mage.abilities.common.SimpleActivatedAbility;
+<i>13</i>&nbsp;import mage.abilities.costs.common.TapSourceCost;
+<i>14</i>&nbsp;import mage.abilities.costs.mana.GenericManaCost;
+<i>15</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>16</i>&nbsp;import mage.abilities.effects.SearchEffect;
+<i>17</i>&nbsp;import mage.cards.Card;
+<i>18</i>&nbsp;import mage.cards.CardImpl;
+<i>19</i>&nbsp;import mage.cards.CardSetInfo;
+<i>20</i>&nbsp;import mage.constants.CardType;
+<i>21</i>&nbsp;import mage.constants.Outcome;
+<i>22</i>&nbsp;import mage.constants.Zone;
+<i>23</i>&nbsp;import mage.filter.FilterCard;
+<i>24</i>&nbsp;import mage.filter.predicate.Predicates;
+<i>25</i>&nbsp;import mage.filter.predicate.mageobject.CardTypePredicate;
+<i>26</i>&nbsp;import mage.game.ExileZone;
+<i>27</i>&nbsp;import mage.game.Game;
+<i>28</i>&nbsp;import mage.players.Player;
+<i>29</i>&nbsp;import mage.target.common.TargetCardInLibrary;
+<i>30</i>&nbsp;import mage.util.CardUtil;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;/**
+<i>33</i>&nbsp; *
+<i>34</i>&nbsp; * @author nick.myers
+<i>35</i>&nbsp; */
+<i>36</i>&nbsp;public class SkyshipWeatherlight1 extends CardImpl {
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public SkyshipWeatherlight1(UUID ownerId, CardSetInfo setInfo) {
+<i>39</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},&quot;{4}&quot;);
+<i>40</i>&nbsp;        this.supertype.add(&quot;Legendary&quot;);
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;        // When Skyship Weatherlight enters the battlefield, search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library.
+<i>43</i>&nbsp;        this.addAbility(new EntersBattlefieldTriggeredAbility(new SkyshipWeatherlightEffect(), false));
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;        // {4}, {tap}, Choose a card at random that was removed from the game with Skyship Weatherlight. Put that card into your hand.
+<i>46</i>&nbsp;        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SkyshipWeatherlightEffect2(), new GenericManaCost(4));
+<i>47</i>&nbsp;        ability.addCost(new TapSourceCost());
+<i>48</i>&nbsp;        this.addAbility(ability);
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    public SkyshipWeatherlight1(final SkyshipWeatherlight1 card) {
+<i>52</i>&nbsp;        super(card);
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    @Override
+<i>56</i>&nbsp;    public SkyshipWeatherlight1 copy() {
+<i>57</i>&nbsp;        return new SkyshipWeatherlight1(this);
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;}
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;class SkyshipWeatherlightEffect extends SearchEffect {
+<i>63</i>&nbsp;
+<b class="nc"><i>64</i>&nbsp;    private static final FilterCard filter = new FilterCard(&quot;artifact and/or creature card&quot;);</b>
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    static {
+<b class="nc"><i>67</i>&nbsp;        filter.add(Predicates.or(</b>
+<i>68</i>&nbsp;                new CardTypePredicate(CardType.ARTIFACT),
+<i>69</i>&nbsp;                new CardTypePredicate(CardType.CREATURE)));
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public SkyshipWeatherlightEffect() {
+<i>73</i>&nbsp;
+<b class="nc"><i>74</i>&nbsp;        super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);</b>
+<b class="nc"><i>75</i>&nbsp;        this.staticText = &quot;search your library for any number of artifact and/or creature cards and remove them from the game. Then shuffle your library&quot;;</b>
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    public SkyshipWeatherlightEffect(final SkyshipWeatherlightEffect effect) {
+<b class="nc"><i>80</i>&nbsp;        super(effect);</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    @Override
+<i>84</i>&nbsp;    public SkyshipWeatherlightEffect copy() {
+<b class="nc"><i>85</i>&nbsp;        return new SkyshipWeatherlightEffect(this);</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    @Override
+<i>89</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>90</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());</b>
+<b class="nc"><i>91</i>&nbsp;        MageObject sourceObject = source.getSourceObject(game);</b>
+<b class="nc"><i>92</i>&nbsp;        if (sourceObject != null &amp;&amp; controller != null) {</b>
+<b class="nc"><i>93</i>&nbsp;            if (controller.searchLibrary(target, game)) {</b>
+<b class="nc"><i>94</i>&nbsp;                UUID exileZone = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());</b>
+<b class="nc"><i>95</i>&nbsp;                if (target.getTargets().size() &gt; 0) {</b>
+<b class="nc"><i>96</i>&nbsp;                    for (UUID cardID : target.getTargets()) {</b>
+<b class="nc"><i>97</i>&nbsp;                        Card card = controller.getLibrary().getCard(cardID, game);</b>
+<b class="nc"><i>98</i>&nbsp;                        if (card != null) {</b>
+<b class="nc"><i>99</i>&nbsp;                            controller.moveCardToExileWithInfo(card, exileZone, sourceObject.getIdName(), source.getSourceId(), game, Zone.LIBRARY, true);</b>
+<i>100</i>&nbsp;                        }
+<b class="nc"><i>101</i>&nbsp;                    }</b>
+<i>102</i>&nbsp;                }
+<i>103</i>&nbsp;            }
+<b class="nc"><i>104</i>&nbsp;            controller.shuffleLibrary(source, game);</b>
+<b class="nc"><i>105</i>&nbsp;            return true;</b>
+<i>106</i>&nbsp;        }
+<b class="nc"><i>107</i>&nbsp;        return false;</b>
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;}
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;class SkyshipWeatherlightEffect2 extends OneShotEffect {
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    public SkyshipWeatherlightEffect2() {
+<i>115</i>&nbsp;        super(Outcome.ReturnToHand);
+<i>116</i>&nbsp;        this.staticText = &quot;Choose a card at random that was removed from the game with {this}. Put that card into your hand&quot;;
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    public SkyshipWeatherlightEffect2(final SkyshipWeatherlightEffect2 effect) {
+<i>120</i>&nbsp;        super(effect);
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    @Override
+<i>124</i>&nbsp;    public SkyshipWeatherlightEffect2 copy() {
+<i>125</i>&nbsp;        return new SkyshipWeatherlightEffect2(this);
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    @Override
+<i>129</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>130</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());
+<i>131</i>&nbsp;        MageObject sourceObject = source.getSourceObject(game);
+<i>132</i>&nbsp;        if (sourceObject != null &amp;&amp; controller != null) {
+<i>133</i>&nbsp;            ExileZone exZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()));
+<i>134</i>&nbsp;            if (exZone != null) {
+<i>135</i>&nbsp;                controller.moveCards(exZone.getRandom(game), Zone.HAND, source, game);
+<i>136</i>&nbsp;            }
+<i>137</i>&nbsp;            return true;
+<i>138</i>&nbsp;        }
+<i>139</i>&nbsp;        return false;
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:36</div>
+</div>
+</body>
+</html>

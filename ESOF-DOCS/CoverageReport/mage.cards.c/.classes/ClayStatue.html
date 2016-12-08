@@ -1,0 +1,120 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ClayStatue</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.c</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ClayStatue (mage.cards.c)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClayStatue</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.cards.c;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.UUID;
+<i>4</i>&nbsp;import mage.MageInt;
+<i>5</i>&nbsp;import mage.abilities.common.SimpleActivatedAbility;
+<i>6</i>&nbsp;import mage.abilities.costs.mana.ManaCostsImpl;
+<i>7</i>&nbsp;import mage.abilities.effects.common.RegenerateSourceEffect;
+<i>8</i>&nbsp;import mage.cards.CardImpl;
+<i>9</i>&nbsp;import mage.cards.CardSetInfo;
+<i>10</i>&nbsp;import mage.constants.CardType;
+<i>11</i>&nbsp;import mage.constants.Zone;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;/**
+<i>14</i>&nbsp; *
+<i>15</i>&nbsp; * @author Jgod
+<i>16</i>&nbsp; */
+<i>17</i>&nbsp;public class ClayStatue extends CardImpl {
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public ClayStatue(UUID ownerId, CardSetInfo setInfo) {
+<b class="nc"><i>20</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},&quot;{4}&quot;);</b>
+<b class="nc"><i>21</i>&nbsp;        this.subtype.add(&quot;Golem&quot;);</b>
+<b class="nc"><i>22</i>&nbsp;        this.power = new MageInt(3);</b>
+<b class="nc"><i>23</i>&nbsp;        this.toughness = new MageInt(1);</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;        // {2}: Regenerate Clay Statue.
+<b class="nc"><i>26</i>&nbsp;        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl(&quot;{2}&quot;)));</b>
+<b class="nc"><i>27</i>&nbsp;    }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public ClayStatue(final ClayStatue card) {
+<b class="nc"><i>30</i>&nbsp;        super(card);</b>
+<b class="nc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Override
+<i>34</i>&nbsp;    public ClayStatue copy() {
+<b class="nc"><i>35</i>&nbsp;        return new ClayStatue(this);</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BecomesTappedTriggeredAbility</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BecomesTappedTriggeredAbility (mage.abilities.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BecomesTappedTriggeredAbility</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this template, choose Tools | Templates
+<i>3</i>&nbsp; * and open the template in the editor.
+<i>4</i>&nbsp; */
+<i>5</i>&nbsp;package mage.abilities.common;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import mage.abilities.TriggeredAbilityImpl;
+<i>8</i>&nbsp;import mage.abilities.effects.Effect;
+<i>9</i>&nbsp;import mage.constants.Zone;
+<i>10</i>&nbsp;import mage.filter.FilterPermanent;
+<i>11</i>&nbsp;import mage.game.Game;
+<i>12</i>&nbsp;import mage.game.events.GameEvent;
+<i>13</i>&nbsp;import mage.game.permanent.Permanent;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;/**
+<i>16</i>&nbsp; *
+<i>17</i>&nbsp; * @author Jeff
+<i>18</i>&nbsp; */
+<i>19</i>&nbsp;public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl{
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    FilterPermanent filter;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public BecomesTappedTriggeredAbility(Effect effect, boolean optional) {
+<b class="nc"><i>24</i>&nbsp;        this(effect, optional, new FilterPermanent(&quot;a permanent&quot;));</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;    public BecomesTappedTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter) {
+<b class="nc"><i>27</i>&nbsp;        super(Zone.BATTLEFIELD, effect, optional);</b>
+<b class="nc"><i>28</i>&nbsp;        this.filter = filter;</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public BecomesTappedTriggeredAbility(final BecomesTappedTriggeredAbility ability) {
+<b class="nc"><i>32</i>&nbsp;        super(ability);</b>
+<b class="nc"><i>33</i>&nbsp;        this.filter = ability.filter.copy();</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    @Override
+<i>37</i>&nbsp;    public BecomesTappedTriggeredAbility copy() {
+<b class="nc"><i>38</i>&nbsp;        return new BecomesTappedTriggeredAbility(this);</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    @Override
+<i>42</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<b class="nc"><i>43</i>&nbsp;        return event.getType() == GameEvent.EventType.TAPPED;</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    @Override
+<i>47</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<b class="nc"><i>48</i>&nbsp;        Permanent permanent = game.getPermanent(event.getTargetId());</b>
+<b class="nc"><i>49</i>&nbsp;        return permanent != null &amp;&amp; filter.match(permanent, getSourceId(), getControllerId(), game);</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    @Override
+<i>53</i>&nbsp;    public String getRule() {
+<b class="nc"><i>54</i>&nbsp;        return &quot;When &quot; + filter.getMessage() + &quot; becomes tapped, &quot; + super.getRule();</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

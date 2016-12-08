@@ -1,0 +1,803 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CardPluginImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.mage.plugins.card</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CardPluginImpl (org.mage.plugins.card)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CardPluginImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 243)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CardPluginImpl$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CardPluginImpl$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CardPluginImpl$Row</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 33)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CardPluginImpl$RowType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CardPluginImpl$Stack</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 38)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 296)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package org.mage.plugins.card;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.awt.BorderLayout;
+<i>4</i>&nbsp;import java.awt.Dimension;
+<i>5</i>&nbsp;import java.awt.Frame;
+<i>6</i>&nbsp;import java.awt.Rectangle;
+<i>7</i>&nbsp;import java.awt.event.WindowAdapter;
+<i>8</i>&nbsp;import java.awt.event.WindowEvent;
+<i>9</i>&nbsp;import java.awt.image.BufferedImage;
+<i>10</i>&nbsp;import java.util.ArrayList;
+<i>11</i>&nbsp;import java.util.Collection;
+<i>12</i>&nbsp;import java.util.List;
+<i>13</i>&nbsp;import java.util.Map;
+<i>14</i>&nbsp;import java.util.UUID;
+<i>15</i>&nbsp;import javax.swing.JComponent;
+<i>16</i>&nbsp;import javax.swing.JDialog;
+<i>17</i>&nbsp;import javax.swing.JLayeredPane;
+<i>18</i>&nbsp;import mage.cards.MagePermanent;
+<i>19</i>&nbsp;import mage.cards.action.ActionCallback;
+<i>20</i>&nbsp;import mage.client.dialog.PreferencesDialog;
+<i>21</i>&nbsp;import mage.client.util.GUISizeHelper;
+<i>22</i>&nbsp;import mage.constants.Rarity;
+<i>23</i>&nbsp;import mage.interfaces.plugin.CardPlugin;
+<i>24</i>&nbsp;import mage.utils.CardUtil;
+<i>25</i>&nbsp;import mage.view.CardView;
+<i>26</i>&nbsp;import mage.view.CounterView;
+<i>27</i>&nbsp;import mage.view.PermanentView;
+<i>28</i>&nbsp;import net.xeoh.plugins.base.annotations.PluginImplementation;
+<i>29</i>&nbsp;import net.xeoh.plugins.base.annotations.events.Init;
+<i>30</i>&nbsp;import net.xeoh.plugins.base.annotations.events.PluginLoaded;
+<i>31</i>&nbsp;import net.xeoh.plugins.base.annotations.meta.Author;
+<i>32</i>&nbsp;import org.apache.log4j.Logger;
+<i>33</i>&nbsp;import org.mage.card.arcane.Animation;
+<i>34</i>&nbsp;import org.mage.card.arcane.CardPanel;
+<i>35</i>&nbsp;import org.mage.card.arcane.CardPanelComponentImpl;
+<i>36</i>&nbsp;import org.mage.card.arcane.ManaSymbols;
+<i>37</i>&nbsp;import org.mage.plugins.card.dl.DownloadGui;
+<i>38</i>&nbsp;import org.mage.plugins.card.dl.DownloadJob;
+<i>39</i>&nbsp;import org.mage.plugins.card.dl.Downloader;
+<i>40</i>&nbsp;import org.mage.plugins.card.dl.sources.CardFrames;
+<i>41</i>&nbsp;import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
+<i>42</i>&nbsp;import org.mage.plugins.card.dl.sources.GathererSets;
+<i>43</i>&nbsp;import org.mage.plugins.card.dl.sources.GathererSymbols;
+<i>44</i>&nbsp;import org.mage.plugins.card.images.ImageCache;
+<i>45</i>&nbsp;import org.mage.plugins.card.info.CardInfoPaneImpl;
+<i>46</i>&nbsp;import org.mage.card.arcane.CardPanelRenderImpl;
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;/**
+<i>49</i>&nbsp; * {@link CardPlugin} implementation.
+<i>50</i>&nbsp; *
+<i>51</i>&nbsp; * @author nantuko
+<i>52</i>&nbsp; * @version 0.1 01.11.2010 Mage permanents. Sorting card layout.
+<i>53</i>&nbsp; * @version 0.6 17.07.2011 #sortPermanents got option to display non-land
+<i>54</i>&nbsp; * permanents in one pile
+<i>55</i>&nbsp; * @version 0.7 29.07.2011 face down cards support
+<i>56</i>&nbsp; */
+<i>57</i>&nbsp;@PluginImplementation
+<i>58</i>&nbsp;@Author(name = &quot;nantuko&quot;)
+<b class="nc"><i>59</i>&nbsp;public class CardPluginImpl implements CardPlugin {</b>
+<i>60</i>&nbsp;
+<b class="nc"><i>61</i>&nbsp;    private static final Logger LOGGER = Logger.getLogger(CardPluginImpl.class);</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    private static final int GUTTER_Y = 15;
+<i>64</i>&nbsp;    private static final int GUTTER_X = 5;
+<i>65</i>&nbsp;    static final float EXTRA_CARD_SPACING_X = 0.04f;
+<i>66</i>&nbsp;    private static final float CARD_SPACING_Y = 0.03f;
+<i>67</i>&nbsp;    private static final float STACK_SPACING_X = 0.07f;
+<i>68</i>&nbsp;    private static final float STACK_SPACING_Y = 0.10f;
+<i>69</i>&nbsp;    private static final float ATTACHMENT_SPACING_Y = 0.13f;
+<i>70</i>&nbsp;
+<b class="nc"><i>71</i>&nbsp;    private int landStackMax = 5;</b>
+<i>72</i>&nbsp;    // private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
+<b class="nc"><i>73</i>&nbsp;    private int cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();</b>
+<b class="nc"><i>74</i>&nbsp;    private int cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();</b>
+<i>75</i>&nbsp;
+<b class="nc"><i>76</i>&nbsp;    private boolean stackVertical = false;</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    private int playAreaWidth, playAreaHeight;
+<i>79</i>&nbsp;    private int cardWidth, cardHeight;
+<i>80</i>&nbsp;    private int extraCardSpacingX, cardSpacingX, cardSpacingY;
+<i>81</i>&nbsp;    private int stackSpacingX, stackSpacingY, attachmentSpacingY;
+<b class="nc"><i>82</i>&nbsp;    private List&lt;Row&gt; rows = new ArrayList&lt;&gt;();</b>
+<i>83</i>&nbsp;
+<b class="nc"><i>84</i>&nbsp;    public CardPluginImpl() {</b>
+<b class="nc"><i>85</i>&nbsp;        setGUISize();</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    @Init
+<i>89</i>&nbsp;    public void init() {
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    @PluginLoaded
+<i>93</i>&nbsp;    public void newPlugin(CardPlugin plugin) {
+<b class="nc"><i>94</i>&nbsp;        LOGGER.info(plugin.toString() + &quot; has been loaded.&quot;);</b>
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    @Override
+<i>98</i>&nbsp;    public String toString() {
+<b class="nc"><i>99</i>&nbsp;        return &quot;[Card plugin, version 0.7]&quot;;</b>
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    @Override
+<i>103</i>&nbsp;    public void changeGUISize() {
+<b class="nc"><i>104</i>&nbsp;        setGUISize();</b>
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    private void setGUISize() {
+<b class="nc"><i>108</i>&nbsp;        cardWidthMin = (int) GUISizeHelper.battlefieldCardMinDimension.getWidth();</b>
+<b class="nc"><i>109</i>&nbsp;        cardWidthMax = (int) GUISizeHelper.battlefieldCardMaxDimension.getWidth();</b>
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;    
+<i>112</i>&nbsp;    /**
+<i>113</i>&nbsp;     * Temporary card rendering shim. Split card rendering isn&#39;t implemented yet, so
+<i>114</i>&nbsp;     * use old component based rendering for the split cards.
+<i>115</i>&nbsp;     */
+<i>116</i>&nbsp;    private CardPanel makePanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback, boolean isFoil, Dimension dimension) {
+<b class="nc"><i>117</i>&nbsp;        String fallback = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_RENDERING_FALLBACK, &quot;false&quot;);</b>
+<b class="nc"><i>118</i>&nbsp;        if (view.isSplitCard() || fallback.equals(&quot;true&quot;)) {</b>
+<b class="nc"><i>119</i>&nbsp;            return new CardPanelComponentImpl(view, gameId, loadImage, callback, isFoil, dimension);</b>
+<i>120</i>&nbsp;        } else {
+<b class="nc"><i>121</i>&nbsp;            return new CardPanelRenderImpl(view, gameId, loadImage, callback, isFoil, dimension);</b>
+<i>122</i>&nbsp;        }
+<i>123</i>&nbsp;    }
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    @Override
+<i>126</i>&nbsp;    public MagePermanent getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
+<b class="nc"><i>127</i>&nbsp;        CardPanel cardPanel = makePanel(permanent, gameId, loadImage, callback, false, dimension);</b>
+<b class="nc"><i>128</i>&nbsp;        boolean implemented = !permanent.getRarity().equals(Rarity.NA);</b>
+<b class="nc"><i>129</i>&nbsp;        cardPanel.setShowCastingCost(implemented);</b>
+<b class="nc"><i>130</i>&nbsp;        return cardPanel;</b>
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    @Override
+<i>134</i>&nbsp;    public MagePermanent getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback, boolean canBeFoil, boolean loadImage) {
+<b class="nc"><i>135</i>&nbsp;        CardPanel cardPanel = makePanel(cardView, gameId, loadImage, callback, false, dimension);</b>
+<b class="nc"><i>136</i>&nbsp;        boolean implemented = cardView.getRarity() != null &amp;&amp; !cardView.getRarity().equals(Rarity.NA);</b>
+<b class="nc"><i>137</i>&nbsp;        cardPanel.setShowCastingCost(implemented);</b>
+<b class="nc"><i>138</i>&nbsp;        return cardPanel;</b>
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    @Override
+<i>142</i>&nbsp;    public int sortPermanents(Map&lt;String, JComponent&gt; ui, Collection&lt;MagePermanent&gt; permanents, boolean nonPermanentsOwnRow, boolean topPanel) {
+<i>143</i>&nbsp;        //TODO: add caching
+<i>144</i>&nbsp;        //requires to find out is position have been changed that includes:
+<i>145</i>&nbsp;        //adding/removing permanents, type change
+<i>146</i>&nbsp;
+<b class="nc"><i>147</i>&nbsp;        if (ui == null) {</b>
+<b class="nc"><i>148</i>&nbsp;            throw new RuntimeException(&quot;Error: no components&quot;);</b>
+<i>149</i>&nbsp;        }
+<b class="nc"><i>150</i>&nbsp;        JComponent component = ui.get(&quot;battlefieldPanel&quot;);</b>
+<i>151</i>&nbsp;
+<b class="nc"><i>152</i>&nbsp;        if (component == null) {</b>
+<b class="nc"><i>153</i>&nbsp;            throw new RuntimeException(&quot;Error: battlefieldPanel is missing&quot;);</b>
+<i>154</i>&nbsp;        }
+<i>155</i>&nbsp;
+<b class="nc"><i>156</i>&nbsp;        JLayeredPane battlefieldPanel = (JLayeredPane) component;</b>
+<b class="nc"><i>157</i>&nbsp;        JComponent jPanel = ui.get(&quot;jPanel&quot;);</b>
+<i>158</i>&nbsp;
+<b class="nc"><i>159</i>&nbsp;        Row rowAllLands = new Row();</b>
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;        outerLoop:
+<i>162</i>&nbsp;        //
+<b class="nc"><i>163</i>&nbsp;        for (MagePermanent permanent : permanents) {</b>
+<b class="nc"><i>164</i>&nbsp;            if (!CardUtil.isLand(permanent) || CardUtil.isCreature(permanent)) {</b>
+<b class="nc"><i>165</i>&nbsp;                continue;</b>
+<i>166</i>&nbsp;            }
+<i>167</i>&nbsp;
+<b class="nc"><i>168</i>&nbsp;            int insertIndex = -1;</b>
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;            // Find already added lands with the same name.
+<b class="nc"><i>171</i>&nbsp;            for (int i = 0, n = rowAllLands.size(); i &lt; n; i++) {</b>
+<b class="nc"><i>172</i>&nbsp;                Stack stack = rowAllLands.get(i);</b>
+<b class="nc"><i>173</i>&nbsp;                MagePermanent firstPanel = stack.get(0);</b>
+<b class="nc"><i>174</i>&nbsp;                if (firstPanel.getOriginal().getName().equals(permanent.getOriginal().getName())) {</b>
+<i>175</i>&nbsp;
+<b class="nc"><i>176</i>&nbsp;                    if (!empty(firstPanel.getOriginalPermanent().getAttachments())) {</b>
+<i>177</i>&nbsp;                        // Put this land to the left of lands with the same name and attachments.
+<b class="nc"><i>178</i>&nbsp;                        insertIndex = i;</b>
+<b class="nc"><i>179</i>&nbsp;                        break;</b>
+<i>180</i>&nbsp;                    }
+<b class="nc"><i>181</i>&nbsp;                    List&lt;CounterView&gt; counters = firstPanel.getOriginalPermanent().getCounters();</b>
+<b class="nc"><i>182</i>&nbsp;                    if (counters != null &amp;&amp; counters.size() &gt; 0) {</b>
+<i>183</i>&nbsp;                        // don&#39;t put to first panel if it has counters
+<b class="nc"><i>184</i>&nbsp;                        insertIndex = i;</b>
+<b class="nc"><i>185</i>&nbsp;                        break;</b>
+<i>186</i>&nbsp;                    }
+<i>187</i>&nbsp;
+<b class="nc"><i>188</i>&nbsp;                    if (!empty(permanent.getOriginalPermanent().getAttachments()) || stack.size() == landStackMax) {</b>
+<i>189</i>&nbsp;                        // If this land has attachments or the stack is full, put it to the right.
+<b class="nc"><i>190</i>&nbsp;                        insertIndex = i + 1;</b>
+<b class="nc"><i>191</i>&nbsp;                        continue;</b>
+<i>192</i>&nbsp;                    }
+<b class="nc"><i>193</i>&nbsp;                    counters = permanent.getOriginalPermanent().getCounters();</b>
+<b class="nc"><i>194</i>&nbsp;                    if (counters != null &amp;&amp; counters.size() &gt; 0) {</b>
+<i>195</i>&nbsp;                        // if a land has counter, put it to the right
+<b class="nc"><i>196</i>&nbsp;                        insertIndex = i + 1;</b>
+<b class="nc"><i>197</i>&nbsp;                        continue;</b>
+<i>198</i>&nbsp;                    }
+<i>199</i>&nbsp;                    // Add to stack.
+<b class="nc"><i>200</i>&nbsp;                    stack.add(0, permanent);</b>
+<b class="nc"><i>201</i>&nbsp;                    continue outerLoop;</b>
+<i>202</i>&nbsp;                }
+<b class="nc"><i>203</i>&nbsp;                if (insertIndex != -1) {</b>
+<b class="nc"><i>204</i>&nbsp;                    break;</b>
+<i>205</i>&nbsp;                }
+<i>206</i>&nbsp;            }
+<i>207</i>&nbsp;
+<b class="nc"><i>208</i>&nbsp;            Stack stack = new Stack();</b>
+<i>209</i>&nbsp;
+<b class="nc"><i>210</i>&nbsp;            if (permanent.getOriginalPermanent().getAttachments() != null) {</b>
+<b class="nc"><i>211</i>&nbsp;                stack.setMaxAttachedCount(permanent.getOriginalPermanent().getAttachments().size());</b>
+<i>212</i>&nbsp;            }
+<i>213</i>&nbsp;
+<b class="nc"><i>214</i>&nbsp;            stack.add(permanent);</b>
+<b class="nc"><i>215</i>&nbsp;            rowAllLands.add(insertIndex == -1 ? rowAllLands.size() : insertIndex, stack);</b>
+<b class="nc"><i>216</i>&nbsp;        }</b>
+<i>217</i>&nbsp;
+<b class="nc"><i>218</i>&nbsp;        Row rowAllCreatures = new Row(permanents, RowType.creature);</b>
+<b class="nc"><i>219</i>&nbsp;        Row rowAllOthers = new Row(permanents, RowType.other);</b>
+<b class="nc"><i>220</i>&nbsp;        Row rowAllAttached = new Row(permanents, RowType.attached);</b>
+<i>221</i>&nbsp;
+<b class="nc"><i>222</i>&nbsp;        boolean othersOnTheRight = true;</b>
+<b class="nc"><i>223</i>&nbsp;        if (nonPermanentsOwnRow) {</b>
+<b class="nc"><i>224</i>&nbsp;            othersOnTheRight = false;</b>
+<b class="nc"><i>225</i>&nbsp;            rowAllCreatures.addAll(rowAllOthers);</b>
+<b class="nc"><i>226</i>&nbsp;            rowAllOthers.clear();</b>
+<i>227</i>&nbsp;        }
+<i>228</i>&nbsp;
+<b class="nc"><i>229</i>&nbsp;        cardWidth = cardWidthMax;</b>
+<b class="nc"><i>230</i>&nbsp;        Rectangle rect = battlefieldPanel.getVisibleRect();</b>
+<b class="nc"><i>231</i>&nbsp;        playAreaWidth = rect.width;</b>
+<b class="nc"><i>232</i>&nbsp;        playAreaHeight = rect.height;</b>
+<i>233</i>&nbsp;        while (true) {
+<b class="nc"><i>234</i>&nbsp;            rows.clear();</b>
+<i>235</i>&nbsp;            // calculate values based on the card size that is changing with every iteration
+<b class="nc"><i>236</i>&nbsp;            cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);</b>
+<b class="nc"><i>237</i>&nbsp;            extraCardSpacingX = Math.round(cardWidth * EXTRA_CARD_SPACING_X);</b>
+<b class="nc"><i>238</i>&nbsp;            cardSpacingX = cardHeight - cardWidth + extraCardSpacingX;</b>
+<b class="nc"><i>239</i>&nbsp;            cardSpacingY = Math.round(cardHeight * CARD_SPACING_Y);</b>
+<b class="nc"><i>240</i>&nbsp;            stackSpacingX = stackVertical ? 0 : Math.round(cardWidth * STACK_SPACING_X);</b>
+<b class="nc"><i>241</i>&nbsp;            stackSpacingY = Math.round(cardHeight * STACK_SPACING_Y);</b>
+<b class="nc"><i>242</i>&nbsp;            attachmentSpacingY = Math.round(cardHeight * ATTACHMENT_SPACING_Y);</b>
+<i>243</i>&nbsp;            // clone data
+<b class="nc"><i>244</i>&nbsp;            Row creatures = (Row) rowAllCreatures.clone();</b>
+<b class="nc"><i>245</i>&nbsp;            Row lands = (Row) rowAllLands.clone();</b>
+<b class="nc"><i>246</i>&nbsp;            Row others = (Row) rowAllOthers.clone();</b>
+<i>247</i>&nbsp;
+<i>248</i>&nbsp;            // Wrap all creatures and lands.
+<i>249</i>&nbsp;            int addOthersIndex;
+<b class="nc"><i>250</i>&nbsp;            if (topPanel) {</b>
+<b class="nc"><i>251</i>&nbsp;                wrap(lands, rows, -1);</b>
+<b class="nc"><i>252</i>&nbsp;                wrap(others, rows, rows.size());</b>
+<b class="nc"><i>253</i>&nbsp;                addOthersIndex = rows.size();</b>
+<b class="nc"><i>254</i>&nbsp;                wrap(creatures, rows, addOthersIndex);</b>
+<i>255</i>&nbsp;            } else {
+<b class="nc"><i>256</i>&nbsp;                wrap(creatures, rows, -1);</b>
+<b class="nc"><i>257</i>&nbsp;                addOthersIndex = rows.size();</b>
+<b class="nc"><i>258</i>&nbsp;                wrap(lands, rows, rows.size());</b>
+<b class="nc"><i>259</i>&nbsp;                wrap(others, rows, rows.size());</b>
+<i>260</i>&nbsp;
+<i>261</i>&nbsp;            }
+<i>262</i>&nbsp;
+<i>263</i>&nbsp;            // Store the current rows and others.
+<b class="nc"><i>264</i>&nbsp;            List&lt;Row&gt; storedRows = new ArrayList&lt;&gt;(rows.size());</b>
+<b class="nc"><i>265</i>&nbsp;            for (Row row : rows) {</b>
+<b class="nc"><i>266</i>&nbsp;                storedRows.add((Row) row.clone());</b>
+<b class="nc"><i>267</i>&nbsp;            }</b>
+<b class="nc"><i>268</i>&nbsp;            Row storedOthers = (Row) others.clone();</b>
+<i>269</i>&nbsp;            // Fill in all rows with others.
+<b class="nc"><i>270</i>&nbsp;            for (Row row : rows) {</b>
+<b class="nc"><i>271</i>&nbsp;                fillRow(others, rows, row);</b>
+<b class="nc"><i>272</i>&nbsp;            }</b>
+<i>273</i>&nbsp;
+<i>274</i>&nbsp;            // Stop if everything fits, otherwise revert back to the stored values.
+<b class="nc"><i>275</i>&nbsp;            if (creatures.isEmpty() &amp;&amp; lands.isEmpty() &amp;&amp; others.isEmpty()) {</b>
+<b class="nc"><i>276</i>&nbsp;                break;</b>
+<i>277</i>&nbsp;            }
+<b class="nc"><i>278</i>&nbsp;            rows = storedRows;</b>
+<b class="nc"><i>279</i>&nbsp;            others = storedOthers;</b>
+<i>280</i>&nbsp;            // Try to put others on their own row(s) and fill in the rest.
+<b class="nc"><i>281</i>&nbsp;            wrap(others, rows, addOthersIndex);</b>
+<b class="nc"><i>282</i>&nbsp;            for (Row row : rows) {</b>
+<b class="nc"><i>283</i>&nbsp;                fillRow(others, rows, row);</b>
+<b class="nc"><i>284</i>&nbsp;            }</b>
+<i>285</i>&nbsp;            // If that still doesn&#39;t fit, scale down.
+<b class="nc"><i>286</i>&nbsp;            if (creatures.isEmpty() &amp;&amp; lands.isEmpty() &amp;&amp; others.isEmpty()) {</b>
+<b class="nc"><i>287</i>&nbsp;                break;</b>
+<i>288</i>&nbsp;            }
+<i>289</i>&nbsp;            //FIXME: -1 is too slow. why not binary search?
+<b class="nc"><i>290</i>&nbsp;            cardWidth -= 3;</b>
+<i>291</i>&nbsp;
+<b class="nc"><i>292</i>&nbsp;        }</b>
+<i>293</i>&nbsp;
+<i>294</i>&nbsp;        // Get size of all the rows.
+<b class="nc"><i>295</i>&nbsp;        int x, y = GUTTER_Y;</b>
+<b class="nc"><i>296</i>&nbsp;        int maxRowWidth = 0;</b>
+<b class="nc"><i>297</i>&nbsp;        for (Row row : rows) {</b>
+<b class="nc"><i>298</i>&nbsp;            int rowBottom = 0;</b>
+<b class="nc"><i>299</i>&nbsp;            x = GUTTER_X;</b>
+<b class="nc"><i>300</i>&nbsp;            for (int stackIndex = 0, stackCount = row.size(); stackIndex &lt; stackCount; stackIndex++) {</b>
+<b class="nc"><i>301</i>&nbsp;                Stack stack = row.get(stackIndex);</b>
+<b class="nc"><i>302</i>&nbsp;                rowBottom = Math.max(rowBottom, y + stack.getHeight());</b>
+<b class="nc"><i>303</i>&nbsp;                x += stack.getWidth();</b>
+<i>304</i>&nbsp;            }
+<b class="nc"><i>305</i>&nbsp;            y = rowBottom;</b>
+<b class="nc"><i>306</i>&nbsp;            maxRowWidth = Math.max(maxRowWidth, x);</b>
+<b class="nc"><i>307</i>&nbsp;        }</b>
+<i>308</i>&nbsp;
+<i>309</i>&nbsp;        // Position all card panels.
+<b class="nc"><i>310</i>&nbsp;        y = GUTTER_Y;</b>
+<b class="nc"><i>311</i>&nbsp;        for (Row row : rows) {</b>
+<b class="nc"><i>312</i>&nbsp;            int rowBottom = 0;</b>
+<b class="nc"><i>313</i>&nbsp;            x = GUTTER_X;</b>
+<b class="nc"><i>314</i>&nbsp;            for (int stackIndex = 0, stackCount = row.size(); stackIndex &lt; stackCount; stackIndex++) {</b>
+<b class="nc"><i>315</i>&nbsp;                Stack stack = row.get(stackIndex);</b>
+<i>316</i>&nbsp;                // Align others to the right.
+<b class="nc"><i>317</i>&nbsp;                if (othersOnTheRight &amp;&amp; RowType.other.isType(stack.get(0))) {</b>
+<b class="nc"><i>318</i>&nbsp;                    x = playAreaWidth - GUTTER_X + extraCardSpacingX;</b>
+<b class="nc"><i>319</i>&nbsp;                    for (int i = stackIndex, n = row.size(); i &lt; n; i++) {</b>
+<b class="nc"><i>320</i>&nbsp;                        x -= row.get(i).getWidth();</b>
+<i>321</i>&nbsp;                    }
+<i>322</i>&nbsp;                }
+<b class="nc"><i>323</i>&nbsp;                for (int panelIndex = 0, panelCount = stack.size(); panelIndex &lt; panelCount; panelIndex++) {</b>
+<b class="nc"><i>324</i>&nbsp;                    MagePermanent panel = stack.get(panelIndex);</b>
+<b class="nc"><i>325</i>&nbsp;                    int stackPosition = panelCount - panelIndex - 1;</b>
+<b class="nc"><i>326</i>&nbsp;                    if (jPanel != null) {</b>
+<b class="nc"><i>327</i>&nbsp;                        jPanel.setComponentZOrder(panel, panelIndex);</b>
+<i>328</i>&nbsp;                    }
+<b class="nc"><i>329</i>&nbsp;                    int panelX = x + (stackPosition * stackSpacingX);</b>
+<b class="nc"><i>330</i>&nbsp;                    int panelY = y + (stackPosition * stackSpacingY);</b>
+<i>331</i>&nbsp;                    try {
+<i>332</i>&nbsp;                        // may cause:
+<i>333</i>&nbsp;                        // java.lang.IllegalArgumentException: illegal component position 26 should be less then 26
+<b class="nc"><i>334</i>&nbsp;                        battlefieldPanel.moveToFront(panel);</b>
+<b class="nc"><i>335</i>&nbsp;                    } catch (Exception e) {</b>
+<b class="nc"><i>336</i>&nbsp;                        e.printStackTrace();</b>
+<b class="nc"><i>337</i>&nbsp;                    }</b>
+<b class="nc"><i>338</i>&nbsp;                    panel.setCardBounds(panelX, panelY, cardWidth, cardHeight);</b>
+<i>339</i>&nbsp;                }
+<b class="nc"><i>340</i>&nbsp;                rowBottom = Math.max(rowBottom, y + stack.getHeight());</b>
+<b class="nc"><i>341</i>&nbsp;                x += stack.getWidth();</b>
+<i>342</i>&nbsp;            }
+<b class="nc"><i>343</i>&nbsp;            y = rowBottom;</b>
+<b class="nc"><i>344</i>&nbsp;        }</b>
+<i>345</i>&nbsp;
+<i>346</i>&nbsp;        // we need this only for defining card size
+<i>347</i>&nbsp;        // attached permanents will be handled separately
+<b class="nc"><i>348</i>&nbsp;        for (Stack stack : rowAllAttached) {</b>
+<b class="nc"><i>349</i>&nbsp;            for (MagePermanent panel : stack) {</b>
+<b class="nc"><i>350</i>&nbsp;                panel.setCardBounds(0, 0, cardWidth, cardHeight);</b>
+<b class="nc"><i>351</i>&nbsp;            }</b>
+<b class="nc"><i>352</i>&nbsp;        }</b>
+<i>353</i>&nbsp;
+<b class="nc"><i>354</i>&nbsp;        return y;</b>
+<i>355</i>&nbsp;    }
+<i>356</i>&nbsp;
+<i>357</i>&nbsp;    private boolean empty(List&lt;?&gt; list) {
+<b class="nc"><i>358</i>&nbsp;        return list == null || list.isEmpty();</b>
+<i>359</i>&nbsp;    }
+<i>360</i>&nbsp;
+<i>361</i>&nbsp;    private int wrap(Row sourceRow, List&lt;Row&gt; rows, int insertIndex) {
+<i>362</i>&nbsp;        // The cards are sure to fit (with vertical scrolling) at the minimum card width.
+<b class="nc"><i>363</i>&nbsp;        boolean allowHeightOverflow = cardWidth == cardWidthMin;</b>
+<i>364</i>&nbsp;
+<b class="nc"><i>365</i>&nbsp;        Row currentRow = new Row();</b>
+<b class="nc"><i>366</i>&nbsp;        for (int i = 0, n = sourceRow.size() - 1; i &lt;= n; i++) {</b>
+<b class="nc"><i>367</i>&nbsp;            Stack stack = sourceRow.get(i);</b>
+<i>368</i>&nbsp;            // If the row is not empty and this stack doesn&#39;t fit, add the row.
+<b class="nc"><i>369</i>&nbsp;            int rowWidth = currentRow.getWidth();</b>
+<b class="nc"><i>370</i>&nbsp;            if (!currentRow.isEmpty() &amp;&amp; rowWidth + stack.getWidth() &gt; playAreaWidth) {</b>
+<i>371</i>&nbsp;                // Stop processing if the row is too wide or tall.
+<b class="nc"><i>372</i>&nbsp;                if (!allowHeightOverflow &amp;&amp; rowWidth &gt; playAreaWidth) {</b>
+<b class="nc"><i>373</i>&nbsp;                    break;</b>
+<i>374</i>&nbsp;                }
+<b class="nc"><i>375</i>&nbsp;                if (!allowHeightOverflow &amp;&amp; getRowsHeight(rows) + sourceRow.getHeight() &gt; playAreaHeight) {</b>
+<b class="nc"><i>376</i>&nbsp;                    break;</b>
+<i>377</i>&nbsp;                }
+<b class="nc"><i>378</i>&nbsp;                rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);</b>
+<b class="nc"><i>379</i>&nbsp;                currentRow = new Row();</b>
+<i>380</i>&nbsp;            }
+<b class="nc"><i>381</i>&nbsp;            currentRow.add(stack);</b>
+<i>382</i>&nbsp;        }
+<i>383</i>&nbsp;        // Add the last row if it is not empty and it fits.
+<b class="nc"><i>384</i>&nbsp;        if (!currentRow.isEmpty()) {</b>
+<b class="nc"><i>385</i>&nbsp;            int rowWidth = currentRow.getWidth();</b>
+<b class="nc"><i>386</i>&nbsp;            if (allowHeightOverflow || rowWidth &lt;= playAreaWidth) {</b>
+<b class="nc"><i>387</i>&nbsp;                if (allowHeightOverflow || getRowsHeight(rows) + sourceRow.getHeight() &lt;= playAreaHeight) {</b>
+<b class="nc"><i>388</i>&nbsp;                    rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);</b>
+<i>389</i>&nbsp;                }
+<i>390</i>&nbsp;            }
+<i>391</i>&nbsp;        }
+<i>392</i>&nbsp;        // Remove the wrapped stacks from the source row.
+<b class="nc"><i>393</i>&nbsp;        for (Row row : rows) {</b>
+<b class="nc"><i>394</i>&nbsp;            for (Stack stack : row) {</b>
+<b class="nc"><i>395</i>&nbsp;                sourceRow.remove(stack);</b>
+<b class="nc"><i>396</i>&nbsp;            }</b>
+<b class="nc"><i>397</i>&nbsp;        }</b>
+<b class="nc"><i>398</i>&nbsp;        return insertIndex;</b>
+<i>399</i>&nbsp;    }
+<i>400</i>&nbsp;
+<i>401</i>&nbsp;    private void fillRow(Row sourceRow, List&lt;Row&gt; rows, Row row) {
+<b class="nc"><i>402</i>&nbsp;        int rowWidth = row.getWidth();</b>
+<b class="nc"><i>403</i>&nbsp;        while (!sourceRow.isEmpty()) {</b>
+<b class="nc"><i>404</i>&nbsp;            Stack stack = sourceRow.get(0);</b>
+<b class="nc"><i>405</i>&nbsp;            rowWidth += stack.getWidth();</b>
+<b class="nc"><i>406</i>&nbsp;            if (rowWidth &gt; playAreaWidth) {</b>
+<b class="nc"><i>407</i>&nbsp;                break;</b>
+<i>408</i>&nbsp;            }
+<b class="nc"><i>409</i>&nbsp;            if (stack.getHeight() &gt; row.getHeight()</b>
+<b class="nc"><i>410</i>&nbsp;                    &amp;&amp; getRowsHeight(rows) - row.getHeight() + stack.getHeight() &gt; playAreaHeight) {</b>
+<b class="nc"><i>411</i>&nbsp;                break;</b>
+<i>412</i>&nbsp;            }
+<b class="nc"><i>413</i>&nbsp;            row.add(sourceRow.remove(0));</b>
+<b class="nc"><i>414</i>&nbsp;        }</b>
+<i>415</i>&nbsp;    }
+<i>416</i>&nbsp;
+<i>417</i>&nbsp;    private int getRowsHeight(List&lt;Row&gt; rows) {
+<b class="nc"><i>418</i>&nbsp;        int height = 0;</b>
+<b class="nc"><i>419</i>&nbsp;        for (Row row : rows) {</b>
+<b class="nc"><i>420</i>&nbsp;            height += row.getHeight();</b>
+<b class="nc"><i>421</i>&nbsp;        }</b>
+<b class="nc"><i>422</i>&nbsp;        return height - cardSpacingY + GUTTER_Y * 2;</b>
+<i>423</i>&nbsp;    }
+<i>424</i>&nbsp;
+<b class="nc"><i>425</i>&nbsp;    private static enum RowType {</b>
+<b class="nc"><i>426</i>&nbsp;        land, creature, other, attached;</b>
+<i>427</i>&nbsp;
+<i>428</i>&nbsp;        public boolean isType(MagePermanent card) {
+<b class="nc"><i>429</i>&nbsp;            switch (this) {</b>
+<i>430</i>&nbsp;                case land:
+<b class="nc"><i>431</i>&nbsp;                    return CardUtil.isLand(card);</b>
+<i>432</i>&nbsp;                case creature:
+<b class="nc"><i>433</i>&nbsp;                    return CardUtil.isCreature(card);</b>
+<i>434</i>&nbsp;                case other:
+<b class="nc"><i>435</i>&nbsp;                    return !CardUtil.isLand(card) &amp;&amp; !CardUtil.isCreature(card);</b>
+<i>436</i>&nbsp;                case attached:
+<b class="nc"><i>437</i>&nbsp;                    return card.getOriginalPermanent().isAttachedToPermanent();</b>
+<i>438</i>&nbsp;                default:
+<b class="nc"><i>439</i>&nbsp;                    throw new RuntimeException(&quot;Unhandled type: &quot; + this);</b>
+<i>440</i>&nbsp;            }
+<i>441</i>&nbsp;        }
+<i>442</i>&nbsp;    }
+<i>443</i>&nbsp;
+<b class="nc"><i>444</i>&nbsp;    private class Row extends ArrayList&lt;Stack&gt; {</b>
+<i>445</i>&nbsp;
+<i>446</i>&nbsp;        private static final long serialVersionUID = 1L;
+<i>447</i>&nbsp;
+<b class="nc"><i>448</i>&nbsp;        public Row() {</b>
+<b class="nc"><i>449</i>&nbsp;            super(16);</b>
+<i>450</i>&nbsp;        }
+<i>451</i>&nbsp;
+<i>452</i>&nbsp;        public Row(Collection&lt;MagePermanent&gt; permanents, RowType type) {
+<b class="nc"><i>453</i>&nbsp;            this();</b>
+<b class="nc"><i>454</i>&nbsp;            addAll(permanents, type);</b>
+<i>455</i>&nbsp;        }
+<i>456</i>&nbsp;
+<i>457</i>&nbsp;        private void addAll(Collection&lt;MagePermanent&gt; permanents, RowType type) {
+<b class="nc"><i>458</i>&nbsp;            for (MagePermanent permanent : permanents) {</b>
+<b class="nc"><i>459</i>&nbsp;                if (!type.isType(permanent)) {</b>
+<b class="nc"><i>460</i>&nbsp;                    continue;</b>
+<i>461</i>&nbsp;                }
+<i>462</i>&nbsp;                // all attached permanents are grouped separately later
+<b class="nc"><i>463</i>&nbsp;                if (!type.equals(RowType.attached) &amp;&amp; RowType.attached.isType(permanent)) {</b>
+<b class="nc"><i>464</i>&nbsp;                    continue;</b>
+<i>465</i>&nbsp;                }
+<b class="nc"><i>466</i>&nbsp;                Stack stack = new Stack();</b>
+<b class="nc"><i>467</i>&nbsp;                stack.add(permanent);</b>
+<b class="nc"><i>468</i>&nbsp;                if (permanent.getOriginalPermanent().getAttachments() != null) {</b>
+<b class="nc"><i>469</i>&nbsp;                    stack.setMaxAttachedCount(permanent.getOriginalPermanent().getAttachments().size());</b>
+<i>470</i>&nbsp;                }
+<b class="nc"><i>471</i>&nbsp;                add(stack);</b>
+<b class="nc"><i>472</i>&nbsp;            }</b>
+<i>473</i>&nbsp;        }
+<i>474</i>&nbsp;
+<i>475</i>&nbsp;        @Override
+<i>476</i>&nbsp;        public boolean addAll(Collection&lt;? extends Stack&gt; c) {
+<b class="nc"><i>477</i>&nbsp;            boolean changed = super.addAll(c);</b>
+<b class="nc"><i>478</i>&nbsp;            c.clear();</b>
+<b class="nc"><i>479</i>&nbsp;            return changed;</b>
+<i>480</i>&nbsp;        }
+<i>481</i>&nbsp;
+<i>482</i>&nbsp;        private int getWidth() {
+<b class="nc"><i>483</i>&nbsp;            if (isEmpty()) {</b>
+<b class="nc"><i>484</i>&nbsp;                return 0;</b>
+<i>485</i>&nbsp;            }
+<b class="nc"><i>486</i>&nbsp;            int width = 0;</b>
+<b class="nc"><i>487</i>&nbsp;            for (Stack stack : this) {</b>
+<b class="nc"><i>488</i>&nbsp;                width += stack.getWidth();</b>
+<b class="nc"><i>489</i>&nbsp;            }</b>
+<b class="nc"><i>490</i>&nbsp;            return width + GUTTER_X * 2 - extraCardSpacingX;</b>
+<i>491</i>&nbsp;        }
+<i>492</i>&nbsp;
+<i>493</i>&nbsp;        private int getHeight() {
+<b class="nc"><i>494</i>&nbsp;            if (isEmpty()) {</b>
+<b class="nc"><i>495</i>&nbsp;                return 0;</b>
+<i>496</i>&nbsp;            }
+<b class="nc"><i>497</i>&nbsp;            int height = 0;</b>
+<b class="nc"><i>498</i>&nbsp;            for (Stack stack : this) {</b>
+<b class="nc"><i>499</i>&nbsp;                height = Math.max(height, stack.getHeight());</b>
+<b class="nc"><i>500</i>&nbsp;            }</b>
+<b class="nc"><i>501</i>&nbsp;            return height;</b>
+<i>502</i>&nbsp;        }
+<i>503</i>&nbsp;    }
+<i>504</i>&nbsp;
+<b class="nc"><i>505</i>&nbsp;    private class Stack extends ArrayList&lt;MagePermanent&gt; {</b>
+<i>506</i>&nbsp;
+<i>507</i>&nbsp;        private static final long serialVersionUID = 1L;
+<i>508</i>&nbsp;
+<i>509</i>&nbsp;        /**
+<i>510</i>&nbsp;         * Max attached object count attached to single permanent in the stack.
+<i>511</i>&nbsp;         */
+<b class="nc"><i>512</i>&nbsp;        private int maxAttachedCount = 0;</b>
+<i>513</i>&nbsp;
+<b class="nc"><i>514</i>&nbsp;        public Stack() {</b>
+<b class="nc"><i>515</i>&nbsp;            super(8);</b>
+<i>516</i>&nbsp;        }
+<i>517</i>&nbsp;
+<i>518</i>&nbsp;        private int getWidth() {
+<b class="nc"><i>519</i>&nbsp;            return cardWidth + (size() - 1) * stackSpacingX + cardSpacingX;</b>
+<i>520</i>&nbsp;        }
+<i>521</i>&nbsp;
+<i>522</i>&nbsp;        private int getHeight() {
+<b class="nc"><i>523</i>&nbsp;            return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY + attachmentSpacingY * maxAttachedCount;</b>
+<i>524</i>&nbsp;        }
+<i>525</i>&nbsp;
+<i>526</i>&nbsp;        public int getMaxAttachedCount() {
+<b class="nc"><i>527</i>&nbsp;            return maxAttachedCount;</b>
+<i>528</i>&nbsp;        }
+<i>529</i>&nbsp;
+<i>530</i>&nbsp;        public void setMaxAttachedCount(int maxAttachedCount) {
+<b class="nc"><i>531</i>&nbsp;            this.maxAttachedCount = maxAttachedCount;</b>
+<i>532</i>&nbsp;        }
+<i>533</i>&nbsp;    }
+<i>534</i>&nbsp;
+<i>535</i>&nbsp;    /**
+<i>536</i>&nbsp;     * Download various symbols (mana, tap, set).
+<i>537</i>&nbsp;     *
+<i>538</i>&nbsp;     * @param imagesPath Path to check in and store symbols to. Can be null, in
+<i>539</i>&nbsp;     * such case default path should be used.
+<i>540</i>&nbsp;     */
+<i>541</i>&nbsp;    @Override
+<i>542</i>&nbsp;    public void downloadSymbols(String imagesPath) {
+<b class="nc"><i>543</i>&nbsp;        final DownloadGui g = new DownloadGui(new Downloader());</b>
+<i>544</i>&nbsp;
+<b class="nc"><i>545</i>&nbsp;        Iterable&lt;DownloadJob&gt; it = new GathererSymbols(imagesPath);</b>
+<i>546</i>&nbsp;
+<b class="nc"><i>547</i>&nbsp;        for (DownloadJob job : it) {</b>
+<b class="nc"><i>548</i>&nbsp;            g.getDownloader().add(job);</b>
+<b class="nc"><i>549</i>&nbsp;        }</b>
+<i>550</i>&nbsp;
+<b class="nc"><i>551</i>&nbsp;        it = new GathererSets(imagesPath);</b>
+<b class="nc"><i>552</i>&nbsp;        for (DownloadJob job : it) {</b>
+<b class="nc"><i>553</i>&nbsp;            g.getDownloader().add(job);</b>
+<b class="nc"><i>554</i>&nbsp;        }</b>
+<i>555</i>&nbsp;
+<b class="nc"><i>556</i>&nbsp;        it = new CardFrames(imagesPath);</b>
+<b class="nc"><i>557</i>&nbsp;        for (DownloadJob job : it) {</b>
+<b class="nc"><i>558</i>&nbsp;            g.getDownloader().add(job);</b>
+<b class="nc"><i>559</i>&nbsp;        }</b>
+<i>560</i>&nbsp;
+<b class="nc"><i>561</i>&nbsp;        it = new DirectLinksForDownload(imagesPath);</b>
+<b class="nc"><i>562</i>&nbsp;        for (DownloadJob job : it) {</b>
+<b class="nc"><i>563</i>&nbsp;            g.getDownloader().add(job);</b>
+<b class="nc"><i>564</i>&nbsp;        }</b>
+<i>565</i>&nbsp;
+<b class="nc"><i>566</i>&nbsp;        JDialog d = new JDialog((Frame) null, &quot;Download pictures&quot;, false);</b>
+<b class="nc"><i>567</i>&nbsp;        d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);</b>
+<b class="nc"><i>568</i>&nbsp;        d.addWindowListener(new WindowAdapter() {</b>
+<i>569</i>&nbsp;            @Override
+<i>570</i>&nbsp;            public void windowClosing(WindowEvent e) {
+<b class="nc"><i>571</i>&nbsp;                g.getDownloader().dispose();</b>
+<b class="nc"><i>572</i>&nbsp;                ManaSymbols.loadImages();</b>
+<i>573</i>&nbsp;            }
+<i>574</i>&nbsp;        });
+<b class="nc"><i>575</i>&nbsp;        d.setLayout(new BorderLayout());</b>
+<b class="nc"><i>576</i>&nbsp;        d.add(g);</b>
+<b class="nc"><i>577</i>&nbsp;        d.pack();</b>
+<b class="nc"><i>578</i>&nbsp;        d.setVisible(true);</b>
+<i>579</i>&nbsp;    }
+<i>580</i>&nbsp;
+<i>581</i>&nbsp;    @Override
+<i>582</i>&nbsp;    public void onAddCard(MagePermanent card, int count) {
+<b class="nc"><i>583</i>&nbsp;        if (card != null) {</b>
+<b class="nc"><i>584</i>&nbsp;            Animation.showCard((CardPanel) card, count &gt; 0 ? count : 1);</b>
+<i>585</i>&nbsp;            try {
+<b class="nc"><i>586</i>&nbsp;                while ((card).getAlpha() + 0.05f &lt; 1) {</b>
+<b class="nc"><i>587</i>&nbsp;                    Thread.sleep(30);</b>
+<i>588</i>&nbsp;                }
+<b class="nc"><i>589</i>&nbsp;            } catch (Exception e) {</b>
+<b class="nc"><i>590</i>&nbsp;                e.printStackTrace();</b>
+<b class="nc"><i>591</i>&nbsp;            }</b>
+<i>592</i>&nbsp;        }
+<i>593</i>&nbsp;    }
+<i>594</i>&nbsp;
+<i>595</i>&nbsp;    @Override
+<i>596</i>&nbsp;    public void onRemoveCard(MagePermanent card, int count) {
+<b class="nc"><i>597</i>&nbsp;        if (card != null) {</b>
+<b class="nc"><i>598</i>&nbsp;            Animation.hideCard(card, count &gt; 0 ? count : 1);</b>
+<i>599</i>&nbsp;            try {
+<b class="nc"><i>600</i>&nbsp;                while ((card).getAlpha() - 0.05f &gt; 0) {</b>
+<b class="nc"><i>601</i>&nbsp;                    Thread.sleep(30);</b>
+<i>602</i>&nbsp;                }
+<b class="nc"><i>603</i>&nbsp;            } catch (Exception e) {</b>
+<b class="nc"><i>604</i>&nbsp;                e.printStackTrace();</b>
+<b class="nc"><i>605</i>&nbsp;            }</b>
+<i>606</i>&nbsp;        }
+<i>607</i>&nbsp;    }
+<i>608</i>&nbsp;
+<i>609</i>&nbsp;    @Override
+<i>610</i>&nbsp;    public JComponent getCardInfoPane() {
+<b class="nc"><i>611</i>&nbsp;        return new CardInfoPaneImpl();</b>
+<i>612</i>&nbsp;    }
+<i>613</i>&nbsp;
+<i>614</i>&nbsp;    @Override
+<i>615</i>&nbsp;    public BufferedImage getOriginalImage(CardView card) {
+<b class="nc"><i>616</i>&nbsp;        return ImageCache.getImageOriginal(card);</b>
+<i>617</i>&nbsp;    }
+<i>618</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

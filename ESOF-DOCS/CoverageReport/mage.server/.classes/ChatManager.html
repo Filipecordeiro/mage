@@ -1,0 +1,326 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ChatManager</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.server</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ChatManager (mage.server)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChatManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 96)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp;*
+<i>4</i>&nbsp;* Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp;* permitted provided that the following conditions are met:
+<i>6</i>&nbsp;*
+<i>7</i>&nbsp;*    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp;*       conditions and the following disclaimer.
+<i>9</i>&nbsp;*
+<i>10</i>&nbsp;*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp;*       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp;*       provided with the distribution.
+<i>13</i>&nbsp;*
+<i>14</i>&nbsp;* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp;* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp;* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp;* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp;* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp;* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp;* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp;* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp;*
+<i>24</i>&nbsp;* The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp;* authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp;* or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.server;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.ArrayList;
+<i>31</i>&nbsp;import java.util.Calendar;
+<i>32</i>&nbsp;import java.util.Locale;
+<i>33</i>&nbsp;import java.util.UUID;
+<i>34</i>&nbsp;import java.util.concurrent.ConcurrentHashMap;
+<i>35</i>&nbsp;import mage.server.util.SystemUtil;
+<i>36</i>&nbsp;import mage.view.ChatMessage.MessageColor;
+<i>37</i>&nbsp;import mage.view.ChatMessage.MessageType;
+<i>38</i>&nbsp;import mage.view.ChatMessage.SoundToPlay;
+<i>39</i>&nbsp;import org.apache.log4j.Logger;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;/**
+<i>42</i>&nbsp; *
+<i>43</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>44</i>&nbsp; */
+<i>45</i>&nbsp;public class ChatManager {
+<i>46</i>&nbsp;
+<b class="nc"><i>47</i>&nbsp;    private static final Logger logger = Logger.getLogger(ChatManager.class);</b>
+<i>48</i>&nbsp;
+<b class="nc"><i>49</i>&nbsp;    private static final ChatManager INSTANCE = new ChatManager();</b>
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    public static ChatManager getInstance() {
+<b class="nc"><i>52</i>&nbsp;        return INSTANCE;</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<b class="nc"><i>55</i>&nbsp;    private ChatManager() {</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<b class="nc"><i>58</i>&nbsp;    private final ConcurrentHashMap&lt;UUID, ChatSession&gt; chatSessions = new ConcurrentHashMap&lt;&gt;();</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public UUID createChatSession(String info) {
+<b class="nc"><i>61</i>&nbsp;        ChatSession chatSession = new ChatSession(info);</b>
+<b class="nc"><i>62</i>&nbsp;        chatSessions.put(chatSession.getChatId(), chatSession);</b>
+<b class="nc"><i>63</i>&nbsp;        return chatSession.getChatId();</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public void joinChat(UUID chatId, UUID userId) {
+<b class="nc"><i>67</i>&nbsp;        ChatSession chatSession = chatSessions.get(chatId);</b>
+<b class="nc"><i>68</i>&nbsp;        if (chatSession != null) {</b>
+<b class="nc"><i>69</i>&nbsp;            chatSession.join(userId);</b>
+<i>70</i>&nbsp;        } else {
+<b class="nc"><i>71</i>&nbsp;            logger.trace(&quot;Chat to join not found - chatId: &quot; + chatId + &quot; userId: &quot; + userId);</b>
+<i>72</i>&nbsp;        }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    public void leaveChat(UUID chatId, UUID userId) {
+<b class="nc"><i>77</i>&nbsp;        ChatSession chatSession = chatSessions.get(chatId);</b>
+<b class="nc"><i>78</i>&nbsp;        if (chatSession != null &amp;&amp; chatSession.hasUser(userId)) {</b>
+<b class="nc"><i>79</i>&nbsp;            chatSession.kill(userId, DisconnectReason.CleaningUp);</b>
+<i>80</i>&nbsp;        }
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public void destroyChatSession(UUID chatId) {
+<b class="nc"><i>84</i>&nbsp;        if (chatId != null) {</b>
+<b class="nc"><i>85</i>&nbsp;            ChatSession chatSession = chatSessions.get(chatId);</b>
+<b class="nc"><i>86</i>&nbsp;            if (chatSession != null) {</b>
+<b class="nc"><i>87</i>&nbsp;                synchronized (chatSession) {</b>
+<b class="nc"><i>88</i>&nbsp;                    if (chatSessions.containsKey(chatId)) {</b>
+<b class="nc"><i>89</i>&nbsp;                        chatSessions.remove(chatId);</b>
+<b class="nc"><i>90</i>&nbsp;                        logger.trace(&quot;Chat removed - chatId: &quot; + chatId);</b>
+<i>91</i>&nbsp;                    } else {
+<b class="nc"><i>92</i>&nbsp;                        logger.trace(&quot;Chat to destroy does not exist - chatId: &quot; + chatId);</b>
+<i>93</i>&nbsp;                    }
+<b class="nc"><i>94</i>&nbsp;                }</b>
+<i>95</i>&nbsp;            }
+<i>96</i>&nbsp;        }
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime) {
+<b class="nc"><i>100</i>&nbsp;        this.broadcast(chatId, userName, message, color, withTime, MessageType.TALK);</b>
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType) {
+<b class="nc"><i>104</i>&nbsp;        this.broadcast(chatId, userName, message, color, withTime, messageType, null);</b>
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;
+<b class="nc"><i>107</i>&nbsp;    static String lastMessage = &quot;&quot;;</b>
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, MessageType messageType, SoundToPlay soundToPlay) {
+<b class="nc"><i>110</i>&nbsp;        ChatSession chatSession = chatSessions.get(chatId);</b>
+<b class="nc"><i>111</i>&nbsp;        if (chatSession != null) {</b>
+<b class="nc"><i>112</i>&nbsp;            if (message.startsWith(&quot;\\&quot;) || message.startsWith(&quot;/&quot;)) {</b>
+<b class="nc"><i>113</i>&nbsp;                User user = UserManager.getInstance().getUserByName(userName);</b>
+<b class="nc"><i>114</i>&nbsp;                if (user != null) {</b>
+<b class="nc"><i>115</i>&nbsp;                    if (!performUserCommand(user, message, chatId, false)) {</b>
+<b class="nc"><i>116</i>&nbsp;                        performUserCommand(user, message, chatId, true);</b>
+<i>117</i>&nbsp;                    }
+<i>118</i>&nbsp;                    return;
+<i>119</i>&nbsp;                }
+<i>120</i>&nbsp;            }
+<i>121</i>&nbsp;
+<b class="nc"><i>122</i>&nbsp;            if (!messageType.equals(MessageType.GAME)) {</b>
+<b class="nc"><i>123</i>&nbsp;                if (message.equals(lastMessage)) {</b>
+<i>124</i>&nbsp;                    // prevent identical messages
+<i>125</i>&nbsp;                    return;
+<i>126</i>&nbsp;                }
+<b class="nc"><i>127</i>&nbsp;                if (messageType.equals(MessageType.TALK)) {</b>
+<b class="nc"><i>128</i>&nbsp;                    User user = UserManager.getInstance().getUserByName(userName);</b>
+<b class="nc"><i>129</i>&nbsp;                    if (user != null) {</b>
+<b class="nc"><i>130</i>&nbsp;                        if (user.getChatLockedUntil() != null) {</b>
+<b class="nc"><i>131</i>&nbsp;                            if (user.getChatLockedUntil().compareTo(Calendar.getInstance().getTime()) &gt; 0) {</b>
+<b class="nc"><i>132</i>&nbsp;                                chatSessions.get(chatId).broadcastInfoToUser(user, &quot;Your chat is muted until &quot; + SystemUtil.dateFormat.format(user.getChatLockedUntil()));</b>
+<i>133</i>&nbsp;                                return;
+<i>134</i>&nbsp;                            } else {
+<b class="nc"><i>135</i>&nbsp;                                user.setChatLockedUntil(null);</b>
+<i>136</i>&nbsp;                            }
+<i>137</i>&nbsp;                        }
+<i>138</i>&nbsp;                    }
+<i>139</i>&nbsp;                }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;            }
+<b class="nc"><i>142</i>&nbsp;            lastMessage = message;</b>
+<b class="nc"><i>143</i>&nbsp;            chatSession.broadcast(userName, message, color, withTime, messageType, soundToPlay);</b>
+<i>144</i>&nbsp;        }
+<i>145</i>&nbsp;    }
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;    private static final String COMMANDS_LIST
+<i>148</i>&nbsp;            = &quot;&lt;br/&gt;List of commands:&quot;
+<i>149</i>&nbsp;            + &quot;&lt;br/&gt;\\history or \\h [username] - shows the history of a player&quot;
+<i>150</i>&nbsp;            + &quot;&lt;br/&gt;\\me - shows the history of the current player&quot;
+<i>151</i>&nbsp;            + &quot;&lt;br/&gt;\\list or \\l - Show a list of commands&quot;
+<i>152</i>&nbsp;            + &quot;&lt;br/&gt;\\whisper or \\w [player name] [text] - whisper to the player with the given name&quot;;
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    private boolean performUserCommand(User user, String message, UUID chatId, boolean doError) {
+<b class="nc"><i>155</i>&nbsp;        String command = message.substring(1).trim().toUpperCase(Locale.ENGLISH);</b>
+<b class="nc"><i>156</i>&nbsp;        if (doError) {</b>
+<b class="nc"><i>157</i>&nbsp;            message += new StringBuilder(&quot;&lt;br/&gt;Invalid User Command &#39;&quot; + message + &quot;&#39;.&quot;).append(COMMANDS_LIST).toString();</b>
+<b class="nc"><i>158</i>&nbsp;            chatSessions.get(chatId).broadcastInfoToUser(user, message);</b>
+<b class="nc"><i>159</i>&nbsp;            return true;</b>
+<i>160</i>&nbsp;        }
+<i>161</i>&nbsp;
+<b class="nc"><i>162</i>&nbsp;        if (command.startsWith(&quot;H &quot;) || command.startsWith(&quot;HISTORY &quot;)) {</b>
+<b class="nc"><i>163</i>&nbsp;            message += &quot;&lt;br/&gt;&quot; + UserManager.getInstance().getUserHistory(message.substring(command.startsWith(&quot;H &quot;) ? 3 : 9));</b>
+<b class="nc"><i>164</i>&nbsp;            chatSessions.get(chatId).broadcastInfoToUser(user, message);</b>
+<b class="nc"><i>165</i>&nbsp;            return true;</b>
+<i>166</i>&nbsp;        }
+<b class="nc"><i>167</i>&nbsp;        if (command.equals(&quot;ME&quot;)) {</b>
+<b class="nc"><i>168</i>&nbsp;            message += &quot;&lt;br/&gt;&quot; + UserManager.getInstance().getUserHistory(user.getName());</b>
+<b class="nc"><i>169</i>&nbsp;            chatSessions.get(chatId).broadcastInfoToUser(user, message);</b>
+<b class="nc"><i>170</i>&nbsp;            return true;</b>
+<i>171</i>&nbsp;        }
+<b class="nc"><i>172</i>&nbsp;        if (command.startsWith(&quot;W &quot;) || command.startsWith(&quot;WHISPER &quot;)) {</b>
+<b class="nc"><i>173</i>&nbsp;            String rest = message.substring(command.startsWith(&quot;W &quot;) ? 3 : 9);</b>
+<b class="nc"><i>174</i>&nbsp;            int first = rest.indexOf(&quot; &quot;);</b>
+<b class="nc"><i>175</i>&nbsp;            if (first &gt; 1) {</b>
+<b class="nc"><i>176</i>&nbsp;                String userToName = rest.substring(0, first);</b>
+<b class="nc"><i>177</i>&nbsp;                rest = rest.substring(first + 1).trim();</b>
+<b class="nc"><i>178</i>&nbsp;                User userTo = UserManager.getInstance().getUserByName(userToName);</b>
+<b class="nc"><i>179</i>&nbsp;                if (userTo != null) {</b>
+<b class="nc"><i>180</i>&nbsp;                    if (!chatSessions.get(chatId).broadcastWhisperToUser(user, userTo, rest)) {</b>
+<b class="nc"><i>181</i>&nbsp;                        message += new StringBuilder(&quot;&lt;br/&gt;User &quot;).append(userToName).append(&quot; not found&quot;).toString();</b>
+<b class="nc"><i>182</i>&nbsp;                        chatSessions.get(chatId).broadcastInfoToUser(user, message);</b>
+<i>183</i>&nbsp;                    }
+<i>184</i>&nbsp;                } else {
+<b class="nc"><i>185</i>&nbsp;                    message += new StringBuilder(&quot;&lt;br/&gt;User &quot;).append(userToName).append(&quot; not found&quot;).toString();</b>
+<b class="nc"><i>186</i>&nbsp;                    chatSessions.get(chatId).broadcastInfoToUser(user, message);</b>
+<i>187</i>&nbsp;                }
+<b class="nc"><i>188</i>&nbsp;                return true;</b>
+<i>189</i>&nbsp;            }
+<i>190</i>&nbsp;        }
+<b class="nc"><i>191</i>&nbsp;        if (command.equals(&quot;L&quot;) || command.equals(&quot;LIST&quot;)) {</b>
+<b class="nc"><i>192</i>&nbsp;            message += COMMANDS_LIST;</b>
+<b class="nc"><i>193</i>&nbsp;            chatSessions.get(chatId).broadcastInfoToUser(user, message);</b>
+<b class="nc"><i>194</i>&nbsp;            return true;</b>
+<i>195</i>&nbsp;        }
+<b class="nc"><i>196</i>&nbsp;        return false;</b>
+<i>197</i>&nbsp;    }
+<i>198</i>&nbsp;
+<i>199</i>&nbsp;    /**
+<i>200</i>&nbsp;     *
+<i>201</i>&nbsp;     * use mainly for announcing that a user connection was lost or that a user
+<i>202</i>&nbsp;     * has reconnected
+<i>203</i>&nbsp;     *
+<i>204</i>&nbsp;     * @param userId
+<i>205</i>&nbsp;     * @param message
+<i>206</i>&nbsp;     * @param color
+<i>207</i>&nbsp;     */
+<i>208</i>&nbsp;    public void broadcast(UUID userId, String message, MessageColor color) {
+<b class="nc"><i>209</i>&nbsp;        User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>210</i>&nbsp;        if (user != null) {</b>
+<b class="nc"><i>211</i>&nbsp;            for (ChatSession chat : chatSessions.values()) {</b>
+<b class="nc"><i>212</i>&nbsp;                if (chat.hasUser(userId)) {</b>
+<b class="nc"><i>213</i>&nbsp;                    chat.broadcast(user.getName(), message, color, true, MessageType.TALK, null);</b>
+<i>214</i>&nbsp;                }
+<b class="nc"><i>215</i>&nbsp;            }</b>
+<i>216</i>&nbsp;        }
+<i>217</i>&nbsp;    }
+<i>218</i>&nbsp;
+<i>219</i>&nbsp;    public void sendReconnectMessage(UUID userId) {
+<b class="nc"><i>220</i>&nbsp;        User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>221</i>&nbsp;        if (user != null) {</b>
+<b class="nc"><i>222</i>&nbsp;            for (ChatSession chat : chatSessions.values()) {</b>
+<b class="nc"><i>223</i>&nbsp;                if (chat.hasUser(userId)) {</b>
+<b class="nc"><i>224</i>&nbsp;                    chat.broadcast(null, user.getName() + &quot; has reconnected&quot;, MessageColor.BLUE, true, MessageType.STATUS, null);</b>
+<i>225</i>&nbsp;                }
+<b class="nc"><i>226</i>&nbsp;            }</b>
+<i>227</i>&nbsp;        }
+<i>228</i>&nbsp;    }
+<i>229</i>&nbsp;
+<i>230</i>&nbsp;    public void removeUser(UUID userId, DisconnectReason reason) {
+<b class="nc"><i>231</i>&nbsp;        for (ChatSession chatSession : chatSessions.values()) {</b>
+<b class="nc"><i>232</i>&nbsp;            if (chatSession.hasUser(userId)) {</b>
+<b class="nc"><i>233</i>&nbsp;                chatSession.kill(userId, reason);</b>
+<i>234</i>&nbsp;            }
+<b class="nc"><i>235</i>&nbsp;        }</b>
+<i>236</i>&nbsp;    }
+<i>237</i>&nbsp;
+<i>238</i>&nbsp;    public ArrayList&lt;ChatSession&gt; getChatSessions() {
+<b class="nc"><i>239</i>&nbsp;        ArrayList&lt;ChatSession&gt; chatSessionList = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>240</i>&nbsp;        chatSessionList.addAll(chatSessions.values());</b>
+<b class="nc"><i>241</i>&nbsp;        return chatSessionList;</b>
+<i>242</i>&nbsp;    }
+<i>243</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

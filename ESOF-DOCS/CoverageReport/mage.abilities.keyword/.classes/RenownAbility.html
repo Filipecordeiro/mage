@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RenownAbility</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.keyword</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RenownAbility (mage.abilities.keyword)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RenownAbility</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.abilities.keyword;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import mage.abilities.Ability;
+<i>9</i>&nbsp;import mage.abilities.TriggeredAbilityImpl;
+<i>10</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>11</i>&nbsp;import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+<i>12</i>&nbsp;import mage.constants.Outcome;
+<i>13</i>&nbsp;import mage.constants.Zone;
+<i>14</i>&nbsp;import mage.counters.CounterType;
+<i>15</i>&nbsp;import mage.game.Game;
+<i>16</i>&nbsp;import mage.game.events.DamagedPlayerEvent;
+<i>17</i>&nbsp;import mage.game.events.GameEvent;
+<i>18</i>&nbsp;import mage.game.permanent.Permanent;
+<i>19</i>&nbsp;import mage.util.CardUtil;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;/**
+<i>22</i>&nbsp; *
+<i>23</i>&nbsp; * @author LevelX2
+<i>24</i>&nbsp; */
+<i>25</i>&nbsp;public class RenownAbility extends TriggeredAbilityImpl {
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    private int renownValue;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public RenownAbility(int renownValue) {
+<b class="fc"><i>30</i>&nbsp;        super(Zone.BATTLEFIELD, new BecomesRenownedSourceEffect(renownValue), false);</b>
+<b class="fc"><i>31</i>&nbsp;        this.renownValue = renownValue;</b>
+<b class="fc"><i>32</i>&nbsp;    }</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    public RenownAbility(final RenownAbility ability) {
+<b class="fc"><i>35</i>&nbsp;        super(ability);</b>
+<b class="fc"><i>36</i>&nbsp;        this.renownValue = ability.renownValue;</b>
+<b class="fc"><i>37</i>&nbsp;    }</b>
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @Override
+<i>40</i>&nbsp;    public RenownAbility copy() {
+<b class="fc"><i>41</i>&nbsp;        return new RenownAbility(this);</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    @Override
+<i>45</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<b class="fc"><i>46</i>&nbsp;        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @Override
+<i>50</i>&nbsp;    public boolean checkInterveningIfClause(Game game) {
+<b class="fc"><i>51</i>&nbsp;        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(getSourceId());</b>
+<b class="fc"><i>52</i>&nbsp;        return sourcePermanent != null &amp;&amp; !sourcePermanent.isRenowned();</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    @Override
+<i>56</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<b class="fc"><i>57</i>&nbsp;        return event.getSourceId().equals(getSourceId())</b>
+<b class="fc"><i>58</i>&nbsp;                &amp;&amp; ((DamagedPlayerEvent) event).isCombatDamage();</b>
+<i>59</i>&nbsp;    }
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    public int getRenownValue() {
+<b class="fc"><i>62</i>&nbsp;        return renownValue;</b>
+<i>63</i>&nbsp;    }
+<i>64</i>&nbsp;}
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;class BecomesRenownedSourceEffect extends OneShotEffect {
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public BecomesRenownedSourceEffect(int renownValue) {
+<i>69</i>&nbsp;        super(Outcome.BoostCreature);
+<i>70</i>&nbsp;        this.staticText = setText(renownValue);
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    public BecomesRenownedSourceEffect(final BecomesRenownedSourceEffect effect) {
+<i>74</i>&nbsp;        super(effect);
+<i>75</i>&nbsp;    }
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    @Override
+<i>78</i>&nbsp;    public BecomesRenownedSourceEffect copy() {
+<i>79</i>&nbsp;        return new BecomesRenownedSourceEffect(this);
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    @Override
+<i>83</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>84</i>&nbsp;        Permanent permanent = game.getPermanent(source.getSourceId());
+<i>85</i>&nbsp;        if (permanent != null &amp;&amp; source instanceof RenownAbility) {
+<i>86</i>&nbsp;            game.informPlayers(permanent.getLogName() + &quot; is now renowned&quot;);
+<i>87</i>&nbsp;            int renownValue = ((RenownAbility) source).getRenownValue();
+<i>88</i>&nbsp;            // handle renown = X
+<i>89</i>&nbsp;            if (renownValue == Integer.MAX_VALUE) {
+<i>90</i>&nbsp;                renownValue = source.getManaCostsToPay().getX();
+<i>91</i>&nbsp;            }
+<i>92</i>&nbsp;            new AddCountersSourceEffect(CounterType.P1P1.createInstance(renownValue), true).apply(game, source);
+<i>93</i>&nbsp;            permanent.setRenowned(true);
+<i>94</i>&nbsp;            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BECOMES_RENOWNED, source.getSourceId(), source.getSourceId(), source.getControllerId(), renownValue));
+<i>95</i>&nbsp;            return true;
+<i>96</i>&nbsp;        }
+<i>97</i>&nbsp;        return false;
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    private String setText(int renownValue) {
+<i>101</i>&nbsp;        // Renown 1 (When this creature deals combat damage to a player, if it isn&#39;t renowned, put a +1/+1 counter on it and it becomes renowned.)
+<i>102</i>&nbsp;        StringBuilder sb = new StringBuilder(&quot;Renown &quot;);
+<i>103</i>&nbsp;        sb.append(renownValue == Integer.MAX_VALUE ? &quot;X&quot; : renownValue)
+<i>104</i>&nbsp;                .append(&quot; &lt;i&gt;(When this creature deals combat damage to a player, if it isn&#39;t renowned, put &quot;)
+<i>105</i>&nbsp;                .append(renownValue == Integer.MAX_VALUE ? &quot;X&quot; : CardUtil.numberToText(renownValue, &quot;a&quot;))
+<i>106</i>&nbsp;                .append(&quot; +1/+1 counter on it and it becomes renowned.)&lt;/i&gt;&quot;);
+<i>107</i>&nbsp;        return sb.toString();
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

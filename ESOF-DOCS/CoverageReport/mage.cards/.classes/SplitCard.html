@@ -1,0 +1,285 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SplitCard</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SplitCard (mage.cards)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SplitCard</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (10/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.5%
+  </span>
+  <span class="absValue">
+    (50/ 68)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SplitCard$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (10/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.5%
+  </span>
+  <span class="absValue">
+    (50/ 69)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.ArrayList;
+<i>31</i>&nbsp;import java.util.List;
+<i>32</i>&nbsp;import java.util.UUID;
+<i>33</i>&nbsp;import mage.abilities.Abilities;
+<i>34</i>&nbsp;import mage.abilities.AbilitiesImpl;
+<i>35</i>&nbsp;import mage.abilities.Ability;
+<i>36</i>&nbsp;import mage.abilities.SpellAbility;
+<i>37</i>&nbsp;import mage.constants.CardType;
+<i>38</i>&nbsp;import mage.constants.Rarity;
+<i>39</i>&nbsp;import mage.constants.SpellAbilityType;
+<i>40</i>&nbsp;import mage.constants.Zone;
+<i>41</i>&nbsp;import mage.game.Game;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;/**
+<i>44</i>&nbsp; *
+<i>45</i>&nbsp; * @author LevelX2
+<i>46</i>&nbsp; */
+<i>47</i>&nbsp;public abstract class SplitCard extends CardImpl {
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    protected Card leftHalfCard;
+<i>50</i>&nbsp;    protected Card rightHalfCard;
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costsLeft, String costsRight, boolean fused) {
+<b class="fc"><i>53</i>&nbsp;        super(ownerId, setInfo, cardTypes, costsLeft + costsRight, (fused ? SpellAbilityType.SPLIT_FUSED : SpellAbilityType.SPLIT));</b>
+<b class="fc"><i>54</i>&nbsp;        String[] names = setInfo.getName().split(&quot; // &quot;);</b>
+<b class="fc"><i>55</i>&nbsp;        leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), cardTypes, costsLeft, this, SpellAbilityType.SPLIT_LEFT);</b>
+<b class="fc"><i>56</i>&nbsp;        rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), cardTypes, costsRight, this, SpellAbilityType.SPLIT_RIGHT);</b>
+<b class="fc"><i>57</i>&nbsp;        this.splitCard = true;</b>
+<b class="fc"><i>58</i>&nbsp;    }</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public SplitCard(SplitCard card) {
+<b class="fc"><i>61</i>&nbsp;        super(card);</b>
+<b class="fc"><i>62</i>&nbsp;        this.leftHalfCard = card.getLeftHalfCard().copy();</b>
+<b class="fc"><i>63</i>&nbsp;        ((SplitCardHalf) leftHalfCard).setParentCard(this);</b>
+<b class="fc"><i>64</i>&nbsp;        this.rightHalfCard = card.rightHalfCard.copy();</b>
+<b class="fc"><i>65</i>&nbsp;        ((SplitCardHalf) rightHalfCard).setParentCard(this);</b>
+<b class="fc"><i>66</i>&nbsp;    }</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public SplitCardHalf getLeftHalfCard() {
+<b class="fc"><i>69</i>&nbsp;        return (SplitCardHalf) leftHalfCard;</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public SplitCardHalf getRightHalfCard() {
+<b class="fc"><i>73</i>&nbsp;        return (SplitCardHalf) rightHalfCard;</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    @Override
+<i>77</i>&nbsp;    public void assignNewId() {
+<b class="nc"><i>78</i>&nbsp;        super.assignNewId();</b>
+<b class="nc"><i>79</i>&nbsp;        leftHalfCard.assignNewId();</b>
+<b class="nc"><i>80</i>&nbsp;        rightHalfCard.assignNewId();</b>
+<b class="nc"><i>81</i>&nbsp;    }</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    @Override
+<i>84</i>&nbsp;    public void setCopy(boolean isCopy) {
+<b class="nc"><i>85</i>&nbsp;        super.setCopy(isCopy);</b>
+<b class="nc"><i>86</i>&nbsp;        leftHalfCard.setCopy(isCopy);</b>
+<b class="nc"><i>87</i>&nbsp;        rightHalfCard.setCopy(isCopy);</b>
+<b class="nc"><i>88</i>&nbsp;    }</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    @Override
+<i>91</i>&nbsp;    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList&lt;UUID&gt; appliedEffects) {
+<b class="fc"><i>92</i>&nbsp;        if (super.moveToZone(toZone, sourceId, game, flag, appliedEffects)) {</b>
+<b class="fc"><i>93</i>&nbsp;            game.getState().setZone(getLeftHalfCard().getId(), toZone);</b>
+<b class="fc"><i>94</i>&nbsp;            game.getState().setZone(getRightHalfCard().getId(), toZone);</b>
+<b class="fc"><i>95</i>&nbsp;            return true;</b>
+<i>96</i>&nbsp;        }
+<b class="nc"><i>97</i>&nbsp;        return false;</b>
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    @Override
+<i>101</i>&nbsp;    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList&lt;UUID&gt; appliedEffects) {
+<b class="fc"><i>102</i>&nbsp;        if (super.moveToExile(exileId, name, sourceId, game, appliedEffects)) {</b>
+<b class="fc"><i>103</i>&nbsp;            Zone currentZone = game.getState().getZone(getId());</b>
+<b class="fc"><i>104</i>&nbsp;            game.getState().setZone(getLeftHalfCard().getId(), currentZone);</b>
+<b class="fc"><i>105</i>&nbsp;            game.getState().setZone(getRightHalfCard().getId(), currentZone);</b>
+<b class="fc"><i>106</i>&nbsp;            return true;</b>
+<i>107</i>&nbsp;        }
+<b class="nc"><i>108</i>&nbsp;        return false;</b>
+<i>109</i>&nbsp;    }
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    @Override
+<i>112</i>&nbsp;    public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
+<b class="nc"><i>113</i>&nbsp;        switch (ability.getSpellAbilityType()) {</b>
+<i>114</i>&nbsp;            case SPLIT_LEFT:
+<b class="nc"><i>115</i>&nbsp;                return this.getLeftHalfCard().cast(game, fromZone, ability, controllerId);</b>
+<i>116</i>&nbsp;            case SPLIT_RIGHT:
+<b class="nc"><i>117</i>&nbsp;                return this.getRightHalfCard().cast(game, fromZone, ability, controllerId);</b>
+<i>118</i>&nbsp;            default:
+<b class="nc"><i>119</i>&nbsp;                return super.cast(game, fromZone, ability, controllerId);</b>
+<i>120</i>&nbsp;        }
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    @Override
+<i>124</i>&nbsp;    public void setZone(Zone zone, Game game) {
+<b class="fc"><i>125</i>&nbsp;        super.setZone(zone, game);</b>
+<b class="fc"><i>126</i>&nbsp;        game.setZone(getLeftHalfCard().getId(), zone);</b>
+<b class="fc"><i>127</i>&nbsp;        game.setZone(getRightHalfCard().getId(), zone);</b>
+<b class="fc"><i>128</i>&nbsp;    }</b>
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    @Override
+<i>131</i>&nbsp;    public Abilities&lt;Ability&gt; getAbilities() {
+<b class="fc"><i>132</i>&nbsp;        Abilities&lt;Ability&gt; allAbilites = new AbilitiesImpl&lt;&gt;();</b>
+<b class="fc"><i>133</i>&nbsp;        for (Ability ability : super.getAbilities()) {</b>
+<b class="fc"><i>134</i>&nbsp;            if (ability instanceof SpellAbility &amp;&amp; !((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {</b>
+<b class="fc"><i>135</i>&nbsp;                allAbilites.add(ability);</b>
+<i>136</i>&nbsp;            }
+<b class="fc"><i>137</i>&nbsp;        }</b>
+<b class="fc"><i>138</i>&nbsp;        allAbilites.addAll(leftHalfCard.getAbilities());</b>
+<b class="fc"><i>139</i>&nbsp;        allAbilites.addAll(rightHalfCard.getAbilities());</b>
+<b class="fc"><i>140</i>&nbsp;        return allAbilites;</b>
+<i>141</i>&nbsp;    }
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;    @Override
+<i>144</i>&nbsp;    public Abilities&lt;Ability&gt; getAbilities(Game game) {
+<b class="fc"><i>145</i>&nbsp;        Abilities&lt;Ability&gt; allAbilites = new AbilitiesImpl&lt;&gt;();</b>
+<b class="fc"><i>146</i>&nbsp;        for (Ability ability : super.getAbilities(game)) {</b>
+<b class="fc"><i>147</i>&nbsp;            if (ability instanceof SpellAbility &amp;&amp; !((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {</b>
+<b class="fc"><i>148</i>&nbsp;                allAbilites.add(ability);</b>
+<i>149</i>&nbsp;            }
+<b class="fc"><i>150</i>&nbsp;        }</b>
+<b class="fc"><i>151</i>&nbsp;        allAbilites.addAll(leftHalfCard.getAbilities(game));</b>
+<b class="fc"><i>152</i>&nbsp;        allAbilites.addAll(rightHalfCard.getAbilities(game));</b>
+<b class="fc"><i>153</i>&nbsp;        return allAbilites;</b>
+<i>154</i>&nbsp;    }
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;    @Override
+<i>157</i>&nbsp;    public List&lt;String&gt; getRules() {
+<b class="nc"><i>158</i>&nbsp;        List&lt;String&gt; rules = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>159</i>&nbsp;        if (getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {</b>
+<b class="nc"><i>160</i>&nbsp;            rules.add(&quot;--------------------------------------------------------------------------\nFuse (You may cast one or both halves of this card from your hand.)&quot;);</b>
+<i>161</i>&nbsp;        }
+<b class="nc"><i>162</i>&nbsp;        return rules;</b>
+<i>163</i>&nbsp;    }
+<i>164</i>&nbsp;
+<i>165</i>&nbsp;    @Override
+<i>166</i>&nbsp;    public void setOwnerId(UUID ownerId) {
+<b class="fc"><i>167</i>&nbsp;        super.setOwnerId(ownerId);</b>
+<b class="fc"><i>168</i>&nbsp;        abilities.setControllerId(ownerId);</b>
+<b class="fc"><i>169</i>&nbsp;        leftHalfCard.getAbilities().setControllerId(ownerId);</b>
+<b class="fc"><i>170</i>&nbsp;        leftHalfCard.setOwnerId(ownerId);</b>
+<b class="fc"><i>171</i>&nbsp;        rightHalfCard.getAbilities().setControllerId(ownerId);</b>
+<b class="fc"><i>172</i>&nbsp;        rightHalfCard.setOwnerId(ownerId);</b>
+<i>173</i>&nbsp;
+<b class="fc"><i>174</i>&nbsp;    }</b>
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

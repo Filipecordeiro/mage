@@ -1,0 +1,470 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TokensMtgImageSource</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.mage.plugins.card.dl.sources</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TokensMtgImageSource (org.mage.plugins.card.dl.sources)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TokensMtgImageSource</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 125)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TokensMtgImageSource$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TokensMtgImageSource$TokenData</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 135)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package org.mage.plugins.card.dl.sources;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.BufferedReader;
+<i>31</i>&nbsp;import java.io.IOException;
+<i>32</i>&nbsp;import java.io.InputStream;
+<i>33</i>&nbsp;import java.io.InputStreamReader;
+<i>34</i>&nbsp;import java.net.URL;
+<i>35</i>&nbsp;import java.util.ArrayList;
+<i>36</i>&nbsp;import java.util.HashMap;
+<i>37</i>&nbsp;import java.util.List;
+<i>38</i>&nbsp;import java.util.Map;
+<i>39</i>&nbsp;import org.apache.log4j.Logger;
+<i>40</i>&nbsp;import org.mage.plugins.card.images.CardDownloadData;
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;/**
+<i>43</i>&nbsp; *
+<i>44</i>&nbsp; * @author Quercitron
+<i>45</i>&nbsp; */
+<b class="nc"><i>46</i>&nbsp;public class TokensMtgImageSource implements CardImageSource {</b>
+<i>47</i>&nbsp;
+<b class="nc"><i>48</i>&nbsp;    private static final Logger logger = Logger.getLogger(TokensMtgImageSource.class);</b>
+<i>49</i>&nbsp;
+<b class="nc"><i>50</i>&nbsp;    private static CardImageSource instance = new TokensMtgImageSource();</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public static CardImageSource getInstance() {
+<b class="nc"><i>53</i>&nbsp;        if (instance == null) {</b>
+<b class="nc"><i>54</i>&nbsp;            instance = new TokensMtgImageSource();</b>
+<i>55</i>&nbsp;        }
+<b class="nc"><i>56</i>&nbsp;        return instance;</b>
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    @Override
+<i>60</i>&nbsp;    public String getSourceName() {
+<b class="nc"><i>61</i>&nbsp;        return &quot;tokens.mtg.onl&quot;;</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    @Override
+<i>65</i>&nbsp;    public Float getAverageSize() {
+<b class="nc"><i>66</i>&nbsp;        return 26.7f;</b>
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @Override
+<i>70</i>&nbsp;    public String getNextHttpImageUrl() {
+<b class="nc"><i>71</i>&nbsp;        return null;</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    @Override
+<i>75</i>&nbsp;    public String getFileForHttpImage(String httpImageUrl) {
+<b class="nc"><i>76</i>&nbsp;        return null;</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    @Override
+<i>80</i>&nbsp;    public String generateURL(CardDownloadData card) throws Exception {
+<b class="nc"><i>81</i>&nbsp;        return null;</b>
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<b class="nc"><i>84</i>&nbsp;    private static final String[] EMBLEMS = {</b>
+<i>85</i>&nbsp;            &quot;Ajani&quot;,
+<i>86</i>&nbsp;            &quot;Chandra&quot;,
+<i>87</i>&nbsp;            &quot;Dack&quot;,
+<i>88</i>&nbsp;            &quot;Daretti&quot;,
+<i>89</i>&nbsp;            &quot;Domri&quot;,
+<i>90</i>&nbsp;            &quot;Elspeth&quot;,
+<i>91</i>&nbsp;            &quot;Garruk&quot;,
+<i>92</i>&nbsp;            &quot;Gideon&quot;,
+<i>93</i>&nbsp;            &quot;Jace&quot;,
+<i>94</i>&nbsp;            &quot;Kiora&quot;,
+<i>95</i>&nbsp;            &quot;Koth&quot;,
+<i>96</i>&nbsp;            &quot;Liliana&quot;,
+<i>97</i>&nbsp;            &quot;Narset&quot;,
+<i>98</i>&nbsp;            &quot;Nixilis&quot;,
+<i>99</i>&nbsp;            &quot;Sarkhan&quot;,
+<i>100</i>&nbsp;            &quot;Sorin&quot;,
+<i>101</i>&nbsp;            &quot;Tamiyo&quot;,
+<i>102</i>&nbsp;            &quot;Teferi&quot;,
+<i>103</i>&nbsp;            &quot;Venser&quot;,
+<i>104</i>&nbsp;    };
+<i>105</i>&nbsp;
+<b class="nc"><i>106</i>&nbsp;    private static final Map&lt;String, String&gt; SET_NAMES_REPLACEMENT = new HashMap&lt;String, String&gt;() {</b>
+<i>107</i>&nbsp;        {
+<b class="nc"><i>108</i>&nbsp;            put(&quot;con&quot;, &quot;CFX&quot;);</b>
+<b class="nc"><i>109</i>&nbsp;            put(&quot;fnmp&quot;, &quot;FNM&quot;);</b>
+<i>110</i>&nbsp;        }
+<i>111</i>&nbsp;    };
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;    @Override
+<i>114</i>&nbsp;    public String generateTokenUrl(CardDownloadData card) throws IOException {
+<b class="nc"><i>115</i>&nbsp;        String name = card.getName();</b>
+<b class="nc"><i>116</i>&nbsp;        String set = card.getSet();</b>
+<b class="nc"><i>117</i>&nbsp;        int type = card.getType();</b>
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;        // handle emblems
+<b class="nc"><i>120</i>&nbsp;        if (name.toLowerCase().contains(&quot;emblem&quot;)) {</b>
+<b class="nc"><i>121</i>&nbsp;            for (String emblem : EMBLEMS) {</b>
+<b class="nc"><i>122</i>&nbsp;                if (name.toLowerCase().contains(emblem.toLowerCase())){</b>
+<b class="nc"><i>123</i>&nbsp;                    name = emblem + &quot; Emblem&quot;;</b>
+<b class="nc"><i>124</i>&nbsp;                    break;</b>
+<i>125</i>&nbsp;                }
+<i>126</i>&nbsp;            }
+<i>127</i>&nbsp;        }
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;        // we should replace some set names
+<b class="nc"><i>130</i>&nbsp;        if (SET_NAMES_REPLACEMENT.containsKey(set.toLowerCase())) {</b>
+<b class="nc"><i>131</i>&nbsp;            set = SET_NAMES_REPLACEMENT.get(set.toLowerCase());</b>
+<i>132</i>&nbsp;        }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;        // Image URL contains token number
+<i>135</i>&nbsp;        // e.g. http://tokens.mtg.onl/tokens/ORI_010-Thopter.jpg -- token number 010
+<i>136</i>&nbsp;        // We don&#39;t know these numbers, but we can take them from a file
+<i>137</i>&nbsp;        // with tokens information that can be downloaded from the site.
+<b class="nc"><i>138</i>&nbsp;        List&lt;TokenData&gt; tokensData = getTokensData();</b>
+<i>139</i>&nbsp;
+<b class="nc"><i>140</i>&nbsp;        if (tokensData.isEmpty()) {</b>
+<b class="nc"><i>141</i>&nbsp;            return null;</b>
+<i>142</i>&nbsp;        }
+<i>143</i>&nbsp;
+<b class="nc"><i>144</i>&nbsp;        List&lt;TokenData&gt; matchedTokens = new ArrayList&lt;TokenData&gt;();</b>
+<b class="nc"><i>145</i>&nbsp;        for (TokenData token : tokensData) {</b>
+<b class="nc"><i>146</i>&nbsp;            if (name.equalsIgnoreCase(token.getName()) &amp;&amp; set.equalsIgnoreCase(token.getExpansionSetCode())) {</b>
+<b class="nc"><i>147</i>&nbsp;                matchedTokens.add(token);</b>
+<i>148</i>&nbsp;            }
+<b class="nc"><i>149</i>&nbsp;        }</b>
+<i>150</i>&nbsp;
+<b class="nc"><i>151</i>&nbsp;        if (matchedTokens.isEmpty()) {</b>
+<b class="nc"><i>152</i>&nbsp;            logger.info(&quot;Could not find data for token &quot; + name + &quot;, set &quot; + set + &quot;.&quot;);</b>
+<b class="nc"><i>153</i>&nbsp;            return null;</b>
+<i>154</i>&nbsp;        }
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;        TokenData tokenData;
+<b class="nc"><i>157</i>&nbsp;        if (type == 0) {</b>
+<b class="nc"><i>158</i>&nbsp;            if (matchedTokens.size() &gt; 1) {</b>
+<b class="nc"><i>159</i>&nbsp;                logger.info(&quot;Multiple images were found for token &quot; + name + &quot;, set &quot; + set + &quot;.&quot;);</b>
+<i>160</i>&nbsp;            }
+<b class="nc"><i>161</i>&nbsp;            tokenData = matchedTokens.get(0);</b>
+<i>162</i>&nbsp;        } else {
+<b class="nc"><i>163</i>&nbsp;            if (type &gt; matchedTokens.size()) {</b>
+<b class="nc"><i>164</i>&nbsp;                logger.warn(&quot;Not enough images for token with type &quot; + type + &quot;, name &quot; + name + &quot;, set &quot; + set + &quot;.&quot;);</b>
+<b class="nc"><i>165</i>&nbsp;                return null;</b>
+<i>166</i>&nbsp;            }
+<b class="nc"><i>167</i>&nbsp;            tokenData = matchedTokens.get(card.getType() - 1);</b>
+<i>168</i>&nbsp;        }
+<i>169</i>&nbsp;
+<b class="nc"><i>170</i>&nbsp;        String url = &quot;http://tokens.mtg.onl/tokens/&quot; + tokenData.getExpansionSetCode().trim() + &quot;_&quot;</b>
+<b class="nc"><i>171</i>&nbsp;                + tokenData.getNumber().trim() + &quot;-&quot; + tokenData.getName().trim()+ &quot;.jpg&quot;;</b>
+<b class="nc"><i>172</i>&nbsp;        url = url.replace(&#39; &#39;, &#39;-&#39;);</b>
+<b class="nc"><i>173</i>&nbsp;        return url;</b>
+<i>174</i>&nbsp;    }
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;    private List&lt;TokenData&gt; tokensData;
+<i>177</i>&nbsp;
+<b class="nc"><i>178</i>&nbsp;    private final Object tokensDataSync = new Object();</b>
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;    private List&lt;TokenData&gt; getTokensData() throws IOException {
+<b class="nc"><i>181</i>&nbsp;        if (tokensData == null) {</b>
+<b class="nc"><i>182</i>&nbsp;            synchronized (tokensDataSync) {</b>
+<b class="nc"><i>183</i>&nbsp;                if (tokensData == null) {</b>
+<b class="nc"><i>184</i>&nbsp;                    tokensData = new ArrayList&lt;TokenData&gt;();</b>
+<i>185</i>&nbsp;
+<i>186</i>&nbsp;                    // get tokens data from resource file
+<b class="nc"><i>187</i>&nbsp;                    InputStream inputStream = null;</b>
+<i>188</i>&nbsp;                    try {
+<b class="nc"><i>189</i>&nbsp;                        inputStream = this.getClass().getResourceAsStream(&quot;/tokens-mtg-onl-list.csv&quot;);</b>
+<b class="nc"><i>190</i>&nbsp;                        List&lt;TokenData&gt; fileTokensData = parseTokensData(inputStream);</b>
+<b class="nc"><i>191</i>&nbsp;                        tokensData.addAll(fileTokensData);</b>
+<b class="nc"><i>192</i>&nbsp;                    } catch (Exception exception) {</b>
+<b class="nc"><i>193</i>&nbsp;                        logger.warn(&quot;Failed to get tokens description from resource file tokens-mtg-onl-list.csv&quot;, exception);</b>
+<i>194</i>&nbsp;                    } finally {
+<b class="nc"><i>195</i>&nbsp;                        if (inputStream != null) {</b>
+<i>196</i>&nbsp;                            try {
+<b class="nc"><i>197</i>&nbsp;                                inputStream.close();</b>
+<b class="nc"><i>198</i>&nbsp;                            } catch (Exception e) {</b>
+<b class="nc"><i>199</i>&nbsp;                                logger.error(&quot;Input stream close failed:&quot;, e);</b>
+<b class="nc"><i>200</i>&nbsp;                            }</b>
+<i>201</i>&nbsp;                        }
+<i>202</i>&nbsp;                    }
+<i>203</i>&nbsp;
+<i>204</i>&nbsp;                    // description on site may contain new information
+<i>205</i>&nbsp;                    // try to add it
+<i>206</i>&nbsp;                    try {
+<b class="nc"><i>207</i>&nbsp;                        URL url = new URL(&quot;http://tokens.mtg.onl/data/SetsWithTokens.csv&quot;);</b>
+<b class="nc"><i>208</i>&nbsp;                        inputStream = url.openStream();</b>
+<b class="nc"><i>209</i>&nbsp;                        List&lt;TokenData&gt; siteTokensData = parseTokensData(inputStream);</b>
+<i>210</i>&nbsp;
+<b class="nc"><i>211</i>&nbsp;                        List&lt;TokenData&gt; newTokensData = new ArrayList&lt;TokenData&gt;();</b>
+<b class="nc"><i>212</i>&nbsp;                        for (TokenData siteData : siteTokensData) {</b>
+<b class="nc"><i>213</i>&nbsp;                            boolean isNew = true;</b>
+<b class="nc"><i>214</i>&nbsp;                            for (TokenData fileData : tokensData) {</b>
+<b class="nc"><i>215</i>&nbsp;                                if (siteData.getName().equalsIgnoreCase(fileData.getName())</b>
+<b class="nc"><i>216</i>&nbsp;                                        &amp;&amp; siteData.getNumber().equalsIgnoreCase(fileData.getNumber())</b>
+<b class="nc"><i>217</i>&nbsp;                                        &amp;&amp; siteData.getExpansionSetCode().equalsIgnoreCase(fileData.getExpansionSetCode())) {</b>
+<b class="nc"><i>218</i>&nbsp;                                    isNew = false;</b>
+<b class="nc"><i>219</i>&nbsp;                                    break;</b>
+<i>220</i>&nbsp;                                }
+<b class="nc"><i>221</i>&nbsp;                            }</b>
+<b class="nc"><i>222</i>&nbsp;                            if (isNew) {</b>
+<b class="nc"><i>223</i>&nbsp;                                newTokensData.add(siteData);</b>
+<i>224</i>&nbsp;                            }
+<b class="nc"><i>225</i>&nbsp;                        }</b>
+<i>226</i>&nbsp;
+<b class="nc"><i>227</i>&nbsp;                        tokensData.addAll(newTokensData);</b>
+<b class="nc"><i>228</i>&nbsp;                    } catch (Exception exception) {</b>
+<b class="nc"><i>229</i>&nbsp;                        logger.warn(&quot;Failed to get tokens description from tokens.mtg.onl&quot;, exception);</b>
+<i>230</i>&nbsp;                    } finally {
+<b class="nc"><i>231</i>&nbsp;                        if (inputStream != null) {</b>
+<i>232</i>&nbsp;                            try {
+<b class="nc"><i>233</i>&nbsp;                                inputStream.close();</b>
+<b class="nc"><i>234</i>&nbsp;                            } catch (Exception e) {</b>
+<b class="nc"><i>235</i>&nbsp;                                logger.error(&quot;Input stream close failed:&quot;, e);</b>
+<b class="nc"><i>236</i>&nbsp;                            }</b>
+<i>237</i>&nbsp;                        }
+<i>238</i>&nbsp;                    }
+<i>239</i>&nbsp;                }
+<b class="nc"><i>240</i>&nbsp;            }</b>
+<i>241</i>&nbsp;        }
+<i>242</i>&nbsp;
+<b class="nc"><i>243</i>&nbsp;        return tokensData;</b>
+<i>244</i>&nbsp;    }
+<i>245</i>&nbsp;
+<i>246</i>&nbsp;    private List&lt;TokenData&gt; parseTokensData(InputStream inputStream) throws IOException {
+<b class="nc"><i>247</i>&nbsp;        List&lt;TokenData&gt; tokensData = new ArrayList&lt;TokenData&gt;();</b>
+<i>248</i>&nbsp;
+<b class="nc"><i>249</i>&nbsp;        InputStreamReader inputReader = null;</b>
+<b class="nc"><i>250</i>&nbsp;        BufferedReader reader = null;</b>
+<i>251</i>&nbsp;        try {
+<i>252</i>&nbsp;            // we have to specify encoding to read special comma
+<b class="nc"><i>253</i>&nbsp;            inputReader = new InputStreamReader(inputStream, &quot;Cp1252&quot;);</b>
+<b class="nc"><i>254</i>&nbsp;            reader = new BufferedReader(inputReader);</b>
+<i>255</i>&nbsp;
+<b class="nc"><i>256</i>&nbsp;            reader.readLine(); // skip header</b>
+<b class="nc"><i>257</i>&nbsp;            String line = reader.readLine();</b>
+<i>258</i>&nbsp;            // states
+<i>259</i>&nbsp;            // 0 - wait set name
+<i>260</i>&nbsp;            // 1 - wait cards
+<i>261</i>&nbsp;            // 2 - process cards
+<b class="nc"><i>262</i>&nbsp;            int state = 0;</b>
+<b class="nc"><i>263</i>&nbsp;            String set = null;</b>
+<b class="nc"><i>264</i>&nbsp;            while (line != null) {</b>
+<b class="nc"><i>265</i>&nbsp;                if (line.trim().isEmpty()) {</b>
+<b class="nc"><i>266</i>&nbsp;                    if (state == 2) {</b>
+<b class="nc"><i>267</i>&nbsp;                        state = 0;</b>
+<i>268</i>&nbsp;                    }
+<i>269</i>&nbsp;                } else {
+<b class="nc"><i>270</i>&nbsp;                    if (state == 0) {</b>
+<b class="nc"><i>271</i>&nbsp;                    set = line.substring(0, 3);</b>
+<b class="nc"><i>272</i>&nbsp;                    state = 1;</b>
+<i>273</i>&nbsp;                } else {
+<b class="nc"><i>274</i>&nbsp;                    if (state == 1) {</b>
+<b class="nc"><i>275</i>&nbsp;                        state = 2;</b>
+<i>276</i>&nbsp;                    }
+<b class="nc"><i>277</i>&nbsp;                    String[] split = line.split(&quot;,&quot;);</b>
+<i>278</i>&nbsp;                    // replace special comma for cards like &#39;Ashaya‚ the Awoken World&#39;
+<b class="nc"><i>279</i>&nbsp;                    String name = split[0].replace(&#39;‚&#39;, &#39;,&#39;);</b>
+<b class="nc"><i>280</i>&nbsp;                    String number = split[1];</b>
+<b class="nc"><i>281</i>&nbsp;                    TokenData token = new TokenData(name, number, set);</b>
+<b class="nc"><i>282</i>&nbsp;                    tokensData.add(token);</b>
+<i>283</i>&nbsp;                }
+<i>284</i>&nbsp;                }
+<i>285</i>&nbsp;
+<b class="nc"><i>286</i>&nbsp;                line = reader.readLine();</b>
+<i>287</i>&nbsp;            }
+<i>288</i>&nbsp;        } finally {
+<b class="nc"><i>289</i>&nbsp;            if (inputReader != null) {</b>
+<i>290</i>&nbsp;                try {
+<b class="nc"><i>291</i>&nbsp;                    inputReader.close();</b>
+<b class="nc"><i>292</i>&nbsp;                } catch (Exception e) {</b>
+<b class="nc"><i>293</i>&nbsp;                    logger.error(&quot;Input reader close failed:&quot;, e);</b>
+<b class="nc"><i>294</i>&nbsp;                }</b>
+<i>295</i>&nbsp;            }
+<b class="nc"><i>296</i>&nbsp;            if (reader != null) {</b>
+<i>297</i>&nbsp;                try {
+<b class="nc"><i>298</i>&nbsp;                    reader.close();</b>
+<b class="nc"><i>299</i>&nbsp;                } catch (Exception e) {</b>
+<b class="nc"><i>300</i>&nbsp;                    logger.error(&quot;Buffered reader close failed:&quot;, e);</b>
+<b class="nc"><i>301</i>&nbsp;                }</b>
+<i>302</i>&nbsp;            }
+<i>303</i>&nbsp;        }
+<i>304</i>&nbsp;
+<b class="nc"><i>305</i>&nbsp;        return tokensData;</b>
+<i>306</i>&nbsp;    }
+<i>307</i>&nbsp;
+<i>308</i>&nbsp;    final class TokenData {
+<i>309</i>&nbsp;
+<i>310</i>&nbsp;        final private String name;
+<i>311</i>&nbsp;        final private String number;
+<i>312</i>&nbsp;        final private String expansionSetCode;
+<i>313</i>&nbsp;
+<b class="nc"><i>314</i>&nbsp;        public TokenData(String name, String number, String expansionSetCode) {</b>
+<b class="nc"><i>315</i>&nbsp;            this.name = name;</b>
+<b class="nc"><i>316</i>&nbsp;            this.number = number;</b>
+<b class="nc"><i>317</i>&nbsp;            this.expansionSetCode = expansionSetCode;</b>
+<i>318</i>&nbsp;        }
+<i>319</i>&nbsp;
+<i>320</i>&nbsp;        public String getName() {
+<b class="nc"><i>321</i>&nbsp;            return name;</b>
+<i>322</i>&nbsp;        }
+<i>323</i>&nbsp;
+<i>324</i>&nbsp;        public String getNumber() {
+<b class="nc"><i>325</i>&nbsp;            return number;</b>
+<i>326</i>&nbsp;        }
+<i>327</i>&nbsp;
+<i>328</i>&nbsp;        public String getExpansionSetCode() {
+<b class="nc"><i>329</i>&nbsp;            return expansionSetCode;</b>
+<i>330</i>&nbsp;        }
+<i>331</i>&nbsp;    }
+<i>332</i>&nbsp;
+<i>333</i>&nbsp;    @Override
+<i>334</i>&nbsp;    public Integer getTotalImages() {
+<b class="nc"><i>335</i>&nbsp;        return -1;</b>
+<i>336</i>&nbsp;    }
+<i>337</i>&nbsp;    
+<i>338</i>&nbsp;    @Override
+<i>339</i>&nbsp;    public Boolean isTokenSource() {
+<b class="nc"><i>340</i>&nbsp;        return true;</b>
+<i>341</i>&nbsp;    }
+<i>342</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

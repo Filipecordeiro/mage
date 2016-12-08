@@ -1,0 +1,666 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: VintageCube2013</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.tournament.cubes</a> ]
+</div>
+
+<h1>Coverage Summary for Class: VintageCube2013 (mage.tournament.cubes)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VintageCube2013</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 541)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp;*
+<i>4</i>&nbsp;* Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp;* permitted provided that the following conditions are met:
+<i>6</i>&nbsp;*
+<i>7</i>&nbsp;*    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp;*       conditions and the following disclaimer.
+<i>9</i>&nbsp;*
+<i>10</i>&nbsp;*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp;*       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp;*       provided with the distribution.
+<i>13</i>&nbsp;*
+<i>14</i>&nbsp;* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp;* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp;* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp;* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp;* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp;* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp;* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp;* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp;*
+<i>24</i>&nbsp;* The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp;* authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp;* or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp;*/
+<i>28</i>&nbsp;package mage.tournament.cubes;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import mage.game.draft.DraftCube;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;/**
+<i>33</i>&nbsp; *
+<i>34</i>&nbsp; * @author LevelX2
+<i>35</i>&nbsp; */
+<i>36</i>&nbsp;public class VintageCube2013 extends DraftCube {
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public VintageCube2013() {
+<b class="nc"><i>39</i>&nbsp;        super(&quot;MTGO Vintage Cube 2013&quot;);</b>
+<i>40</i>&nbsp;
+<b class="nc"><i>41</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Honor of the Pure&quot;,&quot;&quot;));</b>
+<b class="nc"><i>42</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Path to Exile&quot;,&quot;&quot;));</b>
+<b class="nc"><i>43</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Land Tax&quot;,&quot;&quot;));</b>
+<b class="nc"><i>44</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Exalted Angel&quot;,&quot;&quot;));</b>
+<b class="nc"><i>45</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mana Tithe&quot;,&quot;&quot;));</b>
+<b class="nc"><i>46</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Spectral Procession&quot;,&quot;&quot;));</b>
+<b class="nc"><i>47</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wall of Omens&quot;,&quot;&quot;));</b>
+<b class="nc"><i>48</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sun Titan&quot;,&quot;&quot;));</b>
+<b class="nc"><i>49</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Leonin Relic-Warder&quot;,&quot;&quot;));</b>
+<b class="nc"><i>50</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Elesh Norn, Grand Cenobite&quot;,&quot;&quot;));</b>
+<b class="nc"><i>51</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lingering Souls&quot;,&quot;&quot;));</b>
+<b class="nc"><i>52</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Terminus&quot;,&quot;&quot;));</b>
+<b class="nc"><i>53</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Disenchant&quot;,&quot;&quot;));</b>
+<b class="nc"><i>54</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mother of Runes&quot;,&quot;&quot;));</b>
+<b class="nc"><i>55</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Weathered Wayfarer&quot;,&quot;&quot;));</b>
+<b class="nc"><i>56</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ravages of War&quot;,&quot;&quot;));</b>
+<b class="nc"><i>57</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Student of Warfare&quot;,&quot;&quot;));</b>
+<b class="nc"><i>58</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Swords to Plowshares&quot;,&quot;&quot;));</b>
+<b class="nc"><i>59</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Elspeth Tirel&quot;,&quot;&quot;));</b>
+<b class="nc"><i>60</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mirran Crusader&quot;,&quot;&quot;));</b>
+<b class="nc"><i>61</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Elite Vanguard&quot;,&quot;&quot;));</b>
+<b class="nc"><i>62</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Day of Judgment&quot;,&quot;&quot;));</b>
+<b class="nc"><i>63</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nearheath Pilgrim&quot;,&quot;&quot;));</b>
+<b class="nc"><i>64</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Silverblade Paladin&quot;,&quot;&quot;));</b>
+<b class="nc"><i>65</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Soldier of the Pantheon&quot;,&quot;&quot;));</b>
+<b class="nc"><i>66</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Enlightened Tutor&quot;,&quot;&quot;));</b>
+<b class="nc"><i>67</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Soltari Champion&quot;,&quot;&quot;));</b>
+<b class="nc"><i>68</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Catastrophe&quot;,&quot;&quot;));</b>
+<b class="nc"><i>69</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Parallax Wave&quot;,&quot;&quot;));</b>
+<b class="nc"><i>70</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Rout&quot;,&quot;&quot;));</b>
+<b class="nc"><i>71</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Whipcorder&quot;,&quot;&quot;));</b>
+<b class="nc"><i>72</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Kami of Ancient Law&quot;,&quot;&quot;));</b>
+<b class="nc"><i>73</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Isamaru, Hound of Konda&quot;,&quot;&quot;));</b>
+<b class="nc"><i>74</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Savannah Lions&quot;,&quot;&quot;));</b>
+<b class="nc"><i>75</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Paladin en-Vec&quot;,&quot;&quot;));</b>
+<b class="nc"><i>76</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wrath of God&quot;,&quot;&quot;));</b>
+<b class="nc"><i>77</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Cloudgoat Ranger&quot;,&quot;&quot;));</b>
+<b class="nc"><i>78</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mirror Entity&quot;,&quot;&quot;));</b>
+<b class="nc"><i>79</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Reveillark&quot;,&quot;&quot;));</b>
+<b class="nc"><i>80</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Flickerwisp&quot;,&quot;&quot;));</b>
+<b class="nc"><i>81</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ranger of Eos&quot;,&quot;&quot;));</b>
+<b class="nc"><i>82</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Elspeth, Knight-Errant&quot;,&quot;&quot;));</b>
+<b class="nc"><i>83</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Balance&quot;,&quot;&quot;));</b>
+<b class="nc"><i>84</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Steppe Lynx&quot;,&quot;&quot;));</b>
+<b class="nc"><i>85</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Journey to Nowhere&quot;,&quot;&quot;));</b>
+<b class="nc"><i>86</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Emeria Angel&quot;,&quot;&quot;));</b>
+<b class="nc"><i>87</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ajani Goldmane&quot;,&quot;&quot;));</b>
+<b class="nc"><i>88</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Porcelain Legionnaire&quot;,&quot;&quot;));</b>
+<b class="nc"><i>89</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Blade Splicer&quot;,&quot;&quot;));</b>
+<b class="nc"><i>90</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Thalia, Guardian of Thraben&quot;,&quot;&quot;));</b>
+<b class="nc"><i>91</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Restoration Angel&quot;,&quot;&quot;));</b>
+<b class="nc"><i>92</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Knight of Glory&quot;,&quot;&quot;));</b>
+<b class="nc"><i>93</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Moat&quot;,&quot;&quot;));</b>
+<b class="nc"><i>94</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Elspeth, Sun&#39;s Champion&quot;,&quot;&quot;));</b>
+<b class="nc"><i>95</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Spear of Heliod&quot;,&quot;&quot;));</b>
+<b class="nc"><i>96</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Unexpectedly Absent&quot;,&quot;&quot;));</b>
+<b class="nc"><i>97</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Armageddon&quot;,&quot;&quot;));</b>
+<b class="nc"><i>98</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Faith&#39;s Fetters&quot;,&quot;&quot;));</b>
+<b class="nc"><i>99</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Stoneforge Mystic&quot;,&quot;&quot;));</b>
+<b class="nc"><i>100</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Linvala, Keeper of Silence&quot;,&quot;&quot;));</b>
+<b class="nc"><i>101</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Baneslayer Angel&quot;,&quot;&quot;));</b>
+<b class="nc"><i>102</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Hero of Bladehold&quot;,&quot;&quot;));</b>
+<b class="nc"><i>103</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Oblivion Ring&quot;,&quot;&quot;));</b>
+<b class="nc"><i>104</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Gideon&#39;s Lawkeeper&quot;,&quot;&quot;));</b>
+<b class="nc"><i>105</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ajani, Caller of the Pride&quot;,&quot;&quot;));</b>
+<b class="nc"><i>106</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Angel of Serenity&quot;,&quot;&quot;));</b>
+<b class="nc"><i>107</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Archangel of Thune&quot;,&quot;&quot;));</b>
+<b class="nc"><i>108</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Loam Lion&quot;,&quot;&quot;));</b>
+<b class="nc"><i>109</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Gideon Jura&quot;,&quot;&quot;));</b>
+<b class="nc"><i>110</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mana Drain&quot;,&quot;&quot;));</b>
+<b class="nc"><i>111</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Frantic Search&quot;,&quot;&quot;));</b>
+<b class="nc"><i>112</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Treachery&quot;,&quot;&quot;));</b>
+<b class="nc"><i>113</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Brainstorm&quot;,&quot;&quot;));</b>
+<b class="nc"><i>114</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Brain Freeze&quot;,&quot;&quot;));</b>
+<b class="nc"><i>115</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Vesuvan Shapeshifter&quot;,&quot;&quot;));</b>
+<b class="nc"><i>116</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Venser, Shaper Savant&quot;,&quot;&quot;));</b>
+<b class="nc"><i>117</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sower of Temptation&quot;,&quot;&quot;));</b>
+<b class="nc"><i>118</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wake Thrasher&quot;,&quot;&quot;));</b>
+<b class="nc"><i>119</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Consecrated Sphinx&quot;,&quot;&quot;));</b>
+<b class="nc"><i>120</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Snapcaster Mage&quot;,&quot;&quot;));</b>
+<b class="nc"><i>121</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;True-Name Nemesis&quot;,&quot;&quot;));</b>
+<b class="nc"><i>122</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Intuition&quot;,&quot;&quot;));</b>
+<b class="nc"><i>123</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Forbid&quot;,&quot;&quot;));</b>
+<b class="nc"><i>124</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Force Spike&quot;,&quot;&quot;));</b>
+<b class="nc"><i>125</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Upheaval&quot;,&quot;&quot;));</b>
+<b class="nc"><i>126</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Voidmage Prodigy&quot;,&quot;&quot;));</b>
+<b class="nc"><i>127</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Willbender&quot;,&quot;&quot;));</b>
+<b class="nc"><i>128</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Gifts Ungiven&quot;,&quot;&quot;));</b>
+<b class="nc"><i>129</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Compulsive Research&quot;,&quot;&quot;));</b>
+<b class="nc"><i>130</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Riftwing Cloudskate&quot;,&quot;&quot;));</b>
+<b class="nc"><i>131</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Glen Elendra Archmage&quot;,&quot;&quot;));</b>
+<b class="nc"><i>132</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Inkwell Leviathan&quot;,&quot;&quot;));</b>
+<b class="nc"><i>133</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tinker&quot;,&quot;&quot;));</b>
+<b class="nc"><i>134</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Jace, the Mind Sculptor&quot;,&quot;&quot;));</b>
+<b class="nc"><i>135</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Old Man of the Sea&quot;,&quot;&quot;));</b>
+<b class="nc"><i>136</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mystical Tutor&quot;,&quot;&quot;));</b>
+<b class="nc"><i>137</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Impulse&quot;,&quot;&quot;));</b>
+<b class="nc"><i>138</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Turnabout&quot;,&quot;&quot;));</b>
+<b class="nc"><i>139</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Palinchron&quot;,&quot;&quot;));</b>
+<b class="nc"><i>140</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Daze&quot;,&quot;&quot;));</b>
+<b class="nc"><i>141</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Meloku the Clouded Mirror&quot;,&quot;&quot;));</b>
+<b class="nc"><i>142</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Jushi Apprentice&quot;,&quot;&quot;));</b>
+<b class="nc"><i>143</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Remand&quot;,&quot;&quot;));</b>
+<b class="nc"><i>144</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Looter il-Kor&quot;,&quot;&quot;));</b>
+<b class="nc"><i>145</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Aeon Chronicler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>146</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mulldrifter&quot;,&quot;&quot;));</b>
+<b class="nc"><i>147</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Cryptic Command&quot;,&quot;&quot;));</b>
+<b class="nc"><i>148</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Serendib Efreet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>149</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Into the Roil&quot;,&quot;&quot;));</b>
+<b class="nc"><i>150</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sphinx of Jwar Isle&quot;,&quot;&quot;));</b>
+<b class="nc"><i>151</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Jace Beleren&quot;,&quot;&quot;));</b>
+<b class="nc"><i>152</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Preordain&quot;,&quot;&quot;));</b>
+<b class="nc"><i>153</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Fact or Fiction&quot;,&quot;&quot;));</b>
+<b class="nc"><i>154</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mana Leak&quot;,&quot;&quot;));</b>
+<b class="nc"><i>155</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Frost Titan&quot;,&quot;&quot;));</b>
+<b class="nc"><i>156</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Phantasmal Image&quot;,&quot;&quot;));</b>
+<b class="nc"><i>157</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dungeon Geists&quot;,&quot;&quot;));</b>
+<b class="nc"><i>158</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tamiyo, the Moon Sage&quot;,&quot;&quot;));</b>
+<b class="nc"><i>159</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Timetwister&quot;,&quot;&quot;));</b>
+<b class="nc"><i>160</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Show and Tell&quot;,&quot;&quot;));</b>
+<b class="nc"><i>161</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Aetherling&quot;,&quot;&quot;));</b>
+<b class="nc"><i>162</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Memory Lapse&quot;,&quot;&quot;));</b>
+<b class="nc"><i>163</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dream Halls&quot;,&quot;&quot;));</b>
+<b class="nc"><i>164</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Opposition&quot;,&quot;&quot;));</b>
+<b class="nc"><i>165</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mind&#39;s Desire&quot;,&quot;&quot;));</b>
+<b class="nc"><i>166</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Vendilion Clique&quot;,&quot;&quot;));</b>
+<b class="nc"><i>167</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Counterspell&quot;,&quot;&quot;));</b>
+<b class="nc"><i>168</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Force of Will&quot;,&quot;&quot;));</b>
+<b class="nc"><i>169</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Control Magic&quot;,&quot;&quot;));</b>
+<b class="nc"><i>170</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Jace, Architect of Thought&quot;,&quot;&quot;));</b>
+<b class="nc"><i>171</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Time Walk&quot;,&quot;&quot;));</b>
+<b class="nc"><i>172</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bribery&quot;,&quot;&quot;));</b>
+<b class="nc"><i>173</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ancestral Recall&quot;,&quot;&quot;));</b>
+<b class="nc"><i>174</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ancestral Vision&quot;,&quot;&quot;));</b>
+<b class="nc"><i>175</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Phyrexian Metamorph&quot;,&quot;&quot;));</b>
+<b class="nc"><i>176</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Time Spiral&quot;,&quot;&quot;));</b>
+<b class="nc"><i>177</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Miscalculation&quot;,&quot;&quot;));</b>
+<b class="nc"><i>178</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Trinket Mage&quot;,&quot;&quot;));</b>
+<b class="nc"><i>179</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Recurring Nightmare&quot;,&quot;&quot;));</b>
+<b class="nc"><i>180</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Buried Alive&quot;,&quot;&quot;));</b>
+<b class="nc"><i>181</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tendrils of Agony&quot;,&quot;&quot;));</b>
+<b class="nc"><i>182</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Unburial Rites&quot;,&quot;&quot;));</b>
+<b class="nc"><i>183</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mesmeric Fiend&quot;,&quot;&quot;));</b>
+<b class="nc"><i>184</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Slaughter Pact&quot;,&quot;&quot;));</b>
+<b class="nc"><i>185</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Gatekeeper of Malakir&quot;,&quot;&quot;));</b>
+<b class="nc"><i>186</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Grave Titan&quot;,&quot;&quot;));</b>
+<b class="nc"><i>187</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Phyrexian Obliterator&quot;,&quot;&quot;));</b>
+<b class="nc"><i>188</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Necromancy&quot;,&quot;&quot;));</b>
+<b class="nc"><i>189</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Corpse Dance&quot;,&quot;&quot;));</b>
+<b class="nc"><i>190</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Yawgmoth&#39;s Will&quot;,&quot;&quot;));</b>
+<b class="nc"><i>191</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nightscape Familiar&quot;,&quot;&quot;));</b>
+<b class="nc"><i>192</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nezumi Shortfang&quot;,&quot;&quot;));</b>
+<b class="nc"><i>193</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dark Confidant&quot;,&quot;&quot;));</b>
+<b class="nc"><i>194</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Graveborn Muse&quot;,&quot;&quot;));</b>
+<b class="nc"><i>195</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Liliana Vess&quot;,&quot;&quot;));</b>
+<b class="nc"><i>196</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Black Knight&quot;,&quot;&quot;));</b>
+<b class="nc"><i>197</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Go for the Throat&quot;,&quot;&quot;));</b>
+<b class="nc"><i>198</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sheoldred, Whispering One&quot;,&quot;&quot;));</b>
+<b class="nc"><i>199</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bloodline Keeper&quot;,&quot;&quot;));</b>
+<b class="nc"><i>200</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Animate Dead&quot;,&quot;&quot;));</b>
+<b class="nc"><i>201</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Gravecrawler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>202</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Griselbrand&quot;,&quot;&quot;));</b>
+<b class="nc"><i>203</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Erebos, God of the Dead&quot;,&quot;&quot;));</b>
+<b class="nc"><i>204</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Toxic Deluge&quot;,&quot;&quot;));</b>
+<b class="nc"><i>205</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Vampiric Tutor&quot;,&quot;&quot;));</b>
+<b class="nc"><i>206</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Living Death&quot;,&quot;&quot;));</b>
+<b class="nc"><i>207</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Reanimate&quot;,&quot;&quot;));</b>
+<b class="nc"><i>208</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bone Shredder&quot;,&quot;&quot;));</b>
+<b class="nc"><i>209</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Braids, Cabal Minion&quot;,&quot;&quot;));</b>
+<b class="nc"><i>210</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Entomb&quot;,&quot;&quot;));</b>
+<b class="nc"><i>211</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Putrid Imp&quot;,&quot;&quot;));</b>
+<b class="nc"><i>212</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nezumi Graverobber&quot;,&quot;&quot;));</b>
+<b class="nc"><i>213</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ink-Eyes, Servant of Oni&quot;,&quot;&quot;));</b>
+<b class="nc"><i>214</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Phyrexian Arena&quot;,&quot;&quot;));</b>
+<b class="nc"><i>215</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Plague Sliver&quot;,&quot;&quot;));</b>
+<b class="nc"><i>216</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Damnation&quot;,&quot;&quot;));</b>
+<b class="nc"><i>217</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nekrataal&quot;,&quot;&quot;));</b>
+<b class="nc"><i>218</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Shriekmaw&quot;,&quot;&quot;));</b>
+<b class="nc"><i>219</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bitterblossom&quot;,&quot;&quot;));</b>
+<b class="nc"><i>220</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Demonic Tutor&quot;,&quot;&quot;));</b>
+<b class="nc"><i>221</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Necropotence&quot;,&quot;&quot;));</b>
+<b class="nc"><i>222</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Disfigure&quot;,&quot;&quot;));</b>
+<b class="nc"><i>223</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Vampire Nighthawk&quot;,&quot;&quot;));</b>
+<b class="nc"><i>224</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Guul Draz Assassin&quot;,&quot;&quot;));</b>
+<b class="nc"><i>225</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Consuming Vapors&quot;,&quot;&quot;));</b>
+<b class="nc"><i>226</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Duress&quot;,&quot;&quot;));</b>
+<b class="nc"><i>227</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Skinrender&quot;,&quot;&quot;));</b>
+<b class="nc"><i>228</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dismember&quot;,&quot;&quot;));</b>
+<b class="nc"><i>229</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Diregraf Ghoul&quot;,&quot;&quot;));</b>
+<b class="nc"><i>230</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Liliana of the Veil&quot;,&quot;&quot;));</b>
+<b class="nc"><i>231</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Hymn to Tourach&quot;,&quot;&quot;));</b>
+<b class="nc"><i>232</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ultimate Price&quot;,&quot;&quot;));</b>
+<b class="nc"><i>233</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nether Void&quot;,&quot;&quot;));</b>
+<b class="nc"><i>234</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;The Abyss&quot;,&quot;&quot;));</b>
+<b class="nc"><i>235</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lifebane Zombie&quot;,&quot;&quot;));</b>
+<b class="nc"><i>236</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Thoughtseize&quot;,&quot;&quot;));</b>
+<b class="nc"><i>237</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Hero&#39;s Downfall&quot;,&quot;&quot;));</b>
+<b class="nc"><i>238</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Diabolic Edict&quot;,&quot;&quot;));</b>
+<b class="nc"><i>239</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sarcomancy&quot;,&quot;&quot;));</b>
+<b class="nc"><i>240</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Oona&#39;s Prowler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>241</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dark Ritual&quot;,&quot;&quot;));</b>
+<b class="nc"><i>242</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Hypnotic Specter&quot;,&quot;&quot;));</b>
+<b class="nc"><i>243</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bloodghast&quot;,&quot;&quot;));</b>
+<b class="nc"><i>244</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Inquisition of Kozilek&quot;,&quot;&quot;));</b>
+<b class="nc"><i>245</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Phyrexian Rager&quot;,&quot;&quot;));</b>
+<b class="nc"><i>246</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bloodgift Demon&quot;,&quot;&quot;));</b>
+<b class="nc"><i>247</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mind Twist&quot;,&quot;&quot;));</b>
+<b class="nc"><i>248</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Frenzied Goblin&quot;,&quot;&quot;));</b>
+<b class="nc"><i>249</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Torch Fiend&quot;,&quot;&quot;));</b>
+<b class="nc"><i>250</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Earthquake&quot;,&quot;&quot;));</b>
+<b class="nc"><i>251</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Goblin Ruinblaster&quot;,&quot;&quot;));</b>
+<b class="nc"><i>252</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Chandra&#39;s Phoenix&quot;,&quot;&quot;));</b>
+<b class="nc"><i>253</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Price of Progress&quot;,&quot;&quot;));</b>
+<b class="nc"><i>254</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Avalanche Riders&quot;,&quot;&quot;));</b>
+<b class="nc"><i>255</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Goblin Welder&quot;,&quot;&quot;));</b>
+<b class="nc"><i>256</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Firebolt&quot;,&quot;&quot;));</b>
+<b class="nc"><i>257</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sulfuric Vortex&quot;,&quot;&quot;));</b>
+<b class="nc"><i>258</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Seething Song&quot;,&quot;&quot;));</b>
+<b class="nc"><i>259</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Rift Bolt&quot;,&quot;&quot;));</b>
+<b class="nc"><i>260</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mogg War Marshal&quot;,&quot;&quot;));</b>
+<b class="nc"><i>261</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Hellrider&quot;,&quot;&quot;));</b>
+<b class="nc"><i>262</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Taurean Mauler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>263</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ember Hauler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>264</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Koth of the Hammer&quot;,&quot;&quot;));</b>
+<b class="nc"><i>265</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Jackal Pup&quot;,&quot;&quot;));</b>
+<b class="nc"><i>266</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Incinerate&quot;,&quot;&quot;));</b>
+<b class="nc"><i>267</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Chandra, the Firebrand&quot;,&quot;&quot;));</b>
+<b class="nc"><i>268</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Stormblood Berserker&quot;,&quot;&quot;));</b>
+<b class="nc"><i>269</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Grim Lavamancer&quot;,&quot;&quot;));</b>
+<b class="nc"><i>270</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bonfire of the Damned&quot;,&quot;&quot;));</b>
+<b class="nc"><i>271</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Thundermaw Hellkite&quot;,&quot;&quot;));</b>
+<b class="nc"><i>272</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Magma Jet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>273</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Firedrinker Satyr&quot;,&quot;&quot;));</b>
+<b class="nc"><i>274</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Firestorm&quot;,&quot;&quot;));</b>
+<b class="nc"><i>275</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ravenous Baboons&quot;,&quot;&quot;));</b>
+<b class="nc"><i>276</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wildfire&quot;,&quot;&quot;));</b>
+<b class="nc"><i>277</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sneak Attack&quot;,&quot;&quot;));</b>
+<b class="nc"><i>278</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Reckless Charge&quot;,&quot;&quot;));</b>
+<b class="nc"><i>279</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Molten Rain&quot;,&quot;&quot;));</b>
+<b class="nc"><i>280</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Char&quot;,&quot;&quot;));</b>
+<b class="nc"><i>281</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tin Street Hooligan&quot;,&quot;&quot;));</b>
+<b class="nc"><i>282</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Empty the Warrens&quot;,&quot;&quot;));</b>
+<b class="nc"><i>283</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ancient Grudge&quot;,&quot;&quot;));</b>
+<b class="nc"><i>284</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Greater Gargadon&quot;,&quot;&quot;));</b>
+<b class="nc"><i>285</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Keldon Marauders&quot;,&quot;&quot;));</b>
+<b class="nc"><i>286</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Magus of the Moon&quot;,&quot;&quot;));</b>
+<b class="nc"><i>287</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Smash to Smithereens&quot;,&quot;&quot;));</b>
+<b class="nc"><i>288</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Hellspark Elemental&quot;,&quot;&quot;));</b>
+<b class="nc"><i>289</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ball Lightning&quot;,&quot;&quot;));</b>
+<b class="nc"><i>290</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Siege-Gang Commander&quot;,&quot;&quot;));</b>
+<b class="nc"><i>291</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Burning of Xinye&quot;,&quot;&quot;));</b>
+<b class="nc"><i>292</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Goblin Guide&quot;,&quot;&quot;));</b>
+<b class="nc"><i>293</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Searing Blaze&quot;,&quot;&quot;));</b>
+<b class="nc"><i>294</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Kargan Dragonlord&quot;,&quot;&quot;));</b>
+<b class="nc"><i>295</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wheel of Fortune&quot;,&quot;&quot;));</b>
+<b class="nc"><i>296</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Pyroclasm&quot;,&quot;&quot;));</b>
+<b class="nc"><i>297</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Arc Trail&quot;,&quot;&quot;));</b>
+<b class="nc"><i>298</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Spikeshot Elder&quot;,&quot;&quot;));</b>
+<b class="nc"><i>299</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Urabrask the Hidden&quot;,&quot;&quot;));</b>
+<b class="nc"><i>300</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Flametongue Kavu&quot;,&quot;&quot;));</b>
+<b class="nc"><i>301</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Inferno Titan&quot;,&quot;&quot;));</b>
+<b class="nc"><i>302</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Kird Ape&quot;,&quot;&quot;));</b>
+<b class="nc"><i>303</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Brimstone Volley&quot;,&quot;&quot;));</b>
+<b class="nc"><i>304</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Devil&#39;s Play&quot;,&quot;&quot;));</b>
+<b class="nc"><i>305</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Faithless Looting&quot;,&quot;&quot;));</b>
+<b class="nc"><i>306</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Orcish Lumberjack&quot;,&quot;&quot;));</b>
+<b class="nc"><i>307</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Zealous Conscripts&quot;,&quot;&quot;));</b>
+<b class="nc"><i>308</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mizzium Mortars&quot;,&quot;&quot;));</b>
+<b class="nc"><i>309</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Goblin Vandal&quot;,&quot;&quot;));</b>
+<b class="nc"><i>310</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Plated Geopede&quot;,&quot;&quot;));</b>
+<b class="nc"><i>311</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lightning Bolt&quot;,&quot;&quot;));</b>
+<b class="nc"><i>312</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Chain Lightning&quot;,&quot;&quot;));</b>
+<b class="nc"><i>313</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Chaos Warp&quot;,&quot;&quot;));</b>
+<b class="nc"><i>314</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Fireblast&quot;,&quot;&quot;));</b>
+<b class="nc"><i>315</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Chandra, Pyromaster&quot;,&quot;&quot;));</b>
+<b class="nc"><i>316</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Hero of Oxid Ridge&quot;,&quot;&quot;));</b>
+<b class="nc"><i>317</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nantuko Vigilante&quot;,&quot;&quot;));</b>
+<b class="nc"><i>318</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Boon Satyr&quot;,&quot;&quot;));</b>
+<b class="nc"><i>319</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Rude Awakening&quot;,&quot;&quot;));</b>
+<b class="nc"><i>320</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Thornscape Battlemage&quot;,&quot;&quot;));</b>
+<b class="nc"><i>321</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Indrik Stomphowler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>322</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ohran Viper&quot;,&quot;&quot;));</b>
+<b class="nc"><i>323</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lotus Cobra&quot;,&quot;&quot;));</b>
+<b class="nc"><i>324</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Primeval Titan&quot;,&quot;&quot;));</b>
+<b class="nc"><i>325</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Birds of Paradise&quot;,&quot;&quot;));</b>
+<b class="nc"><i>326</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wall of Blossoms&quot;,&quot;&quot;));</b>
+<b class="nc"><i>327</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Restock&quot;,&quot;&quot;));</b>
+<b class="nc"><i>328</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tooth and Nail&quot;,&quot;&quot;));</b>
+<b class="nc"><i>329</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Eternal Witness&quot;,&quot;&quot;));</b>
+<b class="nc"><i>330</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Primal Command&quot;,&quot;&quot;));</b>
+<b class="nc"><i>331</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Stunted Growth&quot;,&quot;&quot;));</b>
+<b class="nc"><i>332</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wickerbough Elder&quot;,&quot;&quot;));</b>
+<b class="nc"><i>333</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Master of the Wild Hunt&quot;,&quot;&quot;));</b>
+<b class="nc"><i>334</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Harmonize&quot;,&quot;&quot;));</b>
+<b class="nc"><i>335</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Terastodon&quot;,&quot;&quot;));</b>
+<b class="nc"><i>336</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Garruk Wildspeaker&quot;,&quot;&quot;));</b>
+<b class="nc"><i>337</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Birthing Pod&quot;,&quot;&quot;));</b>
+<b class="nc"><i>338</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Scavenging Ooze&quot;,&quot;&quot;));</b>
+<b class="nc"><i>339</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Avacyn&#39;s Pilgrim&quot;,&quot;&quot;));</b>
+<b class="nc"><i>340</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Strangleroot Geist&quot;,&quot;&quot;));</b>
+<b class="nc"><i>341</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wolfir Silverheart&quot;,&quot;&quot;));</b>
+<b class="nc"><i>342</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Eureka&quot;,&quot;&quot;));</b>
+<b class="nc"><i>343</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Garruk, Caller of Beasts&quot;,&quot;&quot;));</b>
+<b class="nc"><i>344</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Natural Order&quot;,&quot;&quot;));</b>
+<b class="nc"><i>345</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Deranged Hermit&quot;,&quot;&quot;));</b>
+<b class="nc"><i>346</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nostalgic Dreams&quot;,&quot;&quot;));</b>
+<b class="nc"><i>347</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Genesis&quot;,&quot;&quot;));</b>
+<b class="nc"><i>348</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Plow Under&quot;,&quot;&quot;));</b>
+<b class="nc"><i>349</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Heartbeat of Spring&quot;,&quot;&quot;));</b>
+<b class="nc"><i>350</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Woodfall Primus&quot;,&quot;&quot;));</b>
+<b class="nc"><i>351</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Noble Hierarch&quot;,&quot;&quot;));</b>
+<b class="nc"><i>352</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Channel&quot;,&quot;&quot;));</b>
+<b class="nc"><i>353</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Oracle of Mul Daya&quot;,&quot;&quot;));</b>
+<b class="nc"><i>354</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Arbor Elf&quot;,&quot;&quot;));</b>
+<b class="nc"><i>355</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Joraga Treespeaker&quot;,&quot;&quot;));</b>
+<b class="nc"><i>356</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Awakening Zone&quot;,&quot;&quot;));</b>
+<b class="nc"><i>357</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Vengevine&quot;,&quot;&quot;));</b>
+<b class="nc"><i>358</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Fauna Shaman&quot;,&quot;&quot;));</b>
+<b class="nc"><i>359</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Genesis Wave&quot;,&quot;&quot;));</b>
+<b class="nc"><i>360</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Thrun, the Last Troll&quot;,&quot;&quot;));</b>
+<b class="nc"><i>361</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Beast Within&quot;,&quot;&quot;));</b>
+<b class="nc"><i>362</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Naturalize&quot;,&quot;&quot;));</b>
+<b class="nc"><i>363</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Garruk Relentless&quot;,&quot;&quot;));</b>
+<b class="nc"><i>364</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ulvenwald Tracker&quot;,&quot;&quot;));</b>
+<b class="nc"><i>365</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Polukranos, World Eater&quot;,&quot;&quot;));</b>
+<b class="nc"><i>366</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Rofellos, Llanowar Emissary&quot;,&quot;&quot;));</b>
+<b class="nc"><i>367</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Elves of Deep Shadow&quot;,&quot;&quot;));</b>
+<b class="nc"><i>368</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Thelonite Hermit&quot;,&quot;&quot;));</b>
+<b class="nc"><i>369</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tarmogoyf&quot;,&quot;&quot;));</b>
+<b class="nc"><i>370</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wild Nacatl&quot;,&quot;&quot;));</b>
+<b class="nc"><i>371</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Avenger of Zendikar&quot;,&quot;&quot;));</b>
+<b class="nc"><i>372</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Call of the Herd&quot;,&quot;&quot;));</b>
+<b class="nc"><i>373</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Obstinate Baloth&quot;,&quot;&quot;));</b>
+<b class="nc"><i>374</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Green Sun&#39;s Zenith&quot;,&quot;&quot;));</b>
+<b class="nc"><i>375</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Acidic Slime&quot;,&quot;&quot;));</b>
+<b class="nc"><i>376</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Garruk, Primal Hunter&quot;,&quot;&quot;));</b>
+<b class="nc"><i>377</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Llanowar Elves&quot;,&quot;&quot;));</b>
+<b class="nc"><i>378</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Regrowth&quot;,&quot;&quot;));</b>
+<b class="nc"><i>379</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Fyndhorn Elves&quot;,&quot;&quot;));</b>
+<b class="nc"><i>380</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Thragtusk&quot;,&quot;&quot;));</b>
+<b class="nc"><i>381</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Elvish Mystic&quot;,&quot;&quot;));</b>
+<b class="nc"><i>382</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sylvan Caryatid&quot;,&quot;&quot;));</b>
+<b class="nc"><i>383</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Chord of Calling&quot;,&quot;&quot;));</b>
+<b class="nc"><i>384</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Survival of the Fittest&quot;,&quot;&quot;));</b>
+<b class="nc"><i>385</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sylvan Library&quot;,&quot;&quot;));</b>
+<b class="nc"><i>386</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Savannah&quot;,&quot;&quot;));</b>
+<b class="nc"><i>387</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bayou&quot;,&quot;&quot;));</b>
+<b class="nc"><i>388</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Scrubland&quot;,&quot;&quot;));</b>
+<b class="nc"><i>389</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Blood Crypt&quot;,&quot;&quot;));</b>
+<b class="nc"><i>390</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Brushland&quot;,&quot;&quot;));</b>
+<b class="nc"><i>391</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Caves of Koilos&quot;,&quot;&quot;));</b>
+<b class="nc"><i>392</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dust Bowl&quot;,&quot;&quot;));</b>
+<b class="nc"><i>393</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ghitu Encampment&quot;,&quot;&quot;));</b>
+<b class="nc"><i>394</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Gruul Turf&quot;,&quot;&quot;));</b>
+<b class="nc"><i>395</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Golgari Rot Farm&quot;,&quot;&quot;));</b>
+<b class="nc"><i>396</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Hallowed Fountain&quot;,&quot;&quot;));</b>
+<b class="nc"><i>397</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Library of Alexandria&quot;,&quot;&quot;));</b>
+<b class="nc"><i>398</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lake of the Dead&quot;,&quot;&quot;));</b>
+<b class="nc"><i>399</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Llanowar Wastes&quot;,&quot;&quot;));</b>
+<b class="nc"><i>400</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Marsh Flats&quot;,&quot;&quot;));</b>
+<b class="nc"><i>401</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Boros Garrison&quot;,&quot;&quot;));</b>
+<b class="nc"><i>402</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Izzet Boilerworks&quot;,&quot;&quot;));</b>
+<b class="nc"><i>403</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Orzhov Basilica&quot;,&quot;&quot;));</b>
+<b class="nc"><i>404</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mishra&#39;s Workshop&quot;,&quot;&quot;));</b>
+<b class="nc"><i>405</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Treetop Village&quot;,&quot;&quot;));</b>
+<b class="nc"><i>406</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Adarkar Wastes&quot;,&quot;&quot;));</b>
+<b class="nc"><i>407</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Plateau&quot;,&quot;&quot;));</b>
+<b class="nc"><i>408</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Rishadan Port&quot;,&quot;&quot;));</b>
+<b class="nc"><i>409</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Scalding Tarn&quot;,&quot;&quot;));</b>
+<b class="nc"><i>410</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Shivan Reef&quot;,&quot;&quot;));</b>
+<b class="nc"><i>411</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Steam Vents&quot;,&quot;&quot;));</b>
+<b class="nc"><i>412</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Strip Mine&quot;,&quot;&quot;));</b>
+<b class="nc"><i>413</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Taiga&quot;,&quot;&quot;));</b>
+<b class="nc"><i>414</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Thawing Glaciers&quot;,&quot;&quot;));</b>
+<b class="nc"><i>415</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tropical Island&quot;,&quot;&quot;));</b>
+<b class="nc"><i>416</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tundra&quot;,&quot;&quot;));</b>
+<b class="nc"><i>417</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Underground River&quot;,&quot;&quot;));</b>
+<b class="nc"><i>418</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Volcanic Island&quot;,&quot;&quot;));</b>
+<b class="nc"><i>419</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Windbrisk Heights&quot;,&quot;&quot;));</b>
+<b class="nc"><i>420</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wooded Foothills&quot;,&quot;&quot;));</b>
+<b class="nc"><i>421</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ancient Tomb&quot;,&quot;&quot;));</b>
+<b class="nc"><i>422</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Azorius Chancery&quot;,&quot;&quot;));</b>
+<b class="nc"><i>423</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Badlands&quot;,&quot;&quot;));</b>
+<b class="nc"><i>424</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Arid Mesa&quot;,&quot;&quot;));</b>
+<b class="nc"><i>425</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Misty Rainforest&quot;,&quot;&quot;));</b>
+<b class="nc"><i>426</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Maze of Ith&quot;,&quot;&quot;));</b>
+<b class="nc"><i>427</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dimir Aqueduct&quot;,&quot;&quot;));</b>
+<b class="nc"><i>428</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Teetering Peaks&quot;,&quot;&quot;));</b>
+<b class="nc"><i>429</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Underground Sea&quot;,&quot;&quot;));</b>
+<b class="nc"><i>430</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bloodstained Mire&quot;,&quot;&quot;));</b>
+<b class="nc"><i>431</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Watery Grave&quot;,&quot;&quot;));</b>
+<b class="nc"><i>432</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sacred Foundry&quot;,&quot;&quot;));</b>
+<b class="nc"><i>433</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Stomping Ground&quot;,&quot;&quot;));</b>
+<b class="nc"><i>434</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Godless Shrine&quot;,&quot;&quot;));</b>
+<b class="nc"><i>435</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Breeding Pool&quot;,&quot;&quot;));</b>
+<b class="nc"><i>436</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sulfurous Springs&quot;,&quot;&quot;));</b>
+<b class="nc"><i>437</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Yavimaya Coast&quot;,&quot;&quot;));</b>
+<b class="nc"><i>438</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Karplusan Forest&quot;,&quot;&quot;));</b>
+<b class="nc"><i>439</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Verdant Catacombs&quot;,&quot;&quot;));</b>
+<b class="nc"><i>440</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wasteland&quot;,&quot;&quot;));</b>
+<b class="nc"><i>441</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mishra&#39;s Factory&quot;,&quot;&quot;));</b>
+<b class="nc"><i>442</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Selesnya Sanctuary&quot;,&quot;&quot;));</b>
+<b class="nc"><i>443</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Rakdos Carnarium&quot;,&quot;&quot;));</b>
+<b class="nc"><i>444</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Simic Growth Chamber&quot;,&quot;&quot;));</b>
+<b class="nc"><i>445</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Karakas&quot;,&quot;&quot;));</b>
+<b class="nc"><i>446</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Temple Garden&quot;,&quot;&quot;));</b>
+<b class="nc"><i>447</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Overgrown Tomb&quot;,&quot;&quot;));</b>
+<b class="nc"><i>448</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Volrath&#39;s Stronghold&quot;,&quot;&quot;));</b>
+<b class="nc"><i>449</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Gaea&#39;s Cradle&quot;,&quot;&quot;));</b>
+<b class="nc"><i>450</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tolarian Academy&quot;,&quot;&quot;));</b>
+<b class="nc"><i>451</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Flooded Strand&quot;,&quot;&quot;));</b>
+<b class="nc"><i>452</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Polluted Delta&quot;,&quot;&quot;));</b>
+<b class="nc"><i>453</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Windswept Heath&quot;,&quot;&quot;));</b>
+<b class="nc"><i>454</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Academy Ruins&quot;,&quot;&quot;));</b>
+<b class="nc"><i>455</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Battlefield Forge&quot;,&quot;&quot;));</b>
+<b class="nc"><i>456</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ral Zarek&quot;,&quot;&quot;));</b>
+<b class="nc"><i>457</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Void&quot;,&quot;&quot;));</b>
+<b class="nc"><i>458</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Pernicious Deed&quot;,&quot;&quot;));</b>
+<b class="nc"><i>459</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lightning Helix&quot;,&quot;&quot;));</b>
+<b class="nc"><i>460</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Electrolyze&quot;,&quot;&quot;));</b>
+<b class="nc"><i>461</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Grand Arbiter Augustin IV&quot;,&quot;&quot;));</b>
+<b class="nc"><i>462</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Kitchen Finks&quot;,&quot;&quot;));</b>
+<b class="nc"><i>463</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Stillmoon Cavalier&quot;,&quot;&quot;));</b>
+<b class="nc"><i>464</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tidehollow Sculler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>465</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nicol Bolas, Planeswalker&quot;,&quot;&quot;));</b>
+<b class="nc"><i>466</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sphinx of the Steel Wind&quot;,&quot;&quot;));</b>
+<b class="nc"><i>467</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Huntmaster of the Fells&quot;,&quot;&quot;));</b>
+<b class="nc"><i>468</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mirari&#39;s Wake&quot;,&quot;&quot;));</b>
+<b class="nc"><i>469</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Venser, the Sojourner&quot;,&quot;&quot;));</b>
+<b class="nc"><i>470</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Shardless Agent&quot;,&quot;&quot;));</b>
+<b class="nc"><i>471</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Izzet Charm&quot;,&quot;&quot;));</b>
+<b class="nc"><i>472</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Abrupt Decay&quot;,&quot;&quot;));</b>
+<b class="nc"><i>473</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Domri Rade&quot;,&quot;&quot;));</b>
+<b class="nc"><i>474</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mystic Snake&quot;,&quot;&quot;));</b>
+<b class="nc"><i>475</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Firemane Angel&quot;,&quot;&quot;));</b>
+<b class="nc"><i>476</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Angel of Despair&quot;,&quot;&quot;));</b>
+<b class="nc"><i>477</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Trygon Predator&quot;,&quot;&quot;));</b>
+<b class="nc"><i>478</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Simic Sky Swallower&quot;,&quot;&quot;));</b>
+<b class="nc"><i>479</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Boggart Ram-Gang&quot;,&quot;&quot;));</b>
+<b class="nc"><i>480</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Figure of Destiny&quot;,&quot;&quot;));</b>
+<b class="nc"><i>481</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Agony Warp&quot;,&quot;&quot;));</b>
+<b class="nc"><i>482</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Broodmate Dragon&quot;,&quot;&quot;));</b>
+<b class="nc"><i>483</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Knight of the Reliquary&quot;,&quot;&quot;));</b>
+<b class="nc"><i>484</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bloodbraid Elf&quot;,&quot;&quot;));</b>
+<b class="nc"><i>485</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Edric, Spymaster of Trest&quot;,&quot;&quot;));</b>
+<b class="nc"><i>486</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Geist of Saint Traft&quot;,&quot;&quot;));</b>
+<b class="nc"><i>487</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Falkenrath Aristocrat&quot;,&quot;&quot;));</b>
+<b class="nc"><i>488</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Rakdos Cackler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>489</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dreadbore&quot;,&quot;&quot;));</b>
+<b class="nc"><i>490</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dreg Mangler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>491</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Vraska the Unseen&quot;,&quot;&quot;));</b>
+<b class="nc"><i>492</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Fleecemane Lion&quot;,&quot;&quot;));</b>
+<b class="nc"><i>493</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Daxos of Meletis&quot;,&quot;&quot;));</b>
+<b class="nc"><i>494</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Steam Augury&quot;,&quot;&quot;));</b>
+<b class="nc"><i>495</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Prophetic Bolt&quot;,&quot;&quot;));</b>
+<b class="nc"><i>496</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Shadowmage Infiltrator&quot;,&quot;&quot;));</b>
+<b class="nc"><i>497</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ajani Vengeant&quot;,&quot;&quot;));</b>
+<b class="nc"><i>498</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Vindicate&quot;,&quot;&quot;));</b>
+<b class="nc"><i>499</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Maelstrom Pulse&quot;,&quot;&quot;));</b>
+<b class="nc"><i>500</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tezzeret, Agent of Bolas&quot;,&quot;&quot;));</b>
+<b class="nc"><i>501</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sorin, Lord of Innistrad&quot;,&quot;&quot;));</b>
+<b class="nc"><i>502</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Baleful Strix&quot;,&quot;&quot;));</b>
+<b class="nc"><i>503</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Xenagos, the Reveler&quot;,&quot;&quot;));</b>
+<b class="nc"><i>504</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sphinx&#39;s Revelation&quot;,&quot;&quot;));</b>
+<b class="nc"><i>505</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Voice of Resurgence&quot;,&quot;&quot;));</b>
+<b class="nc"><i>506</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Null Rod&quot;,&quot;&quot;));</b>
+<b class="nc"><i>507</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Cursed Scroll&quot;,&quot;&quot;));</b>
+<b class="nc"><i>508</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;All Is Dust&quot;,&quot;&quot;));</b>
+<b class="nc"><i>509</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Emrakul, the Aeons Torn&quot;,&quot;&quot;));</b>
+<b class="nc"><i>510</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Kozilek, Butcher of Truth&quot;,&quot;&quot;));</b>
+<b class="nc"><i>511</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Ulamog, the Infinite Gyre&quot;,&quot;&quot;));</b>
+<b class="nc"><i>512</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Shrine of Burning Rage&quot;,&quot;&quot;));</b>
+<b class="nc"><i>513</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Batterskull&quot;,&quot;&quot;));</b>
+<b class="nc"><i>514</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lion&#39;s Eye Diamond&quot;,&quot;&quot;));</b>
+<b class="nc"><i>515</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Grim Monolith&quot;,&quot;&quot;));</b>
+<b class="nc"><i>516</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Memory Jar&quot;,&quot;&quot;));</b>
+<b class="nc"><i>517</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mox Diamond&quot;,&quot;&quot;));</b>
+<b class="nc"><i>518</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Nevinyrral&#39;s Disk&quot;,&quot;&quot;));</b>
+<b class="nc"><i>519</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Orzhov Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>520</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Pristine Talisman&quot;,&quot;&quot;));</b>
+<b class="nc"><i>521</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Rakdos Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>522</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sol Ring&quot;,&quot;&quot;));</b>
+<b class="nc"><i>523</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Tangle Wire&quot;,&quot;&quot;));</b>
+<b class="nc"><i>524</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Thran Dynamo&quot;,&quot;&quot;));</b>
+<b class="nc"><i>525</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Winter Orb&quot;,&quot;&quot;));</b>
+<b class="nc"><i>526</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Masticore&quot;,&quot;&quot;));</b>
+<b class="nc"><i>527</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Myr Battlesphere&quot;,&quot;&quot;));</b>
+<b class="nc"><i>528</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Molten-Tail Masticore&quot;,&quot;&quot;));</b>
+<b class="nc"><i>529</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Phyrexian Revoker&quot;,&quot;&quot;));</b>
+<b class="nc"><i>530</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Solemn Simulacrum&quot;,&quot;&quot;));</b>
+<b class="nc"><i>531</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Bonesplitter&quot;,&quot;&quot;));</b>
+<b class="nc"><i>532</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sword of Body and Mind&quot;,&quot;&quot;));</b>
+<b class="nc"><i>533</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sword of Feast and Famine&quot;,&quot;&quot;));</b>
+<b class="nc"><i>534</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sword of War and Peace&quot;,&quot;&quot;));</b>
+<b class="nc"><i>535</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Chrome Mox&quot;,&quot;&quot;));</b>
+<b class="nc"><i>536</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Gilded Lotus&quot;,&quot;&quot;));</b>
+<b class="nc"><i>537</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sword of Light and Shadow&quot;,&quot;&quot;));</b>
+<b class="nc"><i>538</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Razormane Masticore&quot;,&quot;&quot;));</b>
+<b class="nc"><i>539</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Pentad Prism&quot;,&quot;&quot;));</b>
+<b class="nc"><i>540</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Coalition Relic&quot;,&quot;&quot;));</b>
+<b class="nc"><i>541</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mind Stone&quot;,&quot;&quot;));</b>
+<b class="nc"><i>542</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Precursor Golem&quot;,&quot;&quot;));</b>
+<b class="nc"><i>543</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Wurmcoil Engine&quot;,&quot;&quot;));</b>
+<b class="nc"><i>544</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Azorius Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>545</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Simic Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>546</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Basalt Monolith&quot;,&quot;&quot;));</b>
+<b class="nc"><i>547</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mox Sapphire&quot;,&quot;&quot;));</b>
+<b class="nc"><i>548</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mox Pearl&quot;,&quot;&quot;));</b>
+<b class="nc"><i>549</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mox Ruby&quot;,&quot;&quot;));</b>
+<b class="nc"><i>550</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mox Emerald&quot;,&quot;&quot;));</b>
+<b class="nc"><i>551</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mox Jet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>552</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Black Lotus&quot;,&quot;&quot;));</b>
+<b class="nc"><i>553</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Boros Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>554</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Blightsteel Colossus&quot;,&quot;&quot;));</b>
+<b class="nc"><i>555</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Dimir Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>556</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Epochrasite&quot;,&quot;&quot;));</b>
+<b class="nc"><i>557</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Etched Oracle&quot;,&quot;&quot;));</b>
+<b class="nc"><i>558</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Everflowing Chalice&quot;,&quot;&quot;));</b>
+<b class="nc"><i>559</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Gruul Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>560</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Izzet Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>561</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Golgari Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>562</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lodestone Golem&quot;,&quot;&quot;));</b>
+<b class="nc"><i>563</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lotus Bloom&quot;,&quot;&quot;));</b>
+<b class="nc"><i>564</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mana Crypt&quot;,&quot;&quot;));</b>
+<b class="nc"><i>565</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Mana Vault&quot;,&quot;&quot;));</b>
+<b class="nc"><i>566</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Selesnya Signet&quot;,&quot;&quot;));</b>
+<b class="nc"><i>567</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Metalworker&quot;,&quot;&quot;));</b>
+<b class="nc"><i>568</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Scroll Rack&quot;,&quot;&quot;));</b>
+<b class="nc"><i>569</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Worn Powerstone&quot;,&quot;&quot;));</b>
+<b class="nc"><i>570</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Smokestack&quot;,&quot;&quot;));</b>
+<b class="nc"><i>571</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Lightning Greaves&quot;,&quot;&quot;));</b>
+<b class="nc"><i>572</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sundering Titan&quot;,&quot;&quot;));</b>
+<b class="nc"><i>573</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sword of Fire and Ice&quot;,&quot;&quot;));</b>
+<b class="nc"><i>574</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Skullclamp&quot;,&quot;&quot;));</b>
+<b class="nc"><i>575</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Vedalken Shackles&quot;,&quot;&quot;));</b>
+<b class="nc"><i>576</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Crucible of Worlds&quot;,&quot;&quot;));</b>
+<b class="nc"><i>577</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Sensei&#39;s Divining Top&quot;,&quot;&quot;));</b>
+<b class="nc"><i>578</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Umezawa&#39;s Jitte&quot;,&quot;&quot;));</b>
+<b class="nc"><i>579</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Manriki-Gusari&quot;,&quot;&quot;));</b>
+<b class="nc"><i>580</i>&nbsp;        cubeCards.add(new CardIdentity(&quot;Karn Liberated&quot;,&quot;&quot;));</b>
+<i>581</i>&nbsp;
+<i>582</i>&nbsp;    }
+<i>583</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

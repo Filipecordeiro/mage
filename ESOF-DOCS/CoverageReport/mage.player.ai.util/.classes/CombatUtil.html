@@ -1,0 +1,511 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CombatUtil</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.player.ai.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CombatUtil (mage.player.ai.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CombatUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 174)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CombatUtil$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CombatUtil$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 180)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.player.ai.util;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import mage.abilities.keyword.DoubleStrikeAbility;
+<i>4</i>&nbsp;import mage.abilities.keyword.InfectAbility;
+<i>5</i>&nbsp;import mage.counters.CounterType;
+<i>6</i>&nbsp;import mage.game.Game;
+<i>7</i>&nbsp;import mage.game.combat.Combat;
+<i>8</i>&nbsp;import mage.game.events.GameEvent;
+<i>9</i>&nbsp;import mage.game.permanent.Permanent;
+<i>10</i>&nbsp;import mage.game.turn.CombatDamageStep;
+<i>11</i>&nbsp;import mage.game.turn.EndOfCombatStep;
+<i>12</i>&nbsp;import mage.game.turn.FirstCombatDamageStep;
+<i>13</i>&nbsp;import mage.game.turn.Step;
+<i>14</i>&nbsp;import mage.players.Player;
+<i>15</i>&nbsp;import org.apache.log4j.Logger;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;import java.util.*;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;/**
+<i>20</i>&nbsp; * Base helper methods for combat.
+<i>21</i>&nbsp; *
+<i>22</i>&nbsp; * @author noxx
+<i>23</i>&nbsp; */
+<i>24</i>&nbsp;public class CombatUtil {
+<i>25</i>&nbsp;
+<b class="nc"><i>26</i>&nbsp;    private static final List&lt;Permanent&gt; emptyList = new ArrayList&lt;Permanent&gt;();</b>
+<i>27</i>&nbsp;
+<b class="nc"><i>28</i>&nbsp;    private static final Logger log = Logger.getLogger(CombatUtil.class);</b>
+<i>29</i>&nbsp;
+<b class="nc"><i>30</i>&nbsp;    private CombatUtil() {</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public static List&lt;Permanent&gt; canKillOpponent(Game game, List&lt;Permanent&gt; attackersList, List&lt;Permanent&gt; blockersList,
+<i>34</i>&nbsp;                                                  Player defender) {
+<b class="nc"><i>35</i>&nbsp;        List&lt;Permanent&gt; blockableAttackers = new ArrayList&lt;Permanent&gt;(blockersList);</b>
+<b class="nc"><i>36</i>&nbsp;        List&lt;Permanent&gt; unblockableAttackers = new ArrayList&lt;Permanent&gt;();</b>
+<b class="nc"><i>37</i>&nbsp;        for (Permanent attacker : attackersList) {</b>
+<b class="nc"><i>38</i>&nbsp;            if (!canBeBlocked(game, attacker, blockersList)) {</b>
+<b class="nc"><i>39</i>&nbsp;                unblockableAttackers.add(attacker);</b>
+<b class="nc"><i>40</i>&nbsp;                blockableAttackers.remove(attacker);</b>
+<i>41</i>&nbsp;            }
+<b class="nc"><i>42</i>&nbsp;        }</b>
+<i>43</i>&nbsp;
+<b class="nc"><i>44</i>&nbsp;        sortByPower(blockableAttackers, true);</b>
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;        // imagine that most powerful will be blocked as 1-vs-1
+<b class="nc"><i>47</i>&nbsp;        List&lt;Permanent&gt; attackersThatWontBeBlocked = new ArrayList&lt;Permanent&gt;(blockableAttackers);</b>
+<b class="nc"><i>48</i>&nbsp;        for (int i = 0; (i &lt; blockersList.size() &amp;&amp; i &lt; blockableAttackers.size()); i++) {</b>
+<b class="nc"><i>49</i>&nbsp;            attackersThatWontBeBlocked.remove(blockableAttackers.get(i));</b>
+<i>50</i>&nbsp;        }
+<b class="nc"><i>51</i>&nbsp;        attackersThatWontBeBlocked.addAll(unblockableAttackers);</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;        // now count if it is possible to win the game by this attack using unblockable attackers and
+<i>54</i>&nbsp;        // those attackers that won&#39;t be blocked for sure (as player will block other creatures)
+<b class="nc"><i>55</i>&nbsp;        if (sumDamage(attackersThatWontBeBlocked, defender) &gt;= defender.getLife() &amp;&amp; defender.isLifeTotalCanChange()</b>
+<b class="nc"><i>56</i>&nbsp;                &amp;&amp; defender.canLose(game) &amp;&amp; defender.getLife() &gt; 0) {</b>
+<b class="nc"><i>57</i>&nbsp;            blockableAttackers.addAll(unblockableAttackers);</b>
+<b class="nc"><i>58</i>&nbsp;            return blockableAttackers;</b>
+<i>59</i>&nbsp;        }
+<i>60</i>&nbsp;
+<b class="nc"><i>61</i>&nbsp;        if (sumPoisonDamage(attackersThatWontBeBlocked, defender) &gt;= 10 - defender.getCounters().getCount(CounterType.POISON)) {</b>
+<b class="nc"><i>62</i>&nbsp;            blockableAttackers.addAll(unblockableAttackers);</b>
+<b class="nc"><i>63</i>&nbsp;            return blockableAttackers;</b>
+<i>64</i>&nbsp;        }
+<i>65</i>&nbsp;
+<b class="nc"><i>66</i>&nbsp;        return emptyList;</b>
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    /**
+<i>70</i>&nbsp;     * Checks that attacker can be blocked by any blocker from the list.
+<i>71</i>&nbsp;     *
+<i>72</i>&nbsp;     * @param game         Game
+<i>73</i>&nbsp;     * @param attacker     Attacker to check
+<i>74</i>&nbsp;     * @param blockersList Blockers to try to block the attacker with.
+<i>75</i>&nbsp;     * @return true if attacker can be blocked by any blocker
+<i>76</i>&nbsp;     */
+<i>77</i>&nbsp;    public static boolean canBeBlocked(Game game, Permanent attacker, List&lt;Permanent&gt; blockersList) {
+<b class="nc"><i>78</i>&nbsp;        for (Permanent blocker : blockersList) {</b>
+<b class="nc"><i>79</i>&nbsp;            if (blocker.canBlock(attacker.getId(), game)) {</b>
+<b class="nc"><i>80</i>&nbsp;                return true;</b>
+<i>81</i>&nbsp;            }
+<b class="nc"><i>82</i>&nbsp;        }</b>
+<b class="nc"><i>83</i>&nbsp;        return false;</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public static void sortByPower(List&lt;Permanent&gt; permanents, final boolean ascending) {
+<b class="nc"><i>87</i>&nbsp;        Collections.sort(permanents, new Comparator&lt;Permanent&gt;() {</b>
+<i>88</i>&nbsp;            @Override
+<i>89</i>&nbsp;            public int compare(Permanent o1, Permanent o2) {
+<b class="nc"><i>90</i>&nbsp;                if (ascending) {</b>
+<b class="nc"><i>91</i>&nbsp;                    return o2.getPower().getValue() - o1.getPower().getValue();</b>
+<i>92</i>&nbsp;                } else {
+<b class="nc"><i>93</i>&nbsp;                    return o1.getPower().getValue() - o2.getPower().getValue();</b>
+<i>94</i>&nbsp;                }
+<i>95</i>&nbsp;            }
+<i>96</i>&nbsp;        });
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    public static Permanent getWorstCreature(List&lt;Permanent&gt; creatures) {
+<b class="nc"><i>100</i>&nbsp;        if (creatures.isEmpty()) {</b>
+<b class="nc"><i>101</i>&nbsp;            return null;</b>
+<i>102</i>&nbsp;        }
+<b class="nc"><i>103</i>&nbsp;        Collections.sort(creatures, new Comparator&lt;Permanent&gt;() {</b>
+<i>104</i>&nbsp;            @Override
+<i>105</i>&nbsp;            public int compare(Permanent o1, Permanent o2) {
+<b class="nc"><i>106</i>&nbsp;                return o2.getPower().getValue() - o1.getPower().getValue();</b>
+<i>107</i>&nbsp;            }
+<i>108</i>&nbsp;        });
+<b class="nc"><i>109</i>&nbsp;        return creatures.get(0);</b>
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    private static int sumDamage(List&lt;Permanent&gt; attackersThatWontBeBlocked, Player defender) {
+<b class="nc"><i>113</i>&nbsp;        int damage = 0;</b>
+<b class="nc"><i>114</i>&nbsp;        for (Permanent attacker : attackersThatWontBeBlocked) {</b>
+<b class="nc"><i>115</i>&nbsp;            if (!attacker.getAbilities().contains(InfectAbility.getInstance())) {</b>
+<b class="nc"><i>116</i>&nbsp;                damage += attacker.getPower().getValue();</b>
+<b class="nc"><i>117</i>&nbsp;                if (attacker.getAbilities().contains(DoubleStrikeAbility.getInstance())) {</b>
+<b class="nc"><i>118</i>&nbsp;                    damage += attacker.getPower().getValue();</b>
+<i>119</i>&nbsp;                }
+<i>120</i>&nbsp;            }
+<b class="nc"><i>121</i>&nbsp;        }</b>
+<b class="nc"><i>122</i>&nbsp;        return damage;</b>
+<i>123</i>&nbsp;    }
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    private static int sumPoisonDamage(List&lt;Permanent&gt; attackersThatWontBeBlocked, Player defender) {
+<b class="nc"><i>126</i>&nbsp;        int damage = 0;</b>
+<b class="nc"><i>127</i>&nbsp;        for (Permanent attacker : attackersThatWontBeBlocked) {</b>
+<b class="nc"><i>128</i>&nbsp;            if (attacker.getAbilities().contains(InfectAbility.getInstance())) {</b>
+<b class="nc"><i>129</i>&nbsp;                damage += attacker.getPower().getValue();</b>
+<b class="nc"><i>130</i>&nbsp;                if (attacker.getAbilities().contains(DoubleStrikeAbility.getInstance())) {</b>
+<b class="nc"><i>131</i>&nbsp;                    damage += attacker.getPower().getValue();</b>
+<i>132</i>&nbsp;                }
+<i>133</i>&nbsp;            }
+<b class="nc"><i>134</i>&nbsp;        }</b>
+<b class="nc"><i>135</i>&nbsp;        return damage;</b>
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;    public static void handleExalted() {
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    /**
+<i>142</i>&nbsp;     * Determines what blockers from the list can block the attacker
+<i>143</i>&nbsp;     *
+<i>144</i>&nbsp;     * @param game         Game
+<i>145</i>&nbsp;     * @param attacker     Attacker to check
+<i>146</i>&nbsp;     * @param blockersList Blockers to try to block the attacker with.
+<i>147</i>&nbsp;     * @return true if attacker can be blocked by any blocker
+<i>148</i>&nbsp;     */
+<i>149</i>&nbsp;    public static List&lt;Permanent&gt; getPossibleBlockers(Game game, Permanent attacker, List&lt;Permanent&gt; blockersList) {
+<b class="nc"><i>150</i>&nbsp;        List&lt;Permanent&gt; canBlock = new ArrayList&lt;Permanent&gt;();</b>
+<b class="nc"><i>151</i>&nbsp;        for (Permanent blocker : blockersList) {</b>
+<b class="nc"><i>152</i>&nbsp;            if (blocker.canBlock(attacker.getId(), game)) {</b>
+<b class="nc"><i>153</i>&nbsp;                canBlock.add(blocker);</b>
+<i>154</i>&nbsp;            }
+<b class="nc"><i>155</i>&nbsp;        }</b>
+<b class="nc"><i>156</i>&nbsp;        return canBlock;</b>
+<i>157</i>&nbsp;    }
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;    public static CombatInfo blockWithGoodTrade(Game game, List&lt;Permanent&gt; attackers, List&lt;Permanent&gt; blockers) {
+<i>160</i>&nbsp;
+<b class="nc"><i>161</i>&nbsp;        UUID attackerId = game.getCombat().getAttackerId();</b>
+<b class="nc"><i>162</i>&nbsp;        UUID defenderId = game.getCombat().getDefenders().iterator().next();</b>
+<b class="nc"><i>163</i>&nbsp;        if (attackerId == null || defenderId == null) {</b>
+<b class="nc"><i>164</i>&nbsp;            log.warn(&quot;Couldn&#39;t find attacker or defender: &quot; + attackerId + &quot; &quot; + defenderId);</b>
+<b class="nc"><i>165</i>&nbsp;            return new CombatInfo();</b>
+<i>166</i>&nbsp;        }
+<i>167</i>&nbsp;
+<b class="nc"><i>168</i>&nbsp;        CombatInfo combatInfo = new CombatInfo();</b>
+<b class="nc"><i>169</i>&nbsp;        for (Permanent attacker : attackers) {</b>
+<i>170</i>&nbsp;            //TODO: handle attackers with &quot;can&#39;t be blocked except&quot;
+<b class="nc"><i>171</i>&nbsp;            List&lt;Permanent&gt; possibleBlockers = getPossibleBlockers(game, attacker, blockers);</b>
+<b class="nc"><i>172</i>&nbsp;            List&lt;Permanent&gt; survivedBlockers = getBlockersThatWillSurvive(game, attackerId, defenderId, attacker, possibleBlockers);</b>
+<b class="nc"><i>173</i>&nbsp;            if (!survivedBlockers.isEmpty()) {</b>
+<b class="nc"><i>174</i>&nbsp;                Permanent blocker = getWorstCreature(survivedBlockers);</b>
+<b class="nc"><i>175</i>&nbsp;                combatInfo.addPair(attacker, blocker);</b>
+<b class="nc"><i>176</i>&nbsp;                blockers.remove(blocker);</b>
+<i>177</i>&nbsp;            }
+<b class="nc"><i>178</i>&nbsp;            if (blockers.isEmpty()) {</b>
+<b class="nc"><i>179</i>&nbsp;                break;</b>
+<i>180</i>&nbsp;            }
+<b class="nc"><i>181</i>&nbsp;        }</b>
+<i>182</i>&nbsp;
+<b class="nc"><i>183</i>&nbsp;        return combatInfo;</b>
+<i>184</i>&nbsp;    }
+<i>185</i>&nbsp;
+<i>186</i>&nbsp;    private static List&lt;Permanent&gt; getBlockersThatWillSurvive(Game game, UUID attackerId, UUID defenderId, Permanent attacker, List&lt;Permanent&gt; possibleBlockers) {
+<b class="nc"><i>187</i>&nbsp;        List&lt;Permanent&gt; blockers = new ArrayList&lt;Permanent&gt;();</b>
+<b class="nc"><i>188</i>&nbsp;        for (Permanent blocker : possibleBlockers) {</b>
+<b class="nc"><i>189</i>&nbsp;            SurviveInfo info = willItSurvive(game, attackerId, defenderId, attacker, blocker);</b>
+<i>190</i>&nbsp;            //if (info.isAttackerDied() &amp;&amp; !info.isBlockerDied()) {
+<b class="nc"><i>191</i>&nbsp;            if (info != null) {</b>
+<b class="nc"><i>192</i>&nbsp;                if (info.isAttackerDied()) {</b>
+<b class="nc"><i>193</i>&nbsp;                    blockers.add(blocker);</b>
+<b class="nc"><i>194</i>&nbsp;                } else if (!info.isBlockerDied()) {</b>
+<b class="nc"><i>195</i>&nbsp;                    blockers.add(blocker);</b>
+<i>196</i>&nbsp;                }
+<i>197</i>&nbsp;            }
+<b class="nc"><i>198</i>&nbsp;        }</b>
+<b class="nc"><i>199</i>&nbsp;        return blockers;</b>
+<i>200</i>&nbsp;    }
+<i>201</i>&nbsp;
+<i>202</i>&nbsp;    public static SurviveInfo willItSurvive(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
+<b class="nc"><i>203</i>&nbsp;        Game sim = game.copy();</b>
+<i>204</i>&nbsp;
+<b class="nc"><i>205</i>&nbsp;        Combat combat = sim.getCombat();</b>
+<b class="nc"><i>206</i>&nbsp;        combat.setAttacker(attackingPlayerId);</b>
+<b class="nc"><i>207</i>&nbsp;        combat.setDefenders(sim);</b>
+<i>208</i>&nbsp;
+<b class="nc"><i>209</i>&nbsp;        if (blocker == null || attacker == null || sim.getPlayer(defendingPlayerId) == null) {</b>
+<b class="nc"><i>210</i>&nbsp;            return null;</b>
+<i>211</i>&nbsp;        }
+<i>212</i>&nbsp;
+<b class="nc"><i>213</i>&nbsp;        sim.getPlayer(defendingPlayerId).declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), sim);</b>
+<b class="nc"><i>214</i>&nbsp;        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));</b>
+<i>215</i>&nbsp;
+<b class="nc"><i>216</i>&nbsp;        sim.checkStateAndTriggered();</b>
+<b class="nc"><i>217</i>&nbsp;        while (!sim.getStack().isEmpty()) {</b>
+<b class="nc"><i>218</i>&nbsp;            sim.getStack().resolve(sim);</b>
+<b class="nc"><i>219</i>&nbsp;            sim.applyEffects();</b>
+<i>220</i>&nbsp;        }
+<b class="nc"><i>221</i>&nbsp;        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));</b>
+<i>222</i>&nbsp;
+<b class="nc"><i>223</i>&nbsp;        simulateStep(sim, new FirstCombatDamageStep());</b>
+<b class="nc"><i>224</i>&nbsp;        simulateStep(sim, new CombatDamageStep());</b>
+<b class="nc"><i>225</i>&nbsp;        simulateStep(sim, new EndOfCombatStep());</b>
+<i>226</i>&nbsp;        // The following commented out call produces random freezes.
+<i>227</i>&nbsp;        //sim.checkStateAndTriggered();
+<b class="nc"><i>228</i>&nbsp;        while (!sim.getStack().isEmpty()) {</b>
+<b class="nc"><i>229</i>&nbsp;            sim.getStack().resolve(sim);</b>
+<b class="nc"><i>230</i>&nbsp;            sim.applyEffects();</b>
+<i>231</i>&nbsp;        }
+<i>232</i>&nbsp;
+<b class="nc"><i>233</i>&nbsp;        return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), !sim.getBattlefield().containsPermanent(blocker.getId()));</b>
+<i>234</i>&nbsp;    }
+<i>235</i>&nbsp;
+<i>236</i>&nbsp;    public static SurviveInfo getCombatInfo(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker) {
+<b class="nc"><i>237</i>&nbsp;        Game sim = game.copy();</b>
+<i>238</i>&nbsp;
+<b class="nc"><i>239</i>&nbsp;        Combat combat = sim.getCombat();</b>
+<b class="nc"><i>240</i>&nbsp;        combat.setAttacker(attackingPlayerId);</b>
+<b class="nc"><i>241</i>&nbsp;        combat.setDefenders(sim);</b>
+<i>242</i>&nbsp;
+<b class="nc"><i>243</i>&nbsp;        UUID defenderId = sim.getCombat().getDefenders().iterator().next();</b>
+<b class="nc"><i>244</i>&nbsp;        boolean triggered = false;</b>
+<i>245</i>&nbsp;
+<b class="nc"><i>246</i>&nbsp;        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));</b>
+<i>247</i>&nbsp;
+<b class="nc"><i>248</i>&nbsp;        sim.checkStateAndTriggered();</b>
+<b class="nc"><i>249</i>&nbsp;        while (!sim.getStack().isEmpty()) {</b>
+<b class="nc"><i>250</i>&nbsp;            triggered = true;</b>
+<b class="nc"><i>251</i>&nbsp;            sim.getStack().resolve(sim);</b>
+<b class="nc"><i>252</i>&nbsp;            sim.applyEffects();</b>
+<i>253</i>&nbsp;        }
+<b class="nc"><i>254</i>&nbsp;        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));</b>
+<i>255</i>&nbsp;
+<b class="nc"><i>256</i>&nbsp;        simulateStep(sim, new FirstCombatDamageStep());</b>
+<b class="nc"><i>257</i>&nbsp;        simulateStep(sim, new CombatDamageStep());</b>
+<b class="nc"><i>258</i>&nbsp;        simulateStep(sim, new EndOfCombatStep());</b>
+<i>259</i>&nbsp;        // The following commented out call produces random freezes.
+<i>260</i>&nbsp;        //sim.checkStateAndTriggered();
+<b class="nc"><i>261</i>&nbsp;        while (!sim.getStack().isEmpty()) {</b>
+<b class="nc"><i>262</i>&nbsp;            triggered = true;</b>
+<b class="nc"><i>263</i>&nbsp;            sim.getStack().resolve(sim);</b>
+<b class="nc"><i>264</i>&nbsp;            sim.applyEffects();</b>
+<i>265</i>&nbsp;        }
+<i>266</i>&nbsp;
+<b class="nc"><i>267</i>&nbsp;        return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), false, sim.getPlayer(defenderId), triggered);</b>
+<i>268</i>&nbsp;    }
+<i>269</i>&nbsp;
+<i>270</i>&nbsp;    protected static void simulateStep(Game game, Step step) {
+<b class="nc"><i>271</i>&nbsp;        game.getPhase().setStep(step);</b>
+<b class="nc"><i>272</i>&nbsp;        if (!step.skipStep(game, game.getActivePlayerId())) {</b>
+<b class="nc"><i>273</i>&nbsp;            step.beginStep(game, game.getActivePlayerId());</b>
+<i>274</i>&nbsp;            // The following commented out call produces random freezes.
+<i>275</i>&nbsp;            //game.checkStateAndTriggered();
+<b class="nc"><i>276</i>&nbsp;            while (!game.getStack().isEmpty()) {</b>
+<b class="nc"><i>277</i>&nbsp;                game.getStack().resolve(game);</b>
+<b class="nc"><i>278</i>&nbsp;                game.applyEffects();</b>
+<i>279</i>&nbsp;            }
+<b class="nc"><i>280</i>&nbsp;            step.endStep(game, game.getActivePlayerId());</b>
+<i>281</i>&nbsp;        }
+<i>282</i>&nbsp;    }
+<i>283</i>&nbsp;
+<i>284</i>&nbsp;    public static boolean canBlock(Game game, Permanent blocker) {
+<b class="nc"><i>285</i>&nbsp;        boolean canBlock = true;</b>
+<b class="nc"><i>286</i>&nbsp;        if (!blocker.isTapped()) {</b>
+<i>287</i>&nbsp;            try {
+<b class="nc"><i>288</i>&nbsp;                canBlock = blocker.canBlock(null, game);</b>
+<b class="nc"><i>289</i>&nbsp;            } catch (Exception e) {</b>
+<i>290</i>&nbsp;                //e.printStackTrace();
+<b class="nc"><i>291</i>&nbsp;            }</b>
+<i>292</i>&nbsp;        }
+<b class="nc"><i>293</i>&nbsp;        return canBlock;</b>
+<i>294</i>&nbsp;    }
+<i>295</i>&nbsp;    
+<i>296</i>&nbsp;    public static CombatInfo blockWithGoodTrade2(Game game, List&lt;Permanent&gt; attackers, List&lt;Permanent&gt; blockers) {
+<i>297</i>&nbsp;
+<b class="nc"><i>298</i>&nbsp;        UUID attackerId = game.getCombat().getAttackerId();</b>
+<b class="nc"><i>299</i>&nbsp;        UUID defenderId = game.getCombat().getDefenders().iterator().next();</b>
+<b class="nc"><i>300</i>&nbsp;        if (attackerId == null || defenderId == null) {</b>
+<b class="nc"><i>301</i>&nbsp;            log.warn(&quot;Couldn&#39;t find attacker or defender: &quot; + attackerId + &quot; &quot; + defenderId);</b>
+<b class="nc"><i>302</i>&nbsp;            return new CombatInfo();</b>
+<i>303</i>&nbsp;        }
+<i>304</i>&nbsp;
+<b class="nc"><i>305</i>&nbsp;        CombatInfo combatInfo = new CombatInfo();</b>
+<b class="nc"><i>306</i>&nbsp;        for (Permanent attacker : attackers) {</b>
+<i>307</i>&nbsp;            //TODO: handle attackers with &quot;can&#39;t be blocked except&quot;
+<b class="nc"><i>308</i>&nbsp;            List&lt;Permanent&gt; possibleBlockers = getPossibleBlockers(game, attacker, blockers);</b>
+<b class="nc"><i>309</i>&nbsp;            List&lt;Permanent&gt; survivedBlockers = getBlockersThatWillSurvive2(game, attackerId, defenderId, attacker, possibleBlockers);</b>
+<b class="nc"><i>310</i>&nbsp;            if (!survivedBlockers.isEmpty()) {</b>
+<b class="nc"><i>311</i>&nbsp;                Permanent blocker = getWorstCreature(survivedBlockers);</b>
+<b class="nc"><i>312</i>&nbsp;                combatInfo.addPair(attacker, blocker);</b>
+<b class="nc"><i>313</i>&nbsp;                blockers.remove(blocker);</b>
+<i>314</i>&nbsp;            }
+<b class="nc"><i>315</i>&nbsp;            if (blockers.isEmpty()) {</b>
+<b class="nc"><i>316</i>&nbsp;                break;</b>
+<i>317</i>&nbsp;            }
+<b class="nc"><i>318</i>&nbsp;        }</b>
+<i>319</i>&nbsp;
+<b class="nc"><i>320</i>&nbsp;        return combatInfo;</b>
+<i>321</i>&nbsp;    }
+<i>322</i>&nbsp;    
+<i>323</i>&nbsp;    private static List&lt;Permanent&gt; getBlockersThatWillSurvive2(Game game, UUID attackerId, UUID defenderId, Permanent attacker, List&lt;Permanent&gt; possibleBlockers) {
+<b class="nc"><i>324</i>&nbsp;        List&lt;Permanent&gt; blockers = new ArrayList&lt;Permanent&gt;();</b>
+<b class="nc"><i>325</i>&nbsp;        for (Permanent blocker : possibleBlockers) {</b>
+<b class="nc"><i>326</i>&nbsp;            SurviveInfo info = willItSurvive2(game, attackerId, defenderId, attacker, blocker);</b>
+<i>327</i>&nbsp;            //if (info.isAttackerDied() &amp;&amp; !info.isBlockerDied()) {
+<b class="nc"><i>328</i>&nbsp;            if (info != null) {</b>
+<b class="nc"><i>329</i>&nbsp;                if (info.isAttackerDied()) {</b>
+<b class="nc"><i>330</i>&nbsp;                    blockers.add(blocker);</b>
+<b class="nc"><i>331</i>&nbsp;                } else if (!info.isBlockerDied()) {</b>
+<b class="nc"><i>332</i>&nbsp;                    blockers.add(blocker);</b>
+<i>333</i>&nbsp;                }
+<i>334</i>&nbsp;            }
+<b class="nc"><i>335</i>&nbsp;        }</b>
+<b class="nc"><i>336</i>&nbsp;        return blockers;</b>
+<i>337</i>&nbsp;    }
+<i>338</i>&nbsp;    
+<i>339</i>&nbsp;    public static SurviveInfo willItSurvive2(Game game, UUID attackingPlayerId, UUID defendingPlayerId, Permanent attacker, Permanent blocker) {
+<i>340</i>&nbsp;        
+<b class="nc"><i>341</i>&nbsp;        Game sim = game.copy();</b>
+<i>342</i>&nbsp;
+<b class="nc"><i>343</i>&nbsp;        Combat combat = sim.getCombat();</b>
+<b class="nc"><i>344</i>&nbsp;        combat.setAttacker(attackingPlayerId);</b>
+<b class="nc"><i>345</i>&nbsp;        combat.setDefenders(sim);</b>
+<i>346</i>&nbsp;
+<b class="nc"><i>347</i>&nbsp;        if (blocker == null || attacker == null || sim.getPlayer(defendingPlayerId) == null) {</b>
+<b class="nc"><i>348</i>&nbsp;            return null;</b>
+<i>349</i>&nbsp;        }
+<i>350</i>&nbsp;        
+<b class="nc"><i>351</i>&nbsp;        if (attacker.getPower().getValue() &gt;= blocker.getToughness().getValue()) {</b>
+<b class="nc"><i>352</i>&nbsp;            sim.getBattlefield().removePermanent(blocker.getId());</b>
+<i>353</i>&nbsp;        }
+<b class="nc"><i>354</i>&nbsp;        if (attacker.getToughness().getValue() &lt;= blocker.getPower().getValue()) {</b>
+<b class="nc"><i>355</i>&nbsp;            sim.getBattlefield().removePermanent(attacker.getId());</b>
+<i>356</i>&nbsp;        }
+<i>357</i>&nbsp;        
+<i>358</i>&nbsp;        /*
+<i>359</i>&nbsp;        sim.getPlayer(defendingPlayerId).declareBlocker(blocker.getId(), attacker.getId(), sim);
+<i>360</i>&nbsp;        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
+<i>361</i>&nbsp;
+<i>362</i>&nbsp;        sim.checkStateAndTriggered();
+<i>363</i>&nbsp;        while (!sim.getStack().isEmpty()) {
+<i>364</i>&nbsp;            sim.getStack().resolve(sim);
+<i>365</i>&nbsp;            sim.applyEffects();
+<i>366</i>&nbsp;        }
+<i>367</i>&nbsp;        sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));
+<i>368</i>&nbsp;
+<i>369</i>&nbsp;        simulateStep(sim, new FirstCombatDamageStep());
+<i>370</i>&nbsp;        simulateStep(sim, new CombatDamageStep());
+<i>371</i>&nbsp;        simulateStep(sim, new EndOfCombatStep());
+<i>372</i>&nbsp;        // The following commented out call produces random freezes.
+<i>373</i>&nbsp;        //sim.checkStateAndTriggered();
+<i>374</i>&nbsp;        while (!sim.getStack().isEmpty()) {
+<i>375</i>&nbsp;            sim.getStack().resolve(sim);
+<i>376</i>&nbsp;            sim.applyEffects();
+<i>377</i>&nbsp;        }
+<i>378</i>&nbsp;        */
+<i>379</i>&nbsp;
+<b class="nc"><i>380</i>&nbsp;        return new SurviveInfo(!sim.getBattlefield().containsPermanent(attacker.getId()), !sim.getBattlefield().containsPermanent(blocker.getId()));</b>
+<i>381</i>&nbsp;    }
+<i>382</i>&nbsp;
+<i>383</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

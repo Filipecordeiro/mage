@@ -1,0 +1,281 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BoostAllEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common.continuous</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BoostAllEffect (mage.abilities.effects.common.continuous)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BoostAllEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.4%
+  </span>
+  <span class="absValue">
+    (71/ 76)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.effects.common.continuous;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.Iterator;
+<i>31</i>&nbsp;import mage.MageObjectReference;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.dynamicvalue.DynamicValue;
+<i>34</i>&nbsp;import mage.abilities.dynamicvalue.common.StaticValue;
+<i>35</i>&nbsp;import mage.abilities.effects.ContinuousEffectImpl;
+<i>36</i>&nbsp;import mage.constants.Duration;
+<i>37</i>&nbsp;import mage.constants.Layer;
+<i>38</i>&nbsp;import mage.constants.Outcome;
+<i>39</i>&nbsp;import mage.constants.SubLayer;
+<i>40</i>&nbsp;import mage.filter.common.FilterCreaturePermanent;
+<i>41</i>&nbsp;import mage.game.Game;
+<i>42</i>&nbsp;import mage.game.permanent.Permanent;
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;/**
+<i>45</i>&nbsp; *
+<i>46</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>47</i>&nbsp; */
+<i>48</i>&nbsp;public class BoostAllEffect extends ContinuousEffectImpl {
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    protected DynamicValue power;
+<i>51</i>&nbsp;    protected DynamicValue toughness;
+<i>52</i>&nbsp;    protected boolean excludeSource;
+<i>53</i>&nbsp;    protected FilterCreaturePermanent filter;
+<i>54</i>&nbsp;    protected boolean lockedInPT;
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public BoostAllEffect(int power, int toughness, Duration duration) {
+<b class="fc"><i>57</i>&nbsp;        this(power, toughness, duration, false);</b>
+<b class="fc"><i>58</i>&nbsp;    }</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
+<b class="nc"><i>61</i>&nbsp;        this(power, toughness, duration, new FilterCreaturePermanent(&quot;All creatures&quot;), false);</b>
+<b class="nc"><i>62</i>&nbsp;    }</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    public BoostAllEffect(int power, int toughness, Duration duration, boolean excludeSource) {
+<b class="fc"><i>65</i>&nbsp;        this(power, toughness, duration, new FilterCreaturePermanent(&quot;All creatures&quot;), excludeSource);</b>
+<b class="fc"><i>66</i>&nbsp;    }</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public BoostAllEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
+<b class="fc"><i>69</i>&nbsp;        this(new StaticValue(power), new StaticValue(toughness), duration, filter, excludeSource);</b>
+<b class="fc"><i>70</i>&nbsp;    }</b>
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
+<b class="fc"><i>73</i>&nbsp;        this(power, toughness, duration, filter, excludeSource, null);</b>
+<b class="fc"><i>74</i>&nbsp;    }</b>
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule) {
+<b class="fc"><i>77</i>&nbsp;        this(power, toughness, duration, filter, excludeSource, rule, false);</b>
+<b class="fc"><i>78</i>&nbsp;    }</b>
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule, boolean lockedInPT) {
+<b class="fc"><i>81</i>&nbsp;        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);</b>
+<b class="fc"><i>82</i>&nbsp;        this.power = power;</b>
+<b class="fc"><i>83</i>&nbsp;        this.toughness = toughness;</b>
+<b class="fc"><i>84</i>&nbsp;        this.filter = filter;</b>
+<b class="fc"><i>85</i>&nbsp;        this.excludeSource = excludeSource;</b>
+<i>86</i>&nbsp;
+<b class="fc"><i>87</i>&nbsp;        this.lockedInPT = lockedInPT;</b>
+<b class="fc"><i>88</i>&nbsp;        if (rule == null || rule.isEmpty()) {</b>
+<b class="fc"><i>89</i>&nbsp;            setText();</b>
+<i>90</i>&nbsp;        } else {
+<b class="nc"><i>91</i>&nbsp;            this.staticText = rule;</b>
+<i>92</i>&nbsp;        }
+<b class="fc"><i>93</i>&nbsp;    }</b>
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    public BoostAllEffect(final BoostAllEffect effect) {
+<b class="fc"><i>96</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>97</i>&nbsp;        this.power = effect.power;</b>
+<b class="fc"><i>98</i>&nbsp;        this.toughness = effect.toughness;</b>
+<b class="fc"><i>99</i>&nbsp;        this.filter = effect.filter.copy();</b>
+<b class="fc"><i>100</i>&nbsp;        this.excludeSource = effect.excludeSource;</b>
+<b class="fc"><i>101</i>&nbsp;        this.lockedInPT = effect.lockedInPT;</b>
+<b class="fc"><i>102</i>&nbsp;    }</b>
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    @Override
+<i>105</i>&nbsp;    public BoostAllEffect copy() {
+<b class="fc"><i>106</i>&nbsp;        return new BoostAllEffect(this);</b>
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    @Override
+<i>110</i>&nbsp;    public void init(Ability source, Game game) {
+<b class="fc"><i>111</i>&nbsp;        super.init(source, game);</b>
+<b class="fc"><i>112</i>&nbsp;        setRuntimeData(source, game);</b>
+<b class="fc"><i>113</i>&nbsp;        if (this.affectedObjectsSet) {</b>
+<b class="fc"><i>114</i>&nbsp;            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {</b>
+<b class="fc"><i>115</i>&nbsp;                if (!(excludeSource &amp;&amp; perm.getId().equals(source.getSourceId())) &amp;&amp; selectedByRuntimeData(perm, source, game)) {</b>
+<b class="fc"><i>116</i>&nbsp;                    affectedObjectList.add(new MageObjectReference(perm, game));</b>
+<i>117</i>&nbsp;                }
+<b class="fc"><i>118</i>&nbsp;            }</b>
+<i>119</i>&nbsp;        }
+<b class="fc"><i>120</i>&nbsp;        if (lockedInPT) {</b>
+<b class="nc"><i>121</i>&nbsp;            power = new StaticValue(power.calculate(game, source, this));</b>
+<b class="nc"><i>122</i>&nbsp;            toughness = new StaticValue(toughness.calculate(game, source, this));</b>
+<i>123</i>&nbsp;        }
+<b class="fc"><i>124</i>&nbsp;    }</b>
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    @Override
+<i>127</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="fc"><i>128</i>&nbsp;        if (this.affectedObjectsSet) {</b>
+<b class="fc"><i>129</i>&nbsp;            for (Iterator&lt;MageObjectReference&gt; it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost</b>
+<b class="fc"><i>130</i>&nbsp;                Permanent permanent = it.next().getPermanent(game);</b>
+<b class="fc"><i>131</i>&nbsp;                if (permanent != null) {</b>
+<b class="fc"><i>132</i>&nbsp;                    permanent.addPower(power.calculate(game, source, this));</b>
+<b class="fc"><i>133</i>&nbsp;                    permanent.addToughness(toughness.calculate(game, source, this));</b>
+<i>134</i>&nbsp;                } else {
+<b class="fc"><i>135</i>&nbsp;                    it.remove(); // no longer on the battlefield, remove reference to object</b>
+<i>136</i>&nbsp;                }
+<b class="fc"><i>137</i>&nbsp;            }</b>
+<i>138</i>&nbsp;        } else {
+<b class="fc"><i>139</i>&nbsp;            setRuntimeData(source, game);</b>
+<b class="fc"><i>140</i>&nbsp;            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {</b>
+<b class="fc"><i>141</i>&nbsp;                if (!(excludeSource &amp;&amp; perm.getId().equals(source.getSourceId())) &amp;&amp; selectedByRuntimeData(perm, source, game)) {</b>
+<b class="fc"><i>142</i>&nbsp;                    perm.addPower(power.calculate(game, source, this));</b>
+<b class="fc"><i>143</i>&nbsp;                    perm.addToughness(toughness.calculate(game, source, this));</b>
+<i>144</i>&nbsp;                }
+<b class="fc"><i>145</i>&nbsp;            }</b>
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;        }
+<b class="fc"><i>148</i>&nbsp;        return true;</b>
+<i>149</i>&nbsp;    }
+<i>150</i>&nbsp;
+<i>151</i>&nbsp;    /**
+<i>152</i>&nbsp;     * Overwrite this in effect that inherits from this
+<i>153</i>&nbsp;     *
+<i>154</i>&nbsp;     * @param source
+<i>155</i>&nbsp;     * @param game
+<i>156</i>&nbsp;     */
+<i>157</i>&nbsp;    protected void setRuntimeData(Ability source, Game game) {
+<i>158</i>&nbsp;
+<b class="fc"><i>159</i>&nbsp;    }</b>
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;    /**
+<i>162</i>&nbsp;     * Overwrite this in effect that inherits from this
+<i>163</i>&nbsp;     *
+<i>164</i>&nbsp;     * @param permanent
+<i>165</i>&nbsp;     * @param source
+<i>166</i>&nbsp;     * @param game
+<i>167</i>&nbsp;     * @return
+<i>168</i>&nbsp;     */
+<i>169</i>&nbsp;    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
+<b class="fc"><i>170</i>&nbsp;        return true;</b>
+<i>171</i>&nbsp;    }
+<i>172</i>&nbsp;
+<i>173</i>&nbsp;    protected void setText() {
+<b class="fc"><i>174</i>&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc"><i>175</i>&nbsp;        if (excludeSource) {</b>
+<b class="fc"><i>176</i>&nbsp;            sb.append(&quot;Other &quot;);</b>
+<i>177</i>&nbsp;        }
+<b class="fc"><i>178</i>&nbsp;        sb.append(filter.getMessage()).append(&quot; get &quot;);</b>
+<b class="fc"><i>179</i>&nbsp;        String p = power.toString();</b>
+<b class="fc"><i>180</i>&nbsp;        if (!p.startsWith(&quot;-&quot;)) {</b>
+<b class="fc"><i>181</i>&nbsp;            sb.append(&quot;+&quot;);</b>
+<i>182</i>&nbsp;        }
+<b class="fc"><i>183</i>&nbsp;        sb.append(p).append(&quot;/&quot;);</b>
+<b class="fc"><i>184</i>&nbsp;        String t = toughness.toString();</b>
+<b class="fc"><i>185</i>&nbsp;        if (!t.startsWith(&quot;-&quot;)) {</b>
+<b class="fc"><i>186</i>&nbsp;            if (p.startsWith(&quot;-&quot;)) {</b>
+<b class="fc"><i>187</i>&nbsp;                sb.append(&quot;-&quot;);</b>
+<i>188</i>&nbsp;            } else {
+<b class="fc"><i>189</i>&nbsp;                sb.append(&quot;+&quot;);</b>
+<i>190</i>&nbsp;            }
+<i>191</i>&nbsp;        }
+<b class="fc"><i>192</i>&nbsp;        sb.append(t);</b>
+<b class="fc"><i>193</i>&nbsp;        sb.append((duration == Duration.EndOfTurn ? &quot; until end of turn&quot; : &quot;&quot;));</b>
+<b class="fc"><i>194</i>&nbsp;        sb.append(power.getMessage());</b>
+<b class="fc"><i>195</i>&nbsp;        staticText = sb.toString();</b>
+<b class="fc"><i>196</i>&nbsp;    }</b>
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AddConditionalColorlessManaEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AddConditionalColorlessManaEffect (mage.abilities.effects.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AddConditionalColorlessManaEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.4%
+  </span>
+  <span class="absValue">
+    (17/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.abilities.effects.common;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import mage.Mana;
+<i>9</i>&nbsp;import mage.abilities.Ability;
+<i>10</i>&nbsp;import mage.abilities.mana.builder.ConditionalManaBuilder;
+<i>11</i>&nbsp;import mage.game.Game;
+<i>12</i>&nbsp;import mage.players.Player;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;/**
+<i>15</i>&nbsp; *
+<i>16</i>&nbsp; * @author LevelX2
+<i>17</i>&nbsp; */
+<i>18</i>&nbsp;public class AddConditionalColorlessManaEffect extends ManaEffect {
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    private final int amount;
+<i>21</i>&nbsp;    private final ConditionalManaBuilder manaBuilder;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public AddConditionalColorlessManaEffect(int amount, ConditionalManaBuilder manaBuilder) {
+<b class="fc"><i>24</i>&nbsp;        super();</b>
+<b class="fc"><i>25</i>&nbsp;        this.amount = amount;</b>
+<b class="fc"><i>26</i>&nbsp;        this.manaBuilder = manaBuilder;</b>
+<i>27</i>&nbsp;
+<b class="fc"><i>28</i>&nbsp;        staticText = &quot;Add &quot; + String.format(String.format(&quot;%%%ds&quot;, amount), &quot; &quot;).replace(&quot; &quot;, &quot;{C}&quot;)</b>
+<b class="fc"><i>29</i>&nbsp;                + &quot; to your mana pool. &quot; + manaBuilder.getRule();</b>
+<b class="fc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public AddConditionalColorlessManaEffect(final AddConditionalColorlessManaEffect effect) {
+<b class="fc"><i>33</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>34</i>&nbsp;        this.amount = effect.amount;</b>
+<b class="fc"><i>35</i>&nbsp;        this.manaBuilder = effect.manaBuilder;</b>
+<b class="fc"><i>36</i>&nbsp;    }</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    @Override
+<i>39</i>&nbsp;    public AddConditionalColorlessManaEffect copy() {
+<b class="fc"><i>40</i>&nbsp;        return new AddConditionalColorlessManaEffect(this);</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    @Override
+<i>44</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="fc"><i>45</i>&nbsp;        Player player = game.getPlayer(source.getControllerId());</b>
+<b class="fc"><i>46</i>&nbsp;        if (player != null) {</b>
+<b class="fc"><i>47</i>&nbsp;            player.getManaPool().addMana(getMana(game, source), game, source);</b>
+<b class="fc"><i>48</i>&nbsp;            return true;</b>
+<i>49</i>&nbsp;        }
+<b class="nc"><i>50</i>&nbsp;        return false;</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    @Override
+<i>54</i>&nbsp;    public Mana getMana(Game game, Ability source) {
+<b class="fc"><i>55</i>&nbsp;        return manaBuilder.setMana(Mana.ColorlessMana(amount), source, game).build();</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public Mana getMana() {
+<b class="fc"><i>59</i>&nbsp;        return new Mana(0, 0, 0, 0, 0, 0, 0, amount);</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,412 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: StarWars</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.sets</a> ]
+</div>
+
+<h1>Coverage Summary for Class: StarWars (mage.sets)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StarWars</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (278/ 278)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.sets;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.GregorianCalendar;
+<i>31</i>&nbsp;import mage.cards.ExpansionSet;
+<i>32</i>&nbsp;import mage.constants.SetType;
+<i>33</i>&nbsp;import mage.constants.Rarity;
+<i>34</i>&nbsp;import java.util.List;
+<i>35</i>&nbsp;import mage.ObjectColor;
+<i>36</i>&nbsp;import mage.cards.CardGraphicInfo;
+<i>37</i>&nbsp;import mage.cards.FrameStyle;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;/**
+<i>40</i>&nbsp; *
+<i>41</i>&nbsp; * @author Styxo
+<i>42</i>&nbsp; */
+<i>43</i>&nbsp;public class StarWars extends ExpansionSet {
+<i>44</i>&nbsp;
+<b class="fc"><i>45</i>&nbsp;    private static final StarWars fINSTANCE = new StarWars();</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    public static StarWars getInstance() {
+<b class="fc"><i>48</i>&nbsp;        return fINSTANCE;</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    private StarWars() {
+<b class="fc"><i>52</i>&nbsp;        super(&quot;Star Wars&quot;, &quot;SWS&quot;, &quot;mage.sets.starwars&quot;, new GregorianCalendar(2015, 12, 25).getTime(), SetType.CUSTOM_SET);</b>
+<b class="fc"><i>53</i>&nbsp;        this.blockName = &quot;Star Wars&quot;;</b>
+<b class="fc"><i>54</i>&nbsp;        this.hasBoosters = true;</b>
+<b class="fc"><i>55</i>&nbsp;        this.hasBasicLands = true;</b>
+<b class="fc"><i>56</i>&nbsp;        this.numBoosterLands = 1;</b>
+<b class="fc"><i>57</i>&nbsp;        this.numBoosterCommon = 10;</b>
+<b class="fc"><i>58</i>&nbsp;        this.numBoosterUncommon = 3;</b>
+<b class="fc"><i>59</i>&nbsp;        this.numBoosterRare = 1;</b>
+<b class="fc"><i>60</i>&nbsp;        this.ratioBoosterMythic = 8;</b>
+<b class="fc"><i>61</i>&nbsp;        cards.add(new SetCardInfo(&quot;AAT-1&quot;, 179, Rarity.UNCOMMON, mage.cards.a.AAT1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>62</i>&nbsp;        cards.add(new SetCardInfo(&quot;Acklay of the Arena&quot;, 180, Rarity.RARE, mage.cards.a.AcklayOfTheArena.class));</b>
+<b class="fc"><i>63</i>&nbsp;        cards.add(new SetCardInfo(&quot;Acquire Target&quot;, 64, Rarity.COMMON, mage.cards.a.AcquireTarget.class));</b>
+<b class="fc"><i>64</i>&nbsp;        cards.add(new SetCardInfo(&quot;Admiral Ackbar&quot;, 34, Rarity.RARE, mage.cards.a.AdmiralAckbar.class));</b>
+<b class="fc"><i>65</i>&nbsp;        cards.add(new SetCardInfo(&quot;Adroit Hateflayer&quot;, 181, Rarity.COMMON, mage.cards.a.AdroitHateflayer.class));</b>
+<b class="fc"><i>66</i>&nbsp;        cards.add(new SetCardInfo(&quot;Anakin Skywalker&quot;, 182, Rarity.MYTHIC, mage.cards.a.AnakinSkywalker.class));</b>
+<b class="fc"><i>67</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ancient Holocron&quot;, 230, Rarity.UNCOMMON, mage.cards.a.AncientHolocron.class));</b>
+<b class="fc"><i>68</i>&nbsp;        cards.add(new SetCardInfo(&quot;Aqualish Bounty Hunter&quot;, 65, Rarity.COMMON, mage.cards.a.AqualishBountyHunter.class));</b>
+<b class="fc"><i>69</i>&nbsp;        cards.add(new SetCardInfo(&quot;Arrest&quot;, 2, Rarity.COMMON, mage.cards.a.Arrest.class));</b>
+<b class="fc"><i>70</i>&nbsp;        cards.add(new SetCardInfo(&quot;Asajj Ventress&quot;, 183, Rarity.RARE, mage.cards.a.AsajjVentress.class));</b>
+<b class="fc"><i>71</i>&nbsp;        cards.add(new SetCardInfo(&quot;ATST&quot;, 128, Rarity.RARE, mage.cards.a.ATST.class));</b>
+<b class="fc"><i>72</i>&nbsp;        cards.add(new SetCardInfo(&quot;Aurra Sing, Bane of Jedi&quot;, 168, Rarity.MYTHIC, mage.cards.a.AurraSingBaneOfJedi.class));</b>
+<b class="fc"><i>73</i>&nbsp;        cards.add(new SetCardInfo(&quot;A-Wing&quot;, 96, Rarity.UNCOMMON, mage.cards.a.AWing.class));</b>
+<b class="fc"><i>74</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bantha Herd&quot;, 3, Rarity.RARE, mage.cards.b.BanthaHerd.class));</b>
+<b class="fc"><i>75</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bathe in Bacta&quot;, 129, Rarity.COMMON, mage.cards.b.BatheInBacta.class));</b>
+<b class="fc"><i>76</i>&nbsp;        cards.add(new SetCardInfo(&quot;Battle Tactics&quot;, 5, Rarity.COMMON, mage.cards.b.BattleTactics.class));</b>
+<b class="fc"><i>77</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bib Fortuna&quot;, 67, Rarity.UNCOMMON, mage.cards.b.BibFortuna.class));</b>
+<b class="fc"><i>78</i>&nbsp;        cards.add(new SetCardInfo(&quot;Black Market Dealer&quot;, 68, Rarity.UNCOMMON, mage.cards.b.BlackMarketDealer.class));</b>
+<b class="fc"><i>79</i>&nbsp;        cards.add(new SetCardInfo(&quot;Blind Worship&quot;, 184, Rarity.RARE, mage.cards.b.BlindWorship.class));</b>
+<b class="fc"><i>80</i>&nbsp;        cards.add(new SetCardInfo(&quot;Boba Fett&quot;, 185, Rarity.MYTHIC, mage.cards.b.BobaFett.class));</b>
+<b class="fc"><i>81</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bossk&quot;, 131, Rarity.RARE, mage.cards.b.Bossk.class));</b>
+<b class="fc"><i>82</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bounty Collector&quot;, 132, Rarity.UNCOMMON, mage.cards.b.BountyCollector.class));</b>
+<b class="fc"><i>83</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bounty Sniper&quot;, 98, Rarity.UNCOMMON, mage.cards.b.BountySniper.class));</b>
+<b class="fc"><i>84</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bounty Spotter&quot;, 69, Rarity.UNCOMMON, mage.cards.b.BountySpotter.class));</b>
+<b class="fc"><i>85</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bull Rancor&quot;, 186, Rarity.RARE, mage.cards.b.BullRancor.class));</b>
+<b class="fc"><i>86</i>&nbsp;        cards.add(new SetCardInfo(&quot;C-3PO and R2D2&quot;, 160, Rarity.RARE, mage.cards.c.C3POAndR2D2.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>87</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cantina Band&quot;, 6, Rarity.COMMON, mage.cards.c.CantinaBand.class));</b>
+<b class="fc"><i>88</i>&nbsp;        cards.add(new SetCardInfo(&quot;Capture&quot;, 99, Rarity.COMMON, mage.cards.c.Capture.class));</b>
+<b class="fc"><i>89</i>&nbsp;        cards.add(new SetCardInfo(&quot;Carbonite Chamber&quot;, 161, Rarity.UNCOMMON, mage.cards.c.CarboniteChamber.class));</b>
+<b class="fc"><i>90</i>&nbsp;        cards.add(new SetCardInfo(&quot;Chewbacca&quot;, 187, Rarity.RARE, mage.cards.c.Chewbacca.class));</b>
+<b class="fc"><i>91</i>&nbsp;        cards.add(new SetCardInfo(&quot;Chief Chirpa&quot;, 188, Rarity.RARE, mage.cards.c.ChiefChirpa.class));</b>
+<b class="fc"><i>92</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cloaking Device&quot;, 36, Rarity.COMMON, mage.cards.c.CloakingDevice.class));</b>
+<b class="fc"><i>93</i>&nbsp;        cards.add(new SetCardInfo(&quot;Commander Cody&quot;, 189, Rarity.RARE, mage.cards.c.CommanderCody.class));</b>
+<b class="fc"><i>94</i>&nbsp;        cards.add(new SetCardInfo(&quot;Condemn&quot;, 7, Rarity.UNCOMMON, mage.cards.c.Condemn.class));</b>
+<b class="fc"><i>95</i>&nbsp;        cards.add(new SetCardInfo(&quot;Corellian Corvette&quot;, 133, Rarity.UNCOMMON, mage.cards.c.CorellianCorvette.class));</b>
+<b class="fc"><i>96</i>&nbsp;        cards.add(new SetCardInfo(&quot;Crossfire&quot;, 100, Rarity.COMMON, mage.cards.c.Crossfire.class));</b>
+<b class="fc"><i>97</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cruelty of the Sith&quot;, 190, Rarity.UNCOMMON, mage.cards.c.CrueltyOfTheSith.class));</b>
+<b class="fc"><i>98</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cunning Abduction&quot;, 165, Rarity.RARE, mage.cards.c.CunningAbduction.class));</b>
+<b class="fc"><i>99</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dagobah Maw Slug&quot;, 191, Rarity.COMMON, mage.cards.d.DagobahMawSlug.class));</b>
+<b class="fc"><i>100</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dark Apprenticeship&quot;, 101, Rarity.UNCOMMON, mage.cards.d.DarkApprenticeship.class));</b>
+<b class="fc"><i>101</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dark Decision&quot;, 169, Rarity.COMMON, mage.cards.d.DarkDecision.class));</b>
+<b class="fc"><i>102</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dark Trooper&quot;, 231, Rarity.COMMON, mage.cards.d.DarkTrooper.class));</b>
+<b class="fc"><i>103</i>&nbsp;        cards.add(new SetCardInfo(&quot;Darth Maul&quot;, 170, Rarity.RARE, mage.cards.d.DarthMaul.class));</b>
+<b class="fc"><i>104</i>&nbsp;        cards.add(new SetCardInfo(&quot;Darth Sidious, Sith Lord&quot;, 192, Rarity.MYTHIC, mage.cards.d.DarthSidiousSithLord.class));</b>
+<b class="fc"><i>105</i>&nbsp;        cards.add(new SetCardInfo(&quot;Darth Tyranus&quot;, 193, Rarity.MYTHIC, mage.cards.d.DarthTyranus.class));</b>
+<b class="fc"><i>106</i>&nbsp;        cards.add(new SetCardInfo(&quot;Darth Vader&quot;, 182, Rarity.MYTHIC, mage.cards.d.DarthVader.class));</b>
+<b class="fc"><i>107</i>&nbsp;        cards.add(new SetCardInfo(&quot;Death Trooper&quot;, 70, Rarity.UNCOMMON, mage.cards.d.DeathTrooper.class));</b>
+<b class="fc"><i>108</i>&nbsp;        cards.add(new SetCardInfo(&quot;Deploy The Troops&quot;, 8, Rarity.UNCOMMON, mage.cards.d.DeployTheTroops.class));</b>
+<b class="fc"><i>109</i>&nbsp;        cards.add(new SetCardInfo(&quot;Doom Blade&quot;, 71, Rarity.UNCOMMON, mage.cards.d.DoomBlade.class));</b>
+<b class="fc"><i>110</i>&nbsp;        cards.add(new SetCardInfo(&quot;Droideka&quot;, 9, Rarity.UNCOMMON, mage.cards.d.Droideka.class));</b>
+<b class="fc"><i>111</i>&nbsp;        cards.add(new SetCardInfo(&quot;Droid Factory&quot;, 239, Rarity.COMMON, mage.cards.d.DroidFactory.class));</b>
+<b class="fc"><i>112</i>&nbsp;        cards.add(new SetCardInfo(&quot;Droid Foundry&quot;, 240, Rarity.UNCOMMON, mage.cards.d.DroidFoundry.class));</b>
+<b class="fc"><i>113</i>&nbsp;        cards.add(new SetCardInfo(&quot;Drone Holocron&quot;, 232, Rarity.COMMON, mage.cards.d.DroneHolocron.class));</b>
+<b class="fc"><i>114</i>&nbsp;        cards.add(new SetCardInfo(&quot;Echo Base Commando&quot;, 175, Rarity.RARE, mage.cards.e.EchoBaseCommando.class));</b>
+<b class="fc"><i>115</i>&nbsp;        cards.add(new SetCardInfo(&quot;EMP Blast&quot;, 10, Rarity.UNCOMMON, mage.cards.e.EMPBlast.class));</b>
+<b class="fc"><i>116</i>&nbsp;        cards.add(new SetCardInfo(&quot;Escape Pod&quot;, 11, Rarity.COMMON, mage.cards.e.EscapePod.class));</b>
+<b class="fc"><i>117</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ewok Ambush&quot;, 134, Rarity.COMMON, mage.cards.e.EwokAmbush.class));</b>
+<b class="fc"><i>118</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ewok Firedancers&quot;, 135, Rarity.COMMON, mage.cards.e.EwokFiredancers.class));</b>
+<b class="fc"><i>119</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ewok Village&quot;, 241, Rarity.UNCOMMON, mage.cards.e.EwokVillage.class));</b>
+<b class="fc"><i>120</i>&nbsp;        cards.add(new SetCardInfo(&quot;Exogorth&quot;, 136, Rarity.RARE, mage.cards.e.Exogorth.class));</b>
+<b class="fc"><i>121</i>&nbsp;        cards.add(new SetCardInfo(&quot;Explore&quot;, 137, Rarity.COMMON, mage.cards.e.Explore.class));</b>
+<b class="fc"><i>122</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ferocity of the Underworld&quot;, 194, Rarity.UNCOMMON, mage.cards.f.FerocityOfTheUnderworld.class));</b>
+<b class="fc"><i>123</i>&nbsp;        cards.add(new SetCardInfo(&quot;Flames of Remembrance&quot;, 102, Rarity.RARE, mage.cards.f.FlamesOfRemembrance.class));</b>
+<b class="fc"><i>124</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Adept&quot;, 195, Rarity.COMMON, mage.cards.f.ForceAdept.class));</b>
+<b class="fc"><i>125</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Choke&quot;, 166, Rarity.COMMON, mage.cards.f.ForceChoke.class));</b>
+<b class="fc"><i>126</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Denial&quot;, 37, Rarity.COMMON, mage.cards.f.ForceDenial.class));</b>
+<b class="fc"><i>127</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Drain&quot;, 73, Rarity.COMMON, mage.cards.f.ForceDrain.class));</b>
+<b class="fc"><i>128</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Healing&quot;, 12, Rarity.COMMON, mage.cards.f.ForceHealing.class));</b>
+<b class="fc"><i>129</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Lightning&quot;, 103, Rarity.RARE, mage.cards.f.ForceLightning.class));</b>
+<b class="fc"><i>130</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Mastery&quot;, 196, Rarity.RARE, mage.cards.f.ForceMastery.class));</b>
+<b class="fc"><i>131</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Pull&quot;, 138, Rarity.COMMON, mage.cards.f.ForcePull.class));</b>
+<b class="fc"><i>132</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Push&quot;, 38, Rarity.UNCOMMON, mage.cards.f.ForcePush.class));</b>
+<b class="fc"><i>133</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Scream&quot;, 104, Rarity.COMMON, mage.cards.f.ForceScream.class));</b>
+<b class="fc"><i>134</i>&nbsp;        cards.add(new SetCardInfo(&quot;Force Spark&quot;, 105, Rarity.COMMON, mage.cards.f.ForceSpark.class));</b>
+<b class="fc"><i>135</i>&nbsp;        cards.add(new SetCardInfo(&quot;Forest&quot;, 264, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>136</i>&nbsp;        cards.add(new SetCardInfo(&quot;Forest&quot;, 265, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>137</i>&nbsp;        cards.add(new SetCardInfo(&quot;Forest&quot;, 266, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>138</i>&nbsp;        cards.add(new SetCardInfo(&quot;Fulfill Contract&quot;, 226, Rarity.COMMON, mage.cards.f.FulfillContract.class));</b>
+<b class="fc"><i>139</i>&nbsp;        cards.add(new SetCardInfo(&quot;Gamorrean Enforcer&quot;, 106, Rarity.COMMON, mage.cards.g.GamorreanEnforcer.class));</b>
+<b class="fc"><i>140</i>&nbsp;        cards.add(new SetCardInfo(&quot;Gamorrean Prison Guard&quot;, 107, Rarity.UNCOMMON, mage.cards.g.GamorreanPrisonGuard.class));</b>
+<b class="fc"><i>141</i>&nbsp;        cards.add(new SetCardInfo(&quot;General Grievous&quot;, 197, Rarity.MYTHIC, mage.cards.g.GeneralGrievous.class));</b>
+<b class="fc"><i>142</i>&nbsp;        cards.add(new SetCardInfo(&quot;Gifted Initiate&quot;, 13, Rarity.COMMON, mage.cards.g.GiftedInitiate.class));</b>
+<b class="fc"><i>143</i>&nbsp;        cards.add(new SetCardInfo(&quot;Grand Moff Tarkin&quot;, 74, Rarity.RARE, mage.cards.g.GrandMoffTarkin.class));</b>
+<b class="fc"><i>144</i>&nbsp;        cards.add(new SetCardInfo(&quot;Greater Krayt Dragon&quot;, 198, Rarity.MYTHIC, mage.cards.g.GreaterKraytDragon.class));</b>
+<b class="fc"><i>145</i>&nbsp;        cards.add(new SetCardInfo(&quot;Greedo&quot;, 199, Rarity.RARE, mage.cards.g.Greedo.class));</b>
+<b class="fc"><i>146</i>&nbsp;        cards.add(new SetCardInfo(&quot;Gundark&quot;, 108, Rarity.COMMON, mage.cards.g.Gundark.class));</b>
+<b class="fc"><i>147</i>&nbsp;        cards.add(new SetCardInfo(&quot;Gungan Captain&quot;, 39, Rarity.COMMON, mage.cards.g.GunganCaptain.class));</b>
+<b class="fc"><i>148</i>&nbsp;        cards.add(new SetCardInfo(&quot;Han Solo&quot;, 109, Rarity.RARE, mage.cards.h.HanSolo.class));</b>
+<b class="fc"><i>149</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hazard Trooper&quot;, 75, Rarity.UNCOMMON, mage.cards.h.HazardTrooper.class));</b>
+<b class="fc"><i>150</i>&nbsp;        cards.add(new SetCardInfo(&quot;Head Hunting&quot;, 76, Rarity.COMMON, mage.cards.h.HeadHunting.class));</b>
+<b class="fc"><i>151</i>&nbsp;        cards.add(new SetCardInfo(&quot;Heavy Trooper&quot;, 77, Rarity.COMMON, mage.cards.h.HeavyTrooper.class));</b>
+<b class="fc"><i>152</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hot Pursuit&quot;, 200, Rarity.RARE, mage.cards.h.HotPursuit.class));</b>
+<b class="fc"><i>153</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hungry Dragonsnake&quot;, 139, Rarity.COMMON, mage.cards.h.HungryDragonsnake.class));</b>
+<b class="fc"><i>154</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hunt to Extinction&quot;, 201, Rarity.RARE, mage.cards.h.HuntToExtinction.class));</b>
+<b class="fc"><i>155</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hutt Crime Lord&quot;, 140, Rarity.UNCOMMON, mage.cards.h.HuttCrimeLord.class));</b>
+<b class="fc"><i>156</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hutt Palace&quot;, 242, Rarity.UNCOMMON, mage.cards.h.HuttPalace.class));</b>
+<b class="fc"><i>157</i>&nbsp;        cards.add(new SetCardInfo(&quot;IG-88B&quot;, 78, Rarity.RARE, mage.cards.i.IG88B.class));</b>
+<b class="fc"><i>158</i>&nbsp;        cards.add(new SetCardInfo(&quot;Images of the Past&quot;, 176, Rarity.COMMON, mage.cards.i.ImagesOfThePast.class));</b>
+<b class="fc"><i>159</i>&nbsp;        cards.add(new SetCardInfo(&quot;Imperial Gunner&quot;, 110, Rarity.COMMON, mage.cards.i.ImperialGunner.class));</b>
+<b class="fc"><i>160</i>&nbsp;        cards.add(new SetCardInfo(&quot;Imperial Spy&quot;, 40, Rarity.UNCOMMON, mage.cards.i.ImperialSpy.class));</b>
+<b class="fc"><i>161</i>&nbsp;        cards.add(new SetCardInfo(&quot;Insatiable Rakghoul&quot;, 79, Rarity.COMMON, mage.cards.i.InsatiableRakghoul.class));</b>
+<b class="fc"><i>162</i>&nbsp;        cards.add(new SetCardInfo(&quot;Interrogation&quot;, 80, Rarity.COMMON, mage.cards.i.Interrogation.class));</b>
+<b class="fc"><i>163</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ion Cannon&quot;, 14, Rarity.COMMON, mage.cards.i.IonCannon.class));</b>
+<b class="fc"><i>164</i>&nbsp;        cards.add(new SetCardInfo(&quot;Iron Fist of the Empire&quot;, 202, Rarity.RARE, mage.cards.i.IronFistOfTheEmpire.class));</b>
+<b class="fc"><i>165</i>&nbsp;        cards.add(new SetCardInfo(&quot;Irresponsible Gambling&quot;, 111, Rarity.COMMON, mage.cards.i.IrresponsibleGambling.class));</b>
+<b class="fc"><i>166</i>&nbsp;        cards.add(new SetCardInfo(&quot;Island&quot;, 255, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>167</i>&nbsp;        cards.add(new SetCardInfo(&quot;Island&quot;, 256, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>168</i>&nbsp;        cards.add(new SetCardInfo(&quot;Island&quot;, 257, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>169</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ithorian Initiate&quot;, 141, Rarity.COMMON, mage.cards.i.IthorianInitiate.class));</b>
+<b class="fc"><i>170</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jabba the Hutt&quot;, 203, Rarity.RARE, mage.cards.j.JabbaTheHutt.class));</b>
+<b class="fc"><i>171</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jango Fett&quot;, 112, Rarity.RARE, mage.cards.j.JangoFett.class));</b>
+<b class="fc"><i>172</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jar Jar Binks&quot;, 41, Rarity.RARE, mage.cards.j.JarJarBinks.class));</b>
+<b class="fc"><i>173</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jar&#39;Kai Battle Stance&quot;, 113, Rarity.COMMON, mage.cards.j.JarKaiBattleStance.class));</b>
+<b class="fc"><i>174</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Battle Healer&quot;, 15, Rarity.UNCOMMON, mage.cards.j.JediBattleHealer.class));</b>
+<b class="fc"><i>175</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Battle Mage&quot;, 42, Rarity.UNCOMMON, mage.cards.j.JediBattleMage.class));</b>
+<b class="fc"><i>176</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Battle Sage&quot;, 142, Rarity.UNCOMMON, mage.cards.j.JediBattleSage.class));</b>
+<b class="fc"><i>177</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Enclave&quot;, 243, Rarity.UNCOMMON, mage.cards.j.JediEnclave.class));</b>
+<b class="fc"><i>178</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Holocron&quot;, 233, Rarity.COMMON, mage.cards.j.JediHolocron.class));</b>
+<b class="fc"><i>179</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Inquirer&quot;, 16, Rarity.UNCOMMON, mage.cards.j.JediInquirer.class));</b>
+<b class="fc"><i>180</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Instructor&quot;, 17, Rarity.COMMON, mage.cards.j.JediInstructor.class));</b>
+<b class="fc"><i>181</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Knight&quot;, 204, Rarity.UNCOMMON, mage.cards.j.JediKnight.class));</b>
+<b class="fc"><i>182</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Mind Trick&quot;, 43, Rarity.RARE, mage.cards.j.JediMindTrick.class));</b>
+<b class="fc"><i>183</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Reflex&quot;, 18, Rarity.COMMON, mage.cards.j.JediReflex.class));</b>
+<b class="fc"><i>184</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Starfighter&quot;, 19, Rarity.UNCOMMON, mage.cards.j.JediStarfighter.class));</b>
+<b class="fc"><i>185</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Temple&quot;, 244, Rarity.UNCOMMON, mage.cards.j.JediTemple.class));</b>
+<b class="fc"><i>186</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jedi Training&quot;, 44, Rarity.UNCOMMON, mage.cards.j.JediTraining.class));</b>
+<b class="fc"><i>187</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jump Trooper&quot;, 45, Rarity.UNCOMMON, mage.cards.j.JumpTrooper.class));</b>
+<b class="fc"><i>188</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jungle Village&quot;, 245, Rarity.UNCOMMON, mage.cards.j.JungleVillage.class));</b>
+<b class="fc"><i>189</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kamino Cloning Facility&quot;, 246, Rarity.RARE, mage.cards.k.KaminoCloningFacility.class));</b>
+<b class="fc"><i>190</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ki-Adi-Mundi&quot;, 143, Rarity.RARE, mage.cards.k.KiAdiMundi.class));</b>
+<b class="fc"><i>191</i>&nbsp;        cards.add(new SetCardInfo(&quot;LAAT Gunship&quot;, 20, Rarity.UNCOMMON, mage.cards.l.LAATGunship.class));</b>
+<b class="fc"><i>192</i>&nbsp;        cards.add(new SetCardInfo(&quot;Lando Calrissian&quot;, 21, Rarity.RARE, mage.cards.l.LandoCalrissian.class));</b>
+<b class="fc"><i>193</i>&nbsp;        cards.add(new SetCardInfo(&quot;Legacy of the Beloved&quot;, 144, Rarity.RARE, mage.cards.l.LegacyOfTheBeloved.class));</b>
+<b class="fc"><i>194</i>&nbsp;        cards.add(new SetCardInfo(&quot;Lightning Bolt&quot;, 114, Rarity.COMMON, mage.cards.l.LightningBolt.class));</b>
+<b class="fc"><i>195</i>&nbsp;        cards.add(new SetCardInfo(&quot;Lightsaber&quot;, 234, Rarity.COMMON, mage.cards.l.Lightsaber.class));</b>
+<b class="fc"><i>196</i>&nbsp;        cards.add(new SetCardInfo(&quot;Loyal Tauntaun&quot;, 22, Rarity.COMMON, mage.cards.l.LoyalTauntaun.class));</b>
+<b class="fc"><i>197</i>&nbsp;        cards.add(new SetCardInfo(&quot;Luke Skywalker&quot;, 205, Rarity.MYTHIC, mage.cards.l.LukeSkywalker.class));</b>
+<b class="fc"><i>198</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mace Windu&quot;, 46, Rarity.RARE, mage.cards.m.MaceWindu.class));</b>
+<b class="fc"><i>199</i>&nbsp;        cards.add(new SetCardInfo(&quot;Maintenance Droid&quot;, 162, Rarity.COMMON, mage.cards.m.MaintenanceDroid.class));</b>
+<b class="fc"><i>200</i>&nbsp;        cards.add(new SetCardInfo(&quot;Maintenance Hangar&quot;, 23, Rarity.UNCOMMON, mage.cards.m.MaintenanceHangar.class));</b>
+<b class="fc"><i>201</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mantellian Savrip&quot;, 145, Rarity.UNCOMMON, mage.cards.m.MantellianSavrip.class));</b>
+<b class="fc"><i>202</i>&nbsp;        cards.add(new SetCardInfo(&quot;March of the Droids&quot;, 206, Rarity.RARE, mage.cards.m.MarchOfTheDroids.class));</b>
+<b class="fc"><i>203</i>&nbsp;        cards.add(new SetCardInfo(&quot;Might of the Wild&quot;, 207, Rarity.UNCOMMON, mage.cards.m.MightOfTheWild.class));</b>
+<b class="fc"><i>204</i>&nbsp;        cards.add(new SetCardInfo(&quot;Millennium Falcon&quot;, 146, Rarity.RARE, mage.cards.m.MillenniumFalcon.class));</b>
+<b class="fc"><i>205</i>&nbsp;        cards.add(new SetCardInfo(&quot;Miraculous Recovery&quot;, 24, Rarity.UNCOMMON, mage.cards.m.MiraculousRecovery.class));</b>
+<b class="fc"><i>206</i>&nbsp;        cards.add(new SetCardInfo(&quot;Moisture Farm&quot;, 247, Rarity.RARE, mage.cards.m.MoistureFarm.class));</b>
+<b class="fc"><i>207</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mon Calamari Cruiser&quot;, 47, Rarity.UNCOMMON, mage.cards.m.MonCalamariCruiser.class));</b>
+<b class="fc"><i>208</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mon Calamari Initiate&quot;, 48, Rarity.COMMON, mage.cards.m.MonCalamariInitiate.class));</b>
+<b class="fc"><i>209</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mountain&quot;, 261, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>210</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mountain&quot;, 262, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>211</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mountain&quot;, 263, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>212</i>&nbsp;        cards.add(new SetCardInfo(&quot;N-1 Starfighter&quot;, 224, Rarity.COMMON, mage.cards.n.N1Starfighter.class));</b>
+<b class="fc"><i>213</i>&nbsp;        cards.add(new SetCardInfo(&quot;Neophyte Hateflayer&quot;, 81, Rarity.COMMON, mage.cards.n.NeophyteHateflayer.class));</b>
+<b class="fc"><i>214</i>&nbsp;        cards.add(new SetCardInfo(&quot;Nerf Herder&quot;, 147, Rarity.UNCOMMON, mage.cards.n.NerfHerder.class));</b>
+<b class="fc"><i>215</i>&nbsp;        cards.add(new SetCardInfo(&quot;Nexu Stalker&quot;, 148, Rarity.UNCOMMON, mage.cards.n.NexuStalker.class));</b>
+<b class="fc"><i>216</i>&nbsp;        cards.add(new SetCardInfo(&quot;Nightspider&quot;, 149, Rarity.COMMON, mage.cards.n.Nightspider.class));</b>
+<b class="fc"><i>217</i>&nbsp;        cards.add(new SetCardInfo(&quot;No Contest&quot;, 150, Rarity.NA, mage.cards.n.NoContest.class));</b>
+<b class="fc"><i>218</i>&nbsp;        cards.add(new SetCardInfo(&quot;Novice Bounty Hunter&quot;, 115, Rarity.COMMON, mage.cards.n.NoviceBountyHunter.class));</b>
+<b class="fc"><i>219</i>&nbsp;        cards.add(new SetCardInfo(&quot;Nute Gunray&quot;, 208, Rarity.RARE, mage.cards.n.NuteGunray.class));</b>
+<b class="fc"><i>220</i>&nbsp;        cards.add(new SetCardInfo(&quot;Obi-Wan Kenobi&quot;, 163, Rarity.MYTHIC, mage.cards.o.ObiWanKenobi.class));</b>
+<b class="fc"><i>221</i>&nbsp;        cards.add(new SetCardInfo(&quot;Orbital Bombardment&quot;, 25, Rarity.RARE, mage.cards.o.OrbitalBombardment.class));</b>
+<b class="fc"><i>222</i>&nbsp;        cards.add(new SetCardInfo(&quot;Order 66&quot;, 82, Rarity.RARE, mage.cards.o.Order66.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>223</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ortolan Keyboardist&quot;, 49, Rarity.COMMON, mage.cards.o.OrtolanKeyboardist.class));</b>
+<b class="fc"><i>224</i>&nbsp;        cards.add(new SetCardInfo(&quot;Outer Rim Slaver&quot;, 209, Rarity.COMMON, mage.cards.o.OuterRimSlaver.class));</b>
+<b class="fc"><i>225</i>&nbsp;        cards.add(new SetCardInfo(&quot;Outlaw Holocron&quot;, 235, Rarity.COMMON, mage.cards.o.OutlawHolocron.class));</b>
+<b class="fc"><i>226</i>&nbsp;        cards.add(new SetCardInfo(&quot;Personal Energy Field&quot;, 50, Rarity.COMMON, mage.cards.p.PersonalEnergyField.class));</b>
+<b class="fc"><i>227</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plains&quot;, 252, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>228</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plains&quot;, 253, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>229</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plains&quot;, 254, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>230</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plo Koon&quot;, 26, Rarity.RARE, mage.cards.p.PloKoon.class));</b>
+<b class="fc"><i>231</i>&nbsp;        cards.add(new SetCardInfo(&quot;Precipice of Mortis&quot;, 210, Rarity.RARE, mage.cards.p.PrecipiceOfMortis.class));</b>
+<b class="fc"><i>232</i>&nbsp;        cards.add(new SetCardInfo(&quot;Predator&#39;s Strike&quot;, 151, Rarity.COMMON, mage.cards.p.PredatorsStrike.class));</b>
+<b class="fc"><i>233</i>&nbsp;        cards.add(new SetCardInfo(&quot;Preordain&quot;, 33, Rarity.UNCOMMON, mage.cards.p.Preordain.class));</b>
+<b class="fc"><i>234</i>&nbsp;        cards.add(new SetCardInfo(&quot;Primal Instict&quot;, 172, Rarity.COMMON, mage.cards.p.PrimalInstict.class));</b>
+<b class="fc"><i>235</i>&nbsp;        cards.add(new SetCardInfo(&quot;Princess Leia&quot;, 211, Rarity.RARE, mage.cards.p.PrincessLeia.class));</b>
+<b class="fc"><i>236</i>&nbsp;        cards.add(new SetCardInfo(&quot;Probe Droid&quot;, 51, Rarity.COMMON, mage.cards.p.ProbeDroid.class));</b>
+<b class="fc"><i>237</i>&nbsp;        cards.add(new SetCardInfo(&quot;Public Arrangement&quot;, 83, Rarity.UNCOMMON, mage.cards.p.PublicArrangement.class));</b>
+<b class="fc"><i>238</i>&nbsp;        cards.add(new SetCardInfo(&quot;Qui-Gon Jinn&quot;, 212, Rarity.RARE, mage.cards.q.QuiGonJinn.class));</b>
+<b class="fc"><i>239</i>&nbsp;        cards.add(new SetCardInfo(&quot;Raging Reek&quot;, 116, Rarity.COMMON, mage.cards.r.RagingReek.class));</b>
+<b class="fc"><i>240</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rallying Fire&quot;, 117, Rarity.COMMON, mage.cards.r.RallyingFire.class));</b>
+<b class="fc"><i>241</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ravenous Wampa&quot;, 229, Rarity.UNCOMMON, mage.cards.r.RavenousWampa.class));</b>
+<b class="fc"><i>242</i>&nbsp;        cards.add(new SetCardInfo(&quot;Regression&quot;, 152, Rarity.UNCOMMON, mage.cards.r.Regression.class));</b>
+<b class="fc"><i>243</i>&nbsp;        cards.add(new SetCardInfo(&quot;Republic Frigate&quot;, 52, Rarity.COMMON, mage.cards.r.RepublicFrigate.class));</b>
+<b class="fc"><i>244</i>&nbsp;        cards.add(new SetCardInfo(&quot;Repurpose&quot;, 84, Rarity.COMMON, mage.cards.r.Repurpose.class));</b>
+<b class="fc"><i>245</i>&nbsp;        cards.add(new SetCardInfo(&quot;Revenge&quot;, 118, Rarity.COMMON, mage.cards.r.Revenge.class));</b>
+<b class="fc"><i>246</i>&nbsp;        cards.add(new SetCardInfo(&quot;Riding Ronto&quot;, 27, Rarity.UNCOMMON, mage.cards.r.RidingRonto.class));</b>
+<b class="fc"><i>247</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rocket Trooper&quot;, 119, Rarity.RARE, mage.cards.r.RocketTrooper.class));</b>
+<b class="fc"><i>248</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rogue&#39;s Passage&quot;, 248, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));</b>
+<b class="fc"><i>249</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rule of two&quot;, 85, Rarity.UNCOMMON, mage.cards.r.RuleOfTwo.class));</b>
+<b class="fc"><i>250</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rumination&quot;, 53, Rarity.COMMON, mage.cards.r.Rumination.class));</b>
+<b class="fc"><i>251</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rumor Monger&quot;, 213, Rarity.COMMON, mage.cards.r.RumorMonger.class));</b>
+<b class="fc"><i>252</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sabacc Game&quot;, 54, Rarity.UNCOMMON, mage.cards.s.SabaccGame.class));</b>
+<b class="fc"><i>253</i>&nbsp;        cards.add(new SetCardInfo(&quot;Salvage Squad&quot;, 214, Rarity.COMMON, mage.cards.s.SalvageSquad.class));</b>
+<b class="fc"><i>254</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sand Trooper&quot;, 28, Rarity.COMMON, mage.cards.s.SandTrooper.class));</b>
+<b class="fc"><i>255</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sarlacc Pit&quot;, 173, Rarity.RARE, mage.cards.s.SarlaccPit.class));</b>
+<b class="fc"><i>256</i>&nbsp;        cards.add(new SetCardInfo(&quot;Scout the Perimeter&quot;, 153, Rarity.COMMON, mage.cards.s.ScoutThePerimeter.class));</b>
+<b class="fc"><i>257</i>&nbsp;        cards.add(new SetCardInfo(&quot;Scout Trooper&quot;, 154, Rarity.COMMON, mage.cards.s.ScoutTrooper.class));</b>
+<b class="fc"><i>258</i>&nbsp;        cards.add(new SetCardInfo(&quot;Security Droid&quot;, 29, Rarity.COMMON, mage.cards.s.SecurityDroid.class));</b>
+<b class="fc"><i>259</i>&nbsp;        cards.add(new SetCardInfo(&quot;Senator Bail Organa&quot;, 177, Rarity.UNCOMMON, mage.cards.s.SenatorBailOrgana.class));</b>
+<b class="fc"><i>260</i>&nbsp;        cards.add(new SetCardInfo(&quot;Senator Lott Dod&quot;, 167, Rarity.UNCOMMON, mage.cards.s.SenatorLottDod.class));</b>
+<b class="fc"><i>261</i>&nbsp;        cards.add(new SetCardInfo(&quot;Senator Onaconda Farr&quot;, 174, Rarity.UNCOMMON, mage.cards.s.SenatorOnacondaFarr.class));</b>
+<b class="fc"><i>262</i>&nbsp;        cards.add(new SetCardInfo(&quot;Senator Padme Amidala&quot;, 164, Rarity.UNCOMMON, mage.cards.s.SenatorPadmeAmidala.class));</b>
+<b class="fc"><i>263</i>&nbsp;        cards.add(new SetCardInfo(&quot;Senator Passel Argente&quot;, 171, Rarity.UNCOMMON, mage.cards.s.SenatorPasselArgente.class));</b>
+<b class="fc"><i>264</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shaak Herd&quot;, 155, Rarity.COMMON, mage.cards.s.ShaakHerd.class));</b>
+<b class="fc"><i>265</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shadow Trooper&quot;, 55, Rarity.COMMON, mage.cards.s.ShadowTrooper.class));</b>
+<b class="fc"><i>266</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shock Trooper&quot;, 120, Rarity.UNCOMMON, mage.cards.s.ShockTrooper.class));</b>
+<b class="fc"><i>267</i>&nbsp;        cards.add(new SetCardInfo(&quot;Show of Dominance&quot;, 156, Rarity.UNCOMMON, mage.cards.s.ShowOfDominance.class));</b>
+<b class="fc"><i>268</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Assassin&quot;, 86, Rarity.UNCOMMON, mage.cards.s.SithAssassin.class));</b>
+<b class="fc"><i>269</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Citadel&quot;, 249, Rarity.UNCOMMON, mage.cards.s.SithCitadel.class));</b>
+<b class="fc"><i>270</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Evoker&quot;, 87, Rarity.COMMON, mage.cards.s.SithEvoker.class));</b>
+<b class="fc"><i>271</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Holocron&quot;, 236, Rarity.COMMON, mage.cards.s.SithHolocron.class));</b>
+<b class="fc"><i>272</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Inquisitor&quot;, 88, Rarity.COMMON, mage.cards.s.SithInquisitor.class));</b>
+<b class="fc"><i>273</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Lord&quot;, 89, Rarity.RARE, mage.cards.s.SithLord.class));</b>
+<b class="fc"><i>274</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Magic&quot;, 215, Rarity.RARE, mage.cards.s.SithMagic.class));</b>
+<b class="fc"><i>275</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Manipulator&quot;, 56, Rarity.UNCOMMON, mage.cards.s.SithManipulator.class));</b>
+<b class="fc"><i>276</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Marauder&quot;, 121, Rarity.COMMON, mage.cards.s.SithMarauder.class));</b>
+<b class="fc"><i>277</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Mindseer&quot;, 216, Rarity.UNCOMMON, mage.cards.s.SithMindseer.class));</b>
+<b class="fc"><i>278</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Ravager&quot;, 122, Rarity.COMMON, mage.cards.s.SithRavager.class));</b>
+<b class="fc"><i>279</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Ruins&quot;, 250, Rarity.COMMON, mage.cards.s.SithRuins.class));</b>
+<b class="fc"><i>280</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Sorcerer&quot;, 57, Rarity.COMMON, mage.cards.s.SithSorcerer.class));</b>
+<b class="fc"><i>281</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sith Thoughtseeker&quot;, 90, Rarity.COMMON, mage.cards.s.SithThoughtseeker.class));</b>
+<b class="fc"><i>282</i>&nbsp;        cards.add(new SetCardInfo(&quot;Slave I&quot;, 217, Rarity.RARE, mage.cards.s.SlaveI.class));</b>
+<b class="fc"><i>283</i>&nbsp;        cards.add(new SetCardInfo(&quot;Smash to Smithereens&quot;, 123, Rarity.COMMON, mage.cards.s.SmashToSmithereens.class));</b>
+<b class="fc"><i>284</i>&nbsp;        cards.add(new SetCardInfo(&quot;Snow Trooper&quot;, 30, Rarity.UNCOMMON, mage.cards.s.SnowTrooper.class));</b>
+<b class="fc"><i>285</i>&nbsp;        cards.add(new SetCardInfo(&quot;Speeder Trooper&quot;, 124, Rarity.COMMON, mage.cards.s.SpeederTrooper.class));</b>
+<b class="fc"><i>286</i>&nbsp;        cards.add(new SetCardInfo(&quot;Star Destroyer&quot;, 218, Rarity.RARE, mage.cards.s.StarDestroyer.class));</b>
+<b class="fc"><i>287</i>&nbsp;        cards.add(new SetCardInfo(&quot;Strike Team Commando&quot;, 228, Rarity.COMMON, mage.cards.s.StrikeTeamCommando.class));</b>
+<b class="fc"><i>288</i>&nbsp;        cards.add(new SetCardInfo(&quot;Super Battle Droid&quot;, 58, Rarity.COMMON, mage.cards.s.SuperBattleDroid.class));</b>
+<b class="fc"><i>289</i>&nbsp;        cards.add(new SetCardInfo(&quot;Surprise Maneuver&quot;, 59, Rarity.COMMON, mage.cards.s.SurpriseManeuver.class));</b>
+<b class="fc"><i>290</i>&nbsp;        cards.add(new SetCardInfo(&quot;Swamp&quot;, 258, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>291</i>&nbsp;        cards.add(new SetCardInfo(&quot;Swamp&quot;, 259, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>292</i>&nbsp;        cards.add(new SetCardInfo(&quot;Swamp&quot;, 260, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>293</i>&nbsp;        cards.add(new SetCardInfo(&quot;Swarm the Skies&quot;, 91, Rarity.COMMON, mage.cards.s.SwarmTheSkies.class));</b>
+<b class="fc"><i>294</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tank Droid&quot;, 219, Rarity.RARE, mage.cards.t.TankDroid.class));</b>
+<b class="fc"><i>295</i>&nbsp;        cards.add(new SetCardInfo(&quot;Terentatek&quot;, 125, Rarity.COMMON, mage.cards.t.Terentatek.class));</b>
+<b class="fc"><i>296</i>&nbsp;        cards.add(new SetCardInfo(&quot;The Battle of Endor&quot;, 130, Rarity.MYTHIC, mage.cards.t.TheBattleOfEndor.class));</b>
+<b class="fc"><i>297</i>&nbsp;        cards.add(new SetCardInfo(&quot;The Battle of Geonosis&quot;, 97, Rarity.MYTHIC, mage.cards.t.TheBattleOfGeonosis.class));</b>
+<b class="fc"><i>298</i>&nbsp;        cards.add(new SetCardInfo(&quot;The Battle of Hoth&quot;, 4, Rarity.MYTHIC, mage.cards.t.TheBattleOfHoth.class));</b>
+<b class="fc"><i>299</i>&nbsp;        cards.add(new SetCardInfo(&quot;The Battle of Naboo&quot;, 35, Rarity.MYTHIC, mage.cards.t.TheBattleOfNaboo.class));</b>
+<b class="fc"><i>300</i>&nbsp;        cards.add(new SetCardInfo(&quot;The Battle of Yavin&quot;, 66, Rarity.MYTHIC, mage.cards.t.TheBattleOfYavin.class));</b>
+<b class="fc"><i>301</i>&nbsp;        cards.add(new SetCardInfo(&quot;The Death Star&quot;, 1, Rarity.MYTHIC, mage.cards.t.TheDeathStar.class));</b>
+<b class="fc"><i>302</i>&nbsp;        cards.add(new SetCardInfo(&quot;TIE Bomber&quot;, 92, Rarity.UNCOMMON, mage.cards.t.TIEBomber.class));</b>
+<b class="fc"><i>303</i>&nbsp;        cards.add(new SetCardInfo(&quot;TIE Interceptor&quot;, 93, Rarity.COMMON, mage.cards.t.TIEInterceptor.class));</b>
+<b class="fc"><i>304</i>&nbsp;        cards.add(new SetCardInfo(&quot;Trade Federation Battleship&quot;, 220, Rarity.RARE, mage.cards.t.TradeFederationBattleship.class));</b>
+<b class="fc"><i>305</i>&nbsp;        cards.add(new SetCardInfo(&quot;Treacherous Bounty Hunter&quot;, 94, Rarity.COMMON, mage.cards.t.TreacherousBountyHunter.class));</b>
+<b class="fc"><i>306</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tri-Fighter&quot;, 225, Rarity.UNCOMMON, mage.cards.t.TriFighter.class));</b>
+<b class="fc"><i>307</i>&nbsp;        cards.add(new SetCardInfo(&quot;Trooper Armor&quot;, 237, Rarity.UNCOMMON, mage.cards.t.TrooperArmor.class));</b>
+<b class="fc"><i>308</i>&nbsp;        cards.add(new SetCardInfo(&quot;Trooper Commando&quot;, 157, Rarity.UNCOMMON, mage.cards.t.TrooperCommando.class));</b>
+<b class="fc"><i>309</i>&nbsp;        cards.add(new SetCardInfo(&quot;Twi&#39;lek Seductess&quot;, 158, Rarity.COMMON, mage.cards.t.TwilekSeductess.class));</b>
+<b class="fc"><i>310</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ugnaught Scrap Worker&quot;, 60, Rarity.COMMON, mage.cards.u.UgnaughtScrapWorker.class));</b>
+<b class="fc"><i>311</i>&nbsp;        cards.add(new SetCardInfo(&quot;Underworld Slums&quot;, 251, Rarity.COMMON, mage.cards.u.UnderworldSlums.class));</b>
+<b class="fc"><i>312</i>&nbsp;        cards.add(new SetCardInfo(&quot;Unity of the Droids&quot;, 221, Rarity.UNCOMMON, mage.cards.u.UnityOfTheDroids.class));</b>
+<b class="fc"><i>313</i>&nbsp;        cards.add(new SetCardInfo(&quot;Unruly Sureshot&quot;, 95, Rarity.UNCOMMON, mage.cards.u.UnrulySureshot.class));</b>
+<b class="fc"><i>314</i>&nbsp;        cards.add(new SetCardInfo(&quot;Vapor Snag&quot;, 61, Rarity.COMMON, mage.cards.v.VaporSnag.class));</b>
+<b class="fc"><i>315</i>&nbsp;        cards.add(new SetCardInfo(&quot;V-Wing&quot;, 126, Rarity.COMMON, mage.cards.v.VWing.class));</b>
+<b class="fc"><i>316</i>&nbsp;        cards.add(new SetCardInfo(&quot;Weequay Beastmaster&quot;, 127, Rarity.UNCOMMON, mage.cards.w.WeequayBeastmaster.class));</b>
+<b class="fc"><i>317</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wild Holocron&quot;, 238, Rarity.COMMON, mage.cards.w.WildHolocron.class));</b>
+<b class="fc"><i>318</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wisdom of the Jedi&quot;, 222, Rarity.UNCOMMON, mage.cards.w.WisdomOfTheJedi.class));</b>
+<b class="fc"><i>319</i>&nbsp;        cards.add(new SetCardInfo(&quot;Womp Rat&quot;, 31, Rarity.COMMON, mage.cards.w.WompRat.class));</b>
+<b class="fc"><i>320</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wookiee Bounty Hunter&quot;, 159, Rarity.COMMON, mage.cards.w.WookieeBountyHunter.class));</b>
+<b class="fc"><i>321</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wookiee Mystic&quot;, 223, Rarity.UNCOMMON, mage.cards.w.WookieeMystic.class));</b>
+<b class="fc"><i>322</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wookiee Raidleader&quot;, 227, Rarity.COMMON, mage.cards.w.WookieeRaidleader.class));</b>
+<b class="fc"><i>323</i>&nbsp;        cards.add(new SetCardInfo(&quot;X-Wing&quot;, 32, Rarity.COMMON, mage.cards.x.XWing.class));</b>
+<b class="fc"><i>324</i>&nbsp;        cards.add(new SetCardInfo(&quot;Yoda, Jedi Master&quot;, 178, Rarity.MYTHIC, mage.cards.y.YodaJediMaster.class));</b>
+<b class="fc"><i>325</i>&nbsp;        cards.add(new SetCardInfo(&quot;Y-Wing&quot;, 62, Rarity.UNCOMMON, mage.cards.y.YWing.class));</b>
+<b class="fc"><i>326</i>&nbsp;        cards.add(new SetCardInfo(&quot;Zam Wessel&quot;, 63, Rarity.NA, mage.cards.z.ZamWessel.class));</b>
+<b class="fc"><i>327</i>&nbsp;    }</b>
+<i>328</i>&nbsp;
+<i>329</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

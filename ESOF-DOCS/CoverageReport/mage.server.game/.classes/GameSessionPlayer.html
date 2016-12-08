@@ -1,0 +1,430 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GameSessionPlayer</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.server.game</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GameSessionPlayer (mage.server.game)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameSessionPlayer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 109)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GameSessionPlayer$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 122)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.server.game;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.Serializable;
+<i>31</i>&nbsp;import java.util.ArrayList;
+<i>32</i>&nbsp;import java.util.HashMap;
+<i>33</i>&nbsp;import java.util.List;
+<i>34</i>&nbsp;import java.util.Map;
+<i>35</i>&nbsp;import java.util.Map.Entry;
+<i>36</i>&nbsp;import java.util.Set;
+<i>37</i>&nbsp;import java.util.UUID;
+<i>38</i>&nbsp;import java.util.concurrent.ExecutorService;
+<i>39</i>&nbsp;import mage.cards.Cards;
+<i>40</i>&nbsp;import mage.choices.Choice;
+<i>41</i>&nbsp;import mage.constants.ManaType;
+<i>42</i>&nbsp;import mage.constants.PlayerAction;
+<i>43</i>&nbsp;import mage.game.Game;
+<i>44</i>&nbsp;import mage.game.Table;
+<i>45</i>&nbsp;import mage.interfaces.callback.ClientCallback;
+<i>46</i>&nbsp;import mage.players.Player;
+<i>47</i>&nbsp;import mage.server.User;
+<i>48</i>&nbsp;import mage.server.UserManager;
+<i>49</i>&nbsp;import mage.server.util.ThreadExecutor;
+<i>50</i>&nbsp;import mage.view.AbilityPickerView;
+<i>51</i>&nbsp;import mage.view.CardsView;
+<i>52</i>&nbsp;import mage.view.GameClientMessage;
+<i>53</i>&nbsp;import mage.view.GameView;
+<i>54</i>&nbsp;import mage.view.LookedAtView;
+<i>55</i>&nbsp;import mage.view.SimpleCardsView;
+<i>56</i>&nbsp;import mage.view.UserRequestMessage;
+<i>57</i>&nbsp;import org.apache.log4j.Logger;
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;/**
+<i>60</i>&nbsp; *
+<i>61</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>62</i>&nbsp; */
+<b class="nc"><i>63</i>&nbsp;public class GameSessionPlayer extends GameSessionWatcher {</b>
+<i>64</i>&nbsp;
+<b class="nc"><i>65</i>&nbsp;    private static final Logger logger = Logger.getLogger(GameSessionPlayer.class);</b>
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    private final UUID playerId;
+<i>68</i>&nbsp;
+<b class="nc"><i>69</i>&nbsp;    private static final ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();</b>
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    public GameSessionPlayer(Game game, UUID userId, UUID playerId) {
+<b class="nc"><i>72</i>&nbsp;        super(userId, game, true);</b>
+<b class="nc"><i>73</i>&nbsp;        this.playerId = playerId;</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    @Override
+<i>77</i>&nbsp;    public void CleanUp() {
+<b class="nc"><i>78</i>&nbsp;        super.CleanUp();</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    public void ask(final String question, final Map&lt;String, Serializable&gt; options) {
+<b class="nc"><i>82</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>83</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>84</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>85</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;gameAsk&quot;, game.getId(), new GameClientMessage(getGameView(), question, options)));</b>
+<i>86</i>&nbsp;            }
+<i>87</i>&nbsp;        }
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    public void target(final String question, final CardsView cardView, final Set&lt;UUID&gt; targets, final boolean required, final Map&lt;String, Serializable&gt; options) {
+<b class="nc"><i>91</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>92</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>93</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>94</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;gameTarget&quot;, game.getId(), new GameClientMessage(getGameView(), question, cardView, targets, required, options)));</b>
+<i>95</i>&nbsp;            }
+<i>96</i>&nbsp;        }
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    public void select(final String message, final Map&lt;String, Serializable&gt; options) {
+<b class="nc"><i>100</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>101</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>102</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>103</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;gameSelect&quot;, game.getId(), new GameClientMessage(getGameView(), message, options)));</b>
+<i>104</i>&nbsp;            }
+<i>105</i>&nbsp;        }
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    public void chooseAbility(final AbilityPickerView abilities) {
+<b class="nc"><i>109</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>110</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>111</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>112</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;gameChooseAbility&quot;, game.getId(), abilities));</b>
+<i>113</i>&nbsp;            }
+<i>114</i>&nbsp;        }
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    public void choosePile(final String message, final CardsView pile1, final CardsView pile2) {
+<b class="nc"><i>118</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>119</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>120</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>121</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;gameChoosePile&quot;, game.getId(), new GameClientMessage(message, pile1, pile2)));</b>
+<i>122</i>&nbsp;            }
+<i>123</i>&nbsp;        }
+<i>124</i>&nbsp;    }
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    public void chooseChoice(final Choice choice) {
+<b class="nc"><i>127</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>128</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>129</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>130</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;gameChooseChoice&quot;, game.getId(), new GameClientMessage(choice)));</b>
+<i>131</i>&nbsp;            }
+<i>132</i>&nbsp;        }
+<i>133</i>&nbsp;    }
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    public void playMana(final String message, final Map&lt;String, Serializable&gt; options) {
+<b class="nc"><i>136</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>137</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>138</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>139</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;gamePlayMana&quot;, game.getId(), new GameClientMessage(getGameView(), message, options)));</b>
+<i>140</i>&nbsp;            }
+<i>141</i>&nbsp;        }
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;    public void playXMana(final String message) {
+<b class="nc"><i>145</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>146</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>147</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>148</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;gamePlayXMana&quot;, game.getId(), new GameClientMessage(getGameView(), message)));</b>
+<i>149</i>&nbsp;            }
+<i>150</i>&nbsp;        }
+<i>151</i>&nbsp;    }
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    public void getAmount(final String message, final int min, final int max) {
+<b class="nc"><i>154</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>155</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>156</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>157</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;gameSelectAmount&quot;, game.getId(), new GameClientMessage(message, min, max)));</b>
+<i>158</i>&nbsp;            }
+<i>159</i>&nbsp;        }
+<i>160</i>&nbsp;    }
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;    public void endGameInfo(Table table) {
+<b class="nc"><i>163</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>164</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>165</i>&nbsp;            if (user != null) {</b>
+<b class="nc"><i>166</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;endGameInfo&quot;, game.getId(), getGameEndView(playerId, table)));</b>
+<i>167</i>&nbsp;            }
+<i>168</i>&nbsp;        }
+<i>169</i>&nbsp;    }
+<i>170</i>&nbsp;
+<i>171</i>&nbsp;    public void requestPermissionToRollbackTurn(UUID requestingUserId, int numberTurns) {
+<b class="nc"><i>172</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>173</i>&nbsp;            User requestingUser = UserManager.getInstance().getUser(requestingUserId);</b>
+<b class="nc"><i>174</i>&nbsp;            User requestedUser = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>175</i>&nbsp;            if (requestedUser != null &amp;&amp; requestingUser != null) {</b>
+<i>176</i>&nbsp;                String message;
+<b class="nc"><i>177</i>&nbsp;                switch (numberTurns) {</b>
+<i>178</i>&nbsp;                    case 0:
+<b class="nc"><i>179</i>&nbsp;                        message = &quot;Allow rollback to the start of the current turn?&quot;;</b>
+<b class="nc"><i>180</i>&nbsp;                        break;</b>
+<i>181</i>&nbsp;                    case 1:
+<b class="nc"><i>182</i>&nbsp;                        message = &quot;Allow rollback to the start of the previous turn?&quot;;</b>
+<b class="nc"><i>183</i>&nbsp;                        break;</b>
+<i>184</i>&nbsp;                    default:
+<b class="nc"><i>185</i>&nbsp;                        message = &quot;Allow to rollback &quot; + numberTurns + &quot; turns?&quot;;</b>
+<i>186</i>&nbsp;                }
+<b class="nc"><i>187</i>&nbsp;                UserRequestMessage userRequestMessage = new UserRequestMessage(</b>
+<b class="nc"><i>188</i>&nbsp;                        &quot;Request by &quot; + requestedUser.getName(), message);</b>
+<b class="nc"><i>189</i>&nbsp;                userRequestMessage.setRelatedUser(requestingUserId, requestingUser.getName());</b>
+<b class="nc"><i>190</i>&nbsp;                userRequestMessage.setGameId(game.getId());</b>
+<b class="nc"><i>191</i>&nbsp;                userRequestMessage.setButton1(&quot;Accept&quot;, PlayerAction.ADD_PERMISSION_TO_ROLLBACK_TURN);</b>
+<b class="nc"><i>192</i>&nbsp;                userRequestMessage.setButton2(&quot;Deny&quot;, PlayerAction.DENY_PERMISSON_TO_ROLLBACK_TURN);</b>
+<b class="nc"><i>193</i>&nbsp;                requestedUser.fireCallback(new ClientCallback(&quot;userRequestDialog&quot;, game.getId(), userRequestMessage));</b>
+<i>194</i>&nbsp;            }
+<i>195</i>&nbsp;        }
+<i>196</i>&nbsp;    }
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    public void requestPermissionToSeeHandCards(UUID watcherId) {
+<b class="nc"><i>199</i>&nbsp;        if (!killed) {</b>
+<b class="nc"><i>200</i>&nbsp;            User watcher = UserManager.getInstance().getUser(watcherId);</b>
+<b class="nc"><i>201</i>&nbsp;            User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>202</i>&nbsp;            if (user != null &amp;&amp; watcher != null) {</b>
+<b class="nc"><i>203</i>&nbsp;                UserRequestMessage userRequestMessage = new UserRequestMessage(</b>
+<i>204</i>&nbsp;                        &quot;User request&quot;,
+<b class="nc"><i>205</i>&nbsp;                        &quot;Allow user &lt;b&gt;&quot; + watcher.getName() + &quot;&lt;/b&gt; for this match to see your hand cards?&lt;br&gt;&quot;</b>
+<i>206</i>&nbsp;                        + &quot;(You can revoke this every time using related popup menu item of your battlefield.)&quot;);
+<b class="nc"><i>207</i>&nbsp;                userRequestMessage.setRelatedUser(watcherId, watcher.getName());</b>
+<b class="nc"><i>208</i>&nbsp;                userRequestMessage.setGameId(game.getId());</b>
+<b class="nc"><i>209</i>&nbsp;                userRequestMessage.setButton1(&quot;Accept&quot;, PlayerAction.ADD_PERMISSION_TO_SEE_HAND_CARDS);</b>
+<b class="nc"><i>210</i>&nbsp;                userRequestMessage.setButton2(&quot;Reject&quot;, null);</b>
+<b class="nc"><i>211</i>&nbsp;                user.fireCallback(new ClientCallback(&quot;userRequestDialog&quot;, game.getId(), userRequestMessage));</b>
+<i>212</i>&nbsp;            }
+<i>213</i>&nbsp;        }
+<i>214</i>&nbsp;    }
+<i>215</i>&nbsp;
+<i>216</i>&nbsp;    public void sendPlayerUUID(UUID data) {
+<b class="nc"><i>217</i>&nbsp;        game.getPlayer(playerId).setResponseUUID(data);</b>
+<i>218</i>&nbsp;    }
+<i>219</i>&nbsp;
+<i>220</i>&nbsp;    public void sendPlayerString(String data) {
+<b class="nc"><i>221</i>&nbsp;        game.getPlayer(playerId).setResponseString(data);</b>
+<i>222</i>&nbsp;    }
+<i>223</i>&nbsp;
+<i>224</i>&nbsp;    public void sendPlayerManaType(ManaType manaType, UUID manaTypePlayerId) {
+<b class="nc"><i>225</i>&nbsp;        game.getPlayer(playerId).setResponseManaType(manaTypePlayerId, manaType);</b>
+<i>226</i>&nbsp;    }
+<i>227</i>&nbsp;
+<i>228</i>&nbsp;    public void sendPlayerBoolean(Boolean data) {
+<b class="nc"><i>229</i>&nbsp;        game.getPlayer(playerId).setResponseBoolean(data);</b>
+<i>230</i>&nbsp;    }
+<i>231</i>&nbsp;
+<i>232</i>&nbsp;    public void sendPlayerInteger(Integer data) {
+<b class="nc"><i>233</i>&nbsp;        game.getPlayer(playerId).setResponseInteger(data);</b>
+<i>234</i>&nbsp;    }
+<i>235</i>&nbsp;
+<i>236</i>&nbsp;    @Override
+<i>237</i>&nbsp;    public GameView getGameView() {
+<b class="nc"><i>238</i>&nbsp;        Player player = game.getPlayer(playerId);</b>
+<b class="nc"><i>239</i>&nbsp;        GameView gameView = new GameView(game.getState(), game, playerId, null);</b>
+<b class="nc"><i>240</i>&nbsp;        gameView.setHand(new CardsView(game, player.getHand().getCards(game)));</b>
+<b class="nc"><i>241</i>&nbsp;        if (gameView.getPriorityPlayerName().equals(player.getName())) {</b>
+<b class="nc"><i>242</i>&nbsp;            gameView.setCanPlayInHand(player.getPlayableInHand(game));</b>
+<i>243</i>&nbsp;        }
+<i>244</i>&nbsp;
+<b class="nc"><i>245</i>&nbsp;        processControlledPlayers(player, gameView);</b>
+<b class="nc"><i>246</i>&nbsp;        processWatchedHands(userId, gameView);</b>
+<i>247</i>&nbsp;        //TODO: should player who controls another player&#39;s turn be able to look at all these cards?
+<i>248</i>&nbsp;
+<b class="nc"><i>249</i>&nbsp;        List&lt;LookedAtView&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>250</i>&nbsp;        for (Entry&lt;String, Cards&gt; entry : game.getState().getLookedAt(playerId).entrySet()) {</b>
+<b class="nc"><i>251</i>&nbsp;            list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));</b>
+<b class="nc"><i>252</i>&nbsp;        }</b>
+<b class="nc"><i>253</i>&nbsp;        gameView.setLookedAt(list);</b>
+<i>254</i>&nbsp;
+<b class="nc"><i>255</i>&nbsp;        return gameView;</b>
+<i>256</i>&nbsp;    }
+<i>257</i>&nbsp;
+<i>258</i>&nbsp;    private void processControlledPlayers(Player player, GameView gameView) {
+<b class="nc"><i>259</i>&nbsp;        if (player.getPlayersUnderYourControl().size() &gt; 0) {</b>
+<b class="nc"><i>260</i>&nbsp;            Map&lt;String, SimpleCardsView&gt; handCards = new HashMap&lt;&gt;();</b>
+<b class="nc"><i>261</i>&nbsp;            for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {</b>
+<b class="nc"><i>262</i>&nbsp;                Player opponent = game.getPlayer(controlledPlayerId);</b>
+<b class="nc"><i>263</i>&nbsp;                handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game), true));</b>
+<b class="nc"><i>264</i>&nbsp;            }</b>
+<b class="nc"><i>265</i>&nbsp;            gameView.setOpponentHands(handCards);</b>
+<i>266</i>&nbsp;        }
+<i>267</i>&nbsp;    }
+<i>268</i>&nbsp;
+<i>269</i>&nbsp;    public void removeGame() {
+<b class="nc"><i>270</i>&nbsp;        User user = UserManager.getInstance().getUser(userId);</b>
+<b class="nc"><i>271</i>&nbsp;        if (user != null) {</b>
+<b class="nc"><i>272</i>&nbsp;            user.removeGame(playerId);</b>
+<i>273</i>&nbsp;        }
+<i>274</i>&nbsp;    }
+<i>275</i>&nbsp;
+<i>276</i>&nbsp;    public UUID getGameId() {
+<b class="nc"><i>277</i>&nbsp;        return game.getId();</b>
+<i>278</i>&nbsp;    }
+<i>279</i>&nbsp;
+<i>280</i>&nbsp;    public void quitGame() {
+<b class="nc"><i>281</i>&nbsp;        if (game != null) {</b>
+<b class="nc"><i>282</i>&nbsp;            final Player player = game.getPlayer(playerId);</b>
+<b class="nc"><i>283</i>&nbsp;            if (player != null &amp;&amp; player.isInGame()) {</b>
+<b class="nc"><i>284</i>&nbsp;                callExecutor.execute(</b>
+<b class="nc"><i>285</i>&nbsp;                        new Runnable() {</b>
+<i>286</i>&nbsp;                    @Override
+<i>287</i>&nbsp;                    public void run() {
+<i>288</i>&nbsp;                        try {
+<b class="nc"><i>289</i>&nbsp;                            if (game.getStartTime() == null) {</b>
+<i>290</i>&nbsp;                                // gameController is still waiting to start the game
+<b class="nc"><i>291</i>&nbsp;                                player.leave();</b>
+<i>292</i>&nbsp;                            } else {
+<i>293</i>&nbsp;                                // game was already started
+<b class="nc"><i>294</i>&nbsp;                                player.quit(game);</b>
+<i>295</i>&nbsp;                            }
+<i>296</i>&nbsp;
+<b class="nc"><i>297</i>&nbsp;                        } catch (Exception ex) {</b>
+<b class="nc"><i>298</i>&nbsp;                            if (ex != null) {</b>
+<i>299</i>&nbsp;                                // It seems this can happen if two threads try to end the game at the exact same time (one wins and one ends here)
+<b class="nc"><i>300</i>&nbsp;                                logger.fatal(&quot;Game session game quit exception &quot; + (ex.getMessage() == null ? &quot;null&quot; : ex.getMessage()));</b>
+<b class="nc"><i>301</i>&nbsp;                                logger.debug(&quot;- gameId:&quot; + game.getId() + &quot;  playerId: &quot; + playerId);</b>
+<b class="nc"><i>302</i>&nbsp;                                if (ex.getCause() != null) {</b>
+<b class="nc"><i>303</i>&nbsp;                                    logger.debug(&quot;- Cause: &quot; + (ex.getCause().getMessage() == null ? &quot;null&quot; : ex.getCause().getMessage()), ex);</b>
+<i>304</i>&nbsp;                                } else {
+<b class="nc"><i>305</i>&nbsp;                                    logger.debug(&quot;- ex: &quot; + ex.toString(), ex);</b>
+<i>306</i>&nbsp;                                }
+<i>307</i>&nbsp;                            } else {
+<b class="nc"><i>308</i>&nbsp;                                logger.fatal(&quot;Game session game quit exception - null  gameId:&quot; + game.getId() + &quot;  playerId: &quot; + playerId);</b>
+<i>309</i>&nbsp;                            }
+<b class="nc"><i>310</i>&nbsp;                        }</b>
+<i>311</i>&nbsp;                    }
+<i>312</i>&nbsp;                }
+<i>313</i>&nbsp;                );
+<i>314</i>&nbsp;
+<i>315</i>&nbsp;            }
+<b class="nc"><i>316</i>&nbsp;        } else {</b>
+<b class="nc"><i>317</i>&nbsp;            logger.error(&quot;game object missing   playerId: &quot; + (playerId == null ? &quot;[null]&quot; : playerId));</b>
+<i>318</i>&nbsp;        }
+<i>319</i>&nbsp;    }
+<i>320</i>&nbsp;
+<i>321</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

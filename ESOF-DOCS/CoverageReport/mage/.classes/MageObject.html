@@ -1,0 +1,130 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MageObject</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MageObject (mage)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MageObject</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.Serializable;
+<i>4</i>&nbsp;import java.util.List;
+<i>5</i>&nbsp;import java.util.UUID;
+<i>6</i>&nbsp;import mage.abilities.Abilities;
+<i>7</i>&nbsp;import mage.abilities.Ability;
+<i>8</i>&nbsp;import mage.abilities.costs.mana.ManaCost;
+<i>9</i>&nbsp;import mage.abilities.costs.mana.ManaCosts;
+<i>10</i>&nbsp;import mage.cards.FrameStyle;
+<i>11</i>&nbsp;import mage.constants.CardType;
+<i>12</i>&nbsp;import mage.game.Game;
+<i>13</i>&nbsp;import mage.game.events.ZoneChangeEvent;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;public interface MageObject extends MageItem, Serializable {
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    String getName();
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    String getIdName();
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    String getLogName();
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    String getImageName();
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    void setName(String name);
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    List&lt;CardType&gt; getCardType();
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    List&lt;String&gt; getSubtype(Game game);
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    boolean hasSubtype(String subtype, Game game);
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    List&lt;String&gt; getSupertype();
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    Abilities&lt;Ability&gt; getAbilities();
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    boolean hasAbility(UUID abilityId, Game game);
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    ObjectColor getColor(Game game);
+<i>40</i>&nbsp;    
+<i>41</i>&nbsp;    ObjectColor getFrameColor(Game game);
+<i>42</i>&nbsp;    
+<i>43</i>&nbsp;    FrameStyle getFrameStyle();
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    ManaCosts&lt;ManaCost&gt; getManaCost();
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    int getConvertedManaCost();
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    MageInt getPower();
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    MageInt getToughness();
+<i>52</i>&nbsp;    
+<i>53</i>&nbsp;    int getStartingLoyalty();
+<i>54</i>&nbsp;    
+<i>55</i>&nbsp;    
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    void adjustCosts(Ability ability, Game game);
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    void adjustTargets(Ability ability, Game game);
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    MageObject copy();
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    /**
+<i>64</i>&nbsp;     * Defines that MageObject is a copy of another object
+<i>65</i>&nbsp;     *
+<i>66</i>&nbsp;     * @param isCopy
+<i>67</i>&nbsp;     */
+<i>68</i>&nbsp;    void setCopy(boolean isCopy);
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    /**
+<i>71</i>&nbsp;     * Checks if current MageObject is a copy of another object
+<i>72</i>&nbsp;     *
+<i>73</i>&nbsp;     * @return
+<i>74</i>&nbsp;     */
+<i>75</i>&nbsp;    boolean isCopy();
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    int getZoneChangeCounter(Game game);
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    void updateZoneChangeCounter(Game game, ZoneChangeEvent event);
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    void setZoneChangeCounter(int value, Game game);
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

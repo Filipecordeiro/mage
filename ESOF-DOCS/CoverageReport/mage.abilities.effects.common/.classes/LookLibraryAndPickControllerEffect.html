@@ -1,0 +1,360 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LookLibraryAndPickControllerEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LookLibraryAndPickControllerEffect (mage.abilities.effects.common)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LookLibraryAndPickControllerEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (11/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    65.7%
+  </span>
+  <span class="absValue">
+    (65/ 99)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LookLibraryAndPickControllerEffect$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (12/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66%
+  </span>
+  <span class="absValue">
+    (66/ 100)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *
+<i>3</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>4</i>&nbsp; *
+<i>5</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>6</i>&nbsp; * permitted provided that the following conditions are met:
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>9</i>&nbsp; *        conditions and the following disclaimer.
+<i>10</i>&nbsp; *
+<i>11</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>12</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>13</i>&nbsp; *        provided with the distribution.
+<i>14</i>&nbsp; *
+<i>15</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>16</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>17</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>18</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>19</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>20</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>21</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>22</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>23</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>24</i>&nbsp; *
+<i>25</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>26</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>27</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>28</i>&nbsp; *
+<i>29</i>&nbsp; */
+<i>30</i>&nbsp;package mage.abilities.effects.common;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.Mode;
+<i>34</i>&nbsp;import mage.abilities.dynamicvalue.DynamicValue;
+<i>35</i>&nbsp;import mage.abilities.dynamicvalue.common.StaticValue;
+<i>36</i>&nbsp;import mage.cards.Card;
+<i>37</i>&nbsp;import mage.cards.Cards;
+<i>38</i>&nbsp;import mage.cards.CardsImpl;
+<i>39</i>&nbsp;import mage.constants.Outcome;
+<i>40</i>&nbsp;import mage.constants.Zone;
+<i>41</i>&nbsp;import mage.filter.FilterCard;
+<i>42</i>&nbsp;import mage.game.Game;
+<i>43</i>&nbsp;import mage.players.Player;
+<i>44</i>&nbsp;import mage.target.TargetCard;
+<i>45</i>&nbsp;import mage.util.CardUtil;
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;/**
+<i>48</i>&nbsp; *
+<i>49</i>&nbsp; * @author LevelX
+<i>50</i>&nbsp; */
+<i>51</i>&nbsp;public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEffect {
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    protected FilterCard filter; // which kind of cards to reveal
+<i>54</i>&nbsp;    protected DynamicValue numberToPick;
+<b class="fc"><i>55</i>&nbsp;    protected boolean revealPickedCards = true;</b>
+<b class="fc"><i>56</i>&nbsp;    protected Zone targetPickedCards = Zone.HAND; // HAND</b>
+<b class="fc"><i>57</i>&nbsp;    protected int foundCardsToPick = 0;</b>
+<i>58</i>&nbsp;    protected boolean optional;
+<i>59</i>&nbsp;    private boolean upTo;
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick, FilterCard pickFilter, boolean putOnTop) {
+<b class="fc"><i>62</i>&nbsp;        this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter, putOnTop, true);</b>
+<b class="fc"><i>63</i>&nbsp;    }</b>
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick, FilterCard pickFilter, boolean putOnTop, boolean reveal) {
+<b class="fc"><i>66</i>&nbsp;        this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter, Zone.LIBRARY, putOnTop, reveal);</b>
+<b class="fc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick,
+<i>70</i>&nbsp;            FilterCard pickFilter, Zone targetZoneLookedCards, boolean putOnTop, boolean reveal) {
+<b class="fc"><i>71</i>&nbsp;        this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter, targetZoneLookedCards, putOnTop, reveal, false);</b>
+<b class="fc"><i>72</i>&nbsp;    }</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    public LookLibraryAndPickControllerEffect(int numberOfCards, int numberToPick, FilterCard pickFilter, boolean upTo) {
+<b class="nc"><i>75</i>&nbsp;        this(new StaticValue(numberOfCards), false, new StaticValue(numberToPick), pickFilter, Zone.LIBRARY, false, true, upTo);</b>
+<b class="nc"><i>76</i>&nbsp;    }</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    public LookLibraryAndPickControllerEffect(int numberOfCards, int numberToPick, FilterCard pickFilter, boolean reveal, boolean upTo,
+<i>79</i>&nbsp;            Zone targetZonePickedCards, boolean optional) {
+<b class="nc"><i>80</i>&nbsp;        this(new StaticValue(numberOfCards), false, new StaticValue(numberToPick), pickFilter, Zone.LIBRARY, false, reveal, upTo, targetZonePickedCards, optional);</b>
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;    }</b>
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick,
+<i>85</i>&nbsp;            FilterCard pickFilter, Zone targetZoneLookedCards, boolean putOnTop, boolean reveal, boolean upTo) {
+<b class="fc"><i>86</i>&nbsp;        this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter, targetZoneLookedCards, putOnTop, reveal, upTo, Zone.HAND, false);</b>
+<b class="fc"><i>87</i>&nbsp;    }</b>
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    /**
+<i>90</i>&nbsp;     *
+<i>91</i>&nbsp;     * @param numberOfCards
+<i>92</i>&nbsp;     * @param mayShuffleAfter
+<i>93</i>&nbsp;     * @param numberToPick
+<i>94</i>&nbsp;     * @param pickFilter
+<i>95</i>&nbsp;     * @param targetZoneLookedCards
+<i>96</i>&nbsp;     * @param putOnTop
+<i>97</i>&nbsp;     * @param reveal
+<i>98</i>&nbsp;     * @param upTo
+<i>99</i>&nbsp;     * @param targetZonePickedCards
+<i>100</i>&nbsp;     * @param optional
+<i>101</i>&nbsp;     */
+<i>102</i>&nbsp;    public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick,
+<i>103</i>&nbsp;            FilterCard pickFilter, Zone targetZoneLookedCards, boolean putOnTop, boolean reveal, boolean upTo, Zone targetZonePickedCards, boolean optional) {
+<b class="fc"><i>104</i>&nbsp;        super(Outcome.DrawCard, numberOfCards, mayShuffleAfter, targetZoneLookedCards, putOnTop);</b>
+<b class="fc"><i>105</i>&nbsp;        this.numberToPick = numberToPick;</b>
+<b class="fc"><i>106</i>&nbsp;        this.filter = pickFilter;</b>
+<b class="fc"><i>107</i>&nbsp;        this.revealPickedCards = reveal;</b>
+<b class="fc"><i>108</i>&nbsp;        this.targetPickedCards = targetZonePickedCards;</b>
+<b class="fc"><i>109</i>&nbsp;        this.upTo = upTo;</b>
+<b class="fc"><i>110</i>&nbsp;        this.optional = optional;</b>
+<b class="fc"><i>111</i>&nbsp;    }</b>
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;    public LookLibraryAndPickControllerEffect(final LookLibraryAndPickControllerEffect effect) {
+<b class="fc"><i>114</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>115</i>&nbsp;        this.numberToPick = effect.numberToPick.copy();</b>
+<b class="fc"><i>116</i>&nbsp;        this.filter = effect.filter.copy();</b>
+<b class="fc"><i>117</i>&nbsp;        this.revealPickedCards = effect.revealPickedCards;</b>
+<b class="fc"><i>118</i>&nbsp;        this.targetPickedCards = effect.targetPickedCards;</b>
+<b class="fc"><i>119</i>&nbsp;        this.upTo = effect.upTo;</b>
+<b class="fc"><i>120</i>&nbsp;        this.optional = effect.optional;</b>
+<b class="fc"><i>121</i>&nbsp;    }</b>
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    @Override
+<i>124</i>&nbsp;    public LookLibraryAndPickControllerEffect copy() {
+<b class="fc"><i>125</i>&nbsp;        return new LookLibraryAndPickControllerEffect(this);</b>
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    @Override
+<i>130</i>&nbsp;    protected void cardLooked(Card card, Game game, Ability source) {
+<b class="fc"><i>131</i>&nbsp;        if (numberToPick.calculate(game, source, this) &gt; 0 &amp;&amp; filter.match(card, game)) {</b>
+<b class="fc"><i>132</i>&nbsp;            ++foundCardsToPick;</b>
+<i>133</i>&nbsp;        }
+<b class="fc"><i>134</i>&nbsp;    }</b>
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    @Override
+<i>137</i>&nbsp;    protected void actionWithSelectedCards(Cards cards, Game game, Ability source, String windowName) {
+<b class="fc"><i>138</i>&nbsp;        Player player = game.getPlayer(source.getControllerId());</b>
+<b class="fc"><i>139</i>&nbsp;        if (player != null &amp;&amp; foundCardsToPick &gt; 0) {</b>
+<b class="fc"><i>140</i>&nbsp;            if (!optional || player.chooseUse(Outcome.DrawCard, getMayText(), source, game)) {</b>
+<b class="fc"><i>141</i>&nbsp;                FilterCard pickFilter = filter.copy();</b>
+<b class="fc"><i>142</i>&nbsp;                pickFilter.setMessage(getPickText());</b>
+<b class="fc"><i>143</i>&nbsp;                TargetCard target = new TargetCard((upTo ? 0 : numberToPick.calculate(game, source, this)), numberToPick.calculate(game, source, this), Zone.LIBRARY, pickFilter);</b>
+<b class="fc"><i>144</i>&nbsp;                if (player.choose(Outcome.DrawCard, cards, target, game)) {</b>
+<b class="fc"><i>145</i>&nbsp;                    Cards pickedCards = new CardsImpl(target.getTargets());</b>
+<b class="fc"><i>146</i>&nbsp;                    cards.removeAll(pickedCards);</b>
+<b class="fc"><i>147</i>&nbsp;                    player.moveCards(pickedCards.getCards(game), targetPickedCards, source, game);</b>
+<b class="fc"><i>148</i>&nbsp;                    if (revealPickedCards) {</b>
+<b class="nc"><i>149</i>&nbsp;                        player.revealCards(windowName, pickedCards, game);</b>
+<i>150</i>&nbsp;                    }
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;                }
+<i>153</i>&nbsp;            }
+<i>154</i>&nbsp;        }
+<i>155</i>&nbsp;
+<b class="fc"><i>156</i>&nbsp;    }</b>
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    private String getMayText() {
+<b class="nc"><i>159</i>&nbsp;        StringBuilder sb = new StringBuilder(&quot;Do you wish to &quot;);</b>
+<b class="pc"><i>160</i>&nbsp;        switch (targetPickedCards) {</b>
+<i>161</i>&nbsp;            case HAND:
+<b class="nc"><i>162</i>&nbsp;                if (revealPickedCards) {</b>
+<b class="nc"><i>163</i>&nbsp;                    sb.append(&quot;reveal &quot;).append(filter.getMessage()).append(&quot; and put into your hand&quot;);</b>
+<i>164</i>&nbsp;                } else {
+<b class="nc"><i>165</i>&nbsp;                    sb.append(&quot;put &quot;).append(filter.getMessage()).append(&quot; into your hand&quot;);</b>
+<i>166</i>&nbsp;                }
+<b class="nc"><i>167</i>&nbsp;                break;</b>
+<i>168</i>&nbsp;            case BATTLEFIELD:
+<b class="nc"><i>169</i>&nbsp;                sb.append(&quot;put &quot;).append(filter.getMessage()).append(&quot; onto the battlefield&quot;);</b>
+<b class="nc"><i>170</i>&nbsp;                break;</b>
+<i>171</i>&nbsp;            case GRAVEYARD:
+<b class="nc"><i>172</i>&nbsp;                sb.append(&quot;put &quot;).append(filter.getMessage()).append(&quot; into your graveyard&quot;);</b>
+<i>173</i>&nbsp;                break;
+<i>174</i>&nbsp;        }
+<b class="nc"><i>175</i>&nbsp;        return sb.append(&quot;?&quot;).toString();</b>
+<i>176</i>&nbsp;    }
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;    private String getPickText() {
+<b class="fc"><i>179</i>&nbsp;        StringBuilder sb = new StringBuilder(filter.getMessage()).append(&quot; to &quot;);</b>
+<b class="fc"><i>180</i>&nbsp;        switch (targetPickedCards) {</b>
+<i>181</i>&nbsp;            case HAND:
+<b class="fc"><i>182</i>&nbsp;                if (revealPickedCards) {</b>
+<b class="nc"><i>183</i>&nbsp;                    sb.append(&quot;reveal and put into your hand&quot;);</b>
+<i>184</i>&nbsp;                } else {
+<b class="fc"><i>185</i>&nbsp;                    sb.append(&quot;put into your hand&quot;);</b>
+<i>186</i>&nbsp;                }
+<b class="fc"><i>187</i>&nbsp;                break;</b>
+<i>188</i>&nbsp;            case BATTLEFIELD:
+<b class="nc"><i>189</i>&nbsp;                sb.append(&quot;put onto the battlefield&quot;);</b>
+<b class="nc"><i>190</i>&nbsp;                break;</b>
+<i>191</i>&nbsp;            case GRAVEYARD:
+<b class="nc"><i>192</i>&nbsp;                sb.append(&quot;put into the graveyard&quot;);</b>
+<i>193</i>&nbsp;                break;
+<i>194</i>&nbsp;        }
+<b class="fc"><i>195</i>&nbsp;        return sb.toString();</b>
+<i>196</i>&nbsp;    }
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    @Override
+<i>199</i>&nbsp;    public String getText(Mode mode) {
+<b class="fc"><i>200</i>&nbsp;        if (staticText != null &amp;&amp; !staticText.isEmpty()) {</b>
+<b class="nc"><i>201</i>&nbsp;            return staticText;</b>
+<i>202</i>&nbsp;        }
+<b class="fc"><i>203</i>&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc"><i>204</i>&nbsp;        if (numberToPick.calculate(null, null, this) &gt; 0) {</b>
+<i>205</i>&nbsp;
+<b class="fc"><i>206</i>&nbsp;            if (revealPickedCards) {</b>
+<b class="nc"><i>207</i>&nbsp;                sb.append(&quot;. You may reveal &quot;);</b>
+<b class="nc"><i>208</i>&nbsp;                sb.append(filter.getMessage()).append(&quot; from among them and put it into your &quot;);</b>
+<b class="fc"><i>209</i>&nbsp;            } else if (targetPickedCards.equals(Zone.BATTLEFIELD)) {</b>
+<b class="nc"><i>210</i>&nbsp;                sb.append(&quot;. You &quot;);</b>
+<b class="nc"><i>211</i>&nbsp;                if (optional) {</b>
+<b class="nc"><i>212</i>&nbsp;                    sb.append(&quot;may &quot;);</b>
+<i>213</i>&nbsp;                }
+<b class="nc"><i>214</i>&nbsp;                sb.append(&quot;put &quot;).append(filter.getMessage()).append(&quot; from among them onto the &quot;);</b>
+<i>215</i>&nbsp;            } else {
+<b class="fc"><i>216</i>&nbsp;                sb.append(&quot;. Put &quot;);</b>
+<b class="fc"><i>217</i>&nbsp;                if (numberToPick.calculate(null, null, this) &gt; 1) {</b>
+<b class="nc"><i>218</i>&nbsp;                    if (upTo) {</b>
+<b class="nc"><i>219</i>&nbsp;                        if (numberToPick.calculate(null, null, this) == (numberOfCards.calculate(null, null, this))) {</b>
+<b class="nc"><i>220</i>&nbsp;                            sb.append(&quot;any number&quot;);</b>
+<i>221</i>&nbsp;                        } else {
+<b class="nc"><i>222</i>&nbsp;                            sb.append(&quot;up to &quot;).append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));</b>
+<i>223</i>&nbsp;                        }
+<i>224</i>&nbsp;                    } else {
+<b class="nc"><i>225</i>&nbsp;                        sb.append(CardUtil.numberToText(numberToPick.calculate(null, null, this)));</b>
+<i>226</i>&nbsp;                    }
+<i>227</i>&nbsp;                } else {
+<b class="fc"><i>228</i>&nbsp;                    sb.append(&quot;one&quot;);</b>
+<i>229</i>&nbsp;                }
+<i>230</i>&nbsp;
+<b class="fc"><i>231</i>&nbsp;                sb.append(&quot; of them into your &quot;);</b>
+<i>232</i>&nbsp;            }
+<b class="fc"><i>233</i>&nbsp;            sb.append(targetPickedCards.toString().toLowerCase());</b>
+<i>234</i>&nbsp;
+<b class="fc"><i>235</i>&nbsp;            if (targetZoneLookedCards == Zone.LIBRARY) {</b>
+<b class="fc"><i>236</i>&nbsp;                sb.append(&quot;. Put the rest &quot;);</b>
+<b class="fc"><i>237</i>&nbsp;                if (putOnTop) {</b>
+<b class="nc"><i>238</i>&nbsp;                    sb.append(&quot;back on top&quot;);</b>
+<i>239</i>&nbsp;                } else {
+<b class="fc"><i>240</i>&nbsp;                    sb.append(&quot;on the bottom&quot;);</b>
+<i>241</i>&nbsp;                }
+<b class="fc"><i>242</i>&nbsp;                sb.append(&quot; of your library in any order&quot;);</b>
+<b class="nc"><i>243</i>&nbsp;            } else if (targetZoneLookedCards == Zone.GRAVEYARD) {</b>
+<b class="nc"><i>244</i>&nbsp;                sb.append(&quot; and the other into your graveyard&quot;);</b>
+<i>245</i>&nbsp;            }
+<i>246</i>&nbsp;        }
+<i>247</i>&nbsp;        // get text frame from super class and inject action text
+<b class="fc"><i>248</i>&nbsp;        return setText(mode, sb.toString());</b>
+<i>249</i>&nbsp;    }
+<i>250</i>&nbsp;
+<i>251</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

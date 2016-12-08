@@ -1,0 +1,383 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MageObjectImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MageObjectImpl (mage)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MageObjectImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (26/ 30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.3%
+  </span>
+  <span class="absValue">
+    (92/ 103)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.ArrayList;
+<i>31</i>&nbsp;import java.util.List;
+<i>32</i>&nbsp;import java.util.UUID;
+<i>33</i>&nbsp;import mage.abilities.Abilities;
+<i>34</i>&nbsp;import mage.abilities.AbilitiesImpl;
+<i>35</i>&nbsp;import mage.abilities.Ability;
+<i>36</i>&nbsp;import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+<i>37</i>&nbsp;import mage.abilities.costs.mana.ManaCost;
+<i>38</i>&nbsp;import mage.abilities.costs.mana.ManaCosts;
+<i>39</i>&nbsp;import mage.abilities.costs.mana.ManaCostsImpl;
+<i>40</i>&nbsp;import mage.abilities.keyword.ChangelingAbility;
+<i>41</i>&nbsp;import mage.abilities.mana.ManaAbility;
+<i>42</i>&nbsp;import mage.cards.FrameStyle;
+<i>43</i>&nbsp;import mage.constants.CardType;
+<i>44</i>&nbsp;import mage.game.Game;
+<i>45</i>&nbsp;import mage.game.events.ZoneChangeEvent;
+<i>46</i>&nbsp;import mage.util.CardUtil;
+<i>47</i>&nbsp;import mage.util.GameLog;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;public abstract class MageObjectImpl implements MageObject {
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    protected UUID objectId;
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    protected String name;
+<i>54</i>&nbsp;    protected ManaCosts&lt;ManaCost&gt; manaCost;
+<i>55</i>&nbsp;    protected ObjectColor color;
+<i>56</i>&nbsp;    protected ObjectColor frameColor;
+<i>57</i>&nbsp;    protected FrameStyle frameStyle;
+<b class="fc"><i>58</i>&nbsp;    protected List&lt;CardType&gt; cardType = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>59</i>&nbsp;    protected List&lt;String&gt; subtype = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>60</i>&nbsp;    protected List&lt;String&gt; supertype = new ArrayList&lt;&gt;();</b>
+<i>61</i>&nbsp;    protected Abilities&lt;Ability&gt; abilities;
+<i>62</i>&nbsp;    protected String text;
+<i>63</i>&nbsp;    protected MageInt power;
+<i>64</i>&nbsp;    protected MageInt toughness;
+<i>65</i>&nbsp;    protected boolean copy;
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public MageObjectImpl() {
+<b class="fc"><i>68</i>&nbsp;        this(UUID.randomUUID());</b>
+<b class="fc"><i>69</i>&nbsp;    }</b>
+<i>70</i>&nbsp;
+<b class="fc"><i>71</i>&nbsp;    public MageObjectImpl(UUID id) {</b>
+<b class="fc"><i>72</i>&nbsp;        objectId = id;</b>
+<b class="fc"><i>73</i>&nbsp;        power = new MageInt(0);</b>
+<b class="fc"><i>74</i>&nbsp;        toughness = new MageInt(0);</b>
+<b class="fc"><i>75</i>&nbsp;        color = new ObjectColor();</b>
+<b class="fc"><i>76</i>&nbsp;        frameColor = new ObjectColor();</b>
+<b class="fc"><i>77</i>&nbsp;        frameStyle = FrameStyle.M15_NORMAL;</b>
+<b class="fc"><i>78</i>&nbsp;        manaCost = new ManaCostsImpl&lt;&gt;(&quot;&quot;);</b>
+<b class="fc"><i>79</i>&nbsp;        abilities = new AbilitiesImpl&lt;&gt;();</b>
+<b class="fc"><i>80</i>&nbsp;    }</b>
+<i>81</i>&nbsp;
+<b class="fc"><i>82</i>&nbsp;    public MageObjectImpl(final MageObjectImpl object) {</b>
+<b class="fc"><i>83</i>&nbsp;        objectId = object.objectId;</b>
+<b class="fc"><i>84</i>&nbsp;        name = object.name;</b>
+<b class="fc"><i>85</i>&nbsp;        manaCost = object.manaCost.copy();</b>
+<b class="fc"><i>86</i>&nbsp;        text = object.text;</b>
+<b class="fc"><i>87</i>&nbsp;        color = object.color.copy();</b>
+<b class="fc"><i>88</i>&nbsp;        frameColor = object.frameColor.copy();</b>
+<b class="fc"><i>89</i>&nbsp;        frameStyle = object.frameStyle;</b>
+<b class="fc"><i>90</i>&nbsp;        power = object.power.copy();</b>
+<b class="fc"><i>91</i>&nbsp;        toughness = object.toughness.copy();</b>
+<b class="fc"><i>92</i>&nbsp;        abilities = object.abilities.copy();</b>
+<b class="fc"><i>93</i>&nbsp;        this.cardType.addAll(object.cardType);</b>
+<b class="fc"><i>94</i>&nbsp;        this.subtype.addAll(object.subtype);</b>
+<b class="fc"><i>95</i>&nbsp;        this.supertype.addAll(object.supertype);</b>
+<b class="fc"><i>96</i>&nbsp;        this.copy = object.copy;</b>
+<b class="fc"><i>97</i>&nbsp;    }</b>
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    @Override
+<i>100</i>&nbsp;    public UUID getId() {
+<b class="fc"><i>101</i>&nbsp;        return objectId;</b>
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    @Override
+<i>105</i>&nbsp;    public String getName() {
+<b class="fc"><i>106</i>&nbsp;        return name;</b>
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    @Override
+<i>110</i>&nbsp;    public String getIdName() {
+<b class="fc"><i>111</i>&nbsp;        return getName() + &quot; [&quot; + getId().toString().substring(0, 3) + &quot;]&quot;;</b>
+<i>112</i>&nbsp;    }
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    @Override
+<i>115</i>&nbsp;    public String getLogName() {
+<b class="nc"><i>116</i>&nbsp;        return GameLog.getColoredObjectIdName(this);</b>
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    @Override
+<i>120</i>&nbsp;    public String getImageName() {
+<b class="nc"><i>121</i>&nbsp;        return name;</b>
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    @Override
+<i>125</i>&nbsp;    public void setName(String name) {
+<b class="fc"><i>126</i>&nbsp;        this.name = name;</b>
+<b class="fc"><i>127</i>&nbsp;    }</b>
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    @Override
+<i>130</i>&nbsp;    public List&lt;CardType&gt; getCardType() {
+<b class="fc"><i>131</i>&nbsp;        return cardType;</b>
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    @Override
+<i>135</i>&nbsp;    public List&lt;String&gt; getSubtype(Game game) {
+<b class="fc"><i>136</i>&nbsp;        return subtype;</b>
+<i>137</i>&nbsp;    }
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    @Override
+<i>140</i>&nbsp;    public List&lt;String&gt; getSupertype() {
+<b class="fc"><i>141</i>&nbsp;        return supertype;</b>
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;    @Override
+<i>145</i>&nbsp;    public Abilities&lt;Ability&gt; getAbilities() {
+<b class="fc"><i>146</i>&nbsp;        return abilities;</b>
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    @Override
+<i>150</i>&nbsp;    public boolean hasAbility(UUID abilityId, Game game) {
+<b class="fc"><i>151</i>&nbsp;        if (this.getAbilities().containsKey(abilityId)) {</b>
+<b class="fc"><i>152</i>&nbsp;            return true;</b>
+<i>153</i>&nbsp;        }
+<b class="fc"><i>154</i>&nbsp;        Abilities&lt;Ability&gt; otherAbilities = game.getState().getAllOtherAbilities(getId());</b>
+<b class="fc"><i>155</i>&nbsp;        return otherAbilities != null &amp;&amp; otherAbilities.containsKey(abilityId);</b>
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    @Override
+<i>159</i>&nbsp;    public MageInt getPower() {
+<b class="fc"><i>160</i>&nbsp;        return power;</b>
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    @Override
+<i>164</i>&nbsp;    public MageInt getToughness() {
+<b class="fc"><i>165</i>&nbsp;        return toughness;</b>
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;    
+<i>168</i>&nbsp;    @Override
+<i>169</i>&nbsp;    public int getStartingLoyalty() {
+<b class="nc"><i>170</i>&nbsp;        for (Ability ab: getAbilities()) {</b>
+<b class="nc"><i>171</i>&nbsp;            if (ab instanceof PlanswalkerEntersWithLoyalityCountersAbility) {</b>
+<b class="nc"><i>172</i>&nbsp;                return ((PlanswalkerEntersWithLoyalityCountersAbility)ab).getStartingLoyalty();</b>
+<i>173</i>&nbsp;            }
+<b class="nc"><i>174</i>&nbsp;        }</b>
+<b class="nc"><i>175</i>&nbsp;        return 0;</b>
+<i>176</i>&nbsp;    }
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;    @Override
+<i>179</i>&nbsp;    public ObjectColor getColor(Game game) {
+<b class="fc"><i>180</i>&nbsp;        return color;</b>
+<i>181</i>&nbsp;    }
+<i>182</i>&nbsp;    
+<i>183</i>&nbsp;    @Override
+<i>184</i>&nbsp;    public ObjectColor getFrameColor(Game game) {
+<i>185</i>&nbsp;        // For lands, add any colors of mana the land can produce to
+<i>186</i>&nbsp;        // its frame colors.
+<b class="fc"><i>187</i>&nbsp;        if (getCardType().contains(CardType.LAND)) {</b>
+<b class="fc"><i>188</i>&nbsp;            ObjectColor cl = frameColor.copy();</b>
+<b class="fc"><i>189</i>&nbsp;            for (Ability ab: getAbilities()) {</b>
+<b class="fc"><i>190</i>&nbsp;                if (ab instanceof ManaAbility) {</b>
+<b class="fc"><i>191</i>&nbsp;                    ManaAbility mana = (ManaAbility)ab;</b>
+<i>192</i>&nbsp;                    try {
+<b class="fc"><i>193</i>&nbsp;                        List&lt;Mana&gt; manaAdded = mana.getNetMana(game);</b>
+<b class="fc"><i>194</i>&nbsp;                        for (Mana m: manaAdded) {</b>
+<b class="fc"><i>195</i>&nbsp;                            if (m.getAny() &gt; 0) {</b>
+<b class="fc"><i>196</i>&nbsp;                                return new ObjectColor(&quot;WUBRG&quot;);</b>
+<i>197</i>&nbsp;                            }
+<b class="fc"><i>198</i>&nbsp;                            if (m.getWhite() &gt; 0) {</b>
+<b class="fc"><i>199</i>&nbsp;                                cl.setWhite(true);</b>
+<i>200</i>&nbsp;                            }
+<b class="fc"><i>201</i>&nbsp;                            if (m.getBlue() &gt; 0) {</b>
+<b class="fc"><i>202</i>&nbsp;                                cl.setBlue(true);</b>
+<i>203</i>&nbsp;                            }
+<b class="fc"><i>204</i>&nbsp;                            if (m.getBlack() &gt; 0) {</b>
+<b class="fc"><i>205</i>&nbsp;                                cl.setBlack(true);</b>
+<i>206</i>&nbsp;                            }
+<b class="fc"><i>207</i>&nbsp;                            if (m.getRed() &gt; 0) {</b>
+<b class="fc"><i>208</i>&nbsp;                                cl.setRed(true);</b>
+<i>209</i>&nbsp;                            }
+<b class="fc"><i>210</i>&nbsp;                            if (m.getGreen() &gt; 0) {</b>
+<b class="fc"><i>211</i>&nbsp;                                cl.setGreen(true);</b>
+<i>212</i>&nbsp;                            }
+<b class="fc"><i>213</i>&nbsp;                        }</b>
+<b class="fc"><i>214</i>&nbsp;                    } catch (NullPointerException e) {</b>
+<i>215</i>&nbsp;                        // Ability depends on game
+<i>216</i>&nbsp;                        // but no game passed
+<i>217</i>&nbsp;                        // All such abilities are 5-color ones
+<b class="fc"><i>218</i>&nbsp;                        return new ObjectColor(&quot;WUBRG&quot;);</b>
+<b class="fc"><i>219</i>&nbsp;                    }</b>
+<i>220</i>&nbsp;                }
+<b class="fc"><i>221</i>&nbsp;            }</b>
+<b class="fc"><i>222</i>&nbsp;            return cl;</b>
+<i>223</i>&nbsp;        } else {
+<i>224</i>&nbsp;            // For everything else, just return the frame colors
+<b class="fc"><i>225</i>&nbsp;            return frameColor;</b>
+<i>226</i>&nbsp;        }
+<i>227</i>&nbsp;    }
+<i>228</i>&nbsp;
+<i>229</i>&nbsp;    @Override
+<i>230</i>&nbsp;    public FrameStyle getFrameStyle() {
+<b class="fc"><i>231</i>&nbsp;        return frameStyle;</b>
+<i>232</i>&nbsp;    }
+<i>233</i>&nbsp;
+<i>234</i>&nbsp;    @Override
+<i>235</i>&nbsp;    public ManaCosts&lt;ManaCost&gt; getManaCost() {
+<b class="fc"><i>236</i>&nbsp;        return manaCost;</b>
+<i>237</i>&nbsp;    }
+<i>238</i>&nbsp;
+<i>239</i>&nbsp;    @Override
+<i>240</i>&nbsp;    public int getConvertedManaCost() {
+<b class="fc"><i>241</i>&nbsp;        if (manaCost != null) {</b>
+<b class="fc"><i>242</i>&nbsp;            return manaCost.convertedManaCost();</b>
+<i>243</i>&nbsp;        }
+<b class="nc"><i>244</i>&nbsp;        return 0;</b>
+<i>245</i>&nbsp;    }
+<i>246</i>&nbsp;
+<i>247</i>&nbsp;    @Override
+<i>248</i>&nbsp;    public void adjustCosts(Ability ability, Game game) {
+<b class="fc"><i>249</i>&nbsp;    }</b>
+<i>250</i>&nbsp;
+<i>251</i>&nbsp;    @Override
+<i>252</i>&nbsp;    public void adjustTargets(Ability ability, Game game) {
+<b class="fc"><i>253</i>&nbsp;    }</b>
+<i>254</i>&nbsp;
+<i>255</i>&nbsp;    @Override
+<i>256</i>&nbsp;    public boolean hasSubtype(String value, Game game) {
+<b class="fc"><i>257</i>&nbsp;        if (value == null) {</b>
+<b class="nc"><i>258</i>&nbsp;            return false;</b>
+<i>259</i>&nbsp;        }
+<b class="fc"><i>260</i>&nbsp;        List&lt;String&gt; subtypes = this.getSubtype(game);</b>
+<b class="fc"><i>261</i>&nbsp;        if (subtypes.contains(value)) {</b>
+<b class="fc"><i>262</i>&nbsp;            return true;</b>
+<i>263</i>&nbsp;        } else {
+<i>264</i>&nbsp;            // checking for Changeling
+<i>265</i>&nbsp;            // first make sure input parameter is a creature subtype
+<i>266</i>&nbsp;            // if not, then ChangelingAbility doesn&#39;t matter
+<b class="fc"><i>267</i>&nbsp;            if (CardUtil.isNonCreatureSubtype(value)) {</b>
+<b class="fc"><i>268</i>&nbsp;                return false;</b>
+<i>269</i>&nbsp;            }
+<i>270</i>&nbsp;            // as it is creature subtype, then check the existence of Changeling
+<b class="fc"><i>271</i>&nbsp;            return abilities.contains(ChangelingAbility.getInstance()) || subtypes.contains(ChangelingAbility.ALL_CREATURE_TYPE);</b>
+<i>272</i>&nbsp;        }
+<i>273</i>&nbsp;    }
+<i>274</i>&nbsp;
+<i>275</i>&nbsp;    @Override
+<i>276</i>&nbsp;    public void setCopy(boolean isCopy) {
+<b class="fc"><i>277</i>&nbsp;        this.copy = isCopy;</b>
+<b class="fc"><i>278</i>&nbsp;    }</b>
+<i>279</i>&nbsp;
+<i>280</i>&nbsp;    @Override
+<i>281</i>&nbsp;    public boolean isCopy() {
+<b class="fc"><i>282</i>&nbsp;        return copy;</b>
+<i>283</i>&nbsp;    }
+<i>284</i>&nbsp;
+<i>285</i>&nbsp;    @Override
+<i>286</i>&nbsp;    public int getZoneChangeCounter(Game game) {
+<b class="fc"><i>287</i>&nbsp;        return game.getState().getZoneChangeCounter(objectId);</b>
+<i>288</i>&nbsp;    }
+<i>289</i>&nbsp;
+<i>290</i>&nbsp;    @Override
+<i>291</i>&nbsp;    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+<b class="fc"><i>292</i>&nbsp;        game.getState().updateZoneChangeCounter(objectId);</b>
+<b class="fc"><i>293</i>&nbsp;    }</b>
+<i>294</i>&nbsp;
+<i>295</i>&nbsp;    @Override
+<i>296</i>&nbsp;    public void setZoneChangeCounter(int value, Game game) {
+<b class="nc"><i>297</i>&nbsp;        game.getState().setZoneChangeCounter(objectId, value);</b>
+<b class="nc"><i>298</i>&nbsp;    }</b>
+<i>299</i>&nbsp;
+<i>300</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

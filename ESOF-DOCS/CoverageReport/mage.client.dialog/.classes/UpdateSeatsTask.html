@@ -1,0 +1,571 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UpdateSeatsTask</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.dialog</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UpdateSeatsTask (mage.client.dialog)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UpdateSeatsTask</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 38)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;
+<i>29</i>&nbsp; /*
+<i>30</i>&nbsp; * TableWaitingDialog.java
+<i>31</i>&nbsp; *
+<i>32</i>&nbsp; * Created on Dec 16, 2009, 10:27:44 AM
+<i>33</i>&nbsp; */
+<i>34</i>&nbsp;package mage.client.dialog;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;import java.awt.Dimension;
+<i>37</i>&nbsp;import java.util.List;
+<i>38</i>&nbsp;import java.util.UUID;
+<i>39</i>&nbsp;import java.util.concurrent.CancellationException;
+<i>40</i>&nbsp;import java.util.concurrent.ExecutionException;
+<i>41</i>&nbsp;import javax.swing.Icon;
+<i>42</i>&nbsp;import javax.swing.SwingWorker;
+<i>43</i>&nbsp;import javax.swing.table.AbstractTableModel;
+<i>44</i>&nbsp;import mage.client.MageFrame;
+<i>45</i>&nbsp;import mage.client.SessionHandler;
+<i>46</i>&nbsp;import mage.client.chat.ChatPanelBasic;
+<i>47</i>&nbsp;import mage.client.components.MageComponents;
+<i>48</i>&nbsp;import mage.client.components.tray.MageTray;
+<i>49</i>&nbsp;import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_ORDER;
+<i>50</i>&nbsp;import static mage.client.dialog.PreferencesDialog.KEY_TABLE_WAITING_COLUMNS_WIDTH;
+<i>51</i>&nbsp;import mage.client.util.GUISizeHelper;
+<i>52</i>&nbsp;import mage.client.util.audio.AudioManager;
+<i>53</i>&nbsp;import mage.client.util.gui.TableUtil;
+<i>54</i>&nbsp;import mage.client.util.gui.countryBox.CountryCellRenderer;
+<i>55</i>&nbsp;import mage.remote.Session;
+<i>56</i>&nbsp;import mage.view.SeatView;
+<i>57</i>&nbsp;import mage.view.TableView;
+<i>58</i>&nbsp;import org.apache.log4j.Logger;
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;/**
+<i>61</i>&nbsp; *
+<i>62</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>63</i>&nbsp; */
+<i>64</i>&nbsp;public class TableWaitingDialog extends MageDialog {
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    private static final Logger LOGGER = Logger.getLogger(TableWaitingDialog.class);
+<i>67</i>&nbsp;    private static final int[] DEFAULT_COLUMS_WIDTH = {20, 50, 100, 100, 100};
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    private UUID tableId;
+<i>70</i>&nbsp;    private UUID roomId;
+<i>71</i>&nbsp;    private boolean isTournament;
+<i>72</i>&nbsp;    private final TableWaitModel tableWaitModel;
+<i>73</i>&nbsp;    private UpdateSeatsTask updateTask;
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    /**
+<i>76</i>&nbsp;     * Creates new form TableWaitingDialog
+<i>77</i>&nbsp;     */
+<i>78</i>&nbsp;    public TableWaitingDialog() {
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;        tableWaitModel = new TableWaitModel();
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;        initComponents();
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;        int prefWidth = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLE_WAITING_WIDTH, &quot;500&quot;));
+<i>85</i>&nbsp;        int prefHeight = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLE_WAITING_HEIGHT, &quot;400&quot;));
+<i>86</i>&nbsp;        if (prefWidth &gt; 40 &amp;&amp; prefHeight &gt; 40) {
+<i>87</i>&nbsp;            this.setSize(prefWidth, prefHeight);
+<i>88</i>&nbsp;        }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;        chatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.NONE);
+<i>91</i>&nbsp;        tableSeats.createDefaultColumnsFromModel();
+<i>92</i>&nbsp;        TableUtil.setColumnWidthAndOrder(tableSeats, DEFAULT_COLUMS_WIDTH, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+<i>93</i>&nbsp;        tableSeats.setDefaultRenderer(Icon.class, new CountryCellRenderer());
+<i>94</i>&nbsp;        setGUISize();
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;        MageFrame.getUI().addButton(MageComponents.TABLE_WAITING_START_BUTTON, btnStart);
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    @Override
+<i>100</i>&nbsp;    public void changeGUISize() {
+<i>101</i>&nbsp;        setGUISize();
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    private void setGUISize() {
+<i>105</i>&nbsp;        tableSeats.getTableHeader().setFont(GUISizeHelper.tableFont);
+<i>106</i>&nbsp;        tableSeats.setFont(GUISizeHelper.tableFont);
+<i>107</i>&nbsp;        tableSeats.setRowHeight(GUISizeHelper.getTableRowHeight());
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;        jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+<i>110</i>&nbsp;        jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
+<i>111</i>&nbsp;        jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));
+<i>112</i>&nbsp;    }
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    public void update(TableView table) {
+<i>115</i>&nbsp;        try {
+<i>116</i>&nbsp;            if (table != null) {
+<i>117</i>&nbsp;                switch (table.getTableState()) {
+<i>118</i>&nbsp;                    case READY_TO_START:
+<i>119</i>&nbsp;                        this.btnStart.setEnabled(true);
+<i>120</i>&nbsp;                        this.btnMoveDown.setEnabled(true);
+<i>121</i>&nbsp;                        this.btnMoveUp.setEnabled(true);
+<i>122</i>&nbsp;                        break;
+<i>123</i>&nbsp;                    case WAITING:
+<i>124</i>&nbsp;                        this.btnStart.setEnabled(false);
+<i>125</i>&nbsp;                        this.btnMoveDown.setEnabled(false);
+<i>126</i>&nbsp;                        this.btnMoveUp.setEnabled(false);
+<i>127</i>&nbsp;                        break;
+<i>128</i>&nbsp;                    default:
+<i>129</i>&nbsp;                        closeDialog();
+<i>130</i>&nbsp;                        return;
+<i>131</i>&nbsp;                }
+<i>132</i>&nbsp;                int row = this.tableSeats.getSelectedRow();
+<i>133</i>&nbsp;                if (getTitle().equals(&quot;Waiting for players&quot;)) {
+<i>134</i>&nbsp;                    this.title = getTitle() + &quot; - &quot; + table.getDeckType() + &quot; / &quot; + table.getGameType();
+<i>135</i>&nbsp;                    this.repaint();
+<i>136</i>&nbsp;                }
+<i>137</i>&nbsp;                tableWaitModel.loadData(table);
+<i>138</i>&nbsp;                this.tableSeats.repaint();
+<i>139</i>&nbsp;                this.tableSeats.getSelectionModel().setSelectionInterval(row, row);
+<i>140</i>&nbsp;            } else {
+<i>141</i>&nbsp;                closeDialog();
+<i>142</i>&nbsp;            }
+<i>143</i>&nbsp;        } catch (Exception ex) {
+<i>144</i>&nbsp;            closeDialog();
+<i>145</i>&nbsp;        }
+<i>146</i>&nbsp;    }
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;    public void showDialog(UUID roomId, UUID tableId, boolean isTournament) {
+<i>149</i>&nbsp;        this.roomId = roomId;
+<i>150</i>&nbsp;        this.tableId = tableId;
+<i>151</i>&nbsp;        this.isTournament = isTournament;
+<i>152</i>&nbsp;        updateTask = new UpdateSeatsTask(SessionHandler.getSession(), roomId, tableId, this);
+<i>153</i>&nbsp;        if (SessionHandler.isTableOwner(roomId, tableId)) {
+<i>154</i>&nbsp;            this.btnStart.setVisible(true);
+<i>155</i>&nbsp;            this.btnMoveDown.setVisible(true);
+<i>156</i>&nbsp;            this.btnMoveUp.setVisible(true);
+<i>157</i>&nbsp;        } else {
+<i>158</i>&nbsp;            this.btnStart.setVisible(false);
+<i>159</i>&nbsp;            this.btnMoveDown.setVisible(false);
+<i>160</i>&nbsp;            this.btnMoveUp.setVisible(false);
+<i>161</i>&nbsp;        }
+<i>162</i>&nbsp;        UUID chatId = SessionHandler.getTableChatId(tableId);
+<i>163</i>&nbsp;        if (chatId != null) {
+<i>164</i>&nbsp;            this.chatPanel.connect(chatId);
+<i>165</i>&nbsp;            updateTask.execute();
+<i>166</i>&nbsp;            this.setModal(false);
+<i>167</i>&nbsp;            this.setLocation(100, 100);
+<i>168</i>&nbsp;            this.setVisible(true);
+<i>169</i>&nbsp;        } else {
+<i>170</i>&nbsp;            closeDialog();
+<i>171</i>&nbsp;        }
+<i>172</i>&nbsp;    }
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;    public void closeDialog() {
+<i>175</i>&nbsp;        if (updateTask != null) {
+<i>176</i>&nbsp;            updateTask.cancel(true);
+<i>177</i>&nbsp;        }
+<i>178</i>&nbsp;        this.chatPanel.disconnect();
+<i>179</i>&nbsp;        MageFrame.getUI().removeButton(MageComponents.TABLE_WAITING_START_BUTTON);
+<i>180</i>&nbsp;        this.removeDialog();
+<i>181</i>&nbsp;        TableUtil.saveColumnWidthAndOrderToPrefs(tableSeats, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
+<i>182</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLE_WAITING_WIDTH, Integer.toString(getWidth()));
+<i>183</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLE_WAITING_HEIGHT, Integer.toString(getHeight()));
+<i>184</i>&nbsp;    }
+<i>185</i>&nbsp;
+<i>186</i>&nbsp;    /**
+<i>187</i>&nbsp;     * This method is called from within the constructor to initialize the form.
+<i>188</i>&nbsp;     * WARNING: Do NOT modify this code. The content of this method is always
+<i>189</i>&nbsp;     * regenerated by the Form Editor.
+<i>190</i>&nbsp;     */
+<i>191</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>192</i>&nbsp;    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+<i>193</i>&nbsp;    private void initComponents() {
+<i>194</i>&nbsp;
+<i>195</i>&nbsp;        btnMoveUp = new javax.swing.JButton();
+<i>196</i>&nbsp;        btnMoveDown = new javax.swing.JButton();
+<i>197</i>&nbsp;        btnCancel = new javax.swing.JButton();
+<i>198</i>&nbsp;        btnStart = new javax.swing.JButton();
+<i>199</i>&nbsp;        jSplitPane1 = new javax.swing.JSplitPane();
+<i>200</i>&nbsp;        jScrollPane1 = new javax.swing.JScrollPane();
+<i>201</i>&nbsp;        tableSeats = new javax.swing.JTable();
+<i>202</i>&nbsp;        chatPanel = new mage.client.chat.ChatPanelBasic();
+<i>203</i>&nbsp;
+<i>204</i>&nbsp;        setResizable(true);
+<i>205</i>&nbsp;        setTitle(&quot;Waiting for players&quot;);
+<i>206</i>&nbsp;
+<i>207</i>&nbsp;        btnMoveUp.setText(&quot;Move Up&quot;);
+<i>208</i>&nbsp;        btnMoveUp.setEnabled(false);
+<i>209</i>&nbsp;        btnMoveUp.addActionListener(new java.awt.event.ActionListener() {
+<i>210</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>211</i>&nbsp;                btnMoveUpActionPerformed(evt);
+<i>212</i>&nbsp;            }
+<i>213</i>&nbsp;        });
+<i>214</i>&nbsp;
+<i>215</i>&nbsp;        btnMoveDown.setText(&quot;Move Down&quot;);
+<i>216</i>&nbsp;        btnMoveDown.setEnabled(false);
+<i>217</i>&nbsp;        btnMoveDown.addActionListener(new java.awt.event.ActionListener() {
+<i>218</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>219</i>&nbsp;                btnMoveDownActionPerformed(evt);
+<i>220</i>&nbsp;            }
+<i>221</i>&nbsp;        });
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;        btnCancel.setText(&quot;Cancel&quot;);
+<i>224</i>&nbsp;        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+<i>225</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>226</i>&nbsp;                btnCancelActionPerformed(evt);
+<i>227</i>&nbsp;            }
+<i>228</i>&nbsp;        });
+<i>229</i>&nbsp;
+<i>230</i>&nbsp;        btnStart.setText(&quot;Start&quot;);
+<i>231</i>&nbsp;        btnStart.setEnabled(false);
+<i>232</i>&nbsp;        btnStart.addActionListener(new java.awt.event.ActionListener() {
+<i>233</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>234</i>&nbsp;                btnStartActionPerformed(evt);
+<i>235</i>&nbsp;            }
+<i>236</i>&nbsp;        });
+<i>237</i>&nbsp;
+<i>238</i>&nbsp;        jSplitPane1.setDividerLocation(300);
+<i>239</i>&nbsp;        jSplitPane1.setDividerSize(3);
+<i>240</i>&nbsp;        jSplitPane1.setResizeWeight(1.0);
+<i>241</i>&nbsp;        jSplitPane1.setToolTipText(&quot;&quot;);
+<i>242</i>&nbsp;
+<i>243</i>&nbsp;        tableSeats.setModel(tableWaitModel);
+<i>244</i>&nbsp;        tableSeats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+<i>245</i>&nbsp;        jScrollPane1.setViewportView(tableSeats);
+<i>246</i>&nbsp;
+<i>247</i>&nbsp;        jSplitPane1.setLeftComponent(jScrollPane1);
+<i>248</i>&nbsp;        jSplitPane1.setRightComponent(chatPanel);
+<i>249</i>&nbsp;
+<i>250</i>&nbsp;        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+<i>251</i>&nbsp;        getContentPane().setLayout(layout);
+<i>252</i>&nbsp;        layout.setHorizontalGroup(
+<i>253</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>254</i>&nbsp;            .addGroup(layout.createSequentialGroup()
+<i>255</i>&nbsp;                .addContainerGap()
+<i>256</i>&nbsp;                .addComponent(btnMoveDown)
+<i>257</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>258</i>&nbsp;                .addComponent(btnMoveUp)
+<i>259</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<i>260</i>&nbsp;                .addComponent(btnStart)
+<i>261</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>262</i>&nbsp;                .addComponent(btnCancel)
+<i>263</i>&nbsp;                .addContainerGap())
+<i>264</i>&nbsp;            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+<i>265</i>&nbsp;        );
+<i>266</i>&nbsp;        layout.setVerticalGroup(
+<i>267</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>268</i>&nbsp;            .addGroup(layout.createSequentialGroup()
+<i>269</i>&nbsp;                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+<i>270</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+<i>271</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+<i>272</i>&nbsp;                    .addComponent(btnMoveDown)
+<i>273</i>&nbsp;                    .addComponent(btnMoveUp)
+<i>274</i>&nbsp;                    .addComponent(btnCancel)
+<i>275</i>&nbsp;                    .addComponent(btnStart))
+<i>276</i>&nbsp;                .addContainerGap())
+<i>277</i>&nbsp;        );
+<i>278</i>&nbsp;
+<i>279</i>&nbsp;        pack();
+<i>280</i>&nbsp;    }// &lt;/editor-fold&gt;//GEN-END:initComponents
+<i>281</i>&nbsp;
+<i>282</i>&nbsp;    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+<i>283</i>&nbsp;        if (!isTournament) {
+<i>284</i>&nbsp;            if (SessionHandler.startMatch(roomId, tableId)) {
+<i>285</i>&nbsp;                closeDialog();
+<i>286</i>&nbsp;            }
+<i>287</i>&nbsp;        } else if (SessionHandler.startTournament(roomId, tableId)) {
+<i>288</i>&nbsp;            closeDialog();
+<i>289</i>&nbsp;        }
+<i>290</i>&nbsp;    }//GEN-LAST:event_btnStartActionPerformed
+<i>291</i>&nbsp;
+<i>292</i>&nbsp;    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+<i>293</i>&nbsp;        try {
+<i>294</i>&nbsp;            if (!SessionHandler.leaveTable(roomId, tableId)) {
+<i>295</i>&nbsp;                return; // already started, so leave no more possible
+<i>296</i>&nbsp;            }
+<i>297</i>&nbsp;        } catch (Exception e) {
+<i>298</i>&nbsp;            //swallow exception
+<i>299</i>&nbsp;            LOGGER.error(e);
+<i>300</i>&nbsp;        }
+<i>301</i>&nbsp;        closeDialog();
+<i>302</i>&nbsp;    }//GEN-LAST:event_btnCancelActionPerformed
+<i>303</i>&nbsp;
+<i>304</i>&nbsp;    private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
+<i>305</i>&nbsp;        int row = this.tableSeats.getSelectedRow();
+<i>306</i>&nbsp;        if (row &lt; this.tableSeats.getRowCount() - 1) {
+<i>307</i>&nbsp;            SessionHandler.swapSeats(roomId, tableId, row, row + 1);
+<i>308</i>&nbsp;            this.tableSeats.getSelectionModel().setSelectionInterval(row + 1, row + 1);
+<i>309</i>&nbsp;        }
+<i>310</i>&nbsp;
+<i>311</i>&nbsp;    }//GEN-LAST:event_btnMoveDownActionPerformed
+<i>312</i>&nbsp;
+<i>313</i>&nbsp;    private void btnMoveUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveUpActionPerformed
+<i>314</i>&nbsp;        int row = this.tableSeats.getSelectedRow();
+<i>315</i>&nbsp;        if (row &gt; 0) {
+<i>316</i>&nbsp;            SessionHandler.swapSeats(roomId, tableId, row, row - 1);
+<i>317</i>&nbsp;            this.tableSeats.getSelectionModel().setSelectionInterval(row - 1, row - 1);
+<i>318</i>&nbsp;        }
+<i>319</i>&nbsp;    }//GEN-LAST:event_btnMoveUpActionPerformed
+<i>320</i>&nbsp;
+<i>321</i>&nbsp;    // Variables declaration - do not modify//GEN-BEGIN:variables
+<i>322</i>&nbsp;    private javax.swing.JButton btnCancel;
+<i>323</i>&nbsp;    private javax.swing.JButton btnMoveDown;
+<i>324</i>&nbsp;    private javax.swing.JButton btnMoveUp;
+<i>325</i>&nbsp;    private javax.swing.JButton btnStart;
+<i>326</i>&nbsp;    private mage.client.chat.ChatPanelBasic chatPanel;
+<i>327</i>&nbsp;    private javax.swing.JScrollPane jScrollPane1;
+<i>328</i>&nbsp;    private javax.swing.JSplitPane jSplitPane1;
+<i>329</i>&nbsp;    private javax.swing.JTable tableSeats;
+<i>330</i>&nbsp;    // End of variables declaration//GEN-END:variables
+<i>331</i>&nbsp;
+<i>332</i>&nbsp;}
+<i>333</i>&nbsp;
+<i>334</i>&nbsp;class TableWaitModel extends AbstractTableModel {
+<i>335</i>&nbsp;
+<i>336</i>&nbsp;    private final String[] columnNames = new String[]{&quot;Seat&quot;, &quot;Loc&quot;, &quot;Player Name&quot;, &quot;Constructed Rating&quot;, &quot;Player Type&quot;, &quot;History&quot;};
+<i>337</i>&nbsp;    private SeatView[] seats = new SeatView[0];
+<i>338</i>&nbsp;    private boolean limited;
+<i>339</i>&nbsp;
+<i>340</i>&nbsp;    public void loadData(TableView table) {
+<i>341</i>&nbsp;        seats = table.getSeats().toArray(new SeatView[0]);
+<i>342</i>&nbsp;        if (limited != table.isLimited()) {
+<i>343</i>&nbsp;            limited = table.isLimited();
+<i>344</i>&nbsp;            columnNames[3] = limited ? &quot;Limited Rating&quot; : &quot;Constructed Rating&quot;;
+<i>345</i>&nbsp;            this.fireTableStructureChanged();
+<i>346</i>&nbsp;        }
+<i>347</i>&nbsp;        this.fireTableDataChanged();
+<i>348</i>&nbsp;    }
+<i>349</i>&nbsp;
+<i>350</i>&nbsp;    @Override
+<i>351</i>&nbsp;    public int getRowCount() {
+<i>352</i>&nbsp;        return seats.length;
+<i>353</i>&nbsp;    }
+<i>354</i>&nbsp;
+<i>355</i>&nbsp;    @Override
+<i>356</i>&nbsp;    public int getColumnCount() {
+<i>357</i>&nbsp;        return columnNames.length;
+<i>358</i>&nbsp;    }
+<i>359</i>&nbsp;
+<i>360</i>&nbsp;    @Override
+<i>361</i>&nbsp;    public Object getValueAt(int arg0, int arg1) {
+<i>362</i>&nbsp;        if (seats[arg0].getPlayerId() == null) {
+<i>363</i>&nbsp;            if (arg1 == 0) {
+<i>364</i>&nbsp;                return Integer.toString(arg0 + 1);
+<i>365</i>&nbsp;            }
+<i>366</i>&nbsp;        } else {
+<i>367</i>&nbsp;            switch (arg1) {
+<i>368</i>&nbsp;                case 0:
+<i>369</i>&nbsp;                    return Integer.toString(arg0 + 1);
+<i>370</i>&nbsp;                case 1:
+<i>371</i>&nbsp;                    return seats[arg0].getFlagName();
+<i>372</i>&nbsp;                case 2:
+<i>373</i>&nbsp;                    return seats[arg0].getPlayerName();
+<i>374</i>&nbsp;                case 3:
+<i>375</i>&nbsp;                    return limited ? seats[arg0].getLimitedRating() : seats[arg0].getConstructedRating();
+<i>376</i>&nbsp;                case 4:
+<i>377</i>&nbsp;                    return seats[arg0].getPlayerType();
+<i>378</i>&nbsp;                case 5:
+<i>379</i>&nbsp;                    return seats[arg0].getHistory();
+<i>380</i>&nbsp;            }
+<i>381</i>&nbsp;        }
+<i>382</i>&nbsp;        return &quot;&quot;;
+<i>383</i>&nbsp;    }
+<i>384</i>&nbsp;
+<i>385</i>&nbsp;    @Override
+<i>386</i>&nbsp;    public String getColumnName(int columnIndex) {
+<i>387</i>&nbsp;        String colName = &quot;&quot;;
+<i>388</i>&nbsp;
+<i>389</i>&nbsp;        if (columnIndex &lt;= getColumnCount()) {
+<i>390</i>&nbsp;            colName = columnNames[columnIndex];
+<i>391</i>&nbsp;        }
+<i>392</i>&nbsp;
+<i>393</i>&nbsp;        return colName;
+<i>394</i>&nbsp;    }
+<i>395</i>&nbsp;
+<i>396</i>&nbsp;    @Override
+<i>397</i>&nbsp;    public Class getColumnClass(int columnIndex) {
+<i>398</i>&nbsp;        switch (columnIndex) {
+<i>399</i>&nbsp;            case 1:
+<i>400</i>&nbsp;                return Icon.class;
+<i>401</i>&nbsp;            case 3:
+<i>402</i>&nbsp;                return Integer.class;
+<i>403</i>&nbsp;            default:
+<i>404</i>&nbsp;                return String.class;
+<i>405</i>&nbsp;        }
+<i>406</i>&nbsp;    }
+<i>407</i>&nbsp;
+<i>408</i>&nbsp;    @Override
+<i>409</i>&nbsp;    public boolean isCellEditable(int rowIndex, int columnIndex) {
+<i>410</i>&nbsp;        return false;
+<i>411</i>&nbsp;    }
+<i>412</i>&nbsp;
+<i>413</i>&nbsp;}
+<i>414</i>&nbsp;
+<i>415</i>&nbsp;class UpdateSeatsTask extends SwingWorker&lt;Void, TableView&gt; {
+<i>416</i>&nbsp;
+<i>417</i>&nbsp;    private final Session session;
+<i>418</i>&nbsp;    private final UUID roomId;
+<i>419</i>&nbsp;    private final UUID tableId;
+<i>420</i>&nbsp;    private final TableWaitingDialog dialog;
+<b class="nc"><i>421</i>&nbsp;    private int count = 0;</b>
+<i>422</i>&nbsp;
+<b class="nc"><i>423</i>&nbsp;    private static final Logger logger = Logger.getLogger(TableWaitingDialog.class);</b>
+<i>424</i>&nbsp;
+<b class="nc"><i>425</i>&nbsp;    UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {</b>
+<b class="nc"><i>426</i>&nbsp;        this.session = session;</b>
+<b class="nc"><i>427</i>&nbsp;        this.roomId = roomId;</b>
+<b class="nc"><i>428</i>&nbsp;        this.tableId = tableId;</b>
+<b class="nc"><i>429</i>&nbsp;        this.dialog = dialog;</b>
+<i>430</i>&nbsp;    }
+<i>431</i>&nbsp;
+<i>432</i>&nbsp;    @Override
+<i>433</i>&nbsp;    protected Void doInBackground() throws Exception {
+<b class="nc"><i>434</i>&nbsp;        while (!isCancelled()) {</b>
+<b class="nc"><i>435</i>&nbsp;            this.publish(SessionHandler.getTable(roomId, tableId));</b>
+<b class="nc"><i>436</i>&nbsp;            Thread.sleep(1000);</b>
+<i>437</i>&nbsp;        }
+<b class="nc"><i>438</i>&nbsp;        return null;</b>
+<i>439</i>&nbsp;    }
+<i>440</i>&nbsp;
+<i>441</i>&nbsp;    @Override
+<i>442</i>&nbsp;    protected void process(List&lt;TableView&gt; view) {
+<b class="nc"><i>443</i>&nbsp;        TableView tableView = view.get(0);</b>
+<b class="nc"><i>444</i>&nbsp;        if (count == 0) {</b>
+<b class="nc"><i>445</i>&nbsp;            count = getPlayersCount(tableView);</b>
+<i>446</i>&nbsp;        } else {
+<b class="nc"><i>447</i>&nbsp;            int current = getPlayersCount(tableView);</b>
+<b class="nc"><i>448</i>&nbsp;            if (current != count) {</b>
+<b class="nc"><i>449</i>&nbsp;                if (count &gt; 0) {</b>
+<b class="nc"><i>450</i>&nbsp;                    if (current &gt; count) {</b>
+<b class="nc"><i>451</i>&nbsp;                        MageTray.getInstance().displayMessage(&quot;New player joined your game.&quot;);</b>
+<b class="nc"><i>452</i>&nbsp;                        AudioManager.playPlayerJoinedTable();</b>
+<i>453</i>&nbsp;                    } else {
+<b class="nc"><i>454</i>&nbsp;                        MageTray.getInstance().displayMessage(&quot;A player left your game.&quot;);</b>
+<i>455</i>&nbsp;                    }
+<b class="nc"><i>456</i>&nbsp;                    MageTray.getInstance().blink();</b>
+<i>457</i>&nbsp;                }
+<b class="nc"><i>458</i>&nbsp;                count = current;</b>
+<i>459</i>&nbsp;            }
+<i>460</i>&nbsp;        }
+<b class="nc"><i>461</i>&nbsp;        dialog.update(tableView);</b>
+<i>462</i>&nbsp;    }
+<i>463</i>&nbsp;
+<i>464</i>&nbsp;    private int getPlayersCount(TableView tableView) {
+<b class="nc"><i>465</i>&nbsp;        int playerCount = 0;</b>
+<b class="nc"><i>466</i>&nbsp;        if (tableView != null) {</b>
+<b class="nc"><i>467</i>&nbsp;            for (SeatView seatView : tableView.getSeats()) {</b>
+<b class="nc"><i>468</i>&nbsp;                if (seatView.getPlayerId() != null &amp;&amp; seatView.getPlayerType().equals(&quot;Human&quot;)) {</b>
+<b class="nc"><i>469</i>&nbsp;                    playerCount++;</b>
+<i>470</i>&nbsp;                }
+<b class="nc"><i>471</i>&nbsp;            }</b>
+<i>472</i>&nbsp;        }
+<b class="nc"><i>473</i>&nbsp;        return playerCount;</b>
+<i>474</i>&nbsp;    }
+<i>475</i>&nbsp;
+<i>476</i>&nbsp;    @Override
+<i>477</i>&nbsp;    protected void done() {
+<i>478</i>&nbsp;        try {
+<b class="nc"><i>479</i>&nbsp;            get();</b>
+<b class="nc"><i>480</i>&nbsp;        } catch (InterruptedException ex) {</b>
+<b class="nc"><i>481</i>&nbsp;            logger.fatal(&quot;Update Seats Task error&quot;, ex);</b>
+<b class="nc"><i>482</i>&nbsp;        } catch (ExecutionException ex) {</b>
+<b class="nc"><i>483</i>&nbsp;            logger.fatal(&quot;Update Seats Task error&quot;, ex);</b>
+<b class="nc"><i>484</i>&nbsp;        } catch (CancellationException ex) {</b>
+<b class="nc"><i>485</i>&nbsp;        }</b>
+<i>486</i>&nbsp;    }
+<i>487</i>&nbsp;
+<i>488</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

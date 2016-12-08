@@ -1,0 +1,352 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MatchOptions</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.game.match</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MatchOptions (mage.game.match)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MatchOptions</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 35)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 72)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MatchOptions$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 73)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; * 
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; * 
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; * 
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; * 
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; * 
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;package mage.game.match;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;import java.io.Serializable;
+<i>32</i>&nbsp;import java.util.ArrayList;
+<i>33</i>&nbsp;import java.util.List;
+<i>34</i>&nbsp;import mage.constants.MatchTimeLimit;
+<i>35</i>&nbsp;import mage.constants.MultiplayerAttackOption;
+<i>36</i>&nbsp;import mage.constants.RangeOfInfluence;
+<i>37</i>&nbsp;import mage.constants.SkillLevel;
+<i>38</i>&nbsp;import mage.game.result.ResultProtos;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;/**
+<i>41</i>&nbsp; *
+<i>42</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>43</i>&nbsp; */
+<i>44</i>&nbsp;public class MatchOptions implements Serializable {
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    protected String name;
+<i>47</i>&nbsp;    protected MultiplayerAttackOption attackOption;
+<i>48</i>&nbsp;    protected RangeOfInfluence range;
+<i>49</i>&nbsp;    protected int winsNeeded;
+<i>50</i>&nbsp;    protected int freeMulligans;
+<i>51</i>&nbsp;    protected String gameType;
+<i>52</i>&nbsp;    protected String deckType;
+<i>53</i>&nbsp;    protected boolean limited;
+<b class="nc"><i>54</i>&nbsp;    protected List&lt;String&gt; playerTypes = new ArrayList&lt;&gt;();</b>
+<i>55</i>&nbsp;    protected boolean multiPlayer;
+<i>56</i>&nbsp;    protected int numSeats;
+<i>57</i>&nbsp;    protected String password;
+<i>58</i>&nbsp;    protected SkillLevel skillLevel;
+<i>59</i>&nbsp;    protected boolean rollbackTurnsAllowed;
+<i>60</i>&nbsp;    protected int quitRatio;
+<i>61</i>&nbsp;    protected boolean rated;
+<i>62</i>&nbsp;    protected int numSeatsForMatch;
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    /**
+<i>65</i>&nbsp;     * Time each player has during the game to play using his\her priority.
+<i>66</i>&nbsp;     */
+<i>67</i>&nbsp;    protected MatchTimeLimit matchTimeLimit; // 0 = no priorityTime handling
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    /*public MatchOptions(String name, String gameType) {
+<i>70</i>&nbsp;        this.name = name;
+<i>71</i>&nbsp;        this.gameType = gameType;
+<i>72</i>&nbsp;        this.password = &quot;&quot;;
+<i>73</i>&nbsp;        this.multiPlayer = false;
+<i>74</i>&nbsp;        this.numSeats = 2;
+<i>75</i>&nbsp;    }*/
+<i>76</i>&nbsp;
+<b class="nc"><i>77</i>&nbsp;    public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats ) {</b>
+<b class="nc"><i>78</i>&nbsp;        this.name = name;</b>
+<b class="nc"><i>79</i>&nbsp;        this.gameType = gameType;</b>
+<b class="nc"><i>80</i>&nbsp;        this.password = &quot;&quot;;</b>
+<b class="nc"><i>81</i>&nbsp;        this.multiPlayer = multiPlayer;</b>
+<b class="nc"><i>82</i>&nbsp;        this.numSeats = numSeats;</b>
+<b class="nc"><i>83</i>&nbsp;    }</b>
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    public void setNumSeats (int numSeats) {
+<b class="nc"><i>86</i>&nbsp;        this.numSeats = numSeats;</b>
+<b class="nc"><i>87</i>&nbsp;    }</b>
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    public int getNumSeats () {
+<b class="nc"><i>90</i>&nbsp;        return numSeats;</b>
+<i>91</i>&nbsp;    }
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    public void setMultiPlayer(boolean multiPlayer) {
+<b class="nc"><i>94</i>&nbsp;        this.multiPlayer = multiPlayer;</b>
+<b class="nc"><i>95</i>&nbsp;    }</b>
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    public boolean getMultiPlayer() {
+<b class="nc"><i>98</i>&nbsp;        return multiPlayer;</b>
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    public String getName() {
+<b class="nc"><i>102</i>&nbsp;        return name;</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    public MultiplayerAttackOption getAttackOption() {
+<b class="nc"><i>106</i>&nbsp;        return attackOption;</b>
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    public void setAttackOption(MultiplayerAttackOption attackOption) {
+<b class="nc"><i>110</i>&nbsp;        this.attackOption = attackOption;</b>
+<b class="nc"><i>111</i>&nbsp;    }</b>
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;    public RangeOfInfluence getRange() {
+<b class="nc"><i>114</i>&nbsp;        return range;</b>
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    public void setRange(RangeOfInfluence range) {
+<b class="nc"><i>118</i>&nbsp;        this.range = range;</b>
+<b class="nc"><i>119</i>&nbsp;    }</b>
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    public int getWinsNeeded() {
+<b class="nc"><i>122</i>&nbsp;        return winsNeeded;</b>
+<i>123</i>&nbsp;    }
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    public void setWinsNeeded(int winsNeeded) {
+<b class="nc"><i>126</i>&nbsp;        this.winsNeeded = winsNeeded;</b>
+<b class="nc"><i>127</i>&nbsp;    }</b>
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    public int getFreeMulligans() {
+<b class="nc"><i>130</i>&nbsp;        return freeMulligans;</b>
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    public void setFreeMulligans(int freeMulligans) {
+<b class="nc"><i>134</i>&nbsp;        this.freeMulligans = freeMulligans;</b>
+<b class="nc"><i>135</i>&nbsp;    }</b>
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;    public String getGameType() {
+<b class="nc"><i>138</i>&nbsp;        return gameType;</b>
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    public void setGameType(String gameType) {
+<b class="nc"><i>142</i>&nbsp;        this.gameType = gameType;</b>
+<b class="nc"><i>143</i>&nbsp;    }</b>
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    public String getDeckType() {
+<b class="nc"><i>146</i>&nbsp;        return deckType;</b>
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    public void setDeckType(String deckType) {
+<b class="nc"><i>150</i>&nbsp;        this.deckType = deckType;</b>
+<b class="nc"><i>151</i>&nbsp;    }</b>
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    public List&lt;String&gt; getPlayerTypes() {
+<b class="nc"><i>154</i>&nbsp;        return playerTypes;</b>
+<i>155</i>&nbsp;    }
+<i>156</i>&nbsp;
+<i>157</i>&nbsp;    public boolean isLimited() {
+<b class="nc"><i>158</i>&nbsp;        return limited;</b>
+<i>159</i>&nbsp;    }
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;    public void setLimited(boolean limited) {
+<b class="nc"><i>162</i>&nbsp;        this.limited = limited;</b>
+<b class="nc"><i>163</i>&nbsp;    }</b>
+<i>164</i>&nbsp;
+<i>165</i>&nbsp;    public int getPriorityTime() {
+<b class="nc"><i>166</i>&nbsp;        if (matchTimeLimit == null) {</b>
+<b class="nc"><i>167</i>&nbsp;            return MatchTimeLimit.NONE.getTimeLimit();</b>
+<i>168</i>&nbsp;        }
+<b class="nc"><i>169</i>&nbsp;        return matchTimeLimit.getTimeLimit();</b>
+<i>170</i>&nbsp;    }
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    public MatchTimeLimit getMatchTimeLimit() {
+<b class="nc"><i>173</i>&nbsp;        return this.matchTimeLimit;</b>
+<i>174</i>&nbsp;    }
+<i>175</i>&nbsp;    
+<i>176</i>&nbsp;    public void setMatchTimeLimit(MatchTimeLimit matchTimeLimit) {
+<b class="nc"><i>177</i>&nbsp;        this.matchTimeLimit = matchTimeLimit;</b>
+<b class="nc"><i>178</i>&nbsp;    }</b>
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;    public String getPassword() {
+<b class="nc"><i>181</i>&nbsp;        return password;</b>
+<i>182</i>&nbsp;    }
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    public void setPassword(String password) {
+<b class="nc"><i>185</i>&nbsp;        this.password = password;</b>
+<b class="nc"><i>186</i>&nbsp;    }</b>
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;    public SkillLevel getSkillLevel() {
+<b class="nc"><i>189</i>&nbsp;        return skillLevel;</b>
+<i>190</i>&nbsp;    }
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;    public void setSkillLevel(SkillLevel skillLevel) {
+<b class="nc"><i>193</i>&nbsp;        this.skillLevel = skillLevel;</b>
+<b class="nc"><i>194</i>&nbsp;    }</b>
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;    public boolean isRollbackTurnsAllowed() {
+<b class="nc"><i>197</i>&nbsp;        return rollbackTurnsAllowed;</b>
+<i>198</i>&nbsp;    }
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;    public void setRollbackTurnsAllowed(boolean rollbackTurnsAllowed) {
+<b class="nc"><i>201</i>&nbsp;        this.rollbackTurnsAllowed = rollbackTurnsAllowed;</b>
+<b class="nc"><i>202</i>&nbsp;    }</b>
+<i>203</i>&nbsp;
+<i>204</i>&nbsp;    public int getQuitRatio() {
+<b class="nc"><i>205</i>&nbsp;        return quitRatio;</b>
+<i>206</i>&nbsp;    }
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;    public void setQuitRatio(int quitRatio) {
+<b class="nc"><i>209</i>&nbsp;        this.quitRatio = quitRatio;</b>
+<b class="nc"><i>210</i>&nbsp;    }</b>
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;    public boolean isRated() {
+<b class="nc"><i>213</i>&nbsp;        return rated;</b>
+<i>214</i>&nbsp;    }
+<i>215</i>&nbsp;
+<i>216</i>&nbsp;    public void setRated(boolean rated) {
+<b class="nc"><i>217</i>&nbsp;        this.rated = rated;</b>
+<b class="nc"><i>218</i>&nbsp;    }</b>
+<i>219</i>&nbsp;
+<i>220</i>&nbsp;    public ResultProtos.MatchOptionsProto toProto() {
+<b class="nc"><i>221</i>&nbsp;        ResultProtos.MatchOptionsProto.Builder builder = ResultProtos.MatchOptionsProto.newBuilder()</b>
+<b class="nc"><i>222</i>&nbsp;                .setName(this.getName())</b>
+<b class="nc"><i>223</i>&nbsp;                .setLimited(this.isLimited())</b>
+<b class="nc"><i>224</i>&nbsp;                .setRated(this.isRated())</b>
+<b class="nc"><i>225</i>&nbsp;                .setWinsNeeded(this.getWinsNeeded());</b>
+<i>226</i>&nbsp;
+<b class="nc"><i>227</i>&nbsp;        ResultProtos.SkillLevel skillLevel = ResultProtos.SkillLevel.BEGINNER;</b>
+<b class="nc"><i>228</i>&nbsp;        switch (this.getSkillLevel()) {</b>
+<i>229</i>&nbsp;            case BEGINNER:
+<b class="nc"><i>230</i>&nbsp;                skillLevel = ResultProtos.SkillLevel.BEGINNER;</b>
+<b class="nc"><i>231</i>&nbsp;                break;</b>
+<i>232</i>&nbsp;            case CASUAL:
+<b class="nc"><i>233</i>&nbsp;                skillLevel = ResultProtos.SkillLevel.CASUAL;</b>
+<b class="nc"><i>234</i>&nbsp;                break;</b>
+<i>235</i>&nbsp;            case SERIOUS:
+<b class="nc"><i>236</i>&nbsp;                skillLevel = ResultProtos.SkillLevel.SERIOUS;</b>
+<i>237</i>&nbsp;                break;
+<i>238</i>&nbsp;        }
+<b class="nc"><i>239</i>&nbsp;        builder.setSkillLevel(skillLevel);</b>
+<i>240</i>&nbsp;
+<b class="nc"><i>241</i>&nbsp;        return builder.build();</b>
+<i>242</i>&nbsp;    }
+<i>243</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

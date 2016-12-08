@@ -1,0 +1,277 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BeginningOfUpkeepTriggeredAbility</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BeginningOfUpkeepTriggeredAbility (mage.abilities.common)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BeginningOfUpkeepTriggeredAbility</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74.2%
+  </span>
+  <span class="absValue">
+    (49/ 66)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BeginningOfUpkeepTriggeredAbility$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (51/ 68)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.common;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import mage.abilities.TriggeredAbilityImpl;
+<i>31</i>&nbsp;import mage.abilities.effects.Effect;
+<i>32</i>&nbsp;import mage.constants.TargetController;
+<i>33</i>&nbsp;import mage.constants.Zone;
+<i>34</i>&nbsp;import mage.game.Game;
+<i>35</i>&nbsp;import mage.game.events.GameEvent;
+<i>36</i>&nbsp;import mage.game.permanent.Permanent;
+<i>37</i>&nbsp;import mage.target.targetpointer.FixedTarget;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;/**
+<i>40</i>&nbsp; *
+<i>41</i>&nbsp; * @author Loki
+<i>42</i>&nbsp; */
+<i>43</i>&nbsp;public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    private TargetController targetController;
+<i>46</i>&nbsp;    private boolean setTargetPointer;
+<i>47</i>&nbsp;    protected String ruleTrigger;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public BeginningOfUpkeepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
+<b class="fc"><i>50</i>&nbsp;        this(Zone.BATTLEFIELD, effect, targetController, isOptional);</b>
+<b class="fc"><i>51</i>&nbsp;    }</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    public BeginningOfUpkeepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional) {
+<b class="fc"><i>54</i>&nbsp;        this(zone, effect, targetController, isOptional, true);</b>
+<b class="fc"><i>55</i>&nbsp;    }</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    public BeginningOfUpkeepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer) {
+<b class="fc"><i>58</i>&nbsp;        this(zone, effect, targetController, isOptional, setTargetPointer, null);</b>
+<b class="fc"><i>59</i>&nbsp;    }</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    public BeginningOfUpkeepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer, String ruleTrigger) {
+<b class="fc"><i>62</i>&nbsp;        super(zone, effect, isOptional);</b>
+<b class="fc"><i>63</i>&nbsp;        this.targetController = targetController;</b>
+<b class="fc"><i>64</i>&nbsp;        this.setTargetPointer = setTargetPointer;</b>
+<b class="fc"><i>65</i>&nbsp;        this.ruleTrigger = ruleTrigger;</b>
+<b class="fc"><i>66</i>&nbsp;    }</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public BeginningOfUpkeepTriggeredAbility(final BeginningOfUpkeepTriggeredAbility ability) {
+<b class="fc"><i>69</i>&nbsp;        super(ability);</b>
+<b class="fc"><i>70</i>&nbsp;        this.targetController = ability.targetController;</b>
+<b class="fc"><i>71</i>&nbsp;        this.setTargetPointer = ability.setTargetPointer;</b>
+<b class="fc"><i>72</i>&nbsp;        this.ruleTrigger = ability.ruleTrigger;</b>
+<b class="fc"><i>73</i>&nbsp;    }</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    @Override
+<i>76</i>&nbsp;    public BeginningOfUpkeepTriggeredAbility copy() {
+<b class="fc"><i>77</i>&nbsp;        return new BeginningOfUpkeepTriggeredAbility(this);</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    @Override
+<i>81</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<b class="fc"><i>82</i>&nbsp;        return event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE;</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    @Override
+<i>86</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<b class="fc"><i>87</i>&nbsp;        switch (targetController) {</b>
+<i>88</i>&nbsp;            case YOU:
+<b class="fc"><i>89</i>&nbsp;                boolean yours = event.getPlayerId().equals(this.controllerId);</b>
+<b class="fc"><i>90</i>&nbsp;                if (yours &amp;&amp; setTargetPointer) {</b>
+<b class="fc"><i>91</i>&nbsp;                    if (getTargets().isEmpty()) {</b>
+<b class="fc"><i>92</i>&nbsp;                        for (Effect effect : this.getEffects()) {</b>
+<b class="fc"><i>93</i>&nbsp;                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));</b>
+<b class="fc"><i>94</i>&nbsp;                        }</b>
+<i>95</i>&nbsp;                    }
+<i>96</i>&nbsp;                }
+<b class="fc"><i>97</i>&nbsp;                return yours;</b>
+<i>98</i>&nbsp;            case OPPONENT:
+<b class="fc"><i>99</i>&nbsp;                if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {</b>
+<b class="fc"><i>100</i>&nbsp;                    if (setTargetPointer &amp;&amp; getTargets().isEmpty()) {</b>
+<b class="fc"><i>101</i>&nbsp;                        for (Effect effect : this.getEffects()) {</b>
+<b class="fc"><i>102</i>&nbsp;                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));</b>
+<b class="fc"><i>103</i>&nbsp;                        }</b>
+<i>104</i>&nbsp;                    }
+<b class="fc"><i>105</i>&nbsp;                    return true;</b>
+<i>106</i>&nbsp;                }
+<i>107</i>&nbsp;                break;
+<i>108</i>&nbsp;            case ANY:
+<b class="fc"><i>109</i>&nbsp;                if (setTargetPointer &amp;&amp; getTargets().isEmpty()) {</b>
+<b class="fc"><i>110</i>&nbsp;                    for (Effect effect : this.getEffects()) {</b>
+<b class="fc"><i>111</i>&nbsp;                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));</b>
+<b class="fc"><i>112</i>&nbsp;                    }</b>
+<i>113</i>&nbsp;                }
+<b class="fc"><i>114</i>&nbsp;                return true;</b>
+<i>115</i>&nbsp;            case CONTROLLER_ATTACHED_TO:
+<b class="nc"><i>116</i>&nbsp;                Permanent attachment = game.getPermanent(sourceId);</b>
+<b class="nc"><i>117</i>&nbsp;                if (attachment != null &amp;&amp; attachment.getAttachedTo() != null) {</b>
+<b class="nc"><i>118</i>&nbsp;                    Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());</b>
+<b class="nc"><i>119</i>&nbsp;                    if (attachedTo != null &amp;&amp; attachedTo.getControllerId().equals(event.getPlayerId())) {</b>
+<b class="nc"><i>120</i>&nbsp;                        if (setTargetPointer &amp;&amp; getTargets().isEmpty()) {</b>
+<b class="nc"><i>121</i>&nbsp;                            for (Effect effect : this.getEffects()) {</b>
+<b class="nc"><i>122</i>&nbsp;                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));</b>
+<b class="nc"><i>123</i>&nbsp;                            }</b>
+<i>124</i>&nbsp;                        }
+<b class="nc"><i>125</i>&nbsp;                        return true;</b>
+<i>126</i>&nbsp;                    }
+<b class="nc"><i>127</i>&nbsp;                }</b>
+<i>128</i>&nbsp;                break;
+<i>129</i>&nbsp;            default:
+<b class="nc"><i>130</i>&nbsp;                throw new UnsupportedOperationException(&quot;Value for targetController not supported: &quot; + targetController.toString());</b>
+<i>131</i>&nbsp;        }
+<b class="fc"><i>132</i>&nbsp;        return false;</b>
+<i>133</i>&nbsp;    }
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    @Override
+<i>136</i>&nbsp;    public String getRule() {
+<b class="fc"><i>137</i>&nbsp;        StringBuilder sb = new StringBuilder(super.getRule());</b>
+<b class="fc"><i>138</i>&nbsp;        if (ruleTrigger != null &amp;&amp; !ruleTrigger.isEmpty()) {</b>
+<b class="nc"><i>139</i>&nbsp;            return sb.insert(0, ruleTrigger).toString();</b>
+<i>140</i>&nbsp;        }
+<b class="fc"><i>141</i>&nbsp;        switch (targetController) {</b>
+<i>142</i>&nbsp;            case YOU:
+<b class="fc"><i>143</i>&nbsp;                if (this.optional) {</b>
+<b class="fc"><i>144</i>&nbsp;                    if (sb.substring(0, 6).toLowerCase().equals(&quot;target&quot;)) {</b>
+<b class="nc"><i>145</i>&nbsp;                        sb.insert(0, &quot;you may have &quot;);</b>
+<b class="fc"><i>146</i>&nbsp;                    } else if (!sb.substring(0, 4).toLowerCase().equals(&quot;you &quot;)) {</b>
+<b class="nc"><i>147</i>&nbsp;                        sb.insert(0, &quot;you may &quot;);</b>
+<i>148</i>&nbsp;                    }
+<i>149</i>&nbsp;                }
+<b class="fc"><i>150</i>&nbsp;                return sb.insert(0, generateZoneString()).insert(0, &quot;At the beginning of your upkeep, &quot;).toString();</b>
+<i>151</i>&nbsp;            case OPPONENT:
+<b class="fc"><i>152</i>&nbsp;                return sb.insert(0, generateZoneString()).insert(0, &quot;At the beginning of each opponent&#39;s upkeep, &quot;).toString();</b>
+<i>153</i>&nbsp;            case ANY:
+<b class="fc"><i>154</i>&nbsp;                return sb.insert(0, generateZoneString()).insert(0, &quot;At the beginning of each player&#39;s upkeep, &quot;).toString();</b>
+<i>155</i>&nbsp;            case CONTROLLER_ATTACHED_TO:
+<b class="nc"><i>156</i>&nbsp;                return sb.insert(0, generateZoneString()).insert(0, &quot;At the beginning of the upkeep of enchanted creature&#39;s controller, &quot;).toString();</b>
+<i>157</i>&nbsp;        }
+<b class="nc"><i>158</i>&nbsp;        return &quot;&quot;;</b>
+<i>159</i>&nbsp;    }
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;    private String generateZoneString() {
+<b class="fc"><i>162</i>&nbsp;        switch (getZone()) {</b>
+<i>163</i>&nbsp;            case GRAVEYARD:
+<b class="nc"><i>164</i>&nbsp;                return &quot;if {this} is in your graveyard, &quot;;</b>
+<i>165</i>&nbsp;        }
+<b class="fc"><i>166</i>&nbsp;        return &quot;&quot;;</b>
+<i>167</i>&nbsp;    }
+<i>168</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MageDrawAction</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.actions</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MageDrawAction (mage.actions)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MageDrawAction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (34/ 40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.actions;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;import java.util.List;
+<i>5</i>&nbsp;import java.util.UUID;
+<i>6</i>&nbsp;import mage.actions.impl.MageAction;
+<i>7</i>&nbsp;import mage.actions.score.ArtificialScoringSystem;
+<i>8</i>&nbsp;import mage.cards.Card;
+<i>9</i>&nbsp;import mage.constants.Zone;
+<i>10</i>&nbsp;import mage.game.Game;
+<i>11</i>&nbsp;import mage.game.events.GameEvent;
+<i>12</i>&nbsp;import mage.players.Player;
+<i>13</i>&nbsp;import mage.util.CardUtil;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;/**
+<i>16</i>&nbsp; * Action for drawing cards.
+<i>17</i>&nbsp; *
+<i>18</i>&nbsp; * @author ayrat
+<i>19</i>&nbsp; */
+<i>20</i>&nbsp;public class MageDrawAction extends MageAction {
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    private final Player player;
+<i>23</i>&nbsp;    private final int amount;
+<i>24</i>&nbsp;    private final ArrayList&lt;UUID&gt; appliedEffects;
+<i>25</i>&nbsp;    private final List&lt;Card&gt; drawnCards;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    private static final int NEGATIVE_VALUE = -1000000;
+<i>28</i>&nbsp;
+<b class="fc"><i>29</i>&nbsp;    public MageDrawAction(Player player, int amount, ArrayList&lt;UUID&gt; appliedEffects) {</b>
+<b class="fc"><i>30</i>&nbsp;        this.player = player;</b>
+<b class="fc"><i>31</i>&nbsp;        this.amount = amount;</b>
+<b class="fc"><i>32</i>&nbsp;        this.appliedEffects = appliedEffects;</b>
+<b class="fc"><i>33</i>&nbsp;        this.drawnCards = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>34</i>&nbsp;    }</b>
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    /**
+<i>37</i>&nbsp;     * Draw and set action score.
+<i>38</i>&nbsp;     *
+<i>39</i>&nbsp;     * @param game Game context.
+<i>40</i>&nbsp;     * @return
+<i>41</i>&nbsp;     */
+<i>42</i>&nbsp;    @Override
+<i>43</i>&nbsp;    public int doAction(Game game) {
+<b class="fc"><i>44</i>&nbsp;        int numDrawn = 0;</b>
+<b class="fc"><i>45</i>&nbsp;        int score = 0;</b>
+<b class="fc"><i>46</i>&nbsp;        for (int i = 0; i &lt; amount; i++) {</b>
+<b class="fc"><i>47</i>&nbsp;            int value = drawCard(game);</b>
+<b class="fc"><i>48</i>&nbsp;            if (value == NEGATIVE_VALUE) {</b>
+<b class="fc"><i>49</i>&nbsp;                continue;</b>
+<i>50</i>&nbsp;            }
+<b class="fc"><i>51</i>&nbsp;            numDrawn++;</b>
+<b class="fc"><i>52</i>&nbsp;            score += value;</b>
+<i>53</i>&nbsp;        }
+<b class="fc"><i>54</i>&nbsp;        if (!player.isTopCardRevealed() &amp;&amp; numDrawn &gt; 0) {</b>
+<b class="fc"><i>55</i>&nbsp;            game.fireInformEvent(player.getLogName() + &quot; draws &quot; + CardUtil.numberToText(numDrawn, &quot;a&quot;) + &quot; card&quot; + (numDrawn &gt; 1 ? &quot;s&quot; : &quot;&quot;));</b>
+<i>56</i>&nbsp;        }
+<b class="fc"><i>57</i>&nbsp;        if (player.isEmptyDraw()) {</b>
+<b class="fc"><i>58</i>&nbsp;            GameEvent event = GameEvent.getEvent(GameEvent.EventType.EMPTY_DRAW, player.getId(), player.getId());</b>
+<b class="fc"><i>59</i>&nbsp;            if (!game.replaceEvent(event)) {</b>
+<b class="nc"><i>60</i>&nbsp;                game.doAction(new MageLoseGameAction(player, MageLoseGameAction.DRAW_REASON));</b>
+<i>61</i>&nbsp;            }
+<i>62</i>&nbsp;        }
+<i>63</i>&nbsp;
+<b class="fc"><i>64</i>&nbsp;        setScore(player, score);</b>
+<b class="fc"><i>65</i>&nbsp;        game.setStateCheckRequired();</b>
+<i>66</i>&nbsp;
+<b class="fc"><i>67</i>&nbsp;        return numDrawn;</b>
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    /**
+<i>71</i>&nbsp;     * Draw a card if possible (there is no replacement effect that prevent us
+<i>72</i>&nbsp;     * from drawing). Fire event about card drawn.
+<i>73</i>&nbsp;     *
+<i>74</i>&nbsp;     * @param game
+<i>75</i>&nbsp;     * @return
+<i>76</i>&nbsp;     */
+<i>77</i>&nbsp;    protected int drawCard(Game game) {
+<b class="fc"><i>78</i>&nbsp;        GameEvent event = GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, player.getId(), player.getId());</b>
+<b class="fc"><i>79</i>&nbsp;        event.setAppliedEffects(appliedEffects);</b>
+<b class="fc"><i>80</i>&nbsp;        if (!game.replaceEvent(event)) {</b>
+<b class="fc"><i>81</i>&nbsp;            Card card = player.getLibrary().removeFromTop(game);</b>
+<b class="fc"><i>82</i>&nbsp;            if (card != null) {</b>
+<b class="fc"><i>83</i>&nbsp;                drawnCards.add(card);</b>
+<b class="fc"><i>84</i>&nbsp;                card.moveToZone(Zone.HAND, null, game, false);</b>
+<b class="fc"><i>85</i>&nbsp;                if (player.isTopCardRevealed()) {</b>
+<b class="fc"><i>86</i>&nbsp;                    game.fireInformEvent(player.getLogName() + &quot; draws a revealed card  (&quot; + card.getLogName() + &quot;)&quot;);</b>
+<i>87</i>&nbsp;                }
+<i>88</i>&nbsp;
+<b class="fc"><i>89</i>&nbsp;                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), player.getId()));</b>
+<b class="fc"><i>90</i>&nbsp;                return ArtificialScoringSystem.inst.getCardScore(card);</b>
+<i>91</i>&nbsp;            }
+<i>92</i>&nbsp;        }
+<b class="fc"><i>93</i>&nbsp;        return NEGATIVE_VALUE;</b>
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    /**
+<i>97</i>&nbsp;     * Return a card back to top.
+<i>98</i>&nbsp;     *
+<i>99</i>&nbsp;     * @param game Game context
+<i>100</i>&nbsp;     */
+<i>101</i>&nbsp;    @Override
+<i>102</i>&nbsp;    public void undoAction(Game game) {
+<b class="nc"><i>103</i>&nbsp;        for (int index = drawnCards.size() - 1; index &gt;= 0; index--) {</b>
+<b class="nc"><i>104</i>&nbsp;            Card card = drawnCards.get(index);</b>
+<b class="nc"><i>105</i>&nbsp;            player.getHand().remove(card);</b>
+<b class="nc"><i>106</i>&nbsp;            player.getLibrary().putOnTop(card, game);</b>
+<i>107</i>&nbsp;        }
+<b class="nc"><i>108</i>&nbsp;    }</b>
+<i>109</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

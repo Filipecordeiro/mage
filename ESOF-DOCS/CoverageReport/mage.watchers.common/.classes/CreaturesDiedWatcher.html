@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CreaturesDiedWatcher</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.watchers.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CreaturesDiedWatcher (mage.watchers.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreaturesDiedWatcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.watchers.common;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.HashMap;
+<i>31</i>&nbsp;import java.util.UUID;
+<i>32</i>&nbsp;import mage.constants.CardType;
+<i>33</i>&nbsp;import mage.constants.WatcherScope;
+<i>34</i>&nbsp;import mage.game.Game;
+<i>35</i>&nbsp;import mage.game.events.GameEvent;
+<i>36</i>&nbsp;import mage.game.events.ZoneChangeEvent;
+<i>37</i>&nbsp;import mage.watchers.Watcher;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;/**
+<i>40</i>&nbsp; *
+<i>41</i>&nbsp; * @author LevelX2
+<i>42</i>&nbsp; */
+<i>43</i>&nbsp;public class CreaturesDiedWatcher extends Watcher {
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    private int amountOfCreaturesThatDied;
+<b class="nc"><i>46</i>&nbsp;    private final HashMap&lt;UUID, Integer&gt; amountOfCreaturesThatDiedByController = new HashMap&lt;&gt;();</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    public CreaturesDiedWatcher() {
+<b class="nc"><i>49</i>&nbsp;        super(&quot;CreaturesDiedWatcher&quot;, WatcherScope.GAME);</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public CreaturesDiedWatcher(final CreaturesDiedWatcher watcher) {
+<b class="nc"><i>53</i>&nbsp;        super(watcher);</b>
+<b class="nc"><i>54</i>&nbsp;        this.amountOfCreaturesThatDied = watcher.amountOfCreaturesThatDied;</b>
+<b class="nc"><i>55</i>&nbsp;        this.amountOfCreaturesThatDiedByController.putAll(watcher.amountOfCreaturesThatDiedByController);</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    @Override
+<i>59</i>&nbsp;    public void watch(GameEvent event, Game game) {
+<b class="nc"><i>60</i>&nbsp;        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {</b>
+<b class="nc"><i>61</i>&nbsp;            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;</b>
+<b class="nc"><i>62</i>&nbsp;            if (zEvent.isDiesEvent() &amp;&amp; zEvent.getTarget() != null &amp;&amp; zEvent.getTarget().getCardType().contains(CardType.CREATURE)) {</b>
+<b class="nc"><i>63</i>&nbsp;                amountOfCreaturesThatDied++;</b>
+<b class="nc"><i>64</i>&nbsp;                int amount = 0;</b>
+<b class="nc"><i>65</i>&nbsp;                if (amountOfCreaturesThatDiedByController.containsKey(zEvent.getTarget().getControllerId())) {</b>
+<b class="nc"><i>66</i>&nbsp;                    amount = amountOfCreaturesThatDiedByController.get(zEvent.getTarget().getControllerId());</b>
+<i>67</i>&nbsp;                }
+<b class="nc"><i>68</i>&nbsp;                amountOfCreaturesThatDiedByController.put(zEvent.getTarget().getControllerId(), amount + 1);</b>
+<i>69</i>&nbsp;            }
+<i>70</i>&nbsp;        }
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    @Override
+<i>74</i>&nbsp;    public void reset() {
+<b class="nc"><i>75</i>&nbsp;        amountOfCreaturesThatDied = 0;</b>
+<b class="nc"><i>76</i>&nbsp;        amountOfCreaturesThatDiedByController.clear();</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    public int getAmountOfCreaturesDiesThisTurn() {
+<b class="nc"><i>80</i>&nbsp;        return amountOfCreaturesThatDied;</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public int getAmountOfCreaturesDiesThisTurn(UUID playerId) {
+<b class="nc"><i>84</i>&nbsp;        if (amountOfCreaturesThatDiedByController.containsKey(playerId)) {</b>
+<b class="nc"><i>85</i>&nbsp;            return amountOfCreaturesThatDiedByController.get(playerId);</b>
+<i>86</i>&nbsp;        }
+<b class="nc"><i>87</i>&nbsp;        return 0;</b>
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    @Override
+<i>91</i>&nbsp;    public CreaturesDiedWatcher copy() {
+<b class="nc"><i>92</i>&nbsp;        return new CreaturesDiedWatcher(this);</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

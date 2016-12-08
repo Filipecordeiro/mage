@@ -1,0 +1,364 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NarsetTranscendent</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.n</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NarsetTranscendent (mage.cards.n)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NarsetTranscendent</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.n;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.MageObject;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.DelayedTriggeredAbility;
+<i>34</i>&nbsp;import mage.abilities.LoyaltyAbility;
+<i>35</i>&nbsp;import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+<i>36</i>&nbsp;import mage.abilities.common.SimpleStaticAbility;
+<i>37</i>&nbsp;import mage.abilities.effects.ContinuousEffectImpl;
+<i>38</i>&nbsp;import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
+<i>39</i>&nbsp;import mage.abilities.effects.Effect;
+<i>40</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>41</i>&nbsp;import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+<i>42</i>&nbsp;import mage.abilities.effects.common.GetEmblemEffect;
+<i>43</i>&nbsp;import mage.abilities.keyword.ReboundAbility;
+<i>44</i>&nbsp;import mage.cards.Card;
+<i>45</i>&nbsp;import mage.cards.CardImpl;
+<i>46</i>&nbsp;import mage.cards.CardSetInfo;
+<i>47</i>&nbsp;import mage.cards.CardsImpl;
+<i>48</i>&nbsp;import mage.constants.CardType;
+<i>49</i>&nbsp;import mage.constants.Duration;
+<i>50</i>&nbsp;import mage.constants.Layer;
+<i>51</i>&nbsp;import mage.constants.Outcome;
+<i>52</i>&nbsp;import mage.constants.SubLayer;
+<i>53</i>&nbsp;import mage.constants.Zone;
+<i>54</i>&nbsp;import mage.game.Game;
+<i>55</i>&nbsp;import mage.game.command.Emblem;
+<i>56</i>&nbsp;import mage.game.events.GameEvent;
+<i>57</i>&nbsp;import mage.game.stack.Spell;
+<i>58</i>&nbsp;import mage.players.Player;
+<i>59</i>&nbsp;import mage.target.targetpointer.FixedTarget;
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;/**
+<i>62</i>&nbsp; *
+<i>63</i>&nbsp; * @author LevelX2
+<i>64</i>&nbsp; */
+<i>65</i>&nbsp;public class NarsetTranscendent extends CardImpl {
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public NarsetTranscendent(UUID ownerId, CardSetInfo setInfo) {
+<b class="nc"><i>68</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},&quot;{2}{W}{U}&quot;);</b>
+<b class="nc"><i>69</i>&nbsp;        this.subtype.add(&quot;Narset&quot;);</b>
+<i>70</i>&nbsp;
+<b class="nc"><i>71</i>&nbsp;        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(6));</b>
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;        // +1: Look at the top card of your library. If it&#39;s a noncreature, nonland card, you may reveal it and put it into your hand.
+<b class="nc"><i>74</i>&nbsp;        this.addAbility(new LoyaltyAbility(new NarsetTranscendentEffect1(), 1));</b>
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;        // -2: When you cast your next instant or sorcery spell from your hand this turn, it gains rebound.
+<b class="nc"><i>77</i>&nbsp;        this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(new NarsetTranscendentTriggeredAbility()), -2));</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;        // -9:You get an emblem with &quot;Your opponents can&#39;t cast noncreature spells.&quot;
+<b class="nc"><i>80</i>&nbsp;        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new NarsetTranscendentEmblem()), -9));</b>
+<b class="nc"><i>81</i>&nbsp;    }</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public NarsetTranscendent(final NarsetTranscendent card) {
+<b class="nc"><i>84</i>&nbsp;        super(card);</b>
+<b class="nc"><i>85</i>&nbsp;    }</b>
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    @Override
+<i>88</i>&nbsp;    public NarsetTranscendent copy() {
+<b class="nc"><i>89</i>&nbsp;        return new NarsetTranscendent(this);</b>
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;}
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;class NarsetTranscendentEffect1 extends OneShotEffect {
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    public NarsetTranscendentEffect1() {
+<i>96</i>&nbsp;        super(Outcome.DrawCard);
+<i>97</i>&nbsp;        this.staticText = &quot;Look at the top card of your library. If it&#39;s a noncreature, nonland card, you may reveal it and put it into your hand&quot;;
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    public NarsetTranscendentEffect1(final NarsetTranscendentEffect1 effect) {
+<i>101</i>&nbsp;        super(effect);
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    @Override
+<i>105</i>&nbsp;    public NarsetTranscendentEffect1 copy() {
+<i>106</i>&nbsp;        return new NarsetTranscendentEffect1(this);
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    @Override
+<i>110</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>111</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());
+<i>112</i>&nbsp;        MageObject sourceObject = source.getSourceObject(game);
+<i>113</i>&nbsp;        if (sourceObject != null &amp;&amp; controller != null &amp;&amp; controller.getLibrary().size() &gt; 0) {
+<i>114</i>&nbsp;            Card card = controller.getLibrary().getFromTop(game);
+<i>115</i>&nbsp;            if (card != null) {
+<i>116</i>&nbsp;                CardsImpl cards = new CardsImpl();
+<i>117</i>&nbsp;                cards.add(card);
+<i>118</i>&nbsp;                controller.lookAtCards(sourceObject.getIdName(), cards, game);
+<i>119</i>&nbsp;                if (!card.getCardType().contains(CardType.CREATURE) &amp;&amp; !card.getCardType().contains(CardType.LAND)) {
+<i>120</i>&nbsp;                    if (controller.chooseUse(outcome, &quot;Reveal &quot; + card.getLogName() + &quot; and put it into your hand?&quot;, source, game)) {
+<i>121</i>&nbsp;                        controller.moveCards(card, Zone.HAND, source, game);
+<i>122</i>&nbsp;                        controller.revealCards(sourceObject.getIdName(), cards, game);
+<i>123</i>&nbsp;                    }
+<i>124</i>&nbsp;                }
+<i>125</i>&nbsp;                return true;
+<i>126</i>&nbsp;            }
+<i>127</i>&nbsp;        }
+<i>128</i>&nbsp;        return false;
+<i>129</i>&nbsp;    }
+<i>130</i>&nbsp;}
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;class NarsetTranscendentTriggeredAbility extends DelayedTriggeredAbility {
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    public NarsetTranscendentTriggeredAbility() {
+<i>135</i>&nbsp;        super(new NarsetTranscendentGainReboundEffect(), Duration.EndOfTurn, true);
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;    private NarsetTranscendentTriggeredAbility(final NarsetTranscendentTriggeredAbility ability) {
+<i>139</i>&nbsp;        super(ability);
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;    @Override
+<i>143</i>&nbsp;    public NarsetTranscendentTriggeredAbility copy() {
+<i>144</i>&nbsp;        return new NarsetTranscendentTriggeredAbility(this);
+<i>145</i>&nbsp;    }
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;    @Override
+<i>148</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<i>149</i>&nbsp;        return event.getType() == GameEvent.EventType.SPELL_CAST;
+<i>150</i>&nbsp;    }
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;    @Override
+<i>153</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<i>154</i>&nbsp;        if (event.getPlayerId().equals(this.getControllerId())) {
+<i>155</i>&nbsp;            Spell spell = game.getStack().getSpell(event.getTargetId());
+<i>156</i>&nbsp;            if (spell != null &amp;&amp; spell.getFromZone().equals(Zone.HAND)) {
+<i>157</i>&nbsp;                if (spell.getCard() != null
+<i>158</i>&nbsp;                        &amp;&amp; spell.getCard().getCardType().contains(CardType.INSTANT) || spell.getCard().getCardType().contains(CardType.SORCERY)) {
+<i>159</i>&nbsp;                    for (Effect effect : getEffects()) {
+<i>160</i>&nbsp;                        effect.setTargetPointer(new FixedTarget(spell.getId()));
+<i>161</i>&nbsp;                    }
+<i>162</i>&nbsp;                    return true;
+<i>163</i>&nbsp;                }
+<i>164</i>&nbsp;            }
+<i>165</i>&nbsp;        }
+<i>166</i>&nbsp;        return false;
+<i>167</i>&nbsp;    }
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;    @Override
+<i>170</i>&nbsp;    public String getRule() {
+<i>171</i>&nbsp;        return &quot;When you cast your next instant or sorcery spell from your hand this turn, &quot; + super.getRule();
+<i>172</i>&nbsp;    }
+<i>173</i>&nbsp;}
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;class NarsetTranscendentGainReboundEffect extends ContinuousEffectImpl {
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;    public NarsetTranscendentGainReboundEffect() {
+<i>178</i>&nbsp;        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+<i>179</i>&nbsp;        staticText = &quot;it gains rebound&quot;;
+<i>180</i>&nbsp;    }
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;    public NarsetTranscendentGainReboundEffect(final NarsetTranscendentGainReboundEffect effect) {
+<i>183</i>&nbsp;        super(effect);
+<i>184</i>&nbsp;    }
+<i>185</i>&nbsp;
+<i>186</i>&nbsp;    @Override
+<i>187</i>&nbsp;    public NarsetTranscendentGainReboundEffect copy() {
+<i>188</i>&nbsp;        return new NarsetTranscendentGainReboundEffect(this);
+<i>189</i>&nbsp;    }
+<i>190</i>&nbsp;
+<i>191</i>&nbsp;    @Override
+<i>192</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>193</i>&nbsp;        Player player = game.getPlayer(source.getControllerId());
+<i>194</i>&nbsp;        if (player != null) {
+<i>195</i>&nbsp;            Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+<i>196</i>&nbsp;            if (spell != null) {
+<i>197</i>&nbsp;                Card card = spell.getCard();
+<i>198</i>&nbsp;                if (card != null) {
+<i>199</i>&nbsp;                    addReboundAbility(card, source, game);
+<i>200</i>&nbsp;                }
+<i>201</i>&nbsp;            } else {
+<i>202</i>&nbsp;                discard();
+<i>203</i>&nbsp;            }
+<i>204</i>&nbsp;            return true;
+<i>205</i>&nbsp;        }
+<i>206</i>&nbsp;        return false;
+<i>207</i>&nbsp;    }
+<i>208</i>&nbsp;
+<i>209</i>&nbsp;    private void addReboundAbility(Card card, Ability source, Game game) {
+<i>210</i>&nbsp;        boolean found = false;
+<i>211</i>&nbsp;        for (Ability ability : card.getAbilities()) {
+<i>212</i>&nbsp;            if (ability instanceof ReboundAbility) {
+<i>213</i>&nbsp;                found = true;
+<i>214</i>&nbsp;                break;
+<i>215</i>&nbsp;            }
+<i>216</i>&nbsp;        }
+<i>217</i>&nbsp;        if (!found) {
+<i>218</i>&nbsp;            Ability ability = new ReboundAbility();
+<i>219</i>&nbsp;            game.getState().addOtherAbility(card, ability);
+<i>220</i>&nbsp;        }
+<i>221</i>&nbsp;    }
+<i>222</i>&nbsp;}
+<i>223</i>&nbsp;
+<i>224</i>&nbsp;class NarsetTranscendentEmblem extends Emblem {
+<i>225</i>&nbsp;    // &quot;Your opponents can&#39;t cast noncreature spells.
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;    public NarsetTranscendentEmblem() {
+<i>228</i>&nbsp;
+<i>229</i>&nbsp;        this.setName(&quot;EMBLEM: Narset Transcendent&quot;);
+<i>230</i>&nbsp;
+<i>231</i>&nbsp;        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new NarsetTranscendentCantCastEffect()));
+<i>232</i>&nbsp;    }
+<i>233</i>&nbsp;}
+<i>234</i>&nbsp;
+<i>235</i>&nbsp;class NarsetTranscendentCantCastEffect extends ContinuousRuleModifyingEffectImpl {
+<i>236</i>&nbsp;
+<i>237</i>&nbsp;    public NarsetTranscendentCantCastEffect() {
+<i>238</i>&nbsp;        super(Duration.EndOfGame, Outcome.Benefit);
+<i>239</i>&nbsp;        staticText = &quot;Your opponents can&#39;t cast noncreature spells&quot;;
+<i>240</i>&nbsp;    }
+<i>241</i>&nbsp;
+<i>242</i>&nbsp;    public NarsetTranscendentCantCastEffect(final NarsetTranscendentCantCastEffect effect) {
+<i>243</i>&nbsp;        super(effect);
+<i>244</i>&nbsp;    }
+<i>245</i>&nbsp;
+<i>246</i>&nbsp;    @Override
+<i>247</i>&nbsp;    public NarsetTranscendentCantCastEffect copy() {
+<i>248</i>&nbsp;        return new NarsetTranscendentCantCastEffect(this);
+<i>249</i>&nbsp;    }
+<i>250</i>&nbsp;
+<i>251</i>&nbsp;    @Override
+<i>252</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>253</i>&nbsp;        return true;
+<i>254</i>&nbsp;    }
+<i>255</i>&nbsp;
+<i>256</i>&nbsp;    @Override
+<i>257</i>&nbsp;    public String getInfoMessage(Ability source, GameEvent event, Game game) {
+<i>258</i>&nbsp;        MageObject mageObject = game.getObject(source.getSourceId());
+<i>259</i>&nbsp;        if (mageObject != null) {
+<i>260</i>&nbsp;            return &quot;You can&#39;t cast can&#39;t cast noncreature spells (it is prevented by emblem of &quot; + mageObject.getLogName() + &quot;)&quot;;
+<i>261</i>&nbsp;        }
+<i>262</i>&nbsp;        return null;
+<i>263</i>&nbsp;    }
+<i>264</i>&nbsp;
+<i>265</i>&nbsp;    @Override
+<i>266</i>&nbsp;    public boolean checksEventType(GameEvent event, Game game) {
+<i>267</i>&nbsp;        return event.getType() == GameEvent.EventType.CAST_SPELL;
+<i>268</i>&nbsp;    }
+<i>269</i>&nbsp;
+<i>270</i>&nbsp;    @Override
+<i>271</i>&nbsp;    public boolean applies(GameEvent event, Ability source, Game game) {
+<i>272</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());
+<i>273</i>&nbsp;        if (controller != null &amp;&amp; controller.hasOpponent(event.getPlayerId(), game)) {
+<i>274</i>&nbsp;            Card card = game.getCard(event.getSourceId());
+<i>275</i>&nbsp;            if (card != null &amp;&amp; !card.getCardType().contains(CardType.CREATURE)) {
+<i>276</i>&nbsp;                return true;
+<i>277</i>&nbsp;            }
+<i>278</i>&nbsp;        }
+<i>279</i>&nbsp;        return false;
+<i>280</i>&nbsp;    }
+<i>281</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:35</div>
+</div>
+</body>
+</html>

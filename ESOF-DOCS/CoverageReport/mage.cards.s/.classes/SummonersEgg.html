@@ -1,0 +1,243 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SummonersEgg</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.s</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SummonersEgg (mage.cards.s)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SummonersEgg</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/ 10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.s;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.MageInt;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.common.DiesTriggeredAbility;
+<i>34</i>&nbsp;import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+<i>35</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>36</i>&nbsp;import mage.cards.Card;
+<i>37</i>&nbsp;import mage.cards.CardImpl;
+<i>38</i>&nbsp;import mage.cards.CardSetInfo;
+<i>39</i>&nbsp;import mage.constants.CardType;
+<i>40</i>&nbsp;import mage.constants.Outcome;
+<i>41</i>&nbsp;import mage.constants.Zone;
+<i>42</i>&nbsp;import mage.filter.FilterCard;
+<i>43</i>&nbsp;import mage.game.Game;
+<i>44</i>&nbsp;import mage.game.permanent.Permanent;
+<i>45</i>&nbsp;import mage.players.Player;
+<i>46</i>&nbsp;import mage.target.TargetCard;
+<i>47</i>&nbsp;import mage.util.CardUtil;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;/**
+<i>50</i>&nbsp; *
+<i>51</i>&nbsp; * @author Plopman
+<i>52</i>&nbsp; */
+<i>53</i>&nbsp;public class SummonersEgg extends CardImpl {
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public SummonersEgg(UUID ownerId, CardSetInfo setInfo) {
+<b class="fc"><i>56</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},&quot;{4}&quot;);</b>
+<b class="fc"><i>57</i>&nbsp;        this.subtype.add(&quot;Construct&quot;);</b>
+<b class="fc"><i>58</i>&nbsp;        this.power = new MageInt(0);</b>
+<b class="fc"><i>59</i>&nbsp;        this.toughness = new MageInt(4);</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;        // Imprint - When Summoner&#39;s Egg enters the battlefield, you may exile a card from your hand face down.
+<b class="fc"><i>62</i>&nbsp;        this.addAbility(new EntersBattlefieldTriggeredAbility(new SummonersEggImprintEffect(), true, &quot;&lt;i&gt;Imprint - &lt;/i&gt;&quot;));</b>
+<i>63</i>&nbsp;        // When Summoner&#39;s Egg dies, turn the exiled card face up. If it&#39;s a creature card, put it onto the battlefield under your control.
+<b class="fc"><i>64</i>&nbsp;        this.addAbility(new DiesTriggeredAbility(new SummonersEggPutOntoBattlefieldEffect()));</b>
+<b class="fc"><i>65</i>&nbsp;    }</b>
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public SummonersEgg(final SummonersEgg card) {
+<b class="fc"><i>68</i>&nbsp;        super(card);</b>
+<b class="fc"><i>69</i>&nbsp;    }</b>
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    @Override
+<i>72</i>&nbsp;    public SummonersEgg copy() {
+<b class="fc"><i>73</i>&nbsp;        return new SummonersEgg(this);</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;}
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;class SummonersEggImprintEffect extends OneShotEffect {
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    public SummonersEggImprintEffect() {
+<i>80</i>&nbsp;        super(Outcome.Benefit);
+<i>81</i>&nbsp;        staticText = &quot;exile a card from your hand face down&quot;;
+<i>82</i>&nbsp;    }
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    public SummonersEggImprintEffect(SummonersEggImprintEffect effect) {
+<i>85</i>&nbsp;        super(effect);
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    @Override
+<i>89</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>90</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());
+<i>91</i>&nbsp;        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+<i>92</i>&nbsp;        if (controller != null) {
+<i>93</i>&nbsp;            if (controller.getHand().size() &gt; 0) {
+<i>94</i>&nbsp;                TargetCard target = new TargetCard(Zone.HAND, new FilterCard());
+<i>95</i>&nbsp;                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)
+<i>96</i>&nbsp;                        &amp;&amp; controller.choose(Outcome.Benefit, controller.getHand(), target, game)) {
+<i>97</i>&nbsp;                    Card card = controller.getHand().get(target.getFirstTarget(), game);
+<i>98</i>&nbsp;                    if (card != null) {
+<i>99</i>&nbsp;                        card.setFaceDown(true, game);
+<i>100</i>&nbsp;                        controller.moveCardsToExile(card, source, game, false, source.getSourceId(), sourcePermanent.getIdName() + &quot; (Imprint)&quot;);
+<i>101</i>&nbsp;                        card.setFaceDown(true, game);
+<i>102</i>&nbsp;                        Permanent permanent = game.getPermanent(source.getSourceId());
+<i>103</i>&nbsp;                        if (permanent != null) {
+<i>104</i>&nbsp;                            permanent.imprint(card.getId(), game);
+<i>105</i>&nbsp;                            permanent.addInfo(&quot;imprint&quot;, CardUtil.addToolTipMarkTags(&quot;[Imprinted card]&quot;), game);
+<i>106</i>&nbsp;                        }
+<i>107</i>&nbsp;                    }
+<i>108</i>&nbsp;                }
+<i>109</i>&nbsp;            }
+<i>110</i>&nbsp;            return true;
+<i>111</i>&nbsp;        }
+<i>112</i>&nbsp;        return false;
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    @Override
+<i>117</i>&nbsp;    public SummonersEggImprintEffect copy() {
+<i>118</i>&nbsp;        return new SummonersEggImprintEffect(this);
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;}
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;class SummonersEggPutOntoBattlefieldEffect extends OneShotEffect {
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    public SummonersEggPutOntoBattlefieldEffect() {
+<i>126</i>&nbsp;        super(Outcome.PutCreatureInPlay);
+<i>127</i>&nbsp;        this.staticText = &quot;turn the exiled card face up. If it&#39;s a creature card, put it onto the battlefield under your control&quot;;
+<i>128</i>&nbsp;    }
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    public SummonersEggPutOntoBattlefieldEffect(final SummonersEggPutOntoBattlefieldEffect effect) {
+<i>131</i>&nbsp;        super(effect);
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    @Override
+<i>135</i>&nbsp;    public SummonersEggPutOntoBattlefieldEffect copy() {
+<i>136</i>&nbsp;        return new SummonersEggPutOntoBattlefieldEffect(this);
+<i>137</i>&nbsp;    }
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    @Override
+<i>140</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>141</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());
+<i>142</i>&nbsp;        if (controller != null) {
+<i>143</i>&nbsp;            Permanent SummonersEgg = game.getPermanentOrLKIBattlefield(source.getSourceId());
+<i>144</i>&nbsp;            if (SummonersEgg != null &amp;&amp; SummonersEgg.getImprinted() != null &amp;&amp; !SummonersEgg.getImprinted().isEmpty()) {
+<i>145</i>&nbsp;                Card imprintedCard = game.getCard(SummonersEgg.getImprinted().get(0));
+<i>146</i>&nbsp;                if (imprintedCard != null &amp;&amp; game.getState().getZone(imprintedCard.getId()).equals(Zone.EXILED)) {
+<i>147</i>&nbsp;                    //turn the exiled card face up.
+<i>148</i>&nbsp;                    imprintedCard.turnFaceUp(game, source.getControllerId());
+<i>149</i>&nbsp;                    //If it&#39;s a creature card,
+<i>150</i>&nbsp;                    if (imprintedCard.getCardType().contains(CardType.CREATURE)) {
+<i>151</i>&nbsp;                        //put it onto the battlefield under your control
+<i>152</i>&nbsp;                        imprintedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
+<i>153</i>&nbsp;                    }
+<i>154</i>&nbsp;                }
+<i>155</i>&nbsp;            }
+<i>156</i>&nbsp;            return true;
+<i>157</i>&nbsp;        }
+<i>158</i>&nbsp;        return false;
+<i>159</i>&nbsp;    }
+<i>160</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:36</div>
+</div>
+</body>
+</html>

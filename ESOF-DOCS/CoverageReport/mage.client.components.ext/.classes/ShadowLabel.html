@@ -1,0 +1,156 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ShadowLabel</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.components.ext</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ShadowLabel (mage.client.components.ext)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ShadowLabel</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.client.components.ext;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import javax.swing.*;
+<i>4</i>&nbsp;import java.awt.*;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;/**
+<i>7</i>&nbsp; * @author mw, noxx
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;public class ShadowLabel extends JLabel {
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    private String text;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    private Font f;
+<i>14</i>&nbsp;    
+<b class="nc"><i>15</i>&nbsp;    private boolean invertColors = false;</b>
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public ShadowLabel() {
+<b class="nc"><i>18</i>&nbsp;    	super();</b>
+<i>19</i>&nbsp;    }
+<i>20</i>&nbsp;    
+<i>21</i>&nbsp;    public ShadowLabel(String text, int size) {
+<b class="nc"><i>22</i>&nbsp;        super();</b>
+<b class="nc"><i>23</i>&nbsp;        this.text = text;</b>
+<b class="nc"><i>24</i>&nbsp;        f = new Font(&quot;Dialog&quot;, 1, size);</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    
+<i>28</i>&nbsp;    @Override
+<i>29</i>&nbsp;    public void paintComponent(Graphics g) {
+<b class="nc"><i>30</i>&nbsp;        super.paintComponent(g);</b>
+<i>31</i>&nbsp;
+<b class="nc"><i>32</i>&nbsp;        Graphics2D g2D = (Graphics2D) g;</b>
+<i>33</i>&nbsp;        // ////////////////////////////////////////////////////////////////
+<i>34</i>&nbsp;        // antialiasing
+<b class="nc"><i>35</i>&nbsp;        g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,</b>
+<i>36</i>&nbsp;                 RenderingHints.VALUE_ANTIALIAS_ON);
+<i>37</i>&nbsp;        // ////////////////////////////////////////////////////////////////
+<i>38</i>&nbsp;        
+<i>39</i>&nbsp;        /**
+<i>40</i>&nbsp;         * draw text
+<i>41</i>&nbsp;         */
+<b class="nc"><i>42</i>&nbsp;        if (!invertColors) {</b>
+<b class="nc"><i>43</i>&nbsp;	        g2D.setFont(f);</b>
+<b class="nc"><i>44</i>&nbsp;	        g2D.setColor(new Color(0, 0, 0));</b>
+<b class="nc"><i>45</i>&nbsp;	        g2D.drawString(this.text, 1, 14);</b>
+<b class="nc"><i>46</i>&nbsp;	        g2D.setColor(new Color(255, 255, 255, 230));</b>
+<b class="nc"><i>47</i>&nbsp;	        g2D.drawString(this.text, 0, 13);</b>
+<i>48</i>&nbsp;        } else {
+<b class="nc"><i>49</i>&nbsp;        	g2D.setFont(f);</b>
+<b class="nc"><i>50</i>&nbsp;	        g2D.setColor(new Color(255, 255, 255, 230));</b>
+<b class="nc"><i>51</i>&nbsp;	        g2D.drawString(this.text, 1, 14);</b>
+<b class="nc"><i>52</i>&nbsp;	        g2D.setColor(new Color(0, 0, 0));</b>
+<b class="nc"><i>53</i>&nbsp;	        g2D.drawString(this.text, 0, 13);</b>
+<i>54</i>&nbsp;        }
+<b class="nc"><i>55</i>&nbsp;        g2D.dispose();</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;    
+<i>59</i>&nbsp;    public void setInvertColors(boolean invertColors) {
+<b class="nc"><i>60</i>&nbsp;		this.invertColors = invertColors;</b>
+<i>61</i>&nbsp;	}
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;	public void setText(String text) {
+<b class="nc"><i>64</i>&nbsp;        this.text = text;</b>
+<b class="nc"><i>65</i>&nbsp;        repaint();</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    /**
+<i>69</i>&nbsp;     * Default UID
+<i>70</i>&nbsp;     */
+<i>71</i>&nbsp;    private static final long serialVersionUID = 1L;
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,343 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DeckFilter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.table</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DeckFilter (mage.client.table)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DeckFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp;*
+<i>4</i>&nbsp;* Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp;* permitted provided that the following conditions are met:
+<i>6</i>&nbsp;*
+<i>7</i>&nbsp;*    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp;*       conditions and the following disclaimer.
+<i>9</i>&nbsp;*
+<i>10</i>&nbsp;*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp;*       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp;*       provided with the distribution.
+<i>13</i>&nbsp;*
+<i>14</i>&nbsp;* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp;* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp;* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp;* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp;* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp;* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp;* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp;* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp;*
+<i>24</i>&nbsp;* The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp;* authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp;* or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp;*/
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;/*
+<i>30</i>&nbsp; * NewPlayerPanel.java
+<i>31</i>&nbsp; *
+<i>32</i>&nbsp; * Created on 15-Dec-2009, 10:09:46 PM
+<i>33</i>&nbsp; */
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;package mage.client.table;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;import java.io.File;
+<i>38</i>&nbsp;import java.io.IOException;
+<i>39</i>&nbsp;import javax.swing.JFileChooser;
+<i>40</i>&nbsp;import javax.swing.filechooser.FileFilter;
+<i>41</i>&nbsp;import mage.client.MageFrame;
+<i>42</i>&nbsp;import mage.client.deck.generator.DeckGenerator;
+<i>43</i>&nbsp;import mage.client.util.Config;
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;/**
+<i>46</i>&nbsp; *
+<i>47</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>48</i>&nbsp; */
+<i>49</i>&nbsp;public class NewPlayerPanel extends javax.swing.JPanel {
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    private final JFileChooser fcSelectDeck;
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /** Creates new form NewPlayerPanel */
+<i>54</i>&nbsp;    public NewPlayerPanel() {
+<i>55</i>&nbsp;        initComponents();
+<i>56</i>&nbsp;        fcSelectDeck = new JFileChooser();
+<i>57</i>&nbsp;        fcSelectDeck.setAcceptAllFileFilterUsed(false);
+<i>58</i>&nbsp;        fcSelectDeck.addChoosableFileFilter(new DeckFilter());
+<i>59</i>&nbsp;        String deckPath = MageFrame.getPreferences().get(&quot;defaultDeckPath&quot;, &quot;&quot;);
+<i>60</i>&nbsp;        if (deckPath.isEmpty()) {
+<i>61</i>&nbsp;            if (Config.defaultDeckPath != null) {
+<i>62</i>&nbsp;                deckPath = Config.defaultDeckPath;
+<i>63</i>&nbsp;            }
+<i>64</i>&nbsp;        }
+<i>65</i>&nbsp;        this.txtPlayerDeck.setText(deckPath);
+<i>66</i>&nbsp;        if (Config.defaultComputerName != null) {
+<i>67</i>&nbsp;            this.txtPlayerName.setText(Config.defaultComputerName);
+<i>68</i>&nbsp;        }
+<i>69</i>&nbsp;        if (cbLevel.getModel().getSize() &gt; 0) {
+<i>70</i>&nbsp;            cbLevel.setSelectedIndex(cbLevel.getModel().getSize()/2);
+<i>71</i>&nbsp;        }
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    public void setPlayerName(String playerName) {
+<i>75</i>&nbsp;        this.txtPlayerName.setText(playerName);
+<i>76</i>&nbsp;        this.txtPlayerName.setEditable(false);
+<i>77</i>&nbsp;        this.txtPlayerName.setEnabled(false);
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    protected void playerLoadDeck() {
+<i>81</i>&nbsp;        String lastFolder = MageFrame.getPreferences().get(&quot;lastDeckFolder&quot;, &quot;&quot;);
+<i>82</i>&nbsp;        if (!lastFolder.isEmpty()) {
+<i>83</i>&nbsp;            fcSelectDeck.setCurrentDirectory(new File(lastFolder));
+<i>84</i>&nbsp;        }
+<i>85</i>&nbsp;        int ret = fcSelectDeck.showDialog(this, &quot;Select Deck&quot;);
+<i>86</i>&nbsp;        if (ret == JFileChooser.APPROVE_OPTION) {
+<i>87</i>&nbsp;            File file = fcSelectDeck.getSelectedFile();
+<i>88</i>&nbsp;            this.txtPlayerDeck.setText(file.getPath());
+<i>89</i>&nbsp;            try {
+<i>90</i>&nbsp;                MageFrame.getPreferences().put(&quot;lastDeckFolder&quot;, file.getCanonicalPath());
+<i>91</i>&nbsp;            } catch (IOException ex) {    }
+<i>92</i>&nbsp;        }
+<i>93</i>&nbsp;        fcSelectDeck.setSelectedFile(null);
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    protected void generateDeck() {
+<i>97</i>&nbsp;        String path = DeckGenerator.generateDeck();
+<i>98</i>&nbsp;        if (path != null) {
+<i>99</i>&nbsp;            this.txtPlayerDeck.setText(path);
+<i>100</i>&nbsp;            MageFrame.getPreferences().put(&quot;defaultDeckPath&quot;, path);
+<i>101</i>&nbsp;        }
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    public String getPlayerName() {
+<i>105</i>&nbsp;        return this.txtPlayerName.getText();
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    public String getDeckFile() {
+<i>109</i>&nbsp;        return this.txtPlayerDeck.getText();
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    public void setDeckFile(String deckFile) {
+<i>113</i>&nbsp;        this.txtPlayerDeck.setText(deckFile);
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    public int getLevel() {
+<i>118</i>&nbsp;        return Integer.valueOf((String)this.cbLevel.getSelectedItem());
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    public void showLevel(boolean show) {
+<i>122</i>&nbsp;        this.cbLevel.setVisible(show);
+<i>123</i>&nbsp;        this.lblLevel.setVisible(show);
+<i>124</i>&nbsp;    }
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    public void showDeckElements(boolean show) {
+<i>127</i>&nbsp;        this.lblPlayerDeck.setVisible(show);
+<i>128</i>&nbsp;        this.txtPlayerDeck.setVisible(show);
+<i>129</i>&nbsp;        this.btnGenerate.setVisible(show);
+<i>130</i>&nbsp;        this.btnPlayerDeck.setVisible(show);
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    /** This method is called from within the constructor to
+<i>134</i>&nbsp;     * initialize the form.
+<i>135</i>&nbsp;     * WARNING: Do NOT modify this code. The content of this method is
+<i>136</i>&nbsp;     * always regenerated by the Form Editor.
+<i>137</i>&nbsp;     */
+<i>138</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>139</i>&nbsp;    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+<i>140</i>&nbsp;    private void initComponents() {
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;        lblPlayerName = new javax.swing.JLabel();
+<i>143</i>&nbsp;        txtPlayerName = new javax.swing.JTextField();
+<i>144</i>&nbsp;        lblPlayerDeck = new javax.swing.JLabel();
+<i>145</i>&nbsp;        txtPlayerDeck = new javax.swing.JTextField();
+<i>146</i>&nbsp;        btnPlayerDeck = new javax.swing.JButton();
+<i>147</i>&nbsp;        btnGenerate = new javax.swing.JButton();
+<i>148</i>&nbsp;        lblLevel = new javax.swing.JLabel();
+<i>149</i>&nbsp;        cbLevel = new javax.swing.JComboBox();
+<i>150</i>&nbsp;
+<i>151</i>&nbsp;        lblPlayerName.setText(&quot;Name:&quot;);
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;        lblPlayerDeck.setText(&quot;Deck:&quot;);
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;        btnPlayerDeck.setText(&quot;...&quot;);
+<i>156</i>&nbsp;        btnPlayerDeck.addActionListener(new java.awt.event.ActionListener() {
+<i>157</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>158</i>&nbsp;                btnPlayerDeckActionPerformed(evt);
+<i>159</i>&nbsp;            }
+<i>160</i>&nbsp;        });
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;        btnGenerate.setText(&quot;Generate&quot;);
+<i>163</i>&nbsp;        btnGenerate.addActionListener(new java.awt.event.ActionListener() {
+<i>164</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>165</i>&nbsp;                btnGenerateActionPerformed(evt);
+<i>166</i>&nbsp;            }
+<i>167</i>&nbsp;        });
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;        lblLevel.setText(&quot;Skill:&quot;);
+<i>170</i>&nbsp;
+<i>171</i>&nbsp;        cbLevel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot; }));
+<i>172</i>&nbsp;
+<i>173</i>&nbsp;        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+<i>174</i>&nbsp;        this.setLayout(layout);
+<i>175</i>&nbsp;        layout.setHorizontalGroup(
+<i>176</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>177</i>&nbsp;            .addGroup(layout.createSequentialGroup()
+<i>178</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>179</i>&nbsp;                    .addGroup(layout.createSequentialGroup()
+<i>180</i>&nbsp;                        .addGap(4, 4, 4)
+<i>181</i>&nbsp;                        .addComponent(lblPlayerDeck))
+<i>182</i>&nbsp;                    .addComponent(lblPlayerName))
+<i>183</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>184</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>185</i>&nbsp;                    .addComponent(txtPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+<i>186</i>&nbsp;                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
+<i>187</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>188</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>189</i>&nbsp;                    .addGroup(layout.createSequentialGroup()
+<i>190</i>&nbsp;                        .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>191</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>192</i>&nbsp;                        .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+<i>193</i>&nbsp;                    .addGroup(layout.createSequentialGroup()
+<i>194</i>&nbsp;                        .addComponent(lblLevel)
+<i>195</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>196</i>&nbsp;                        .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))))
+<i>197</i>&nbsp;        );
+<i>198</i>&nbsp;        layout.setVerticalGroup(
+<i>199</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>200</i>&nbsp;            .addGroup(layout.createSequentialGroup()
+<i>201</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+<i>202</i>&nbsp;                    .addComponent(txtPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>203</i>&nbsp;                    .addComponent(lblPlayerName)
+<i>204</i>&nbsp;                    .addComponent(lblLevel)
+<i>205</i>&nbsp;                    .addComponent(cbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+<i>206</i>&nbsp;                .addGap(3, 3, 3)
+<i>207</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+<i>208</i>&nbsp;                    .addComponent(lblPlayerDeck)
+<i>209</i>&nbsp;                    .addComponent(txtPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>210</i>&nbsp;                    .addComponent(btnPlayerDeck, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>211</i>&nbsp;                    .addComponent(btnGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+<i>212</i>&nbsp;        );
+<i>213</i>&nbsp;    }// &lt;/editor-fold&gt;//GEN-END:initComponents
+<i>214</i>&nbsp;
+<i>215</i>&nbsp;    private void btnPlayerDeckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayerDeckActionPerformed
+<i>216</i>&nbsp;        playerLoadDeck();
+<i>217</i>&nbsp;}//GEN-LAST:event_btnPlayerDeckActionPerformed
+<i>218</i>&nbsp;
+<i>219</i>&nbsp;    private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
+<i>220</i>&nbsp;        generateDeck();
+<i>221</i>&nbsp;    }//GEN-LAST:event_btnGenerateActionPerformed
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;
+<i>224</i>&nbsp;    // Variables declaration - do not modify//GEN-BEGIN:variables
+<i>225</i>&nbsp;    private javax.swing.JButton btnGenerate;
+<i>226</i>&nbsp;    private javax.swing.JButton btnPlayerDeck;
+<i>227</i>&nbsp;    private javax.swing.JComboBox cbLevel;
+<i>228</i>&nbsp;    private javax.swing.JLabel lblLevel;
+<i>229</i>&nbsp;    private javax.swing.JLabel lblPlayerDeck;
+<i>230</i>&nbsp;    private javax.swing.JLabel lblPlayerName;
+<i>231</i>&nbsp;    private javax.swing.JTextField txtPlayerDeck;
+<i>232</i>&nbsp;    private javax.swing.JTextField txtPlayerName;
+<i>233</i>&nbsp;    // End of variables declaration//GEN-END:variables
+<i>234</i>&nbsp;
+<i>235</i>&nbsp;}
+<i>236</i>&nbsp;
+<b class="nc"><i>237</i>&nbsp;class DeckFilter extends FileFilter {</b>
+<i>238</i>&nbsp;
+<i>239</i>&nbsp;    @Override
+<i>240</i>&nbsp;    public boolean accept(File f) {
+<b class="nc"><i>241</i>&nbsp;        if (f.isDirectory()) {</b>
+<b class="nc"><i>242</i>&nbsp;            return true;</b>
+<i>243</i>&nbsp;        }
+<i>244</i>&nbsp;
+<b class="nc"><i>245</i>&nbsp;        String ext = null;</b>
+<b class="nc"><i>246</i>&nbsp;        String s = f.getName();</b>
+<b class="nc"><i>247</i>&nbsp;        int i = s.lastIndexOf(&#39;.&#39;);</b>
+<i>248</i>&nbsp;
+<b class="nc"><i>249</i>&nbsp;        if (i &gt; 0 &amp;&amp;  i &lt; s.length() - 1) {</b>
+<b class="nc"><i>250</i>&nbsp;            ext = s.substring(i+1).toLowerCase();</b>
+<i>251</i>&nbsp;        }
+<b class="nc"><i>252</i>&nbsp;        return (ext==null)?false:ext.equals(&quot;dck&quot;);</b>
+<i>253</i>&nbsp;    }
+<i>254</i>&nbsp;
+<i>255</i>&nbsp;    @Override
+<i>256</i>&nbsp;    public String getDescription() {
+<b class="nc"><i>257</i>&nbsp;        return &quot;Deck Files&quot;;</b>
+<i>258</i>&nbsp;    }
+<i>259</i>&nbsp;
+<i>260</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

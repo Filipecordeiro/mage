@@ -1,0 +1,752 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ComputerPlayer7</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.player.ai</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ComputerPlayer7 (mage.player.ai)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ComputerPlayer7</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.9%
+  </span>
+  <span class="absValue">
+    (9/ 17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.7%
+  </span>
+  <span class="absValue">
+    (108/ 352)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ComputerPlayer7$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    55.6%
+  </span>
+  <span class="absValue">
+    (10/ 18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.9%
+  </span>
+  <span class="absValue">
+    (109/ 353)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; * 
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; * 
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; * 
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; * 
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; * 
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;package mage.player.ai;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;import java.util.LinkedList;
+<i>32</i>&nbsp;import java.util.List;
+<i>33</i>&nbsp;import java.util.UUID;
+<i>34</i>&nbsp;import mage.abilities.Ability;
+<i>35</i>&nbsp;import mage.constants.PhaseStep;
+<i>36</i>&nbsp;import mage.constants.RangeOfInfluence;
+<i>37</i>&nbsp;import mage.game.Game;
+<i>38</i>&nbsp;import mage.game.combat.Combat;
+<i>39</i>&nbsp;import mage.game.combat.CombatGroup;
+<i>40</i>&nbsp;import mage.game.events.GameEvent;
+<i>41</i>&nbsp;import mage.game.turn.BeginCombatStep;
+<i>42</i>&nbsp;import mage.game.turn.CleanupStep;
+<i>43</i>&nbsp;import mage.game.turn.CombatDamageStep;
+<i>44</i>&nbsp;import mage.game.turn.CombatPhase;
+<i>45</i>&nbsp;import mage.game.turn.DeclareAttackersStep;
+<i>46</i>&nbsp;import mage.game.turn.DeclareBlockersStep;
+<i>47</i>&nbsp;import mage.game.turn.EndOfCombatStep;
+<i>48</i>&nbsp;import mage.game.turn.EndPhase;
+<i>49</i>&nbsp;import mage.game.turn.EndStep;
+<i>50</i>&nbsp;import mage.game.turn.FirstCombatDamageStep;
+<i>51</i>&nbsp;import mage.game.turn.PostCombatMainPhase;
+<i>52</i>&nbsp;import mage.game.turn.PostCombatMainStep;
+<i>53</i>&nbsp;import mage.game.turn.Step;
+<i>54</i>&nbsp;import org.apache.log4j.Logger;
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;/**
+<i>60</i>&nbsp; *
+<i>61</i>&nbsp; * @author ayratn
+<i>62</i>&nbsp; */
+<i>63</i>&nbsp;public class ComputerPlayer7 extends ComputerPlayer6 {
+<i>64</i>&nbsp;
+<b class="fc"><i>65</i>&nbsp;    private static final Logger logger = Logger.getLogger(ComputerPlayer7.class);</b>
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    private boolean allowBadMoves;
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    public ComputerPlayer7(String name, RangeOfInfluence range, int skill) {
+<b class="fc"><i>70</i>&nbsp;        super(name, range, skill);</b>
+<b class="fc"><i>71</i>&nbsp;    }</b>
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    public ComputerPlayer7(final ComputerPlayer7 player) {
+<b class="fc"><i>74</i>&nbsp;        super(player);</b>
+<b class="fc"><i>75</i>&nbsp;        this.allowBadMoves = player.allowBadMoves;</b>
+<b class="fc"><i>76</i>&nbsp;    }</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    @Override
+<i>79</i>&nbsp;    public ComputerPlayer7 copy() {
+<b class="fc"><i>80</i>&nbsp;        return new ComputerPlayer7(this);</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    @Override
+<i>84</i>&nbsp;    public boolean priority(Game game) {
+<b class="fc"><i>85</i>&nbsp;        game.resumeTimer(getTurnControlledBy());</b>
+<b class="fc"><i>86</i>&nbsp;        boolean result = priorityPlay(game);</b>
+<b class="fc"><i>87</i>&nbsp;        game.pauseTimer(getTurnControlledBy());</b>
+<b class="fc"><i>88</i>&nbsp;        return result;</b>
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    private boolean priorityPlay(Game game) {
+<b class="fc"><i>92</i>&nbsp;        if (lastLoggedTurn != game.getTurnNum()) {</b>
+<b class="fc"><i>93</i>&nbsp;            lastLoggedTurn = game.getTurnNum();</b>
+<b class="fc"><i>94</i>&nbsp;            logger.info(&quot;======================= Turn: &quot;+ game.getTurnNum() + &quot; [&quot;+ game.getPlayer(game.getActivePlayerId()).getName() +&quot;] =========================================&quot;);</b>
+<i>95</i>&nbsp;        }
+<b class="fc"><i>96</i>&nbsp;        logState(game);</b>
+<b class="fc"><i>97</i>&nbsp;        logger.debug(&quot;Priority -- Step: &quot; + (game.getTurn().getStepType() + &quot;                       &quot;).substring(0,25) + &quot; ActivePlayer-&quot; + game.getPlayer(game.getActivePlayerId()).getName() + &quot; PriorityPlayer-&quot; + name);</b>
+<b class="fc"><i>98</i>&nbsp;        game.getState().setPriorityPlayerId(playerId);</b>
+<b class="fc"><i>99</i>&nbsp;        game.firePriorityEvent(playerId);</b>
+<b class="fc"><i>100</i>&nbsp;        switch (game.getTurn().getStepType()) {</b>
+<i>101</i>&nbsp;            case UPKEEP:
+<i>102</i>&nbsp;            case DRAW:
+<b class="fc"><i>103</i>&nbsp;                pass(game);</b>
+<b class="fc"><i>104</i>&nbsp;                return false;</b>
+<i>105</i>&nbsp;            case PRECOMBAT_MAIN:
+<b class="fc"><i>106</i>&nbsp;                if (game.getActivePlayerId().equals(playerId)) {</b>
+<b class="fc"><i>107</i>&nbsp;                    printOutState(game);</b>
+<b class="fc"><i>108</i>&nbsp;                    if (actions.isEmpty()) {</b>
+<b class="fc"><i>109</i>&nbsp;                        logger.info(&quot;Sim Calculate pre combat actions ----------------------------------------------------- &quot;);</b>
+<b class="fc"><i>110</i>&nbsp;                        calculatePreCombatActions(game);</b>
+<i>111</i>&nbsp;                    }
+<b class="fc"><i>112</i>&nbsp;                    act(game);</b>
+<b class="fc"><i>113</i>&nbsp;                    return true;</b>
+<i>114</i>&nbsp;                }
+<i>115</i>&nbsp;                else {
+<b class="fc"><i>116</i>&nbsp;                    pass(game);</b>
+<i>117</i>&nbsp;                }
+<b class="fc"><i>118</i>&nbsp;                return false;</b>
+<i>119</i>&nbsp;            case BEGIN_COMBAT:
+<b class="fc"><i>120</i>&nbsp;                pass(game);</b>
+<b class="fc"><i>121</i>&nbsp;                return false;</b>
+<i>122</i>&nbsp;            case DECLARE_ATTACKERS:
+<b class="fc"><i>123</i>&nbsp;                if (!game.getActivePlayerId().equals(playerId)) {</b>
+<b class="fc"><i>124</i>&nbsp;                    printOutState(game);</b>
+<b class="fc"><i>125</i>&nbsp;                    if (actions.isEmpty()) {</b>
+<b class="fc"><i>126</i>&nbsp;                        logger.info(&quot;Sim Calculate declare attackers actions ----------------------------------------------------- &quot;);</b>
+<b class="fc"><i>127</i>&nbsp;                        calculatePreCombatActions(game);</b>
+<i>128</i>&nbsp;                    }
+<b class="fc"><i>129</i>&nbsp;                    act(game);</b>
+<b class="fc"><i>130</i>&nbsp;                    return true;</b>
+<i>131</i>&nbsp;                }
+<i>132</i>&nbsp;                else {
+<b class="fc"><i>133</i>&nbsp;                    pass(game);</b>
+<i>134</i>&nbsp;                }
+<b class="fc"><i>135</i>&nbsp;                return false;</b>
+<i>136</i>&nbsp;            case DECLARE_BLOCKERS:
+<i>137</i>&nbsp;            case FIRST_COMBAT_DAMAGE:
+<i>138</i>&nbsp;            case COMBAT_DAMAGE:
+<i>139</i>&nbsp;            case END_COMBAT:
+<b class="fc"><i>140</i>&nbsp;                pass(game);</b>
+<b class="fc"><i>141</i>&nbsp;                return false;</b>
+<i>142</i>&nbsp;            case POSTCOMBAT_MAIN:
+<i>143</i>&nbsp;//                if (game.getActivePlayerId().equals(playerId)) {
+<b class="fc"><i>144</i>&nbsp;                    printOutState(game);</b>
+<b class="fc"><i>145</i>&nbsp;                    if (actions.isEmpty()) {</b>
+<b class="fc"><i>146</i>&nbsp;                        calculatePostCombatActions(game);</b>
+<i>147</i>&nbsp;                    }
+<b class="fc"><i>148</i>&nbsp;                    act(game);</b>
+<b class="fc"><i>149</i>&nbsp;                    return true;</b>
+<i>150</i>&nbsp;//                }
+<i>151</i>&nbsp;//                else {
+<i>152</i>&nbsp;//                    pass(game);
+<i>153</i>&nbsp;//                }
+<i>154</i>&nbsp;//                return false;
+<i>155</i>&nbsp;            case END_TURN:
+<i>156</i>&nbsp;            case CLEANUP:
+<b class="fc"><i>157</i>&nbsp;                actionCache.clear();</b>
+<b class="fc"><i>158</i>&nbsp;                pass(game);</b>
+<b class="fc"><i>159</i>&nbsp;                return false;</b>
+<i>160</i>&nbsp;        }
+<b class="nc"><i>161</i>&nbsp;        return false;</b>
+<i>162</i>&nbsp;    }
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;    protected void calculatePreCombatActions(Game game) {        
+<b class="fc"><i>165</i>&nbsp;        if (!getNextAction(game)) {</b>
+<b class="fc"><i>166</i>&nbsp;            currentScore = GameStateEvaluator2.evaluate(playerId, game);</b>
+<b class="fc"><i>167</i>&nbsp;            Game sim = createSimulation(game);</b>
+<b class="fc"><i>168</i>&nbsp;            SimulationNode2.resetCount();</b>
+<b class="fc"><i>169</i>&nbsp;            root = new SimulationNode2(null, sim, maxDepth, playerId);</b>
+<i>170</i>&nbsp;            
+<b class="fc"><i>171</i>&nbsp;            addActionsTimed();</b>
+<b class="fc"><i>172</i>&nbsp;            logger.trace(&quot;After add actions timed: root.children.size = &quot; + root.children.size());</b>
+<b class="fc"><i>173</i>&nbsp;            if (root.children.size() &gt; 0) {</b>
+<b class="fc"><i>174</i>&nbsp;                root = root.children.get(0);</b>
+<i>175</i>&nbsp;                // int bestScore = root.getScore();
+<i>176</i>&nbsp;                // if (bestScore &gt; currentScore || allowBadMoves) {
+<i>177</i>&nbsp;                
+<i>178</i>&nbsp;                // prevent repeating always the same action with no cost
+<b class="fc"><i>179</i>&nbsp;                boolean doThis = true;</b>
+<b class="fc"><i>180</i>&nbsp;                if (root.abilities.size() == 1) {</b>
+<b class="fc"><i>181</i>&nbsp;                    for (Ability ability:root.abilities) {</b>
+<b class="fc"><i>182</i>&nbsp;                        if (ability.getManaCosts().convertedManaCost() == 0 &amp;&amp; ability.getCosts().isEmpty()) {</b>
+<b class="fc"><i>183</i>&nbsp;                            if (actionCache.contains(ability.getRule() + &quot;_&quot; + ability.getSourceId())) {</b>
+<b class="fc"><i>184</i>&nbsp;                                doThis = false; // don&#39;t do it again</b>
+<i>185</i>&nbsp;                            }
+<i>186</i>&nbsp;                        }
+<b class="fc"><i>187</i>&nbsp;                    }</b>
+<i>188</i>&nbsp;                }
+<b class="fc"><i>189</i>&nbsp;                if (doThis) {</b>
+<b class="fc"><i>190</i>&nbsp;                    actions = new LinkedList&lt;&gt;(root.abilities);</b>
+<b class="fc"><i>191</i>&nbsp;                    combat = root.combat;</b>
+<b class="fc"><i>192</i>&nbsp;                    for (Ability ability : actions) {</b>
+<b class="fc"><i>193</i>&nbsp;                        actionCache.add(ability.getRule() + &quot;_&quot; + ability.getSourceId());</b>
+<b class="fc"><i>194</i>&nbsp;                    }</b>
+<i>195</i>&nbsp;                }
+<b class="fc"><i>196</i>&nbsp;            } else {</b>
+<b class="nc"><i>197</i>&nbsp;                logger.info(&quot;[&quot; + game.getPlayer(playerId).getName() + &quot;][pre] Action: skip&quot;);</b>
+<i>198</i>&nbsp;            }
+<b class="fc"><i>199</i>&nbsp;        } else {</b>
+<b class="fc"><i>200</i>&nbsp;            logger.debug(&quot;Next Action exists!&quot;);</b>
+<i>201</i>&nbsp;        }
+<b class="fc"><i>202</i>&nbsp;    }</b>
+<i>203</i>&nbsp;
+<i>204</i>&nbsp;    protected void calculatePostCombatActions(Game game) {
+<b class="fc"><i>205</i>&nbsp;        if (!getNextAction(game)) {</b>
+<b class="fc"><i>206</i>&nbsp;            currentScore = GameStateEvaluator2.evaluate(playerId, game);</b>
+<b class="fc"><i>207</i>&nbsp;            Game sim = createSimulation(game);</b>
+<b class="fc"><i>208</i>&nbsp;            SimulationNode2.resetCount();</b>
+<b class="fc"><i>209</i>&nbsp;            root = new SimulationNode2(null, sim, maxDepth, playerId);</b>
+<b class="fc"><i>210</i>&nbsp;            logger.debug(&quot;Sim Calculate post combat actions ----------------------------------------------------------------------------------------&quot;);</b>
+<i>211</i>&nbsp;
+<b class="fc"><i>212</i>&nbsp;            addActionsTimed();</b>
+<b class="fc"><i>213</i>&nbsp;            if (root != null &amp;&amp; root.children.size() &gt; 0) {</b>
+<b class="fc"><i>214</i>&nbsp;                root = root.children.get(0);</b>
+<b class="fc"><i>215</i>&nbsp;                int bestScore = root.getScore();</b>
+<b class="fc"><i>216</i>&nbsp;                if (bestScore &gt; currentScore || allowBadMoves) {</b>
+<b class="nc"><i>217</i>&nbsp;                    actions = new LinkedList&lt;&gt;(root.abilities);</b>
+<b class="nc"><i>218</i>&nbsp;                    combat = root.combat;</b>
+<i>219</i>&nbsp;                } else {
+<b class="fc"><i>220</i>&nbsp;                    logger.debug(&quot;[&quot; + game.getPlayer(playerId).getName() + &quot;] no better score  current: &quot; + currentScore + &quot; bestScore: &quot; + bestScore );</b>
+<i>221</i>&nbsp;                }
+<b class="fc"><i>222</i>&nbsp;            } else {</b>
+<b class="nc"><i>223</i>&nbsp;                logger.debug(&quot;[&quot; + game.getPlayer(playerId).getName() + &quot;][post] Action: skip&quot;);</b>
+<i>224</i>&nbsp;            }
+<i>225</i>&nbsp;        }
+<b class="fc"><i>226</i>&nbsp;    }</b>
+<i>227</i>&nbsp;
+<i>228</i>&nbsp;    @Override
+<i>229</i>&nbsp;    protected int addActions(SimulationNode2 node, int depth, int alpha, int beta) {
+<b class="fc"><i>230</i>&nbsp;        boolean stepFinished = false;</b>
+<i>231</i>&nbsp;        int val;
+<b class="fc"><i>232</i>&nbsp;        if (logger.isTraceEnabled() &amp;&amp; node !=null &amp;&amp; node.getAbilities() != null &amp;&amp; !node.getAbilities().toString().equals(&quot;[Pass]&quot;)){</b>
+<b class="nc"><i>233</i>&nbsp;            logger.trace(&quot;Add Action [&quot; + depth + &quot;] &quot; + node.getAbilities().toString() + &quot;  a: &quot; + alpha + &quot; b: &quot; + beta);</b>
+<i>234</i>&nbsp;        }
+<b class="fc"><i>235</i>&nbsp;        Game game = node.getGame();</b>
+<b class="fc"><i>236</i>&nbsp;        if (ALLOW_INTERRUPT &amp;&amp; Thread.interrupted()) {</b>
+<b class="nc"><i>237</i>&nbsp;            Thread.currentThread().interrupt();</b>
+<b class="nc"><i>238</i>&nbsp;            logger.debug(&quot;interrupted&quot;);</b>
+<b class="nc"><i>239</i>&nbsp;            return GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>240</i>&nbsp;        }
+<i>241</i>&nbsp;        // Condition to stop deeper simulation
+<b class="fc"><i>242</i>&nbsp;        if (depth &lt;= 0 || SimulationNode2.nodeCount &gt; maxNodes || game.gameOver(null)) {</b>
+<b class="nc"><i>243</i>&nbsp;            val = GameStateEvaluator2.evaluate(playerId, game);</b>
+<b class="nc"><i>244</i>&nbsp;            if (logger.isTraceEnabled()) {</b>
+<b class="nc"><i>245</i>&nbsp;                StringBuilder sb = new StringBuilder(&quot;Add Actions -- reached end state  &lt;&quot;).append(val).append(&quot;&gt;&quot;);</b>
+<b class="nc"><i>246</i>&nbsp;                SimulationNode2 logNode  = node;</b>
+<i>247</i>&nbsp;                do {
+<b class="nc"><i>248</i>&nbsp;                    sb.append(new StringBuilder(&quot; &lt;- [&quot;+logNode.getDepth()+&quot;]&quot; + (logNode.getAbilities() != null ? logNode.getAbilities().toString():&quot;[empty]&quot;)));</b>
+<b class="nc"><i>249</i>&nbsp;                    logNode = logNode.getParent();</b>
+<b class="nc"><i>250</i>&nbsp;                } while((logNode.getParent() != null));</b>
+<b class="nc"><i>251</i>&nbsp;                logger.trace(sb);</b>
+<b class="nc"><i>252</i>&nbsp;            }</b>
+<b class="fc"><i>253</i>&nbsp;        } else if (node.getChildren().size() &gt; 0) {</b>
+<b class="nc"><i>254</i>&nbsp;            if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>255</i>&nbsp;                StringBuilder sb = new StringBuilder(&quot;Add Action [&quot;).append(depth)</b>
+<b class="nc"><i>256</i>&nbsp;                        .append(&quot;] -- something added children &quot;)</b>
+<b class="nc"><i>257</i>&nbsp;                        .append(node.getAbilities() != null ? node.getAbilities().toString():&quot;null&quot;)</b>
+<b class="nc"><i>258</i>&nbsp;                        .append(&quot; added children: &quot;).append(node.getChildren().size()).append(&quot; (&quot;);</b>
+<b class="nc"><i>259</i>&nbsp;                for (SimulationNode2 logNode: node.getChildren()) {</b>
+<b class="nc"><i>260</i>&nbsp;                    sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString():&quot;null&quot;).append(&quot;, &quot;);</b>
+<b class="nc"><i>261</i>&nbsp;                }</b>
+<b class="nc"><i>262</i>&nbsp;                sb.append(&quot;)&quot;);</b>
+<b class="nc"><i>263</i>&nbsp;                logger.debug(sb);</b>
+<i>264</i>&nbsp;            }
+<b class="nc"><i>265</i>&nbsp;            val = minimaxAB(node, depth-1, alpha, beta);</b>
+<i>266</i>&nbsp;        }
+<i>267</i>&nbsp;        else {
+<b class="fc"><i>268</i>&nbsp;            logger.trace(&quot;Add Action -- alpha: &quot; + alpha + &quot; beta: &quot; + beta + &quot; depth:&quot; + depth + &quot; step:&quot; + game.getTurn().getStepType() + &quot; for player:&quot; + game.getPlayer(game.getPlayerList().get()).getName());</b>
+<b class="fc"><i>269</i>&nbsp;            if (allPassed(game)) {</b>
+<b class="fc"><i>270</i>&nbsp;                if (!game.getStack().isEmpty()) {</b>
+<b class="fc"><i>271</i>&nbsp;                    resolve(node, depth, game);</b>
+<i>272</i>&nbsp;                }
+<i>273</i>&nbsp;                else {
+<b class="nc"><i>274</i>&nbsp;                    stepFinished = true;</b>
+<i>275</i>&nbsp;                }
+<i>276</i>&nbsp;            }
+<i>277</i>&nbsp;
+<b class="fc"><i>278</i>&nbsp;            if (game.gameOver(null)) {</b>
+<b class="nc"><i>279</i>&nbsp;                val = GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>280</i>&nbsp;            }
+<b class="fc"><i>281</i>&nbsp;            else if (stepFinished) {</b>
+<b class="nc"><i>282</i>&nbsp;                logger.debug(&quot;Step finished&quot;);</b>
+<b class="nc"><i>283</i>&nbsp;                int testScore = GameStateEvaluator2.evaluate(playerId, game);</b>
+<b class="nc"><i>284</i>&nbsp;                if (game.getActivePlayerId().equals(playerId)) {</b>
+<b class="nc"><i>285</i>&nbsp;                    if (testScore &lt; currentScore) {</b>
+<i>286</i>&nbsp;                        // if score at end of step is worse than original score don&#39;t check further
+<i>287</i>&nbsp;                        //logger.debug(&quot;Add Action -- abandoning check, no immediate benefit&quot;);
+<b class="nc"><i>288</i>&nbsp;                        val = testScore;</b>
+<i>289</i>&nbsp;                    }
+<i>290</i>&nbsp;                    else {
+<i>291</i>&nbsp;                        /*switch (game.getTurn().getStepType()) {
+<i>292</i>&nbsp;                            case PRECOMBAT_MAIN:
+<i>293</i>&nbsp;                                val = simulateCombat(game, node, depth-1, alpha, beta, false);
+<i>294</i>&nbsp;                                break;
+<i>295</i>&nbsp;                            case POSTCOMBAT_MAIN:
+<i>296</i>&nbsp;                                val = simulateCounterAttack(game, node, depth-1, alpha, beta);
+<i>297</i>&nbsp;                                break;
+<i>298</i>&nbsp;                            default:
+<i>299</i>&nbsp;                                val = GameStateEvaluator2.evaluate(playerId, game);
+<i>300</i>&nbsp;                                break;
+<i>301</i>&nbsp;                        }*/
+<b class="nc"><i>302</i>&nbsp;                        val = GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>303</i>&nbsp;                    }
+<i>304</i>&nbsp;                }
+<i>305</i>&nbsp;                else {
+<b class="nc"><i>306</i>&nbsp;                    val = GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>307</i>&nbsp;                    /*if (game.getTurn().getStepType() == PhaseStep.DECLARE_ATTACKERS)
+<i>308</i>&nbsp;                        val = simulateBlockers(game, node, playerId, depth-1, alpha, beta, true);
+<i>309</i>&nbsp;                    else
+<i>310</i>&nbsp;                        val = GameStateEvaluator2.evaluate(playerId, game);
+<i>311</i>&nbsp;                        */
+<i>312</i>&nbsp;                }
+<b class="nc"><i>313</i>&nbsp;            }</b>
+<b class="fc"><i>314</i>&nbsp;            else if (node.getChildren().size() &gt; 0) {</b>
+<b class="nc"><i>315</i>&nbsp;                if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>316</i>&nbsp;                    StringBuilder sb = new StringBuilder(&quot;Add Action [&quot;).append(depth)</b>
+<b class="nc"><i>317</i>&nbsp;                            .append(&quot;] -- trigger &quot;)</b>
+<b class="nc"><i>318</i>&nbsp;                            .append(node.getAbilities() != null ? node.getAbilities().toString():&quot;null&quot;)</b>
+<b class="nc"><i>319</i>&nbsp;                            .append(&quot; added children: &quot;).append(node.getChildren().size()).append(&quot; (&quot;);</b>
+<b class="nc"><i>320</i>&nbsp;                    for (SimulationNode2 logNode: node.getChildren()) {</b>
+<b class="nc"><i>321</i>&nbsp;                        sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString():&quot;null&quot;).append(&quot;, &quot;);</b>
+<b class="nc"><i>322</i>&nbsp;                    }</b>
+<b class="nc"><i>323</i>&nbsp;                    sb.append(&quot;)&quot;);</b>
+<b class="nc"><i>324</i>&nbsp;                    logger.debug(sb);</b>
+<i>325</i>&nbsp;                }
+<i>326</i>&nbsp;
+<b class="nc"><i>327</i>&nbsp;                val = minimaxAB(node, depth, alpha, beta);</b>
+<i>328</i>&nbsp;            }
+<i>329</i>&nbsp;            else {
+<b class="fc"><i>330</i>&nbsp;                val = simulatePriority(node, game, depth, alpha, beta);</b>
+<i>331</i>&nbsp;            }
+<i>332</i>&nbsp;        }
+<b class="fc"><i>333</i>&nbsp;        node.setScore(val); // test</b>
+<b class="fc"><i>334</i>&nbsp;        logger.trace(&quot;returning -- score: &quot; + val + &quot; depth:&quot; + depth + &quot; step:&quot; + game.getTurn().getStepType() + &quot; for player:&quot; + game.getPlayer(node.getPlayerId()).getName());</b>
+<b class="fc"><i>335</i>&nbsp;        return val;</b>
+<i>336</i>&nbsp;
+<i>337</i>&nbsp;    }
+<i>338</i>&nbsp;
+<i>339</i>&nbsp;    protected int simulateCombat(Game game, SimulationNode2 node, int depth, int alpha, int beta, boolean counter) {
+<b class="nc"><i>340</i>&nbsp;        Integer val = null;</b>
+<b class="nc"><i>341</i>&nbsp;        if (ALLOW_INTERRUPT &amp;&amp; Thread.interrupted()) {</b>
+<b class="nc"><i>342</i>&nbsp;            Thread.currentThread().interrupt();</b>
+<b class="nc"><i>343</i>&nbsp;            logger.debug(&quot;interrupted&quot;);</b>
+<b class="nc"><i>344</i>&nbsp;            return GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>345</i>&nbsp;        }
+<b class="nc"><i>346</i>&nbsp;        if (game.getTurn().getStepType() != PhaseStep.DECLARE_BLOCKERS) {</b>
+<b class="nc"><i>347</i>&nbsp;            game.getTurn().setPhase(new CombatPhase());</b>
+<b class="nc"><i>348</i>&nbsp;            if (game.getPhase().beginPhase(game, game.getActivePlayerId())) {</b>
+<b class="nc"><i>349</i>&nbsp;                simulateStep(game, new BeginCombatStep());</b>
+<b class="nc"><i>350</i>&nbsp;                game.getPhase().setStep(new DeclareAttackersStep());</b>
+<b class="nc"><i>351</i>&nbsp;                if (!game.getStep().skipStep(game, game.getActivePlayerId())) {</b>
+<b class="nc"><i>352</i>&nbsp;                    game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, game.getActivePlayerId()));</b>
+<b class="nc"><i>353</i>&nbsp;                    if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, game.getActivePlayerId(), game.getActivePlayerId()))) {</b>
+<b class="nc"><i>354</i>&nbsp;                        val = simulateAttackers(game, node, game.getActivePlayerId(), depth, alpha, beta, counter);</b>
+<i>355</i>&nbsp;                    }
+<i>356</i>&nbsp;                }
+<b class="nc"><i>357</i>&nbsp;                else if (!counter) {</b>
+<b class="nc"><i>358</i>&nbsp;                    simulateToEnd(game);</b>
+<b class="nc"><i>359</i>&nbsp;                    val = simulatePostCombatMain(game, node, depth, alpha, beta);</b>
+<i>360</i>&nbsp;                }
+<i>361</i>&nbsp;            }
+<i>362</i>&nbsp;        }
+<i>363</i>&nbsp;        else {
+<b class="nc"><i>364</i>&nbsp;            if (!game.getStep().skipStep(game, game.getActivePlayerId())) {</b>
+<b class="nc"><i>365</i>&nbsp;                game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, game.getActivePlayerId()));</b>
+<b class="nc"><i>366</i>&nbsp;                if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, game.getActivePlayerId(), game.getActivePlayerId()))) {</b>
+<i>367</i>&nbsp;                    //only suitable for two player games - only simulates blocks for 1st defender
+<b class="nc"><i>368</i>&nbsp;                    val = simulateBlockers(game, node, game.getCombat().getDefenders().iterator().next(), depth, alpha, beta, counter);</b>
+<i>369</i>&nbsp;                }
+<i>370</i>&nbsp;            }
+<b class="nc"><i>371</i>&nbsp;            else if (!counter) {</b>
+<b class="nc"><i>372</i>&nbsp;                finishCombat(game);</b>
+<i>373</i>&nbsp;                ///val = simulateCounterAttack(game, node, depth, alpha, beta);
+<i>374</i>&nbsp;            }
+<i>375</i>&nbsp;        }
+<b class="nc"><i>376</i>&nbsp;        if (val == null) {</b>
+<b class="nc"><i>377</i>&nbsp;            val = GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>378</i>&nbsp;        }
+<b class="nc"><i>379</i>&nbsp;        if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>380</i>&nbsp;            logger.debug(&quot;returning -- combat score: &quot; + val + &quot; depth:&quot; + depth + &quot; for player:&quot; + game.getPlayer(node.getPlayerId()).getName());</b>
+<i>381</i>&nbsp;        }
+<b class="nc"><i>382</i>&nbsp;        return val;</b>
+<i>383</i>&nbsp;    }
+<i>384</i>&nbsp;
+<i>385</i>&nbsp;
+<i>386</i>&nbsp;    protected int simulateAttackers(Game game, SimulationNode2 node, UUID attackerId, int depth, int alpha, int beta, boolean counter) {
+<b class="nc"><i>387</i>&nbsp;        if (ALLOW_INTERRUPT &amp;&amp; Thread.interrupted()) {</b>
+<b class="nc"><i>388</i>&nbsp;            Thread.currentThread().interrupt();</b>
+<b class="nc"><i>389</i>&nbsp;            logger.debug(&quot;interrupted&quot;);</b>
+<b class="nc"><i>390</i>&nbsp;            return GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>391</i>&nbsp;        }
+<b class="nc"><i>392</i>&nbsp;        Integer val = null;</b>
+<b class="nc"><i>393</i>&nbsp;        SimulationNode2 bestNode = null;</b>
+<b class="nc"><i>394</i>&nbsp;        SimulatedPlayer2 attacker = (SimulatedPlayer2) game.getPlayer(attackerId);</b>
+<b class="nc"><i>395</i>&nbsp;        UUID defenderId = game.getOpponents(attackerId).iterator().next();</b>
+<b class="nc"><i>396</i>&nbsp;        if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>397</i>&nbsp;            logger.debug(attacker.getName() + &quot;&#39;s possible attackers: &quot; + attacker.getAvailableAttackers(defenderId, game));</b>
+<i>398</i>&nbsp;        }
+<b class="nc"><i>399</i>&nbsp;        for (Combat engagement: attacker.addAttackers(game)) {</b>
+<b class="nc"><i>400</i>&nbsp;            if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>401</i>&nbsp;                logger.debug(&quot;Sim Attackers: &quot; + engagement.getAttackers() + &quot;, blockers: &quot; + engagement.getBlockers());</b>
+<i>402</i>&nbsp;            }
+<b class="nc"><i>403</i>&nbsp;            if (alpha &gt;= beta) {</b>
+<b class="nc"><i>404</i>&nbsp;                logger.debug(&quot;Sim Attackers -- pruning attackers&quot;);</b>
+<b class="nc"><i>405</i>&nbsp;                break;</b>
+<i>406</i>&nbsp;            }
+<b class="nc"><i>407</i>&nbsp;            Game sim = game.copy();            </b>
+<b class="nc"><i>408</i>&nbsp;            for (CombatGroup group: engagement.getGroups()) {</b>
+<b class="nc"><i>409</i>&nbsp;                for (UUID attackId: group.getAttackers()) {</b>
+<b class="nc"><i>410</i>&nbsp;                    sim.getPlayer(attackerId).declareAttacker(attackId, defenderId, sim, false);</b>
+<b class="nc"><i>411</i>&nbsp;                }</b>
+<b class="nc"><i>412</i>&nbsp;            }</b>
+<b class="nc"><i>413</i>&nbsp;            sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));</b>
+<b class="nc"><i>414</i>&nbsp;            SimulationNode2 newNode = new SimulationNode2(node, sim, depth, attackerId);</b>
+<b class="nc"><i>415</i>&nbsp;            if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>416</i>&nbsp;                logger.debug(&quot;Sim attack for player:&quot; + game.getPlayer(attackerId).getName());</b>
+<i>417</i>&nbsp;            }
+<b class="nc"><i>418</i>&nbsp;            sim.checkStateAndTriggered();</b>
+<b class="nc"><i>419</i>&nbsp;            while (!sim.getStack().isEmpty()) {</b>
+<b class="nc"><i>420</i>&nbsp;                sim.getStack().resolve(sim);</b>
+<b class="nc"><i>421</i>&nbsp;                logger.debug(&quot;Sim attack: resolving triggered abilities&quot;);</b>
+<b class="nc"><i>422</i>&nbsp;                sim.applyEffects();</b>
+<i>423</i>&nbsp;            }
+<b class="nc"><i>424</i>&nbsp;            sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));</b>
+<b class="nc"><i>425</i>&nbsp;            Combat simCombat = sim.getCombat().copy();</b>
+<b class="nc"><i>426</i>&nbsp;            sim.getPhase().setStep(new DeclareBlockersStep());</b>
+<b class="nc"><i>427</i>&nbsp;            val = simulateCombat(sim, newNode, depth-1, alpha, beta, counter);</b>
+<b class="nc"><i>428</i>&nbsp;            if (!attackerId.equals(playerId)) {</b>
+<b class="nc"><i>429</i>&nbsp;                if (val &lt; beta) {</b>
+<b class="nc"><i>430</i>&nbsp;                    beta = val;</b>
+<b class="nc"><i>431</i>&nbsp;                    bestNode = newNode;</b>
+<b class="nc"><i>432</i>&nbsp;                    bestNode.setScore(val);</b>
+<b class="nc"><i>433</i>&nbsp;                    if (newNode.getChildren().size() &gt; 0) {</b>
+<b class="nc"><i>434</i>&nbsp;                        bestNode.setCombat(newNode.getChildren().get(0).getCombat());</b>
+<i>435</i>&nbsp;                    }
+<i>436</i>&nbsp;                }
+<i>437</i>&nbsp;            }
+<i>438</i>&nbsp;            else {
+<b class="nc"><i>439</i>&nbsp;                if (val &gt; alpha) {</b>
+<b class="nc"><i>440</i>&nbsp;                    alpha = val;</b>
+<b class="nc"><i>441</i>&nbsp;                    bestNode = newNode;</b>
+<b class="nc"><i>442</i>&nbsp;                    bestNode.setScore(val);</b>
+<b class="nc"><i>443</i>&nbsp;                    if (newNode.getChildren().size() &gt; 0) {</b>
+<b class="nc"><i>444</i>&nbsp;                        bestNode.setCombat(newNode.getChildren().get(0).getCombat());</b>
+<i>445</i>&nbsp;                    }
+<i>446</i>&nbsp;                }
+<i>447</i>&nbsp;            }
+<b class="nc"><i>448</i>&nbsp;        }</b>
+<b class="nc"><i>449</i>&nbsp;        if (val == null) {</b>
+<b class="nc"><i>450</i>&nbsp;            val = GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>451</i>&nbsp;        }
+<b class="nc"><i>452</i>&nbsp;        if (bestNode != null) {</b>
+<b class="nc"><i>453</i>&nbsp;            node.children.clear();</b>
+<b class="nc"><i>454</i>&nbsp;            node.children.add(bestNode);</b>
+<b class="nc"><i>455</i>&nbsp;            node.setScore(bestNode.getScore());</b>
+<i>456</i>&nbsp;        }
+<b class="nc"><i>457</i>&nbsp;        if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>458</i>&nbsp;            logger.debug(&quot;Sim attackers: returning score: &quot; + val + &quot; depth:&quot; + depth + &quot; for player:&quot; + game.getPlayer(node.getPlayerId()).getName());</b>
+<i>459</i>&nbsp;        }
+<b class="nc"><i>460</i>&nbsp;        return val;</b>
+<i>461</i>&nbsp;    }
+<i>462</i>&nbsp;
+<i>463</i>&nbsp;    protected int simulateBlockers(Game game, SimulationNode2 node, UUID defenderId, int depth, int alpha, int beta, boolean counter) {
+<b class="nc"><i>464</i>&nbsp;        if (ALLOW_INTERRUPT &amp;&amp; Thread.interrupted()) {</b>
+<b class="nc"><i>465</i>&nbsp;            Thread.currentThread().interrupt();</b>
+<b class="nc"><i>466</i>&nbsp;            logger.debug(&quot;interrupted&quot;);</b>
+<b class="nc"><i>467</i>&nbsp;            return GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>468</i>&nbsp;        }
+<b class="nc"><i>469</i>&nbsp;        Integer val = null;</b>
+<b class="nc"><i>470</i>&nbsp;        SimulationNode2 bestNode = null;</b>
+<i>471</i>&nbsp;        //check if defender is being attacked
+<b class="nc"><i>472</i>&nbsp;        if (game.getCombat().isAttacked(defenderId, game)) {</b>
+<b class="nc"><i>473</i>&nbsp;            SimulatedPlayer2 defender = (SimulatedPlayer2) game.getPlayer(defenderId);</b>
+<b class="nc"><i>474</i>&nbsp;            if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>475</i>&nbsp;                logger.debug(defender.getName() + &quot;&#39;s possible blockers: &quot; + defender.getAvailableBlockers(game));</b>
+<i>476</i>&nbsp;            }
+<b class="nc"><i>477</i>&nbsp;            List&lt;Combat&gt; combats = defender.addBlockers(game);</b>
+<b class="nc"><i>478</i>&nbsp;            for (Combat engagement: combats) {</b>
+<b class="nc"><i>479</i>&nbsp;                if (alpha &gt;= beta) {</b>
+<b class="nc"><i>480</i>&nbsp;                    logger.debug(&quot;Sim blockers -- pruning blockers&quot;);</b>
+<b class="nc"><i>481</i>&nbsp;                    break;</b>
+<i>482</i>&nbsp;                }
+<b class="nc"><i>483</i>&nbsp;                Game sim = game.copy();</b>
+<b class="nc"><i>484</i>&nbsp;                for (CombatGroup group: engagement.getGroups()) {</b>
+<b class="nc"><i>485</i>&nbsp;                    if (group.getAttackers().size() &gt; 0) {</b>
+<b class="nc"><i>486</i>&nbsp;                        UUID attackerId = group.getAttackers().get(0);</b>
+<b class="nc"><i>487</i>&nbsp;                        for (UUID blockerId: group.getBlockers()) {</b>
+<b class="nc"><i>488</i>&nbsp;                            sim.getPlayer(defenderId).declareBlocker(defenderId, blockerId, attackerId, sim);</b>
+<b class="nc"><i>489</i>&nbsp;                        }</b>
+<i>490</i>&nbsp;                    }
+<b class="nc"><i>491</i>&nbsp;                }</b>
+<b class="nc"><i>492</i>&nbsp;                sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));</b>
+<b class="nc"><i>493</i>&nbsp;                SimulationNode2 newNode = new SimulationNode2(node, sim, depth, defenderId);</b>
+<b class="nc"><i>494</i>&nbsp;                if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>495</i>&nbsp;                    logger.debug(&quot;Sim block for player:&quot; + game.getPlayer(defenderId).getName());</b>
+<i>496</i>&nbsp;                }
+<b class="nc"><i>497</i>&nbsp;                sim.checkStateAndTriggered();</b>
+<b class="nc"><i>498</i>&nbsp;                while (!sim.getStack().isEmpty()) {</b>
+<b class="nc"><i>499</i>&nbsp;                    sim.getStack().resolve(sim);</b>
+<b class="nc"><i>500</i>&nbsp;                    logger.debug(&quot;Sim blockers: resolving triggered abilities&quot;);</b>
+<b class="nc"><i>501</i>&nbsp;                    sim.applyEffects();</b>
+<i>502</i>&nbsp;                }
+<b class="nc"><i>503</i>&nbsp;                sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_POST, sim.getActivePlayerId(), sim.getActivePlayerId()));</b>
+<b class="nc"><i>504</i>&nbsp;                Combat simCombat = sim.getCombat().copy();</b>
+<b class="nc"><i>505</i>&nbsp;                finishCombat(sim);</b>
+<b class="nc"><i>506</i>&nbsp;                if (sim.gameOver(null)) {</b>
+<b class="nc"><i>507</i>&nbsp;                    val = GameStateEvaluator2.evaluate(playerId, sim);</b>
+<i>508</i>&nbsp;                }
+<b class="nc"><i>509</i>&nbsp;                else if (!counter) {</b>
+<b class="nc"><i>510</i>&nbsp;                    val = simulatePostCombatMain(sim, newNode, depth-1, alpha, beta);</b>
+<i>511</i>&nbsp;                }
+<i>512</i>&nbsp;                else {
+<b class="nc"><i>513</i>&nbsp;                    val = GameStateEvaluator2.evaluate(playerId, sim);</b>
+<i>514</i>&nbsp;                }
+<b class="nc"><i>515</i>&nbsp;                if (!defenderId.equals(playerId)) {</b>
+<b class="nc"><i>516</i>&nbsp;                    if (val &lt; beta) {</b>
+<b class="nc"><i>517</i>&nbsp;                        beta = val;</b>
+<b class="nc"><i>518</i>&nbsp;                        bestNode = newNode;</b>
+<b class="nc"><i>519</i>&nbsp;                        bestNode.setScore(val);</b>
+<b class="nc"><i>520</i>&nbsp;                        bestNode.setCombat(simCombat);</b>
+<i>521</i>&nbsp;                    }
+<i>522</i>&nbsp;                }
+<i>523</i>&nbsp;                else {
+<b class="nc"><i>524</i>&nbsp;                    if (val &gt; alpha) {</b>
+<b class="nc"><i>525</i>&nbsp;                        alpha = val;</b>
+<b class="nc"><i>526</i>&nbsp;                        bestNode = newNode;</b>
+<b class="nc"><i>527</i>&nbsp;                        bestNode.setScore(val);</b>
+<b class="nc"><i>528</i>&nbsp;                        bestNode.setCombat(simCombat);</b>
+<i>529</i>&nbsp;                    }
+<i>530</i>&nbsp;                }
+<b class="nc"><i>531</i>&nbsp;            }</b>
+<i>532</i>&nbsp;        }
+<b class="nc"><i>533</i>&nbsp;        if (val == null) {</b>
+<b class="nc"><i>534</i>&nbsp;            val = GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>535</i>&nbsp;        }
+<b class="nc"><i>536</i>&nbsp;        if (bestNode != null) {</b>
+<b class="nc"><i>537</i>&nbsp;            node.children.clear();</b>
+<b class="nc"><i>538</i>&nbsp;            node.children.add(bestNode);</b>
+<b class="nc"><i>539</i>&nbsp;            node.setScore(bestNode.getScore());</b>
+<i>540</i>&nbsp;        }
+<b class="nc"><i>541</i>&nbsp;        if (logger.isDebugEnabled()) {</b>
+<b class="nc"><i>542</i>&nbsp;            logger.debug(&quot;Sim blockers: returning score: &quot; + val + &quot; depth:&quot; + depth + &quot; for player:&quot; + game.getPlayer(node.getPlayerId()).getName());</b>
+<i>543</i>&nbsp;        }
+<b class="nc"><i>544</i>&nbsp;        return val;</b>
+<i>545</i>&nbsp;    }
+<i>546</i>&nbsp;
+<i>547</i>&nbsp;    /*protected int simulateCounterAttack(Game game, SimulationNode2 node, int depth, int alpha, int beta) {
+<i>548</i>&nbsp;        if (ALLOW_INTERRUP &amp;&amp; Thread.interrupted()) {
+<i>549</i>&nbsp;            Thread.currentThread().interrupt();
+<i>550</i>&nbsp;            logger.debug(&quot;interrupted&quot;);
+<i>551</i>&nbsp;            return GameStateEvaluator2.evaluate(playerId, game);
+<i>552</i>&nbsp;        }
+<i>553</i>&nbsp;        Integer val = null;
+<i>554</i>&nbsp;        if (!game.isGameOver()) {
+<i>555</i>&nbsp;            simulateToEnd(game);
+<i>556</i>&nbsp;            game.getState().setActivePlayerId(game.getState().getPlayerList(game.getActivePlayerId()).getNext());
+<i>557</i>&nbsp;            logger.debug(&quot;simulating -- counter attack for player &quot; + game.getPlayer(game.getActivePlayerId()).getName());
+<i>558</i>&nbsp;            game.getTurn().setPhase(new BeginningPhase());
+<i>559</i>&nbsp;            if (game.getPhase().beginPhase(game, game.getActivePlayerId())) {
+<i>560</i>&nbsp;                simulateStep(game, new UntapStep());
+<i>561</i>&nbsp;                simulateStep(game, new UpkeepStep());
+<i>562</i>&nbsp;                simulateStep(game, new DrawStep());
+<i>563</i>&nbsp;                game.getPhase().endPhase(game, game.getActivePlayerId());
+<i>564</i>&nbsp;            }
+<i>565</i>&nbsp;            val = simulateCombat(game, node, depth-1, alpha, beta, true);
+<i>566</i>&nbsp;            if (logger.isDebugEnabled())
+<i>567</i>&nbsp;                logger.debug(&quot;returning -- counter attack score: &quot; + val + &quot; depth:&quot; + depth + &quot; for player:&quot; + game.getPlayer(node.getPlayerId()).getName());
+<i>568</i>&nbsp;        }
+<i>569</i>&nbsp;        if (val == null)
+<i>570</i>&nbsp;            val = GameStateEvaluator2.evaluate(playerId, game);
+<i>571</i>&nbsp;        return val;
+<i>572</i>&nbsp;    }*/
+<i>573</i>&nbsp;
+<i>574</i>&nbsp;    protected void simulateStep(Game game, Step step) {
+<b class="nc"><i>575</i>&nbsp;        if (ALLOW_INTERRUPT &amp;&amp; Thread.interrupted()) {</b>
+<b class="nc"><i>576</i>&nbsp;            Thread.currentThread().interrupt();</b>
+<b class="nc"><i>577</i>&nbsp;            logger.debug(&quot;interrupted&quot;);</b>
+<b class="nc"><i>578</i>&nbsp;            return;</b>
+<i>579</i>&nbsp;        }
+<b class="nc"><i>580</i>&nbsp;        if (!game.gameOver(null)) {</b>
+<b class="nc"><i>581</i>&nbsp;            game.getPhase().setStep(step);</b>
+<b class="nc"><i>582</i>&nbsp;            if (!step.skipStep(game, game.getActivePlayerId())) {</b>
+<b class="nc"><i>583</i>&nbsp;                step.beginStep(game, game.getActivePlayerId());</b>
+<b class="nc"><i>584</i>&nbsp;                game.checkStateAndTriggered();</b>
+<b class="nc"><i>585</i>&nbsp;                while (!game.getStack().isEmpty()) {</b>
+<b class="nc"><i>586</i>&nbsp;                    game.getStack().resolve(game);</b>
+<b class="nc"><i>587</i>&nbsp;                    game.applyEffects();</b>
+<i>588</i>&nbsp;                }
+<b class="nc"><i>589</i>&nbsp;                step.endStep(game, game.getActivePlayerId());</b>
+<i>590</i>&nbsp;            }
+<i>591</i>&nbsp;        }
+<b class="nc"><i>592</i>&nbsp;    }</b>
+<i>593</i>&nbsp;
+<i>594</i>&nbsp;    protected void finishCombat(Game game) {
+<b class="nc"><i>595</i>&nbsp;        if (ALLOW_INTERRUPT &amp;&amp; Thread.interrupted()) {</b>
+<b class="nc"><i>596</i>&nbsp;            Thread.currentThread().interrupt();</b>
+<b class="nc"><i>597</i>&nbsp;            logger.debug(&quot;interrupted&quot;);</b>
+<b class="nc"><i>598</i>&nbsp;            return;</b>
+<i>599</i>&nbsp;        }
+<b class="nc"><i>600</i>&nbsp;        simulateStep(game, new FirstCombatDamageStep());</b>
+<b class="nc"><i>601</i>&nbsp;        simulateStep(game, new CombatDamageStep());</b>
+<b class="nc"><i>602</i>&nbsp;        simulateStep(game, new EndOfCombatStep());</b>
+<b class="nc"><i>603</i>&nbsp;    }</b>
+<i>604</i>&nbsp;
+<i>605</i>&nbsp;    protected int simulatePostCombatMain(Game game, SimulationNode2 node, int depth, int alpha, int beta) {
+<b class="nc"><i>606</i>&nbsp;        if (ALLOW_INTERRUPT &amp;&amp; Thread.interrupted()) {</b>
+<b class="nc"><i>607</i>&nbsp;            Thread.currentThread().interrupt();</b>
+<b class="nc"><i>608</i>&nbsp;            logger.debug(&quot;interrupted&quot;);</b>
+<b class="nc"><i>609</i>&nbsp;            return GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>610</i>&nbsp;        }
+<b class="nc"><i>611</i>&nbsp;        logger.debug(&quot;Sim [&quot; + depth + &quot;] -- post combat main&quot;);</b>
+<b class="nc"><i>612</i>&nbsp;        game.getTurn().setPhase(new PostCombatMainPhase());</b>
+<b class="nc"><i>613</i>&nbsp;        if (game.getPhase().beginPhase(game, game.getActivePlayerId())) {</b>
+<b class="nc"><i>614</i>&nbsp;            game.getPhase().setStep(new PostCombatMainStep());</b>
+<b class="nc"><i>615</i>&nbsp;            game.getStep().beginStep(game, playerId);</b>
+<b class="nc"><i>616</i>&nbsp;            game.getPlayers().resetPassed();</b>
+<b class="nc"><i>617</i>&nbsp;            return addActions(node, depth, alpha, beta);</b>
+<i>618</i>&nbsp;        }
+<i>619</i>&nbsp;        //return simulateCounterAttack(game, node, depth, alpha, beta);
+<b class="nc"><i>620</i>&nbsp;        return GameStateEvaluator2.evaluate(playerId, game);</b>
+<i>621</i>&nbsp;    }
+<i>622</i>&nbsp;
+<i>623</i>&nbsp;    protected void simulateToEnd(Game game) {
+<b class="nc"><i>624</i>&nbsp;        if (ALLOW_INTERRUPT &amp;&amp; Thread.interrupted()) {</b>
+<b class="nc"><i>625</i>&nbsp;            Thread.currentThread().interrupt();</b>
+<b class="nc"><i>626</i>&nbsp;            logger.debug(&quot;interrupted&quot;);</b>
+<b class="nc"><i>627</i>&nbsp;            return;</b>
+<i>628</i>&nbsp;        }
+<b class="nc"><i>629</i>&nbsp;        if (!game.gameOver(null)) {</b>
+<b class="nc"><i>630</i>&nbsp;            game.getTurn().getPhase().endPhase(game, game.getActivePlayerId());</b>
+<b class="nc"><i>631</i>&nbsp;            game.getTurn().setPhase(new EndPhase());</b>
+<b class="nc"><i>632</i>&nbsp;            if (game.getTurn().getPhase().beginPhase(game, game.getActivePlayerId())) {</b>
+<b class="nc"><i>633</i>&nbsp;                simulateStep(game, new EndStep());</b>
+<b class="nc"><i>634</i>&nbsp;                simulateStep(game, new CleanupStep());</b>
+<i>635</i>&nbsp;            }
+<i>636</i>&nbsp;        }
+<b class="nc"><i>637</i>&nbsp;    }</b>
+<i>638</i>&nbsp;
+<i>639</i>&nbsp;    @Override
+<i>640</i>&nbsp;    public void setAllowBadMoves(boolean allowBadMoves) {
+<b class="nc"><i>641</i>&nbsp;        this.allowBadMoves = allowBadMoves;</b>
+<b class="nc"><i>642</i>&nbsp;    }</b>
+<i>643</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

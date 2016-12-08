@@ -1,0 +1,242 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TalusPaladinEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.t</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TalusPaladinEffect (mage.cards.t)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TalusPaladinEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.t;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.MageInt;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.TriggeredAbilityImpl;
+<i>34</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>35</i>&nbsp;import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
+<i>36</i>&nbsp;import mage.abilities.keyword.LifelinkAbility;
+<i>37</i>&nbsp;import mage.cards.CardImpl;
+<i>38</i>&nbsp;import mage.cards.CardSetInfo;
+<i>39</i>&nbsp;import mage.constants.CardType;
+<i>40</i>&nbsp;import mage.constants.Duration;
+<i>41</i>&nbsp;import mage.constants.Outcome;
+<i>42</i>&nbsp;import mage.constants.Zone;
+<i>43</i>&nbsp;import mage.counters.CounterType;
+<i>44</i>&nbsp;import mage.filter.common.FilterControlledPermanent;
+<i>45</i>&nbsp;import mage.filter.predicate.mageobject.SubtypePredicate;
+<i>46</i>&nbsp;import mage.game.Game;
+<i>47</i>&nbsp;import mage.game.events.GameEvent;
+<i>48</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>49</i>&nbsp;import mage.game.permanent.Permanent;
+<i>50</i>&nbsp;import mage.players.Player;
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;/**
+<i>53</i>&nbsp; *
+<i>54</i>&nbsp; * @author jeffwadsworth
+<i>55</i>&nbsp; */
+<i>56</i>&nbsp;public class TalusPaladin extends CardImpl {
+<i>57</i>&nbsp;    
+<i>58</i>&nbsp;    public TalusPaladin(UUID ownerId, CardSetInfo setInfo) {
+<i>59</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{3}{W}&quot;);
+<i>60</i>&nbsp;        this.subtype.add(&quot;Human&quot;);
+<i>61</i>&nbsp;        this.subtype.add(&quot;Knight&quot;);
+<i>62</i>&nbsp;        this.subtype.add(&quot;Ally&quot;);
+<i>63</i>&nbsp;        
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;        this.power = new MageInt(2);
+<i>66</i>&nbsp;        this.toughness = new MageInt(3);
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;        // Whenever Talus Paladin or another Ally enters the battlefield under your control, you may have Allies you control gain lifelink until end of turn, and you may put a +1/+1 counter on Talus Paladin.
+<i>69</i>&nbsp;        this.addAbility(new TalusPaladinTriggeredAbility());
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;    
+<i>72</i>&nbsp;    public TalusPaladin(final TalusPaladin card) {
+<i>73</i>&nbsp;        super(card);
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;    
+<i>76</i>&nbsp;    @Override
+<i>77</i>&nbsp;    public TalusPaladin copy() {
+<i>78</i>&nbsp;        return new TalusPaladin(this);
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;}
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl {
+<i>83</i>&nbsp;    
+<i>84</i>&nbsp;    private static final FilterControlledPermanent filter = new FilterControlledPermanent(&quot;all allies you control&quot;);
+<i>85</i>&nbsp;    
+<i>86</i>&nbsp;    static {
+<i>87</i>&nbsp;        filter.add(new SubtypePredicate(&quot;Ally&quot;));
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;    
+<i>90</i>&nbsp;    TalusPaladinTriggeredAbility() {
+<i>91</i>&nbsp;        super(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, filter), true);
+<i>92</i>&nbsp;        this.addEffect(new TalusPaladinEffect());
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;    
+<i>95</i>&nbsp;    TalusPaladinTriggeredAbility(final TalusPaladinTriggeredAbility ability) {
+<i>96</i>&nbsp;        super(ability);
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;    
+<i>99</i>&nbsp;    @Override
+<i>100</i>&nbsp;    public TalusPaladinTriggeredAbility copy() {
+<i>101</i>&nbsp;        return new TalusPaladinTriggeredAbility(this);
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    @Override
+<i>105</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<i>106</i>&nbsp;        return event.getType() == EventType.ENTERS_THE_BATTLEFIELD;
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;    
+<i>109</i>&nbsp;    @Override
+<i>110</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<i>111</i>&nbsp;        Permanent ally = game.getPermanent(event.getTargetId());
+<i>112</i>&nbsp;        if (ally != null) {
+<i>113</i>&nbsp;            if (ally.hasSubtype(&quot;Ally&quot;, game)
+<i>114</i>&nbsp;                    &amp;&amp; ally.getControllerId().equals(this.getControllerId())) {
+<i>115</i>&nbsp;                if (event.getTargetId().equals(this.getSourceId())
+<i>116</i>&nbsp;                        || event.getTargetId().equals(ally.getId())) {
+<i>117</i>&nbsp;                    return true;
+<i>118</i>&nbsp;                }
+<i>119</i>&nbsp;            }
+<i>120</i>&nbsp;        }
+<i>121</i>&nbsp;        return false;
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;    
+<i>124</i>&nbsp;    @Override
+<i>125</i>&nbsp;    public String getRule() {
+<i>126</i>&nbsp;        return &quot;Whenever {this} or another Ally enters the battlefield under your control, you may have Allies you control gain lifelink until end of turn, and you may put a +1/+1 counter on {this}.&quot;;
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;}
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;class TalusPaladinEffect extends OneShotEffect {
+<i>131</i>&nbsp;    
+<i>132</i>&nbsp;    public TalusPaladinEffect() {
+<b class="nc"><i>133</i>&nbsp;        super(Outcome.Benefit);</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;    
+<i>136</i>&nbsp;    public TalusPaladinEffect(final TalusPaladinEffect effect) {
+<b class="nc"><i>137</i>&nbsp;        super(effect);</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;    
+<i>140</i>&nbsp;    @Override
+<i>141</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>142</i>&nbsp;        Player player = game.getPlayer(source.getControllerId());</b>
+<b class="nc"><i>143</i>&nbsp;        Permanent taluspPaladin = game.getPermanent(source.getSourceId());</b>
+<b class="nc"><i>144</i>&nbsp;        if (taluspPaladin != null) {</b>
+<b class="nc"><i>145</i>&nbsp;            StringBuilder sb = new StringBuilder();</b>
+<b class="nc"><i>146</i>&nbsp;            sb.append(&quot;Put a +1/+1 counter on Talus Paladin?&quot;);</b>
+<b class="nc"><i>147</i>&nbsp;            if (!player.chooseUse(Outcome.Benefit, sb.toString(), source, game)) {</b>
+<b class="nc"><i>148</i>&nbsp;                return false;</b>
+<i>149</i>&nbsp;            }
+<b class="nc"><i>150</i>&nbsp;            taluspPaladin.addCounters(CounterType.P1P1.createInstance(), game);</b>
+<i>151</i>&nbsp;        }
+<b class="nc"><i>152</i>&nbsp;        return false;</b>
+<i>153</i>&nbsp;    }
+<i>154</i>&nbsp;    
+<i>155</i>&nbsp;    @Override
+<i>156</i>&nbsp;    public TalusPaladinEffect copy() {
+<b class="nc"><i>157</i>&nbsp;        return new TalusPaladinEffect(this);</b>
+<i>158</i>&nbsp;    }
+<i>159</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

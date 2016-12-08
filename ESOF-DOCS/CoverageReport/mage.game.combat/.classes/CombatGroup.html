@@ -1,0 +1,734 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CombatGroup</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.game.combat</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CombatGroup (mage.game.combat)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CombatGroup</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (28/ 35)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.6%
+  </span>
+  <span class="absValue">
+    (248/ 337)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.game.combat;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.Serializable;
+<i>31</i>&nbsp;import java.util.ArrayList;
+<i>32</i>&nbsp;import java.util.HashMap;
+<i>33</i>&nbsp;import java.util.List;
+<i>34</i>&nbsp;import java.util.Map;
+<i>35</i>&nbsp;import java.util.UUID;
+<i>36</i>&nbsp;import mage.abilities.common.DamageAsThoughNotBlockedAbility;
+<i>37</i>&nbsp;import mage.abilities.keyword.CantBlockAloneAbility;
+<i>38</i>&nbsp;import mage.abilities.keyword.DeathtouchAbility;
+<i>39</i>&nbsp;import mage.abilities.keyword.DoubleStrikeAbility;
+<i>40</i>&nbsp;import mage.abilities.keyword.FirstStrikeAbility;
+<i>41</i>&nbsp;import mage.abilities.keyword.TrampleAbility;
+<i>42</i>&nbsp;import mage.constants.Outcome;
+<i>43</i>&nbsp;import mage.game.Game;
+<i>44</i>&nbsp;import mage.game.events.GameEvent;
+<i>45</i>&nbsp;import mage.game.permanent.Permanent;
+<i>46</i>&nbsp;import mage.players.Player;
+<i>47</i>&nbsp;import mage.util.Copyable;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;/**
+<i>50</i>&nbsp; *
+<i>51</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>52</i>&nbsp; */
+<i>53</i>&nbsp;public class CombatGroup implements Serializable, Copyable&lt;CombatGroup&gt; {
+<i>54</i>&nbsp;
+<b class="fc"><i>55</i>&nbsp;    protected List&lt;UUID&gt; attackers = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>56</i>&nbsp;    protected List&lt;UUID&gt; blockers = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>57</i>&nbsp;    protected List&lt;UUID&gt; blockerOrder = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>58</i>&nbsp;    protected List&lt;UUID&gt; attackerOrder = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>59</i>&nbsp;    protected Map&lt;UUID, UUID&gt; players = new HashMap&lt;&gt;();</b>
+<i>60</i>&nbsp;    protected boolean blocked;
+<i>61</i>&nbsp;    protected UUID defenderId; // planeswalker or player
+<i>62</i>&nbsp;    protected UUID defendingPlayerId;
+<i>63</i>&nbsp;    protected boolean defenderIsPlaneswalker;
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    /**
+<i>66</i>&nbsp;     * @param defenderId the player that controls the defending permanents
+<i>67</i>&nbsp;     * @param defenderIsPlaneswalker is the defending permanent a planeswalker
+<i>68</i>&nbsp;     * @param defendingPlayerId regular controller of the defending permanents
+<i>69</i>&nbsp;     */
+<b class="fc"><i>70</i>&nbsp;    public CombatGroup(UUID defenderId, boolean defenderIsPlaneswalker, UUID defendingPlayerId) {</b>
+<b class="fc"><i>71</i>&nbsp;        this.defenderId = defenderId;</b>
+<b class="fc"><i>72</i>&nbsp;        this.defenderIsPlaneswalker = defenderIsPlaneswalker;</b>
+<b class="fc"><i>73</i>&nbsp;        this.defendingPlayerId = defendingPlayerId;</b>
+<b class="fc"><i>74</i>&nbsp;    }</b>
+<i>75</i>&nbsp;
+<b class="fc"><i>76</i>&nbsp;    public CombatGroup(final CombatGroup group) {</b>
+<b class="fc"><i>77</i>&nbsp;        this.attackers.addAll(group.attackers);</b>
+<b class="fc"><i>78</i>&nbsp;        this.blockers.addAll(group.blockers);</b>
+<b class="fc"><i>79</i>&nbsp;        this.blockerOrder.addAll(group.blockerOrder);</b>
+<b class="fc"><i>80</i>&nbsp;        this.attackerOrder.addAll(group.attackerOrder);</b>
+<b class="fc"><i>81</i>&nbsp;        this.players.putAll(group.players);</b>
+<b class="fc"><i>82</i>&nbsp;        this.blocked = group.blocked;</b>
+<b class="fc"><i>83</i>&nbsp;        this.defenderId = group.defenderId;</b>
+<b class="fc"><i>84</i>&nbsp;        this.defendingPlayerId = group.defendingPlayerId;</b>
+<b class="fc"><i>85</i>&nbsp;        this.defenderIsPlaneswalker = group.defenderIsPlaneswalker;</b>
+<b class="fc"><i>86</i>&nbsp;    }</b>
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    public boolean hasFirstOrDoubleStrike(Game game) {
+<b class="fc"><i>89</i>&nbsp;        for (UUID permId : attackers) {</b>
+<b class="fc"><i>90</i>&nbsp;            Permanent attacker = game.getPermanent(permId);</b>
+<b class="fc"><i>91</i>&nbsp;            if (attacker != null &amp;&amp; hasFirstOrDoubleStrike(attacker)) {</b>
+<b class="fc"><i>92</i>&nbsp;                return true;</b>
+<i>93</i>&nbsp;            }
+<b class="fc"><i>94</i>&nbsp;        }</b>
+<b class="fc"><i>95</i>&nbsp;        for (UUID permId : blockers) {</b>
+<b class="fc"><i>96</i>&nbsp;            Permanent blocker = game.getPermanent(permId);</b>
+<b class="fc"><i>97</i>&nbsp;            if (blocker != null &amp;&amp; hasFirstOrDoubleStrike(blocker)) {</b>
+<b class="fc"><i>98</i>&nbsp;                return true;</b>
+<i>99</i>&nbsp;            }
+<b class="fc"><i>100</i>&nbsp;        }</b>
+<b class="fc"><i>101</i>&nbsp;        return false;</b>
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    public UUID getDefenderId() {
+<b class="fc"><i>105</i>&nbsp;        return defenderId;</b>
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    public List&lt;UUID&gt; getAttackers() {
+<b class="fc"><i>109</i>&nbsp;        return attackers;</b>
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    public List&lt;UUID&gt; getBlockers() {
+<b class="fc"><i>113</i>&nbsp;        return blockers;</b>
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    public List&lt;UUID&gt; getBlockerOrder() {
+<b class="fc"><i>117</i>&nbsp;        return blockerOrder;</b>
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    private boolean hasFirstOrDoubleStrike(Permanent perm) {
+<b class="fc"><i>121</i>&nbsp;        return perm.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId()) || perm.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId());</b>
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    private boolean hasFirstStrike(Permanent perm) {
+<b class="fc"><i>125</i>&nbsp;        return perm.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId());</b>
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    private boolean hasDoubleStrike(Permanent perm) {
+<b class="fc"><i>129</i>&nbsp;        return perm.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId());</b>
+<i>130</i>&nbsp;    }
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    private boolean hasTrample(Permanent perm) {
+<b class="fc"><i>133</i>&nbsp;        return perm.getAbilities().containsKey(TrampleAbility.getInstance().getId());</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    public void assignDamageToBlockers(boolean first, Game game) {
+<b class="fc"><i>137</i>&nbsp;        if (attackers.size() &gt; 0 &amp;&amp; (!first || hasFirstOrDoubleStrike(game))) {</b>
+<b class="fc"><i>138</i>&nbsp;            if (blockers.isEmpty()) {</b>
+<b class="fc"><i>139</i>&nbsp;                unblockedDamage(first, game);</b>
+<i>140</i>&nbsp;            } else {
+<b class="fc"><i>141</i>&nbsp;                Permanent attacker = game.getPermanent(attackers.get(0));</b>
+<b class="fc"><i>142</i>&nbsp;                if (attacker.getAbilities().containsKey(DamageAsThoughNotBlockedAbility.getInstance().getId())) {</b>
+<b class="nc"><i>143</i>&nbsp;                    Player player = game.getPlayer(attacker.getControllerId());</b>
+<b class="nc"><i>144</i>&nbsp;                    if (player.chooseUse(Outcome.Damage, &quot;Do you wish to assign damage for &quot; + attacker.getLogName() + &quot; as though it weren&#39;t blocked?&quot;, null, game)) {</b>
+<b class="nc"><i>145</i>&nbsp;                        blocked = false;</b>
+<b class="nc"><i>146</i>&nbsp;                        unblockedDamage(first, game);</b>
+<i>147</i>&nbsp;                    }
+<i>148</i>&nbsp;                }
+<b class="fc"><i>149</i>&nbsp;                if (blockers.size() == 1) {</b>
+<b class="fc"><i>150</i>&nbsp;                    singleBlockerDamage(first, game);</b>
+<i>151</i>&nbsp;                } else {
+<b class="fc"><i>152</i>&nbsp;                    multiBlockerDamage(first, game);</b>
+<i>153</i>&nbsp;                }
+<i>154</i>&nbsp;            }
+<i>155</i>&nbsp;        }
+<b class="fc"><i>156</i>&nbsp;    }</b>
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    public void assignDamageToAttackers(boolean first, Game game) {
+<b class="nc"><i>159</i>&nbsp;        if (blockers.size() &gt; 0 &amp;&amp; (!first || hasFirstOrDoubleStrike(game))) {</b>
+<b class="nc"><i>160</i>&nbsp;            if (attackers.size() == 1) {</b>
+<b class="nc"><i>161</i>&nbsp;                singleAttackerDamage(first, game);</b>
+<i>162</i>&nbsp;            } else {
+<b class="nc"><i>163</i>&nbsp;                multiAttackerDamage(first, game);</b>
+<i>164</i>&nbsp;            }
+<i>165</i>&nbsp;        }
+<b class="nc"><i>166</i>&nbsp;    }</b>
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;    public void applyDamage(Game game) {
+<b class="fc"><i>169</i>&nbsp;        for (UUID uuid : attackers) {</b>
+<b class="fc"><i>170</i>&nbsp;            Permanent permanent = game.getPermanent(uuid);</b>
+<b class="fc"><i>171</i>&nbsp;            if (permanent != null) {</b>
+<b class="fc"><i>172</i>&nbsp;                permanent.applyDamage(game);</b>
+<i>173</i>&nbsp;            }
+<b class="fc"><i>174</i>&nbsp;        }</b>
+<b class="fc"><i>175</i>&nbsp;        for (UUID uuid : blockers) {</b>
+<b class="fc"><i>176</i>&nbsp;            Permanent permanent = game.getPermanent(uuid);</b>
+<b class="fc"><i>177</i>&nbsp;            if (permanent != null) {</b>
+<b class="fc"><i>178</i>&nbsp;                permanent.applyDamage(game);</b>
+<i>179</i>&nbsp;            }
+<b class="fc"><i>180</i>&nbsp;        }</b>
+<b class="fc"><i>181</i>&nbsp;    }</b>
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;    /**
+<i>184</i>&nbsp;     * Determines if permanent can damage in current (First Strike or not)
+<i>185</i>&nbsp;     * combat damage step
+<i>186</i>&nbsp;     *
+<i>187</i>&nbsp;     * @param perm Permanent to check
+<i>188</i>&nbsp;     * @param first First strike or common combat damage step
+<i>189</i>&nbsp;     * @return
+<i>190</i>&nbsp;     */
+<i>191</i>&nbsp;    private boolean canDamage(Permanent perm, boolean first) {
+<i>192</i>&nbsp;        // if now first strike combat damage step
+<b class="fc"><i>193</i>&nbsp;        if (first) {</b>
+<i>194</i>&nbsp;            // should have first strike or double strike
+<b class="fc"><i>195</i>&nbsp;            return hasFirstOrDoubleStrike(perm);</b>
+<i>196</i>&nbsp;        } // if now not first strike combat
+<i>197</i>&nbsp;        else {
+<b class="fc"><i>198</i>&nbsp;            if (hasFirstStrike(perm)) {</b>
+<i>199</i>&nbsp;                // if it has first strike in non FS combat damage step
+<i>200</i>&nbsp;                // then it can damage only if it has ALSO double strike
+<i>201</i>&nbsp;                // Fixes Issue 200
+<b class="fc"><i>202</i>&nbsp;                return hasDoubleStrike(perm);</b>
+<i>203</i>&nbsp;            }
+<i>204</i>&nbsp;            // can damage otherwise
+<b class="fc"><i>205</i>&nbsp;            return true;</b>
+<i>206</i>&nbsp;        }
+<i>207</i>&nbsp;    }
+<i>208</i>&nbsp;
+<i>209</i>&nbsp;    private void unblockedDamage(boolean first, Game game) {
+<b class="fc"><i>210</i>&nbsp;        for (UUID attackerId : attackers) {</b>
+<b class="fc"><i>211</i>&nbsp;            Permanent attacker = game.getPermanent(attackerId);</b>
+<b class="fc"><i>212</i>&nbsp;            if (canDamage(attacker, first)) {</b>
+<i>213</i>&nbsp;                //20091005 - 510.1c, 702.17c
+<b class="fc"><i>214</i>&nbsp;                if (!blocked || hasTrample(attacker)) {</b>
+<b class="fc"><i>215</i>&nbsp;                    defenderDamage(attacker, getDamageValueFromPermanent(attacker, game), game);</b>
+<i>216</i>&nbsp;                }
+<i>217</i>&nbsp;            }
+<b class="fc"><i>218</i>&nbsp;        }</b>
+<b class="fc"><i>219</i>&nbsp;    }</b>
+<i>220</i>&nbsp;
+<i>221</i>&nbsp;    private void singleBlockerDamage(boolean first, Game game) {
+<i>222</i>&nbsp;        //TODO:  handle banding
+<b class="fc"><i>223</i>&nbsp;        Permanent blocker = game.getPermanent(blockers.get(0));</b>
+<b class="fc"><i>224</i>&nbsp;        Permanent attacker = game.getPermanent(attackers.get(0));</b>
+<b class="fc"><i>225</i>&nbsp;        if (blocker != null &amp;&amp; attacker != null) {</b>
+<b class="fc"><i>226</i>&nbsp;            int blockerDamage = getDamageValueFromPermanent(blocker, game); // must be set before attacker damage marking because of effects like Test of Faith</b>
+<b class="fc"><i>227</i>&nbsp;            if (blocked &amp;&amp; canDamage(attacker, first)) {</b>
+<b class="fc"><i>228</i>&nbsp;                int damage = getDamageValueFromPermanent(attacker, game);</b>
+<b class="fc"><i>229</i>&nbsp;                if (hasTrample(attacker)) {</b>
+<i>230</i>&nbsp;                    int lethalDamage;
+<b class="fc"><i>231</i>&nbsp;                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {</b>
+<b class="nc"><i>232</i>&nbsp;                        lethalDamage = 1;</b>
+<i>233</i>&nbsp;                    } else {
+<b class="fc"><i>234</i>&nbsp;                        lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();</b>
+<i>235</i>&nbsp;                    }
+<b class="fc"><i>236</i>&nbsp;                    if (lethalDamage &gt;= damage) {</b>
+<b class="fc"><i>237</i>&nbsp;                        blocker.markDamage(damage, attacker.getId(), game, true, true);</b>
+<i>238</i>&nbsp;                    } else {
+<b class="fc"><i>239</i>&nbsp;                        Player player = game.getPlayer(attacker.getControllerId());</b>
+<b class="fc"><i>240</i>&nbsp;                        int damageAssigned = player.getAmount(lethalDamage, damage, &quot;Assign damage to &quot; + blocker.getName(), game);</b>
+<b class="fc"><i>241</i>&nbsp;                        blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);</b>
+<b class="fc"><i>242</i>&nbsp;                        damage -= damageAssigned;</b>
+<b class="fc"><i>243</i>&nbsp;                        if (damage &gt; 0) {</b>
+<b class="fc"><i>244</i>&nbsp;                            defenderDamage(attacker, damage, game);</b>
+<i>245</i>&nbsp;                        }
+<i>246</i>&nbsp;                    }
+<b class="fc"><i>247</i>&nbsp;                } else {</b>
+<b class="fc"><i>248</i>&nbsp;                    blocker.markDamage(damage, attacker.getId(), game, true, true);</b>
+<i>249</i>&nbsp;                }
+<i>250</i>&nbsp;            }
+<b class="fc"><i>251</i>&nbsp;            if (canDamage(blocker, first)) {</b>
+<b class="fc"><i>252</i>&nbsp;                if (blocker.getBlocking() == 1) { // blocking several creatures handled separately</b>
+<b class="fc"><i>253</i>&nbsp;                    attacker.markDamage(blockerDamage, blocker.getId(), game, true, true);</b>
+<i>254</i>&nbsp;                }
+<i>255</i>&nbsp;            }
+<i>256</i>&nbsp;        }
+<b class="fc"><i>257</i>&nbsp;    }</b>
+<i>258</i>&nbsp;
+<i>259</i>&nbsp;    private void multiBlockerDamage(boolean first, Game game) {
+<i>260</i>&nbsp;        //TODO:  handle banding
+<b class="fc"><i>261</i>&nbsp;        Permanent attacker = game.getPermanent(attackers.get(0));</b>
+<b class="fc"><i>262</i>&nbsp;        if (attacker == null) {</b>
+<b class="nc"><i>263</i>&nbsp;            return;</b>
+<i>264</i>&nbsp;        }
+<b class="fc"><i>265</i>&nbsp;        Player player = game.getPlayer(attacker.getControllerId());</b>
+<b class="fc"><i>266</i>&nbsp;        int damage = getDamageValueFromPermanent(attacker, game);</b>
+<b class="fc"><i>267</i>&nbsp;        if (canDamage(attacker, first)) {</b>
+<i>268</i>&nbsp;            // must be set before attacker damage marking because of effects like Test of Faith
+<b class="fc"><i>269</i>&nbsp;            Map&lt;UUID, Integer&gt; blockerPower = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>270</i>&nbsp;            for (UUID blockerId : blockerOrder) {</b>
+<b class="fc"><i>271</i>&nbsp;                Permanent blocker = game.getPermanent(blockerId);</b>
+<b class="fc"><i>272</i>&nbsp;                if (canDamage(blocker, first)) {</b>
+<b class="fc"><i>273</i>&nbsp;                    if (blocker.getBlocking() == 1) { // blocking several creatures handled separately</b>
+<b class="fc"><i>274</i>&nbsp;                        blockerPower.put(blockerId, getDamageValueFromPermanent(blocker, game));</b>
+<i>275</i>&nbsp;                    }
+<i>276</i>&nbsp;                }
+<b class="fc"><i>277</i>&nbsp;            }</b>
+<b class="fc"><i>278</i>&nbsp;            Map&lt;UUID, Integer&gt; assigned = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>279</i>&nbsp;            if (blocked) {</b>
+<b class="fc"><i>280</i>&nbsp;                for (UUID blockerId : blockerOrder) {</b>
+<b class="fc"><i>281</i>&nbsp;                    Permanent blocker = game.getPermanent(blockerId);</b>
+<i>282</i>&nbsp;                    int lethalDamage;
+<b class="fc"><i>283</i>&nbsp;                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {</b>
+<b class="fc"><i>284</i>&nbsp;                        lethalDamage = 1;</b>
+<i>285</i>&nbsp;                    } else {
+<b class="fc"><i>286</i>&nbsp;                        lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();</b>
+<i>287</i>&nbsp;                    }
+<b class="fc"><i>288</i>&nbsp;                    if (lethalDamage &gt;= damage) {</b>
+<b class="fc"><i>289</i>&nbsp;                        assigned.put(blockerId, damage);</b>
+<b class="fc"><i>290</i>&nbsp;                        damage = 0;</b>
+<b class="fc"><i>291</i>&nbsp;                        break;</b>
+<i>292</i>&nbsp;                    }
+<b class="fc"><i>293</i>&nbsp;                    int damageAssigned = player.getAmount(lethalDamage, damage, &quot;Assign damage to &quot; + blocker.getName(), game);</b>
+<b class="fc"><i>294</i>&nbsp;                    assigned.put(blockerId, damageAssigned);</b>
+<b class="fc"><i>295</i>&nbsp;                    damage -= damageAssigned;</b>
+<b class="fc"><i>296</i>&nbsp;                }</b>
+<b class="fc"><i>297</i>&nbsp;                if (damage &gt; 0 &amp;&amp; hasTrample(attacker)) {</b>
+<b class="nc"><i>298</i>&nbsp;                    defenderDamage(attacker, damage, game);</b>
+<i>299</i>&nbsp;                } else {
+<i>300</i>&nbsp;                    // Assign the damge left to first blocker
+<b class="fc"><i>301</i>&nbsp;                    assigned.put(blockerOrder.get(0), assigned.get(blockerOrder.get(0)) + damage);</b>
+<i>302</i>&nbsp;                }
+<i>303</i>&nbsp;            }
+<b class="fc"><i>304</i>&nbsp;            for (UUID blockerId : blockerOrder) {</b>
+<b class="fc"><i>305</i>&nbsp;                Integer power = blockerPower.get(blockerId);</b>
+<b class="fc"><i>306</i>&nbsp;                if (power != null) {</b>
+<b class="fc"><i>307</i>&nbsp;                    attacker.markDamage(power, blockerId, game, true, true);</b>
+<i>308</i>&nbsp;                }
+<b class="fc"><i>309</i>&nbsp;            }</b>
+<b class="fc"><i>310</i>&nbsp;            for (Map.Entry&lt;UUID, Integer&gt; entry : assigned.entrySet()) {</b>
+<b class="fc"><i>311</i>&nbsp;                Permanent blocker = game.getPermanent(entry.getKey());</b>
+<b class="fc"><i>312</i>&nbsp;                blocker.markDamage(entry.getValue(), attacker.getId(), game, true, true);</b>
+<b class="fc"><i>313</i>&nbsp;            }</b>
+<b class="fc"><i>314</i>&nbsp;        } else {</b>
+<b class="fc"><i>315</i>&nbsp;            for (UUID blockerId : blockerOrder) {</b>
+<b class="fc"><i>316</i>&nbsp;                Permanent blocker = game.getPermanent(blockerId);</b>
+<b class="fc"><i>317</i>&nbsp;                if (canDamage(blocker, first)) {</b>
+<b class="fc"><i>318</i>&nbsp;                    attacker.markDamage(getDamageValueFromPermanent(blocker, game), blocker.getId(), game, true, true);</b>
+<i>319</i>&nbsp;                }
+<b class="fc"><i>320</i>&nbsp;            }</b>
+<i>321</i>&nbsp;        }
+<b class="fc"><i>322</i>&nbsp;    }</b>
+<i>323</i>&nbsp;
+<i>324</i>&nbsp;    /**
+<i>325</i>&nbsp;     * Damages attacking creatures by a creature that blocked several ones
+<i>326</i>&nbsp;     * Damages only attackers as blocker was damage in
+<i>327</i>&nbsp;     * {@link #singleBlockerDamage}.
+<i>328</i>&nbsp;     *
+<i>329</i>&nbsp;     * Handles abilities like &quot;{this} an block any number of creatures.&quot;.
+<i>330</i>&nbsp;     *
+<i>331</i>&nbsp;     * @param first
+<i>332</i>&nbsp;     * @param game
+<i>333</i>&nbsp;     */
+<i>334</i>&nbsp;    private void singleAttackerDamage(boolean first, Game game) {
+<b class="nc"><i>335</i>&nbsp;        Permanent blocker = game.getPermanent(blockers.get(0));</b>
+<b class="nc"><i>336</i>&nbsp;        Permanent attacker = game.getPermanent(attackers.get(0));</b>
+<b class="nc"><i>337</i>&nbsp;        if (blocker != null &amp;&amp; attacker != null) {</b>
+<b class="nc"><i>338</i>&nbsp;            if (canDamage(blocker, first)) {</b>
+<b class="nc"><i>339</i>&nbsp;                int damage = getDamageValueFromPermanent(blocker, game);</b>
+<b class="nc"><i>340</i>&nbsp;                attacker.markDamage(damage, blocker.getId(), game, true, true);</b>
+<i>341</i>&nbsp;            }
+<i>342</i>&nbsp;        }
+<b class="nc"><i>343</i>&nbsp;    }</b>
+<i>344</i>&nbsp;
+<i>345</i>&nbsp;    /**
+<i>346</i>&nbsp;     * Damages attacking creatures by a creature that blocked several ones
+<i>347</i>&nbsp;     * Damages only attackers as blocker was damage in either
+<i>348</i>&nbsp;     * {@link #singleBlockerDamage} or {@link #multiBlockerDamage}.
+<i>349</i>&nbsp;     *
+<i>350</i>&nbsp;     * Handles abilities like &quot;{this} an block any number of creatures.&quot;.
+<i>351</i>&nbsp;     *
+<i>352</i>&nbsp;     * @param first
+<i>353</i>&nbsp;     * @param game
+<i>354</i>&nbsp;     */
+<i>355</i>&nbsp;    private void multiAttackerDamage(boolean first, Game game) {
+<b class="nc"><i>356</i>&nbsp;        Permanent blocker = game.getPermanent(blockers.get(0));</b>
+<b class="nc"><i>357</i>&nbsp;        if (blocker == null) {</b>
+<b class="nc"><i>358</i>&nbsp;            return;</b>
+<i>359</i>&nbsp;        }
+<b class="nc"><i>360</i>&nbsp;        Player player = game.getPlayer(blocker.getControllerId());</b>
+<b class="nc"><i>361</i>&nbsp;        int damage = getDamageValueFromPermanent(blocker, game);</b>
+<i>362</i>&nbsp;
+<b class="nc"><i>363</i>&nbsp;        if (canDamage(blocker, first)) {</b>
+<b class="nc"><i>364</i>&nbsp;            Map&lt;UUID, Integer&gt; assigned = new HashMap&lt;&gt;();</b>
+<b class="nc"><i>365</i>&nbsp;            for (UUID attackerId : attackerOrder) {</b>
+<b class="nc"><i>366</i>&nbsp;                Permanent attacker = game.getPermanent(attackerId);</b>
+<b class="nc"><i>367</i>&nbsp;                if (attacker != null) {</b>
+<i>368</i>&nbsp;                    int lethalDamage;
+<b class="nc"><i>369</i>&nbsp;                    if (blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {</b>
+<b class="nc"><i>370</i>&nbsp;                        lethalDamage = 1;</b>
+<i>371</i>&nbsp;                    } else {
+<b class="nc"><i>372</i>&nbsp;                        lethalDamage = attacker.getToughness().getValue() - attacker.getDamage();</b>
+<i>373</i>&nbsp;                    }
+<b class="nc"><i>374</i>&nbsp;                    if (lethalDamage &gt;= damage) {</b>
+<b class="nc"><i>375</i>&nbsp;                        assigned.put(attackerId, damage);</b>
+<b class="nc"><i>376</i>&nbsp;                        break;</b>
+<i>377</i>&nbsp;                    }
+<b class="nc"><i>378</i>&nbsp;                    int damageAssigned = player.getAmount(lethalDamage, damage, &quot;Assign damage to &quot; + attacker.getName(), game);</b>
+<b class="nc"><i>379</i>&nbsp;                    assigned.put(attackerId, damageAssigned);</b>
+<b class="nc"><i>380</i>&nbsp;                    damage -= damageAssigned;</b>
+<i>381</i>&nbsp;                }
+<b class="nc"><i>382</i>&nbsp;            }</b>
+<i>383</i>&nbsp;
+<b class="nc"><i>384</i>&nbsp;            for (Map.Entry&lt;UUID, Integer&gt; entry : assigned.entrySet()) {</b>
+<b class="nc"><i>385</i>&nbsp;                Permanent attacker = game.getPermanent(entry.getKey());</b>
+<b class="nc"><i>386</i>&nbsp;                attacker.markDamage(entry.getValue(), blocker.getId(), game, true, true);</b>
+<b class="nc"><i>387</i>&nbsp;            }</b>
+<i>388</i>&nbsp;        }
+<b class="nc"><i>389</i>&nbsp;    }</b>
+<i>390</i>&nbsp;
+<i>391</i>&nbsp;    private void defenderDamage(Permanent attacker, int amount, Game game) {
+<b class="fc"><i>392</i>&nbsp;        if (this.defenderIsPlaneswalker) {</b>
+<b class="fc"><i>393</i>&nbsp;            Permanent defender = game.getPermanent(defenderId);</b>
+<b class="fc"><i>394</i>&nbsp;            if (defender != null) {</b>
+<b class="fc"><i>395</i>&nbsp;                defender.markDamage(amount, attacker.getId(), game, true, true);</b>
+<i>396</i>&nbsp;            }
+<b class="fc"><i>397</i>&nbsp;        } else {</b>
+<b class="fc"><i>398</i>&nbsp;            Player defender = game.getPlayer(defenderId);</b>
+<b class="fc"><i>399</i>&nbsp;            defender.damage(amount, attacker.getId(), game, true, true);</b>
+<i>400</i>&nbsp;        }
+<b class="fc"><i>401</i>&nbsp;    }</b>
+<i>402</i>&nbsp;
+<i>403</i>&nbsp;    public boolean canBlock(Permanent blocker, Game game) {
+<i>404</i>&nbsp;        // player can&#39;t block if another player is attacked
+<b class="fc"><i>405</i>&nbsp;        if (!defendingPlayerId.equals(blocker.getControllerId())) {</b>
+<b class="nc"><i>406</i>&nbsp;            return false;</b>
+<i>407</i>&nbsp;        }
+<b class="fc"><i>408</i>&nbsp;        for (UUID attackerId : attackers) {</b>
+<b class="fc"><i>409</i>&nbsp;            if (!blocker.canBlock(attackerId, game)) {</b>
+<b class="fc"><i>410</i>&nbsp;                return false;</b>
+<i>411</i>&nbsp;            }
+<b class="fc"><i>412</i>&nbsp;        }</b>
+<b class="fc"><i>413</i>&nbsp;        return true;</b>
+<i>414</i>&nbsp;    }
+<i>415</i>&nbsp;
+<i>416</i>&nbsp;    /**
+<i>417</i>&nbsp;     *
+<i>418</i>&nbsp;     * @param blockerId
+<i>419</i>&nbsp;     * @param playerId controller of the blocking creature
+<i>420</i>&nbsp;     * @param game
+<i>421</i>&nbsp;     */
+<i>422</i>&nbsp;    public void addBlocker(UUID blockerId, UUID playerId, Game game) {
+<b class="fc"><i>423</i>&nbsp;        for (UUID attackerId : attackers) {</b>
+<b class="fc"><i>424</i>&nbsp;            if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_BLOCKER, attackerId, blockerId, playerId))) {</b>
+<b class="nc"><i>425</i>&nbsp;                return;</b>
+<i>426</i>&nbsp;            }
+<b class="fc"><i>427</i>&nbsp;        }</b>
+<b class="fc"><i>428</i>&nbsp;        addBlockerToGroup(blockerId, playerId, game);</b>
+<b class="fc"><i>429</i>&nbsp;    }</b>
+<i>430</i>&nbsp;
+<i>431</i>&nbsp;    /**
+<i>432</i>&nbsp;     * Adds a blocker to a combat group without creating a DECLARE_BLOCKER
+<i>433</i>&nbsp;     * event.
+<i>434</i>&nbsp;     *
+<i>435</i>&nbsp;     * @param blockerId
+<i>436</i>&nbsp;     * @param playerId controller of the blocking creature
+<i>437</i>&nbsp;     * @param game
+<i>438</i>&nbsp;     */
+<i>439</i>&nbsp;    public void addBlockerToGroup(UUID blockerId, UUID playerId, Game game) {
+<b class="fc"><i>440</i>&nbsp;        Permanent blocker = game.getPermanent(blockerId);</b>
+<b class="fc"><i>441</i>&nbsp;        if (blockerId != null &amp;&amp; blocker != null) {</b>
+<b class="fc"><i>442</i>&nbsp;            blocker.setBlocking(blocker.getBlocking() + 1);</b>
+<b class="fc"><i>443</i>&nbsp;            blockers.add(blockerId);</b>
+<b class="fc"><i>444</i>&nbsp;            blockerOrder.add(blockerId);</b>
+<b class="fc"><i>445</i>&nbsp;            this.blocked = true;</b>
+<b class="fc"><i>446</i>&nbsp;            this.players.put(blockerId, playerId);</b>
+<i>447</i>&nbsp;        }
+<b class="fc"><i>448</i>&nbsp;    }</b>
+<i>449</i>&nbsp;
+<i>450</i>&nbsp;    public void pickBlockerOrder(UUID playerId, Game game) {
+<b class="fc"><i>451</i>&nbsp;        if (blockers.isEmpty()) {</b>
+<b class="fc"><i>452</i>&nbsp;            return;</b>
+<i>453</i>&nbsp;        }
+<b class="fc"><i>454</i>&nbsp;        Player player = game.getPlayer(playerId);</b>
+<b class="fc"><i>455</i>&nbsp;        List&lt;UUID&gt; blockerList = new ArrayList&lt;&gt;(blockers);</b>
+<b class="fc"><i>456</i>&nbsp;        blockerOrder.clear();</b>
+<b class="fc"><i>457</i>&nbsp;        while (true &amp;&amp; player.canRespond()) {</b>
+<b class="fc"><i>458</i>&nbsp;            if (blockerList.size() == 1) {</b>
+<b class="fc"><i>459</i>&nbsp;                blockerOrder.add(blockerList.get(0));</b>
+<b class="fc"><i>460</i>&nbsp;                break;</b>
+<i>461</i>&nbsp;            } else {
+<b class="fc"><i>462</i>&nbsp;                List&lt;Permanent&gt; blockerPerms = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>463</i>&nbsp;                for (UUID blockerId : blockerList) {</b>
+<b class="fc"><i>464</i>&nbsp;                    blockerPerms.add(game.getPermanent(blockerId));</b>
+<b class="fc"><i>465</i>&nbsp;                }</b>
+<b class="fc"><i>466</i>&nbsp;                UUID blockerId = player.chooseBlockerOrder(blockerPerms, this, blockerOrder, game);</b>
+<b class="fc"><i>467</i>&nbsp;                blockerOrder.add(blockerId);</b>
+<b class="fc"><i>468</i>&nbsp;                blockerList.remove(blockerId);</b>
+<b class="fc"><i>469</i>&nbsp;            }</b>
+<i>470</i>&nbsp;        }
+<b class="fc"><i>471</i>&nbsp;    }</b>
+<i>472</i>&nbsp;
+<i>473</i>&nbsp;    public void pickAttackerOrder(UUID playerId, Game game) {
+<b class="nc"><i>474</i>&nbsp;        if (attackers.isEmpty()) {</b>
+<b class="nc"><i>475</i>&nbsp;            return;</b>
+<i>476</i>&nbsp;        }
+<b class="nc"><i>477</i>&nbsp;        Player player = game.getPlayer(playerId);</b>
+<b class="nc"><i>478</i>&nbsp;        List&lt;UUID&gt; attackerList = new ArrayList&lt;&gt;(attackers);</b>
+<b class="nc"><i>479</i>&nbsp;        attackerOrder.clear();</b>
+<i>480</i>&nbsp;        while (true) {
+<b class="nc"><i>481</i>&nbsp;            if (attackerList.size() == 1) {</b>
+<b class="nc"><i>482</i>&nbsp;                attackerOrder.add(attackerList.get(0));</b>
+<b class="nc"><i>483</i>&nbsp;                break;</b>
+<i>484</i>&nbsp;            } else {
+<b class="nc"><i>485</i>&nbsp;                List&lt;Permanent&gt; attackerPerms = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>486</i>&nbsp;                for (UUID attackerId : attackerList) {</b>
+<b class="nc"><i>487</i>&nbsp;                    attackerPerms.add(game.getPermanent(attackerId));</b>
+<b class="nc"><i>488</i>&nbsp;                }</b>
+<b class="nc"><i>489</i>&nbsp;                UUID attackerId = player.chooseAttackerOrder(attackerPerms, game);</b>
+<b class="nc"><i>490</i>&nbsp;                if (!player.isInGame()) {</b>
+<b class="nc"><i>491</i>&nbsp;                    break;</b>
+<i>492</i>&nbsp;                }
+<b class="nc"><i>493</i>&nbsp;                attackerOrder.add(attackerId);</b>
+<b class="nc"><i>494</i>&nbsp;                attackerList.remove(attackerId);</b>
+<b class="nc"><i>495</i>&nbsp;            }</b>
+<i>496</i>&nbsp;        }
+<b class="nc"><i>497</i>&nbsp;    }</b>
+<i>498</i>&nbsp;
+<i>499</i>&nbsp;    public int totalAttackerDamage(Game game) {
+<b class="nc"><i>500</i>&nbsp;        int total = 0;</b>
+<b class="nc"><i>501</i>&nbsp;        for (UUID attackerId : attackers) {</b>
+<b class="nc"><i>502</i>&nbsp;            total += getDamageValueFromPermanent(game.getPermanent(attackerId), game);</b>
+<b class="nc"><i>503</i>&nbsp;        }</b>
+<b class="nc"><i>504</i>&nbsp;        return total;</b>
+<i>505</i>&nbsp;    }
+<i>506</i>&nbsp;
+<i>507</i>&nbsp;    public boolean isDefenderIsPlaneswalker() {
+<b class="nc"><i>508</i>&nbsp;        return defenderIsPlaneswalker;</b>
+<i>509</i>&nbsp;    }
+<i>510</i>&nbsp;
+<i>511</i>&nbsp;    public boolean removeAttackedPlaneswalker(UUID planeswalkerId) {
+<b class="fc"><i>512</i>&nbsp;        if (defenderIsPlaneswalker &amp;&amp; defenderId.equals(planeswalkerId)) {</b>
+<b class="fc"><i>513</i>&nbsp;            defenderId = null;</b>
+<b class="fc"><i>514</i>&nbsp;            return true;</b>
+<i>515</i>&nbsp;        }
+<b class="nc"><i>516</i>&nbsp;        return false;</b>
+<i>517</i>&nbsp;    }
+<i>518</i>&nbsp;
+<i>519</i>&nbsp;    public boolean remove(UUID creatureId) {
+<b class="fc"><i>520</i>&nbsp;        boolean result = false;</b>
+<b class="fc"><i>521</i>&nbsp;        if (attackers.contains(creatureId)) {</b>
+<b class="fc"><i>522</i>&nbsp;            attackers.remove(creatureId);</b>
+<b class="fc"><i>523</i>&nbsp;            result = true;</b>
+<b class="fc"><i>524</i>&nbsp;        } else if (blockers.contains(creatureId)) {</b>
+<b class="fc"><i>525</i>&nbsp;            blockers.remove(creatureId);</b>
+<b class="fc"><i>526</i>&nbsp;            result = true;</b>
+<i>527</i>&nbsp;            //20100423 - 509.2a
+<b class="fc"><i>528</i>&nbsp;            if (blockerOrder.contains(creatureId)) {</b>
+<b class="fc"><i>529</i>&nbsp;                blockerOrder.remove(creatureId);</b>
+<i>530</i>&nbsp;            }
+<i>531</i>&nbsp;        }
+<b class="fc"><i>532</i>&nbsp;        return result;</b>
+<i>533</i>&nbsp;    }
+<i>534</i>&nbsp;
+<i>535</i>&nbsp;    public void acceptBlockers(Game game) {
+<b class="fc"><i>536</i>&nbsp;        if (attackers.isEmpty()) {</b>
+<b class="fc"><i>537</i>&nbsp;            return;</b>
+<i>538</i>&nbsp;        }
+<b class="fc"><i>539</i>&nbsp;        for (UUID blockerId : blockers) {</b>
+<b class="fc"><i>540</i>&nbsp;            for (UUID attackerId : attackers) {</b>
+<b class="fc"><i>541</i>&nbsp;                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.BLOCKER_DECLARED, attackerId, blockerId, players.get(blockerId)));</b>
+<b class="fc"><i>542</i>&nbsp;            }</b>
+<b class="fc"><i>543</i>&nbsp;        }</b>
+<i>544</i>&nbsp;
+<b class="fc"><i>545</i>&nbsp;        if (!blockers.isEmpty()) {</b>
+<b class="fc"><i>546</i>&nbsp;            for (UUID attackerId : attackers) {</b>
+<b class="fc"><i>547</i>&nbsp;                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKED, attackerId, null));</b>
+<b class="fc"><i>548</i>&nbsp;            }</b>
+<i>549</i>&nbsp;        }
+<b class="fc"><i>550</i>&nbsp;    }</b>
+<i>551</i>&nbsp;
+<i>552</i>&nbsp;    public boolean checkBlockRestrictions(Game game, int blockersCount) {
+<b class="fc"><i>553</i>&nbsp;        boolean blockWasLegal = true;</b>
+<b class="fc"><i>554</i>&nbsp;        if (attackers.isEmpty()) {</b>
+<b class="fc"><i>555</i>&nbsp;            return blockWasLegal;</b>
+<i>556</i>&nbsp;        }
+<b class="fc"><i>557</i>&nbsp;        if (blockersCount == 1) {</b>
+<b class="fc"><i>558</i>&nbsp;            List&lt;UUID&gt; toBeRemoved = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>559</i>&nbsp;            for (UUID blockerId : getBlockers()) {</b>
+<b class="fc"><i>560</i>&nbsp;                Permanent blocker = game.getPermanent(blockerId);</b>
+<b class="fc"><i>561</i>&nbsp;                if (blocker != null &amp;&amp; blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {</b>
+<b class="fc"><i>562</i>&nbsp;                    blockWasLegal = false;</b>
+<b class="fc"><i>563</i>&nbsp;                    if (!game.isSimulation()) {</b>
+<b class="fc"><i>564</i>&nbsp;                        game.informPlayers(blocker.getLogName() + &quot; can&#39;t block alone. Removing it from combat.&quot;);</b>
+<i>565</i>&nbsp;                    }
+<b class="fc"><i>566</i>&nbsp;                    toBeRemoved.add(blockerId);</b>
+<i>567</i>&nbsp;                }
+<b class="fc"><i>568</i>&nbsp;            }</b>
+<i>569</i>&nbsp;
+<b class="fc"><i>570</i>&nbsp;            for (UUID blockerId : toBeRemoved) {</b>
+<b class="fc"><i>571</i>&nbsp;                game.getCombat().removeBlocker(blockerId, game);</b>
+<b class="fc"><i>572</i>&nbsp;            }</b>
+<b class="fc"><i>573</i>&nbsp;            if (blockers.isEmpty()) {</b>
+<b class="fc"><i>574</i>&nbsp;                this.blocked = false;</b>
+<i>575</i>&nbsp;            }
+<i>576</i>&nbsp;        }
+<i>577</i>&nbsp;
+<b class="fc"><i>578</i>&nbsp;        for (UUID uuid : attackers) {</b>
+<b class="fc"><i>579</i>&nbsp;            Permanent attacker = game.getPermanent(uuid);</b>
+<i>580</i>&nbsp;            // Check if there are enough blockers to have a legal block
+<b class="fc"><i>581</i>&nbsp;            if (attacker != null &amp;&amp; this.blocked &amp;&amp; attacker.getMinBlockedBy() &gt; 1 &amp;&amp; blockers.size() &gt; 0 &amp;&amp; blockers.size() &lt; attacker.getMinBlockedBy()) {</b>
+<b class="fc"><i>582</i>&nbsp;                for (UUID blockerId : blockers) {</b>
+<b class="fc"><i>583</i>&nbsp;                    Permanent blocker = game.getPermanent(blockerId);</b>
+<b class="fc"><i>584</i>&nbsp;                    if (blocker != null) {</b>
+<b class="fc"><i>585</i>&nbsp;                        blocker.setBlocking(blocker.getBlocking() - 1);</b>
+<i>586</i>&nbsp;                    }
+<b class="fc"><i>587</i>&nbsp;                }</b>
+<b class="fc"><i>588</i>&nbsp;                blockers.clear();</b>
+<b class="fc"><i>589</i>&nbsp;                blockerOrder.clear();</b>
+<b class="fc"><i>590</i>&nbsp;                this.blocked = false;</b>
+<b class="fc"><i>591</i>&nbsp;                if (!game.isSimulation()) {</b>
+<b class="fc"><i>592</i>&nbsp;                    game.informPlayers(attacker.getLogName() + &quot; can&#39;t be blocked except by &quot; + attacker.getMinBlockedBy() + &quot; or more creatures. Blockers discarded.&quot;);</b>
+<i>593</i>&nbsp;                }
+<b class="fc"><i>594</i>&nbsp;                blockWasLegal = false;</b>
+<i>595</i>&nbsp;            }
+<i>596</i>&nbsp;            // Check if there are to many blockers (maxBlockedBy = 0 means no restrictions)
+<b class="fc"><i>597</i>&nbsp;            if (attacker != null &amp;&amp; this.blocked &amp;&amp; attacker.getMaxBlockedBy() &gt; 0 &amp;&amp; attacker.getMaxBlockedBy() &lt; blockers.size()) {</b>
+<b class="nc"><i>598</i>&nbsp;                for (UUID blockerId : blockers) {</b>
+<b class="nc"><i>599</i>&nbsp;                    Permanent blocker = game.getPermanent(blockerId);</b>
+<b class="nc"><i>600</i>&nbsp;                    if (blocker != null) {</b>
+<b class="nc"><i>601</i>&nbsp;                        blocker.setBlocking(blocker.getBlocking() - 1);</b>
+<i>602</i>&nbsp;                    }
+<b class="nc"><i>603</i>&nbsp;                }</b>
+<b class="nc"><i>604</i>&nbsp;                blockers.clear();</b>
+<b class="nc"><i>605</i>&nbsp;                blockerOrder.clear();</b>
+<b class="nc"><i>606</i>&nbsp;                this.blocked = false;</b>
+<b class="nc"><i>607</i>&nbsp;                if (!game.isSimulation()) {</b>
+<b class="nc"><i>608</i>&nbsp;                    game.informPlayers(new StringBuilder(attacker.getLogName())</b>
+<b class="nc"><i>609</i>&nbsp;                            .append(&quot; can&#39;t be blocked by more than &quot;).append(attacker.getMaxBlockedBy())</b>
+<b class="nc"><i>610</i>&nbsp;                            .append(attacker.getMaxBlockedBy() == 1 ? &quot; creature.&quot; : &quot; creatures.&quot;)</b>
+<b class="nc"><i>611</i>&nbsp;                            .append(&quot; Blockers discarded.&quot;).toString());</b>
+<i>612</i>&nbsp;                }
+<b class="nc"><i>613</i>&nbsp;                blockWasLegal = false;</b>
+<i>614</i>&nbsp;            }
+<i>615</i>&nbsp;
+<b class="fc"><i>616</i>&nbsp;        }</b>
+<b class="fc"><i>617</i>&nbsp;        return blockWasLegal;</b>
+<i>618</i>&nbsp;    }
+<i>619</i>&nbsp;
+<i>620</i>&nbsp;    /**
+<i>621</i>&nbsp;     * There are effects that let creatures assigns combat damage equal to its
+<i>622</i>&nbsp;     * toughness rather than its power. So this method takes this into account
+<i>623</i>&nbsp;     * to get the value of damage a creature will assign
+<i>624</i>&nbsp;     *
+<i>625</i>&nbsp;     * @param permanent
+<i>626</i>&nbsp;     * @param game
+<i>627</i>&nbsp;     * @return
+<i>628</i>&nbsp;     */
+<i>629</i>&nbsp;    private int getDamageValueFromPermanent(Permanent permanent, Game game) {
+<b class="fc"><i>630</i>&nbsp;        if (game.getCombat().useToughnessForDamage(permanent, game)) {</b>
+<b class="nc"><i>631</i>&nbsp;            return permanent.getToughness().getValue();</b>
+<i>632</i>&nbsp;        } else {
+<b class="fc"><i>633</i>&nbsp;            return permanent.getPower().getValue();</b>
+<i>634</i>&nbsp;        }
+<i>635</i>&nbsp;    }
+<i>636</i>&nbsp;
+<i>637</i>&nbsp;    /**
+<i>638</i>&nbsp;     * There are effects, that set an attacker to be blcoked. Therefore this
+<i>639</i>&nbsp;     * setter can be used.
+<i>640</i>&nbsp;     *
+<i>641</i>&nbsp;     * @param blocked
+<i>642</i>&nbsp;     */
+<i>643</i>&nbsp;    public void setBlocked(boolean blocked) {
+<b class="nc"><i>644</i>&nbsp;        this.blocked = blocked;</b>
+<b class="nc"><i>645</i>&nbsp;    }</b>
+<i>646</i>&nbsp;
+<i>647</i>&nbsp;    @Override
+<i>648</i>&nbsp;    public CombatGroup copy() {
+<b class="fc"><i>649</i>&nbsp;        return new CombatGroup(this);</b>
+<i>650</i>&nbsp;    }
+<i>651</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:35</div>
+</div>
+</body>
+</html>

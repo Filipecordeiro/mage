@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ControlsPermanentGreatestCMCCondition</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.condition.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ControlsPermanentGreatestCMCCondition (mage.abilities.condition.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ControlsPermanentGreatestCMCCondition</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.abilities.condition.common;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.HashSet;
+<i>9</i>&nbsp;import java.util.List;
+<i>10</i>&nbsp;import java.util.Set;
+<i>11</i>&nbsp;import java.util.UUID;
+<i>12</i>&nbsp;import mage.abilities.Ability;
+<i>13</i>&nbsp;import mage.abilities.condition.Condition;
+<i>14</i>&nbsp;import mage.filter.FilterPermanent;
+<i>15</i>&nbsp;import mage.game.Game;
+<i>16</i>&nbsp;import mage.game.permanent.Permanent;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;/**
+<i>19</i>&nbsp; *
+<i>20</i>&nbsp; * @author LevelX2
+<i>21</i>&nbsp; */
+<i>22</i>&nbsp;public class ControlsPermanentGreatestCMCCondition implements Condition {
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    private final FilterPermanent filter;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public ControlsPermanentGreatestCMCCondition() {
+<b class="nc"><i>27</i>&nbsp;        this(new FilterPermanent());</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    public ControlsPermanentGreatestCMCCondition(FilterPermanent filter) {
+<b class="nc"><i>31</i>&nbsp;        super();</b>
+<b class="nc"><i>32</i>&nbsp;        this.filter = filter;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    @Override
+<i>36</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>37</i>&nbsp;        Set&lt;UUID&gt; controllers = new HashSet&lt;&gt;();</b>
+<b class="nc"><i>38</i>&nbsp;        Integer maxCMC = null;</b>
+<i>39</i>&nbsp;
+<b class="nc"><i>40</i>&nbsp;        List&lt;Permanent&gt; permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);</b>
+<b class="nc"><i>41</i>&nbsp;        for (Permanent permanent : permanents) {</b>
+<b class="nc"><i>42</i>&nbsp;            int cmc = permanent.getManaCost().convertedManaCost();</b>
+<b class="nc"><i>43</i>&nbsp;            if (maxCMC == null || cmc &gt; maxCMC) {</b>
+<b class="nc"><i>44</i>&nbsp;                maxCMC = cmc;</b>
+<b class="nc"><i>45</i>&nbsp;                controllers.clear();</b>
+<i>46</i>&nbsp;            }
+<b class="nc"><i>47</i>&nbsp;            if (cmc == maxCMC) {</b>
+<b class="nc"><i>48</i>&nbsp;                controllers.add(permanent.getControllerId());</b>
+<i>49</i>&nbsp;            }
+<b class="nc"><i>50</i>&nbsp;        }</b>
+<b class="nc"><i>51</i>&nbsp;        return controllers.contains(source.getControllerId());</b>
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    @Override
+<i>55</i>&nbsp;    public String toString() {
+<b class="nc"><i>56</i>&nbsp;        return &quot;you control the &quot; + filter.getMessage() + &quot; with the highest converted mana cost or tied for the highest converted mana cost&quot;;</b>
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

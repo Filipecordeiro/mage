@@ -1,0 +1,323 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CardsImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CardsImpl (mage.cards)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CardsImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.5%
+  </span>
+  <span class="absValue">
+    (19/ 21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.1%
+  </span>
+  <span class="absValue">
+    (87/ 106)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.Serializable;
+<i>31</i>&nbsp;import java.util.ArrayList;
+<i>32</i>&nbsp;import java.util.Collection;
+<i>33</i>&nbsp;import java.util.Collections;
+<i>34</i>&nbsp;import java.util.HashMap;
+<i>35</i>&nbsp;import java.util.Iterator;
+<i>36</i>&nbsp;import java.util.LinkedHashSet;
+<i>37</i>&nbsp;import java.util.List;
+<i>38</i>&nbsp;import java.util.Map;
+<i>39</i>&nbsp;import java.util.Set;
+<i>40</i>&nbsp;import java.util.UUID;
+<i>41</i>&nbsp;import mage.filter.FilterCard;
+<i>42</i>&nbsp;import mage.game.Game;
+<i>43</i>&nbsp;import mage.util.RandomUtil;
+<i>44</i>&nbsp;import mage.util.ThreadLocalStringBuilder;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;/**
+<i>47</i>&nbsp; *
+<i>48</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>49</i>&nbsp; */
+<i>50</i>&nbsp;public class CardsImpl extends LinkedHashSet&lt;UUID&gt; implements Cards, Serializable {
+<i>51</i>&nbsp;
+<b class="fc"><i>52</i>&nbsp;    private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(200);</b>
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    private UUID ownerId;
+<i>55</i>&nbsp;
+<b class="fc"><i>56</i>&nbsp;    public CardsImpl() {</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<b class="fc"><i>59</i>&nbsp;    public CardsImpl(Card card) {</b>
+<b class="fc"><i>60</i>&nbsp;        if (card != null) {</b>
+<b class="fc"><i>61</i>&nbsp;            this.add(card.getId());</b>
+<i>62</i>&nbsp;        }
+<b class="fc"><i>63</i>&nbsp;    }</b>
+<i>64</i>&nbsp;
+<b class="fc"><i>65</i>&nbsp;    public CardsImpl(Collection&lt;UUID&gt; cardIds) {</b>
+<b class="fc"><i>66</i>&nbsp;        if (cardIds != null) {</b>
+<b class="fc"><i>67</i>&nbsp;            this.addAll(cardIds);</b>
+<i>68</i>&nbsp;        }
+<b class="fc"><i>69</i>&nbsp;    }</b>
+<i>70</i>&nbsp;
+<b class="fc"><i>71</i>&nbsp;    public CardsImpl(final CardsImpl cards) {</b>
+<b class="fc"><i>72</i>&nbsp;        this.addAll(cards);</b>
+<b class="fc"><i>73</i>&nbsp;        this.ownerId = cards.ownerId;</b>
+<b class="fc"><i>74</i>&nbsp;    }</b>
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    @Override
+<i>77</i>&nbsp;    public Cards copy() {
+<b class="fc"><i>78</i>&nbsp;        return new CardsImpl(this);</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    @Override
+<i>82</i>&nbsp;    public void add(Card card) {
+<b class="fc"><i>83</i>&nbsp;        this.add(card.getId());</b>
+<b class="fc"><i>84</i>&nbsp;    }</b>
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    @Override
+<i>87</i>&nbsp;    public Card get(UUID cardId, Game game) {
+<b class="fc"><i>88</i>&nbsp;        if (this.contains(cardId)) {</b>
+<b class="fc"><i>89</i>&nbsp;            return game.getCard(cardId);</b>
+<i>90</i>&nbsp;        }
+<b class="fc"><i>91</i>&nbsp;        return null;</b>
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    @Override
+<i>95</i>&nbsp;    public void remove(Card card) {
+<b class="fc"><i>96</i>&nbsp;        if (card == null) {</b>
+<b class="nc"><i>97</i>&nbsp;            return;</b>
+<i>98</i>&nbsp;        }
+<b class="fc"><i>99</i>&nbsp;        this.remove(card.getId());</b>
+<b class="fc"><i>100</i>&nbsp;    }</b>
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    @Override
+<i>103</i>&nbsp;    public void setOwner(UUID ownerId, Game game) {
+<b class="nc"><i>104</i>&nbsp;        this.ownerId = ownerId;</b>
+<b class="nc"><i>105</i>&nbsp;        for (UUID card : this) {</b>
+<b class="nc"><i>106</i>&nbsp;            game.getCard(card).setOwnerId(ownerId);</b>
+<b class="nc"><i>107</i>&nbsp;        }</b>
+<b class="nc"><i>108</i>&nbsp;    }</b>
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    @Override
+<i>111</i>&nbsp;    public Card getRandom(Game game) {
+<b class="fc"><i>112</i>&nbsp;        if (this.isEmpty()) {</b>
+<b class="nc"><i>113</i>&nbsp;            return null;</b>
+<i>114</i>&nbsp;        }
+<b class="fc"><i>115</i>&nbsp;        UUID[] cards = this.toArray(new UUID[this.size()]);</b>
+<b class="fc"><i>116</i>&nbsp;        return game.getCard(cards[RandomUtil.nextInt(cards.length)]);</b>
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    @Override
+<i>120</i>&nbsp;    public int count(FilterCard filter, Game game) {
+<b class="fc"><i>121</i>&nbsp;        int result = 0;</b>
+<b class="fc"><i>122</i>&nbsp;        for (UUID cardId : this) {</b>
+<b class="fc"><i>123</i>&nbsp;            if (filter.match(game.getCard(cardId), game)) {</b>
+<b class="fc"><i>124</i>&nbsp;                result++;</b>
+<i>125</i>&nbsp;            }
+<b class="fc"><i>126</i>&nbsp;        }</b>
+<b class="fc"><i>127</i>&nbsp;        return result;</b>
+<i>128</i>&nbsp;    }
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    @Override
+<i>131</i>&nbsp;    public int count(FilterCard filter, UUID playerId, Game game) {
+<b class="fc"><i>132</i>&nbsp;        int result = 0;</b>
+<b class="fc"><i>133</i>&nbsp;        for (UUID card : this) {</b>
+<b class="fc"><i>134</i>&nbsp;            if (filter.match(game.getCard(card), playerId, game)) {</b>
+<b class="fc"><i>135</i>&nbsp;                result++;</b>
+<i>136</i>&nbsp;            }
+<b class="fc"><i>137</i>&nbsp;        }</b>
+<b class="fc"><i>138</i>&nbsp;        return result;</b>
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    @Override
+<i>142</i>&nbsp;    public int count(FilterCard filter, UUID sourceId, UUID playerId, Game game) {
+<b class="fc"><i>143</i>&nbsp;        if (sourceId == null) {</b>
+<b class="nc"><i>144</i>&nbsp;            return count(filter, playerId, game);</b>
+<i>145</i>&nbsp;        }
+<b class="fc"><i>146</i>&nbsp;        int result = 0;</b>
+<b class="fc"><i>147</i>&nbsp;        for (UUID card : this) {</b>
+<b class="fc"><i>148</i>&nbsp;            if (filter.match(game.getCard(card), sourceId, playerId, game)) {</b>
+<b class="fc"><i>149</i>&nbsp;                result++;</b>
+<i>150</i>&nbsp;            }
+<b class="fc"><i>151</i>&nbsp;        }</b>
+<b class="fc"><i>152</i>&nbsp;        return result;</b>
+<i>153</i>&nbsp;    }
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;    @Override
+<i>156</i>&nbsp;    public Set&lt;Card&gt; getCards(FilterCard filter, UUID sourceId, UUID playerId, Game game) {
+<b class="fc"><i>157</i>&nbsp;        Set&lt;Card&gt; cards = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc"><i>158</i>&nbsp;        for (UUID cardId : this) {</b>
+<b class="fc"><i>159</i>&nbsp;            Card card = game.getCard(cardId);</b>
+<b class="fc"><i>160</i>&nbsp;            if (card != null) {</b>
+<b class="fc"><i>161</i>&nbsp;                boolean match = filter.match(card, sourceId, playerId, game);</b>
+<b class="fc"><i>162</i>&nbsp;                if (match) {</b>
+<b class="fc"><i>163</i>&nbsp;                    cards.add(game.getCard(cardId));</b>
+<i>164</i>&nbsp;                }
+<i>165</i>&nbsp;            }
+<b class="fc"><i>166</i>&nbsp;        }</b>
+<b class="fc"><i>167</i>&nbsp;        return cards;</b>
+<i>168</i>&nbsp;    }
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;    @Override
+<i>171</i>&nbsp;    public Set&lt;Card&gt; getCards(FilterCard filter, Game game) {
+<b class="fc"><i>172</i>&nbsp;        Set&lt;Card&gt; cards = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc"><i>173</i>&nbsp;        for (UUID card : this) {</b>
+<b class="fc"><i>174</i>&nbsp;            boolean match = filter.match(game.getCard(card), game);</b>
+<b class="fc"><i>175</i>&nbsp;            if (match) {</b>
+<b class="fc"><i>176</i>&nbsp;                cards.add(game.getCard(card));</b>
+<i>177</i>&nbsp;            }
+<b class="fc"><i>178</i>&nbsp;        }</b>
+<b class="fc"><i>179</i>&nbsp;        return cards;</b>
+<i>180</i>&nbsp;    }
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;    @Override
+<i>183</i>&nbsp;    public Set&lt;Card&gt; getCards(Game game) {
+<b class="fc"><i>184</i>&nbsp;        Set&lt;Card&gt; cards = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc"><i>185</i>&nbsp;        for (Iterator&lt;UUID&gt; it = this.iterator(); it.hasNext();) { // Changed to iterator because of ConcurrentModificationException</b>
+<b class="fc"><i>186</i>&nbsp;            UUID cardId = it.next();</b>
+<i>187</i>&nbsp;
+<b class="fc"><i>188</i>&nbsp;            Card card = game.getCard(cardId);</b>
+<b class="fc"><i>189</i>&nbsp;            if (card == null) {</b>
+<b class="fc"><i>190</i>&nbsp;                card = game.getPermanent(cardId); // needed to get TokenCard objects</b>
+<i>191</i>&nbsp;            }
+<b class="fc"><i>192</i>&nbsp;            if (card != null) { // this can happen during the cancelation (player concedes) of a game</b>
+<b class="fc"><i>193</i>&nbsp;                cards.add(card);</b>
+<i>194</i>&nbsp;            }
+<b class="fc"><i>195</i>&nbsp;        }</b>
+<b class="fc"><i>196</i>&nbsp;        return cards;</b>
+<i>197</i>&nbsp;    }
+<i>198</i>&nbsp;
+<i>199</i>&nbsp;    @Override
+<i>200</i>&nbsp;    public String getValue(Game game) {
+<b class="nc"><i>201</i>&nbsp;        StringBuilder sb = threadLocalBuilder.get();</b>
+<b class="nc"><i>202</i>&nbsp;        List&lt;String&gt; cards = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>203</i>&nbsp;        for (UUID cardId : this) {</b>
+<b class="nc"><i>204</i>&nbsp;            Card card = game.getCard(cardId);</b>
+<b class="nc"><i>205</i>&nbsp;            cards.add(card.getName());</b>
+<b class="nc"><i>206</i>&nbsp;        }</b>
+<b class="nc"><i>207</i>&nbsp;        Collections.sort(cards);</b>
+<b class="nc"><i>208</i>&nbsp;        for (String name : cards) {</b>
+<b class="nc"><i>209</i>&nbsp;            sb.append(name).append(&quot;:&quot;);</b>
+<b class="nc"><i>210</i>&nbsp;        }</b>
+<b class="nc"><i>211</i>&nbsp;        return sb.toString();</b>
+<i>212</i>&nbsp;    }
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;    @Override
+<i>215</i>&nbsp;    public void addAll(List&lt;Card&gt; cards) {
+<b class="fc"><i>216</i>&nbsp;        for (Card card : cards) {</b>
+<b class="fc"><i>217</i>&nbsp;            add(card.getId());</b>
+<b class="fc"><i>218</i>&nbsp;        }</b>
+<b class="fc"><i>219</i>&nbsp;    }</b>
+<i>220</i>&nbsp;
+<i>221</i>&nbsp;    @Override
+<i>222</i>&nbsp;    public void addAll(Set&lt;Card&gt; cards) {
+<b class="fc"><i>223</i>&nbsp;        for (Card card : cards) {</b>
+<b class="fc"><i>224</i>&nbsp;            add(card.getId());</b>
+<b class="fc"><i>225</i>&nbsp;        }</b>
+<b class="fc"><i>226</i>&nbsp;    }</b>
+<i>227</i>&nbsp;
+<i>228</i>&nbsp;    @Override
+<i>229</i>&nbsp;    public Collection&lt;Card&gt; getUniqueCards(Game game) {
+<b class="fc"><i>230</i>&nbsp;        Map&lt;String, Card&gt; cards = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>231</i>&nbsp;        for (UUID cardId : this) {</b>
+<b class="fc"><i>232</i>&nbsp;            Card card = game.getCard(cardId);</b>
+<b class="fc"><i>233</i>&nbsp;            if (!cards.containsKey(card.getName())) {</b>
+<b class="fc"><i>234</i>&nbsp;                cards.put(card.getName(), card);</b>
+<i>235</i>&nbsp;            }
+<b class="fc"><i>236</i>&nbsp;        }</b>
+<b class="fc"><i>237</i>&nbsp;        return cards.values();</b>
+<i>238</i>&nbsp;    }
+<i>239</i>&nbsp;
+<i>240</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

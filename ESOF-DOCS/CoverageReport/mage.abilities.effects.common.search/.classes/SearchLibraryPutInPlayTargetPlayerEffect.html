@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SearchLibraryPutInPlayTargetPlayerEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common.search</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SearchLibraryPutInPlayTargetPlayerEffect (mage.abilities.effects.common.search)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SearchLibraryPutInPlayTargetPlayerEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    54.5%
+  </span>
+  <span class="absValue">
+    (6/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (30/ 48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.abilities.effects.common.search;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;import java.util.UUID;
+<i>10</i>&nbsp;import mage.abilities.Ability;
+<i>11</i>&nbsp;import mage.abilities.effects.SearchEffect;
+<i>12</i>&nbsp;import mage.cards.CardsImpl;
+<i>13</i>&nbsp;import mage.constants.Outcome;
+<i>14</i>&nbsp;import mage.constants.Zone;
+<i>15</i>&nbsp;import mage.game.Game;
+<i>16</i>&nbsp;import mage.players.Player;
+<i>17</i>&nbsp;import mage.target.common.TargetCardInLibrary;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;/**
+<i>20</i>&nbsp; *
+<i>21</i>&nbsp; * @author LevelX2
+<i>22</i>&nbsp; */
+<i>23</i>&nbsp;public class SearchLibraryPutInPlayTargetPlayerEffect extends SearchEffect {
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    protected boolean tapped;
+<i>26</i>&nbsp;    protected boolean forceShuffle;
+<i>27</i>&nbsp;    protected boolean ownerIsController;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target) {
+<b class="nc"><i>30</i>&nbsp;        this(target, false, true, Outcome.PutCardInPlay);</b>
+<b class="nc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped) {
+<b class="nc"><i>34</i>&nbsp;        this(target, tapped, true, Outcome.PutCardInPlay);</b>
+<b class="nc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle) {
+<b class="nc"><i>38</i>&nbsp;        this(target, tapped, forceShuffle, Outcome.PutCardInPlay);</b>
+<b class="nc"><i>39</i>&nbsp;    }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped, Outcome outcome) {
+<b class="nc"><i>42</i>&nbsp;        this(target, tapped, true, outcome);</b>
+<b class="nc"><i>43</i>&nbsp;    }</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, Outcome outcome) {
+<b class="fc"><i>46</i>&nbsp;        this(target, tapped, forceShuffle, outcome, false);</b>
+<b class="fc"><i>47</i>&nbsp;    }</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public SearchLibraryPutInPlayTargetPlayerEffect(TargetCardInLibrary target, boolean tapped, boolean forceShuffle, Outcome outcome, boolean ownerIsController) {
+<b class="fc"><i>50</i>&nbsp;        super(target, outcome);</b>
+<b class="fc"><i>51</i>&nbsp;        this.tapped = tapped;</b>
+<b class="fc"><i>52</i>&nbsp;        this.forceShuffle = forceShuffle;</b>
+<b class="fc"><i>53</i>&nbsp;        this.ownerIsController = ownerIsController;</b>
+<b class="fc"><i>54</i>&nbsp;        setText();</b>
+<b class="fc"><i>55</i>&nbsp;    }</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    public SearchLibraryPutInPlayTargetPlayerEffect(final SearchLibraryPutInPlayTargetPlayerEffect effect) {
+<b class="fc"><i>58</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>59</i>&nbsp;        this.tapped = effect.tapped;</b>
+<b class="fc"><i>60</i>&nbsp;        this.forceShuffle = effect.forceShuffle;</b>
+<b class="fc"><i>61</i>&nbsp;        this.ownerIsController = effect.ownerIsController;</b>
+<b class="fc"><i>62</i>&nbsp;    }</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    @Override
+<i>65</i>&nbsp;    public SearchLibraryPutInPlayTargetPlayerEffect copy() {
+<b class="fc"><i>66</i>&nbsp;        return new SearchLibraryPutInPlayTargetPlayerEffect(this);</b>
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @Override
+<i>70</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="fc"><i>71</i>&nbsp;        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));</b>
+<b class="fc"><i>72</i>&nbsp;        if (player != null) {</b>
+<b class="fc"><i>73</i>&nbsp;            if (player.searchLibrary(target, game)) {</b>
+<b class="fc"><i>74</i>&nbsp;                if (target.getTargets().size() &gt; 0) {</b>
+<b class="fc"><i>75</i>&nbsp;                    player.moveCards(new CardsImpl(target.getTargets()).getCards(game),</b>
+<i>76</i>&nbsp;                            Zone.BATTLEFIELD, source, game, tapped, false, ownerIsController, null);
+<i>77</i>&nbsp;                }
+<b class="fc"><i>78</i>&nbsp;                player.shuffleLibrary(source, game);</b>
+<b class="fc"><i>79</i>&nbsp;                return true;</b>
+<i>80</i>&nbsp;            }
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;            if (forceShuffle) {</b>
+<b class="nc"><i>83</i>&nbsp;                player.shuffleLibrary(source, game);</b>
+<i>84</i>&nbsp;            }
+<i>85</i>&nbsp;        }
+<i>86</i>&nbsp;
+<b class="nc"><i>87</i>&nbsp;        return false;</b>
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    private void setText() {
+<b class="fc"><i>91</i>&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc"><i>92</i>&nbsp;        sb.append(&quot;target player searches his or her library for &quot;);</b>
+<b class="fc"><i>93</i>&nbsp;        if (target.getNumberOfTargets() == 0 &amp;&amp; target.getMaxNumberOfTargets() &gt; 0) {</b>
+<b class="nc"><i>94</i>&nbsp;            if (target.getMaxNumberOfTargets() == Integer.MAX_VALUE) {</b>
+<b class="nc"><i>95</i>&nbsp;                sb.append(&quot;any number of &quot;).append(&quot; &quot;);</b>
+<i>96</i>&nbsp;            } else {
+<b class="nc"><i>97</i>&nbsp;                sb.append(&quot;up to &quot;).append(target.getMaxNumberOfTargets()).append(&quot; &quot;);</b>
+<i>98</i>&nbsp;            }
+<b class="nc"><i>99</i>&nbsp;            sb.append(target.getTargetName()).append(&quot; and put them onto the battlefield&quot;);</b>
+<i>100</i>&nbsp;        } else {
+<b class="fc"><i>101</i>&nbsp;            sb.append(&quot;a &quot;).append(target.getTargetName()).append(&quot; and put it onto the battlefield&quot;);</b>
+<i>102</i>&nbsp;        }
+<b class="fc"><i>103</i>&nbsp;        if (tapped) {</b>
+<b class="nc"><i>104</i>&nbsp;            sb.append(&quot; tapped&quot;);</b>
+<i>105</i>&nbsp;        }
+<b class="fc"><i>106</i>&nbsp;        if (forceShuffle) {</b>
+<b class="fc"><i>107</i>&nbsp;            sb.append(&quot;. Then that player shuffles his or her library&quot;);</b>
+<i>108</i>&nbsp;        } else {
+<b class="nc"><i>109</i>&nbsp;            sb.append(&quot;. If that player does, he or she shuffles his or her library&quot;);</b>
+<i>110</i>&nbsp;        }
+<b class="fc"><i>111</i>&nbsp;        staticText = sb.toString();</b>
+<b class="fc"><i>112</i>&nbsp;    }</b>
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    public List&lt;UUID&gt; getTargets() {
+<b class="nc"><i>115</i>&nbsp;        return target.getTargets();</b>
+<i>116</i>&nbsp;    }
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RuleOfTwo</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.r</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RuleOfTwo (mage.cards.r)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RuleOfTwo</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.r;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.abilities.Ability;
+<i>32</i>&nbsp;import mage.abilities.common.SimpleStaticAbility;
+<i>33</i>&nbsp;import mage.abilities.condition.common.CreatureCountCondition;
+<i>34</i>&nbsp;import mage.abilities.decorator.ConditionalContinuousEffect;
+<i>35</i>&nbsp;import mage.abilities.effects.ContinuousEffect;
+<i>36</i>&nbsp;import mage.abilities.effects.Effect;
+<i>37</i>&nbsp;import mage.abilities.effects.common.continuous.BoostControlledEffect;
+<i>38</i>&nbsp;import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
+<i>39</i>&nbsp;import mage.abilities.keyword.DeathtouchAbility;
+<i>40</i>&nbsp;import mage.abilities.keyword.LifelinkAbility;
+<i>41</i>&nbsp;import mage.cards.CardImpl;
+<i>42</i>&nbsp;import mage.cards.CardSetInfo;
+<i>43</i>&nbsp;import mage.constants.CardType;
+<i>44</i>&nbsp;import mage.constants.Duration;
+<i>45</i>&nbsp;import mage.constants.TargetController;
+<i>46</i>&nbsp;import mage.constants.Zone;
+<i>47</i>&nbsp;import mage.filter.common.FilterCreaturePermanent;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;/**
+<i>50</i>&nbsp; *
+<i>51</i>&nbsp; * @author Styxo
+<i>52</i>&nbsp; */
+<i>53</i>&nbsp;public class RuleOfTwo extends CardImpl {
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public RuleOfTwo(UUID ownerId, CardSetInfo setInfo) {
+<b class="nc"><i>56</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},&quot;{3}{B}{B}&quot;);</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;        // As long as you control exatly two creatures, those creatures get +2/+0 and have deathtouch and lifelink.
+<b class="nc"><i>59</i>&nbsp;        ContinuousEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield);</b>
+<b class="nc"><i>60</i>&nbsp;        Effect effect = new ConditionalContinuousEffect(boostEffect, new CreatureCountCondition(2, TargetController.YOU),</b>
+<i>61</i>&nbsp;                &quot;As long as you control exactly two creatures, those creatures get +2/+0&quot;);
+<b class="nc"><i>62</i>&nbsp;        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);</b>
+<b class="nc"><i>63</i>&nbsp;        ContinuousEffect deathtouchEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent());</b>
+<b class="nc"><i>64</i>&nbsp;        effect = new ConditionalContinuousEffect(deathtouchEffect, new CreatureCountCondition(2, TargetController.YOU),</b>
+<i>65</i>&nbsp;                &quot;and have deathtouch&quot;);
+<b class="nc"><i>66</i>&nbsp;        ability.addEffect(effect);</b>
+<b class="nc"><i>67</i>&nbsp;        ContinuousEffect lifelinkEffect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent());</b>
+<b class="nc"><i>68</i>&nbsp;        effect = new ConditionalContinuousEffect(lifelinkEffect, new CreatureCountCondition(2, TargetController.YOU),</b>
+<i>69</i>&nbsp;                &quot;and lifelink&quot;);
+<b class="nc"><i>70</i>&nbsp;        ability.addEffect(effect);</b>
+<b class="nc"><i>71</i>&nbsp;        this.addAbility(ability);</b>
+<b class="nc"><i>72</i>&nbsp;    }</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    public RuleOfTwo(final RuleOfTwo card) {
+<b class="nc"><i>75</i>&nbsp;        super(card);</b>
+<b class="nc"><i>76</i>&nbsp;    }</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    @Override
+<i>79</i>&nbsp;    public RuleOfTwo copy() {
+<b class="nc"><i>80</i>&nbsp;        return new RuleOfTwo(this);</b>
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:35</div>
+</div>
+</body>
+</html>

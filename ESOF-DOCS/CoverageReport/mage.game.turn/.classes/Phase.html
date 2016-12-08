@@ -1,0 +1,366 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Phase</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.game.turn</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Phase (mage.game.turn)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Phase</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.5%
+  </span>
+  <span class="absValue">
+    (13/ 17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.8%
+  </span>
+  <span class="absValue">
+    (74/ 116)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Phase$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    72.2%
+  </span>
+  <span class="absValue">
+    (13/ 18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.2%
+  </span>
+  <span class="absValue">
+    (74/ 117)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.game.turn;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.Serializable;
+<i>31</i>&nbsp;import java.util.ArrayList;
+<i>32</i>&nbsp;import java.util.Iterator;
+<i>33</i>&nbsp;import java.util.List;
+<i>34</i>&nbsp;import java.util.UUID;
+<i>35</i>&nbsp;import mage.constants.PhaseStep;
+<i>36</i>&nbsp;import mage.constants.TurnPhase;
+<i>37</i>&nbsp;import mage.game.Game;
+<i>38</i>&nbsp;import mage.game.events.GameEvent;
+<i>39</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;/**
+<i>42</i>&nbsp; *
+<i>43</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>44</i>&nbsp; */
+<i>45</i>&nbsp;public abstract class Phase implements Serializable {
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    protected TurnPhase type;
+<b class="fc"><i>48</i>&nbsp;    protected List&lt;Step&gt; steps = new ArrayList&lt;&gt;();</b>
+<i>49</i>&nbsp;    protected EventType event;
+<i>50</i>&nbsp;    protected EventType preEvent;
+<i>51</i>&nbsp;    protected EventType postEvent;
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    protected UUID activePlayerId;
+<i>54</i>&nbsp;    protected Step currentStep;
+<i>55</i>&nbsp;    protected int count;
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    public abstract Phase copy();
+<i>58</i>&nbsp;
+<b class="fc"><i>59</i>&nbsp;    public Phase() {</b>
+<b class="fc"><i>60</i>&nbsp;    }</b>
+<i>61</i>&nbsp;
+<b class="fc"><i>62</i>&nbsp;    public Phase(final Phase phase) {</b>
+<b class="fc"><i>63</i>&nbsp;        this.type = phase.type;</b>
+<b class="fc"><i>64</i>&nbsp;        this.event = phase.event;</b>
+<b class="fc"><i>65</i>&nbsp;        this.preEvent = phase.preEvent;</b>
+<b class="fc"><i>66</i>&nbsp;        this.postEvent = phase.postEvent;</b>
+<b class="fc"><i>67</i>&nbsp;        this.activePlayerId = phase.activePlayerId;</b>
+<b class="fc"><i>68</i>&nbsp;        if (phase.currentStep != null) {</b>
+<b class="fc"><i>69</i>&nbsp;            this.currentStep = phase.currentStep.copy();</b>
+<i>70</i>&nbsp;        }
+<b class="fc"><i>71</i>&nbsp;        this.count = phase.count;</b>
+<b class="fc"><i>72</i>&nbsp;        for (Step step : phase.steps) {</b>
+<b class="fc"><i>73</i>&nbsp;            this.steps.add(step.copy());</b>
+<b class="fc"><i>74</i>&nbsp;        }</b>
+<b class="fc"><i>75</i>&nbsp;    }</b>
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    public TurnPhase getType() {
+<b class="fc"><i>78</i>&nbsp;        return type;</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    public Step getStep() {
+<b class="fc"><i>82</i>&nbsp;        return currentStep;</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    public void setStep(Step step) {
+<b class="nc"><i>86</i>&nbsp;        this.currentStep = step;</b>
+<b class="nc"><i>87</i>&nbsp;    }</b>
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    public void resetCount() {
+<b class="fc"><i>90</i>&nbsp;        count = 0;</b>
+<b class="fc"><i>91</i>&nbsp;    }</b>
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    public int getCount() {
+<b class="nc"><i>94</i>&nbsp;        return count;</b>
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    public boolean play(Game game, UUID activePlayerId) {
+<b class="fc"><i>98</i>&nbsp;        if (game.isPaused() || game.gameOver(null)) {</b>
+<b class="nc"><i>99</i>&nbsp;            return false;</b>
+<i>100</i>&nbsp;        }
+<i>101</i>&nbsp;
+<b class="fc"><i>102</i>&nbsp;        this.activePlayerId = activePlayerId;</b>
+<i>103</i>&nbsp;
+<b class="fc"><i>104</i>&nbsp;        if (beginPhase(game, activePlayerId)) {</b>
+<i>105</i>&nbsp;
+<b class="fc"><i>106</i>&nbsp;            for (Step step : steps) {</b>
+<b class="fc"><i>107</i>&nbsp;                if (game.isPaused() || game.gameOver(null)) {</b>
+<b class="fc"><i>108</i>&nbsp;                    return false;</b>
+<i>109</i>&nbsp;                }
+<b class="fc"><i>110</i>&nbsp;                if (game.getTurn().isEndTurnRequested() &amp;&amp; !step.getType().equals(PhaseStep.CLEANUP)) {</b>
+<b class="fc"><i>111</i>&nbsp;                    continue;</b>
+<i>112</i>&nbsp;                }
+<b class="fc"><i>113</i>&nbsp;                currentStep = step;</b>
+<b class="fc"><i>114</i>&nbsp;                if (!game.getState().getTurnMods().skipStep(activePlayerId, getStep().getType())) {</b>
+<b class="fc"><i>115</i>&nbsp;                    playStep(game);</b>
+<b class="fc"><i>116</i>&nbsp;                    if (game.executingRollback()) {</b>
+<b class="fc"><i>117</i>&nbsp;                        return true;</b>
+<i>118</i>&nbsp;                    }
+<i>119</i>&nbsp;                }
+<b class="fc"><i>120</i>&nbsp;                if (!game.isSimulation() &amp;&amp; checkStopOnStepOption(game)) {</b>
+<b class="fc"><i>121</i>&nbsp;                    return false;</b>
+<i>122</i>&nbsp;                }
+<i>123</i>&nbsp;
+<b class="fc"><i>124</i>&nbsp;            }</b>
+<b class="fc"><i>125</i>&nbsp;            if (game.isPaused() || game.gameOver(null)) {</b>
+<b class="fc"><i>126</i>&nbsp;                return false;</b>
+<i>127</i>&nbsp;            }
+<b class="fc"><i>128</i>&nbsp;            count++;</b>
+<b class="fc"><i>129</i>&nbsp;            endPhase(game, activePlayerId);</b>
+<b class="fc"><i>130</i>&nbsp;            return true;</b>
+<i>131</i>&nbsp;        }
+<b class="nc"><i>132</i>&nbsp;        return false;</b>
+<i>133</i>&nbsp;    }
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    private boolean checkStopOnStepOption(Game game) {
+<b class="fc"><i>136</i>&nbsp;        if (game.getOptions().stopOnTurn != null &amp;&amp; game.getOptions().stopAtStep == getStep().getType()) {</b>
+<b class="fc"><i>137</i>&nbsp;            if (game.getOptions().stopOnTurn &lt;= game.getState().getTurnNum()) {</b>
+<b class="fc"><i>138</i>&nbsp;                game.pause();</b>
+<b class="fc"><i>139</i>&nbsp;                return true;</b>
+<i>140</i>&nbsp;            }
+<i>141</i>&nbsp;        }
+<b class="fc"><i>142</i>&nbsp;        return false;</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    public boolean resumePlay(Game game, PhaseStep stepType, boolean wasPaused) {
+<b class="nc"><i>146</i>&nbsp;        if (game.isPaused() || game.gameOver(null)) {</b>
+<b class="nc"><i>147</i>&nbsp;            return false;</b>
+<i>148</i>&nbsp;        }
+<i>149</i>&nbsp;
+<b class="nc"><i>150</i>&nbsp;        this.activePlayerId = game.getActivePlayerId();</b>
+<b class="nc"><i>151</i>&nbsp;        Iterator&lt;Step&gt; it = steps.iterator();</b>
+<i>152</i>&nbsp;        Step step;
+<i>153</i>&nbsp;        do {
+<b class="nc"><i>154</i>&nbsp;            step = it.next();</b>
+<b class="nc"><i>155</i>&nbsp;            currentStep = step;</b>
+<b class="nc"><i>156</i>&nbsp;        } while (step.getType() != stepType);</b>
+<b class="nc"><i>157</i>&nbsp;        resumeStep(game, wasPaused);</b>
+<b class="nc"><i>158</i>&nbsp;        while (it.hasNext()) {</b>
+<b class="nc"><i>159</i>&nbsp;            step = it.next();</b>
+<b class="nc"><i>160</i>&nbsp;            if (game.isPaused() || game.gameOver(null)) {</b>
+<b class="nc"><i>161</i>&nbsp;                return false;</b>
+<i>162</i>&nbsp;            }
+<b class="nc"><i>163</i>&nbsp;            currentStep = step;</b>
+<b class="nc"><i>164</i>&nbsp;            if (!game.getState().getTurnMods().skipStep(activePlayerId, currentStep.getType())) {</b>
+<b class="nc"><i>165</i>&nbsp;                playStep(game);</b>
+<b class="nc"><i>166</i>&nbsp;                if (game.executingRollback()) {</b>
+<b class="nc"><i>167</i>&nbsp;                    return true;</b>
+<i>168</i>&nbsp;                }
+<i>169</i>&nbsp;            }
+<i>170</i>&nbsp;        }
+<i>171</i>&nbsp;
+<b class="nc"><i>172</i>&nbsp;        if (game.isPaused() || game.gameOver(null)) {</b>
+<b class="nc"><i>173</i>&nbsp;            return false;</b>
+<i>174</i>&nbsp;        }
+<b class="nc"><i>175</i>&nbsp;        count++;</b>
+<b class="nc"><i>176</i>&nbsp;        endPhase(game, activePlayerId);</b>
+<b class="nc"><i>177</i>&nbsp;        return true;</b>
+<i>178</i>&nbsp;    }
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;    public boolean beginPhase(Game game, UUID activePlayerId) {
+<b class="fc"><i>181</i>&nbsp;        if (!game.replaceEvent(new GameEvent(event, null, null, activePlayerId))) {</b>
+<b class="fc"><i>182</i>&nbsp;            game.fireEvent(new GameEvent(preEvent, null, null, activePlayerId));</b>
+<b class="fc"><i>183</i>&nbsp;            return true;</b>
+<i>184</i>&nbsp;        }
+<b class="nc"><i>185</i>&nbsp;        return false;</b>
+<i>186</i>&nbsp;    }
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;    public void endPhase(Game game, UUID activePlayerId) {
+<b class="fc"><i>189</i>&nbsp;        game.fireEvent(new GameEvent(postEvent, null, null, activePlayerId));</b>
+<b class="fc"><i>190</i>&nbsp;        game.getState().getTriggers().removeAbilitiesOfNonExistingSources(game); // e.g. tokens that left the battlefield</b>
+<b class="fc"><i>191</i>&nbsp;    }</b>
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    public void prePriority(Game game, UUID activePlayerId) {
+<b class="fc"><i>194</i>&nbsp;        currentStep.beginStep(game, activePlayerId);</b>
+<b class="fc"><i>195</i>&nbsp;    }</b>
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;    public void postPriority(Game game, UUID activePlayerId) {
+<b class="fc"><i>198</i>&nbsp;        currentStep.endStep(game, activePlayerId);</b>
+<i>199</i>&nbsp;        //20091005 - 500.4/703.4n
+<b class="fc"><i>200</i>&nbsp;        game.emptyManaPools();</b>
+<i>201</i>&nbsp;        //20091005 - 500.9
+<b class="fc"><i>202</i>&nbsp;        playExtraSteps(game, currentStep.getType());</b>
+<b class="fc"><i>203</i>&nbsp;    }</b>
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;    protected void playStep(Game game) {
+<b class="fc"><i>206</i>&nbsp;        if (!currentStep.skipStep(game, activePlayerId)) {</b>
+<b class="fc"><i>207</i>&nbsp;            game.getState().increaseStepNum();</b>
+<b class="fc"><i>208</i>&nbsp;            prePriority(game, activePlayerId);</b>
+<b class="fc"><i>209</i>&nbsp;            if (!game.isPaused() &amp;&amp; !game.gameOver(null) &amp;&amp; !game.executingRollback()) {</b>
+<b class="fc"><i>210</i>&nbsp;                currentStep.priority(game, activePlayerId, false);</b>
+<b class="fc"><i>211</i>&nbsp;                if (game.executingRollback()) {</b>
+<b class="fc"><i>212</i>&nbsp;                    return;</b>
+<i>213</i>&nbsp;                }
+<i>214</i>&nbsp;            }
+<b class="fc"><i>215</i>&nbsp;            if (!game.isPaused() &amp;&amp; !game.gameOver(null) &amp;&amp; !game.executingRollback()) {</b>
+<b class="fc"><i>216</i>&nbsp;                postPriority(game, activePlayerId);</b>
+<i>217</i>&nbsp;            }
+<i>218</i>&nbsp;        }
+<b class="fc"><i>219</i>&nbsp;    }</b>
+<i>220</i>&nbsp;
+<i>221</i>&nbsp;    protected void resumeStep(Game game, boolean wasPaused) {
+<b class="nc"><i>222</i>&nbsp;        boolean resuming = true;</b>
+<b class="nc"><i>223</i>&nbsp;        if (currentStep == null || currentStep.getStepPart() == null) {</b>
+<b class="nc"><i>224</i>&nbsp;            game.end();</b>
+<b class="nc"><i>225</i>&nbsp;            return;</b>
+<i>226</i>&nbsp;        }
+<b class="nc"><i>227</i>&nbsp;        switch (currentStep.getStepPart()) {</b>
+<i>228</i>&nbsp;            case PRE:
+<b class="nc"><i>229</i>&nbsp;                if (wasPaused) {</b>
+<b class="nc"><i>230</i>&nbsp;                    currentStep.resumeBeginStep(game, activePlayerId);</b>
+<b class="nc"><i>231</i>&nbsp;                    resuming = false;</b>
+<i>232</i>&nbsp;                } else {
+<b class="nc"><i>233</i>&nbsp;                    prePriority(game, activePlayerId);</b>
+<i>234</i>&nbsp;                }
+<i>235</i>&nbsp;            case PRIORITY:
+<b class="nc"><i>236</i>&nbsp;                if (!game.isPaused() &amp;&amp; !game.gameOver(null)) {</b>
+<b class="nc"><i>237</i>&nbsp;                    currentStep.priority(game, activePlayerId, resuming);</b>
+<i>238</i>&nbsp;                }
+<i>239</i>&nbsp;            case POST:
+<b class="nc"><i>240</i>&nbsp;                if (!game.isPaused() &amp;&amp; !game.gameOver(null)) {</b>
+<b class="nc"><i>241</i>&nbsp;                    postPriority(game, activePlayerId);</b>
+<i>242</i>&nbsp;                }
+<i>243</i>&nbsp;        }
+<b class="nc"><i>244</i>&nbsp;    }</b>
+<i>245</i>&nbsp;
+<i>246</i>&nbsp;    private void playExtraSteps(Game game, PhaseStep afterStep) {
+<i>247</i>&nbsp;        while (true) {
+<b class="fc"><i>248</i>&nbsp;            Step extraStep = game.getState().getTurnMods().extraStep(activePlayerId, afterStep);</b>
+<b class="fc"><i>249</i>&nbsp;            if (extraStep == null) {</b>
+<b class="fc"><i>250</i>&nbsp;                return;</b>
+<i>251</i>&nbsp;            }
+<b class="fc"><i>252</i>&nbsp;            currentStep = extraStep;</b>
+<b class="fc"><i>253</i>&nbsp;            playStep(game);</b>
+<b class="fc"><i>254</i>&nbsp;        }</b>
+<i>255</i>&nbsp;    }
+<i>256</i>&nbsp;
+<i>257</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MagePreferences</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.preference</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MagePreferences (mage.client.preference)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MagePreferences</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.client.preference;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.prefs.Preferences;
+<i>4</i>&nbsp;import mage.client.MageFrame;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;// TODO: Move all preference related logic from MageFrame and PreferencesDialog to this class.
+<b class="nc"><i>7</i>&nbsp;public class MagePreferences {</b>
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;    private static final String KEY_SERVER_ADDRESS = &quot;serverAddress&quot;;
+<i>10</i>&nbsp;    private static final String KEY_SERVER_PORT = &quot;serverPort&quot;;
+<i>11</i>&nbsp;    private static final String KEY_USER_NAME = &quot;userName&quot;;
+<i>12</i>&nbsp;    private static final String KEY_PASSWORD = &quot;password&quot;;
+<i>13</i>&nbsp;    private static final String KEY_EMAIL = &quot;email&quot;;
+<i>14</i>&nbsp;    private static final String KEY_AUTO_CONNECT = &quot;autoConnect&quot;;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    private static Preferences prefs() {
+<i>17</i>&nbsp;        // TODO: Move MageFrame.prefs to this class.
+<b class="nc"><i>18</i>&nbsp;        return MageFrame.getPreferences();</b>
+<i>19</i>&nbsp;    }
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    public static String getServerAddress() {
+<b class="nc"><i>22</i>&nbsp;        return prefs().get(KEY_SERVER_ADDRESS, &quot;&quot;);</b>
+<i>23</i>&nbsp;    }
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    public static String getServerAddressWithDefault(String defaultValue) {
+<b class="nc"><i>26</i>&nbsp;        return prefs().get(KEY_SERVER_ADDRESS, defaultValue);</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public static void setServerAddress(String serverAddress) {
+<b class="nc"><i>30</i>&nbsp;        prefs().put(KEY_SERVER_ADDRESS, serverAddress);</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public static int getServerPort() {
+<b class="nc"><i>34</i>&nbsp;        return prefs().getInt(KEY_SERVER_PORT, 0);</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public static int getServerPortWithDefault(int defaultValue) {
+<b class="nc"><i>38</i>&nbsp;        return prefs().getInt(KEY_SERVER_PORT, defaultValue);</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public static void setServerPort(int port) {
+<b class="nc"><i>42</i>&nbsp;        prefs().putInt(KEY_SERVER_PORT, port);</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    private static String prefixedKey(String prefix, String key) {
+<b class="nc"><i>46</i>&nbsp;        return prefix + &quot;/&quot; + key;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public static String getUserName(String serverAddress) {
+<b class="nc"><i>50</i>&nbsp;        String userName = prefs().get(prefixedKey(serverAddress, KEY_USER_NAME), &quot;&quot;);</b>
+<b class="nc"><i>51</i>&nbsp;        if (!userName.isEmpty()) {</b>
+<b class="nc"><i>52</i>&nbsp;            return userName;</b>
+<i>53</i>&nbsp;        }
+<i>54</i>&nbsp;        // For clients older than 1.4.7, userName is stored without a serverAddress prefix.
+<b class="nc"><i>55</i>&nbsp;        return prefs().get(KEY_USER_NAME, &quot;&quot;);</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public static void setUserName(String serverAddress, String userName) {
+<b class="nc"><i>59</i>&nbsp;        prefs().put(prefixedKey(serverAddress, KEY_USER_NAME), userName);</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public static String getPassword(String serverAddress) {
+<b class="nc"><i>63</i>&nbsp;        return prefs().get(prefixedKey(serverAddress, KEY_PASSWORD), &quot;&quot;);</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public static void setPassword(String serverAddress, String password) {
+<b class="nc"><i>67</i>&nbsp;        prefs().put(prefixedKey(serverAddress, KEY_PASSWORD), password);</b>
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    public static String getEmail(String serverAddress) {
+<b class="nc"><i>71</i>&nbsp;        return prefs().get(prefixedKey(serverAddress, KEY_EMAIL), &quot;&quot;);</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    public static void setEmail(String serverAddress, String userName) {
+<b class="nc"><i>75</i>&nbsp;        prefs().put(prefixedKey(serverAddress, KEY_EMAIL), userName);</b>
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    public static boolean getAutoConnect() {
+<b class="nc"><i>79</i>&nbsp;        return prefs().getBoolean(KEY_AUTO_CONNECT, false);</b>
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    public static void setAutoConnect(boolean autoConnect) {
+<b class="nc"><i>83</i>&nbsp;        prefs().putBoolean(KEY_AUTO_CONNECT, autoConnect);</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

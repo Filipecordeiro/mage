@@ -1,0 +1,1374 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ContinuousEffectSorter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ContinuousEffectSorter (mage.abilities.effects)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ContinuousEffectSorter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.effects;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.Serializable;
+<i>31</i>&nbsp;import java.util.ArrayList;
+<i>32</i>&nbsp;import java.util.Collections;
+<i>33</i>&nbsp;import java.util.Comparator;
+<i>34</i>&nbsp;import java.util.EnumMap;
+<i>35</i>&nbsp;import java.util.HashMap;
+<i>36</i>&nbsp;import java.util.HashSet;
+<i>37</i>&nbsp;import java.util.Iterator;
+<i>38</i>&nbsp;import java.util.LinkedHashMap;
+<i>39</i>&nbsp;import java.util.List;
+<i>40</i>&nbsp;import java.util.Map;
+<i>41</i>&nbsp;import java.util.Map.Entry;
+<i>42</i>&nbsp;import java.util.Set;
+<i>43</i>&nbsp;import java.util.UUID;
+<i>44</i>&nbsp;import mage.MageObject;
+<i>45</i>&nbsp;import mage.abilities.Ability;
+<i>46</i>&nbsp;import mage.abilities.ActivatedAbility;
+<i>47</i>&nbsp;import mage.abilities.MageSingleton;
+<i>48</i>&nbsp;import mage.abilities.SpellAbility;
+<i>49</i>&nbsp;import mage.abilities.StaticAbility;
+<i>50</i>&nbsp;import mage.abilities.keyword.SpliceOntoArcaneAbility;
+<i>51</i>&nbsp;import mage.cards.Cards;
+<i>52</i>&nbsp;import mage.cards.CardsImpl;
+<i>53</i>&nbsp;import mage.constants.AbilityType;
+<i>54</i>&nbsp;import mage.constants.AsThoughEffectType;
+<i>55</i>&nbsp;import mage.constants.CostModificationType;
+<i>56</i>&nbsp;import mage.constants.Duration;
+<i>57</i>&nbsp;import mage.constants.EffectType;
+<i>58</i>&nbsp;import mage.constants.Layer;
+<i>59</i>&nbsp;import mage.constants.ManaType;
+<i>60</i>&nbsp;import mage.constants.Outcome;
+<i>61</i>&nbsp;import mage.constants.SpellAbilityType;
+<i>62</i>&nbsp;import mage.constants.SubLayer;
+<i>63</i>&nbsp;import mage.constants.Zone;
+<i>64</i>&nbsp;import mage.filter.FilterCard;
+<i>65</i>&nbsp;import mage.filter.predicate.Predicate;
+<i>66</i>&nbsp;import mage.filter.predicate.Predicates;
+<i>67</i>&nbsp;import mage.filter.predicate.mageobject.CardIdPredicate;
+<i>68</i>&nbsp;import mage.game.Game;
+<i>69</i>&nbsp;import mage.game.events.GameEvent;
+<i>70</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>71</i>&nbsp;import mage.game.events.ZoneChangeEvent;
+<i>72</i>&nbsp;import mage.game.permanent.Permanent;
+<i>73</i>&nbsp;import mage.game.permanent.PermanentCard;
+<i>74</i>&nbsp;import mage.game.stack.Spell;
+<i>75</i>&nbsp;import mage.players.ManaPoolItem;
+<i>76</i>&nbsp;import mage.players.Player;
+<i>77</i>&nbsp;import mage.target.common.TargetCardInHand;
+<i>78</i>&nbsp;import org.apache.log4j.Logger;
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;/**
+<i>81</i>&nbsp; *
+<i>82</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>83</i>&nbsp; */
+<i>84</i>&nbsp;public class ContinuousEffects implements Serializable {
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    private static final Logger logger = Logger.getLogger(ContinuousEffects.class);
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    private long order = 0;
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    //transient Continuous effects
+<i>91</i>&nbsp;    private ContinuousEffectsList&lt;ContinuousEffect&gt; layeredEffects = new ContinuousEffectsList&lt;&gt;();
+<i>92</i>&nbsp;    private ContinuousEffectsList&lt;ContinuousRuleModifyingEffect&gt; continuousRuleModifyingEffects = new ContinuousEffectsList&lt;&gt;();
+<i>93</i>&nbsp;    private ContinuousEffectsList&lt;ReplacementEffect&gt; replacementEffects = new ContinuousEffectsList&lt;&gt;();
+<i>94</i>&nbsp;    private ContinuousEffectsList&lt;PreventionEffect&gt; preventionEffects = new ContinuousEffectsList&lt;&gt;();
+<i>95</i>&nbsp;    private ContinuousEffectsList&lt;RequirementEffect&gt; requirementEffects = new ContinuousEffectsList&lt;&gt;();
+<i>96</i>&nbsp;    private ContinuousEffectsList&lt;RestrictionEffect&gt; restrictionEffects = new ContinuousEffectsList&lt;&gt;();
+<i>97</i>&nbsp;    private ContinuousEffectsList&lt;RestrictionUntapNotMoreThanEffect&gt; restrictionUntapNotMoreThanEffects = new ContinuousEffectsList&lt;&gt;();
+<i>98</i>&nbsp;    private ContinuousEffectsList&lt;CostModificationEffect&gt; costModificationEffects = new ContinuousEffectsList&lt;&gt;();
+<i>99</i>&nbsp;    private ContinuousEffectsList&lt;SpliceCardEffect&gt; spliceCardEffects = new ContinuousEffectsList&lt;&gt;();
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    private final Map&lt;AsThoughEffectType, ContinuousEffectsList&lt;AsThoughEffect&gt;&gt; asThoughEffectsMap = new EnumMap&lt;&gt;(AsThoughEffectType.class);
+<i>102</i>&nbsp;    public final List&lt;ContinuousEffectsList&lt;?&gt;&gt; allEffectsLists = new ArrayList&lt;&gt;();
+<i>103</i>&nbsp;    private final ApplyCountersEffect applyCounters;
+<i>104</i>&nbsp;    private final PlaneswalkerRedirectionEffect planeswalkerRedirectionEffect;
+<i>105</i>&nbsp;    private final AuraReplacementEffect auraReplacementEffect;
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    private final List&lt;ContinuousEffect&gt; previous = new ArrayList&lt;&gt;();
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    // note all effect/abilities that were only added temporary
+<i>110</i>&nbsp;    private final Map&lt;ContinuousEffect, Set&lt;Ability&gt;&gt; temporaryEffects = new HashMap&lt;&gt;();
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    private final ContinuousEffectSorter sorter = new ContinuousEffectSorter();
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    public ContinuousEffects() {
+<i>115</i>&nbsp;        applyCounters = new ApplyCountersEffect();
+<i>116</i>&nbsp;        planeswalkerRedirectionEffect = new PlaneswalkerRedirectionEffect();
+<i>117</i>&nbsp;        auraReplacementEffect = new AuraReplacementEffect();
+<i>118</i>&nbsp;        collectAllEffects();
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    public ContinuousEffects(final ContinuousEffects effect) {
+<i>122</i>&nbsp;        this.applyCounters = effect.applyCounters.copy();
+<i>123</i>&nbsp;        this.planeswalkerRedirectionEffect = effect.planeswalkerRedirectionEffect.copy();
+<i>124</i>&nbsp;        this.auraReplacementEffect = effect.auraReplacementEffect.copy();
+<i>125</i>&nbsp;        layeredEffects = effect.layeredEffects.copy();
+<i>126</i>&nbsp;        continuousRuleModifyingEffects = effect.continuousRuleModifyingEffects.copy();
+<i>127</i>&nbsp;        replacementEffects = effect.replacementEffects.copy();
+<i>128</i>&nbsp;        preventionEffects = effect.preventionEffects.copy();
+<i>129</i>&nbsp;        requirementEffects = effect.requirementEffects.copy();
+<i>130</i>&nbsp;        restrictionEffects = effect.restrictionEffects.copy();
+<i>131</i>&nbsp;        restrictionUntapNotMoreThanEffects = effect.restrictionUntapNotMoreThanEffects.copy();
+<i>132</i>&nbsp;        for (Map.Entry&lt;AsThoughEffectType, ContinuousEffectsList&lt;AsThoughEffect&gt;&gt; entry : effect.asThoughEffectsMap.entrySet()) {
+<i>133</i>&nbsp;            asThoughEffectsMap.put(entry.getKey(), entry.getValue().copy());
+<i>134</i>&nbsp;        }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;        costModificationEffects = effect.costModificationEffects.copy();
+<i>137</i>&nbsp;        spliceCardEffects = effect.spliceCardEffects.copy();
+<i>138</i>&nbsp;        temporaryEffects.putAll(effect.temporaryEffects);
+<i>139</i>&nbsp;        collectAllEffects();
+<i>140</i>&nbsp;        order = effect.order;
+<i>141</i>&nbsp;    }
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;    private void collectAllEffects() {
+<i>144</i>&nbsp;        allEffectsLists.add(layeredEffects);
+<i>145</i>&nbsp;        allEffectsLists.add(continuousRuleModifyingEffects);
+<i>146</i>&nbsp;        allEffectsLists.add(replacementEffects);
+<i>147</i>&nbsp;        allEffectsLists.add(preventionEffects);
+<i>148</i>&nbsp;        allEffectsLists.add(requirementEffects);
+<i>149</i>&nbsp;        allEffectsLists.add(restrictionEffects);
+<i>150</i>&nbsp;        allEffectsLists.add(restrictionUntapNotMoreThanEffects);
+<i>151</i>&nbsp;        allEffectsLists.add(costModificationEffects);
+<i>152</i>&nbsp;        allEffectsLists.add(spliceCardEffects);
+<i>153</i>&nbsp;        for (ContinuousEffectsList continuousEffectsList : asThoughEffectsMap.values()) {
+<i>154</i>&nbsp;            allEffectsLists.add(continuousEffectsList);
+<i>155</i>&nbsp;        }
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    public ContinuousEffects copy() {
+<i>159</i>&nbsp;        return new ContinuousEffects(this);
+<i>160</i>&nbsp;    }
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;    public List&lt;RequirementEffect&gt; getRequirementEffects() {
+<i>163</i>&nbsp;        return requirementEffects;
+<i>164</i>&nbsp;    }
+<i>165</i>&nbsp;
+<i>166</i>&nbsp;    public List&lt;RestrictionEffect&gt; getRestrictionEffects() {
+<i>167</i>&nbsp;        return restrictionEffects;
+<i>168</i>&nbsp;    }
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;    public void removeEndOfCombatEffects() {
+<i>171</i>&nbsp;        layeredEffects.removeEndOfCombatEffects();
+<i>172</i>&nbsp;        continuousRuleModifyingEffects.removeEndOfCombatEffects();
+<i>173</i>&nbsp;        replacementEffects.removeEndOfCombatEffects();
+<i>174</i>&nbsp;        preventionEffects.removeEndOfCombatEffects();
+<i>175</i>&nbsp;        requirementEffects.removeEndOfCombatEffects();
+<i>176</i>&nbsp;        restrictionEffects.removeEndOfCombatEffects();
+<i>177</i>&nbsp;        for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
+<i>178</i>&nbsp;            asThoughtlist.removeEndOfCombatEffects();
+<i>179</i>&nbsp;        }
+<i>180</i>&nbsp;        costModificationEffects.removeEndOfCombatEffects();
+<i>181</i>&nbsp;        spliceCardEffects.removeEndOfCombatEffects();
+<i>182</i>&nbsp;    }
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    public void removeEndOfTurnEffects() {
+<i>185</i>&nbsp;        layeredEffects.removeEndOfTurnEffects();
+<i>186</i>&nbsp;        continuousRuleModifyingEffects.removeEndOfTurnEffects();
+<i>187</i>&nbsp;        replacementEffects.removeEndOfTurnEffects();
+<i>188</i>&nbsp;        preventionEffects.removeEndOfTurnEffects();
+<i>189</i>&nbsp;        requirementEffects.removeEndOfTurnEffects();
+<i>190</i>&nbsp;        restrictionEffects.removeEndOfTurnEffects();
+<i>191</i>&nbsp;        for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
+<i>192</i>&nbsp;            asThoughtlist.removeEndOfTurnEffects();
+<i>193</i>&nbsp;        }
+<i>194</i>&nbsp;        costModificationEffects.removeEndOfTurnEffects();
+<i>195</i>&nbsp;        spliceCardEffects.removeEndOfTurnEffects();
+<i>196</i>&nbsp;    }
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    public void removeInactiveEffects(Game game) {
+<i>199</i>&nbsp;        layeredEffects.removeInactiveEffects(game);
+<i>200</i>&nbsp;        continuousRuleModifyingEffects.removeInactiveEffects(game);
+<i>201</i>&nbsp;        replacementEffects.removeInactiveEffects(game);
+<i>202</i>&nbsp;        preventionEffects.removeInactiveEffects(game);
+<i>203</i>&nbsp;        requirementEffects.removeInactiveEffects(game);
+<i>204</i>&nbsp;        restrictionEffects.removeInactiveEffects(game);
+<i>205</i>&nbsp;        restrictionUntapNotMoreThanEffects.removeInactiveEffects(game);
+<i>206</i>&nbsp;        for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
+<i>207</i>&nbsp;            asThoughtlist.removeInactiveEffects(game);
+<i>208</i>&nbsp;        }
+<i>209</i>&nbsp;        costModificationEffects.removeInactiveEffects(game);
+<i>210</i>&nbsp;        spliceCardEffects.removeInactiveEffects(game);
+<i>211</i>&nbsp;    }
+<i>212</i>&nbsp;
+<i>213</i>&nbsp;    public List&lt;ContinuousEffect&gt; getLayeredEffects(Game game) {
+<i>214</i>&nbsp;        List&lt;ContinuousEffect&gt; layerEffects = new ArrayList&lt;&gt;();
+<i>215</i>&nbsp;        for (ContinuousEffect effect : layeredEffects) {
+<i>216</i>&nbsp;            switch (effect.getDuration()) {
+<i>217</i>&nbsp;                case WhileOnBattlefield:
+<i>218</i>&nbsp;                case WhileOnStack:
+<i>219</i>&nbsp;                case WhileInGraveyard:
+<i>220</i>&nbsp;                    HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>221</i>&nbsp;                    if (abilities != null) {
+<i>222</i>&nbsp;                        for (Ability ability : abilities) {
+<i>223</i>&nbsp;                            // If e.g. triggerd abilities (non static) created the effect, the ability must not be in usable zone (e.g. Unearth giving Haste effect)
+<i>224</i>&nbsp;                            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
+<i>225</i>&nbsp;                                layerEffects.add(effect);
+<i>226</i>&nbsp;                                break;
+<i>227</i>&nbsp;                            }
+<i>228</i>&nbsp;                        }
+<i>229</i>&nbsp;                    } else {
+<i>230</i>&nbsp;                        logger.error(&quot;No abilities for continuous effect: &quot; + effect.toString());
+<i>231</i>&nbsp;                    }
+<i>232</i>&nbsp;                    break;
+<i>233</i>&nbsp;                default:
+<i>234</i>&nbsp;                    layerEffects.add(effect);
+<i>235</i>&nbsp;            }
+<i>236</i>&nbsp;        }
+<i>237</i>&nbsp;
+<i>238</i>&nbsp;        updateTimestamps(layerEffects);
+<i>239</i>&nbsp;
+<i>240</i>&nbsp;        Collections.sort(layerEffects, sorter);
+<i>241</i>&nbsp;        return layerEffects;
+<i>242</i>&nbsp;    }
+<i>243</i>&nbsp;
+<i>244</i>&nbsp;    /**
+<i>245</i>&nbsp;     * Initially effect timestamp is set when game starts in game.loadCard
+<i>246</i>&nbsp;     * method. After that timestamp should be updated whenever effect becomes
+<i>247</i>&nbsp;     * &quot;actual&quot; meaning it becomes turned on that is defined by
+<i>248</i>&nbsp;     * Ability.#isInUseableZone(Game, boolean) method in
+<i>249</i>&nbsp;     * #getLayeredEffects(Game).
+<i>250</i>&nbsp;     *
+<i>251</i>&nbsp;     * @param layerEffects
+<i>252</i>&nbsp;     */
+<i>253</i>&nbsp;    private void updateTimestamps(List&lt;ContinuousEffect&gt; layerEffects) {
+<i>254</i>&nbsp;        for (ContinuousEffect continuousEffect : layerEffects) {
+<i>255</i>&nbsp;            // check if it&#39;s new, then set order
+<i>256</i>&nbsp;            if (!previous.contains(continuousEffect)) {
+<i>257</i>&nbsp;                setOrder(continuousEffect);
+<i>258</i>&nbsp;            }
+<i>259</i>&nbsp;        }
+<i>260</i>&nbsp;        previous.clear();
+<i>261</i>&nbsp;        previous.addAll(layerEffects);
+<i>262</i>&nbsp;    }
+<i>263</i>&nbsp;
+<i>264</i>&nbsp;    public void setOrder(ContinuousEffect effect) {
+<i>265</i>&nbsp;        effect.setOrder(order++);
+<i>266</i>&nbsp;    }
+<i>267</i>&nbsp;
+<i>268</i>&nbsp;    private List&lt;ContinuousEffect&gt; filterLayeredEffects(List&lt;ContinuousEffect&gt; effects, Layer layer) {
+<i>269</i>&nbsp;        List&lt;ContinuousEffect&gt; layerEffects = new ArrayList&lt;&gt;();
+<i>270</i>&nbsp;        for (ContinuousEffect effect : effects) {
+<i>271</i>&nbsp;            if (effect.hasLayer(layer)) {
+<i>272</i>&nbsp;                layerEffects.add(effect);
+<i>273</i>&nbsp;            }
+<i>274</i>&nbsp;        }
+<i>275</i>&nbsp;        return layerEffects;
+<i>276</i>&nbsp;    }
+<i>277</i>&nbsp;
+<i>278</i>&nbsp;    public HashMap&lt;RequirementEffect, HashSet&lt;Ability&gt;&gt; getApplicableRequirementEffects(Permanent permanent, Game game) {
+<i>279</i>&nbsp;        HashMap&lt;RequirementEffect, HashSet&lt;Ability&gt;&gt; effects = new HashMap&lt;&gt;();
+<i>280</i>&nbsp;        for (RequirementEffect effect : requirementEffects) {
+<i>281</i>&nbsp;            HashSet&lt;Ability&gt; abilities = requirementEffects.getAbility(effect.getId());
+<i>282</i>&nbsp;            HashSet&lt;Ability&gt; applicableAbilities = new HashSet&lt;&gt;();
+<i>283</i>&nbsp;            for (Ability ability : abilities) {
+<i>284</i>&nbsp;                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, null)) {
+<i>285</i>&nbsp;                    if (effect.applies(permanent, ability, game)) {
+<i>286</i>&nbsp;                        applicableAbilities.add(ability);
+<i>287</i>&nbsp;                    }
+<i>288</i>&nbsp;                }
+<i>289</i>&nbsp;            }
+<i>290</i>&nbsp;            if (!applicableAbilities.isEmpty()) {
+<i>291</i>&nbsp;                effects.put(effect, abilities);
+<i>292</i>&nbsp;            }
+<i>293</i>&nbsp;        }
+<i>294</i>&nbsp;        return effects;
+<i>295</i>&nbsp;    }
+<i>296</i>&nbsp;
+<i>297</i>&nbsp;    public HashMap&lt;RestrictionEffect, HashSet&lt;Ability&gt;&gt; getApplicableRestrictionEffects(Permanent permanent, Game game) {
+<i>298</i>&nbsp;        HashMap&lt;RestrictionEffect, HashSet&lt;Ability&gt;&gt; effects = new HashMap&lt;&gt;();
+<i>299</i>&nbsp;        for (RestrictionEffect effect : restrictionEffects) {
+<i>300</i>&nbsp;            HashSet&lt;Ability&gt; abilities = restrictionEffects.getAbility(effect.getId());
+<i>301</i>&nbsp;            HashSet&lt;Ability&gt; applicableAbilities = new HashSet&lt;&gt;();
+<i>302</i>&nbsp;            for (Ability ability : abilities) {
+<i>303</i>&nbsp;                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, null)) {
+<i>304</i>&nbsp;                    if (effect.applies(permanent, ability, game)) {
+<i>305</i>&nbsp;                        applicableAbilities.add(ability);
+<i>306</i>&nbsp;                    }
+<i>307</i>&nbsp;                }
+<i>308</i>&nbsp;            }
+<i>309</i>&nbsp;            if (!applicableAbilities.isEmpty()) {
+<i>310</i>&nbsp;                effects.put(effect, abilities);
+<i>311</i>&nbsp;            }
+<i>312</i>&nbsp;        }
+<i>313</i>&nbsp;        return effects;
+<i>314</i>&nbsp;    }
+<i>315</i>&nbsp;
+<i>316</i>&nbsp;    public HashMap&lt;RestrictionUntapNotMoreThanEffect, HashSet&lt;Ability&gt;&gt; getApplicableRestrictionUntapNotMoreThanEffects(Player player, Game game) {
+<i>317</i>&nbsp;        HashMap&lt;RestrictionUntapNotMoreThanEffect, HashSet&lt;Ability&gt;&gt; effects = new HashMap&lt;&gt;();
+<i>318</i>&nbsp;        for (RestrictionUntapNotMoreThanEffect effect : restrictionUntapNotMoreThanEffects) {
+<i>319</i>&nbsp;            HashSet&lt;Ability&gt; abilities = restrictionUntapNotMoreThanEffects.getAbility(effect.getId());
+<i>320</i>&nbsp;            HashSet&lt;Ability&gt; applicableAbilities = new HashSet&lt;&gt;();
+<i>321</i>&nbsp;            for (Ability ability : abilities) {
+<i>322</i>&nbsp;                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
+<i>323</i>&nbsp;                    if (effect.applies(player, ability, game)) {
+<i>324</i>&nbsp;                        applicableAbilities.add(ability);
+<i>325</i>&nbsp;                    }
+<i>326</i>&nbsp;                }
+<i>327</i>&nbsp;            }
+<i>328</i>&nbsp;            if (!applicableAbilities.isEmpty()) {
+<i>329</i>&nbsp;                effects.put(effect, abilities);
+<i>330</i>&nbsp;            }
+<i>331</i>&nbsp;        }
+<i>332</i>&nbsp;        return effects;
+<i>333</i>&nbsp;    }
+<i>334</i>&nbsp;
+<i>335</i>&nbsp;    public boolean checkIfThereArePayCostToAttackBlockEffects(GameEvent event, Game game) {
+<i>336</i>&nbsp;        for (ReplacementEffect effect : replacementEffects) {
+<i>337</i>&nbsp;            if (!effect.checksEventType(event, game)) {
+<i>338</i>&nbsp;                continue;
+<i>339</i>&nbsp;            }
+<i>340</i>&nbsp;            if (effect instanceof PayCostToAttackBlockEffect) {
+<i>341</i>&nbsp;                HashSet&lt;Ability&gt; abilities = replacementEffects.getAbility(effect.getId());
+<i>342</i>&nbsp;                for (Ability ability : abilities) {
+<i>343</i>&nbsp;                    // for replacment effects of static abilities do not use LKI to check if to apply
+<i>344</i>&nbsp;                    if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
+<i>345</i>&nbsp;                        if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+<i>346</i>&nbsp;                            if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(ability.getSourceId())) {
+<i>347</i>&nbsp;                                if (effect.applies(event, ability, game)
+<i>348</i>&nbsp;                                        &amp;&amp; !((PayCostToAttackBlockEffect) effect).isCostless(event, ability, game)) {
+<i>349</i>&nbsp;                                    return true;
+<i>350</i>&nbsp;                                }
+<i>351</i>&nbsp;                            }
+<i>352</i>&nbsp;                        }
+<i>353</i>&nbsp;                    }
+<i>354</i>&nbsp;                }
+<i>355</i>&nbsp;            }
+<i>356</i>&nbsp;        }
+<i>357</i>&nbsp;        return false;
+<i>358</i>&nbsp;    }
+<i>359</i>&nbsp;
+<i>360</i>&nbsp;    /**
+<i>361</i>&nbsp;     *
+<i>362</i>&nbsp;     * @param event
+<i>363</i>&nbsp;     * @param game
+<i>364</i>&nbsp;     * @return a list of all {@link ReplacementEffect} that apply to the current
+<i>365</i>&nbsp;     * event
+<i>366</i>&nbsp;     */
+<i>367</i>&nbsp;    private HashMap&lt;ReplacementEffect, HashSet&lt;Ability&gt;&gt; getApplicableReplacementEffects(GameEvent event, Game game) {
+<i>368</i>&nbsp;        HashMap&lt;ReplacementEffect, HashSet&lt;Ability&gt;&gt; replaceEffects = new HashMap&lt;&gt;();
+<i>369</i>&nbsp;        if (planeswalkerRedirectionEffect.checksEventType(event, game) &amp;&amp; planeswalkerRedirectionEffect.applies(event, null, game)) {
+<i>370</i>&nbsp;            replaceEffects.put(planeswalkerRedirectionEffect, null);
+<i>371</i>&nbsp;        }
+<i>372</i>&nbsp;        if (auraReplacementEffect.checksEventType(event, game) &amp;&amp; auraReplacementEffect.applies(event, null, game)) {
+<i>373</i>&nbsp;            replaceEffects.put(auraReplacementEffect, null);
+<i>374</i>&nbsp;        }
+<i>375</i>&nbsp;        // boolean checkLKI = event.getType().equals(EventType.ZONE_CHANGE) || event.getType().equals(EventType.DESTROYED_PERMANENT);
+<i>376</i>&nbsp;        //get all applicable transient Replacement effects
+<i>377</i>&nbsp;        for (ReplacementEffect effect : replacementEffects) {
+<i>378</i>&nbsp;            if (!effect.checksEventType(event, game)) {
+<i>379</i>&nbsp;                continue;
+<i>380</i>&nbsp;            }
+<i>381</i>&nbsp;            if (event.getAppliedEffects() != null &amp;&amp; event.getAppliedEffects().contains(effect.getId())) {
+<i>382</i>&nbsp;                // Effect already applied to this event, ignore it
+<i>383</i>&nbsp;                // TODO: Handle also gained effect that are connected to different abilities.
+<i>384</i>&nbsp;                continue;
+<i>385</i>&nbsp;            }
+<i>386</i>&nbsp;            HashSet&lt;Ability&gt; abilities = replacementEffects.getAbility(effect.getId());
+<i>387</i>&nbsp;            HashSet&lt;Ability&gt; applicableAbilities = new HashSet&lt;&gt;();
+<i>388</i>&nbsp;            for (Ability ability : abilities) {
+<i>389</i>&nbsp;                // for replacment effects of static abilities do not use LKI to check if to apply
+<i>390</i>&nbsp;                if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
+<i>391</i>&nbsp;                    if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+<i>392</i>&nbsp;                        if (!game.getScopeRelevant()
+<i>393</i>&nbsp;                                || effect.hasSelfScope()
+<i>394</i>&nbsp;                                || !event.getTargetId().equals(ability.getSourceId())) {
+<i>395</i>&nbsp;                            if (effect.applies(event, ability, game)) {
+<i>396</i>&nbsp;                                applicableAbilities.add(ability);
+<i>397</i>&nbsp;                            }
+<i>398</i>&nbsp;                        }
+<i>399</i>&nbsp;                    }
+<i>400</i>&nbsp;                }
+<i>401</i>&nbsp;            }
+<i>402</i>&nbsp;            if (!applicableAbilities.isEmpty()) {
+<i>403</i>&nbsp;                replaceEffects.put(effect, applicableAbilities);
+<i>404</i>&nbsp;            }
+<i>405</i>&nbsp;        }
+<i>406</i>&nbsp;        for (PreventionEffect effect : preventionEffects) {
+<i>407</i>&nbsp;            if (!effect.checksEventType(event, game)) {
+<i>408</i>&nbsp;                continue;
+<i>409</i>&nbsp;            }
+<i>410</i>&nbsp;            if (event.getAppliedEffects() != null &amp;&amp; event.getAppliedEffects().contains(effect.getId())) {
+<i>411</i>&nbsp;                // Effect already applied to this event, ignore it
+<i>412</i>&nbsp;                // TODO: Handle also gained effect that are connected to different abilities.
+<i>413</i>&nbsp;                continue;
+<i>414</i>&nbsp;            }
+<i>415</i>&nbsp;            HashSet&lt;Ability&gt; abilities = preventionEffects.getAbility(effect.getId());
+<i>416</i>&nbsp;            HashSet&lt;Ability&gt; applicableAbilities = new HashSet&lt;&gt;();
+<i>417</i>&nbsp;            for (Ability ability : abilities) {
+<i>418</i>&nbsp;                if (ability.getAbilityType() != AbilityType.STATIC || ability.isInUseableZone(game, null, event)) {
+<i>419</i>&nbsp;                    if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+<i>420</i>&nbsp;                        if (effect.applies(event, ability, game)) {
+<i>421</i>&nbsp;                            applicableAbilities.add(ability);
+<i>422</i>&nbsp;                        }
+<i>423</i>&nbsp;                    }
+<i>424</i>&nbsp;                }
+<i>425</i>&nbsp;            }
+<i>426</i>&nbsp;            if (!applicableAbilities.isEmpty()) {
+<i>427</i>&nbsp;                replaceEffects.put((ReplacementEffect) effect, applicableAbilities);
+<i>428</i>&nbsp;            }
+<i>429</i>&nbsp;        }
+<i>430</i>&nbsp;        return replaceEffects;
+<i>431</i>&nbsp;    }
+<i>432</i>&nbsp;
+<i>433</i>&nbsp;    private boolean checkAbilityStillExists(Ability ability, ContinuousEffect effect, GameEvent event, Game game) {
+<i>434</i>&nbsp;        switch (effect.getDuration()) { // effects with fixed duration don&#39;t need an object with the source ability (e.g. a silence cast with isochronic Scepter has no more a card object
+<i>435</i>&nbsp;            case EndOfCombat:
+<i>436</i>&nbsp;            case EndOfGame:
+<i>437</i>&nbsp;            case EndOfStep:
+<i>438</i>&nbsp;            case EndOfTurn:
+<i>439</i>&nbsp;            case OneUse:
+<i>440</i>&nbsp;            case Custom:  // custom duration means the effect ends itself if needed
+<i>441</i>&nbsp;                return true;
+<i>442</i>&nbsp;        }
+<i>443</i>&nbsp;        if (ability.getSourceId() == null) { // commander replacement effect
+<i>444</i>&nbsp;            return true;
+<i>445</i>&nbsp;        }
+<i>446</i>&nbsp;        MageObject object;
+<i>447</i>&nbsp;        if (event.getType().equals(EventType.ZONE_CHANGE)
+<i>448</i>&nbsp;                &amp;&amp; ((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)
+<i>449</i>&nbsp;                &amp;&amp; event.getTargetId().equals(ability.getSourceId())) {
+<i>450</i>&nbsp;            object = ((ZoneChangeEvent) event).getTarget();
+<i>451</i>&nbsp;        } else {
+<i>452</i>&nbsp;            object = game.getObject(ability.getSourceId());
+<i>453</i>&nbsp;        }
+<i>454</i>&nbsp;        if (object == null) {
+<i>455</i>&nbsp;            return false;
+<i>456</i>&nbsp;        }
+<i>457</i>&nbsp;        boolean exists = true;
+<i>458</i>&nbsp;        if (!object.getAbilities().contains(ability)) {
+<i>459</i>&nbsp;            exists = false;
+<i>460</i>&nbsp;            if (object instanceof PermanentCard) {
+<i>461</i>&nbsp;                PermanentCard permanent = (PermanentCard) object;
+<i>462</i>&nbsp;                if (permanent.isTransformable() &amp;&amp; event.getType() == GameEvent.EventType.TRANSFORMED) {
+<i>463</i>&nbsp;                    exists = permanent.getCard().getAbilities().contains(ability);
+<i>464</i>&nbsp;                }
+<i>465</i>&nbsp;            }
+<i>466</i>&nbsp;        } else if (object instanceof PermanentCard) {
+<i>467</i>&nbsp;            PermanentCard permanent = (PermanentCard) object;
+<i>468</i>&nbsp;            if (permanent.isFaceDown(game) &amp;&amp; !ability.getWorksFaceDown()) {
+<i>469</i>&nbsp;                return false;
+<i>470</i>&nbsp;            }
+<i>471</i>&nbsp;        } else if (object instanceof Spell) {
+<i>472</i>&nbsp;            Spell spell = (Spell) object;
+<i>473</i>&nbsp;            if (spell.isFaceDown(game) &amp;&amp; !ability.getWorksFaceDown()) {
+<i>474</i>&nbsp;                return false;
+<i>475</i>&nbsp;            }
+<i>476</i>&nbsp;        }
+<i>477</i>&nbsp;        return exists;
+<i>478</i>&nbsp;    }
+<i>479</i>&nbsp;
+<i>480</i>&nbsp;    /**
+<i>481</i>&nbsp;     * Filters out cost modification effects that are not active.
+<i>482</i>&nbsp;     *
+<i>483</i>&nbsp;     * @param game
+<i>484</i>&nbsp;     * @return
+<i>485</i>&nbsp;     */
+<i>486</i>&nbsp;    private List&lt;CostModificationEffect&gt; getApplicableCostModificationEffects(Game game) {
+<i>487</i>&nbsp;        List&lt;CostModificationEffect&gt; costEffects = new ArrayList&lt;&gt;();
+<i>488</i>&nbsp;
+<i>489</i>&nbsp;        for (CostModificationEffect effect : costModificationEffects) {
+<i>490</i>&nbsp;            HashSet&lt;Ability&gt; abilities = costModificationEffects.getAbility(effect.getId());
+<i>491</i>&nbsp;            for (Ability ability : abilities) {
+<i>492</i>&nbsp;                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
+<i>493</i>&nbsp;                    if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+<i>494</i>&nbsp;                        costEffects.add(effect);
+<i>495</i>&nbsp;                        break;
+<i>496</i>&nbsp;                    }
+<i>497</i>&nbsp;                }
+<i>498</i>&nbsp;            }
+<i>499</i>&nbsp;        }
+<i>500</i>&nbsp;
+<i>501</i>&nbsp;        return costEffects;
+<i>502</i>&nbsp;    }
+<i>503</i>&nbsp;
+<i>504</i>&nbsp;    /**
+<i>505</i>&nbsp;     * Filters out splice effects that are not active.
+<i>506</i>&nbsp;     *
+<i>507</i>&nbsp;     * @param game
+<i>508</i>&nbsp;     * @return
+<i>509</i>&nbsp;     */
+<i>510</i>&nbsp;    private List&lt;SpliceCardEffect&gt; getApplicableSpliceCardEffects(Game game, UUID playerId) {
+<i>511</i>&nbsp;        List&lt;SpliceCardEffect&gt; spliceEffects = new ArrayList&lt;&gt;();
+<i>512</i>&nbsp;
+<i>513</i>&nbsp;        for (SpliceCardEffect effect : spliceCardEffects) {
+<i>514</i>&nbsp;            HashSet&lt;Ability&gt; abilities = spliceCardEffects.getAbility(effect.getId());
+<i>515</i>&nbsp;            for (Ability ability : abilities) {
+<i>516</i>&nbsp;                if (ability.getControllerId().equals(playerId) &amp;&amp; (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null))) {
+<i>517</i>&nbsp;                    if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+<i>518</i>&nbsp;                        spliceEffects.add(effect);
+<i>519</i>&nbsp;                        break;
+<i>520</i>&nbsp;                    }
+<i>521</i>&nbsp;                }
+<i>522</i>&nbsp;            }
+<i>523</i>&nbsp;        }
+<i>524</i>&nbsp;
+<i>525</i>&nbsp;        return spliceEffects;
+<i>526</i>&nbsp;    }
+<i>527</i>&nbsp;
+<i>528</i>&nbsp;    public boolean asThough(UUID objectId, AsThoughEffectType type, UUID controllerId, Game game) {
+<i>529</i>&nbsp;        return asThough(objectId, type, null, controllerId, game);
+<i>530</i>&nbsp;    }
+<i>531</i>&nbsp;
+<i>532</i>&nbsp;    public boolean asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+<i>533</i>&nbsp;        List&lt;AsThoughEffect&gt; asThoughEffectsList = getApplicableAsThoughEffects(type, game);
+<i>534</i>&nbsp;        for (AsThoughEffect effect : asThoughEffectsList) {
+<i>535</i>&nbsp;            HashSet&lt;Ability&gt; abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
+<i>536</i>&nbsp;            for (Ability ability : abilities) {
+<i>537</i>&nbsp;                if (affectedAbility == null) {
+<i>538</i>&nbsp;                    if (effect.applies(objectId, ability, controllerId, game)) {
+<i>539</i>&nbsp;                        return true;
+<i>540</i>&nbsp;                    }
+<i>541</i>&nbsp;                } else if (effect.applies(objectId, affectedAbility, ability, game)) {
+<i>542</i>&nbsp;                    return true;
+<i>543</i>&nbsp;                }
+<i>544</i>&nbsp;            }
+<i>545</i>&nbsp;        }
+<i>546</i>&nbsp;        return false;
+<i>547</i>&nbsp;
+<i>548</i>&nbsp;    }
+<i>549</i>&nbsp;
+<i>550</i>&nbsp;    public ManaType asThoughMana(ManaType manaType, ManaPoolItem mana, UUID objectId, Ability affectedAbility, UUID controllerId, Game game) {
+<i>551</i>&nbsp;        // First check existing only effects
+<i>552</i>&nbsp;        List&lt;AsThoughEffect&gt; asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_ONLY_MANA, game);
+<i>553</i>&nbsp;        for (AsThoughEffect effect : asThoughEffectsList) {
+<i>554</i>&nbsp;            HashSet&lt;Ability&gt; abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_ONLY_MANA).getAbility(effect.getId());
+<i>555</i>&nbsp;            for (Ability ability : abilities) {
+<i>556</i>&nbsp;                if ((affectedAbility == null &amp;&amp; effect.applies(objectId, ability, controllerId, game))
+<i>557</i>&nbsp;                        || effect.applies(objectId, affectedAbility, ability, game)) {
+<i>558</i>&nbsp;                    if (((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game) == null) {
+<i>559</i>&nbsp;                        return null;
+<i>560</i>&nbsp;                    }
+<i>561</i>&nbsp;                }
+<i>562</i>&nbsp;            }
+<i>563</i>&nbsp;        }
+<i>564</i>&nbsp;        // then check effects that allow to use other mana types to pay the current mana type to pay
+<i>565</i>&nbsp;        asThoughEffectsList = getApplicableAsThoughEffects(AsThoughEffectType.SPEND_OTHER_MANA, game);
+<i>566</i>&nbsp;        for (AsThoughEffect effect : asThoughEffectsList) {
+<i>567</i>&nbsp;            HashSet&lt;Ability&gt; abilities = asThoughEffectsMap.get(AsThoughEffectType.SPEND_OTHER_MANA).getAbility(effect.getId());
+<i>568</i>&nbsp;            for (Ability ability : abilities) {
+<i>569</i>&nbsp;                if ((affectedAbility == null &amp;&amp; effect.applies(objectId, ability, controllerId, game))
+<i>570</i>&nbsp;                        || effect.applies(objectId, affectedAbility, ability, game)) {
+<i>571</i>&nbsp;                    ManaType usableManaType = ((AsThoughManaEffect) effect).getAsThoughManaType(manaType, mana, controllerId, ability, game);
+<i>572</i>&nbsp;                    if (usableManaType != null) {
+<i>573</i>&nbsp;                        return usableManaType;
+<i>574</i>&nbsp;                    }
+<i>575</i>&nbsp;                }
+<i>576</i>&nbsp;            }
+<i>577</i>&nbsp;        }
+<i>578</i>&nbsp;        return manaType;
+<i>579</i>&nbsp;    }
+<i>580</i>&nbsp;
+<i>581</i>&nbsp;    /**
+<i>582</i>&nbsp;     * Filters out asThough effects that are not active.
+<i>583</i>&nbsp;     *
+<i>584</i>&nbsp;     * @param AsThoughEffectType type
+<i>585</i>&nbsp;     * @param game
+<i>586</i>&nbsp;     * @return
+<i>587</i>&nbsp;     */
+<i>588</i>&nbsp;    private List&lt;AsThoughEffect&gt; getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
+<i>589</i>&nbsp;        List&lt;AsThoughEffect&gt; asThoughEffectsList = new ArrayList&lt;&gt;();
+<i>590</i>&nbsp;        if (asThoughEffectsMap.containsKey(type)) {
+<i>591</i>&nbsp;            for (AsThoughEffect effect : asThoughEffectsMap.get(type)) {
+<i>592</i>&nbsp;                HashSet&lt;Ability&gt; abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
+<i>593</i>&nbsp;                for (Ability ability : abilities) {
+<i>594</i>&nbsp;                    if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, null)) {
+<i>595</i>&nbsp;                        if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+<i>596</i>&nbsp;                            asThoughEffectsList.add(effect);
+<i>597</i>&nbsp;                            break;
+<i>598</i>&nbsp;                        }
+<i>599</i>&nbsp;                    }
+<i>600</i>&nbsp;                }
+<i>601</i>&nbsp;            }
+<i>602</i>&nbsp;        }
+<i>603</i>&nbsp;        return asThoughEffectsList;
+<i>604</i>&nbsp;    }
+<i>605</i>&nbsp;
+<i>606</i>&nbsp;    /**
+<i>607</i>&nbsp;     * 601.2e The player determines the total cost of the spell. Usually this is
+<i>608</i>&nbsp;     * just the mana cost. Some spells have additional or alternative costs.
+<i>609</i>&nbsp;     * Some effects may increase or reduce the cost to pay, or may provide other
+<i>610</i>&nbsp;     * alternative costs. Costs may include paying mana, tapping permanents,
+<i>611</i>&nbsp;     * sacrificing permanents, discarding cards, and so on. The total cost is
+<i>612</i>&nbsp;     * the mana cost or alternative cost (as determined in rule 601.2b), plus
+<i>613</i>&nbsp;     * all additional costs and cost increases, and minus all cost reductions.
+<i>614</i>&nbsp;     * If the mana component of the total cost is reduced to nothing by cost
+<i>615</i>&nbsp;     * reduction effects, it is considered to be {0}. It can’t be reduced to
+<i>616</i>&nbsp;     * less than {0}. Once the total cost is determined, any effects that
+<i>617</i>&nbsp;     * directly affect the total cost are applied. Then the resulting total cost
+<i>618</i>&nbsp;     * becomes “locked in.” If effects would change the total cost after this
+<i>619</i>&nbsp;     * time, they have no effect.
+<i>620</i>&nbsp;     */
+<i>621</i>&nbsp;    /**
+<i>622</i>&nbsp;     * Inspects all {@link Permanent permanent&#39;s} {@link Ability abilities} on
+<i>623</i>&nbsp;     * the battlefield for
+<i>624</i>&nbsp;     * {@link CostModificationEffect cost modification effects} and applies them
+<i>625</i>&nbsp;     * if necessary.
+<i>626</i>&nbsp;     *
+<i>627</i>&nbsp;     * @param abilityToModify
+<i>628</i>&nbsp;     * @param game
+<i>629</i>&nbsp;     */
+<i>630</i>&nbsp;    public void costModification(Ability abilityToModify, Game game) {
+<i>631</i>&nbsp;        List&lt;CostModificationEffect&gt; costEffects = getApplicableCostModificationEffects(game);
+<i>632</i>&nbsp;
+<i>633</i>&nbsp;        for (CostModificationEffect effect : costEffects) {
+<i>634</i>&nbsp;            if (effect.getModificationType() == CostModificationType.INCREASE_COST) {
+<i>635</i>&nbsp;                HashSet&lt;Ability&gt; abilities = costModificationEffects.getAbility(effect.getId());
+<i>636</i>&nbsp;                for (Ability ability : abilities) {
+<i>637</i>&nbsp;                    if (effect.applies(abilityToModify, ability, game)) {
+<i>638</i>&nbsp;                        effect.apply(game, ability, abilityToModify);
+<i>639</i>&nbsp;                    }
+<i>640</i>&nbsp;                }
+<i>641</i>&nbsp;            }
+<i>642</i>&nbsp;        }
+<i>643</i>&nbsp;
+<i>644</i>&nbsp;        for (CostModificationEffect effect : costEffects) {
+<i>645</i>&nbsp;            if (effect.getModificationType() == CostModificationType.REDUCE_COST) {
+<i>646</i>&nbsp;                HashSet&lt;Ability&gt; abilities = costModificationEffects.getAbility(effect.getId());
+<i>647</i>&nbsp;                for (Ability ability : abilities) {
+<i>648</i>&nbsp;                    if (effect.applies(abilityToModify, ability, game)) {
+<i>649</i>&nbsp;                        effect.apply(game, ability, abilityToModify);
+<i>650</i>&nbsp;                    }
+<i>651</i>&nbsp;                }
+<i>652</i>&nbsp;            }
+<i>653</i>&nbsp;        }
+<i>654</i>&nbsp;
+<i>655</i>&nbsp;        for (CostModificationEffect effect : costEffects) {
+<i>656</i>&nbsp;            if (effect.getModificationType() == CostModificationType.SET_COST) {
+<i>657</i>&nbsp;                HashSet&lt;Ability&gt; abilities = costModificationEffects.getAbility(effect.getId());
+<i>658</i>&nbsp;                for (Ability ability : abilities) {
+<i>659</i>&nbsp;                    if (effect.applies(abilityToModify, ability, game)) {
+<i>660</i>&nbsp;                        effect.apply(game, ability, abilityToModify);
+<i>661</i>&nbsp;                    }
+<i>662</i>&nbsp;                }
+<i>663</i>&nbsp;            }
+<i>664</i>&nbsp;        }
+<i>665</i>&nbsp;    }
+<i>666</i>&nbsp;
+<i>667</i>&nbsp;    /**
+<i>668</i>&nbsp;     * Checks all available splice effects to be applied.
+<i>669</i>&nbsp;     *
+<i>670</i>&nbsp;     * @param abilityToModify
+<i>671</i>&nbsp;     * @param game
+<i>672</i>&nbsp;     */
+<i>673</i>&nbsp;    public void applySpliceEffects(Ability abilityToModify, Game game) {
+<i>674</i>&nbsp;        if (((SpellAbility) abilityToModify).getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
+<i>675</i>&nbsp;            // on a spliced ability of a spell can&#39;t be spliced again
+<i>676</i>&nbsp;            return;
+<i>677</i>&nbsp;        }
+<i>678</i>&nbsp;        List&lt;SpliceCardEffect&gt; spliceEffects = getApplicableSpliceCardEffects(game, abilityToModify.getControllerId());
+<i>679</i>&nbsp;        // get the applyable splice abilities
+<i>680</i>&nbsp;        List&lt;SpliceOntoArcaneAbility&gt; spliceAbilities = new ArrayList&lt;&gt;();
+<i>681</i>&nbsp;        for (SpliceCardEffect effect : spliceEffects) {
+<i>682</i>&nbsp;            HashSet&lt;Ability&gt; abilities = spliceCardEffects.getAbility(effect.getId());
+<i>683</i>&nbsp;            for (Ability ability : abilities) {
+<i>684</i>&nbsp;                if (effect.applies(abilityToModify, ability, game)) {
+<i>685</i>&nbsp;                    spliceAbilities.add((SpliceOntoArcaneAbility) ability);
+<i>686</i>&nbsp;                }
+<i>687</i>&nbsp;            }
+<i>688</i>&nbsp;        }
+<i>689</i>&nbsp;        // check if player wants to use splice
+<i>690</i>&nbsp;
+<i>691</i>&nbsp;        if (spliceAbilities.size() &gt; 0) {
+<i>692</i>&nbsp;            Player controller = game.getPlayer(abilityToModify.getControllerId());
+<i>693</i>&nbsp;            if (controller.chooseUse(Outcome.Benefit, &quot;Splice a card?&quot;, abilityToModify, game)) {
+<i>694</i>&nbsp;                Cards cardsToReveal = new CardsImpl();
+<i>695</i>&nbsp;                do {
+<i>696</i>&nbsp;                    FilterCard filter = new FilterCard(&quot;a card to splice&quot;);
+<i>697</i>&nbsp;                    ArrayList&lt;Predicate&lt;MageObject&gt;&gt; idPredicates = new ArrayList&lt;&gt;();
+<i>698</i>&nbsp;                    for (SpliceOntoArcaneAbility ability : spliceAbilities) {
+<i>699</i>&nbsp;                        idPredicates.add(new CardIdPredicate((ability.getSourceId())));
+<i>700</i>&nbsp;                    }
+<i>701</i>&nbsp;                    filter.add(Predicates.or(idPredicates));
+<i>702</i>&nbsp;                    TargetCardInHand target = new TargetCardInHand(filter);
+<i>703</i>&nbsp;                    controller.chooseTarget(Outcome.Benefit, target, abilityToModify, game);
+<i>704</i>&nbsp;                    UUID cardId = target.getFirstTarget();
+<i>705</i>&nbsp;                    if (cardId != null) {
+<i>706</i>&nbsp;                        SpliceOntoArcaneAbility selectedAbility = null;
+<i>707</i>&nbsp;                        for (SpliceOntoArcaneAbility ability : spliceAbilities) {
+<i>708</i>&nbsp;                            if (ability.getSourceId().equals(cardId)) {
+<i>709</i>&nbsp;                                selectedAbility = ability;
+<i>710</i>&nbsp;                                break;
+<i>711</i>&nbsp;                            }
+<i>712</i>&nbsp;                        }
+<i>713</i>&nbsp;                        if (selectedAbility != null) {
+<i>714</i>&nbsp;                            SpliceCardEffect spliceEffect = (SpliceCardEffect) selectedAbility.getEffects().get(0);
+<i>715</i>&nbsp;                            spliceEffect.apply(game, selectedAbility, abilityToModify);
+<i>716</i>&nbsp;                            cardsToReveal.add(game.getCard(cardId));
+<i>717</i>&nbsp;                            spliceAbilities.remove(selectedAbility);
+<i>718</i>&nbsp;                        }
+<i>719</i>&nbsp;                    }
+<i>720</i>&nbsp;                } while (!spliceAbilities.isEmpty() &amp;&amp; controller.chooseUse(Outcome.Benefit, &quot;Splice another card?&quot;, abilityToModify, game));
+<i>721</i>&nbsp;                controller.revealCards(&quot;Spliced cards&quot;, cardsToReveal, game);
+<i>722</i>&nbsp;            }
+<i>723</i>&nbsp;        }
+<i>724</i>&nbsp;    }
+<i>725</i>&nbsp;
+<i>726</i>&nbsp;    /**
+<i>727</i>&nbsp;     * Checks if an event won&#39;t happen because of an rule modifying effect
+<i>728</i>&nbsp;     *
+<i>729</i>&nbsp;     * @param event
+<i>730</i>&nbsp;     * @param targetAbility ability the event is attached to. can be null.
+<i>731</i>&nbsp;     * @param game
+<i>732</i>&nbsp;     * @param checkPlayableMode true if the event does not really happen but
+<i>733</i>&nbsp;     * it&#39;s checked if the event would be replaced
+<i>734</i>&nbsp;     * @return
+<i>735</i>&nbsp;     */
+<i>736</i>&nbsp;    public boolean preventedByRuleModification(GameEvent event, Ability targetAbility, Game game, boolean checkPlayableMode) {
+<i>737</i>&nbsp;        for (ContinuousRuleModifyingEffect effect : continuousRuleModifyingEffects) {
+<i>738</i>&nbsp;            if (!effect.checksEventType(event, game)) {
+<i>739</i>&nbsp;                continue;
+<i>740</i>&nbsp;            }
+<i>741</i>&nbsp;            for (Ability sourceAbility : continuousRuleModifyingEffects.getAbility(effect.getId())) {
+<i>742</i>&nbsp;                if (!(sourceAbility instanceof StaticAbility) || sourceAbility.isInUseableZone(game, null, event)) {
+<i>743</i>&nbsp;                    if (checkAbilityStillExists(sourceAbility, effect, event, game)) {
+<i>744</i>&nbsp;                        if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+<i>745</i>&nbsp;                            effect.setValue(&quot;targetAbility&quot;, targetAbility);
+<i>746</i>&nbsp;                            if (effect.applies(event, sourceAbility, game)) {
+<i>747</i>&nbsp;                                if (targetAbility instanceof ActivatedAbility &amp;&amp; ((ActivatedAbility) targetAbility).isCheckPlayableMode()) {
+<i>748</i>&nbsp;                                    checkPlayableMode = true;
+<i>749</i>&nbsp;                                }
+<i>750</i>&nbsp;                                if (!checkPlayableMode) {
+<i>751</i>&nbsp;                                    String message = effect.getInfoMessage(sourceAbility, event, game);
+<i>752</i>&nbsp;                                    if (message != null &amp;&amp; !message.isEmpty()) {
+<i>753</i>&nbsp;                                        if (effect.sendMessageToUser()) {
+<i>754</i>&nbsp;                                            Player player = game.getPlayer(event.getPlayerId());
+<i>755</i>&nbsp;                                            if (player != null &amp;&amp; !game.isSimulation()) {
+<i>756</i>&nbsp;                                                game.informPlayer(player, message);
+<i>757</i>&nbsp;                                            }
+<i>758</i>&nbsp;                                        }
+<i>759</i>&nbsp;                                        if (effect.sendMessageToGameLog() &amp;&amp; !game.isSimulation()) {
+<i>760</i>&nbsp;                                            game.informPlayers(message);
+<i>761</i>&nbsp;                                        }
+<i>762</i>&nbsp;                                    }
+<i>763</i>&nbsp;                                }
+<i>764</i>&nbsp;                                return true;
+<i>765</i>&nbsp;                            }
+<i>766</i>&nbsp;                        }
+<i>767</i>&nbsp;                    }
+<i>768</i>&nbsp;                }
+<i>769</i>&nbsp;            }
+<i>770</i>&nbsp;        }
+<i>771</i>&nbsp;        return false;
+<i>772</i>&nbsp;    }
+<i>773</i>&nbsp;
+<i>774</i>&nbsp;    public boolean replaceEvent(GameEvent event, Game game) {
+<i>775</i>&nbsp;        boolean caught = false;
+<i>776</i>&nbsp;        HashMap&lt;UUID, HashSet&lt;UUID&gt;&gt; consumed = new HashMap&lt;&gt;();
+<i>777</i>&nbsp;        do {
+<i>778</i>&nbsp;            HashMap&lt;ReplacementEffect, HashSet&lt;Ability&gt;&gt; rEffects = getApplicableReplacementEffects(event, game);
+<i>779</i>&nbsp;            // Remove all consumed effects (ability dependant)
+<i>780</i>&nbsp;            for (Iterator&lt;ReplacementEffect&gt; it1 = rEffects.keySet().iterator(); it1.hasNext();) {
+<i>781</i>&nbsp;                ReplacementEffect entry = it1.next();
+<i>782</i>&nbsp;                if (consumed.containsKey(entry.getId())) {
+<i>783</i>&nbsp;                    HashSet&lt;UUID&gt; consumedAbilitiesIds = consumed.get(entry.getId());
+<i>784</i>&nbsp;                    if (rEffects.get(entry) == null || consumedAbilitiesIds.size() == rEffects.get(entry).size()) {
+<i>785</i>&nbsp;                        it1.remove();
+<i>786</i>&nbsp;                    } else {
+<i>787</i>&nbsp;                        Iterator it = rEffects.get(entry).iterator();
+<i>788</i>&nbsp;                        while (it.hasNext()) {
+<i>789</i>&nbsp;                            Ability ability = (Ability) it.next();
+<i>790</i>&nbsp;                            if (consumedAbilitiesIds.contains(ability.getId())) {
+<i>791</i>&nbsp;                                it.remove();
+<i>792</i>&nbsp;                            }
+<i>793</i>&nbsp;                        }
+<i>794</i>&nbsp;                    }
+<i>795</i>&nbsp;                }
+<i>796</i>&nbsp;            }
+<i>797</i>&nbsp;            // no effects left, quit
+<i>798</i>&nbsp;            if (rEffects.isEmpty()) {
+<i>799</i>&nbsp;                break;
+<i>800</i>&nbsp;            }
+<i>801</i>&nbsp;            int index;
+<i>802</i>&nbsp;            boolean onlyOne = false;
+<i>803</i>&nbsp;            if (rEffects.size() == 1) {
+<i>804</i>&nbsp;                ReplacementEffect effect = rEffects.keySet().iterator().next();
+<i>805</i>&nbsp;                HashSet&lt;Ability&gt; abilities;
+<i>806</i>&nbsp;                if (effect.getEffectType().equals(EffectType.REPLACEMENT)) {
+<i>807</i>&nbsp;                    abilities = replacementEffects.getAbility(effect.getId());
+<i>808</i>&nbsp;                } else {
+<i>809</i>&nbsp;                    abilities = preventionEffects.getAbility(effect.getId());
+<i>810</i>&nbsp;                }
+<i>811</i>&nbsp;                if (abilities == null || abilities.size() == 1) {
+<i>812</i>&nbsp;                    onlyOne = true;
+<i>813</i>&nbsp;                }
+<i>814</i>&nbsp;            }
+<i>815</i>&nbsp;            if (onlyOne) {
+<i>816</i>&nbsp;                index = 0;
+<i>817</i>&nbsp;            } else {
+<i>818</i>&nbsp;                //20100716 - 616.1c
+<i>819</i>&nbsp;                Player player = game.getPlayer(event.getPlayerId());
+<i>820</i>&nbsp;                index = player.chooseReplacementEffect(getReplacementEffectsTexts(rEffects, game), game);
+<i>821</i>&nbsp;            }
+<i>822</i>&nbsp;            // get the selected effect
+<i>823</i>&nbsp;            int checked = 0;
+<i>824</i>&nbsp;            ReplacementEffect rEffect = null;
+<i>825</i>&nbsp;            Ability rAbility = null;
+<i>826</i>&nbsp;            for (Map.Entry&lt;ReplacementEffect, HashSet&lt;Ability&gt;&gt; entry : rEffects.entrySet()) {
+<i>827</i>&nbsp;                if (entry.getValue() == null) {
+<i>828</i>&nbsp;                    if (checked == index) {
+<i>829</i>&nbsp;                        rEffect = entry.getKey();
+<i>830</i>&nbsp;                        break;
+<i>831</i>&nbsp;                    } else {
+<i>832</i>&nbsp;                        checked++;
+<i>833</i>&nbsp;                    }
+<i>834</i>&nbsp;                } else {
+<i>835</i>&nbsp;                    HashSet&lt;Ability&gt; abilities = entry.getValue();
+<i>836</i>&nbsp;                    int size = abilities.size();
+<i>837</i>&nbsp;                    if (index &gt; (checked + size - 1)) {
+<i>838</i>&nbsp;                        checked += size;
+<i>839</i>&nbsp;                    } else {
+<i>840</i>&nbsp;                        rEffect = entry.getKey();
+<i>841</i>&nbsp;                        Iterator it = abilities.iterator();
+<i>842</i>&nbsp;                        while (it.hasNext() &amp;&amp; rAbility == null) {
+<i>843</i>&nbsp;                            if (checked == index) {
+<i>844</i>&nbsp;                                rAbility = (Ability) it.next();
+<i>845</i>&nbsp;                            } else {
+<i>846</i>&nbsp;                                it.next();
+<i>847</i>&nbsp;                                checked++;
+<i>848</i>&nbsp;                            }
+<i>849</i>&nbsp;                        }
+<i>850</i>&nbsp;                        break;
+<i>851</i>&nbsp;                    }
+<i>852</i>&nbsp;                }
+<i>853</i>&nbsp;            }
+<i>854</i>&nbsp;
+<i>855</i>&nbsp;            if (rEffect != null) {
+<i>856</i>&nbsp;                event.getAppliedEffects().add(rEffect.getId());
+<i>857</i>&nbsp;                caught = rEffect.replaceEvent(event, rAbility, game);
+<i>858</i>&nbsp;            }
+<i>859</i>&nbsp;            if (caught) { // Event was completely replaced -&gt; stop applying effects to it
+<i>860</i>&nbsp;                break;
+<i>861</i>&nbsp;            }
+<i>862</i>&nbsp;
+<i>863</i>&nbsp;            // add the applied effect to the consumed effects
+<i>864</i>&nbsp;            if (rEffect != null) {
+<i>865</i>&nbsp;                if (consumed.containsKey(rEffect.getId())) {
+<i>866</i>&nbsp;                    HashSet&lt;UUID&gt; set = consumed.get(rEffect.getId());
+<i>867</i>&nbsp;                    if (rAbility != null) {
+<i>868</i>&nbsp;                        if (!set.contains(rAbility.getId())) {
+<i>869</i>&nbsp;                            set.add(rAbility.getId());
+<i>870</i>&nbsp;                        }
+<i>871</i>&nbsp;                    }
+<i>872</i>&nbsp;                } else {
+<i>873</i>&nbsp;                    HashSet&lt;UUID&gt; set = new HashSet&lt;&gt;();
+<i>874</i>&nbsp;                    if (rAbility != null) { // in case of AuraReplacementEffect or PlaneswalkerReplacementEffect there is no Ability
+<i>875</i>&nbsp;                        set.add(rAbility.getId());
+<i>876</i>&nbsp;                    }
+<i>877</i>&nbsp;                    consumed.put(rEffect.getId(), set);
+<i>878</i>&nbsp;                }
+<i>879</i>&nbsp;            }
+<i>880</i>&nbsp;            // Must be called here for some effects to be able to work correctly
+<i>881</i>&nbsp;            // For example: Vesuva copying a Dark Depth (VesuvaTest:testDarkDepth)
+<i>882</i>&nbsp;            // This call should be removed if possible as replacement effects of EntersTheBattlefield events
+<i>883</i>&nbsp;            // do no longer work correctly because the entering permanents are not yet on the battlefield (before they were).
+<i>884</i>&nbsp;            // game.applyEffects();
+<i>885</i>&nbsp;        } while (true);
+<i>886</i>&nbsp;        return caught;
+<i>887</i>&nbsp;    }
+<i>888</i>&nbsp;
+<i>889</i>&nbsp;    //20091005 - 613
+<i>890</i>&nbsp;    public void apply(Game game) {
+<i>891</i>&nbsp;        removeInactiveEffects(game);
+<i>892</i>&nbsp;        List&lt;ContinuousEffect&gt; activeLayerEffects = getLayeredEffects(game);
+<i>893</i>&nbsp;
+<i>894</i>&nbsp;        List&lt;ContinuousEffect&gt; layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
+<i>895</i>&nbsp;        for (ContinuousEffect effect : layer) {
+<i>896</i>&nbsp;            HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>897</i>&nbsp;            for (Ability ability : abilities) {
+<i>898</i>&nbsp;                effect.apply(Layer.CopyEffects_1, SubLayer.NA, ability, game);
+<i>899</i>&nbsp;            }
+<i>900</i>&nbsp;        }
+<i>901</i>&nbsp;        //Reload layerEffect if copy effects were applied
+<i>902</i>&nbsp;        if (layer.size() &gt; 0) {
+<i>903</i>&nbsp;            activeLayerEffects = getLayeredEffects(game);
+<i>904</i>&nbsp;        }
+<i>905</i>&nbsp;
+<i>906</i>&nbsp;        layer = filterLayeredEffects(activeLayerEffects, Layer.ControlChangingEffects_2);
+<i>907</i>&nbsp;        // apply control changing effects multiple times if it&#39;s needed
+<i>908</i>&nbsp;        // for cases when control over permanents with change control abilities is changed
+<i>909</i>&nbsp;        // e.g. Mind Control is controlled by Steal Enchantment
+<i>910</i>&nbsp;        while (true) {
+<i>911</i>&nbsp;            for (ContinuousEffect effect : layer) {
+<i>912</i>&nbsp;                HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>913</i>&nbsp;                for (Ability ability : abilities) {
+<i>914</i>&nbsp;                    effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, ability, game);
+<i>915</i>&nbsp;                }
+<i>916</i>&nbsp;            }
+<i>917</i>&nbsp;            // if control over all permanent has not changed, we can no longer reapply control changing effects
+<i>918</i>&nbsp;            if (!game.getBattlefield().fireControlChangeEvents(game)) {
+<i>919</i>&nbsp;                break;
+<i>920</i>&nbsp;            }
+<i>921</i>&nbsp;            // reset control before reapplying control changing effects
+<i>922</i>&nbsp;            game.getBattlefield().resetPermanentsControl();
+<i>923</i>&nbsp;        }
+<i>924</i>&nbsp;
+<i>925</i>&nbsp;        applyLayer(activeLayerEffects, Layer.TextChangingEffects_3, game);
+<i>926</i>&nbsp;        applyLayer(activeLayerEffects, Layer.TypeChangingEffects_4, game);
+<i>927</i>&nbsp;        applyLayer(activeLayerEffects, Layer.ColorChangingEffects_5, game);
+<i>928</i>&nbsp;
+<i>929</i>&nbsp;        Map&lt;ContinuousEffect, List&lt;Ability&gt;&gt; appliedEffectAbilities = new HashMap&lt;&gt;();
+<i>930</i>&nbsp;        boolean done = false;
+<i>931</i>&nbsp;        Map&lt;ContinuousEffect, Set&lt;UUID&gt;&gt; waitingEffects = new LinkedHashMap&lt;&gt;();
+<i>932</i>&nbsp;        Set&lt;UUID&gt; appliedEffects = new HashSet&lt;&gt;();
+<i>933</i>&nbsp;        while (!done) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
+<i>934</i>&nbsp;            done = true;
+<i>935</i>&nbsp;            layer = filterLayeredEffects(activeLayerEffects, Layer.AbilityAddingRemovingEffects_6);
+<i>936</i>&nbsp;            for (ContinuousEffect effect : layer) {
+<i>937</i>&nbsp;                if (activeLayerEffects.contains(effect) &amp;&amp; !appliedEffects.contains(effect.getId())) { // Effect does still exist and was not applied yet
+<i>938</i>&nbsp;                    Set&lt;UUID&gt; dependentTo = effect.isDependentTo(layer);
+<i>939</i>&nbsp;                    if (dependentTo != null &amp;&amp; !appliedEffects.containsAll(dependentTo)) {
+<i>940</i>&nbsp;                        waitingEffects.put(effect, dependentTo);
+<i>941</i>&nbsp;                        continue;
+<i>942</i>&nbsp;                    }
+<i>943</i>&nbsp;                    List&lt;Ability&gt; appliedAbilities = appliedEffectAbilities.get(effect);
+<i>944</i>&nbsp;                    HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>945</i>&nbsp;                    for (Ability ability : abilities) {
+<i>946</i>&nbsp;                        if (appliedAbilities == null || !appliedAbilities.contains(ability)) {
+<i>947</i>&nbsp;                            if (appliedAbilities == null) {
+<i>948</i>&nbsp;                                appliedAbilities = new ArrayList&lt;&gt;();
+<i>949</i>&nbsp;                                appliedEffectAbilities.put(effect, appliedAbilities);
+<i>950</i>&nbsp;                            }
+<i>951</i>&nbsp;                            appliedAbilities.add(ability);
+<i>952</i>&nbsp;                            effect.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability, game);
+<i>953</i>&nbsp;                            done = false;
+<i>954</i>&nbsp;                            // list must be updated after each applied effect (eg. if &quot;Turn to Frog&quot; removes abilities)
+<i>955</i>&nbsp;                            activeLayerEffects = getLayeredEffects(game);
+<i>956</i>&nbsp;                        }
+<i>957</i>&nbsp;                    }
+<i>958</i>&nbsp;                    appliedEffects.add(effect.getId());
+<i>959</i>&nbsp;
+<i>960</i>&nbsp;                    if (!waitingEffects.isEmpty()) {
+<i>961</i>&nbsp;                        // check if waiting effects can be applied now
+<i>962</i>&nbsp;                        for (Iterator&lt;Map.Entry&lt;ContinuousEffect, Set&lt;UUID&gt;&gt;&gt; iterator = waitingEffects.entrySet().iterator(); iterator.hasNext();) {
+<i>963</i>&nbsp;                            Map.Entry&lt;ContinuousEffect, Set&lt;UUID&gt;&gt; entry = iterator.next();
+<i>964</i>&nbsp;                            if (appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
+<i>965</i>&nbsp;                                appliedAbilities = appliedEffectAbilities.get(entry.getKey());
+<i>966</i>&nbsp;                                abilities = layeredEffects.getAbility(entry.getKey().getId());
+<i>967</i>&nbsp;                                for (Ability ability : abilities) {
+<i>968</i>&nbsp;                                    if (appliedAbilities == null || !appliedAbilities.contains(ability)) {
+<i>969</i>&nbsp;                                        if (appliedAbilities == null) {
+<i>970</i>&nbsp;                                            appliedAbilities = new ArrayList&lt;&gt;();
+<i>971</i>&nbsp;                                            appliedEffectAbilities.put(entry.getKey(), appliedAbilities);
+<i>972</i>&nbsp;                                        }
+<i>973</i>&nbsp;                                        appliedAbilities.add(ability);
+<i>974</i>&nbsp;                                        entry.getKey().apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, ability, game);
+<i>975</i>&nbsp;                                        done = false;
+<i>976</i>&nbsp;                                        // list must be updated after each applied effect (eg. if &quot;Turn to Frog&quot; removes abilities)
+<i>977</i>&nbsp;                                        activeLayerEffects = getLayeredEffects(game);
+<i>978</i>&nbsp;                                    }
+<i>979</i>&nbsp;                                }
+<i>980</i>&nbsp;                                appliedEffects.add(entry.getKey().getId());
+<i>981</i>&nbsp;                                iterator.remove();
+<i>982</i>&nbsp;                            }
+<i>983</i>&nbsp;                        }
+<i>984</i>&nbsp;                    }
+<i>985</i>&nbsp;                }
+<i>986</i>&nbsp;            }
+<i>987</i>&nbsp;        }
+<i>988</i>&nbsp;
+<i>989</i>&nbsp;        layer = filterLayeredEffects(activeLayerEffects, Layer.PTChangingEffects_7);
+<i>990</i>&nbsp;        for (ContinuousEffect effect : layer) {
+<i>991</i>&nbsp;            HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>992</i>&nbsp;            for (Ability ability : abilities) {
+<i>993</i>&nbsp;                effect.apply(Layer.PTChangingEffects_7, SubLayer.CharacteristicDefining_7a, ability, game);
+<i>994</i>&nbsp;            }
+<i>995</i>&nbsp;        }
+<i>996</i>&nbsp;        for (ContinuousEffect effect : layer) {
+<i>997</i>&nbsp;            HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>998</i>&nbsp;            for (Ability ability : abilities) {
+<i>999</i>&nbsp;                effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, ability, game);
+<i>1000</i>&nbsp;            }
+<i>1001</i>&nbsp;        }
+<i>1002</i>&nbsp;        for (ContinuousEffect effect : layer) {
+<i>1003</i>&nbsp;            HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>1004</i>&nbsp;            for (Ability ability : abilities) {
+<i>1005</i>&nbsp;                effect.apply(Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, ability, game);
+<i>1006</i>&nbsp;            }
+<i>1007</i>&nbsp;        }
+<i>1008</i>&nbsp;
+<i>1009</i>&nbsp;        applyCounters.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
+<i>1010</i>&nbsp;
+<i>1011</i>&nbsp;        for (ContinuousEffect effect : layer) {
+<i>1012</i>&nbsp;            HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>1013</i>&nbsp;            for (Ability ability : abilities) {
+<i>1014</i>&nbsp;                effect.apply(Layer.PTChangingEffects_7, SubLayer.SwitchPT_e, ability, game);
+<i>1015</i>&nbsp;            }
+<i>1016</i>&nbsp;        }
+<i>1017</i>&nbsp;        layer = filterLayeredEffects(activeLayerEffects, Layer.PlayerEffects);
+<i>1018</i>&nbsp;        for (ContinuousEffect effect : layer) {
+<i>1019</i>&nbsp;            HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>1020</i>&nbsp;            for (Ability ability : abilities) {
+<i>1021</i>&nbsp;                effect.apply(Layer.PlayerEffects, SubLayer.NA, ability, game);
+<i>1022</i>&nbsp;            }
+<i>1023</i>&nbsp;        }
+<i>1024</i>&nbsp;        layer = filterLayeredEffects(activeLayerEffects, Layer.RulesEffects);
+<i>1025</i>&nbsp;        for (ContinuousEffect effect : layer) {
+<i>1026</i>&nbsp;            HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>1027</i>&nbsp;            for (Ability ability : abilities) {
+<i>1028</i>&nbsp;                effect.apply(Layer.RulesEffects, SubLayer.NA, ability, game);
+<i>1029</i>&nbsp;            }
+<i>1030</i>&nbsp;        }
+<i>1031</i>&nbsp;    }
+<i>1032</i>&nbsp;
+<i>1033</i>&nbsp;    private void applyLayer(List&lt;ContinuousEffect&gt; activeLayerEffects, Layer currentLayer, Game game) {
+<i>1034</i>&nbsp;        List&lt;ContinuousEffect&gt; layer = filterLayeredEffects(activeLayerEffects, currentLayer);
+<i>1035</i>&nbsp;        if (!layer.isEmpty()) {
+<i>1036</i>&nbsp;            int numberOfEffects = layer.size();
+<i>1037</i>&nbsp;            Set&lt;UUID&gt; appliedEffects = new HashSet&lt;&gt;();
+<i>1038</i>&nbsp;            Map&lt;ContinuousEffect, Set&lt;UUID&gt;&gt; waitingEffects = new LinkedHashMap&lt;&gt;();
+<i>1039</i>&nbsp;            for (ContinuousEffect effect : layer) {
+<i>1040</i>&nbsp;                if (numberOfEffects &gt; 1) { // If an effect is dependent to not applied effects yet of this layer, so wait to apply this effect
+<i>1041</i>&nbsp;                    Set&lt;UUID&gt; dependentTo = effect.isDependentTo(layer);
+<i>1042</i>&nbsp;                    if (dependentTo != null &amp;&amp; !appliedEffects.containsAll(dependentTo)) {
+<i>1043</i>&nbsp;                        waitingEffects.put(effect, dependentTo);
+<i>1044</i>&nbsp;                        continue;
+<i>1045</i>&nbsp;                    }
+<i>1046</i>&nbsp;                }
+<i>1047</i>&nbsp;                applyContinuousEffect(effect, currentLayer, game);
+<i>1048</i>&nbsp;                appliedEffects.add(effect.getId());
+<i>1049</i>&nbsp;                if (!waitingEffects.isEmpty()) {
+<i>1050</i>&nbsp;                    // check if waiting effects can be applied now
+<i>1051</i>&nbsp;                    for (Entry&lt;ContinuousEffect, Set&lt;UUID&gt;&gt; entry : waitingEffects.entrySet()) {
+<i>1052</i>&nbsp;                        if (appliedEffects.containsAll(entry.getValue())) { // all dependent to effects are applied now so apply the effect itself
+<i>1053</i>&nbsp;                            applyContinuousEffect(entry.getKey(), currentLayer, game);
+<i>1054</i>&nbsp;                            appliedEffects.add(entry.getKey().getId());
+<i>1055</i>&nbsp;                        }
+<i>1056</i>&nbsp;                    }
+<i>1057</i>&nbsp;                }
+<i>1058</i>&nbsp;            }
+<i>1059</i>&nbsp;        }
+<i>1060</i>&nbsp;    }
+<i>1061</i>&nbsp;
+<i>1062</i>&nbsp;    private void applyContinuousEffect(ContinuousEffect effect, Layer currentLayer, Game game) {
+<i>1063</i>&nbsp;        HashSet&lt;Ability&gt; abilities = layeredEffects.getAbility(effect.getId());
+<i>1064</i>&nbsp;        for (Ability ability : abilities) {
+<i>1065</i>&nbsp;            effect.apply(currentLayer, SubLayer.NA, ability, game);
+<i>1066</i>&nbsp;        }
+<i>1067</i>&nbsp;    }
+<i>1068</i>&nbsp;
+<i>1069</i>&nbsp;    /**
+<i>1070</i>&nbsp;     * Adds a continuous ability with a reference to a sourceId. It&#39;s used for
+<i>1071</i>&nbsp;     * effects that cease to exist again So this effects were removed again
+<i>1072</i>&nbsp;     * before each applyEffecs
+<i>1073</i>&nbsp;     *
+<i>1074</i>&nbsp;     * @param effect
+<i>1075</i>&nbsp;     * @param sourceId
+<i>1076</i>&nbsp;     * @param source
+<i>1077</i>&nbsp;     */
+<i>1078</i>&nbsp;    public void addEffect(ContinuousEffect effect, UUID sourceId, Ability source) {
+<i>1079</i>&nbsp;        if (!(source instanceof MageSingleton)) { // because MageSingletons may never be removed by removing the temporary effecs they are not added to the temporaryEffects to prevent this
+<i>1080</i>&nbsp;            effect.setTemporary(true);
+<i>1081</i>&nbsp;            Set&lt;Ability&gt; abilities = temporaryEffects.get(effect);
+<i>1082</i>&nbsp;            if (abilities == null) {
+<i>1083</i>&nbsp;                abilities = new HashSet&lt;&gt;();
+<i>1084</i>&nbsp;                temporaryEffects.put(effect, abilities);
+<i>1085</i>&nbsp;            } else if (abilities.contains(source)) {
+<i>1086</i>&nbsp;                // this ability (for the continuous effect) is already added
+<i>1087</i>&nbsp;                return;
+<i>1088</i>&nbsp;            }
+<i>1089</i>&nbsp;            abilities.add(source);
+<i>1090</i>&nbsp;
+<i>1091</i>&nbsp;            // add the effect itself
+<i>1092</i>&nbsp;        }
+<i>1093</i>&nbsp;        addEffect(effect, source);
+<i>1094</i>&nbsp;    }
+<i>1095</i>&nbsp;
+<i>1096</i>&nbsp;    public void addEffect(ContinuousEffect effect, Ability source) {
+<i>1097</i>&nbsp;        if (effect == null) {
+<i>1098</i>&nbsp;            logger.error(&quot;Effect is null: &quot; + source.toString());
+<i>1099</i>&nbsp;            return;
+<i>1100</i>&nbsp;        } else if (source == null) {
+<i>1101</i>&nbsp;            logger.warn(&quot;Adding effect without ability : &quot; + effect.toString());
+<i>1102</i>&nbsp;        }
+<i>1103</i>&nbsp;        switch (effect.getEffectType()) {
+<i>1104</i>&nbsp;            case REPLACEMENT:
+<i>1105</i>&nbsp;            case REDIRECTION:
+<i>1106</i>&nbsp;                ReplacementEffect newReplacementEffect = (ReplacementEffect) effect;
+<i>1107</i>&nbsp;                replacementEffects.addEffect(newReplacementEffect, source);
+<i>1108</i>&nbsp;                break;
+<i>1109</i>&nbsp;            case PREVENTION:
+<i>1110</i>&nbsp;                PreventionEffect newPreventionEffect = (PreventionEffect) effect;
+<i>1111</i>&nbsp;                preventionEffects.addEffect(newPreventionEffect, source);
+<i>1112</i>&nbsp;                break;
+<i>1113</i>&nbsp;            case RESTRICTION:
+<i>1114</i>&nbsp;                RestrictionEffect newRestrictionEffect = (RestrictionEffect) effect;
+<i>1115</i>&nbsp;                restrictionEffects.addEffect(newRestrictionEffect, source);
+<i>1116</i>&nbsp;                break;
+<i>1117</i>&nbsp;            case RESTRICTION_UNTAP_NOT_MORE_THAN:
+<i>1118</i>&nbsp;                RestrictionUntapNotMoreThanEffect newRestrictionUntapNotMoreThanEffect = (RestrictionUntapNotMoreThanEffect) effect;
+<i>1119</i>&nbsp;                restrictionUntapNotMoreThanEffects.addEffect(newRestrictionUntapNotMoreThanEffect, source);
+<i>1120</i>&nbsp;                break;
+<i>1121</i>&nbsp;            case REQUIREMENT:
+<i>1122</i>&nbsp;                RequirementEffect newRequirementEffect = (RequirementEffect) effect;
+<i>1123</i>&nbsp;                requirementEffects.addEffect(newRequirementEffect, source);
+<i>1124</i>&nbsp;                break;
+<i>1125</i>&nbsp;            case ASTHOUGH:
+<i>1126</i>&nbsp;                AsThoughEffect newAsThoughEffect = (AsThoughEffect) effect;
+<i>1127</i>&nbsp;                if (!asThoughEffectsMap.containsKey(newAsThoughEffect.getAsThoughEffectType())) {
+<i>1128</i>&nbsp;                    ContinuousEffectsList&lt;AsThoughEffect&gt; list = new ContinuousEffectsList&lt;&gt;();
+<i>1129</i>&nbsp;                    allEffectsLists.add(list);
+<i>1130</i>&nbsp;                    asThoughEffectsMap.put(newAsThoughEffect.getAsThoughEffectType(), list);
+<i>1131</i>&nbsp;                }
+<i>1132</i>&nbsp;                asThoughEffectsMap.get(newAsThoughEffect.getAsThoughEffectType()).addEffect(newAsThoughEffect, source);
+<i>1133</i>&nbsp;                break;
+<i>1134</i>&nbsp;            case COSTMODIFICATION:
+<i>1135</i>&nbsp;                CostModificationEffect newCostModificationEffect = (CostModificationEffect) effect;
+<i>1136</i>&nbsp;                costModificationEffects.addEffect(newCostModificationEffect, source);
+<i>1137</i>&nbsp;                break;
+<i>1138</i>&nbsp;            case SPLICE:
+<i>1139</i>&nbsp;                SpliceCardEffect newSpliceCardEffect = (SpliceCardEffect) effect;
+<i>1140</i>&nbsp;                spliceCardEffects.addEffect(newSpliceCardEffect, source);
+<i>1141</i>&nbsp;                break;
+<i>1142</i>&nbsp;            case CONTINUOUS_RULE_MODIFICATION:
+<i>1143</i>&nbsp;                ContinuousRuleModifyingEffect newContinuousRuleModifiyingEffect = (ContinuousRuleModifyingEffect) effect;
+<i>1144</i>&nbsp;                continuousRuleModifyingEffects.addEffect(newContinuousRuleModifiyingEffect, source);
+<i>1145</i>&nbsp;                break;
+<i>1146</i>&nbsp;            default:
+<i>1147</i>&nbsp;                layeredEffects.addEffect(effect, source);
+<i>1148</i>&nbsp;                break;
+<i>1149</i>&nbsp;        }
+<i>1150</i>&nbsp;    }
+<i>1151</i>&nbsp;
+<i>1152</i>&nbsp;    public void setController(UUID cardId, UUID controllerId) {
+<i>1153</i>&nbsp;        for (ContinuousEffectsList effectsList : allEffectsLists) {
+<i>1154</i>&nbsp;            setControllerForEffect(effectsList, cardId, controllerId);
+<i>1155</i>&nbsp;        }
+<i>1156</i>&nbsp;    }
+<i>1157</i>&nbsp;
+<i>1158</i>&nbsp;    private void setControllerForEffect(ContinuousEffectsList&lt;?&gt; effects, UUID sourceId, UUID controllerId) {
+<i>1159</i>&nbsp;        for (Effect effect : effects) {
+<i>1160</i>&nbsp;            HashSet&lt;Ability&gt; abilities = effects.getAbility(effect.getId());
+<i>1161</i>&nbsp;            if (abilities != null) {
+<i>1162</i>&nbsp;                for (Ability ability : abilities) {
+<i>1163</i>&nbsp;                    if (ability.getSourceId() != null) {
+<i>1164</i>&nbsp;                        if (ability.getSourceId().equals(sourceId)) {
+<i>1165</i>&nbsp;                            ability.setControllerId(controllerId);
+<i>1166</i>&nbsp;                        }
+<i>1167</i>&nbsp;                    } else if (!ability.getZone().equals(Zone.COMMAND)) {
+<i>1168</i>&nbsp;                        logger.fatal(&quot;Continuous effect for ability with no sourceId Ability: &quot; + ability);
+<i>1169</i>&nbsp;                    }
+<i>1170</i>&nbsp;                }
+<i>1171</i>&nbsp;            }
+<i>1172</i>&nbsp;        }
+<i>1173</i>&nbsp;    }
+<i>1174</i>&nbsp;
+<i>1175</i>&nbsp;    public void clear() {
+<i>1176</i>&nbsp;        for (ContinuousEffectsList effectsList : allEffectsLists) {
+<i>1177</i>&nbsp;            effectsList.clear();
+<i>1178</i>&nbsp;        }
+<i>1179</i>&nbsp;        temporaryEffects.clear();
+<i>1180</i>&nbsp;    }
+<i>1181</i>&nbsp;
+<i>1182</i>&nbsp;    public void removeAllTemporaryEffects() {
+<i>1183</i>&nbsp;        for (Map.Entry&lt;ContinuousEffect, Set&lt;Ability&gt;&gt; entry : temporaryEffects.entrySet()) {
+<i>1184</i>&nbsp;            switch (entry.getKey().getEffectType()) {
+<i>1185</i>&nbsp;                case REPLACEMENT:
+<i>1186</i>&nbsp;                case REDIRECTION:
+<i>1187</i>&nbsp;                    replacementEffects.removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1188</i>&nbsp;                    break;
+<i>1189</i>&nbsp;                case PREVENTION:
+<i>1190</i>&nbsp;                    preventionEffects.removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1191</i>&nbsp;                    break;
+<i>1192</i>&nbsp;                case RESTRICTION:
+<i>1193</i>&nbsp;                    restrictionEffects.removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1194</i>&nbsp;                    break;
+<i>1195</i>&nbsp;                case RESTRICTION_UNTAP_NOT_MORE_THAN:
+<i>1196</i>&nbsp;                    restrictionUntapNotMoreThanEffects.removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1197</i>&nbsp;                    break;
+<i>1198</i>&nbsp;                case REQUIREMENT:
+<i>1199</i>&nbsp;                    requirementEffects.removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1200</i>&nbsp;                    break;
+<i>1201</i>&nbsp;                case ASTHOUGH:
+<i>1202</i>&nbsp;                    AsThoughEffect newAsThoughEffect = (AsThoughEffect) entry.getKey();
+<i>1203</i>&nbsp;                    if (!asThoughEffectsMap.containsKey(newAsThoughEffect.getAsThoughEffectType())) {
+<i>1204</i>&nbsp;                        break;
+<i>1205</i>&nbsp;                    }
+<i>1206</i>&nbsp;                    asThoughEffectsMap.get(newAsThoughEffect.getAsThoughEffectType()).removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1207</i>&nbsp;                    break;
+<i>1208</i>&nbsp;                case COSTMODIFICATION:
+<i>1209</i>&nbsp;                    costModificationEffects.removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1210</i>&nbsp;                    break;
+<i>1211</i>&nbsp;                case SPLICE:
+<i>1212</i>&nbsp;                    spliceCardEffects.removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1213</i>&nbsp;                    break;
+<i>1214</i>&nbsp;                case CONTINUOUS_RULE_MODIFICATION:
+<i>1215</i>&nbsp;                    continuousRuleModifyingEffects.removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1216</i>&nbsp;                    break;
+<i>1217</i>&nbsp;                default:
+<i>1218</i>&nbsp;                    layeredEffects.removeEffects(entry.getKey().getId(), entry.getValue());
+<i>1219</i>&nbsp;                    break;
+<i>1220</i>&nbsp;            }
+<i>1221</i>&nbsp;
+<i>1222</i>&nbsp;        }
+<i>1223</i>&nbsp;        temporaryEffects.clear();
+<i>1224</i>&nbsp;    }
+<i>1225</i>&nbsp;
+<i>1226</i>&nbsp;    public Map&lt;String, String&gt; getReplacementEffectsTexts(HashMap&lt;ReplacementEffect, HashSet&lt;Ability&gt;&gt; rEffects, Game game) {
+<i>1227</i>&nbsp;        Map&lt;String, String&gt; texts = new LinkedHashMap&lt;&gt;();
+<i>1228</i>&nbsp;        for (Map.Entry&lt;ReplacementEffect, HashSet&lt;Ability&gt;&gt; entry : rEffects.entrySet()) {
+<i>1229</i>&nbsp;            if (entry.getValue() != null) {
+<i>1230</i>&nbsp;                for (Ability ability : entry.getValue()) {
+<i>1231</i>&nbsp;                    MageObject object = game.getObject(ability.getSourceId());
+<i>1232</i>&nbsp;                    if (object != null) {
+<i>1233</i>&nbsp;                        texts.put(ability.getId().toString() + &quot;_&quot; + entry.getKey().getId().toString(), object.getName() + &quot;: &quot; + ability.getRule(object.getName()));
+<i>1234</i>&nbsp;                    } else {
+<i>1235</i>&nbsp;                        texts.put(ability.getId().toString() + &quot;_&quot; + entry.getKey().getId().toString(), entry.getKey().getText(null));
+<i>1236</i>&nbsp;                    }
+<i>1237</i>&nbsp;                }
+<i>1238</i>&nbsp;            } else {
+<i>1239</i>&nbsp;                logger.error(&quot;Replacement effect without ability: &quot; + entry.getKey().toString());
+<i>1240</i>&nbsp;            }
+<i>1241</i>&nbsp;        }
+<i>1242</i>&nbsp;        return texts;
+<i>1243</i>&nbsp;    }
+<i>1244</i>&nbsp;
+<i>1245</i>&nbsp;    public boolean existRequirementEffects() {
+<i>1246</i>&nbsp;        return !requirementEffects.isEmpty();
+<i>1247</i>&nbsp;    }
+<i>1248</i>&nbsp;
+<i>1249</i>&nbsp;    public UUID getControllerOfSourceId(UUID sourceId) {
+<i>1250</i>&nbsp;        UUID controllerFound = null;
+<i>1251</i>&nbsp;        for (PreventionEffect effect : preventionEffects) {
+<i>1252</i>&nbsp;            HashSet&lt;Ability&gt; abilities = preventionEffects.getAbility(effect.getId());
+<i>1253</i>&nbsp;            for (Ability ability : abilities) {
+<i>1254</i>&nbsp;                if (ability.getSourceId().equals(sourceId)) {
+<i>1255</i>&nbsp;                    if (controllerFound == null || controllerFound.equals(ability.getControllerId())) {
+<i>1256</i>&nbsp;                        controllerFound = ability.getControllerId();
+<i>1257</i>&nbsp;                    } else {
+<i>1258</i>&nbsp;                        // not unique controller - No solution yet
+<i>1259</i>&nbsp;                        return null;
+<i>1260</i>&nbsp;                    }
+<i>1261</i>&nbsp;                }
+<i>1262</i>&nbsp;            }
+<i>1263</i>&nbsp;        }
+<i>1264</i>&nbsp;        for (ReplacementEffect effect : replacementEffects) {
+<i>1265</i>&nbsp;            HashSet&lt;Ability&gt; abilities = replacementEffects.getAbility(effect.getId());
+<i>1266</i>&nbsp;            for (Ability ability : abilities) {
+<i>1267</i>&nbsp;                if (ability.getSourceId() != null) {
+<i>1268</i>&nbsp;                    if (ability.getSourceId().equals(sourceId)) {
+<i>1269</i>&nbsp;                        if (controllerFound == null || controllerFound.equals(ability.getControllerId())) {
+<i>1270</i>&nbsp;                            controllerFound = ability.getControllerId();
+<i>1271</i>&nbsp;                        } else {
+<i>1272</i>&nbsp;                            // not unique controller - No solution yet
+<i>1273</i>&nbsp;                            return null;
+<i>1274</i>&nbsp;                        }
+<i>1275</i>&nbsp;                    }
+<i>1276</i>&nbsp;                } else {
+<i>1277</i>&nbsp;                    logger.warn(&quot;Ability without sourceId:&quot; + ability.getRule());
+<i>1278</i>&nbsp;                }
+<i>1279</i>&nbsp;            }
+<i>1280</i>&nbsp;        }
+<i>1281</i>&nbsp;        return controllerFound;
+<i>1282</i>&nbsp;    }
+<i>1283</i>&nbsp;}
+<i>1284</i>&nbsp;
+<b class="fc"><i>1285</i>&nbsp;class ContinuousEffectSorter implements Comparator&lt;ContinuousEffect&gt;, Serializable {</b>
+<i>1286</i>&nbsp;
+<i>1287</i>&nbsp;    @Override
+<i>1288</i>&nbsp;    public int compare(ContinuousEffect one, ContinuousEffect two) {
+<b class="fc"><i>1289</i>&nbsp;        return Long.compare(one.getOrder(), two.getOrder());</b>
+<i>1290</i>&nbsp;    }
+<i>1291</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

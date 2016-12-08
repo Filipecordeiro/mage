@@ -1,0 +1,250 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FatespinnerChooseEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.f</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FatespinnerChooseEffect (mage.cards.f)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FatespinnerChooseEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.f;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.HashSet;
+<i>31</i>&nbsp;import java.util.UUID;
+<i>32</i>&nbsp;import mage.MageInt;
+<i>33</i>&nbsp;import mage.abilities.Ability;
+<i>34</i>&nbsp;import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+<i>35</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>36</i>&nbsp;import mage.abilities.effects.ReplacementEffectImpl;
+<i>37</i>&nbsp;import mage.cards.CardImpl;
+<i>38</i>&nbsp;import mage.cards.CardSetInfo;
+<i>39</i>&nbsp;import mage.choices.Choice;
+<i>40</i>&nbsp;import mage.choices.ChoiceImpl;
+<i>41</i>&nbsp;import mage.constants.CardType;
+<i>42</i>&nbsp;import mage.constants.Duration;
+<i>43</i>&nbsp;import mage.constants.Outcome;
+<i>44</i>&nbsp;import mage.constants.TargetController;
+<i>45</i>&nbsp;import mage.constants.Zone;
+<i>46</i>&nbsp;import mage.game.Game;
+<i>47</i>&nbsp;import mage.game.events.GameEvent;
+<i>48</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>49</i>&nbsp;import mage.players.Player;
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;/**
+<i>52</i>&nbsp; *
+<i>53</i>&nbsp; * @author LoneFox
+<i>54</i>&nbsp; */
+<i>55</i>&nbsp;public class Fatespinner extends CardImpl {
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    public Fatespinner(UUID ownerId, CardSetInfo setInfo) {
+<i>58</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{1}{U}{U}&quot;);
+<i>59</i>&nbsp;        this.subtype.add(&quot;Human&quot;);
+<i>60</i>&nbsp;        this.subtype.add(&quot;Wizard&quot;);
+<i>61</i>&nbsp;        this.power = new MageInt(1);
+<i>62</i>&nbsp;        this.toughness = new MageInt(2);
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;        // At the beginning of each opponent&#39;s upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.
+<i>65</i>&nbsp;        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new FatespinnerChooseEffect(),
+<i>66</i>&nbsp;                TargetController.OPPONENT, false, true));
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    public Fatespinner(final Fatespinner card) {
+<i>70</i>&nbsp;        super(card);
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    @Override
+<i>74</i>&nbsp;    public Fatespinner copy() {
+<i>75</i>&nbsp;        return new Fatespinner(this);
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;}
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;class FatespinnerChooseEffect extends OneShotEffect {
+<i>80</i>&nbsp;
+<b class="nc"><i>81</i>&nbsp;    private static final HashSet&lt;String&gt; choices = new HashSet&lt;&gt;();</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    static {
+<b class="nc"><i>84</i>&nbsp;        choices.add(&quot;Draw step&quot;);</b>
+<b class="nc"><i>85</i>&nbsp;        choices.add(&quot;Main phase&quot;);</b>
+<b class="nc"><i>86</i>&nbsp;        choices.add(&quot;Combat phase&quot;);</b>
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    public FatespinnerChooseEffect() {
+<b class="nc"><i>90</i>&nbsp;        super(Outcome.Detriment);</b>
+<b class="nc"><i>91</i>&nbsp;        staticText = &quot;At the beginning of each opponent&#39;s upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.&quot;;</b>
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    public FatespinnerChooseEffect(final FatespinnerChooseEffect effect) {
+<b class="nc"><i>95</i>&nbsp;        super(effect);</b>
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    @Override
+<i>99</i>&nbsp;    public FatespinnerChooseEffect copy() {
+<b class="nc"><i>100</i>&nbsp;        return new FatespinnerChooseEffect(this);</b>
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    @Override
+<i>104</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>105</i>&nbsp;        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));</b>
+<b class="nc"><i>106</i>&nbsp;        if (player != null) {</b>
+<b class="nc"><i>107</i>&nbsp;            Choice choice = new ChoiceImpl(true);</b>
+<b class="nc"><i>108</i>&nbsp;            choice.setMessage(&quot;Choose phase or step to skip&quot;);</b>
+<b class="nc"><i>109</i>&nbsp;            choice.setChoices(choices);</b>
+<b class="nc"><i>110</i>&nbsp;            while (!player.choose(outcome, choice, game)) {</b>
+<b class="nc"><i>111</i>&nbsp;                if (!player.canRespond()) {</b>
+<b class="nc"><i>112</i>&nbsp;                    return false;</b>
+<i>113</i>&nbsp;                }
+<i>114</i>&nbsp;            }
+<b class="nc"><i>115</i>&nbsp;            String chosenPhase = choice.getChoice();</b>
+<b class="nc"><i>116</i>&nbsp;            game.informPlayers(player.getLogName() + &quot; has chosen to skip &quot; + chosenPhase.toLowerCase() + &quot;.&quot;);</b>
+<b class="nc"><i>117</i>&nbsp;            game.addEffect(new FatespinnerSkipEffect(chosenPhase), source);</b>
+<b class="nc"><i>118</i>&nbsp;            return true;</b>
+<i>119</i>&nbsp;        }
+<b class="nc"><i>120</i>&nbsp;        return false;</b>
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;}
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;class FatespinnerSkipEffect extends ReplacementEffectImpl {
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    private final String phase;
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    public FatespinnerSkipEffect(String phase) {
+<i>129</i>&nbsp;        super(Duration.EndOfTurn, Outcome.Detriment);
+<i>130</i>&nbsp;        this.phase = phase;
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    public FatespinnerSkipEffect(final FatespinnerSkipEffect effect) {
+<i>134</i>&nbsp;        super(effect);
+<i>135</i>&nbsp;        this.phase = effect.phase;
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;    @Override
+<i>139</i>&nbsp;    public FatespinnerSkipEffect copy() {
+<i>140</i>&nbsp;        return new FatespinnerSkipEffect(this);
+<i>141</i>&nbsp;    }
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;    @Override
+<i>144</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>145</i>&nbsp;        return true;
+<i>146</i>&nbsp;    }
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;    @Override
+<i>149</i>&nbsp;    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+<i>150</i>&nbsp;        EventType type = event.getType();
+<i>151</i>&nbsp;        return ((phase.equals(&quot;Draw step&quot;) &amp;&amp; type == EventType.DRAW_STEP)
+<i>152</i>&nbsp;                || (phase.equals(&quot;Main phase&quot;) &amp;&amp; (type == EventType.PRECOMBAT_MAIN_PHASE || type == EventType.POSTCOMBAT_MAIN_PHASE))
+<i>153</i>&nbsp;                || (phase.equals(&quot;Combat phase&quot;) &amp;&amp; type == EventType.COMBAT_PHASE));
+<i>154</i>&nbsp;    }
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;    @Override
+<i>157</i>&nbsp;    public boolean checksEventType(GameEvent event, Game game) {
+<i>158</i>&nbsp;        EventType type = event.getType();
+<i>159</i>&nbsp;        return (type == EventType.DRAW_STEP || type == EventType.PRECOMBAT_MAIN_PHASE
+<i>160</i>&nbsp;                || type == EventType.POSTCOMBAT_MAIN_PHASE || type == EventType.COMBAT_PHASE);
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    @Override
+<i>164</i>&nbsp;    public boolean applies(GameEvent event, Ability source, Game game) {
+<i>165</i>&nbsp;        return true;
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

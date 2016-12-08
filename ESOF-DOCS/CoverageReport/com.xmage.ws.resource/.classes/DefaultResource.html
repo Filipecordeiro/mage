@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DefaultResource</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.xmage.ws.resource</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DefaultResource (com.xmage.ws.resource)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultResource</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.1%
+  </span>
+  <span class="absValue">
+    (8/ 14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.xmage.ws.resource;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.xmage.core.decorators.Decorator;
+<i>4</i>&nbsp;import com.xmage.ws.model.DomainErrors;
+<i>5</i>&nbsp;import com.xmage.ws.representer.Representer;
+<i>6</i>&nbsp;import net.minidev.json.JSONObject;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.ArrayList;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; *
+<i>12</i>&nbsp; * @author noxx
+<i>13</i>&nbsp; */
+<i>14</i>&nbsp;public abstract class DefaultResource&lt;R&gt; implements Resource&lt;R&gt; {
+<i>15</i>&nbsp;
+<b class="fc"><i>16</i>&nbsp;    protected DomainErrors.Errors error = DomainErrors.Errors.STATUS_OK;</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    protected R defaultResource;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    protected Representer&lt;R&gt; representer;
+<i>21</i>&nbsp;
+<b class="fc"><i>22</i>&nbsp;    protected java.util.List&lt;Decorator&gt; decorators = new ArrayList&lt;Decorator&gt;();</b>
+<i>23</i>&nbsp;    
+<i>24</i>&nbsp;    protected int version;
+<i>25</i>&nbsp;
+<b class="fc"><i>26</i>&nbsp;    protected DefaultResource(Representer&lt;R&gt; representer) {</b>
+<b class="fc"><i>27</i>&nbsp;        this.representer = representer;</b>
+<b class="fc"><i>28</i>&nbsp;    }</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @Override
+<i>31</i>&nbsp;    public int getError() {
+<b class="fc"><i>32</i>&nbsp;        return error.getCode();</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    @Override
+<i>36</i>&nbsp;    public R getDefault() {
+<b class="fc"><i>37</i>&nbsp;        return defaultResource;</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    @Override
+<i>41</i>&nbsp;    public java.util.List&lt;Decorator&gt; getDecorators() {
+<b class="nc"><i>42</i>&nbsp;        return decorators;</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    @Override
+<i>46</i>&nbsp;    public void addDecorator(Decorator decorator) {
+<b class="nc"><i>47</i>&nbsp;        if (decorator != null) {</b>
+<b class="nc"><i>48</i>&nbsp;            this.decorators.add(decorator);</b>
+<i>49</i>&nbsp;        }
+<b class="nc"><i>50</i>&nbsp;    }</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    @Override
+<i>53</i>&nbsp;    public JSONObject getJSONBody() {
+<b class="fc"><i>54</i>&nbsp;        return representer.toJSON(this);</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    @Override
+<i>58</i>&nbsp;    public String getErrorMessage() {
+<b class="nc"><i>59</i>&nbsp;        return error.getMessage();</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public int getVersion() {
+<b class="nc"><i>63</i>&nbsp;        return version;</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

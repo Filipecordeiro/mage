@@ -1,0 +1,259 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DelveSpecialAction</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.keyword</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DelveSpecialAction (mage.abilities.keyword)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DelveSpecialAction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.keyword;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.List;
+<i>31</i>&nbsp;import mage.Mana;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.SpecialAction;
+<i>34</i>&nbsp;import mage.abilities.common.SimpleStaticAbility;
+<i>35</i>&nbsp;import mage.abilities.costs.common.ExileFromGraveCost;
+<i>36</i>&nbsp;import mage.abilities.costs.mana.AlternateManaPaymentAbility;
+<i>37</i>&nbsp;import mage.abilities.costs.mana.ManaCost;
+<i>38</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>39</i>&nbsp;import mage.cards.Card;
+<i>40</i>&nbsp;import mage.constants.AbilityType;
+<i>41</i>&nbsp;import mage.constants.ManaType;
+<i>42</i>&nbsp;import mage.constants.Outcome;
+<i>43</i>&nbsp;import mage.constants.Zone;
+<i>44</i>&nbsp;import mage.filter.FilterCard;
+<i>45</i>&nbsp;import mage.game.Game;
+<i>46</i>&nbsp;import mage.players.ManaPool;
+<i>47</i>&nbsp;import mage.players.Player;
+<i>48</i>&nbsp;import mage.target.common.TargetCardInYourGraveyard;
+<i>49</i>&nbsp;import mage.util.CardUtil;
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;/**
+<i>52</i>&nbsp; * 702.65. Delve 702.65a Delve is a static ability that functions while the
+<i>53</i>&nbsp; * spell with delve is on the stack. “Delve” means “For each generic mana in
+<i>54</i>&nbsp; * this spell’s total cost, you may exile a card from your graveyard rather than
+<i>55</i>&nbsp; * pay that mana.” The delve ability isn&#39;t an additional or alternative cost and
+<i>56</i>&nbsp; * applies only after the total cost of the spell with delve is determined.
+<i>57</i>&nbsp; * 702.65b Multiple instances of delve on the same spell are redundant.
+<i>58</i>&nbsp; *
+<i>59</i>&nbsp; * The rules for delve have changed slightly since it was last in an
+<i>60</i>&nbsp; * expansion. Previously, delve reduced the cost to cast a spell. Under the
+<i>61</i>&nbsp; * current rules, you exile cards from your graveyard at the same time you pay
+<i>62</i>&nbsp; * the spell’s cost. Exiling a card this way is simply another way to pay that
+<i>63</i>&nbsp; * cost. * Delve doesn&#39;t change a spell’s mana cost or converted mana cost. For
+<i>64</i>&nbsp; * example, Dead Drop’s converted mana cost is 10 even if you exiled three cards
+<i>65</i>&nbsp; * to cast it. * You can’t exile cards to pay for the colored mana requirements
+<i>66</i>&nbsp; * of a spell with delve. * You can’t exile more cards than the generic mana
+<i>67</i>&nbsp; * requirement of a spell with delve. For example, you can’t exile more than
+<i>68</i>&nbsp; * nine cards from your graveyard to cast Dead Drop. * Because delve isn&#39;t an
+<i>69</i>&nbsp; * alternative cost, it can be used in conjunction with alternative costs.
+<i>70</i>&nbsp; *
+<i>71</i>&nbsp; * @author LevelX2
+<i>72</i>&nbsp; *
+<i>73</i>&nbsp; * TODO: Change card exiling to a way to pay mana costs, now it&#39;s maybe not
+<i>74</i>&nbsp; * possible to pay costs from effects that increase the mana costs.
+<i>75</i>&nbsp; */
+<i>76</i>&nbsp;public class DelveAbility extends SimpleStaticAbility implements AlternateManaPaymentAbility {
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    public DelveAbility() {
+<i>79</i>&nbsp;        super(Zone.STACK, null);
+<i>80</i>&nbsp;        this.setRuleAtTheTop(true);
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public DelveAbility(final DelveAbility ability) {
+<i>84</i>&nbsp;        super(ability);
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    @Override
+<i>88</i>&nbsp;    public DelveAbility copy() {
+<i>89</i>&nbsp;        return new DelveAbility(this);
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    @Override
+<i>93</i>&nbsp;    public String getRule() {
+<i>94</i>&nbsp;        return &quot;Delve &lt;i&gt;(Each card you exile from your graveyard while casting this spell pays for {1})&lt;/i&gt;&quot;;
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    @Override
+<i>98</i>&nbsp;    public void addSpecialAction(Ability source, Game game, ManaCost unpaid) {
+<i>99</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());
+<i>100</i>&nbsp;        if (controller != null &amp;&amp; controller.getGraveyard().size() &gt; 0) {
+<i>101</i>&nbsp;            if (unpaid.getMana().getGeneric() &gt; 0 &amp;&amp; source.getAbilityType().equals(AbilityType.SPELL)) {
+<i>102</i>&nbsp;                SpecialAction specialAction = new DelveSpecialAction();
+<i>103</i>&nbsp;                specialAction.setControllerId(source.getControllerId());
+<i>104</i>&nbsp;                specialAction.setSourceId(source.getSourceId());
+<i>105</i>&nbsp;                int unpaidAmount = unpaid.getMana().getGeneric();
+<i>106</i>&nbsp;                if (!controller.getManaPool().isAutoPayment() &amp;&amp; unpaidAmount &gt; 1) {
+<i>107</i>&nbsp;                    unpaidAmount = 1;
+<i>108</i>&nbsp;                }
+<i>109</i>&nbsp;                // TODO: make delve not target cards in graveyard. setNotTarget?
+<i>110</i>&nbsp;                specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
+<i>111</i>&nbsp;                        0, Math.min(controller.getGraveyard().size(), unpaidAmount), new FilterCard())));
+<i>112</i>&nbsp;                if (specialAction.canActivate(source.getControllerId(), game)) {
+<i>113</i>&nbsp;                    game.getState().getSpecialActions().add(specialAction);
+<i>114</i>&nbsp;                }
+<i>115</i>&nbsp;            }
+<i>116</i>&nbsp;        }
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;}
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;class DelveSpecialAction extends SpecialAction {
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    public DelveSpecialAction() {
+<b class="fc"><i>123</i>&nbsp;        super(Zone.ALL, true);</b>
+<b class="fc"><i>124</i>&nbsp;        this.addEffect(new DelveEffect());</b>
+<b class="fc"><i>125</i>&nbsp;    }</b>
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    public DelveSpecialAction(final DelveSpecialAction ability) {
+<b class="fc"><i>128</i>&nbsp;        super(ability);</b>
+<b class="fc"><i>129</i>&nbsp;    }</b>
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;    @Override
+<i>132</i>&nbsp;    public DelveSpecialAction copy() {
+<b class="fc"><i>133</i>&nbsp;        return new DelveSpecialAction(this);</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;}
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;class DelveEffect extends OneShotEffect {
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    public DelveEffect() {
+<i>140</i>&nbsp;        super(Outcome.Benefit);
+<i>141</i>&nbsp;        this.staticText = &quot;Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)&quot;;
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;    public DelveEffect(final DelveEffect effect) {
+<i>145</i>&nbsp;        super(effect);
+<i>146</i>&nbsp;    }
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;    @Override
+<i>149</i>&nbsp;    public DelveEffect copy() {
+<i>150</i>&nbsp;        return new DelveEffect(this);
+<i>151</i>&nbsp;    }
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    @Override
+<i>154</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>155</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());
+<i>156</i>&nbsp;        if (controller != null) {
+<i>157</i>&nbsp;            ExileFromGraveCost exileFromGraveCost = (ExileFromGraveCost) source.getCosts().get(0);
+<i>158</i>&nbsp;            List&lt;Card&gt; exiledCards = exileFromGraveCost.getExiledCards();
+<i>159</i>&nbsp;            if (exiledCards.size() &gt; 0) {
+<i>160</i>&nbsp;                ManaPool manaPool = controller.getManaPool();
+<i>161</i>&nbsp;                manaPool.addMana(new Mana(0, 0, 0, 0, 0, 0, 0, exiledCards.size()), game, source);
+<i>162</i>&nbsp;                manaPool.unlockManaType(ManaType.COLORLESS);
+<i>163</i>&nbsp;                String keyString = CardUtil.getCardZoneString(&quot;delvedCards&quot;, source.getSourceId(), game);
+<i>164</i>&nbsp;                @SuppressWarnings(&quot;unchecked&quot;)
+<i>165</i>&nbsp;                List&lt;Card&gt; delvedCards = (List&lt;Card&gt;) game.getState().getValue(keyString);
+<i>166</i>&nbsp;                if (delvedCards == null) {
+<i>167</i>&nbsp;                    game.getState().setValue(keyString, exiledCards);
+<i>168</i>&nbsp;                } else {
+<i>169</i>&nbsp;                    delvedCards.addAll(exiledCards);
+<i>170</i>&nbsp;                }
+<i>171</i>&nbsp;            }
+<i>172</i>&nbsp;            return true;
+<i>173</i>&nbsp;        }
+<i>174</i>&nbsp;        return false;
+<i>175</i>&nbsp;    }
+<i>176</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

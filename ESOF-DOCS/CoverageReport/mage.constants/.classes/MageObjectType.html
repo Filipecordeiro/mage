@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MageObjectType</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.constants</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MageObjectType (mage.constants)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MageObjectType</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this template, choose Tools | Templates
+<i>3</i>&nbsp; * and open the template in the editor.
+<i>4</i>&nbsp; */
+<i>5</i>&nbsp;package mage.constants;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * 109.1. An object is an ability on the stack, a card, a copy of a card, a token, a spell, a permanent, or an emblem.
+<i>9</i>&nbsp; * 109.2. If a spell or ability uses a description of an object that includes a card type 
+<i>10</i>&nbsp; * or subtype, but doesn&#39;t include the word &quot;card,&quot; &quot;spell,&quot; &quot;source,&quot; or &quot;scheme,&quot; it 
+<i>11</i>&nbsp; * means a permanent of that card type or subtype on the battlefield.
+<i>12</i>&nbsp; *  109.2a If a spell or ability uses a description of an object that includes the word &quot;card&quot; and the name of a zone, it means a card matching that description in the stated zone. #
+<i>13</i>&nbsp; *  109.2b If a spell or ability uses a description of an object that includes the word &quot;spell,&quot; it means a spell matching that description on the stack. #
+<i>14</i>&nbsp; *  109.2c If a spell or ability uses a description of an object that includes the word &quot;source,&quot; it means a source matching that description -- either a source of an ability or a source of damage -- in any zone. See rule 609.7. #
+<i>15</i>&nbsp; *  109.2d If an ability of a scheme card includes the text &quot;this scheme,&quot; it means the scheme card in the command zone on which that ability is printed. #
+<i>16</i>&nbsp; * 109.3. An object&#39;s characteristics are name, mana cost, color, color indicator, card type, subtype, supertype, expansion symbol, rules text, abilities, power, toughness, loyalty, hand modifier, and life modifier. Objects can have some or all of these characteristics. Any other information about an object isn&#39;t a characteristic. For example, characteristics don&#39;t include whether a permanent is tapped, a spell&#39;s target, an object&#39;s owner or controller, what an Aura enchants, and so on. #
+<i>17</i>&nbsp; * 109.4. Only objects on the stack or on the battlefield have a controller. Objects that are neither on the stack nor on the battlefield aren&#39;t controlled by any player. See rule 108.4. There are four exceptions to this rule: #
+<i>18</i>&nbsp; *  109.4a An emblem is controlled by the player that puts it into the command zone. See rule 113, &quot;Emblems.&quot; #
+<i>19</i>&nbsp; *  109.4b In a Planechase game, a face-up plane or phenomenon card is controlled by the player designated as the planar controller. This is usually the active player. See rule 901.6. #
+<i>20</i>&nbsp; *  109.4c In a Vanguard game, each vanguard card is controlled by its owner. See rule 902.6. #
+<i>21</i>&nbsp; *  109.4d In an Archenemy game, each scheme card is controlled by its owner. See rule 904.7. #
+<i>22</i>&nbsp; * 109.5. The words &quot;you&quot; and &quot;your&quot; on an object refer to the object&#39;s controller, its would-be controller (if a player is attempting to play, cast, or activate it), or its owner (if it has no controller). For a static ability, this is the current controller of the object it&#39;s on. For an activated ability, this is the player who activated the ability. For a triggered ability, this is the controller of the object when the ability triggered, unless it&#39;s a delayed triggered ability. To determine the controller of a delayed triggered ability, see rules 603.7d-f
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * @author LevelX2
+<i>25</i>&nbsp; */
+<i>26</i>&nbsp;
+<b class="nc"><i>27</i>&nbsp;public enum MageObjectType {</b>
+<b class="nc"><i>28</i>&nbsp;    ABILITY_STACK (&quot;Ability on the Stack&quot;, false, false),</b>
+<b class="nc"><i>29</i>&nbsp;    CARD (&quot;Card&quot;, false, true),</b>
+<b class="nc"><i>30</i>&nbsp;    COPY_CARD (&quot;Copy of a Card&quot;, false, true),</b>
+<b class="nc"><i>31</i>&nbsp;    TOKEN (&quot;Token&quot;, true, true),</b>
+<b class="nc"><i>32</i>&nbsp;    SPELL (&quot;Spell&quot;, false, true),</b>
+<b class="nc"><i>33</i>&nbsp;    PERMANENT (&quot;Permanent&quot;, true, true),</b>
+<b class="nc"><i>34</i>&nbsp;    EMBLEM (&quot;Emblem&quot;, false, false),</b>
+<b class="nc"><i>35</i>&nbsp;    COMMANDER (&quot;Commander&quot;, false, false),</b>
+<b class="nc"><i>36</i>&nbsp;    NULL(&quot;NullObject&quot;, false, false);</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    private final String text;
+<i>39</i>&nbsp;    private final boolean permanent;
+<i>40</i>&nbsp;    private final boolean canHaveCounters;
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;
+<b class="nc"><i>43</i>&nbsp;    MageObjectType(String text, boolean permanent, boolean canHaveCounters) {</b>
+<b class="nc"><i>44</i>&nbsp;        this.text = text;</b>
+<b class="nc"><i>45</i>&nbsp;        this.permanent = permanent;</b>
+<b class="nc"><i>46</i>&nbsp;        this.canHaveCounters = canHaveCounters;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    @Override
+<i>50</i>&nbsp;    public String toString() {
+<b class="nc"><i>51</i>&nbsp;        return text;</b>
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    public boolean isPermanent() {
+<b class="nc"><i>55</i>&nbsp;        return permanent;</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public boolean canHaveCounters() {
+<b class="nc"><i>59</i>&nbsp;        return canHaveCounters;</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

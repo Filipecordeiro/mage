@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TextboxRule</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.mage.card.arcane</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TextboxRule (org.mage.card.arcane)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TextboxRule</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TextboxRule$EmbeddedSymbol</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TextboxRule$ItalicRegion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 23)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package org.mage.card.arcane;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.awt.Font;
+<i>9</i>&nbsp;import java.awt.Image;
+<i>10</i>&nbsp;import java.awt.font.GraphicAttribute;
+<i>11</i>&nbsp;import java.awt.font.ImageGraphicAttribute;
+<i>12</i>&nbsp;import java.awt.font.TextAttribute;
+<i>13</i>&nbsp;import java.text.AttributedString;
+<i>14</i>&nbsp;import java.util.List;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;/**
+<i>17</i>&nbsp; * @author stravant@gmail.com
+<i>18</i>&nbsp; *
+<i>19</i>&nbsp; * Class describing parsed &amp; translated rules in the text box of a card, ready
+<i>20</i>&nbsp; * to be rendered.
+<i>21</i>&nbsp; */
+<i>22</i>&nbsp;public class TextboxRule {
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    // An attributed region in the text, which can be applied to an
+<i>25</i>&nbsp;    // attributed string.
+<i>26</i>&nbsp;    public interface AttributeRegion {
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;        public void applyToAttributedString(AttributedString str, Font normal, Font italic);
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    // A region of italics, or bold text in a
+<i>32</i>&nbsp;    public static class ItalicRegion implements AttributeRegion {
+<i>33</i>&nbsp;
+<b class="nc"><i>34</i>&nbsp;        ItalicRegion(int start, int end) {</b>
+<b class="nc"><i>35</i>&nbsp;            this.start = start;</b>
+<b class="nc"><i>36</i>&nbsp;            this.end = end;</b>
+<i>37</i>&nbsp;        }
+<i>38</i>&nbsp;        private final int start;
+<i>39</i>&nbsp;        private final int end;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;        @Override
+<i>42</i>&nbsp;        public void applyToAttributedString(AttributedString str, Font normal, Font italic) {
+<b class="nc"><i>43</i>&nbsp;            if (end &gt; start + 1) {</b>
+<b class="nc"><i>44</i>&nbsp;                str.addAttribute(TextAttribute.FONT, italic, start, end);</b>
+<i>45</i>&nbsp;            }
+<i>46</i>&nbsp;        }
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    // A special symbol embedded at some point in a string
+<i>50</i>&nbsp;    public static class EmbeddedSymbol implements AttributeRegion {
+<i>51</i>&nbsp;
+<b class="nc"><i>52</i>&nbsp;        EmbeddedSymbol(String symbol, int location) {</b>
+<b class="nc"><i>53</i>&nbsp;            this.symbol = symbol;</b>
+<b class="nc"><i>54</i>&nbsp;            this.location = location;</b>
+<i>55</i>&nbsp;        }
+<i>56</i>&nbsp;        private final String symbol;
+<i>57</i>&nbsp;        private final int location;
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;        @Override
+<i>60</i>&nbsp;        public void applyToAttributedString(AttributedString str, Font normal, Font italic) {
+<b class="nc"><i>61</i>&nbsp;            Image symbolImage = ManaSymbols.getSizedManaSymbol(symbol.replace(&quot;/&quot;, &quot;&quot;), normal.getSize());</b>
+<b class="nc"><i>62</i>&nbsp;            if (symbolImage != null) {</b>
+<b class="nc"><i>63</i>&nbsp;                ImageGraphicAttribute imgAttr</b>
+<i>64</i>&nbsp;                        = new ImageGraphicAttribute(symbolImage, GraphicAttribute.BOTTOM_ALIGNMENT);
+<b class="nc"><i>65</i>&nbsp;                str.addAttribute(TextAttribute.CHAR_REPLACEMENT, imgAttr, location, location + 1);</b>
+<i>66</i>&nbsp;            }
+<i>67</i>&nbsp;        }
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    public String text;
+<i>71</i>&nbsp;    public TextboxRuleType type;
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    private List&lt;AttributeRegion&gt; regions;
+<i>74</i>&nbsp;
+<b class="nc"><i>75</i>&nbsp;    protected TextboxRule(String text, List&lt;AttributeRegion&gt; regions, TextboxRuleType type) {</b>
+<b class="nc"><i>76</i>&nbsp;        this.text = text;</b>
+<b class="nc"><i>77</i>&nbsp;        this.type = type;</b>
+<b class="nc"><i>78</i>&nbsp;        this.regions = regions;</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    public TextboxRule(String text, List&lt;AttributeRegion&gt; regions) {
+<b class="nc"><i>82</i>&nbsp;        this(text, regions, TextboxRuleType.NORMAL);</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    public AttributedString generateAttributedString(Font normal, Font italic) {
+<i>86</i>&nbsp;        // Build the final attributed text using the regions
+<i>87</i>&nbsp;        // Do it in reverse order for proper handling of regions where
+<i>88</i>&nbsp;        // there are multiple attributes stacked (EG: bold + italic)
+<b class="nc"><i>89</i>&nbsp;        AttributedString attributedRule = new AttributedString(text);</b>
+<b class="nc"><i>90</i>&nbsp;        if (text.length() != 0) {</b>
+<b class="nc"><i>91</i>&nbsp;            attributedRule.addAttribute(TextAttribute.FONT, normal);</b>
+<b class="nc"><i>92</i>&nbsp;            for (int i = regions.size() - 1; i &gt;= 0; --i) {</b>
+<b class="nc"><i>93</i>&nbsp;                regions.get(i).applyToAttributedString(attributedRule, normal, italic);</b>
+<i>94</i>&nbsp;            }
+<i>95</i>&nbsp;        }
+<b class="nc"><i>96</i>&nbsp;        return attributedRule;</b>
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

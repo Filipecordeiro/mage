@@ -1,0 +1,302 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CardDownloadData</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.mage.plugins.card.images</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CardDownloadData (org.mage.plugins.card.images)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CardDownloadData</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 85)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package org.mage.plugins.card.images;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.Objects;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/**
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; * @author North
+<i>8</i>&nbsp; */
+<i>9</i>&nbsp;public class CardDownloadData {
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    private String name;
+<i>12</i>&nbsp;    private String downloadName;
+<i>13</i>&nbsp;    private String set;
+<i>14</i>&nbsp;    private String tokenSetCode;
+<i>15</i>&nbsp;    private String tokenDescriptor;
+<i>16</i>&nbsp;    private String collectorId;
+<i>17</i>&nbsp;    private Integer type;
+<i>18</i>&nbsp;    private boolean token;
+<i>19</i>&nbsp;    private boolean twoFacedCard;
+<i>20</i>&nbsp;    private boolean secondSide;
+<i>21</i>&nbsp;    private boolean flipCard;
+<i>22</i>&nbsp;    private boolean flippedSide;
+<i>23</i>&nbsp;    private boolean splitCard;
+<i>24</i>&nbsp;    private boolean usesVariousArt;
+<i>25</i>&nbsp;    private boolean isType2;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor) {
+<b class="nc"><i>28</i>&nbsp;        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, false);</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token) {
+<b class="nc"><i>32</i>&nbsp;        this(name, set, collectorId, usesVariousArt, type, tokenSetCode, tokenDescriptor, token, false, false);</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<b class="nc"><i>35</i>&nbsp;    public CardDownloadData(String name, String set, String collectorId, boolean usesVariousArt, Integer type, String tokenSetCode, String tokenDescriptor, boolean token, boolean twoFacedCard, boolean secondSide) {</b>
+<b class="nc"><i>36</i>&nbsp;        this.name = name;</b>
+<b class="nc"><i>37</i>&nbsp;        this.set = set;</b>
+<b class="nc"><i>38</i>&nbsp;        this.collectorId = collectorId;</b>
+<b class="nc"><i>39</i>&nbsp;        this.usesVariousArt = usesVariousArt;</b>
+<b class="nc"><i>40</i>&nbsp;        this.type = type;</b>
+<b class="nc"><i>41</i>&nbsp;        this.token = token;</b>
+<b class="nc"><i>42</i>&nbsp;        this.twoFacedCard = twoFacedCard;</b>
+<b class="nc"><i>43</i>&nbsp;        this.secondSide = secondSide;</b>
+<b class="nc"><i>44</i>&nbsp;        this.tokenSetCode = tokenSetCode;</b>
+<b class="nc"><i>45</i>&nbsp;        this.tokenDescriptor = tokenDescriptor;</b>
+<i>46</i>&nbsp;        
+<b class="nc"><i>47</i>&nbsp;        if (this.tokenDescriptor == null || this.tokenDescriptor.equalsIgnoreCase(&quot;&quot;)) {</b>
+<b class="nc"><i>48</i>&nbsp;            this.tokenDescriptor = lastDitchTokenDescriptor();</b>
+<i>49</i>&nbsp;        }
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<b class="nc"><i>52</i>&nbsp;    public CardDownloadData(final CardDownloadData card) {</b>
+<b class="nc"><i>53</i>&nbsp;        this.name = card.name;</b>
+<b class="nc"><i>54</i>&nbsp;        this.set = card.set;</b>
+<b class="nc"><i>55</i>&nbsp;        this.collectorId = card.collectorId;</b>
+<b class="nc"><i>56</i>&nbsp;        this.token = card.token;</b>
+<b class="nc"><i>57</i>&nbsp;        this.twoFacedCard = card.twoFacedCard;</b>
+<b class="nc"><i>58</i>&nbsp;        this.secondSide = card.secondSide;</b>
+<b class="nc"><i>59</i>&nbsp;        this.type = card.type;</b>
+<b class="nc"><i>60</i>&nbsp;        this.usesVariousArt = card.usesVariousArt;</b>
+<b class="nc"><i>61</i>&nbsp;        this.tokenSetCode = card.tokenSetCode;</b>
+<b class="nc"><i>62</i>&nbsp;        this.tokenDescriptor = card.tokenDescriptor;</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    @Override
+<i>67</i>&nbsp;    public boolean equals(Object obj) {
+<b class="nc"><i>68</i>&nbsp;        if (obj == null) {</b>
+<b class="nc"><i>69</i>&nbsp;            return false;</b>
+<i>70</i>&nbsp;        }
+<b class="nc"><i>71</i>&nbsp;        if (getClass() != obj.getClass()) {</b>
+<b class="nc"><i>72</i>&nbsp;            return false;</b>
+<i>73</i>&nbsp;        }
+<b class="nc"><i>74</i>&nbsp;        final CardDownloadData other = (CardDownloadData) obj;</b>
+<b class="nc"><i>75</i>&nbsp;        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {</b>
+<b class="nc"><i>76</i>&nbsp;            return false;</b>
+<i>77</i>&nbsp;        }
+<b class="nc"><i>78</i>&nbsp;        if ((this.set == null) ? (other.set != null) : !this.set.equals(other.set)) {</b>
+<b class="nc"><i>79</i>&nbsp;            return false;</b>
+<i>80</i>&nbsp;        }
+<b class="nc"><i>81</i>&nbsp;        if (!Objects.equals(this.collectorId, other.collectorId) &amp;&amp; (this.collectorId == null || !this.collectorId.equals(other.collectorId))) {</b>
+<b class="nc"><i>82</i>&nbsp;            return false;</b>
+<i>83</i>&nbsp;        }
+<b class="nc"><i>84</i>&nbsp;        if (this.token != other.token) {</b>
+<b class="nc"><i>85</i>&nbsp;            return false;</b>
+<i>86</i>&nbsp;        }
+<b class="nc"><i>87</i>&nbsp;        if (this.twoFacedCard != other.twoFacedCard) {</b>
+<b class="nc"><i>88</i>&nbsp;            return false;</b>
+<i>89</i>&nbsp;        }
+<b class="nc"><i>90</i>&nbsp;        if (this.secondSide != other.secondSide) {</b>
+<b class="nc"><i>91</i>&nbsp;            return false;</b>
+<i>92</i>&nbsp;        }
+<b class="nc"><i>93</i>&nbsp;        if (this.isType2 != other.isType2) {</b>
+<b class="nc"><i>94</i>&nbsp;            return false;</b>
+<i>95</i>&nbsp;        }
+<b class="nc"><i>96</i>&nbsp;        return true;</b>
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    @Override
+<i>100</i>&nbsp;    public int hashCode() {
+<b class="nc"><i>101</i>&nbsp;        int hash = 5;</b>
+<b class="nc"><i>102</i>&nbsp;        hash = 47 * hash + (this.name != null ? this.name.hashCode() : 0);</b>
+<b class="nc"><i>103</i>&nbsp;        hash = 47 * hash + (this.set != null ? this.set.hashCode() : 0);</b>
+<b class="nc"><i>104</i>&nbsp;        hash = 47 * hash + (this.collectorId != null ? this.collectorId.hashCode() : 0);</b>
+<b class="nc"><i>105</i>&nbsp;        hash = 47 * hash + (this.type != null ? this.type.hashCode() : 0);</b>
+<b class="nc"><i>106</i>&nbsp;        hash = 47 * hash + (this.token ? 1 : 0);</b>
+<b class="nc"><i>107</i>&nbsp;        hash = 47 * hash + (this.twoFacedCard ? 1 : 0);</b>
+<b class="nc"><i>108</i>&nbsp;        hash = 47 * hash + (this.secondSide ? 1 : 0);</b>
+<b class="nc"><i>109</i>&nbsp;        hash = 47 * hash + (this.isType2 ? 1 : 0);</b>
+<b class="nc"><i>110</i>&nbsp;        return hash;</b>
+<i>111</i>&nbsp;    }
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;    public String getCollectorId() {
+<b class="nc"><i>114</i>&nbsp;        return collectorId;</b>
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    public String getName() {
+<b class="nc"><i>118</i>&nbsp;        return name;</b>
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    public void setName(String name) {
+<b class="nc"><i>122</i>&nbsp;        this.name = name;</b>
+<i>123</i>&nbsp;    }
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    public String getSet() {
+<b class="nc"><i>126</i>&nbsp;        return set;</b>
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;    
+<i>129</i>&nbsp;    public void setSet(String set) {
+<b class="nc"><i>130</i>&nbsp;        this.set = set;</b>
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    public String getTokenSetCode() {
+<b class="nc"><i>134</i>&nbsp;        return tokenSetCode;</b>
+<i>135</i>&nbsp;    }
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;    public void setTokenSetCode(String tokenSetCode) {
+<b class="nc"><i>138</i>&nbsp;        this.tokenSetCode = tokenSetCode;</b>
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    public String getTokenDescriptor() {
+<b class="nc"><i>142</i>&nbsp;        return tokenDescriptor;</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    public void setTokenDescriptor(String tokenDescriptor) {
+<b class="nc"><i>146</i>&nbsp;        this.tokenDescriptor = tokenDescriptor;</b>
+<i>147</i>&nbsp;    }  
+<i>148</i>&nbsp;    
+<i>149</i>&nbsp;    private String lastDitchTokenDescriptor() {
+<b class="nc"><i>150</i>&nbsp;        String name = this.name.replaceAll(&quot;[^a-zA-Z0-9]&quot;, &quot;&quot;);</b>
+<b class="nc"><i>151</i>&nbsp;        String descriptor = name + &quot;....&quot;; </b>
+<b class="nc"><i>152</i>&nbsp;        descriptor = descriptor.toUpperCase();</b>
+<b class="nc"><i>153</i>&nbsp;        return descriptor;</b>
+<i>154</i>&nbsp;    }  
+<i>155</i>&nbsp;    
+<i>156</i>&nbsp;    public boolean isToken() {
+<b class="nc"><i>157</i>&nbsp;        return token;</b>
+<i>158</i>&nbsp;    }
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;    public void setToken(boolean token) {
+<b class="nc"><i>161</i>&nbsp;        this.token = token;</b>
+<i>162</i>&nbsp;    }
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;    public boolean isTwoFacedCard() {
+<b class="nc"><i>165</i>&nbsp;        return twoFacedCard;</b>
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;    public boolean isSecondSide() {
+<b class="nc"><i>169</i>&nbsp;        return secondSide;</b>
+<i>170</i>&nbsp;    }
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    public String getDownloadName() {
+<b class="nc"><i>173</i>&nbsp;        return downloadName == null ? name : downloadName;</b>
+<i>174</i>&nbsp;    }
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;    public void setDownloadName(String downloadName) {
+<b class="nc"><i>177</i>&nbsp;        this.downloadName = downloadName;</b>
+<i>178</i>&nbsp;    }
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;    public boolean isFlipCard() {
+<b class="nc"><i>181</i>&nbsp;        return flipCard;</b>
+<i>182</i>&nbsp;    }
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    public void setFlipCard(boolean flipCard) {
+<b class="nc"><i>185</i>&nbsp;        this.flipCard = flipCard;</b>
+<i>186</i>&nbsp;    }
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;    public boolean isSplitCard() {
+<b class="nc"><i>189</i>&nbsp;        return splitCard;</b>
+<i>190</i>&nbsp;    }
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;    public void setSplitCard(boolean splitCard) {
+<b class="nc"><i>193</i>&nbsp;        this.splitCard = splitCard;</b>
+<i>194</i>&nbsp;    }
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;    public Integer getType() {
+<b class="nc"><i>197</i>&nbsp;        return type;</b>
+<i>198</i>&nbsp;    }
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;    public boolean getUsesVariousArt() {
+<b class="nc"><i>201</i>&nbsp;        return usesVariousArt;</b>
+<i>202</i>&nbsp;    }
+<i>203</i>&nbsp;
+<i>204</i>&nbsp;    public boolean isFlippedSide() {
+<b class="nc"><i>205</i>&nbsp;        return flippedSide;</b>
+<i>206</i>&nbsp;    }
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;    public void setFlippedSide(boolean flippedSide) {
+<b class="nc"><i>209</i>&nbsp;        this.flippedSide = flippedSide;</b>
+<i>210</i>&nbsp;    }
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;    public boolean isType2() {
+<b class="nc"><i>213</i>&nbsp;        return isType2;</b>
+<i>214</i>&nbsp;    }
+<i>215</i>&nbsp;
+<i>216</i>&nbsp;    public void setType2(boolean type2) {
+<b class="nc"><i>217</i>&nbsp;        isType2 = type2;</b>
+<i>218</i>&nbsp;    }
+<i>219</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

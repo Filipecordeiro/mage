@@ -1,0 +1,561 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TargetWithAdditionalFilter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TargetWithAdditionalFilter (mage.abilities.effects.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TargetWithAdditionalFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 111)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.effects.common;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.ArrayList;
+<i>31</i>&nbsp;import java.util.Collection;
+<i>32</i>&nbsp;import java.util.HashMap;
+<i>33</i>&nbsp;import java.util.HashSet;
+<i>34</i>&nbsp;import java.util.List;
+<i>35</i>&nbsp;import java.util.Map;
+<i>36</i>&nbsp;import java.util.Set;
+<i>37</i>&nbsp;import java.util.UUID;
+<i>38</i>&nbsp;import mage.MageItem;
+<i>39</i>&nbsp;import mage.MageObject;
+<i>40</i>&nbsp;import mage.abilities.Ability;
+<i>41</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>42</i>&nbsp;import mage.constants.Outcome;
+<i>43</i>&nbsp;import mage.constants.Zone;
+<i>44</i>&nbsp;import mage.filter.FilterImpl;
+<i>45</i>&nbsp;import mage.filter.FilterInPlay;
+<i>46</i>&nbsp;import mage.filter.predicate.mageobject.FromSetPredicate;
+<i>47</i>&nbsp;import mage.game.Game;
+<i>48</i>&nbsp;import mage.game.stack.Spell;
+<i>49</i>&nbsp;import mage.players.Player;
+<i>50</i>&nbsp;import mage.target.Target;
+<i>51</i>&nbsp;import mage.target.TargetImpl;
+<i>52</i>&nbsp;import mage.util.TargetAddress;
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;/**
+<i>55</i>&nbsp; * @author duncant
+<i>56</i>&nbsp; * @param &lt;T&gt;
+<i>57</i>&nbsp; */
+<i>58</i>&nbsp;public abstract class CopySpellForEachItCouldTargetEffect&lt;T extends MageItem&gt; extends OneShotEffect {
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    protected final FilterInPlay&lt;T&gt; filter;
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public CopySpellForEachItCouldTargetEffect(FilterInPlay&lt;T&gt; filter) {
+<i>63</i>&nbsp;        super(Outcome.Copy);
+<i>64</i>&nbsp;        this.staticText = &quot;copy the spell for each other &quot; + filter.getMessage() + &quot; that spell could target. Each copy targets a different one&quot;;
+<i>65</i>&nbsp;        this.filter = filter;
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public CopySpellForEachItCouldTargetEffect(final CopySpellForEachItCouldTargetEffect effect) {
+<i>69</i>&nbsp;        super(effect);
+<i>70</i>&nbsp;        this.filter = effect.filter;
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    protected abstract Spell getSpell(Game game, Ability source);
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    protected abstract Player getPlayer(Game game, Ability source);
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    protected abstract boolean changeTarget(Target target, Game game, Ability source);
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    protected abstract void modifyCopy(Spell copy, Game game, Ability source);
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    protected void modifyCopy(Spell copy, T newTarget, Game game, Ability source) {
+<i>82</i>&nbsp;        modifyCopy(copy, game, source);
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    protected boolean okUUIDToCopyFor(UUID potentialTarget, Game game, Ability source, Spell spell) {
+<i>86</i>&nbsp;        return true;
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    @Override
+<i>90</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>91</i>&nbsp;        Player actingPlayer = getPlayer(game, source);
+<i>92</i>&nbsp;        if (actingPlayer == null) {
+<i>93</i>&nbsp;            return false;
+<i>94</i>&nbsp;        }
+<i>95</i>&nbsp;        Spell spell = getSpell(game, source);
+<i>96</i>&nbsp;        if (spell != null) {
+<i>97</i>&nbsp;            Set&lt;TargetAddress&gt; targetsToBeChanged = new HashSet&lt;&gt;();
+<i>98</i>&nbsp;            boolean madeACopy = false;
+<i>99</i>&nbsp;            for (TargetAddress addr : TargetAddress.walk(spell)) {
+<i>100</i>&nbsp;                Target targetInstance = addr.getTarget(spell);
+<i>101</i>&nbsp;                if (targetInstance.getNumberOfTargets() &gt; 1) {
+<i>102</i>&nbsp;                    throw new UnsupportedOperationException(&quot;Changing Target instances with multiple targets is unsupported&quot;);
+<i>103</i>&nbsp;                }
+<i>104</i>&nbsp;                if (changeTarget(targetInstance, game, source)) {
+<i>105</i>&nbsp;                    targetsToBeChanged.add(addr);
+<i>106</i>&nbsp;                }
+<i>107</i>&nbsp;            }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;            if (targetsToBeChanged.size() &lt; 1) {
+<i>110</i>&nbsp;                return false;
+<i>111</i>&nbsp;            }
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;            // collect objects that can be targeted
+<i>114</i>&nbsp;            Spell copy = spell.copySpell(source.getControllerId());
+<i>115</i>&nbsp;            modifyCopy(copy, game, source);
+<i>116</i>&nbsp;            Target sampleTarget = targetsToBeChanged.iterator().next().getTarget(copy);
+<i>117</i>&nbsp;            sampleTarget.setNotTarget(true);
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;            Map&lt;UUID, Map&lt;UUID, Spell&gt;&gt; playerTargetCopyMap = new HashMap&lt;&gt;();
+<i>120</i>&nbsp;            for (UUID objId : sampleTarget.possibleTargets(actingPlayer.getId(), game)) {
+<i>121</i>&nbsp;                MageItem obj = game.getObject(objId);
+<i>122</i>&nbsp;                if (obj == null) {
+<i>123</i>&nbsp;                    obj = game.getPlayer(objId);
+<i>124</i>&nbsp;                }
+<i>125</i>&nbsp;                if (obj != null) {
+<i>126</i>&nbsp;                    copy = spell.copySpell(source.getControllerId());
+<i>127</i>&nbsp;                    try {
+<i>128</i>&nbsp;                        modifyCopy(copy, (T) obj, game, source);
+<i>129</i>&nbsp;                        if (!filter.match((T) obj, source.getSourceId(), actingPlayer.getId(), game)) {
+<i>130</i>&nbsp;                            continue;
+<i>131</i>&nbsp;                        }
+<i>132</i>&nbsp;                    } catch (ClassCastException e) {
+<i>133</i>&nbsp;                        continue;
+<i>134</i>&nbsp;                    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;                    boolean legal = true;
+<i>137</i>&nbsp;                    for (TargetAddress addr : targetsToBeChanged) {
+<i>138</i>&nbsp;                        // potential target must be legal for all targets that we&#39;re about to change
+<i>139</i>&nbsp;                        Target targetInstance = addr.getTarget(copy);
+<i>140</i>&nbsp;                        legal &amp;= targetInstance.canTarget(actingPlayer.getId(), objId, addr.getSpellAbility(copy), game);
+<i>141</i>&nbsp;                        if (!legal) {
+<i>142</i>&nbsp;                            break;
+<i>143</i>&nbsp;                        }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;                        // potential target must not be the thing that was targeted initially
+<i>146</i>&nbsp;                        targetInstance = addr.getTarget(spell);
+<i>147</i>&nbsp;                        legal &amp;= !targetInstance.getTargets().contains(objId);
+<i>148</i>&nbsp;                        if (!legal) {
+<i>149</i>&nbsp;                            break;
+<i>150</i>&nbsp;                        }
+<i>151</i>&nbsp;                    }
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;                    legal &amp;= okUUIDToCopyFor(objId, game, source, spell);
+<i>154</i>&nbsp;                    if (legal) {
+<i>155</i>&nbsp;                        for (TargetAddress addr : targetsToBeChanged) {
+<i>156</i>&nbsp;                            Target targetInstance = addr.getTarget(copy);
+<i>157</i>&nbsp;                            targetInstance.clearChosen();
+<i>158</i>&nbsp;                            targetInstance.add(objId, game);
+<i>159</i>&nbsp;                        }
+<i>160</i>&nbsp;                        if (!playerTargetCopyMap.containsKey(copy.getControllerId())) {
+<i>161</i>&nbsp;                            playerTargetCopyMap.put(copy.getControllerId(), new HashMap&lt;UUID, Spell&gt;());
+<i>162</i>&nbsp;                        }
+<i>163</i>&nbsp;                        playerTargetCopyMap.get(copy.getControllerId()).put(objId, copy);
+<i>164</i>&nbsp;                    }
+<i>165</i>&nbsp;                }
+<i>166</i>&nbsp;            }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;            // allow the copies&#39; controller to choose the order that they go on the stack
+<i>169</i>&nbsp;            for (Player player : game.getPlayers().values()) {
+<i>170</i>&nbsp;                if (playerTargetCopyMap.containsKey(player.getId())) {
+<i>171</i>&nbsp;                    Map&lt;UUID, Spell&gt; targetCopyMap = playerTargetCopyMap.get(player.getId());
+<i>172</i>&nbsp;                    if (targetCopyMap != null) {
+<i>173</i>&nbsp;                        while (targetCopyMap.size() &gt; 0) {
+<i>174</i>&nbsp;                            FilterInPlay&lt;T&gt; setFilter = filter.copy();
+<i>175</i>&nbsp;                            setFilter.add(new FromSetPredicate(targetCopyMap.keySet()));
+<i>176</i>&nbsp;                            Target target = new TargetWithAdditionalFilter(sampleTarget, setFilter);
+<i>177</i>&nbsp;                            target.setMinNumberOfTargets(0);
+<i>178</i>&nbsp;                            target.setMaxNumberOfTargets(1);
+<i>179</i>&nbsp;                            target.setTargetName(filter.getMessage() + &quot; that &quot; + spell.getLogName() + &quot; could target (&quot; + targetCopyMap.size() + &quot; remaining)&quot;);
+<i>180</i>&nbsp;
+<i>181</i>&nbsp;                            // shortcut if there&#39;s only one possible target remaining
+<i>182</i>&nbsp;                            if (targetCopyMap.size() &gt; 1
+<i>183</i>&nbsp;                                    &amp;&amp; target.canChoose(spell.getId(), player.getId(), game)) {
+<i>184</i>&nbsp;                                player.choose(Outcome.Neutral, target, spell.getId(), game);
+<i>185</i>&nbsp;                            }
+<i>186</i>&nbsp;                            Collection&lt;UUID&gt; chosenIds = target.getTargets();
+<i>187</i>&nbsp;                            if (chosenIds.isEmpty()) {
+<i>188</i>&nbsp;                                chosenIds = targetCopyMap.keySet();
+<i>189</i>&nbsp;                            }
+<i>190</i>&nbsp;
+<i>191</i>&nbsp;                            List&lt;UUID&gt; toDelete = new ArrayList&lt;&gt;();
+<i>192</i>&nbsp;                            for (UUID chosenId : chosenIds) {
+<i>193</i>&nbsp;                                Spell chosenCopy = targetCopyMap.get(chosenId);
+<i>194</i>&nbsp;                                if (chosenCopy != null) {
+<i>195</i>&nbsp;                                    game.getStack().push(chosenCopy);
+<i>196</i>&nbsp;                                    toDelete.add(chosenId);
+<i>197</i>&nbsp;                                    madeACopy = true;
+<i>198</i>&nbsp;                                }
+<i>199</i>&nbsp;                            }
+<i>200</i>&nbsp;
+<i>201</i>&nbsp;                            for (UUID idToDelete : toDelete) {
+<i>202</i>&nbsp;                                targetCopyMap.remove(idToDelete);
+<i>203</i>&nbsp;                            }
+<i>204</i>&nbsp;                        }
+<i>205</i>&nbsp;                    }
+<i>206</i>&nbsp;                }
+<i>207</i>&nbsp;            }
+<i>208</i>&nbsp;            return madeACopy;
+<i>209</i>&nbsp;        }
+<i>210</i>&nbsp;        return false;
+<i>211</i>&nbsp;    }
+<i>212</i>&nbsp;}
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;class CompoundFilter&lt;T extends MageItem&gt; extends FilterImpl&lt;T&gt; implements FilterInPlay&lt;T&gt; {
+<i>215</i>&nbsp;
+<i>216</i>&nbsp;    protected final FilterInPlay&lt;T&gt; filterA;
+<i>217</i>&nbsp;    protected final FilterInPlay&lt;T&gt; filterB;
+<i>218</i>&nbsp;
+<i>219</i>&nbsp;    public CompoundFilter(String name) {
+<i>220</i>&nbsp;        super(name);
+<i>221</i>&nbsp;        this.filterA = null;
+<i>222</i>&nbsp;        this.filterB = null;
+<i>223</i>&nbsp;    }
+<i>224</i>&nbsp;
+<i>225</i>&nbsp;    public CompoundFilter(FilterInPlay&lt;T&gt; filterA, FilterInPlay&lt;T&gt; filterB, String name) {
+<i>226</i>&nbsp;        super(name);
+<i>227</i>&nbsp;        this.filterA = filterA;
+<i>228</i>&nbsp;        this.filterB = filterB;
+<i>229</i>&nbsp;    }
+<i>230</i>&nbsp;
+<i>231</i>&nbsp;    @Override
+<i>232</i>&nbsp;    public boolean checkObjectClass(Object object) {
+<i>233</i>&nbsp;        return true; // already checked in the filter classes itself
+<i>234</i>&nbsp;    }
+<i>235</i>&nbsp;
+<i>236</i>&nbsp;    @Override
+<i>237</i>&nbsp;    public boolean match(T obj, Game game) {
+<i>238</i>&nbsp;        return (filterA == null
+<i>239</i>&nbsp;                || !filterA.match(obj, game))
+<i>240</i>&nbsp;                &amp;&amp; (filterB == null
+<i>241</i>&nbsp;                || !filterB.match(obj, game));
+<i>242</i>&nbsp;    }
+<i>243</i>&nbsp;
+<i>244</i>&nbsp;    @Override
+<i>245</i>&nbsp;    public boolean match(T obj, UUID sourceId, UUID playerId, Game game) {
+<i>246</i>&nbsp;        return (filterA == null
+<i>247</i>&nbsp;                || !filterA.match(obj, sourceId, playerId, game))
+<i>248</i>&nbsp;                &amp;&amp; (filterB == null
+<i>249</i>&nbsp;                || !filterB.match(obj, sourceId, playerId, game));
+<i>250</i>&nbsp;    }
+<i>251</i>&nbsp;
+<i>252</i>&nbsp;    @Override
+<i>253</i>&nbsp;    public CompoundFilter copy() {
+<i>254</i>&nbsp;        return new CompoundFilter(filterA == null ? null : filterA.copy(),
+<i>255</i>&nbsp;                filterB == null ? null : filterB.copy(),
+<i>256</i>&nbsp;                message);
+<i>257</i>&nbsp;    }
+<i>258</i>&nbsp;}
+<i>259</i>&nbsp;
+<i>260</i>&nbsp;class TargetWithAdditionalFilter&lt;T extends MageItem&gt; extends TargetImpl {
+<i>261</i>&nbsp;
+<i>262</i>&nbsp;    protected final FilterInPlay&lt;T&gt; additionalFilter;
+<i>263</i>&nbsp;    protected final Target originalTarget;
+<b class="nc"><i>264</i>&nbsp;    protected static final Integer minNumberOfTargets = null;</b>
+<b class="nc"><i>265</i>&nbsp;    protected static final Integer maxNumberOfTargets = null;</b>
+<b class="nc"><i>266</i>&nbsp;    protected static final Zone zone = null;</b>
+<i>267</i>&nbsp;
+<i>268</i>&nbsp;    public TargetWithAdditionalFilter(final TargetWithAdditionalFilter target) {
+<b class="nc"><i>269</i>&nbsp;        this(target.originalTarget, target.additionalFilter, false);</b>
+<i>270</i>&nbsp;    }
+<i>271</i>&nbsp;
+<i>272</i>&nbsp;    public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay&lt;T&gt; additionalFilter) {
+<b class="nc"><i>273</i>&nbsp;        this(originalTarget, additionalFilter, false);</b>
+<i>274</i>&nbsp;    }
+<i>275</i>&nbsp;
+<b class="nc"><i>276</i>&nbsp;    public TargetWithAdditionalFilter(Target originalTarget, FilterInPlay&lt;T&gt; additionalFilter, boolean notTarget) {</b>
+<b class="nc"><i>277</i>&nbsp;        originalTarget = originalTarget.copy();</b>
+<b class="nc"><i>278</i>&nbsp;        originalTarget.clearChosen();</b>
+<b class="nc"><i>279</i>&nbsp;        this.originalTarget = originalTarget;</b>
+<b class="nc"><i>280</i>&nbsp;        this.targetName = originalTarget.getFilter().getMessage();</b>
+<b class="nc"><i>281</i>&nbsp;        this.notTarget = notTarget;</b>
+<b class="nc"><i>282</i>&nbsp;        this.additionalFilter = additionalFilter;</b>
+<i>283</i>&nbsp;    }
+<i>284</i>&nbsp;
+<i>285</i>&nbsp;    @Override
+<i>286</i>&nbsp;    public int getNumberOfTargets() {
+<b class="nc"><i>287</i>&nbsp;        return originalTarget.getNumberOfTargets();</b>
+<i>288</i>&nbsp;    }
+<i>289</i>&nbsp;
+<i>290</i>&nbsp;    @Override
+<i>291</i>&nbsp;    public int getMaxNumberOfTargets() {
+<b class="nc"><i>292</i>&nbsp;        return originalTarget.getMaxNumberOfTargets();</b>
+<i>293</i>&nbsp;    }
+<i>294</i>&nbsp;
+<i>295</i>&nbsp;    @Override
+<i>296</i>&nbsp;    public void setMinNumberOfTargets(int minNumberOfTargets) {
+<b class="nc"><i>297</i>&nbsp;        originalTarget.setMinNumberOfTargets(minNumberOfTargets);</b>
+<i>298</i>&nbsp;    }
+<i>299</i>&nbsp;
+<i>300</i>&nbsp;    @Override
+<i>301</i>&nbsp;    public void setMaxNumberOfTargets(int maxNumberOfTargets) {
+<b class="nc"><i>302</i>&nbsp;        originalTarget.setMaxNumberOfTargets(maxNumberOfTargets);</b>
+<i>303</i>&nbsp;    }
+<i>304</i>&nbsp;
+<i>305</i>&nbsp;    @Override
+<i>306</i>&nbsp;    public Zone getZone() {
+<b class="nc"><i>307</i>&nbsp;        return originalTarget.getZone();</b>
+<i>308</i>&nbsp;    }
+<i>309</i>&nbsp;
+<i>310</i>&nbsp;    @Override
+<i>311</i>&nbsp;    public boolean canTarget(UUID id, Game game) {
+<b class="nc"><i>312</i>&nbsp;        MageItem obj = game.getObject(id);</b>
+<b class="nc"><i>313</i>&nbsp;        if (obj == null) {</b>
+<b class="nc"><i>314</i>&nbsp;            obj = game.getPlayer(id);</b>
+<i>315</i>&nbsp;        }
+<i>316</i>&nbsp;
+<i>317</i>&nbsp;        try {
+<b class="nc"><i>318</i>&nbsp;            return obj != null</b>
+<b class="nc"><i>319</i>&nbsp;                    &amp;&amp; originalTarget.canTarget(id, game)</b>
+<b class="nc"><i>320</i>&nbsp;                    &amp;&amp; additionalFilter.match((T) obj, game);</b>
+<b class="nc"><i>321</i>&nbsp;        } catch (ClassCastException e) {</b>
+<b class="nc"><i>322</i>&nbsp;            return false;</b>
+<i>323</i>&nbsp;        }
+<i>324</i>&nbsp;    }
+<i>325</i>&nbsp;
+<i>326</i>&nbsp;    @Override
+<i>327</i>&nbsp;    public boolean canTarget(UUID id, Ability source, Game game) {
+<b class="nc"><i>328</i>&nbsp;        MageItem obj = game.getObject(id);</b>
+<b class="nc"><i>329</i>&nbsp;        if (obj == null) {</b>
+<b class="nc"><i>330</i>&nbsp;            obj = game.getPlayer(id);</b>
+<i>331</i>&nbsp;        }
+<i>332</i>&nbsp;
+<i>333</i>&nbsp;        try {
+<b class="nc"><i>334</i>&nbsp;            return obj != null</b>
+<b class="nc"><i>335</i>&nbsp;                    &amp;&amp; originalTarget.canTarget(id, source, game)</b>
+<b class="nc"><i>336</i>&nbsp;                    &amp;&amp; additionalFilter.match((T) obj, source.getSourceId(), source.getControllerId(), game);</b>
+<b class="nc"><i>337</i>&nbsp;        } catch (ClassCastException e) {</b>
+<b class="nc"><i>338</i>&nbsp;            return false;</b>
+<i>339</i>&nbsp;        }
+<i>340</i>&nbsp;    }
+<i>341</i>&nbsp;
+<i>342</i>&nbsp;    @Override
+<i>343</i>&nbsp;    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+<b class="nc"><i>344</i>&nbsp;        MageItem obj = game.getObject(id);</b>
+<b class="nc"><i>345</i>&nbsp;        if (obj == null) {</b>
+<b class="nc"><i>346</i>&nbsp;            obj = game.getPlayer(id);</b>
+<i>347</i>&nbsp;        }
+<i>348</i>&nbsp;
+<i>349</i>&nbsp;        try {
+<b class="nc"><i>350</i>&nbsp;            return obj != null</b>
+<b class="nc"><i>351</i>&nbsp;                    &amp;&amp; originalTarget.canTarget(controllerId, id, source, game)</b>
+<b class="nc"><i>352</i>&nbsp;                    &amp;&amp; additionalFilter.match((T) obj, source.getSourceId(), controllerId, game);</b>
+<b class="nc"><i>353</i>&nbsp;        } catch (ClassCastException e) {</b>
+<b class="nc"><i>354</i>&nbsp;            return false;</b>
+<i>355</i>&nbsp;        }
+<i>356</i>&nbsp;    }
+<i>357</i>&nbsp;
+<i>358</i>&nbsp;    @Override
+<i>359</i>&nbsp;    public FilterInPlay&lt;T&gt; getFilter() {
+<b class="nc"><i>360</i>&nbsp;        return new CompoundFilter((FilterInPlay&lt;T&gt;) originalTarget.getFilter(), additionalFilter, originalTarget.getFilter().getMessage());</b>
+<i>361</i>&nbsp;    }
+<i>362</i>&nbsp;
+<i>363</i>&nbsp;    @Override
+<i>364</i>&nbsp;    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+<b class="nc"><i>365</i>&nbsp;        int remainingTargets = getNumberOfTargets() - targets.size();</b>
+<b class="nc"><i>366</i>&nbsp;        if (remainingTargets &lt;= 0) {</b>
+<b class="nc"><i>367</i>&nbsp;            return true;</b>
+<i>368</i>&nbsp;        }
+<i>369</i>&nbsp;
+<b class="nc"><i>370</i>&nbsp;        int count = 0;</b>
+<b class="nc"><i>371</i>&nbsp;        for (UUID objId : originalTarget.possibleTargets(sourceId, sourceControllerId, game)) {</b>
+<b class="nc"><i>372</i>&nbsp;            MageItem obj = game.getObject(objId);</b>
+<b class="nc"><i>373</i>&nbsp;            if (obj == null) {</b>
+<b class="nc"><i>374</i>&nbsp;                obj = game.getPlayer(objId);</b>
+<i>375</i>&nbsp;            }
+<i>376</i>&nbsp;            try {
+<b class="nc"><i>377</i>&nbsp;                if (!targets.containsKey(objId)</b>
+<i>378</i>&nbsp;                        &amp;&amp; obj != null
+<b class="nc"><i>379</i>&nbsp;                        &amp;&amp; additionalFilter.match((T) obj, sourceId, sourceControllerId, game)) {</b>
+<b class="nc"><i>380</i>&nbsp;                    count++;</b>
+<b class="nc"><i>381</i>&nbsp;                    if (count &gt;= remainingTargets) {</b>
+<b class="nc"><i>382</i>&nbsp;                        return true;</b>
+<i>383</i>&nbsp;                    }
+<i>384</i>&nbsp;                }
+<b class="nc"><i>385</i>&nbsp;            } catch (ClassCastException e) {</b>
+<b class="nc"><i>386</i>&nbsp;            }</b>
+<b class="nc"><i>387</i>&nbsp;        }</b>
+<b class="nc"><i>388</i>&nbsp;        return false;</b>
+<i>389</i>&nbsp;    }
+<i>390</i>&nbsp;
+<i>391</i>&nbsp;    @Override
+<i>392</i>&nbsp;    public boolean canChoose(UUID sourceControllerId, Game game) {
+<b class="nc"><i>393</i>&nbsp;        int remainingTargets = getNumberOfTargets() - targets.size();</b>
+<b class="nc"><i>394</i>&nbsp;        if (remainingTargets &lt;= 0) {</b>
+<b class="nc"><i>395</i>&nbsp;            return true;</b>
+<i>396</i>&nbsp;        }
+<i>397</i>&nbsp;
+<b class="nc"><i>398</i>&nbsp;        int count = 0;</b>
+<b class="nc"><i>399</i>&nbsp;        for (UUID objId : originalTarget.possibleTargets(sourceControllerId, game)) {</b>
+<b class="nc"><i>400</i>&nbsp;            MageItem obj = game.getObject(objId);</b>
+<b class="nc"><i>401</i>&nbsp;            if (obj == null) {</b>
+<b class="nc"><i>402</i>&nbsp;                obj = game.getPlayer(objId);</b>
+<i>403</i>&nbsp;            }
+<i>404</i>&nbsp;            try {
+<b class="nc"><i>405</i>&nbsp;                if (!targets.containsKey(objId)</b>
+<i>406</i>&nbsp;                        &amp;&amp; obj != null
+<b class="nc"><i>407</i>&nbsp;                        &amp;&amp; additionalFilter.match((T) obj, game)) {</b>
+<b class="nc"><i>408</i>&nbsp;                    count++;</b>
+<b class="nc"><i>409</i>&nbsp;                    if (count &gt;= remainingTargets) {</b>
+<b class="nc"><i>410</i>&nbsp;                        return true;</b>
+<i>411</i>&nbsp;                    }
+<i>412</i>&nbsp;                }
+<b class="nc"><i>413</i>&nbsp;            } catch (ClassCastException e) {</b>
+<b class="nc"><i>414</i>&nbsp;            }</b>
+<b class="nc"><i>415</i>&nbsp;        }</b>
+<b class="nc"><i>416</i>&nbsp;        return false;</b>
+<i>417</i>&nbsp;    }
+<i>418</i>&nbsp;
+<i>419</i>&nbsp;    @Override
+<i>420</i>&nbsp;    public Set&lt;UUID&gt; possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+<b class="nc"><i>421</i>&nbsp;        Set&lt;UUID&gt; ret = new HashSet&lt;&gt;();</b>
+<b class="nc"><i>422</i>&nbsp;        for (UUID id : originalTarget.possibleTargets(sourceId, sourceControllerId, game)) {</b>
+<b class="nc"><i>423</i>&nbsp;            MageItem obj = game.getObject(id);</b>
+<b class="nc"><i>424</i>&nbsp;            if (obj == null) {</b>
+<b class="nc"><i>425</i>&nbsp;                obj = game.getPlayer(id);</b>
+<i>426</i>&nbsp;            }
+<i>427</i>&nbsp;            try {
+<b class="nc"><i>428</i>&nbsp;                if (obj != null</b>
+<b class="nc"><i>429</i>&nbsp;                        &amp;&amp; additionalFilter.match((T) obj, sourceId, sourceControllerId, game)) {</b>
+<b class="nc"><i>430</i>&nbsp;                    ret.add(id);</b>
+<i>431</i>&nbsp;                }
+<b class="nc"><i>432</i>&nbsp;            } catch (ClassCastException e) {</b>
+<b class="nc"><i>433</i>&nbsp;            }</b>
+<b class="nc"><i>434</i>&nbsp;        }</b>
+<b class="nc"><i>435</i>&nbsp;        return ret;</b>
+<i>436</i>&nbsp;    }
+<i>437</i>&nbsp;
+<i>438</i>&nbsp;    @Override
+<i>439</i>&nbsp;    public Set&lt;UUID&gt; possibleTargets(UUID sourceControllerId, Game game) {
+<b class="nc"><i>440</i>&nbsp;        Set&lt;UUID&gt; ret = new HashSet&lt;&gt;();</b>
+<b class="nc"><i>441</i>&nbsp;        for (UUID id : originalTarget.possibleTargets(sourceControllerId, game)) {</b>
+<b class="nc"><i>442</i>&nbsp;            MageItem obj = game.getObject(id);</b>
+<b class="nc"><i>443</i>&nbsp;            if (obj == null) {</b>
+<b class="nc"><i>444</i>&nbsp;                obj = game.getPlayer(id);</b>
+<i>445</i>&nbsp;            }
+<i>446</i>&nbsp;            try {
+<b class="nc"><i>447</i>&nbsp;                if (obj != null</b>
+<b class="nc"><i>448</i>&nbsp;                        &amp;&amp; additionalFilter.match((T) obj, game)) {</b>
+<b class="nc"><i>449</i>&nbsp;                    ret.add(id);</b>
+<i>450</i>&nbsp;                }
+<b class="nc"><i>451</i>&nbsp;            } catch (ClassCastException e) {</b>
+<b class="nc"><i>452</i>&nbsp;            }</b>
+<b class="nc"><i>453</i>&nbsp;        }</b>
+<b class="nc"><i>454</i>&nbsp;        return ret;</b>
+<i>455</i>&nbsp;    }
+<i>456</i>&nbsp;
+<i>457</i>&nbsp;    @Override
+<i>458</i>&nbsp;    public TargetWithAdditionalFilter copy() {
+<b class="nc"><i>459</i>&nbsp;        return new TargetWithAdditionalFilter(this);</b>
+<i>460</i>&nbsp;    }
+<i>461</i>&nbsp;
+<i>462</i>&nbsp;    @Override
+<i>463</i>&nbsp;    public String getTargetedName(Game game) {
+<b class="nc"><i>464</i>&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc"><i>465</i>&nbsp;        for (UUID targetId : getTargets()) {</b>
+<b class="nc"><i>466</i>&nbsp;            MageObject object = game.getObject(targetId);</b>
+<b class="nc"><i>467</i>&nbsp;            if (object != null) {</b>
+<b class="nc"><i>468</i>&nbsp;                sb.append(object.getLogName()).append(&quot; &quot;);</b>
+<i>469</i>&nbsp;            } else {
+<b class="nc"><i>470</i>&nbsp;                Player player = game.getPlayer(targetId);</b>
+<b class="nc"><i>471</i>&nbsp;                if (player != null) {</b>
+<b class="nc"><i>472</i>&nbsp;                    sb.append(player.getLogName()).append(&quot; &quot;);</b>
+<i>473</i>&nbsp;                }
+<i>474</i>&nbsp;            }
+<b class="nc"><i>475</i>&nbsp;        }</b>
+<b class="nc"><i>476</i>&nbsp;        return sb.toString();</b>
+<i>477</i>&nbsp;    }
+<i>478</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

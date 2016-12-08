@@ -1,0 +1,341 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ConditionalMana</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ConditionalMana (mage)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConditionalMana</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (11/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    43.9%
+  </span>
+  <span class="absValue">
+    (36/ 82)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ConditionalMana$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (12/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    44.6%
+  </span>
+  <span class="absValue">
+    (37/ 83)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.Serializable;
+<i>31</i>&nbsp;import java.util.ArrayList;
+<i>32</i>&nbsp;import java.util.List;
+<i>33</i>&nbsp;import java.util.UUID;
+<i>34</i>&nbsp;import mage.abilities.Ability;
+<i>35</i>&nbsp;import mage.abilities.condition.Condition;
+<i>36</i>&nbsp;import mage.abilities.costs.Cost;
+<i>37</i>&nbsp;import mage.abilities.mana.conditional.ManaCondition;
+<i>38</i>&nbsp;import mage.constants.ManaType;
+<i>39</i>&nbsp;import mage.filter.Filter;
+<i>40</i>&nbsp;import mage.filter.FilterMana;
+<i>41</i>&nbsp;import mage.game.Game;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;/**
+<i>44</i>&nbsp; * @author nantuko
+<i>45</i>&nbsp; */
+<i>46</i>&nbsp;public class ConditionalMana extends Mana implements Serializable {
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    /**
+<i>49</i>&nbsp;     * Conditions that should be met (all or any depending on comparison scope)
+<i>50</i>&nbsp;     * to allow spending {@link Mana} mana.
+<i>51</i>&nbsp;     */
+<b class="fc"><i>52</i>&nbsp;    private List&lt;Condition&gt; conditions = new ArrayList&lt;&gt;();</b>
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    /**
+<i>55</i>&nbsp;     * Text displayed as a description for conditional mana. Usually includes
+<i>56</i>&nbsp;     * the conditions that should be met to use this mana.
+<i>57</i>&nbsp;     */
+<b class="fc"><i>58</i>&nbsp;    protected String staticText = &quot;Conditional mana.&quot;;</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    /**
+<i>61</i>&nbsp;     * By default all conditions should be met
+<i>62</i>&nbsp;     */
+<b class="fc"><i>63</i>&nbsp;    private Filter.ComparisonScope scope = Filter.ComparisonScope.All;</b>
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    /**
+<i>66</i>&nbsp;     * UUID of source for mana.
+<i>67</i>&nbsp;     */
+<i>68</i>&nbsp;    private UUID manaProducerId;
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    /**
+<i>71</i>&nbsp;     * UUID originalId of source ability for mana.
+<i>72</i>&nbsp;     */
+<i>73</i>&nbsp;    private UUID manaProducerOriginalId;
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    public ConditionalMana(Mana mana) {
+<b class="fc"><i>76</i>&nbsp;        super(mana);</b>
+<b class="fc"><i>77</i>&nbsp;    }</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    public ConditionalMana(final ConditionalMana conditionalMana) {
+<b class="fc"><i>80</i>&nbsp;        super(conditionalMana);</b>
+<b class="fc"><i>81</i>&nbsp;        conditions = conditionalMana.conditions;</b>
+<b class="fc"><i>82</i>&nbsp;        scope = conditionalMana.scope;</b>
+<b class="fc"><i>83</i>&nbsp;        staticText = conditionalMana.staticText;</b>
+<b class="fc"><i>84</i>&nbsp;        manaProducerId = conditionalMana.manaProducerId;</b>
+<b class="fc"><i>85</i>&nbsp;        manaProducerOriginalId = conditionalMana.manaProducerOriginalId;</b>
+<b class="fc"><i>86</i>&nbsp;    }</b>
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    public void addCondition(Condition condition) {
+<b class="fc"><i>89</i>&nbsp;        this.conditions.add(condition);</b>
+<b class="fc"><i>90</i>&nbsp;    }</b>
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    public void setComparisonScope(Filter.ComparisonScope scope) {
+<b class="nc"><i>93</i>&nbsp;        this.scope = scope;</b>
+<b class="nc"><i>94</i>&nbsp;    }</b>
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    public boolean apply(Ability ability, Game game, UUID manaProducerId, Cost costToPay) {
+<b class="fc"><i>97</i>&nbsp;        if (conditions.isEmpty()) {</b>
+<b class="nc"><i>98</i>&nbsp;            throw new IllegalStateException(&quot;Conditional mana should contain at least one Condition&quot;);</b>
+<i>99</i>&nbsp;        }
+<b class="fc"><i>100</i>&nbsp;        for (Condition condition : conditions) {</b>
+<b class="fc"><i>101</i>&nbsp;            boolean applied = (condition instanceof ManaCondition)</b>
+<b class="fc"><i>102</i>&nbsp;                    ? ((ManaCondition) condition).apply(game, ability, manaProducerId, costToPay) : condition.apply(game, ability);</b>
+<i>103</i>&nbsp;
+<b class="fc"><i>104</i>&nbsp;            if (!applied) {</b>
+<i>105</i>&nbsp;                // if one condition fails, return false only if All conditions should be met
+<i>106</i>&nbsp;                // otherwise it may happen that Any other condition will be ok
+<b class="fc"><i>107</i>&nbsp;                if (scope.equals(Filter.ComparisonScope.All)) {</b>
+<b class="fc"><i>108</i>&nbsp;                    return false;</b>
+<i>109</i>&nbsp;                }
+<i>110</i>&nbsp;            } else {
+<i>111</i>&nbsp;                // if one condition succeeded, return true only if Any conditions should be met
+<i>112</i>&nbsp;                // otherwise it may happen that any other condition will fail
+<b class="fc"><i>113</i>&nbsp;                if (scope.equals(Filter.ComparisonScope.Any)) {</b>
+<b class="nc"><i>114</i>&nbsp;                    return true;</b>
+<i>115</i>&nbsp;                }
+<i>116</i>&nbsp;            }
+<b class="fc"><i>117</i>&nbsp;        }</b>
+<i>118</i>&nbsp;        // we are here
+<i>119</i>&nbsp;        // if All conditions should be met, then it&#39;s Ok (return true)
+<i>120</i>&nbsp;        // if Any, then it should have already returned true, so returning false here
+<b class="fc"><i>121</i>&nbsp;        return scope.equals(Filter.ComparisonScope.All);</b>
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    @Override
+<i>125</i>&nbsp;    public ConditionalMana copy() {
+<b class="fc"><i>126</i>&nbsp;        return new ConditionalMana(this);</b>
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    public String getDescription() {
+<b class="fc"><i>130</i>&nbsp;        return staticText;</b>
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    public void removeAll(FilterMana filter) {
+<b class="nc"><i>134</i>&nbsp;        if (filter == null) {</b>
+<b class="nc"><i>135</i>&nbsp;            return;</b>
+<i>136</i>&nbsp;        }
+<b class="nc"><i>137</i>&nbsp;        if (filter.isBlack()) {</b>
+<b class="nc"><i>138</i>&nbsp;            black = 0;</b>
+<i>139</i>&nbsp;        }
+<b class="nc"><i>140</i>&nbsp;        if (filter.isBlue()) {</b>
+<b class="nc"><i>141</i>&nbsp;            blue = 0;</b>
+<i>142</i>&nbsp;        }
+<b class="nc"><i>143</i>&nbsp;        if (filter.isWhite()) {</b>
+<b class="nc"><i>144</i>&nbsp;            white = 0;</b>
+<i>145</i>&nbsp;        }
+<b class="nc"><i>146</i>&nbsp;        if (filter.isGreen()) {</b>
+<b class="nc"><i>147</i>&nbsp;            green = 0;</b>
+<i>148</i>&nbsp;        }
+<b class="nc"><i>149</i>&nbsp;        if (filter.isRed()) {</b>
+<b class="nc"><i>150</i>&nbsp;            red = 0;</b>
+<i>151</i>&nbsp;        }
+<b class="nc"><i>152</i>&nbsp;        if (filter.isColorless()) {</b>
+<b class="nc"><i>153</i>&nbsp;            colorless = 0;</b>
+<i>154</i>&nbsp;        }
+<b class="nc"><i>155</i>&nbsp;        if (filter.isGeneric()) {</b>
+<b class="nc"><i>156</i>&nbsp;            generic = 0;</b>
+<i>157</i>&nbsp;        }
+<b class="nc"><i>158</i>&nbsp;    }</b>
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;    public UUID getManaProducerId() {
+<b class="fc"><i>161</i>&nbsp;        return manaProducerId;</b>
+<i>162</i>&nbsp;    }
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;    public void setManaProducerId(UUID manaProducerId) {
+<b class="fc"><i>165</i>&nbsp;        this.manaProducerId = manaProducerId;</b>
+<b class="fc"><i>166</i>&nbsp;    }</b>
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;    public UUID getManaProducerOriginalId() {
+<b class="fc"><i>169</i>&nbsp;        return manaProducerOriginalId;</b>
+<i>170</i>&nbsp;    }
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    public void setManaProducerOriginalId(UUID manaProducerOriginalId) {
+<b class="fc"><i>173</i>&nbsp;        this.manaProducerOriginalId = manaProducerOriginalId;</b>
+<b class="fc"><i>174</i>&nbsp;    }</b>
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;    public void clear(ManaType manaType) {
+<b class="fc"><i>177</i>&nbsp;        switch (manaType) {</b>
+<i>178</i>&nbsp;            case BLACK:
+<b class="fc"><i>179</i>&nbsp;                black = 0;</b>
+<b class="fc"><i>180</i>&nbsp;                break;</b>
+<i>181</i>&nbsp;            case BLUE:
+<b class="nc"><i>182</i>&nbsp;                blue = 0;</b>
+<b class="nc"><i>183</i>&nbsp;                break;</b>
+<i>184</i>&nbsp;            case GREEN:
+<b class="nc"><i>185</i>&nbsp;                green = 0;</b>
+<b class="nc"><i>186</i>&nbsp;                break;</b>
+<i>187</i>&nbsp;            case RED:
+<b class="nc"><i>188</i>&nbsp;                red = 0;</b>
+<b class="nc"><i>189</i>&nbsp;                break;</b>
+<i>190</i>&nbsp;            case WHITE:
+<b class="nc"><i>191</i>&nbsp;                white = 0;</b>
+<b class="nc"><i>192</i>&nbsp;                break;</b>
+<i>193</i>&nbsp;            case GENERIC:
+<b class="nc"><i>194</i>&nbsp;                generic = 0;</b>
+<b class="nc"><i>195</i>&nbsp;                break;</b>
+<i>196</i>&nbsp;            case COLORLESS:
+<b class="nc"><i>197</i>&nbsp;                colorless = 0;</b>
+<i>198</i>&nbsp;                break;
+<i>199</i>&nbsp;        }
+<b class="fc"><i>200</i>&nbsp;    }</b>
+<i>201</i>&nbsp;
+<i>202</i>&nbsp;    public void add(ManaType manaType, int amount) {
+<b class="nc"><i>203</i>&nbsp;        switch (manaType) {</b>
+<i>204</i>&nbsp;            case BLACK:
+<b class="nc"><i>205</i>&nbsp;                black += amount;</b>
+<b class="nc"><i>206</i>&nbsp;                break;</b>
+<i>207</i>&nbsp;            case BLUE:
+<b class="nc"><i>208</i>&nbsp;                blue += amount;</b>
+<i>209</i>&nbsp;                ;
+<b class="nc"><i>210</i>&nbsp;                break;</b>
+<i>211</i>&nbsp;            case GREEN:
+<b class="nc"><i>212</i>&nbsp;                green += amount;</b>
+<i>213</i>&nbsp;                ;
+<b class="nc"><i>214</i>&nbsp;                break;</b>
+<i>215</i>&nbsp;            case RED:
+<b class="nc"><i>216</i>&nbsp;                red += amount;</b>
+<i>217</i>&nbsp;                ;
+<b class="nc"><i>218</i>&nbsp;                break;</b>
+<i>219</i>&nbsp;            case WHITE:
+<b class="nc"><i>220</i>&nbsp;                white += amount;</b>
+<i>221</i>&nbsp;                ;
+<b class="nc"><i>222</i>&nbsp;                break;</b>
+<i>223</i>&nbsp;            case COLORLESS:
+<b class="nc"><i>224</i>&nbsp;                colorless += amount;</b>
+<i>225</i>&nbsp;                ;
+<i>226</i>&nbsp;            case GENERIC:
+<b class="nc"><i>227</i>&nbsp;                generic += amount;</b>
+<i>228</i>&nbsp;                ;
+<i>229</i>&nbsp;                break;
+<i>230</i>&nbsp;        }
+<b class="nc"><i>231</i>&nbsp;    }</b>
+<i>232</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

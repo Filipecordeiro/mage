@@ -1,0 +1,401 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RandomPacksSelectorDialog</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.dialog</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RandomPacksSelectorDialog (mage.client.dialog)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RandomPacksSelectorDialog</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 112)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">RandomPacksSelectorDialog$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">RandomPacksSelectorDialog$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">RandomPacksSelectorDialog$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">RandomPacksSelectorDialog$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 120)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.client.dialog;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.awt.Component;
+<i>9</i>&nbsp;import java.util.ArrayList;
+<i>10</i>&nbsp;import javax.swing.JCheckBox;
+<i>11</i>&nbsp;import javax.swing.JOptionPane;
+<i>12</i>&nbsp;import mage.cards.repository.ExpansionInfo;
+<i>13</i>&nbsp;import mage.cards.repository.ExpansionRepository;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;/**
+<i>16</i>&nbsp; *
+<i>17</i>&nbsp; * @author BrodyL
+<i>18</i>&nbsp; */
+<b class="nc"><i>19</i>&nbsp;public class RandomPacksSelectorDialog extends javax.swing.JDialog {</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * Creates new form RandomPacksSelectorDialog
+<i>23</i>&nbsp;     */
+<i>24</i>&nbsp;    private boolean boxesCreated;
+<i>25</i>&nbsp;    private boolean isRandomDraft;
+<i>26</i>&nbsp;    private boolean isRichManDraft;
+<b class="nc"><i>27</i>&nbsp;    private String title = &quot;&quot;;</b>
+<i>28</i>&nbsp;    public final static String randomDraftDescription = (&quot;The selected packs will be randomly distributed to players. Each player may open different packs. Duplicates will be avoided.&quot;);
+<i>29</i>&nbsp;
+<b class="nc"><i>30</i>&nbsp;    public RandomPacksSelectorDialog(boolean isRandomDraft, boolean isRichManDraft) {</b>
+<b class="nc"><i>31</i>&nbsp;        initComponents();</b>
+<b class="nc"><i>32</i>&nbsp;        setType(isRandomDraft, isRichManDraft);</b>
+<b class="nc"><i>33</i>&nbsp;        this.pnlApply.setToolTipText(randomDraftDescription);</b>
+<b class="nc"><i>34</i>&nbsp;        this.pnlSelect.setToolTipText(randomDraftDescription);</b>
+<b class="nc"><i>35</i>&nbsp;        boxesCreated = false;</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public void setType(boolean isRandomDraft, boolean isRichManDraft) {
+<b class="nc"><i>39</i>&nbsp;        this.isRandomDraft = isRandomDraft;</b>
+<b class="nc"><i>40</i>&nbsp;        this.isRichManDraft = isRichManDraft;</b>
+<b class="nc"><i>41</i>&nbsp;        if (this.isRandomDraft) {</b>
+<b class="nc"><i>42</i>&nbsp;            title = &quot;Random Booster Draft Packs Selector&quot;;</b>
+<b class="nc"><i>43</i>&nbsp;        } else if (this.isRichManDraft) {</b>
+<b class="nc"><i>44</i>&nbsp;            title = &quot;Rich Man Booster Draft Packs Selector&quot;;</b>
+<i>45</i>&nbsp;        }
+<b class="nc"><i>46</i>&nbsp;        setTitle(title);</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public void showDialog() {
+<b class="nc"><i>50</i>&nbsp;        createCheckboxes();</b>
+<b class="nc"><i>51</i>&nbsp;        pnlPacks.setVisible(true);</b>
+<b class="nc"><i>52</i>&nbsp;        pnlPacks.revalidate();</b>
+<b class="nc"><i>53</i>&nbsp;        pnlPacks.repaint();</b>
+<b class="nc"><i>54</i>&nbsp;        this.pack();</b>
+<b class="nc"><i>55</i>&nbsp;        this.revalidate();</b>
+<b class="nc"><i>56</i>&nbsp;        this.repaint();</b>
+<b class="nc"><i>57</i>&nbsp;        this.setVisible(true);</b>
+<b class="nc"><i>58</i>&nbsp;        this.setModal(true);</b>
+<i>59</i>&nbsp;    }
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;   public void setSelectedPacks(ArrayList&lt;String&gt; packs){
+<b class="nc"><i>62</i>&nbsp;       if (!boxesCreated){</b>
+<b class="nc"><i>63</i>&nbsp;           createCheckboxes();</b>
+<i>64</i>&nbsp;       }
+<b class="nc"><i>65</i>&nbsp;       for (Component pack : pnlPacks.getComponents()) {</b>
+<b class="nc"><i>66</i>&nbsp;           JCheckBox thePack = (JCheckBox) pack;</b>
+<b class="nc"><i>67</i>&nbsp;           if (packs.contains(thePack.getText())) {</b>
+<b class="nc"><i>68</i>&nbsp;               thePack.setSelected(true);</b>
+<i>69</i>&nbsp;           } else{
+<b class="nc"><i>70</i>&nbsp;               thePack.setSelected(false);</b>
+<i>71</i>&nbsp;           }
+<i>72</i>&nbsp;       }
+<i>73</i>&nbsp;   }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    public ArrayList&lt;String&gt; getSelectedPacks() {
+<b class="nc"><i>76</i>&nbsp;        ArrayList&lt;String&gt; returnVal = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>77</i>&nbsp;        for (Component pack: pnlPacks.getComponents()){</b>
+<b class="nc"><i>78</i>&nbsp;            JCheckBox thePack = (JCheckBox) pack;</b>
+<b class="nc"><i>79</i>&nbsp;            if (thePack.isSelected()){</b>
+<b class="nc"><i>80</i>&nbsp;                returnVal.add(thePack.getText());</b>
+<i>81</i>&nbsp;            }
+<i>82</i>&nbsp;        }
+<b class="nc"><i>83</i>&nbsp;        return returnVal;</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    private void createCheckboxes() {
+<b class="nc"><i>87</i>&nbsp;        if (!boxesCreated) {</b>
+<b class="nc"><i>88</i>&nbsp;            ExpansionInfo[] allExpansions = ExpansionRepository.instance.getWithBoostersSortedByReleaseDate();</b>
+<b class="nc"><i>89</i>&nbsp;            for (ExpansionInfo exp : allExpansions) {</b>
+<b class="nc"><i>90</i>&nbsp;                JCheckBox pack = new JCheckBox();</b>
+<b class="nc"><i>91</i>&nbsp;                pack.setSelected(true);</b>
+<b class="nc"><i>92</i>&nbsp;                pack.setText(exp.getCode());</b>
+<b class="nc"><i>93</i>&nbsp;                pack.setToolTipText(exp.getName());</b>
+<b class="nc"><i>94</i>&nbsp;                pnlPacks.add(pack);</b>
+<i>95</i>&nbsp;            }
+<b class="nc"><i>96</i>&nbsp;            pnlPacks.setVisible(true);</b>
+<b class="nc"><i>97</i>&nbsp;            this.pack();</b>
+<b class="nc"><i>98</i>&nbsp;            boxesCreated = true;</b>
+<b class="nc"><i>99</i>&nbsp;            pnlPacks.validate();</b>
+<i>100</i>&nbsp;        }
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    /**
+<i>105</i>&nbsp;     * This method is called from within the constructor to initialize the form.
+<i>106</i>&nbsp;     * WARNING: Do NOT modify this code. The content of this method is always
+<i>107</i>&nbsp;     * regenerated by the Form Editor.
+<i>108</i>&nbsp;     */
+<i>109</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>110</i>&nbsp;    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+<i>111</i>&nbsp;    private void initComponents() {
+<i>112</i>&nbsp;
+<b class="nc"><i>113</i>&nbsp;        pnlPacks = new java.awt.Panel();</b>
+<b class="nc"><i>114</i>&nbsp;        pnlSelect = new javax.swing.JPanel();</b>
+<b class="nc"><i>115</i>&nbsp;        btnNone = new javax.swing.JButton();</b>
+<b class="nc"><i>116</i>&nbsp;        btnAll = new javax.swing.JButton();</b>
+<b class="nc"><i>117</i>&nbsp;        pnlApply = new javax.swing.JPanel();</b>
+<b class="nc"><i>118</i>&nbsp;        btnApply = new javax.swing.JButton();</b>
+<i>119</i>&nbsp;
+<b class="nc"><i>120</i>&nbsp;        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);</b>
+<b class="nc"><i>121</i>&nbsp;        setTitle(title);</b>
+<b class="nc"><i>122</i>&nbsp;        setModal(true);</b>
+<b class="nc"><i>123</i>&nbsp;        setModalExclusionType(java.awt.Dialog.ModalExclusionType.APPLICATION_EXCLUDE);</b>
+<b class="nc"><i>124</i>&nbsp;        setPreferredSize(new java.awt.Dimension(600, 450));</b>
+<b class="nc"><i>125</i>&nbsp;        setResizable(false);</b>
+<b class="nc"><i>126</i>&nbsp;        addWindowListener(new java.awt.event.WindowAdapter() {</b>
+<i>127</i>&nbsp;            public void windowClosing(java.awt.event.WindowEvent evt) {
+<b class="nc"><i>128</i>&nbsp;                formWindowClosing(evt);</b>
+<i>129</i>&nbsp;            }
+<i>130</i>&nbsp;        });
+<i>131</i>&nbsp;
+<b class="nc"><i>132</i>&nbsp;        pnlPacks.setLayout(new java.awt.GridLayout(11, 12));</b>
+<i>133</i>&nbsp;
+<b class="nc"><i>134</i>&nbsp;        pnlSelect.setLayout(new javax.swing.BoxLayout(pnlSelect, javax.swing.BoxLayout.LINE_AXIS));</b>
+<i>135</i>&nbsp;
+<b class="nc"><i>136</i>&nbsp;        btnNone.setText(&quot;Select none&quot;);</b>
+<b class="nc"><i>137</i>&nbsp;        btnNone.setActionCommand(&quot;none&quot;);</b>
+<b class="nc"><i>138</i>&nbsp;        btnNone.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>139</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>140</i>&nbsp;                btnNoneActionPerformed(evt);</b>
+<i>141</i>&nbsp;            }
+<i>142</i>&nbsp;        });
+<b class="nc"><i>143</i>&nbsp;        pnlSelect.add(btnNone);</b>
+<i>144</i>&nbsp;
+<b class="nc"><i>145</i>&nbsp;        btnAll.setText(&quot;Select all&quot;);</b>
+<b class="nc"><i>146</i>&nbsp;        btnAll.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>147</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>148</i>&nbsp;                btnAllActionPerformed(evt);</b>
+<i>149</i>&nbsp;            }
+<i>150</i>&nbsp;        });
+<b class="nc"><i>151</i>&nbsp;        pnlSelect.add(btnAll);</b>
+<i>152</i>&nbsp;
+<b class="nc"><i>153</i>&nbsp;        pnlApply.setLayout(new javax.swing.BoxLayout(pnlApply, javax.swing.BoxLayout.LINE_AXIS));</b>
+<i>154</i>&nbsp;
+<b class="nc"><i>155</i>&nbsp;        btnApply.setText(&quot;Apply&quot;);</b>
+<b class="nc"><i>156</i>&nbsp;        if (isRandomDraft) {</b>
+<b class="nc"><i>157</i>&nbsp;            btnApply.setToolTipText(&quot;At least 2 packs must be selected&quot;);</b>
+<b class="nc"><i>158</i>&nbsp;        } else if (isRichManDraft) {</b>
+<b class="nc"><i>159</i>&nbsp;            btnApply.setToolTipText(&quot;At least 1 pack must be selected&quot;);</b>
+<i>160</i>&nbsp;        }
+<b class="nc"><i>161</i>&nbsp;        btnApply.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>162</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>163</i>&nbsp;                btnApplyActionPerformed(evt);</b>
+<i>164</i>&nbsp;            }
+<i>165</i>&nbsp;        });
+<b class="nc"><i>166</i>&nbsp;        pnlApply.add(btnApply);</b>
+<i>167</i>&nbsp;
+<b class="nc"><i>168</i>&nbsp;        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</b>
+<b class="nc"><i>169</i>&nbsp;        getContentPane().setLayout(layout);</b>
+<b class="nc"><i>170</i>&nbsp;        layout.setHorizontalGroup(</b>
+<b class="nc"><i>171</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>172</i>&nbsp;            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>173</i>&nbsp;                .addComponent(pnlSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>174</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)</b>
+<b class="nc"><i>175</i>&nbsp;                .addComponent(pnlApply, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>176</i>&nbsp;            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>177</i>&nbsp;                .addComponent(pnlPacks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</b>
+<b class="nc"><i>178</i>&nbsp;                .addContainerGap())</b>
+<i>179</i>&nbsp;        );
+<b class="nc"><i>180</i>&nbsp;        layout.setVerticalGroup(</b>
+<b class="nc"><i>181</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>182</i>&nbsp;            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>183</i>&nbsp;                .addComponent(pnlPacks, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>184</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>185</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>186</i>&nbsp;                    .addComponent(pnlApply, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>187</i>&nbsp;                    .addComponent(pnlSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>188</i>&nbsp;                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</b>
+<i>189</i>&nbsp;        );
+<i>190</i>&nbsp;
+<b class="nc"><i>191</i>&nbsp;        pack();</b>
+<i>192</i>&nbsp;    }// &lt;/editor-fold&gt;//GEN-END:initComponents
+<i>193</i>&nbsp;
+<i>194</i>&nbsp;    private void btnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllActionPerformed
+<b class="nc"><i>195</i>&nbsp;        setAllCheckBoxes(true);</b>
+<i>196</i>&nbsp;    }//GEN-LAST:event_btnAllActionPerformed
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    private void btnNoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoneActionPerformed
+<b class="nc"><i>199</i>&nbsp;        setAllCheckBoxes(false);</b>
+<i>200</i>&nbsp;    }//GEN-LAST:event_btnNoneActionPerformed
+<i>201</i>&nbsp;
+<i>202</i>&nbsp;    private void btnApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyActionPerformed
+<b class="nc"><i>203</i>&nbsp;        this.doApply();</b>
+<i>204</i>&nbsp;    }//GEN-LAST:event_btnApplyActionPerformed
+<i>205</i>&nbsp;
+<i>206</i>&nbsp;    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+<b class="nc"><i>207</i>&nbsp;        this.doApply();</b>
+<i>208</i>&nbsp;    }//GEN-LAST:event_formWindowClosing
+<i>209</i>&nbsp;
+<i>210</i>&nbsp;    public void doApply() {
+<b class="nc"><i>211</i>&nbsp;        if (getSelectedPacks().size() &lt; 2 &amp;&amp; isRandomDraft) {</b>
+<b class="nc"><i>212</i>&nbsp;            JOptionPane.showMessageDialog(this, &quot;At least 2 sets must be selected&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</b>
+<b class="nc"><i>213</i>&nbsp;        } else if (getSelectedPacks().size() &lt; 1 &amp;&amp; isRichManDraft) {</b>
+<b class="nc"><i>214</i>&nbsp;            JOptionPane.showMessageDialog(this, &quot;At least 1 set must be selected&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</b>
+<i>215</i>&nbsp;        } else {
+<b class="nc"><i>216</i>&nbsp;            this.setVisible(false);</b>
+<i>217</i>&nbsp;        }
+<i>218</i>&nbsp;    }
+<i>219</i>&nbsp;
+<i>220</i>&nbsp;    private void setAllCheckBoxes(boolean value) {
+<b class="nc"><i>221</i>&nbsp;        for (Component pack : pnlPacks.getComponents()) {</b>
+<b class="nc"><i>222</i>&nbsp;            JCheckBox thePack = (JCheckBox) pack;</b>
+<b class="nc"><i>223</i>&nbsp;            thePack.setSelected(value);</b>
+<i>224</i>&nbsp;        }
+<i>225</i>&nbsp;    }
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;    // Variables declaration - do not modify//GEN-BEGIN:variables
+<i>228</i>&nbsp;    private javax.swing.JButton btnAll;
+<i>229</i>&nbsp;    private javax.swing.JButton btnApply;
+<i>230</i>&nbsp;    private javax.swing.JButton btnNone;
+<i>231</i>&nbsp;    private javax.swing.JPanel pnlApply;
+<i>232</i>&nbsp;    private java.awt.Panel pnlPacks;
+<i>233</i>&nbsp;    private javax.swing.JPanel pnlSelect;
+<i>234</i>&nbsp;    // End of variables declaration//GEN-END:variables
+<i>235</i>&nbsp;} 
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

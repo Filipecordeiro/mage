@@ -1,0 +1,628 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CallbackClientImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.remote</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CallbackClientImpl (mage.client.remote)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CallbackClientImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 73)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CallbackClientImpl$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 152)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CallbackClientImpl$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 227)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.client.remote;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.List;
+<i>31</i>&nbsp;import java.util.UUID;
+<i>32</i>&nbsp;import javax.swing.JOptionPane;
+<i>33</i>&nbsp;import javax.swing.SwingUtilities;
+<i>34</i>&nbsp;import mage.cards.decks.Deck;
+<i>35</i>&nbsp;import mage.client.MageFrame;
+<i>36</i>&nbsp;import mage.client.chat.ChatPanelBasic;
+<i>37</i>&nbsp;import mage.client.constants.Constants.DeckEditorMode;
+<i>38</i>&nbsp;import mage.client.draft.DraftPanel;
+<i>39</i>&nbsp;import mage.client.game.GamePanel;
+<i>40</i>&nbsp;import mage.client.plugins.impl.Plugins;
+<i>41</i>&nbsp;import mage.client.util.DeckUtil;
+<i>42</i>&nbsp;import mage.client.util.GameManager;
+<i>43</i>&nbsp;import mage.client.util.audio.AudioManager;
+<i>44</i>&nbsp;import mage.client.util.object.SaveObjectUtil;
+<i>45</i>&nbsp;import mage.interfaces.callback.CallbackClient;
+<i>46</i>&nbsp;import mage.interfaces.callback.ClientCallback;
+<i>47</i>&nbsp;import mage.utils.CompressUtil;
+<i>48</i>&nbsp;import mage.view.AbilityPickerView;
+<i>49</i>&nbsp;import mage.view.ChatMessage;
+<i>50</i>&nbsp;import mage.view.ChatMessage.MessageType;
+<i>51</i>&nbsp;import mage.view.DeckView;
+<i>52</i>&nbsp;import mage.view.DraftClientMessage;
+<i>53</i>&nbsp;import mage.view.DraftView;
+<i>54</i>&nbsp;import mage.view.GameClientMessage;
+<i>55</i>&nbsp;import mage.view.GameEndView;
+<i>56</i>&nbsp;import mage.view.GameView;
+<i>57</i>&nbsp;import mage.view.TableClientMessage;
+<i>58</i>&nbsp;import mage.view.UserRequestMessage;
+<i>59</i>&nbsp;import org.apache.log4j.Logger;
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;/**
+<i>62</i>&nbsp; *
+<i>63</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>64</i>&nbsp; */
+<b class="nc"><i>65</i>&nbsp;public class CallbackClientImpl implements CallbackClient {</b>
+<i>66</i>&nbsp;
+<b class="nc"><i>67</i>&nbsp;    private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);</b>
+<i>68</i>&nbsp;    private final MageFrame frame;
+<b class="nc"><i>69</i>&nbsp;    private int messageId = 0;</b>
+<b class="nc"><i>70</i>&nbsp;    private int gameInformMessageId = 0;</b>
+<i>71</i>&nbsp;
+<b class="nc"><i>72</i>&nbsp;    public CallbackClientImpl(MageFrame frame) {</b>
+<b class="nc"><i>73</i>&nbsp;        this.frame = frame;</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    @Override
+<i>77</i>&nbsp;    public synchronized void processCallback(final ClientCallback callback) {
+<b class="nc"><i>78</i>&nbsp;        SaveObjectUtil.saveObject(callback.getData(), callback.getMethod());</b>
+<b class="nc"><i>79</i>&nbsp;        callback.setData(CompressUtil.decompress(callback.getData()));</b>
+<b class="nc"><i>80</i>&nbsp;        SwingUtilities.invokeLater(new Runnable() {</b>
+<i>81</i>&nbsp;            @Override
+<i>82</i>&nbsp;            public void run() {
+<i>83</i>&nbsp;                try {
+<b class="nc"><i>84</i>&nbsp;                    logger.debug(callback.getMessageId() + &quot; -- &quot; + callback.getMethod());</b>
+<b class="nc"><i>85</i>&nbsp;                    switch (callback.getMethod()) {</b>
+<i>86</i>&nbsp;                        case &quot;startGame&quot;: {
+<b class="nc"><i>87</i>&nbsp;                            TableClientMessage message = (TableClientMessage) callback.getData();</b>
+<b class="nc"><i>88</i>&nbsp;                            GameManager.getInstance().setCurrentPlayerUUID(message.getPlayerId());</b>
+<b class="nc"><i>89</i>&nbsp;                            gameStarted(message.getGameId(), message.getPlayerId());</b>
+<b class="nc"><i>90</i>&nbsp;                            break;</b>
+<i>91</i>&nbsp;                        }
+<i>92</i>&nbsp;                        case &quot;startTournament&quot;: {
+<b class="nc"><i>93</i>&nbsp;                            TableClientMessage message = (TableClientMessage) callback.getData();</b>
+<b class="nc"><i>94</i>&nbsp;                            tournamentStarted(message.getGameId(), message.getPlayerId());</b>
+<b class="nc"><i>95</i>&nbsp;                            break;</b>
+<i>96</i>&nbsp;                        }
+<i>97</i>&nbsp;                        case &quot;startDraft&quot;: {
+<b class="nc"><i>98</i>&nbsp;                            TableClientMessage message = (TableClientMessage) callback.getData();</b>
+<b class="nc"><i>99</i>&nbsp;                            draftStarted(message.getGameId(), message.getPlayerId());</b>
+<b class="nc"><i>100</i>&nbsp;                            break;</b>
+<i>101</i>&nbsp;                        }
+<i>102</i>&nbsp;                        case &quot;replayGame&quot;:
+<b class="nc"><i>103</i>&nbsp;                            replayGame(callback.getObjectId());</b>
+<b class="nc"><i>104</i>&nbsp;                            break;</b>
+<i>105</i>&nbsp;                        case &quot;showTournament&quot;:
+<b class="nc"><i>106</i>&nbsp;                            showTournament(callback.getObjectId());</b>
+<b class="nc"><i>107</i>&nbsp;                            break;</b>
+<i>108</i>&nbsp;                        case &quot;watchGame&quot;:
+<b class="nc"><i>109</i>&nbsp;                            watchGame(callback.getObjectId());</b>
+<b class="nc"><i>110</i>&nbsp;                            break;</b>
+<i>111</i>&nbsp;                        case &quot;chatMessage&quot;: {
+<b class="nc"><i>112</i>&nbsp;                            ChatMessage message = (ChatMessage) callback.getData();</b>
+<b class="nc"><i>113</i>&nbsp;                            ChatPanelBasic panel = MageFrame.getChat(callback.getObjectId());</b>
+<b class="nc"><i>114</i>&nbsp;                            if (panel != null) {</b>
+<i>115</i>&nbsp;                                // play the sound related to the message
+<b class="nc"><i>116</i>&nbsp;                                if (message.getSoundToPlay() != null) {</b>
+<b class="nc"><i>117</i>&nbsp;                                    switch (message.getSoundToPlay()) {</b>
+<i>118</i>&nbsp;                                        case PlayerLeft:
+<b class="nc"><i>119</i>&nbsp;                                            AudioManager.playPlayerLeft();</b>
+<b class="nc"><i>120</i>&nbsp;                                            break;</b>
+<i>121</i>&nbsp;                                        case PlayerQuitTournament:
+<b class="nc"><i>122</i>&nbsp;                                            AudioManager.playPlayerQuitTournament();</b>
+<b class="nc"><i>123</i>&nbsp;                                            break;</b>
+<i>124</i>&nbsp;                                        case PlayerSubmittedDeck:
+<b class="nc"><i>125</i>&nbsp;                                            AudioManager.playPlayerSubmittedDeck();</b>
+<b class="nc"><i>126</i>&nbsp;                                            break;</b>
+<i>127</i>&nbsp;                                        case PlayerWhispered:
+<b class="nc"><i>128</i>&nbsp;                                            AudioManager.playPlayerWhispered();</b>
+<i>129</i>&nbsp;                                            break;
+<i>130</i>&nbsp;                                    }
+<i>131</i>&nbsp;                                }
+<i>132</i>&nbsp;                                // send start message to chat if not done yet
+<b class="nc"><i>133</i>&nbsp;                                if (!panel.isStartMessageDone()) {</b>
+<b class="nc"><i>134</i>&nbsp;                                    createChatStartMessage(panel);</b>
+<i>135</i>&nbsp;                                }
+<i>136</i>&nbsp;                                // send the message to subchat if exists and it&#39;s not a game message
+<b class="nc"><i>137</i>&nbsp;                                if (!message.getMessageType().equals(MessageType.GAME) &amp;&amp; panel.getConnectedChat() != null) {</b>
+<b class="nc"><i>138</i>&nbsp;                                    panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), ChatMessage.MessageColor.BLACK);</b>
+<i>139</i>&nbsp;                                } else {
+<b class="nc"><i>140</i>&nbsp;                                    panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getMessageType(), message.getColor());</b>
+<i>141</i>&nbsp;                                }
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;                            }
+<i>144</i>&nbsp;                            break;
+<i>145</i>&nbsp;                        }
+<i>146</i>&nbsp;                        case &quot;serverMessage&quot;:
+<b class="nc"><i>147</i>&nbsp;                            if (callback.getData() != null) {</b>
+<b class="nc"><i>148</i>&nbsp;                                ChatMessage message = (ChatMessage) callback.getData();</b>
+<b class="nc"><i>149</i>&nbsp;                                if (message.getColor().equals(ChatMessage.MessageColor.RED)) {</b>
+<b class="nc"><i>150</i>&nbsp;                                    JOptionPane.showMessageDialog(null, message.getMessage(), &quot;Server message&quot;, JOptionPane.WARNING_MESSAGE);</b>
+<i>151</i>&nbsp;                                } else {
+<b class="nc"><i>152</i>&nbsp;                                    JOptionPane.showMessageDialog(null, message.getMessage(), &quot;Server message&quot;, JOptionPane.INFORMATION_MESSAGE);</b>
+<i>153</i>&nbsp;                                }
+<b class="nc"><i>154</i>&nbsp;                            }</b>
+<i>155</i>&nbsp;                            break;
+<i>156</i>&nbsp;                        case &quot;joinedTable&quot;: {
+<b class="nc"><i>157</i>&nbsp;                            TableClientMessage message = (TableClientMessage) callback.getData();</b>
+<b class="nc"><i>158</i>&nbsp;                            joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());</b>
+<b class="nc"><i>159</i>&nbsp;                            break;</b>
+<i>160</i>&nbsp;                        }
+<i>161</i>&nbsp;                        case &quot;replayInit&quot;: {
+<b class="nc"><i>162</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>163</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>164</i>&nbsp;                                panel.init((GameView) callback.getData());</b>
+<i>165</i>&nbsp;                            }
+<i>166</i>&nbsp;                            break;
+<i>167</i>&nbsp;                        }
+<i>168</i>&nbsp;                        case &quot;replayDone&quot;: {
+<b class="nc"><i>169</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>170</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>171</i>&nbsp;                                panel.endMessage((String) callback.getData(), callback.getMessageId());</b>
+<i>172</i>&nbsp;                            }
+<i>173</i>&nbsp;                            break;
+<i>174</i>&nbsp;                        }
+<i>175</i>&nbsp;                        case &quot;replayUpdate&quot;: {
+<b class="nc"><i>176</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>177</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>178</i>&nbsp;                                panel.updateGame((GameView) callback.getData());</b>
+<i>179</i>&nbsp;                            }
+<i>180</i>&nbsp;                            break;
+<i>181</i>&nbsp;                        }
+<i>182</i>&nbsp;                        case &quot;gameInit&quot;: {
+<b class="nc"><i>183</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>184</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>185</i>&nbsp;                                panel.init((GameView) callback.getData());</b>
+<i>186</i>&nbsp;                            }
+<i>187</i>&nbsp;                            break;
+<i>188</i>&nbsp;                        }
+<i>189</i>&nbsp;                        case &quot;gameOver&quot;: {
+<b class="nc"><i>190</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>191</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>192</i>&nbsp;                                panel.endMessage((String) callback.getData(), callback.getMessageId());</b>
+<i>193</i>&nbsp;                            }
+<i>194</i>&nbsp;                            break;
+<i>195</i>&nbsp;                        }
+<i>196</i>&nbsp;                        case &quot;gameError&quot;:
+<b class="nc"><i>197</i>&nbsp;                            frame.showErrorDialog(&quot;Game Error&quot;, (String) callback.getData());</b>
+<b class="nc"><i>198</i>&nbsp;                            break;</b>
+<i>199</i>&nbsp;                        case &quot;gameAsk&quot;: {
+<b class="nc"><i>200</i>&nbsp;                            GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>201</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>202</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>203</i>&nbsp;                                panel.ask(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());</b>
+<i>204</i>&nbsp;                            }
+<i>205</i>&nbsp;                            break;
+<i>206</i>&nbsp;                        }
+<i>207</i>&nbsp;                        case &quot;gameTarget&quot;: // e.g. Pick triggered ability
+<i>208</i>&nbsp;                        {
+<b class="nc"><i>209</i>&nbsp;                            GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>210</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>211</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>212</i>&nbsp;                                panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(),</b>
+<b class="nc"><i>213</i>&nbsp;                                        message.getTargets(), message.isFlag(), message.getOptions(), callback.getMessageId());</b>
+<i>214</i>&nbsp;                            }
+<i>215</i>&nbsp;                            break;
+<i>216</i>&nbsp;                        }
+<i>217</i>&nbsp;                        case &quot;gameSelect&quot;: {
+<b class="nc"><i>218</i>&nbsp;                            GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>219</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>220</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>221</i>&nbsp;                                panel.select(message.getMessage(), message.getGameView(), callback.getMessageId(), message.getOptions());</b>
+<i>222</i>&nbsp;                            }
+<i>223</i>&nbsp;                            break;
+<i>224</i>&nbsp;                        }
+<i>225</i>&nbsp;                        case &quot;gameChooseAbility&quot;: {
+<b class="nc"><i>226</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>227</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>228</i>&nbsp;                                panel.pickAbility((AbilityPickerView) callback.getData());</b>
+<i>229</i>&nbsp;                            }
+<i>230</i>&nbsp;                            break;
+<i>231</i>&nbsp;                        }
+<i>232</i>&nbsp;                        case &quot;gameChoosePile&quot;: {
+<b class="nc"><i>233</i>&nbsp;                            GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>234</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>235</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>236</i>&nbsp;                                panel.pickPile(message.getMessage(), message.getPile1(), message.getPile2());</b>
+<i>237</i>&nbsp;                            }
+<i>238</i>&nbsp;                            break;
+<i>239</i>&nbsp;                        }
+<i>240</i>&nbsp;                        case &quot;gameChooseChoice&quot;: {
+<b class="nc"><i>241</i>&nbsp;                            GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>242</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<i>243</i>&nbsp;
+<b class="nc"><i>244</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>245</i>&nbsp;                                panel.getChoice(message.getChoice(), callback.getObjectId());</b>
+<i>246</i>&nbsp;                            }
+<i>247</i>&nbsp;                            break;
+<i>248</i>&nbsp;                        }
+<i>249</i>&nbsp;                        case &quot;gamePlayMana&quot;: {
+<b class="nc"><i>250</i>&nbsp;                            GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>251</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>252</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>253</i>&nbsp;                                panel.playMana(message.getMessage(), message.getGameView(), message.getOptions(), callback.getMessageId());</b>
+<i>254</i>&nbsp;                            }
+<i>255</i>&nbsp;                            break;
+<i>256</i>&nbsp;                        }
+<i>257</i>&nbsp;                        case &quot;gamePlayXMana&quot;: {
+<b class="nc"><i>258</i>&nbsp;                            GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>259</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>260</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>261</i>&nbsp;                                panel.playXMana(message.getMessage(), message.getGameView(), callback.getMessageId());</b>
+<i>262</i>&nbsp;                            }
+<i>263</i>&nbsp;                            break;
+<i>264</i>&nbsp;                        }
+<i>265</i>&nbsp;                        case &quot;gameSelectAmount&quot;: {
+<b class="nc"><i>266</i>&nbsp;                            GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>267</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>268</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>269</i>&nbsp;                                panel.getAmount(message.getMin(), message.getMax(), message.getMessage());</b>
+<i>270</i>&nbsp;                            }
+<i>271</i>&nbsp;                            break;
+<i>272</i>&nbsp;                        }
+<i>273</i>&nbsp;                        case &quot;gameUpdate&quot;: {
+<b class="nc"><i>274</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>275</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>276</i>&nbsp;                                panel.updateGame((GameView) callback.getData());</b>
+<i>277</i>&nbsp;                            }
+<i>278</i>&nbsp;                            break;
+<i>279</i>&nbsp;                        }
+<i>280</i>&nbsp;                        case &quot;endGameInfo&quot;:
+<b class="nc"><i>281</i>&nbsp;                            MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());</b>
+<b class="nc"><i>282</i>&nbsp;                            break;</b>
+<i>283</i>&nbsp;                        case &quot;showUserMessage&quot;:
+<b class="nc"><i>284</i>&nbsp;                            List&lt;String&gt; messageData = (List&lt;String&gt;) callback.getData();</b>
+<b class="nc"><i>285</i>&nbsp;                            if (messageData.size() == 2) {</b>
+<b class="nc"><i>286</i>&nbsp;                                JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);</b>
+<i>287</i>&nbsp;                            }
+<i>288</i>&nbsp;                            break;
+<i>289</i>&nbsp;                        case &quot;gameInform&quot;:
+<b class="nc"><i>290</i>&nbsp;                            if (callback.getMessageId() &gt; gameInformMessageId) {</b>
+<i>291</i>&nbsp;                                {
+<b class="nc"><i>292</i>&nbsp;                                    GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>293</i>&nbsp;                                    GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>294</i>&nbsp;                                    if (panel != null) {</b>
+<b class="nc"><i>295</i>&nbsp;                                        panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());</b>
+<i>296</i>&nbsp;                                    }
+<b class="nc"><i>297</i>&nbsp;                                }</b>
+<i>298</i>&nbsp;// no longer needed because phase skip handling on server side now
+<i>299</i>&nbsp;                            } else {
+<b class="nc"><i>300</i>&nbsp;                                logger.warn(new StringBuilder(&quot;message out of sequence - ignoring&quot;).append(&quot;MessageId = &quot;).append(callback.getMessageId()).append(&quot; method = &quot;).append(callback.getMethod()));</b>
+<i>301</i>&nbsp;                                //logger.warn(&quot;message out of sequence - ignoring&quot;);
+<i>302</i>&nbsp;                            }
+<b class="nc"><i>303</i>&nbsp;                            gameInformMessageId = messageId;</b>
+<b class="nc"><i>304</i>&nbsp;                            break;</b>
+<i>305</i>&nbsp;                        case &quot;gameInformPersonal&quot;: {
+<b class="nc"><i>306</i>&nbsp;                            GameClientMessage message = (GameClientMessage) callback.getData();</b>
+<b class="nc"><i>307</i>&nbsp;                            GamePanel panel = MageFrame.getGame(callback.getObjectId());</b>
+<b class="nc"><i>308</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>309</i>&nbsp;                                JOptionPane.showMessageDialog(panel, message.getMessage(), &quot;Game message&quot;,</b>
+<i>310</i>&nbsp;                                        JOptionPane.INFORMATION_MESSAGE);
+<i>311</i>&nbsp;                            }
+<i>312</i>&nbsp;                            break;
+<i>313</i>&nbsp;                        }
+<i>314</i>&nbsp;                        case &quot;sideboard&quot;: {
+<b class="nc"><i>315</i>&nbsp;                            TableClientMessage message = (TableClientMessage) callback.getData();</b>
+<b class="nc"><i>316</i>&nbsp;                            DeckView deckView = message.getDeck();</b>
+<b class="nc"><i>317</i>&nbsp;                            Deck deck = DeckUtil.construct(deckView);</b>
+<b class="nc"><i>318</i>&nbsp;                            if (message.getFlag()) {</b>
+<b class="nc"><i>319</i>&nbsp;                                construct(deck, message.getTableId(), message.getTime());</b>
+<i>320</i>&nbsp;                            } else {
+<b class="nc"><i>321</i>&nbsp;                                sideboard(deck, message.getTableId(), message.getTime());</b>
+<i>322</i>&nbsp;                            }
+<b class="nc"><i>323</i>&nbsp;                            break;</b>
+<i>324</i>&nbsp;                        }
+<i>325</i>&nbsp;                        case &quot;construct&quot;: {
+<b class="nc"><i>326</i>&nbsp;                            TableClientMessage message = (TableClientMessage) callback.getData();</b>
+<b class="nc"><i>327</i>&nbsp;                            DeckView deckView = message.getDeck();</b>
+<b class="nc"><i>328</i>&nbsp;                            Deck deck = DeckUtil.construct(deckView);</b>
+<b class="nc"><i>329</i>&nbsp;                            construct(deck, message.getTableId(), message.getTime());</b>
+<b class="nc"><i>330</i>&nbsp;                            break;</b>
+<i>331</i>&nbsp;                        }
+<i>332</i>&nbsp;                        case &quot;draftOver&quot;:
+<b class="nc"><i>333</i>&nbsp;                            MageFrame.removeDraft(callback.getObjectId());</b>
+<b class="nc"><i>334</i>&nbsp;                            break;</b>
+<i>335</i>&nbsp;                        case &quot;draftPick&quot;: {
+<b class="nc"><i>336</i>&nbsp;                            DraftClientMessage message = (DraftClientMessage) callback.getData();</b>
+<b class="nc"><i>337</i>&nbsp;                            DraftPanel panel = MageFrame.getDraft(callback.getObjectId());</b>
+<b class="nc"><i>338</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>339</i>&nbsp;                                panel.loadBooster(message.getDraftPickView());</b>
+<i>340</i>&nbsp;                            }
+<i>341</i>&nbsp;                            break;
+<i>342</i>&nbsp;                        }
+<i>343</i>&nbsp;                        case &quot;draftUpdate&quot;: {
+<b class="nc"><i>344</i>&nbsp;                            DraftPanel panel = MageFrame.getDraft(callback.getObjectId());</b>
+<b class="nc"><i>345</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>346</i>&nbsp;                                panel.updateDraft((DraftView) callback.getData());</b>
+<i>347</i>&nbsp;                            }
+<i>348</i>&nbsp;                            break;
+<i>349</i>&nbsp;                        }
+<i>350</i>&nbsp;                        case &quot;draftInform&quot;: //                            if (callback.getMessageId() &gt; messageId) {
+<i>351</i>&nbsp;                        {
+<b class="nc"><i>352</i>&nbsp;                            DraftClientMessage message = (DraftClientMessage) callback.getData();</b>
+<i>353</i>&nbsp;                        }
+<i>354</i>&nbsp;//                            } else {
+<i>355</i>&nbsp;//                                logger.warn(&quot;message out of sequence - ignoring&quot;);
+<i>356</i>&nbsp;//                            }
+<b class="nc"><i>357</i>&nbsp;                        break;</b>
+<i>358</i>&nbsp;                        case &quot;draftInit&quot;: {
+<b class="nc"><i>359</i>&nbsp;                            DraftClientMessage message = (DraftClientMessage) callback.getData();</b>
+<b class="nc"><i>360</i>&nbsp;                            DraftPanel panel = MageFrame.getDraft(callback.getObjectId());</b>
+<b class="nc"><i>361</i>&nbsp;                            if (panel != null) {</b>
+<b class="nc"><i>362</i>&nbsp;                                panel.loadBooster(message.getDraftPickView());</b>
+<i>363</i>&nbsp;                            }
+<i>364</i>&nbsp;                            break;
+<i>365</i>&nbsp;                        }
+<i>366</i>&nbsp;                        case &quot;tournamentInit&quot;:
+<b class="nc"><i>367</i>&nbsp;                            break;</b>
+<i>368</i>&nbsp;                        case &quot;userRequestDialog&quot;:
+<b class="nc"><i>369</i>&nbsp;                            frame.showUserRequestDialog((UserRequestMessage) callback.getData());</b>
+<i>370</i>&nbsp;                            break;
+<i>371</i>&nbsp;                    }
+<b class="nc"><i>372</i>&nbsp;                    messageId = callback.getMessageId();</b>
+<b class="nc"><i>373</i>&nbsp;                } catch (Exception ex) {</b>
+<b class="nc"><i>374</i>&nbsp;                    handleException(ex);</b>
+<b class="nc"><i>375</i>&nbsp;                }</b>
+<i>376</i>&nbsp;            }
+<i>377</i>&nbsp;        });
+<i>378</i>&nbsp;    }
+<i>379</i>&nbsp;
+<i>380</i>&nbsp;    private void createChatStartMessage(ChatPanelBasic chatPanel) {
+<b class="nc"><i>381</i>&nbsp;        chatPanel.setStartMessageDone(true);</b>
+<b class="nc"><i>382</i>&nbsp;        ChatPanelBasic usedPanel = chatPanel;</b>
+<b class="nc"><i>383</i>&nbsp;        if (chatPanel.getConnectedChat() != null) {</b>
+<b class="nc"><i>384</i>&nbsp;            usedPanel = chatPanel.getConnectedChat();</b>
+<i>385</i>&nbsp;        }
+<b class="nc"><i>386</i>&nbsp;        switch (usedPanel.getChatType()) {</b>
+<i>387</i>&nbsp;            case GAME:
+<b class="nc"><i>388</i>&nbsp;                usedPanel.receiveMessage(&quot;&quot;, new StringBuilder(&quot;You may use hot keys to play faster:&quot;)</b>
+<b class="nc"><i>389</i>&nbsp;                        .append(&quot;&lt;br/&gt;Turn mousewheel up (ALT-e) - enlarge image of card the mousepointer hovers over&quot;)</b>
+<b class="nc"><i>390</i>&nbsp;                        .append(&quot;&lt;br/&gt;Turn mousewheel down (ALT-s) - enlarge original/alternate image of card the mousepointer hovers over&quot;)</b>
+<b class="nc"><i>391</i>&nbsp;                        .append(&quot;&lt;br/&gt;&lt;b&gt;F2&lt;/b&gt; - Confirm \&quot;Ok\&quot;, \&quot;Yes\&quot; or \&quot;Done\&quot; button&quot;)</b>
+<b class="nc"><i>392</i>&nbsp;                        .append(&quot;&lt;br/&gt;&lt;b&gt;F4&lt;/b&gt; - Skip current turn but stop on declare attackers/blockers and something on the stack&quot;)</b>
+<b class="nc"><i>393</i>&nbsp;                        .append(&quot;&lt;br/&gt;&lt;b&gt;F5&lt;/b&gt; - Skip to next end step but stop on declare attackers/blockers and something on the stack&quot;)</b>
+<b class="nc"><i>394</i>&nbsp;                        .append(&quot;&lt;br/&gt;&lt;b&gt;F6&lt;/b&gt; - Skip current turn but stop on declare attackers/blockers&quot;)</b>
+<b class="nc"><i>395</i>&nbsp;                        .append(&quot;&lt;br/&gt;&lt;b&gt;F7&lt;/b&gt; - Skip to next main phase but stop on declare attackers/blockers and something on the stack&quot;)</b>
+<b class="nc"><i>396</i>&nbsp;                        .append(&quot;&lt;br/&gt;&lt;b&gt;F9&lt;/b&gt; - Skip everything until your next turn&quot;)</b>
+<b class="nc"><i>397</i>&nbsp;                        .append(&quot;&lt;br/&gt;&lt;b&gt;F11&lt;/b&gt; - Skip everything until the end step just prior to your turn&quot;)</b>
+<b class="nc"><i>398</i>&nbsp;                        .append(&quot;&lt;br/&gt;&lt;b&gt;F3&lt;/b&gt; - Undo F4/F5/F7/F9/F11&quot;)</b>
+<b class="nc"><i>399</i>&nbsp;                        .append(&quot;&lt;br/&gt;&lt;b&gt;&quot;).append(System.getProperty(&quot;os.name&quot;).contains(&quot;Mac OS X&quot;) ? &quot;Cmd&quot; : &quot;Ctrl&quot;).append(&quot; + click&lt;/b&gt; - Hold priority while casting a spell or activating an ability&quot;).toString(),</b>
+<i>400</i>&nbsp;                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+<b class="nc"><i>401</i>&nbsp;                break;</b>
+<i>402</i>&nbsp;            case TOURNAMENT:
+<b class="nc"><i>403</i>&nbsp;                usedPanel.receiveMessage(&quot;&quot;, new StringBuilder(&quot;On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.&quot;).toString(),</b>
+<i>404</i>&nbsp;                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+<b class="nc"><i>405</i>&nbsp;                break;</b>
+<i>406</i>&nbsp;            case TABLES:
+<b class="nc"><i>407</i>&nbsp;                usedPanel.receiveMessage(&quot;&quot;, new StringBuilder(&quot;Download card images by using the \&quot;Images\&quot; menu to the top right .&quot;)</b>
+<b class="nc"><i>408</i>&nbsp;                        .append(&quot;&lt;br/&gt;Download icons and symbols by using the \&quot;Symbols\&quot; menu to the top right.&quot;)</b>
+<b class="nc"><i>409</i>&nbsp;                        .append(&quot;&lt;br/&gt;\\list - Show a list of available chat commands.&quot;).toString(),</b>
+<i>410</i>&nbsp;                        null, MessageType.USER_INFO, ChatMessage.MessageColor.BLUE);
+<i>411</i>&nbsp;                break;
+<i>412</i>&nbsp;
+<i>413</i>&nbsp;        }
+<i>414</i>&nbsp;    }
+<i>415</i>&nbsp;
+<i>416</i>&nbsp;    private void joinedTable(UUID roomId, UUID tableId, boolean isTournament) {
+<i>417</i>&nbsp;        try {
+<b class="nc"><i>418</i>&nbsp;            frame.showTableWaitingDialog(roomId, tableId, isTournament);</b>
+<b class="nc"><i>419</i>&nbsp;        } catch (Exception ex) {</b>
+<b class="nc"><i>420</i>&nbsp;            handleException(ex);</b>
+<b class="nc"><i>421</i>&nbsp;        }</b>
+<i>422</i>&nbsp;    }
+<i>423</i>&nbsp;
+<i>424</i>&nbsp;    protected void gameStarted(final UUID gameId, final UUID playerId) {
+<i>425</i>&nbsp;        try {
+<b class="nc"><i>426</i>&nbsp;            frame.showGame(gameId, playerId);</b>
+<b class="nc"><i>427</i>&nbsp;            logger.info(&quot;Game &quot; + gameId + &quot; started for player &quot; + playerId);</b>
+<b class="nc"><i>428</i>&nbsp;        } catch (Exception ex) {</b>
+<b class="nc"><i>429</i>&nbsp;            handleException(ex);</b>
+<b class="nc"><i>430</i>&nbsp;        }</b>
+<i>431</i>&nbsp;
+<b class="nc"><i>432</i>&nbsp;        if (Plugins.getInstance().isCounterPluginLoaded()) {</b>
+<b class="nc"><i>433</i>&nbsp;            Plugins.getInstance().addGamesPlayed();</b>
+<i>434</i>&nbsp;        }
+<i>435</i>&nbsp;    }
+<i>436</i>&nbsp;
+<i>437</i>&nbsp;    protected void draftStarted(UUID draftId, UUID playerId) {
+<i>438</i>&nbsp;        try {
+<b class="nc"><i>439</i>&nbsp;            frame.showDraft(draftId);</b>
+<b class="nc"><i>440</i>&nbsp;            logger.info(&quot;Draft &quot; + draftId + &quot; started for player &quot; + playerId);</b>
+<b class="nc"><i>441</i>&nbsp;        } catch (Exception ex) {</b>
+<b class="nc"><i>442</i>&nbsp;            handleException(ex);</b>
+<b class="nc"><i>443</i>&nbsp;        }</b>
+<i>444</i>&nbsp;    }
+<i>445</i>&nbsp;
+<i>446</i>&nbsp;    protected void tournamentStarted(UUID tournamentId, UUID playerId) {
+<i>447</i>&nbsp;        try {
+<b class="nc"><i>448</i>&nbsp;            frame.showTournament(tournamentId);</b>
+<b class="nc"><i>449</i>&nbsp;            AudioManager.playTournamentStarted();</b>
+<b class="nc"><i>450</i>&nbsp;            logger.info(&quot;Tournament &quot; + tournamentId + &quot; started for player &quot; + playerId);</b>
+<b class="nc"><i>451</i>&nbsp;        } catch (Exception ex) {</b>
+<b class="nc"><i>452</i>&nbsp;            handleException(ex);</b>
+<b class="nc"><i>453</i>&nbsp;        }</b>
+<i>454</i>&nbsp;    }
+<i>455</i>&nbsp;
+<i>456</i>&nbsp;    /**
+<i>457</i>&nbsp;     * Shows the tournament info panel for a tournament
+<i>458</i>&nbsp;     *
+<i>459</i>&nbsp;     * @param tournamentId
+<i>460</i>&nbsp;     */
+<i>461</i>&nbsp;    protected void showTournament(UUID tournamentId) {
+<i>462</i>&nbsp;        try {
+<b class="nc"><i>463</i>&nbsp;            frame.showTournament(tournamentId);</b>
+<b class="nc"><i>464</i>&nbsp;            logger.info(&quot;Showing tournament &quot; + tournamentId);</b>
+<b class="nc"><i>465</i>&nbsp;        } catch (Exception ex) {</b>
+<b class="nc"><i>466</i>&nbsp;            handleException(ex);</b>
+<b class="nc"><i>467</i>&nbsp;        }</b>
+<i>468</i>&nbsp;    }
+<i>469</i>&nbsp;
+<i>470</i>&nbsp;    protected void watchGame(UUID gameId) {
+<i>471</i>&nbsp;        try {
+<b class="nc"><i>472</i>&nbsp;            frame.watchGame(gameId);</b>
+<b class="nc"><i>473</i>&nbsp;            logger.info(&quot;Watching game &quot; + gameId);</b>
+<b class="nc"><i>474</i>&nbsp;        } catch (Exception ex) {</b>
+<b class="nc"><i>475</i>&nbsp;            handleException(ex);</b>
+<b class="nc"><i>476</i>&nbsp;        }</b>
+<i>477</i>&nbsp;    }
+<i>478</i>&nbsp;
+<i>479</i>&nbsp;    protected void replayGame(UUID gameId) {
+<i>480</i>&nbsp;        try {
+<b class="nc"><i>481</i>&nbsp;            frame.replayGame(gameId);</b>
+<b class="nc"><i>482</i>&nbsp;            logger.info(&quot;Replaying game&quot;);</b>
+<b class="nc"><i>483</i>&nbsp;        } catch (Exception ex) {</b>
+<b class="nc"><i>484</i>&nbsp;            handleException(ex);</b>
+<b class="nc"><i>485</i>&nbsp;        }</b>
+<i>486</i>&nbsp;    }
+<i>487</i>&nbsp;
+<i>488</i>&nbsp;    protected void sideboard(Deck deck, UUID tableId, int time) {
+<b class="nc"><i>489</i>&nbsp;        frame.showDeckEditor(DeckEditorMode.SIDEBOARDING, deck, tableId, time);</b>
+<i>490</i>&nbsp;    }
+<i>491</i>&nbsp;
+<i>492</i>&nbsp;    protected void construct(Deck deck, UUID tableId, int time) {
+<b class="nc"><i>493</i>&nbsp;        frame.showDeckEditor(DeckEditorMode.LIMITED_BUILDING, deck, tableId, time);</b>
+<i>494</i>&nbsp;    }
+<i>495</i>&nbsp;
+<i>496</i>&nbsp;    private void handleException(Exception ex) {
+<b class="nc"><i>497</i>&nbsp;        logger.fatal(&quot;Client error\n&quot;, ex);</b>
+<b class="nc"><i>498</i>&nbsp;        frame.showError(&quot;Error: &quot; + ex.getMessage());</b>
+<i>499</i>&nbsp;    }
+<i>500</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

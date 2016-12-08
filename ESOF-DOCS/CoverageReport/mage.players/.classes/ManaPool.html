@@ -1,0 +1,564 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ManaPool</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.players</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ManaPool (mage.players)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ManaPool</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.4%
+  </span>
+  <span class="absValue">
+    (25/ 36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.2%
+  </span>
+  <span class="absValue">
+    (150/ 245)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.players;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.Serializable;
+<i>31</i>&nbsp;import java.util.ArrayList;
+<i>32</i>&nbsp;import java.util.HashSet;
+<i>33</i>&nbsp;import java.util.Iterator;
+<i>34</i>&nbsp;import java.util.List;
+<i>35</i>&nbsp;import java.util.Set;
+<i>36</i>&nbsp;import java.util.UUID;
+<i>37</i>&nbsp;import mage.ConditionalMana;
+<i>38</i>&nbsp;import mage.Mana;
+<i>39</i>&nbsp;import mage.abilities.Ability;
+<i>40</i>&nbsp;import mage.abilities.costs.Cost;
+<i>41</i>&nbsp;import mage.constants.Duration;
+<i>42</i>&nbsp;import mage.constants.ManaType;
+<i>43</i>&nbsp;import mage.constants.TurnPhase;
+<i>44</i>&nbsp;import mage.filter.Filter;
+<i>45</i>&nbsp;import mage.filter.FilterMana;
+<i>46</i>&nbsp;import mage.game.Game;
+<i>47</i>&nbsp;import mage.game.events.GameEvent;
+<i>48</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>49</i>&nbsp;import mage.game.events.ManaEvent;
+<i>50</i>&nbsp;import mage.game.stack.Spell;
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;/**
+<i>53</i>&nbsp; *
+<i>54</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>55</i>&nbsp; */
+<i>56</i>&nbsp;public class ManaPool implements Serializable {
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    private final UUID playerId;
+<i>59</i>&nbsp;
+<b class="fc"><i>60</i>&nbsp;    private final List&lt;ManaPoolItem&gt; manaItems = new ArrayList&lt;&gt;();</b>
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    private boolean autoPayment; // auto payment from mana pool: true - mode is active
+<i>63</i>&nbsp;    private boolean autoPaymentRestricted; // auto payment from mana pool: true - if auto Payment is on, it will only pay if one kind of mana is in the pool
+<i>64</i>&nbsp;    private ManaType unlockedManaType; // type of mana that was selected to pay manually
+<i>65</i>&nbsp;
+<b class="fc"><i>66</i>&nbsp;    private final Set&lt;ManaType&gt; doNotEmptyManaTypes = new HashSet&lt;&gt;();</b>
+<i>67</i>&nbsp;
+<b class="fc"><i>68</i>&nbsp;    public ManaPool(UUID playerId) {</b>
+<b class="fc"><i>69</i>&nbsp;        this.playerId = playerId;</b>
+<b class="fc"><i>70</i>&nbsp;        autoPayment = true;</b>
+<b class="fc"><i>71</i>&nbsp;        autoPaymentRestricted = true;</b>
+<b class="fc"><i>72</i>&nbsp;        unlockedManaType = null;</b>
+<b class="fc"><i>73</i>&nbsp;    }</b>
+<i>74</i>&nbsp;
+<b class="fc"><i>75</i>&nbsp;    public ManaPool(final ManaPool pool) {</b>
+<b class="fc"><i>76</i>&nbsp;        this.playerId = pool.playerId;</b>
+<b class="fc"><i>77</i>&nbsp;        for (ManaPoolItem item : pool.manaItems) {</b>
+<b class="fc"><i>78</i>&nbsp;            manaItems.add(item.copy());</b>
+<b class="fc"><i>79</i>&nbsp;        }</b>
+<b class="fc"><i>80</i>&nbsp;        this.autoPayment = pool.autoPayment;</b>
+<b class="fc"><i>81</i>&nbsp;        this.autoPaymentRestricted = pool.autoPaymentRestricted;</b>
+<b class="fc"><i>82</i>&nbsp;        this.unlockedManaType = pool.unlockedManaType;</b>
+<b class="fc"><i>83</i>&nbsp;        this.doNotEmptyManaTypes.addAll(pool.doNotEmptyManaTypes);</b>
+<b class="fc"><i>84</i>&nbsp;    }</b>
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public int getRed() {
+<b class="fc"><i>87</i>&nbsp;        return get(ManaType.RED);</b>
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    public int getGreen() {
+<b class="fc"><i>91</i>&nbsp;        return get(ManaType.GREEN);</b>
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    public int getBlue() {
+<b class="fc"><i>95</i>&nbsp;        return get(ManaType.BLUE);</b>
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    public int getWhite() {
+<b class="fc"><i>99</i>&nbsp;        return get(ManaType.WHITE);</b>
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    public int getBlack() {
+<b class="fc"><i>103</i>&nbsp;        return get(ManaType.BLACK);</b>
+<i>104</i>&nbsp;    }
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    /**
+<i>107</i>&nbsp;     *
+<i>108</i>&nbsp;     * @param manaType the mana type that should be paid
+<i>109</i>&nbsp;     * @param ability
+<i>110</i>&nbsp;     * @param filter
+<i>111</i>&nbsp;     * @param game
+<i>112</i>&nbsp;     * @param costToPay complete costs to pay (needed to check conditional mana)
+<i>113</i>&nbsp;     * @return
+<i>114</i>&nbsp;     */
+<i>115</i>&nbsp;    public boolean pay(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay) {
+<b class="fc"><i>116</i>&nbsp;        if (!autoPayment &amp;&amp; !manaType.equals(unlockedManaType)) {</b>
+<i>117</i>&nbsp;            // if manual payment and the needed mana type was not unlocked, nothing will be paid
+<b class="nc"><i>118</i>&nbsp;            return false;</b>
+<i>119</i>&nbsp;        }
+<b class="fc"><i>120</i>&nbsp;        if (autoPayment &amp;&amp; autoPaymentRestricted &amp;&amp; !wasManaAddedBeyondStock() &amp;&amp; !manaType.equals(unlockedManaType)) {</b>
+<i>121</i>&nbsp;            // if automatic restricted payment and there is laready mana in the pool
+<i>122</i>&nbsp;            // and the needed mana type was not unlocked, nothing will be paid
+<b class="fc"><i>123</i>&nbsp;            return false;</b>
+<i>124</i>&nbsp;        }
+<i>125</i>&nbsp;
+<b class="fc"><i>126</i>&nbsp;        if (getConditional(manaType, ability, filter, game, costToPay) &gt; 0) {</b>
+<b class="fc"><i>127</i>&nbsp;            removeConditional(manaType, ability, game, costToPay);</b>
+<b class="fc"><i>128</i>&nbsp;            lockManaType(); // pay only one mana if mana payment is set to manually</b>
+<b class="fc"><i>129</i>&nbsp;            return true;</b>
+<i>130</i>&nbsp;        }
+<b class="fc"><i>131</i>&nbsp;        for (ManaPoolItem mana : manaItems) {</b>
+<b class="fc"><i>132</i>&nbsp;            if (filter != null) {</b>
+<b class="fc"><i>133</i>&nbsp;                if (!filter.match(mana.getSourceObject(), game)) {</b>
+<i>134</i>&nbsp;                    // Prevent that cost reduction by convoke is filtered out
+<b class="fc"><i>135</i>&nbsp;                    if (!(mana.getSourceObject() instanceof Spell) || ability.getSourceId().equals(mana.getSourceId())) {</b>
+<b class="nc"><i>136</i>&nbsp;                        continue;</b>
+<i>137</i>&nbsp;                    }
+<i>138</i>&nbsp;                }
+<i>139</i>&nbsp;            }
+<b class="fc"><i>140</i>&nbsp;            if (!manaType.equals(unlockedManaType) &amp;&amp; autoPayment &amp;&amp; autoPaymentRestricted &amp;&amp; mana.count() == mana.getStock()) {</b>
+<i>141</i>&nbsp;                // no mana added beyond the stock so don&#39;t auto pay this
+<b class="fc"><i>142</i>&nbsp;                continue;</b>
+<i>143</i>&nbsp;            }
+<b class="fc"><i>144</i>&nbsp;            ManaType usableManaType = game.getContinuousEffects().asThoughMana(manaType, mana, ability.getSourceId(), ability, ability.getControllerId(), game);</b>
+<b class="fc"><i>145</i>&nbsp;            if (usableManaType == null) {</b>
+<b class="nc"><i>146</i>&nbsp;                continue;</b>
+<i>147</i>&nbsp;            }
+<b class="fc"><i>148</i>&nbsp;            if (mana.get(usableManaType) &gt; 0) {</b>
+<b class="fc"><i>149</i>&nbsp;                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId(), 0, mana.getFlag());</b>
+<b class="fc"><i>150</i>&nbsp;                event.setData(mana.getOriginalId().toString());</b>
+<b class="fc"><i>151</i>&nbsp;                game.fireEvent(event);</b>
+<b class="fc"><i>152</i>&nbsp;                mana.remove(usableManaType);</b>
+<b class="fc"><i>153</i>&nbsp;                if (mana.count() == 0) { // so no items with count 0 stay in list</b>
+<b class="fc"><i>154</i>&nbsp;                    manaItems.remove(mana);</b>
+<i>155</i>&nbsp;                }
+<b class="fc"><i>156</i>&nbsp;                lockManaType(); // pay only one mana if mana payment is set to manually</b>
+<b class="fc"><i>157</i>&nbsp;                return true;</b>
+<i>158</i>&nbsp;            }
+<b class="fc"><i>159</i>&nbsp;        }</b>
+<b class="fc"><i>160</i>&nbsp;        return false;</b>
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    public int get(ManaType manaType) {
+<b class="fc"><i>164</i>&nbsp;        return getMana().get(manaType);</b>
+<i>165</i>&nbsp;    }
+<i>166</i>&nbsp;
+<i>167</i>&nbsp;    private int getConditional(ManaType manaType, Ability ability, Filter filter, Game game, Cost costToPay) {
+<b class="fc"><i>168</i>&nbsp;        if (ability == null || getConditionalMana().isEmpty()) {</b>
+<b class="fc"><i>169</i>&nbsp;            return 0;</b>
+<i>170</i>&nbsp;        }
+<b class="fc"><i>171</i>&nbsp;        for (ManaPoolItem mana : manaItems) {</b>
+<b class="fc"><i>172</i>&nbsp;            if (mana.isConditional()</b>
+<b class="fc"><i>173</i>&nbsp;                    &amp;&amp; mana.getConditionalMana().get(manaType) &gt; 0</b>
+<b class="fc"><i>174</i>&nbsp;                    &amp;&amp; mana.getConditionalMana().apply(ability, game, mana.getSourceId(), costToPay)) {</b>
+<b class="fc"><i>175</i>&nbsp;                if (filter == null || filter.match(mana.getSourceObject(), game)) {</b>
+<b class="fc"><i>176</i>&nbsp;                    return mana.getConditionalMana().get(manaType);</b>
+<i>177</i>&nbsp;                }
+<i>178</i>&nbsp;            }
+<b class="fc"><i>179</i>&nbsp;        }</b>
+<b class="fc"><i>180</i>&nbsp;        return 0;</b>
+<i>181</i>&nbsp;    }
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;    public int getConditionalCount(Ability ability, Game game, FilterMana filter, Cost costToPay) {
+<b class="fc"><i>184</i>&nbsp;        if (ability == null || getConditionalMana().isEmpty()) {</b>
+<b class="fc"><i>185</i>&nbsp;            return 0;</b>
+<i>186</i>&nbsp;        }
+<b class="fc"><i>187</i>&nbsp;        int count = 0;</b>
+<b class="fc"><i>188</i>&nbsp;        for (ConditionalMana mana : getConditionalMana()) {</b>
+<b class="fc"><i>189</i>&nbsp;            if (mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {</b>
+<b class="fc"><i>190</i>&nbsp;                count += mana.count(filter);</b>
+<i>191</i>&nbsp;            }
+<b class="fc"><i>192</i>&nbsp;        }</b>
+<b class="fc"><i>193</i>&nbsp;        return count;</b>
+<i>194</i>&nbsp;    }
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;    public int getColorless() {
+<b class="fc"><i>197</i>&nbsp;        return get(ManaType.COLORLESS);</b>
+<i>198</i>&nbsp;    }
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;    public void clearEmptyManaPoolRules() {
+<b class="fc"><i>201</i>&nbsp;        doNotEmptyManaTypes.clear();</b>
+<b class="fc"><i>202</i>&nbsp;    }</b>
+<i>203</i>&nbsp;
+<i>204</i>&nbsp;    public void addDoNotEmptyManaType(ManaType manaType) {
+<b class="fc"><i>205</i>&nbsp;        doNotEmptyManaTypes.add(manaType);</b>
+<b class="fc"><i>206</i>&nbsp;    }</b>
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;    public int emptyPool(Game game) {
+<b class="fc"><i>209</i>&nbsp;        int total = 0;</b>
+<b class="fc"><i>210</i>&nbsp;        Iterator&lt;ManaPoolItem&gt; it = manaItems.iterator();</b>
+<b class="fc"><i>211</i>&nbsp;        while (it.hasNext()) {</b>
+<b class="fc"><i>212</i>&nbsp;            ManaPoolItem item = it.next();</b>
+<b class="fc"><i>213</i>&nbsp;            ConditionalMana conditionalItem = item.getConditionalMana();</b>
+<b class="fc"><i>214</i>&nbsp;            for (ManaType manaType : ManaType.values()) {</b>
+<b class="fc"><i>215</i>&nbsp;                if (!doNotEmptyManaTypes.contains(manaType)) {</b>
+<b class="fc"><i>216</i>&nbsp;                    if (item.get(manaType) &gt; 0) {</b>
+<b class="fc"><i>217</i>&nbsp;                        if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {</b>
+<b class="fc"><i>218</i>&nbsp;                            if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {</b>
+<b class="fc"><i>219</i>&nbsp;                                int amount = item.get(manaType);</b>
+<b class="fc"><i>220</i>&nbsp;                                item.clear(manaType);</b>
+<b class="fc"><i>221</i>&nbsp;                                item.add(ManaType.COLORLESS, amount);</b>
+<b class="fc"><i>222</i>&nbsp;                            } else {</b>
+<b class="fc"><i>223</i>&nbsp;                                total += item.get(manaType);</b>
+<b class="fc"><i>224</i>&nbsp;                                item.clear(manaType);</b>
+<i>225</i>&nbsp;                            }
+<i>226</i>&nbsp;                        }
+<i>227</i>&nbsp;                    }
+<b class="fc"><i>228</i>&nbsp;                    if (conditionalItem != null) {</b>
+<b class="fc"><i>229</i>&nbsp;                        if (conditionalItem.get(manaType) &gt; 0) {</b>
+<b class="fc"><i>230</i>&nbsp;                            if (!item.getDuration().equals(Duration.EndOfTurn) || game.getPhase().getType().equals(TurnPhase.END)) {</b>
+<b class="fc"><i>231</i>&nbsp;                                if (game.replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, playerId, null, playerId))) {</b>
+<b class="nc"><i>232</i>&nbsp;                                    int amount = conditionalItem.get(manaType);</b>
+<b class="nc"><i>233</i>&nbsp;                                    conditionalItem.clear(manaType);</b>
+<b class="nc"><i>234</i>&nbsp;                                    conditionalItem.add(ManaType.COLORLESS, amount);</b>
+<b class="nc"><i>235</i>&nbsp;                                } else {</b>
+<b class="fc"><i>236</i>&nbsp;                                    total += conditionalItem.get(manaType);</b>
+<b class="fc"><i>237</i>&nbsp;                                    conditionalItem.clear(manaType);</b>
+<i>238</i>&nbsp;                                }
+<i>239</i>&nbsp;                            }
+<i>240</i>&nbsp;                        }
+<i>241</i>&nbsp;                    }
+<i>242</i>&nbsp;                }
+<i>243</i>&nbsp;            }
+<b class="fc"><i>244</i>&nbsp;            if (item.count() == 0) {</b>
+<b class="fc"><i>245</i>&nbsp;                it.remove();</b>
+<i>246</i>&nbsp;            }
+<b class="fc"><i>247</i>&nbsp;        }</b>
+<b class="fc"><i>248</i>&nbsp;        return total;</b>
+<i>249</i>&nbsp;    }
+<i>250</i>&nbsp;
+<i>251</i>&nbsp;    private int payX(Ability ability, Game game) {
+<b class="nc"><i>252</i>&nbsp;        int total = 0;</b>
+<b class="nc"><i>253</i>&nbsp;        Iterator&lt;ManaPoolItem&gt; it = manaItems.iterator();</b>
+<b class="nc"><i>254</i>&nbsp;        while (it.hasNext()) {</b>
+<b class="nc"><i>255</i>&nbsp;            ManaPoolItem item = it.next();</b>
+<b class="nc"><i>256</i>&nbsp;            if (item.isConditional()) {</b>
+<b class="nc"><i>257</i>&nbsp;                ConditionalMana cm = item.getConditionalMana();</b>
+<b class="nc"><i>258</i>&nbsp;                if (cm.apply(ability, game, cm.getManaProducerId(), null)) {</b>
+<b class="nc"><i>259</i>&nbsp;                    total += item.count();</b>
+<b class="nc"><i>260</i>&nbsp;                    it.remove();</b>
+<i>261</i>&nbsp;                }
+<b class="nc"><i>262</i>&nbsp;            } else {</b>
+<b class="nc"><i>263</i>&nbsp;                total += item.count();</b>
+<b class="nc"><i>264</i>&nbsp;                it.remove();</b>
+<i>265</i>&nbsp;            }
+<b class="nc"><i>266</i>&nbsp;        }</b>
+<b class="nc"><i>267</i>&nbsp;        return total;</b>
+<i>268</i>&nbsp;    }
+<i>269</i>&nbsp;
+<i>270</i>&nbsp;    /**
+<i>271</i>&nbsp;     * remove all mana from pool that applies and that matches filter
+<i>272</i>&nbsp;     *
+<i>273</i>&nbsp;     * @param ability
+<i>274</i>&nbsp;     * @param game
+<i>275</i>&nbsp;     * @param filter
+<i>276</i>&nbsp;     * @return
+<i>277</i>&nbsp;     */
+<i>278</i>&nbsp;    public int payX(Ability ability, Game game, FilterMana filter) {
+<b class="nc"><i>279</i>&nbsp;        if (filter == null) {</b>
+<b class="nc"><i>280</i>&nbsp;            return payX(ability, game);</b>
+<i>281</i>&nbsp;        }
+<b class="nc"><i>282</i>&nbsp;        int total = 0;</b>
+<b class="nc"><i>283</i>&nbsp;        Iterator&lt;ManaPoolItem&gt; it = manaItems.iterator();</b>
+<b class="nc"><i>284</i>&nbsp;        while (it.hasNext()) {</b>
+<b class="nc"><i>285</i>&nbsp;            ManaPoolItem item = it.next();</b>
+<b class="nc"><i>286</i>&nbsp;            if (item.isConditional()) {</b>
+<b class="nc"><i>287</i>&nbsp;                ConditionalMana c = item.getConditionalMana();</b>
+<b class="nc"><i>288</i>&nbsp;                if (c.apply(ability, game, c.getManaProducerId(), null)) {</b>
+<b class="nc"><i>289</i>&nbsp;                    int count = c.count(filter);</b>
+<b class="nc"><i>290</i>&nbsp;                    if (count &gt; 0) {</b>
+<b class="nc"><i>291</i>&nbsp;                        total += count;</b>
+<b class="nc"><i>292</i>&nbsp;                        c.removeAll(filter);</b>
+<b class="nc"><i>293</i>&nbsp;                        if (c.count() == 0) {</b>
+<b class="nc"><i>294</i>&nbsp;                            it.remove();</b>
+<i>295</i>&nbsp;                        }
+<i>296</i>&nbsp;                    }
+<i>297</i>&nbsp;                }
+<b class="nc"><i>298</i>&nbsp;            } else {</b>
+<b class="nc"><i>299</i>&nbsp;                if (filter.isBlack()) {</b>
+<b class="nc"><i>300</i>&nbsp;                    total += item.getBlack();</b>
+<b class="nc"><i>301</i>&nbsp;                    item.removeBlack();</b>
+<i>302</i>&nbsp;                }
+<b class="nc"><i>303</i>&nbsp;                if (filter.isBlue()) {</b>
+<b class="nc"><i>304</i>&nbsp;                    total += item.getBlue();</b>
+<b class="nc"><i>305</i>&nbsp;                    item.removeBlue();</b>
+<i>306</i>&nbsp;                }
+<b class="nc"><i>307</i>&nbsp;                if (filter.isWhite()) {</b>
+<b class="nc"><i>308</i>&nbsp;                    total += item.getWhite();</b>
+<b class="nc"><i>309</i>&nbsp;                    item.removeWhite();</b>
+<i>310</i>&nbsp;                }
+<b class="nc"><i>311</i>&nbsp;                if (filter.isRed()) {</b>
+<b class="nc"><i>312</i>&nbsp;                    total += item.getRed();</b>
+<b class="nc"><i>313</i>&nbsp;                    item.removeRed();</b>
+<i>314</i>&nbsp;                }
+<b class="nc"><i>315</i>&nbsp;                if (filter.isGreen()) {</b>
+<b class="nc"><i>316</i>&nbsp;                    total += item.getGreen();</b>
+<b class="nc"><i>317</i>&nbsp;                    item.removeGreen();</b>
+<i>318</i>&nbsp;                }
+<b class="nc"><i>319</i>&nbsp;                if (filter.isGeneric()) {</b>
+<b class="nc"><i>320</i>&nbsp;                    total += item.getColorless();</b>
+<b class="nc"><i>321</i>&nbsp;                    item.removeColorless();</b>
+<i>322</i>&nbsp;                }
+<b class="nc"><i>323</i>&nbsp;                if (item.count() == 0) {</b>
+<b class="nc"><i>324</i>&nbsp;                    it.remove();</b>
+<i>325</i>&nbsp;                }
+<i>326</i>&nbsp;            }
+<b class="nc"><i>327</i>&nbsp;        }</b>
+<b class="nc"><i>328</i>&nbsp;        return total;</b>
+<i>329</i>&nbsp;    }
+<i>330</i>&nbsp;
+<i>331</i>&nbsp;    public Mana getMana() {
+<b class="fc"><i>332</i>&nbsp;        Mana m = new Mana();</b>
+<b class="fc"><i>333</i>&nbsp;        for (ManaPoolItem item : manaItems) {</b>
+<b class="fc"><i>334</i>&nbsp;            m.add(item.getMana());</b>
+<b class="fc"><i>335</i>&nbsp;        }</b>
+<b class="fc"><i>336</i>&nbsp;        return m;</b>
+<i>337</i>&nbsp;    }
+<i>338</i>&nbsp;
+<i>339</i>&nbsp;    public Mana getMana(FilterMana filter) {
+<b class="nc"><i>340</i>&nbsp;        if (filter == null) {</b>
+<b class="nc"><i>341</i>&nbsp;            return getMana();</b>
+<i>342</i>&nbsp;        }
+<b class="nc"><i>343</i>&nbsp;        Mana test = getMana();</b>
+<b class="nc"><i>344</i>&nbsp;        Mana m = new Mana();</b>
+<b class="nc"><i>345</i>&nbsp;        if (filter.isBlack()) {</b>
+<b class="nc"><i>346</i>&nbsp;            m.setBlack(test.getBlack());</b>
+<i>347</i>&nbsp;        }
+<b class="nc"><i>348</i>&nbsp;        if (filter.isBlue()) {</b>
+<b class="nc"><i>349</i>&nbsp;            m.setBlue(test.getBlue());</b>
+<i>350</i>&nbsp;        }
+<b class="nc"><i>351</i>&nbsp;        if (filter.isGreen()) {</b>
+<b class="nc"><i>352</i>&nbsp;            m.setGreen(test.getGreen());</b>
+<i>353</i>&nbsp;        }
+<b class="nc"><i>354</i>&nbsp;        if (filter.isRed()) {</b>
+<b class="nc"><i>355</i>&nbsp;            m.setRed(test.getRed());</b>
+<i>356</i>&nbsp;        }
+<b class="nc"><i>357</i>&nbsp;        if (filter.isWhite()) {</b>
+<b class="nc"><i>358</i>&nbsp;            m.setWhite(test.getWhite());</b>
+<i>359</i>&nbsp;        }
+<b class="nc"><i>360</i>&nbsp;        if (filter.isColorless()) {</b>
+<b class="nc"><i>361</i>&nbsp;            m.setColorless(test.getColorless());</b>
+<i>362</i>&nbsp;        }
+<b class="nc"><i>363</i>&nbsp;        if (filter.isGeneric()) {</b>
+<b class="nc"><i>364</i>&nbsp;            m.setGeneric(test.getGeneric());</b>
+<i>365</i>&nbsp;        }
+<b class="nc"><i>366</i>&nbsp;        return m;</b>
+<i>367</i>&nbsp;    }
+<i>368</i>&nbsp;
+<i>369</i>&nbsp;    public Mana getAllConditionalMana(Ability ability, Game game, FilterMana filter) {
+<b class="nc"><i>370</i>&nbsp;        Mana m = new Mana();</b>
+<b class="nc"><i>371</i>&nbsp;        m.setGeneric(getConditionalCount(ability, game, filter, null));</b>
+<b class="nc"><i>372</i>&nbsp;        return m;</b>
+<i>373</i>&nbsp;    }
+<i>374</i>&nbsp;
+<i>375</i>&nbsp;    public void addMana(Mana manaToAdd, Game game, Ability source) {
+<b class="fc"><i>376</i>&nbsp;        addMana(manaToAdd, game, source, false);</b>
+<b class="fc"><i>377</i>&nbsp;    }</b>
+<i>378</i>&nbsp;
+<i>379</i>&nbsp;    public void addMana(Mana manaToAdd, Game game, Ability source, boolean emptyOnTurnsEnd) {
+<b class="fc"><i>380</i>&nbsp;        Mana mana = manaToAdd.copy();</b>
+<b class="fc"><i>381</i>&nbsp;        if (!game.replaceEvent(new ManaEvent(EventType.ADD_MANA, source.getId(), source.getSourceId(), playerId, mana))) {</b>
+<b class="fc"><i>382</i>&nbsp;            if (mana instanceof ConditionalMana) {</b>
+<b class="fc"><i>383</i>&nbsp;                ManaPoolItem item = new ManaPoolItem((ConditionalMana) mana, source.getSourceObject(game), source.getOriginalId());</b>
+<b class="fc"><i>384</i>&nbsp;                if (emptyOnTurnsEnd) {</b>
+<b class="nc"><i>385</i>&nbsp;                    item.setDuration(Duration.EndOfTurn);</b>
+<i>386</i>&nbsp;                }
+<b class="fc"><i>387</i>&nbsp;                this.manaItems.add(item);</b>
+<b class="fc"><i>388</i>&nbsp;            } else {</b>
+<b class="fc"><i>389</i>&nbsp;                ManaPoolItem item = new ManaPoolItem(mana.getRed(), mana.getGreen(), mana.getBlue(), mana.getWhite(), mana.getBlack(), mana.getGeneric() + mana.getColorless(), source.getSourceObject(game), source.getOriginalId(), mana.getFlag());</b>
+<b class="fc"><i>390</i>&nbsp;                if (emptyOnTurnsEnd) {</b>
+<b class="fc"><i>391</i>&nbsp;                    item.setDuration(Duration.EndOfTurn);</b>
+<i>392</i>&nbsp;                }
+<b class="fc"><i>393</i>&nbsp;                this.manaItems.add(item);</b>
+<i>394</i>&nbsp;            }
+<b class="fc"><i>395</i>&nbsp;            ManaEvent manaEvent = new ManaEvent(EventType.MANA_ADDED, source.getId(), source.getSourceId(), playerId, mana);</b>
+<b class="fc"><i>396</i>&nbsp;            manaEvent.setData(mana.toString());</b>
+<b class="fc"><i>397</i>&nbsp;            game.fireEvent(manaEvent);</b>
+<i>398</i>&nbsp;        }
+<b class="fc"><i>399</i>&nbsp;    }</b>
+<i>400</i>&nbsp;
+<i>401</i>&nbsp;    public List&lt;ConditionalMana&gt; getConditionalMana() {
+<b class="fc"><i>402</i>&nbsp;        List&lt;ConditionalMana&gt; conditionalMana = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>403</i>&nbsp;        for (ManaPoolItem item : manaItems) {</b>
+<b class="fc"><i>404</i>&nbsp;            if (item.isConditional()) {</b>
+<b class="fc"><i>405</i>&nbsp;                conditionalMana.add(item.getConditionalMana());</b>
+<i>406</i>&nbsp;            }
+<b class="fc"><i>407</i>&nbsp;        }</b>
+<b class="fc"><i>408</i>&nbsp;        return conditionalMana;</b>
+<i>409</i>&nbsp;    }
+<i>410</i>&nbsp;
+<i>411</i>&nbsp;    public int count() {
+<b class="fc"><i>412</i>&nbsp;        int x = 0;</b>
+<b class="fc"><i>413</i>&nbsp;        for (ManaPoolItem item : manaItems) {</b>
+<b class="fc"><i>414</i>&nbsp;            x += item.count();</b>
+<b class="fc"><i>415</i>&nbsp;        }</b>
+<b class="fc"><i>416</i>&nbsp;        return x;</b>
+<i>417</i>&nbsp;    }
+<i>418</i>&nbsp;
+<i>419</i>&nbsp;    public ManaPool copy() {
+<b class="fc"><i>420</i>&nbsp;        return new ManaPool(this);</b>
+<i>421</i>&nbsp;    }
+<i>422</i>&nbsp;
+<i>423</i>&nbsp;    private void removeConditional(ManaType manaType, Ability ability, Game game, Cost costToPay) {
+<b class="fc"><i>424</i>&nbsp;        for (ConditionalMana mana : getConditionalMana()) {</b>
+<b class="fc"><i>425</i>&nbsp;            if (mana.get(manaType) &gt; 0 &amp;&amp; mana.apply(ability, game, mana.getManaProducerId(), costToPay)) {</b>
+<b class="fc"><i>426</i>&nbsp;                mana.set(manaType, mana.get(manaType) - 1);</b>
+<b class="fc"><i>427</i>&nbsp;                GameEvent event = new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getManaProducerId(), ability.getControllerId(), 0, mana.getFlag());</b>
+<b class="fc"><i>428</i>&nbsp;                event.setData(mana.getManaProducerOriginalId().toString());</b>
+<b class="fc"><i>429</i>&nbsp;                game.fireEvent(event);</b>
+<b class="fc"><i>430</i>&nbsp;                break;</b>
+<i>431</i>&nbsp;            }
+<b class="fc"><i>432</i>&nbsp;        }</b>
+<b class="fc"><i>433</i>&nbsp;    }</b>
+<i>434</i>&nbsp;
+<i>435</i>&nbsp;    public boolean isAutoPayment() {
+<b class="fc"><i>436</i>&nbsp;        return autoPayment;</b>
+<i>437</i>&nbsp;    }
+<i>438</i>&nbsp;
+<i>439</i>&nbsp;    public void setAutoPayment(boolean autoPayment) {
+<b class="nc"><i>440</i>&nbsp;        this.autoPayment = autoPayment;</b>
+<b class="nc"><i>441</i>&nbsp;    }</b>
+<i>442</i>&nbsp;
+<i>443</i>&nbsp;    public void setAutoPaymentRestricted(boolean autoPaymentRestricted) {
+<b class="nc"><i>444</i>&nbsp;        this.autoPaymentRestricted = autoPaymentRestricted;</b>
+<b class="nc"><i>445</i>&nbsp;    }</b>
+<i>446</i>&nbsp;
+<i>447</i>&nbsp;    public boolean isAutoPaymentRestricted() {
+<b class="nc"><i>448</i>&nbsp;        return autoPaymentRestricted;</b>
+<i>449</i>&nbsp;    }
+<i>450</i>&nbsp;
+<i>451</i>&nbsp;    public ManaType getUnlockedManaType() {
+<b class="nc"><i>452</i>&nbsp;        return unlockedManaType;</b>
+<i>453</i>&nbsp;    }
+<i>454</i>&nbsp;
+<i>455</i>&nbsp;    public void unlockManaType(ManaType manaType) {
+<b class="nc"><i>456</i>&nbsp;        this.unlockedManaType = manaType;</b>
+<b class="nc"><i>457</i>&nbsp;    }</b>
+<i>458</i>&nbsp;
+<i>459</i>&nbsp;    public void lockManaType() {
+<b class="fc"><i>460</i>&nbsp;        this.unlockedManaType = null;</b>
+<b class="fc"><i>461</i>&nbsp;    }</b>
+<i>462</i>&nbsp;
+<i>463</i>&nbsp;    public void setStock() {
+<b class="nc"><i>464</i>&nbsp;        for (ManaPoolItem mana : manaItems) {</b>
+<b class="nc"><i>465</i>&nbsp;            mana.setStock(mana.count());</b>
+<b class="nc"><i>466</i>&nbsp;        }</b>
+<b class="nc"><i>467</i>&nbsp;    }</b>
+<i>468</i>&nbsp;
+<i>469</i>&nbsp;    private boolean wasManaAddedBeyondStock() {
+<b class="fc"><i>470</i>&nbsp;        for (ManaPoolItem mana : manaItems) {</b>
+<b class="fc"><i>471</i>&nbsp;            if (mana.getStock() &lt; mana.count()) {</b>
+<b class="fc"><i>472</i>&nbsp;                return true;</b>
+<i>473</i>&nbsp;            }
+<b class="fc"><i>474</i>&nbsp;        }</b>
+<b class="fc"><i>475</i>&nbsp;        return false;</b>
+<i>476</i>&nbsp;    }
+<i>477</i>&nbsp;
+<i>478</i>&nbsp;    public boolean isEmpty(){
+<b class="nc"><i>479</i>&nbsp;        return count() == 0;</b>
+<i>480</i>&nbsp;    }
+<i>481</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

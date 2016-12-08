@@ -1,0 +1,220 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WardenOfTheFirstTree2</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.w</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WardenOfTheFirstTree2 (mage.cards.w)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WardenOfTheFirstTree2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/ 10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.w;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.MageInt;
+<i>32</i>&nbsp;import mage.abilities.common.SimpleActivatedAbility;
+<i>33</i>&nbsp;import mage.abilities.condition.LockedInCondition;
+<i>34</i>&nbsp;import mage.abilities.condition.common.SourceMatchesFilterCondition;
+<i>35</i>&nbsp;import mage.abilities.costs.mana.ManaCostsImpl;
+<i>36</i>&nbsp;import mage.abilities.decorator.ConditionalContinuousEffect;
+<i>37</i>&nbsp;import mage.abilities.decorator.ConditionalOneShotEffect;
+<i>38</i>&nbsp;import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+<i>39</i>&nbsp;import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+<i>40</i>&nbsp;import mage.abilities.keyword.LifelinkAbility;
+<i>41</i>&nbsp;import mage.abilities.keyword.TrampleAbility;
+<i>42</i>&nbsp;import mage.cards.CardImpl;
+<i>43</i>&nbsp;import mage.cards.CardSetInfo;
+<i>44</i>&nbsp;import mage.constants.CardType;
+<i>45</i>&nbsp;import mage.constants.Duration;
+<i>46</i>&nbsp;import mage.constants.Zone;
+<i>47</i>&nbsp;import mage.counters.CounterType;
+<i>48</i>&nbsp;import mage.filter.common.FilterCreaturePermanent;
+<i>49</i>&nbsp;import mage.filter.predicate.mageobject.SubtypePredicate;
+<i>50</i>&nbsp;import mage.game.permanent.token.Token;
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;/**
+<i>53</i>&nbsp; *
+<i>54</i>&nbsp; * @author LevelX2
+<i>55</i>&nbsp; */
+<i>56</i>&nbsp;public class WardenOfTheFirstTree extends CardImpl {
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent();
+<i>59</i>&nbsp;    private static final FilterCreaturePermanent FILTER2 = new FilterCreaturePermanent();
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    static {
+<i>62</i>&nbsp;        FILTER.add(new SubtypePredicate(&quot;Warrior&quot;));
+<i>63</i>&nbsp;        FILTER2.add(new SubtypePredicate(&quot;Spirit&quot;));
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public WardenOfTheFirstTree(UUID ownerId, CardSetInfo setInfo) {
+<i>67</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{G}&quot;);
+<i>68</i>&nbsp;        this.subtype.add(&quot;Human&quot;);
+<i>69</i>&nbsp;        this.power = new MageInt(1);
+<i>70</i>&nbsp;        this.toughness = new MageInt(1);
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;        // {1}{W/B}: Warden of the First Tree becomes a Human Warrior with base power and toughness 3/3.
+<i>73</i>&nbsp;        this.addAbility(new SimpleActivatedAbility(
+<i>74</i>&nbsp;                Zone.BATTLEFIELD,
+<i>75</i>&nbsp;                new BecomesCreatureSourceEffect(new WardenOfTheFirstTree1(), &quot;&quot;, Duration.Custom),
+<i>76</i>&nbsp;                new ManaCostsImpl(&quot;{1}{W/B}&quot;)));
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;        // {2}{W/B}{W/B}: If Warden of the First Tree is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink.
+<i>79</i>&nbsp;        this.addAbility(new SimpleActivatedAbility(
+<i>80</i>&nbsp;                Zone.BATTLEFIELD,
+<i>81</i>&nbsp;                new ConditionalContinuousEffect(
+<i>82</i>&nbsp;                        new BecomesCreatureSourceEffect(new WardenOfTheFirstTree2(), &quot;&quot;, Duration.Custom),
+<i>83</i>&nbsp;                        new LockedInCondition(new SourceMatchesFilterCondition(FILTER)),
+<i>84</i>&nbsp;                        &quot;If {this} is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink&quot;),
+<i>85</i>&nbsp;                new ManaCostsImpl(&quot;{2}{W/B}{W/B}&quot;)
+<i>86</i>&nbsp;        ));
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;        // {3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.
+<i>89</i>&nbsp;        this.addAbility(new SimpleActivatedAbility(
+<i>90</i>&nbsp;                Zone.BATTLEFIELD,
+<i>91</i>&nbsp;                new ConditionalOneShotEffect(
+<i>92</i>&nbsp;                        new AddCountersSourceEffect(CounterType.P1P1.createInstance(5)),
+<i>93</i>&nbsp;                        new SourceMatchesFilterCondition(FILTER2),
+<i>94</i>&nbsp;                        &quot;If {this} is a Spirit, put five +1/+1 counters on it&quot;),
+<i>95</i>&nbsp;                new ManaCostsImpl(&quot;{3}{W/B}{W/B}{W/B}&quot;)
+<i>96</i>&nbsp;        ));
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    public WardenOfTheFirstTree(final WardenOfTheFirstTree card) {
+<i>100</i>&nbsp;        super(card);
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    @Override
+<i>104</i>&nbsp;    public WardenOfTheFirstTree copy() {
+<i>105</i>&nbsp;        return new WardenOfTheFirstTree(this);
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;}
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;class WardenOfTheFirstTree1 extends Token {
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    public WardenOfTheFirstTree1() {
+<i>112</i>&nbsp;        super(&quot;Warden of the First Tree&quot;, &quot;Human Warrior with base power and toughness 3/3&quot;);
+<i>113</i>&nbsp;        this.cardType.add(CardType.CREATURE);
+<i>114</i>&nbsp;        this.subtype.add(&quot;Human&quot;);
+<i>115</i>&nbsp;        this.subtype.add(&quot;Warrior&quot;);
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;        this.power = new MageInt(3);
+<i>118</i>&nbsp;        this.toughness = new MageInt(3);
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;}
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;class WardenOfTheFirstTree2 extends Token {
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    public WardenOfTheFirstTree2() {
+<b class="fc"><i>125</i>&nbsp;        super(&quot;Warden of the First Tree&quot;, &quot;Human Spirit Warrior with trample and lifelink&quot;);</b>
+<b class="fc"><i>126</i>&nbsp;        this.cardType.add(CardType.CREATURE);</b>
+<b class="fc"><i>127</i>&nbsp;        this.subtype.add(&quot;Human&quot;);</b>
+<b class="fc"><i>128</i>&nbsp;        this.subtype.add(&quot;Spirit&quot;);</b>
+<b class="fc"><i>129</i>&nbsp;        this.subtype.add(&quot;Warrior&quot;);</b>
+<i>130</i>&nbsp;
+<b class="fc"><i>131</i>&nbsp;        this.power = new MageInt(3);</b>
+<b class="fc"><i>132</i>&nbsp;        this.toughness = new MageInt(3);</b>
+<i>133</i>&nbsp;
+<b class="fc"><i>134</i>&nbsp;        this.addAbility(TrampleAbility.getInstance());</b>
+<b class="fc"><i>135</i>&nbsp;        this.addAbility(LifelinkAbility.getInstance());</b>
+<b class="fc"><i>136</i>&nbsp;    }</b>
+<i>137</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

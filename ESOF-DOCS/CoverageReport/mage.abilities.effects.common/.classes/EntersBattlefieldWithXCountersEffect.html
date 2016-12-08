@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EntersBattlefieldWithXCountersEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EntersBattlefieldWithXCountersEffect (mage.abilities.effects.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EntersBattlefieldWithXCountersEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/ 24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.effects.common;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import mage.abilities.Ability;
+<i>31</i>&nbsp;import mage.abilities.SpellAbility;
+<i>32</i>&nbsp;import mage.abilities.effects.EntersBattlefieldEffect;
+<i>33</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>34</i>&nbsp;import mage.constants.AbilityType;
+<i>35</i>&nbsp;import mage.constants.Outcome;
+<i>36</i>&nbsp;import mage.counters.Counter;
+<i>37</i>&nbsp;import mage.game.Game;
+<i>38</i>&nbsp;import mage.game.permanent.Permanent;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;/**
+<i>41</i>&nbsp; * Use this effect only (I guess) with EntersBattlefieldAbility like abilities
+<i>42</i>&nbsp; *
+<i>43</i>&nbsp; * @author LevelX2
+<i>44</i>&nbsp; */
+<i>45</i>&nbsp;public class EntersBattlefieldWithXCountersEffect extends OneShotEffect {
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    protected final Counter counter;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public EntersBattlefieldWithXCountersEffect(Counter counter) {
+<b class="fc"><i>50</i>&nbsp;        super(Outcome.BoostCreature);</b>
+<b class="fc"><i>51</i>&nbsp;        this.counter = counter;</b>
+<b class="fc"><i>52</i>&nbsp;        staticText = &quot;with X &quot; + counter.getName() + &quot; counters on it&quot;;</b>
+<b class="fc"><i>53</i>&nbsp;    }</b>
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public EntersBattlefieldWithXCountersEffect(final EntersBattlefieldWithXCountersEffect effect) {
+<b class="fc"><i>56</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>57</i>&nbsp;        this.counter = effect.counter;</b>
+<b class="fc"><i>58</i>&nbsp;    }</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    @Override
+<i>61</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="fc"><i>62</i>&nbsp;        Permanent permanent = game.getPermanent(source.getSourceId());</b>
+<b class="fc"><i>63</i>&nbsp;        if (permanent == null) {</b>
+<b class="fc"><i>64</i>&nbsp;            if (permanent == null &amp;&amp; source.getAbilityType().equals(AbilityType.STATIC)) {</b>
+<b class="fc"><i>65</i>&nbsp;                permanent = game.getPermanentEntering(source.getSourceId());</b>
+<i>66</i>&nbsp;            }
+<i>67</i>&nbsp;        }
+<b class="fc"><i>68</i>&nbsp;        if (permanent != null) {</b>
+<b class="fc"><i>69</i>&nbsp;            SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);</b>
+<b class="fc"><i>70</i>&nbsp;            if (spellAbility != null</b>
+<b class="fc"><i>71</i>&nbsp;                    &amp;&amp; spellAbility.getSourceId().equals(source.getSourceId())</b>
+<b class="fc"><i>72</i>&nbsp;                    &amp;&amp; permanent.getZoneChangeCounter(game) == spellAbility.getSourceObjectZoneChangeCounter()) {</b>
+<b class="fc"><i>73</i>&nbsp;                if (spellAbility.getSourceId().equals(source.getSourceId())) { // put into play by normal cast</b>
+<b class="fc"><i>74</i>&nbsp;                    int amount = spellAbility.getManaCostsToPay().getX();</b>
+<b class="fc"><i>75</i>&nbsp;                    if (amount &gt; 0) {</b>
+<b class="fc"><i>76</i>&nbsp;                        Counter counterToAdd = counter.copy();</b>
+<b class="fc"><i>77</i>&nbsp;                        counterToAdd.add(amount - counter.getCount());</b>
+<b class="fc"><i>78</i>&nbsp;                        permanent.addCounters(counterToAdd, game);</b>
+<i>79</i>&nbsp;                    }
+<i>80</i>&nbsp;                }
+<i>81</i>&nbsp;            }
+<i>82</i>&nbsp;        }
+<b class="fc"><i>83</i>&nbsp;        return true;</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    @Override
+<i>87</i>&nbsp;    public EntersBattlefieldWithXCountersEffect copy() {
+<b class="fc"><i>88</i>&nbsp;        return new EntersBattlefieldWithXCountersEffect(this);</b>
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

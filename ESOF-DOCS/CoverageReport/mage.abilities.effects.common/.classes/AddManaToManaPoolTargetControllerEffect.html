@@ -1,0 +1,151 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AddManaToManaPoolTargetControllerEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AddManaToManaPoolTargetControllerEffect (mage.abilities.effects.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AddManaToManaPoolTargetControllerEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (16/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;package mage.abilities.effects.common;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import mage.Mana;
+<i>10</i>&nbsp;import mage.abilities.Ability;
+<i>11</i>&nbsp;import mage.game.Game;
+<i>12</i>&nbsp;import mage.players.Player;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;/**
+<i>15</i>&nbsp; *
+<i>16</i>&nbsp; * @author LevelX2
+<i>17</i>&nbsp; */
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;public class AddManaToManaPoolTargetControllerEffect extends ManaEffect {
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    protected Mana mana;
+<i>22</i>&nbsp;    protected boolean emptyOnlyOnTurnsEnd;
+<i>23</i>&nbsp;    
+<i>24</i>&nbsp;    public AddManaToManaPoolTargetControllerEffect(Mana mana, String textManaPoolOwner) {
+<b class="fc"><i>25</i>&nbsp;        this(mana, textManaPoolOwner, false);</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;    /**
+<i>28</i>&nbsp;     * Adds mana to the mana pool of target pointer player
+<i>29</i>&nbsp;     * 
+<i>30</i>&nbsp;     * @param mana mana that will be added to the pool
+<i>31</i>&nbsp;     * @param textManaPoolOwner text that references to the mana pool owner (e.g. &quot;damaged player&#39;s&quot;)
+<i>32</i>&nbsp;     * @param emptyOnTurnsEnd if set, the mana will empty only on end of turnstep
+<i>33</i>&nbsp;     * 
+<i>34</i>&nbsp;     */     
+<i>35</i>&nbsp;    public AddManaToManaPoolTargetControllerEffect(Mana mana, String textManaPoolOwner, boolean emptyOnTurnsEnd) {
+<b class="fc"><i>36</i>&nbsp;        super();</b>
+<b class="fc"><i>37</i>&nbsp;        this.mana = mana;</b>
+<b class="fc"><i>38</i>&nbsp;        this.emptyOnlyOnTurnsEnd = emptyOnTurnsEnd;</b>
+<b class="fc"><i>39</i>&nbsp;        this.staticText = (textManaPoolOwner.equals(&quot;his or her&quot;)?&quot;that player adds &quot;:&quot;add &quot;) + mana.toString() + &quot; to &quot; + textManaPoolOwner + &quot; mana pool&quot;;</b>
+<b class="fc"><i>40</i>&nbsp;    }</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    public AddManaToManaPoolTargetControllerEffect(final AddManaToManaPoolTargetControllerEffect effect) {
+<b class="fc"><i>43</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>44</i>&nbsp;        this.mana = effect.mana;</b>
+<b class="fc"><i>45</i>&nbsp;        this.emptyOnlyOnTurnsEnd = effect.emptyOnlyOnTurnsEnd;</b>
+<b class="fc"><i>46</i>&nbsp;    }</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    @Override
+<i>49</i>&nbsp;    public AddManaToManaPoolTargetControllerEffect copy() {
+<b class="fc"><i>50</i>&nbsp;        return new AddManaToManaPoolTargetControllerEffect(this);</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    @Override
+<i>54</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="fc"><i>55</i>&nbsp;        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));</b>
+<b class="fc"><i>56</i>&nbsp;        if (player != null) {</b>
+<b class="fc"><i>57</i>&nbsp;            player.getManaPool().addMana(mana, game, source, emptyOnlyOnTurnsEnd);</b>
+<b class="fc"><i>58</i>&nbsp;            return true;</b>
+<i>59</i>&nbsp;        }
+<b class="nc"><i>60</i>&nbsp;        return false;</b>
+<i>61</i>&nbsp;    }
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    @Override
+<i>64</i>&nbsp;    public Mana getMana(Game game, Ability source) {
+<b class="nc"><i>65</i>&nbsp;        return mana;</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

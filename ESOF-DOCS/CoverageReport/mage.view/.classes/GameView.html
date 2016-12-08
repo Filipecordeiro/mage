@@ -1,0 +1,435 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GameView</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.view</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GameView (mage.view)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameView</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 140)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.view;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.Serializable;
+<i>31</i>&nbsp;import java.util.ArrayList;
+<i>32</i>&nbsp;import java.util.List;
+<i>33</i>&nbsp;import java.util.Map;
+<i>34</i>&nbsp;import java.util.Set;
+<i>35</i>&nbsp;import java.util.UUID;
+<i>36</i>&nbsp;import mage.MageObject;
+<i>37</i>&nbsp;import mage.abilities.costs.Cost;
+<i>38</i>&nbsp;import mage.cards.Card;
+<i>39</i>&nbsp;import mage.constants.CardType;
+<i>40</i>&nbsp;import mage.constants.PhaseStep;
+<i>41</i>&nbsp;import mage.constants.TurnPhase;
+<i>42</i>&nbsp;import mage.constants.Zone;
+<i>43</i>&nbsp;import mage.game.ExileZone;
+<i>44</i>&nbsp;import mage.game.Game;
+<i>45</i>&nbsp;import mage.game.GameState;
+<i>46</i>&nbsp;import mage.game.combat.CombatGroup;
+<i>47</i>&nbsp;import mage.game.command.Emblem;
+<i>48</i>&nbsp;import mage.game.permanent.Permanent;
+<i>49</i>&nbsp;import mage.game.permanent.PermanentCard;
+<i>50</i>&nbsp;import mage.game.permanent.PermanentToken;
+<i>51</i>&nbsp;import mage.game.stack.Spell;
+<i>52</i>&nbsp;import mage.game.stack.StackAbility;
+<i>53</i>&nbsp;import mage.game.stack.StackObject;
+<i>54</i>&nbsp;import mage.players.Player;
+<i>55</i>&nbsp;import mage.watchers.common.CastSpellLastTurnWatcher;
+<i>56</i>&nbsp;import org.apache.log4j.Logger;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;/**
+<i>59</i>&nbsp; *
+<i>60</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>61</i>&nbsp; */
+<i>62</i>&nbsp;public class GameView implements Serializable {
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    private static final long serialVersionUID = 1L;
+<i>65</i>&nbsp;
+<b class="nc"><i>66</i>&nbsp;    private static final Logger LOGGER = Logger.getLogger(GameView.class);</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    private final int priorityTime;
+<b class="nc"><i>69</i>&nbsp;    private final List&lt;PlayerView&gt; players = new ArrayList&lt;&gt;();</b>
+<i>70</i>&nbsp;    private CardsView hand;
+<i>71</i>&nbsp;    private Set&lt;UUID&gt; canPlayInHand;
+<i>72</i>&nbsp;    private Map&lt;String, SimpleCardsView&gt; opponentHands;
+<i>73</i>&nbsp;    private Map&lt;String, SimpleCardsView&gt; watchedHands;
+<b class="nc"><i>74</i>&nbsp;    private final CardsView stack = new CardsView();</b>
+<b class="nc"><i>75</i>&nbsp;    private final List&lt;ExileView&gt; exiles = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>76</i>&nbsp;    private final List&lt;RevealedView&gt; revealed = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>77</i>&nbsp;    private List&lt;LookedAtView&gt; lookedAt = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>78</i>&nbsp;    private final List&lt;CombatGroupView&gt; combat = new ArrayList&lt;&gt;();</b>
+<i>79</i>&nbsp;    private final TurnPhase phase;
+<i>80</i>&nbsp;    private final PhaseStep step;
+<i>81</i>&nbsp;    private final UUID activePlayerId;
+<b class="nc"><i>82</i>&nbsp;    private String activePlayerName = &quot;&quot;;</b>
+<b class="nc"><i>83</i>&nbsp;    private String priorityPlayerName = &quot;&quot;;</b>
+<i>84</i>&nbsp;    private final int turn;
+<b class="nc"><i>85</i>&nbsp;    private boolean special = false;</b>
+<i>86</i>&nbsp;    private final boolean isPlayer;
+<i>87</i>&nbsp;    private final int spellsCastCurrentTurn;
+<i>88</i>&nbsp;    private final boolean rollbackTurnsAllowed;
+<i>89</i>&nbsp;
+<b class="nc"><i>90</i>&nbsp;    public GameView(GameState state, Game game, UUID createdForPlayerId, UUID watcherUserId) {</b>
+<b class="nc"><i>91</i>&nbsp;        Player createdForPlayer = null;</b>
+<b class="nc"><i>92</i>&nbsp;        this.isPlayer = createdForPlayerId != null;</b>
+<b class="nc"><i>93</i>&nbsp;        this.priorityTime = game.getPriorityTime();</b>
+<b class="nc"><i>94</i>&nbsp;        for (Player player : state.getPlayers().values()) {</b>
+<b class="nc"><i>95</i>&nbsp;            players.add(new PlayerView(player, state, game, createdForPlayerId, watcherUserId));</b>
+<b class="nc"><i>96</i>&nbsp;            if (player.getId().equals(createdForPlayerId)) {</b>
+<b class="nc"><i>97</i>&nbsp;                createdForPlayer = player;</b>
+<i>98</i>&nbsp;            }
+<b class="nc"><i>99</i>&nbsp;        }</b>
+<b class="nc"><i>100</i>&nbsp;        for (StackObject stackObject : state.getStack()) {</b>
+<b class="nc"><i>101</i>&nbsp;            if (stackObject instanceof StackAbility) {</b>
+<i>102</i>&nbsp;                // Stack Ability
+<b class="nc"><i>103</i>&nbsp;                MageObject object = game.getObject(stackObject.getSourceId());</b>
+<b class="nc"><i>104</i>&nbsp;                Card card = game.getCard(stackObject.getSourceId());</b>
+<b class="nc"><i>105</i>&nbsp;                if (card == null &amp;&amp; (object instanceof PermanentCard)) {</b>
+<b class="nc"><i>106</i>&nbsp;                    card = ((PermanentCard) object).getCard();</b>
+<i>107</i>&nbsp;                }
+<b class="nc"><i>108</i>&nbsp;                if (card != null) {</b>
+<b class="nc"><i>109</i>&nbsp;                    if (object != null) {</b>
+<b class="nc"><i>110</i>&nbsp;                        if (object instanceof Permanent) {</b>
+<b class="nc"><i>111</i>&nbsp;                            boolean controlled = ((Permanent) object).getControllerId().equals(createdForPlayerId);</b>
+<b class="nc"><i>112</i>&nbsp;                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, ((Permanent) object).getName(), new CardView(((Permanent) object), game, controlled, false, false)));</b>
+<b class="nc"><i>113</i>&nbsp;                        } else {</b>
+<b class="nc"><i>114</i>&nbsp;                            stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, card.getName(), new CardView(card, game, false, false, false)));</b>
+<i>115</i>&nbsp;                        }
+<i>116</i>&nbsp;                    } else {
+<b class="nc"><i>117</i>&nbsp;                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, &quot;&quot;, new CardView(card)));</b>
+<i>118</i>&nbsp;                    }
+<b class="nc"><i>119</i>&nbsp;                    if (card.isTransformable()) {</b>
+<b class="nc"><i>120</i>&nbsp;                        updateLatestCardView(game, card, stackObject.getId());</b>
+<i>121</i>&nbsp;                    }
+<b class="nc"><i>122</i>&nbsp;                    checkPaid(stackObject.getId(), (StackAbility) stackObject);</b>
+<b class="nc"><i>123</i>&nbsp;                } else if (object != null) {</b>
+<b class="nc"><i>124</i>&nbsp;                    if (object instanceof PermanentToken) {</b>
+<b class="nc"><i>125</i>&nbsp;                        PermanentToken token = (PermanentToken) object;</b>
+<b class="nc"><i>126</i>&nbsp;                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, token.getName(), new CardView(token)));</b>
+<b class="nc"><i>127</i>&nbsp;                        checkPaid(stackObject.getId(), (StackAbility) stackObject);</b>
+<b class="nc"><i>128</i>&nbsp;                    } else if (object instanceof Emblem) {</b>
+<b class="nc"><i>129</i>&nbsp;                        Card sourceCard = game.getCard(((Emblem) object).getSourceId());</b>
+<i>130</i>&nbsp;                        CardView cardView;
+<b class="nc"><i>131</i>&nbsp;                        if (sourceCard != null) {</b>
+<b class="nc"><i>132</i>&nbsp;                            if (!sourceCard.getCardType().contains(CardType.PLANESWALKER)) {</b>
+<b class="nc"><i>133</i>&nbsp;                                if (sourceCard.getSecondCardFace() != null) {</b>
+<b class="nc"><i>134</i>&nbsp;                                    sourceCard = sourceCard.getSecondCardFace();</b>
+<i>135</i>&nbsp;                                }
+<i>136</i>&nbsp;                            }
+<b class="nc"><i>137</i>&nbsp;                            ((StackAbility) stackObject).setName(&quot;Emblem &quot; + sourceCard.getName());</b>
+<b class="nc"><i>138</i>&nbsp;                            ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());</b>
+<b class="nc"><i>139</i>&nbsp;                            cardView = new CardView(new EmblemView(((Emblem) object), sourceCard));</b>
+<i>140</i>&nbsp;                        } else {
+<b class="nc"><i>141</i>&nbsp;                            cardView = new CardView(new EmblemView((Emblem) object));</b>
+<i>142</i>&nbsp;                        }
+<b class="nc"><i>143</i>&nbsp;                        stack.put(stackObject.getId(),</b>
+<b class="nc"><i>144</i>&nbsp;                                new StackAbilityView(game, (StackAbility) stackObject, object.getName(), cardView));</b>
+<b class="nc"><i>145</i>&nbsp;                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));</b>
+<b class="nc"><i>146</i>&nbsp;                    } else if (object instanceof StackAbility) {</b>
+<b class="nc"><i>147</i>&nbsp;                        StackAbility stackAbility = ((StackAbility) object);</b>
+<b class="nc"><i>148</i>&nbsp;                        stackAbility.newId();</b>
+<b class="nc"><i>149</i>&nbsp;                        stack.put(stackObject.getId(), new CardView(((StackAbility) stackObject)));</b>
+<b class="nc"><i>150</i>&nbsp;                        checkPaid(stackObject.getId(), ((StackAbility) stackObject));</b>
+<b class="nc"><i>151</i>&nbsp;                    } else {</b>
+<b class="nc"><i>152</i>&nbsp;                        LOGGER.fatal(&quot;Object can&#39;t be cast to StackAbility: &quot; + object.getName() + &quot; &quot; + object.toString() + &quot; &quot; + object.getClass().toString());</b>
+<i>153</i>&nbsp;                    }
+<i>154</i>&nbsp;                } else {
+<i>155</i>&nbsp;                    // can happen if a player times out while ability is on the stack
+<b class="nc"><i>156</i>&nbsp;                    LOGGER.debug(&quot;Stack Object for stack ability not found: &quot; + stackObject.getStackAbility().getRule());</b>
+<i>157</i>&nbsp;                }
+<b class="nc"><i>158</i>&nbsp;            } else {</b>
+<i>159</i>&nbsp;                // Spell
+<b class="nc"><i>160</i>&nbsp;                stack.put(stackObject.getId(), new CardView((Spell) stackObject, game, stackObject.getControllerId().equals(createdForPlayerId)));</b>
+<b class="nc"><i>161</i>&nbsp;                checkPaid(stackObject.getId(), (Spell) stackObject);</b>
+<i>162</i>&nbsp;            }
+<i>163</i>&nbsp;            //stackOrder.add(stackObject.getId());
+<b class="nc"><i>164</i>&nbsp;        }</b>
+<i>165</i>&nbsp;        //Collections.reverse(stackOrder);
+<b class="nc"><i>166</i>&nbsp;        for (ExileZone exileZone : state.getExile().getExileZones()) {</b>
+<b class="nc"><i>167</i>&nbsp;            exiles.add(new ExileView(exileZone, game));</b>
+<b class="nc"><i>168</i>&nbsp;        }</b>
+<b class="nc"><i>169</i>&nbsp;        for (String name : state.getRevealed().keySet()) {</b>
+<b class="nc"><i>170</i>&nbsp;            revealed.add(new RevealedView(name, state.getRevealed().get(name), game));</b>
+<b class="nc"><i>171</i>&nbsp;        }</b>
+<b class="nc"><i>172</i>&nbsp;        this.phase = state.getTurn().getPhaseType();</b>
+<b class="nc"><i>173</i>&nbsp;        this.step = state.getTurn().getStepType();</b>
+<b class="nc"><i>174</i>&nbsp;        this.turn = state.getTurnNum();</b>
+<b class="nc"><i>175</i>&nbsp;        this.activePlayerId = state.getActivePlayerId();</b>
+<b class="nc"><i>176</i>&nbsp;        if (state.getActivePlayerId() != null) {</b>
+<b class="nc"><i>177</i>&nbsp;            this.activePlayerName = state.getPlayer(state.getActivePlayerId()).getName();</b>
+<i>178</i>&nbsp;        } else {
+<b class="nc"><i>179</i>&nbsp;            this.activePlayerName = &quot;&quot;;</b>
+<i>180</i>&nbsp;        }
+<b class="nc"><i>181</i>&nbsp;        if (state.getPriorityPlayerId() != null) {</b>
+<b class="nc"><i>182</i>&nbsp;            this.priorityPlayerName = state.getPlayer(state.getPriorityPlayerId()).getName();</b>
+<i>183</i>&nbsp;        } else {
+<b class="nc"><i>184</i>&nbsp;            this.priorityPlayerName = &quot;&quot;;</b>
+<i>185</i>&nbsp;        }
+<b class="nc"><i>186</i>&nbsp;        for (CombatGroup combatGroup : state.getCombat().getGroups()) {</b>
+<b class="nc"><i>187</i>&nbsp;            combat.add(new CombatGroupView(combatGroup, game));</b>
+<b class="nc"><i>188</i>&nbsp;        }</b>
+<b class="nc"><i>189</i>&nbsp;        if (isPlayer) {</b>
+<i>190</i>&nbsp;            // has only to be set for active palyer with priority (e.g. pay mana by delve or Quenchable Fire special action)
+<b class="nc"><i>191</i>&nbsp;            if (createdForPlayer != null &amp;&amp; createdForPlayerId != null &amp;&amp; createdForPlayerId.equals(state.getPriorityPlayerId())) {</b>
+<b class="nc"><i>192</i>&nbsp;                this.special = state.getSpecialActions().getControlledBy(state.getPriorityPlayerId(), createdForPlayer.isInPayManaMode()).size() &gt; 0;</b>
+<i>193</i>&nbsp;            }
+<i>194</i>&nbsp;        } else {
+<b class="nc"><i>195</i>&nbsp;            this.special = false;</b>
+<i>196</i>&nbsp;        }
+<i>197</i>&nbsp;
+<b class="nc"><i>198</i>&nbsp;        CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get(CastSpellLastTurnWatcher.class.getName());</b>
+<b class="nc"><i>199</i>&nbsp;        if (watcher != null) {</b>
+<b class="nc"><i>200</i>&nbsp;            spellsCastCurrentTurn = watcher.getAmountOfSpellsAllPlayersCastOnCurrentTurn();</b>
+<i>201</i>&nbsp;        } else {
+<b class="nc"><i>202</i>&nbsp;            spellsCastCurrentTurn = 0;</b>
+<i>203</i>&nbsp;        }
+<b class="nc"><i>204</i>&nbsp;        rollbackTurnsAllowed = game.getOptions().rollbackTurnsAllowed;</b>
+<i>205</i>&nbsp;    }
+<i>206</i>&nbsp;
+<i>207</i>&nbsp;    private void checkPaid(UUID uuid, StackAbility stackAbility) {
+<b class="nc"><i>208</i>&nbsp;        for (Cost cost : stackAbility.getManaCostsToPay()) {</b>
+<b class="nc"><i>209</i>&nbsp;            if (!cost.isPaid()) {</b>
+<i>210</i>&nbsp;                return;
+<i>211</i>&nbsp;            }
+<b class="nc"><i>212</i>&nbsp;        }</b>
+<b class="nc"><i>213</i>&nbsp;        CardView cardView = stack.get(uuid);</b>
+<b class="nc"><i>214</i>&nbsp;        cardView.paid = true;</b>
+<i>215</i>&nbsp;    }
+<i>216</i>&nbsp;
+<i>217</i>&nbsp;    private void checkPaid(UUID uuid, Spell spell) {
+<b class="nc"><i>218</i>&nbsp;        for (Cost cost : spell.getSpellAbility().getManaCostsToPay()) {</b>
+<b class="nc"><i>219</i>&nbsp;            if (!cost.isPaid()) {</b>
+<i>220</i>&nbsp;                return;
+<i>221</i>&nbsp;            }
+<b class="nc"><i>222</i>&nbsp;        }</b>
+<b class="nc"><i>223</i>&nbsp;        CardView cardView = stack.get(uuid);</b>
+<b class="nc"><i>224</i>&nbsp;        cardView.paid = true;</b>
+<i>225</i>&nbsp;    }
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;    private void setPaid(UUID uuid) {
+<b class="nc"><i>228</i>&nbsp;        CardView cardView = stack.get(uuid);</b>
+<b class="nc"><i>229</i>&nbsp;        cardView.paid = true;</b>
+<i>230</i>&nbsp;    }
+<i>231</i>&nbsp;
+<i>232</i>&nbsp;    private void updateLatestCardView(Game game, Card card, UUID stackId) {
+<b class="nc"><i>233</i>&nbsp;        if (!card.isTransformable()) {</b>
+<i>234</i>&nbsp;            return;
+<i>235</i>&nbsp;        }
+<b class="nc"><i>236</i>&nbsp;        Permanent permanent = game.getPermanent(card.getId());</b>
+<b class="nc"><i>237</i>&nbsp;        if (permanent == null) {</b>
+<b class="nc"><i>238</i>&nbsp;            permanent = (Permanent) game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);</b>
+<i>239</i>&nbsp;        }
+<b class="nc"><i>240</i>&nbsp;        if (permanent != null) {</b>
+<b class="nc"><i>241</i>&nbsp;            if (permanent.isTransformed()) {</b>
+<b class="nc"><i>242</i>&nbsp;                StackAbilityView stackAbilityView = (StackAbilityView) stack.get(stackId);</b>
+<b class="nc"><i>243</i>&nbsp;                stackAbilityView.getSourceCard().setTransformed(true);</b>
+<i>244</i>&nbsp;            }
+<i>245</i>&nbsp;        }
+<i>246</i>&nbsp;    }
+<i>247</i>&nbsp;
+<i>248</i>&nbsp;    public List&lt;PlayerView&gt; getPlayers() {
+<b class="nc"><i>249</i>&nbsp;        return players;</b>
+<i>250</i>&nbsp;    }
+<i>251</i>&nbsp;
+<i>252</i>&nbsp;    public CardsView getHand() {
+<b class="nc"><i>253</i>&nbsp;        return hand;</b>
+<i>254</i>&nbsp;    }
+<i>255</i>&nbsp;
+<i>256</i>&nbsp;    public void setHand(CardsView hand) {
+<b class="nc"><i>257</i>&nbsp;        this.hand = hand;</b>
+<i>258</i>&nbsp;    }
+<i>259</i>&nbsp;
+<i>260</i>&nbsp;    public Map&lt;String, SimpleCardsView&gt; getOpponentHands() {
+<b class="nc"><i>261</i>&nbsp;        return opponentHands;</b>
+<i>262</i>&nbsp;    }
+<i>263</i>&nbsp;
+<i>264</i>&nbsp;    public void setOpponentHands(Map&lt;String, SimpleCardsView&gt; opponentHands) {
+<b class="nc"><i>265</i>&nbsp;        this.opponentHands = opponentHands;</b>
+<i>266</i>&nbsp;    }
+<i>267</i>&nbsp;
+<i>268</i>&nbsp;    public Map&lt;String, SimpleCardsView&gt; getWatchedHands() {
+<b class="nc"><i>269</i>&nbsp;        return watchedHands;</b>
+<i>270</i>&nbsp;    }
+<i>271</i>&nbsp;
+<i>272</i>&nbsp;    public void setWatchedHands(Map&lt;String, SimpleCardsView&gt; watchedHands) {
+<b class="nc"><i>273</i>&nbsp;        this.watchedHands = watchedHands;</b>
+<i>274</i>&nbsp;    }
+<i>275</i>&nbsp;
+<i>276</i>&nbsp;    public TurnPhase getPhase() {
+<b class="nc"><i>277</i>&nbsp;        return phase;</b>
+<i>278</i>&nbsp;    }
+<i>279</i>&nbsp;
+<i>280</i>&nbsp;    public PhaseStep getStep() {
+<b class="nc"><i>281</i>&nbsp;        return step;</b>
+<i>282</i>&nbsp;    }
+<i>283</i>&nbsp;
+<i>284</i>&nbsp;    public CardsView getStack() {
+<b class="nc"><i>285</i>&nbsp;        return stack;</b>
+<i>286</i>&nbsp;    }
+<i>287</i>&nbsp;
+<i>288</i>&nbsp;    public List&lt;ExileView&gt; getExile() {
+<b class="nc"><i>289</i>&nbsp;        return exiles;</b>
+<i>290</i>&nbsp;    }
+<i>291</i>&nbsp;
+<i>292</i>&nbsp;    public List&lt;RevealedView&gt; getRevealed() {
+<b class="nc"><i>293</i>&nbsp;        return revealed;</b>
+<i>294</i>&nbsp;    }
+<i>295</i>&nbsp;
+<i>296</i>&nbsp;    public List&lt;LookedAtView&gt; getLookedAt() {
+<b class="nc"><i>297</i>&nbsp;        return lookedAt;</b>
+<i>298</i>&nbsp;    }
+<i>299</i>&nbsp;
+<i>300</i>&nbsp;    public void setLookedAt(List&lt;LookedAtView&gt; list) {
+<b class="nc"><i>301</i>&nbsp;        this.lookedAt = list;</b>
+<i>302</i>&nbsp;    }
+<i>303</i>&nbsp;
+<i>304</i>&nbsp;    public List&lt;CombatGroupView&gt; getCombat() {
+<b class="nc"><i>305</i>&nbsp;        return combat;</b>
+<i>306</i>&nbsp;    }
+<i>307</i>&nbsp;
+<i>308</i>&nbsp;    public int getTurn() {
+<b class="nc"><i>309</i>&nbsp;        return this.turn;</b>
+<i>310</i>&nbsp;    }
+<i>311</i>&nbsp;
+<i>312</i>&nbsp;    public String getActivePlayerName() {
+<b class="nc"><i>313</i>&nbsp;        return activePlayerName;</b>
+<i>314</i>&nbsp;    }
+<i>315</i>&nbsp;
+<i>316</i>&nbsp;    public String getPriorityPlayerName() {
+<b class="nc"><i>317</i>&nbsp;        return priorityPlayerName;</b>
+<i>318</i>&nbsp;    }
+<i>319</i>&nbsp;
+<i>320</i>&nbsp;    public boolean getSpecial() {
+<b class="nc"><i>321</i>&nbsp;        return special;</b>
+<i>322</i>&nbsp;    }
+<i>323</i>&nbsp;
+<i>324</i>&nbsp;    public int getPriorityTime() {
+<b class="nc"><i>325</i>&nbsp;        return priorityTime;</b>
+<i>326</i>&nbsp;    }
+<i>327</i>&nbsp;
+<i>328</i>&nbsp;    public UUID getActivePlayerId() {
+<b class="nc"><i>329</i>&nbsp;        return activePlayerId;</b>
+<i>330</i>&nbsp;    }
+<i>331</i>&nbsp;
+<i>332</i>&nbsp;    public boolean isPlayer() {
+<b class="nc"><i>333</i>&nbsp;        return isPlayer;</b>
+<i>334</i>&nbsp;    }
+<i>335</i>&nbsp;
+<i>336</i>&nbsp;    public Set&lt;UUID&gt; getCanPlayInHand() {
+<b class="nc"><i>337</i>&nbsp;        return canPlayInHand;</b>
+<i>338</i>&nbsp;    }
+<i>339</i>&nbsp;
+<i>340</i>&nbsp;    public void setCanPlayInHand(Set&lt;UUID&gt; canPlayInHand) {
+<b class="nc"><i>341</i>&nbsp;        this.canPlayInHand = canPlayInHand;</b>
+<i>342</i>&nbsp;    }
+<i>343</i>&nbsp;
+<i>344</i>&nbsp;    public int getSpellsCastCurrentTurn() {
+<b class="nc"><i>345</i>&nbsp;        return spellsCastCurrentTurn;</b>
+<i>346</i>&nbsp;    }
+<i>347</i>&nbsp;
+<i>348</i>&nbsp;    public boolean isRollbackTurnsAllowed() {
+<b class="nc"><i>349</i>&nbsp;        return rollbackTurnsAllowed;</b>
+<i>350</i>&nbsp;    }
+<i>351</i>&nbsp;
+<i>352</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

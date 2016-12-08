@@ -1,0 +1,350 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: StackObjImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.game.stack</a> ]
+</div>
+
+<h1>Coverage Summary for Class: StackObjImpl (mage.game.stack)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StackObjImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (77/ 99)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.game.stack;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.Set;
+<i>9</i>&nbsp;import java.util.UUID;
+<i>10</i>&nbsp;import mage.MageObject;
+<i>11</i>&nbsp;import mage.abilities.Abilities;
+<i>12</i>&nbsp;import mage.abilities.AbilitiesImpl;
+<i>13</i>&nbsp;import mage.abilities.Ability;
+<i>14</i>&nbsp;import mage.abilities.Mode;
+<i>15</i>&nbsp;import mage.abilities.dynamicvalue.common.StaticValue;
+<i>16</i>&nbsp;import mage.constants.Outcome;
+<i>17</i>&nbsp;import mage.filter.FilterPermanent;
+<i>18</i>&nbsp;import mage.game.Game;
+<i>19</i>&nbsp;import mage.game.permanent.Permanent;
+<i>20</i>&nbsp;import mage.players.Player;
+<i>21</i>&nbsp;import mage.target.Target;
+<i>22</i>&nbsp;import mage.target.TargetAmount;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;/**
+<i>25</i>&nbsp; *
+<i>26</i>&nbsp; * @author LevelX2
+<i>27</i>&nbsp; */
+<b class="fc"><i>28</i>&nbsp;public abstract class StackObjImpl implements StackObject {</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * Choose new targets for a stack Object
+<i>32</i>&nbsp;     *
+<i>33</i>&nbsp;     * @param game
+<i>34</i>&nbsp;     * @param playerId Player UUID who changes the targets.
+<i>35</i>&nbsp;     * @return
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    public boolean chooseNewTargets(Game game, UUID playerId) {
+<b class="fc"><i>38</i>&nbsp;        return chooseNewTargets(game, playerId, false, false, null);</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * 114.6. Some effects allow a player to change the target(s) of a spell or
+<i>43</i>&nbsp;     * ability, and other effects allow a player to choose new targets for a
+<i>44</i>&nbsp;     * spell or ability.
+<i>45</i>&nbsp;     *
+<i>46</i>&nbsp;     * 114.6a If an effect allows a player to &quot;change the target(s)&quot; of a spell
+<i>47</i>&nbsp;     * or ability, each target can be changed only to another legal target. If a
+<i>48</i>&nbsp;     * target can&#39;t be changed to another legal target, the original target is
+<i>49</i>&nbsp;     * unchanged, even if the original target is itself illegal by then. If all
+<i>50</i>&nbsp;     * the targets aren&#39;t changed to other legal targets, none of them are
+<i>51</i>&nbsp;     * changed.
+<i>52</i>&nbsp;     *
+<i>53</i>&nbsp;     * 114.6b If an effect allows a player to &quot;change a target&quot; of a spell or
+<i>54</i>&nbsp;     * ability, the process described in rule 114.6a is followed, except that
+<i>55</i>&nbsp;     * only one of those targets may be changed (rather than all of them or none
+<i>56</i>&nbsp;     * of them).
+<i>57</i>&nbsp;     *
+<i>58</i>&nbsp;     * 114.6c If an effect allows a player to &quot;change any targets&quot; of a spell or
+<i>59</i>&nbsp;     * ability, the process described in rule 114.6a is followed, except that
+<i>60</i>&nbsp;     * any number of those targets may be changed (rather than all of them or
+<i>61</i>&nbsp;     * none of them).
+<i>62</i>&nbsp;     *
+<i>63</i>&nbsp;     * 114.6d If an effect allows a player to &quot;choose new targets&quot; for a spell
+<i>64</i>&nbsp;     * or ability, the player may leave any number of the targets unchanged,
+<i>65</i>&nbsp;     * even if those targets would be illegal. If the player chooses to change
+<i>66</i>&nbsp;     * some or all of the targets, the new targets must be legal and must not
+<i>67</i>&nbsp;     * cause any unchanged targets to become illegal.
+<i>68</i>&nbsp;     *
+<i>69</i>&nbsp;     * 114.6e When changing targets or choosing new targets for a spell or
+<i>70</i>&nbsp;     * ability, only the final set of targets is evaluated to determine whether
+<i>71</i>&nbsp;     * the change is legal.
+<i>72</i>&nbsp;     *
+<i>73</i>&nbsp;     * Example: Arc Trail is a sorcery that reads &quot;Arc Trail deals 2 damage to
+<i>74</i>&nbsp;     * target creature or player and 1 damage to another target creature or
+<i>75</i>&nbsp;     * player.&quot; The current targets of Arc Trail are Runeclaw Bear and Llanowar
+<i>76</i>&nbsp;     * Elves, in that order. You cast Redirect, an instant that reads &quot;You may
+<i>77</i>&nbsp;     * choose new targets for target spell,&quot; targeting Arc Trail. You can change
+<i>78</i>&nbsp;     * the first target to Llanowar Elves and change the second target to
+<i>79</i>&nbsp;     * Runeclaw Bear.
+<i>80</i>&nbsp;     *
+<i>81</i>&nbsp;     * 114.7. Modal spells and abilities may have different targeting
+<i>82</i>&nbsp;     * requirements for each mode. An effect that allows a player to change the
+<i>83</i>&nbsp;     * target(s) of a modal spell or ability, or to choose new targets for a
+<i>84</i>&nbsp;     * modal spell or ability, doesn&#39;t allow that player to change its mode.
+<i>85</i>&nbsp;     * (See rule 700.2.)
+<i>86</i>&nbsp;     *
+<i>87</i>&nbsp;     * 706.10c Some effects copy a spell or ability and state that its
+<i>88</i>&nbsp;     * controller may choose new targets for the copy. The player may leave any
+<i>89</i>&nbsp;     * number of the targets unchanged, even if those targets would be illegal.
+<i>90</i>&nbsp;     * If the player chooses to change some or all of the targets, the new
+<i>91</i>&nbsp;     * targets must be legal. Once the player has decided what the copy&#39;s
+<i>92</i>&nbsp;     * targets will be, the copy is put onto the stack with those targets.
+<i>93</i>&nbsp;     *
+<i>94</i>&nbsp;     * @param game
+<i>95</i>&nbsp;     * @param targetControllerId - player that can/has to change the target of
+<i>96</i>&nbsp;     * the spell
+<i>97</i>&nbsp;     * @param forceChange - does only work for targets with maximum of one
+<i>98</i>&nbsp;     * targetId
+<i>99</i>&nbsp;     * @param onlyOneTarget - 114.6b one target must be changed to another
+<i>100</i>&nbsp;     * target
+<i>101</i>&nbsp;     * @param filterNewTarget restriction for the new target, if null nothing is
+<i>102</i>&nbsp;     * cheched
+<i>103</i>&nbsp;     * @return
+<i>104</i>&nbsp;     */
+<i>105</i>&nbsp;    @Override
+<i>106</i>&nbsp;    public boolean chooseNewTargets(Game game, UUID targetControllerId, boolean forceChange, boolean onlyOneTarget, FilterPermanent filterNewTarget) {
+<b class="fc"><i>107</i>&nbsp;        Player targetController = game.getPlayer(targetControllerId);</b>
+<b class="fc"><i>108</i>&nbsp;        if (targetController != null) {</b>
+<b class="fc"><i>109</i>&nbsp;            StringBuilder oldTargetDescription = new StringBuilder();</b>
+<b class="fc"><i>110</i>&nbsp;            StringBuilder newTargetDescription = new StringBuilder();</b>
+<i>111</i>&nbsp;            // Fused split spells or spells where &quot;Splice on Arcane&quot; was used can have more than one ability
+<b class="fc"><i>112</i>&nbsp;            Abilities&lt;Ability&gt; objectAbilities = new AbilitiesImpl&lt;&gt;();</b>
+<b class="fc"><i>113</i>&nbsp;            if (this instanceof Spell) {</b>
+<b class="fc"><i>114</i>&nbsp;                objectAbilities.addAll(((Spell) this).getSpellAbilities());</b>
+<i>115</i>&nbsp;            } else {
+<b class="nc"><i>116</i>&nbsp;                objectAbilities.add(getStackAbility());</b>
+<i>117</i>&nbsp;            }
+<b class="fc"><i>118</i>&nbsp;            for (Ability ability : objectAbilities) {</b>
+<i>119</i>&nbsp;                // Some spells can have more than one mode
+<b class="fc"><i>120</i>&nbsp;                for (UUID modeId : ability.getModes().getSelectedModes()) {</b>
+<b class="fc"><i>121</i>&nbsp;                    Mode mode = ability.getModes().get(modeId);</b>
+<b class="fc"><i>122</i>&nbsp;                    ability.getModes().setActiveMode(mode);</b>
+<b class="fc"><i>123</i>&nbsp;                    oldTargetDescription.append(ability.getTargetDescription(mode.getTargets(), game));</b>
+<b class="fc"><i>124</i>&nbsp;                    for (Target target : mode.getTargets()) {</b>
+<b class="fc"><i>125</i>&nbsp;                        Target newTarget = chooseNewTarget(targetController, ability, mode, target, forceChange, filterNewTarget, game);</b>
+<i>126</i>&nbsp;                        // clear the old target and copy all targets from new target
+<b class="fc"><i>127</i>&nbsp;                        target.clearChosen();</b>
+<b class="fc"><i>128</i>&nbsp;                        for (UUID targetId : newTarget.getTargets()) {</b>
+<b class="fc"><i>129</i>&nbsp;                            target.addTarget(targetId, newTarget.getTargetAmount(targetId), ability, game, false);</b>
+<b class="fc"><i>130</i>&nbsp;                        }</b>
+<i>131</i>&nbsp;
+<b class="fc"><i>132</i>&nbsp;                    }</b>
+<b class="fc"><i>133</i>&nbsp;                    newTargetDescription.append(ability.getTargetDescription(mode.getTargets(), game));</b>
+<b class="fc"><i>134</i>&nbsp;                }</b>
+<i>135</i>&nbsp;
+<b class="fc"><i>136</i>&nbsp;            }</b>
+<b class="fc"><i>137</i>&nbsp;            if (!newTargetDescription.toString().equals(oldTargetDescription.toString()) &amp;&amp; !game.isSimulation()) {</b>
+<b class="fc"><i>138</i>&nbsp;                game.informPlayers(this.getLogName() + &quot; is now &quot; + newTargetDescription.toString());</b>
+<i>139</i>&nbsp;            }
+<b class="fc"><i>140</i>&nbsp;            return true;</b>
+<i>141</i>&nbsp;        }
+<b class="nc"><i>142</i>&nbsp;        return false;</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    /**
+<i>146</i>&nbsp;     * Handles the change of one target instance of a mode
+<i>147</i>&nbsp;     *
+<i>148</i>&nbsp;     * @param targetController - player that can choose the new target
+<i>149</i>&nbsp;     * @param ability
+<i>150</i>&nbsp;     * @param mode
+<i>151</i>&nbsp;     * @param target
+<i>152</i>&nbsp;     * @param forceChange
+<i>153</i>&nbsp;     * @param game
+<i>154</i>&nbsp;     * @return
+<i>155</i>&nbsp;     */
+<i>156</i>&nbsp;    private Target chooseNewTarget(Player targetController, Ability ability, Mode mode, Target target, boolean forceChange, FilterPermanent filterNewTarget, Game game) {
+<b class="fc"><i>157</i>&nbsp;        Target newTarget = target.copy();</b>
+<b class="fc"><i>158</i>&nbsp;        if (!targetController.getId().equals(getControllerId())) {</b>
+<b class="fc"><i>159</i>&nbsp;            newTarget.setTargetController(targetController.getId()); // target controller for the change is different from spell controller</b>
+<b class="fc"><i>160</i>&nbsp;            newTarget.setAbilityController(getControllerId());</b>
+<i>161</i>&nbsp;        }
+<b class="fc"><i>162</i>&nbsp;        newTarget.clearChosen();</b>
+<b class="fc"><i>163</i>&nbsp;        for (UUID targetId : target.getTargets()) {</b>
+<b class="fc"><i>164</i>&nbsp;            String targetNames = getNamesOftargets(targetId, game);</b>
+<i>165</i>&nbsp;            // change the target?
+<b class="fc"><i>166</i>&nbsp;            if (targetNames != null</b>
+<b class="fc"><i>167</i>&nbsp;                    &amp;&amp; (forceChange || targetController.chooseUse(mode.getEffects().get(0).getOutcome(), &quot;Change this target: &quot; + targetNames + &quot;?&quot;, ability, game))) {</b>
+<b class="fc"><i>168</i>&nbsp;                Set&lt;UUID&gt; possibleTargets = target.possibleTargets(this.getSourceId(), getControllerId(), game);</b>
+<i>169</i>&nbsp;                // choose exactly one other target - already targeted objects are not counted
+<b class="fc"><i>170</i>&nbsp;                if (forceChange &amp;&amp; possibleTargets != null &amp;&amp; possibleTargets.size() &gt; 1) { // controller of spell must be used (e.g. TargetOpponent)</b>
+<b class="fc"><i>171</i>&nbsp;                    int iteration = 0;</b>
+<i>172</i>&nbsp;                    do {
+<b class="fc"><i>173</i>&nbsp;                        if (iteration &gt; 0 &amp;&amp; !game.isSimulation()) {</b>
+<b class="nc"><i>174</i>&nbsp;                            game.informPlayer(targetController, &quot;You may only select exactly one target that must be different from the origin target!&quot;);</b>
+<i>175</i>&nbsp;                        }
+<b class="fc"><i>176</i>&nbsp;                        iteration++;</b>
+<b class="fc"><i>177</i>&nbsp;                        newTarget.clearChosen();</b>
+<i>178</i>&nbsp;
+<b class="fc"><i>179</i>&nbsp;                        newTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), getControllerId(), ability, game);</b>
+<i>180</i>&nbsp;                        // check target restriction
+<b class="fc"><i>181</i>&nbsp;                        if (newTarget.getFirstTarget() != null &amp;&amp; filterNewTarget != null) {</b>
+<b class="nc"><i>182</i>&nbsp;                            Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());</b>
+<b class="nc"><i>183</i>&nbsp;                            if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {</b>
+<b class="nc"><i>184</i>&nbsp;                                game.informPlayer(targetController, &quot;Target does not fullfil the target requirements (&quot; + filterNewTarget.getMessage() + &quot;)&quot;);</b>
+<b class="nc"><i>185</i>&nbsp;                                newTarget.clearChosen();</b>
+<i>186</i>&nbsp;                            }
+<i>187</i>&nbsp;                        }
+<b class="fc"><i>188</i>&nbsp;                    } while (targetController.canRespond() &amp;&amp; (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1));</b>
+<i>189</i>&nbsp;                    // choose a new target
+<b class="fc"><i>190</i>&nbsp;                } else {</b>
+<i>191</i>&nbsp;                    // build a target definition with exactly one possible target to select that replaces old target
+<b class="fc"><i>192</i>&nbsp;                    Target tempTarget = target.copy();</b>
+<b class="fc"><i>193</i>&nbsp;                    if (target instanceof TargetAmount) {</b>
+<b class="nc"><i>194</i>&nbsp;                        ((TargetAmount) tempTarget).setAmountDefinition(new StaticValue(target.getTargetAmount(targetId)));</b>
+<i>195</i>&nbsp;                    }
+<b class="fc"><i>196</i>&nbsp;                    tempTarget.setMinNumberOfTargets(1);</b>
+<b class="fc"><i>197</i>&nbsp;                    tempTarget.setMaxNumberOfTargets(1);</b>
+<b class="fc"><i>198</i>&nbsp;                    if (!targetController.getId().equals(getControllerId())) {</b>
+<b class="fc"><i>199</i>&nbsp;                        tempTarget.setTargetController(targetController.getId());</b>
+<b class="fc"><i>200</i>&nbsp;                        tempTarget.setAbilityController(getControllerId());</b>
+<i>201</i>&nbsp;                    }
+<i>202</i>&nbsp;                    boolean again;
+<i>203</i>&nbsp;                    do {
+<b class="fc"><i>204</i>&nbsp;                        again = false;</b>
+<b class="fc"><i>205</i>&nbsp;                        tempTarget.clearChosen();</b>
+<b class="fc"><i>206</i>&nbsp;                        if (!tempTarget.chooseTarget(mode.getEffects().get(0).getOutcome(), getControllerId(), ability, game)) {</b>
+<b class="fc"><i>207</i>&nbsp;                            if (targetController.chooseUse(Outcome.Benefit, &quot;No target object selected. Reset to original target?&quot;, ability, game)) {</b>
+<i>208</i>&nbsp;                                // use previous target no target was selected
+<b class="fc"><i>209</i>&nbsp;                                newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);</b>
+<i>210</i>&nbsp;                            } else {
+<b class="nc"><i>211</i>&nbsp;                                again = true;</b>
+<i>212</i>&nbsp;                            }
+<i>213</i>&nbsp;                        } else // if possible add the alternate Target - it may not be included in the old definition nor in the already selected targets of the new definition
+<b class="fc"><i>214</i>&nbsp;                         if (newTarget.getTargets().contains(tempTarget.getFirstTarget()) || target.getTargets().contains(tempTarget.getFirstTarget())) {</b>
+<b class="fc"><i>215</i>&nbsp;                                if (targetController.isHuman()) {</b>
+<b class="nc"><i>216</i>&nbsp;                                    if (targetController.chooseUse(Outcome.Benefit, &quot;This target was already selected from origin spell. Reset to original target?&quot;, ability, game)) {</b>
+<i>217</i>&nbsp;                                        // use previous target no target was selected
+<b class="nc"><i>218</i>&nbsp;                                        newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);</b>
+<i>219</i>&nbsp;                                    } else {
+<b class="nc"><i>220</i>&nbsp;                                        again = true;</b>
+<i>221</i>&nbsp;                                    }
+<i>222</i>&nbsp;                                } else {
+<b class="fc"><i>223</i>&nbsp;                                    newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);</b>
+<i>224</i>&nbsp;                                }
+<b class="fc"><i>225</i>&nbsp;                            } else if (!target.canTarget(getControllerId(), tempTarget.getFirstTarget(), ability, game)) {</b>
+<b class="nc"><i>226</i>&nbsp;                                if (targetController.isHuman()) {</b>
+<b class="nc"><i>227</i>&nbsp;                                    game.informPlayer(targetController, &quot;This target is not valid!&quot;);</b>
+<b class="nc"><i>228</i>&nbsp;                                    again = true;</b>
+<i>229</i>&nbsp;                                } else {
+<i>230</i>&nbsp;                                    // keep the old
+<b class="nc"><i>231</i>&nbsp;                                    newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);</b>
+<i>232</i>&nbsp;                                }
+<b class="fc"><i>233</i>&nbsp;                            } else if (newTarget.getFirstTarget() != null &amp;&amp; filterNewTarget != null) {</b>
+<b class="nc"><i>234</i>&nbsp;                                Permanent newTargetPermanent = game.getPermanent(newTarget.getFirstTarget());</b>
+<b class="nc"><i>235</i>&nbsp;                                if (newTargetPermanent == null || !filterNewTarget.match(newTargetPermanent, game)) {</b>
+<b class="nc"><i>236</i>&nbsp;                                    game.informPlayer(targetController, &quot;This target does not fullfil the target requirements (&quot; + filterNewTarget.getMessage() + &quot;)&quot;);</b>
+<b class="nc"><i>237</i>&nbsp;                                    again = true;</b>
+<i>238</i>&nbsp;                                }
+<b class="nc"><i>239</i>&nbsp;                            } else {</b>
+<i>240</i>&nbsp;                                // valid target was selected, add it to the new target definition
+<b class="fc"><i>241</i>&nbsp;                                newTarget.addTarget(tempTarget.getFirstTarget(), target.getTargetAmount(targetId), ability, game, false);</b>
+<i>242</i>&nbsp;                            }
+<b class="fc"><i>243</i>&nbsp;                    } while (again &amp;&amp; targetController.canRespond());</b>
+<i>244</i>&nbsp;                }
+<b class="fc"><i>245</i>&nbsp;            } // keep the target</b>
+<i>246</i>&nbsp;            else {
+<b class="nc"><i>247</i>&nbsp;                newTarget.addTarget(targetId, target.getTargetAmount(targetId), ability, game, false);</b>
+<i>248</i>&nbsp;            }
+<b class="fc"><i>249</i>&nbsp;        }</b>
+<b class="fc"><i>250</i>&nbsp;        return newTarget;</b>
+<i>251</i>&nbsp;    }
+<i>252</i>&nbsp;
+<i>253</i>&nbsp;    private String getNamesOftargets(UUID targetId, Game game) {
+<b class="fc"><i>254</i>&nbsp;        MageObject object = game.getObject(targetId);</b>
+<b class="fc"><i>255</i>&nbsp;        String name = null;</b>
+<b class="fc"><i>256</i>&nbsp;        if (object == null) {</b>
+<b class="fc"><i>257</i>&nbsp;            Player targetPlayer = game.getPlayer(targetId);</b>
+<b class="fc"><i>258</i>&nbsp;            if (targetPlayer != null) {</b>
+<b class="fc"><i>259</i>&nbsp;                name = targetPlayer.getLogName();</b>
+<i>260</i>&nbsp;            }
+<b class="fc"><i>261</i>&nbsp;        } else {</b>
+<b class="fc"><i>262</i>&nbsp;            name = object.getName();</b>
+<i>263</i>&nbsp;        }
+<b class="fc"><i>264</i>&nbsp;        return name;</b>
+<i>265</i>&nbsp;    }
+<i>266</i>&nbsp;
+<i>267</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

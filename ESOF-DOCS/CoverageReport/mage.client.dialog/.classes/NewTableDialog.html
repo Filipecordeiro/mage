@@ -1,0 +1,940 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NewTableDialog</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.dialog</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NewTableDialog (mage.client.dialog)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NewTableDialog</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 430)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NewTableDialog$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NewTableDialog$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NewTableDialog$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NewTableDialog$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NewTableDialog$5</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NewTableDialog$6</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 442)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.client.dialog;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.FileNotFoundException;
+<i>31</i>&nbsp;import java.io.IOException;
+<i>32</i>&nbsp;import java.util.ArrayList;
+<i>33</i>&nbsp;import java.util.Arrays;
+<i>34</i>&nbsp;import java.util.List;
+<i>35</i>&nbsp;import java.util.ListIterator;
+<i>36</i>&nbsp;import java.util.UUID;
+<i>37</i>&nbsp;import javax.swing.*;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;import mage.cards.decks.importer.DeckImporterUtil;
+<i>40</i>&nbsp;import mage.client.MageFrame;
+<i>41</i>&nbsp;import mage.client.SessionHandler;
+<i>42</i>&nbsp;import mage.client.components.MageComponents;
+<i>43</i>&nbsp;import mage.client.table.TablePlayerPanel;
+<i>44</i>&nbsp;import mage.client.util.Event;
+<i>45</i>&nbsp;import mage.client.util.Listener;
+<i>46</i>&nbsp;import mage.constants.MatchTimeLimit;
+<i>47</i>&nbsp;import mage.constants.MultiplayerAttackOption;
+<i>48</i>&nbsp;import mage.constants.RangeOfInfluence;
+<i>49</i>&nbsp;import mage.constants.SkillLevel;
+<i>50</i>&nbsp;import mage.game.match.MatchOptions;
+<i>51</i>&nbsp;import mage.view.GameTypeView;
+<i>52</i>&nbsp;import mage.view.TableView;
+<i>53</i>&nbsp;import org.apache.log4j.Logger;
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;/**
+<i>56</i>&nbsp; *
+<i>57</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>58</i>&nbsp; */
+<b class="nc"><i>59</i>&nbsp;public class NewTableDialog extends MageDialog {</b>
+<i>60</i>&nbsp;
+<b class="nc"><i>61</i>&nbsp;    private static final Logger logger = Logger.getLogger(NewTableDialog.class);</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    private TableView table;
+<i>64</i>&nbsp;    private UUID playerId;
+<i>65</i>&nbsp;    private UUID roomId;
+<i>66</i>&nbsp;    private String lastSessionId;
+<b class="nc"><i>67</i>&nbsp;    private final List&lt;TablePlayerPanel&gt; players = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>68</i>&nbsp;    private final List&lt;String&gt; prefPlayerTypes = new ArrayList&lt;&gt;();</b>
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    private static final String LIMITED = &quot;Limited&quot;;
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    /**
+<i>73</i>&nbsp;     * Creates new form NewTableDialog
+<i>74</i>&nbsp;     */
+<b class="nc"><i>75</i>&nbsp;    public NewTableDialog() {</b>
+<b class="nc"><i>76</i>&nbsp;        lastSessionId = &quot;&quot;;</b>
+<b class="nc"><i>77</i>&nbsp;        initComponents();</b>
+<b class="nc"><i>78</i>&nbsp;        player1Panel.showLevel(false);</b>
+<b class="nc"><i>79</i>&nbsp;        this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));</b>
+<b class="nc"><i>80</i>&nbsp;        this.spnFreeMulligans.setModel(new SpinnerNumberModel(0, 0, 5, 1));</b>
+<b class="nc"><i>81</i>&nbsp;        this.spnQuitRatio.setModel(new SpinnerNumberModel(100, 0, 100, 5));</b>
+<b class="nc"><i>82</i>&nbsp;        MageFrame.getUI().addButton(MageComponents.NEW_TABLE_OK_BUTTON, btnOK);</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    /**
+<i>86</i>&nbsp;     * This method is called from within the constructor to initialize the form.
+<i>87</i>&nbsp;     * WARNING: Do NOT modify this code. The content of this method is always
+<i>88</i>&nbsp;     * regenerated by the Form Editor.
+<i>89</i>&nbsp;     */
+<i>90</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>91</i>&nbsp;    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+<i>92</i>&nbsp;    private void initComponents() {
+<i>93</i>&nbsp;
+<b class="nc"><i>94</i>&nbsp;        lblName = new javax.swing.JLabel();</b>
+<b class="nc"><i>95</i>&nbsp;        txtName = new javax.swing.JTextField();</b>
+<b class="nc"><i>96</i>&nbsp;        lblPassword = new javax.swing.JLabel();</b>
+<b class="nc"><i>97</i>&nbsp;        txtPassword = new javax.swing.JTextField();</b>
+<b class="nc"><i>98</i>&nbsp;        lbDeckType = new javax.swing.JLabel();</b>
+<b class="nc"><i>99</i>&nbsp;        cbDeckType = new javax.swing.JComboBox();</b>
+<b class="nc"><i>100</i>&nbsp;        lbTimeLimit = new javax.swing.JLabel();</b>
+<b class="nc"><i>101</i>&nbsp;        cbTimeLimit = new javax.swing.JComboBox();</b>
+<b class="nc"><i>102</i>&nbsp;        lblGameType = new javax.swing.JLabel();</b>
+<b class="nc"><i>103</i>&nbsp;        cbGameType = new javax.swing.JComboBox();</b>
+<b class="nc"><i>104</i>&nbsp;        chkRollbackTurnsAllowed = new javax.swing.JCheckBox();</b>
+<b class="nc"><i>105</i>&nbsp;        chkRated = new javax.swing.JCheckBox();</b>
+<b class="nc"><i>106</i>&nbsp;        lblFreeMulligans = new javax.swing.JLabel();</b>
+<b class="nc"><i>107</i>&nbsp;        spnFreeMulligans = new javax.swing.JSpinner();</b>
+<b class="nc"><i>108</i>&nbsp;        lblNumPlayers = new javax.swing.JLabel();</b>
+<b class="nc"><i>109</i>&nbsp;        spnNumPlayers = new javax.swing.JSpinner();</b>
+<b class="nc"><i>110</i>&nbsp;        lblRange = new javax.swing.JLabel();</b>
+<b class="nc"><i>111</i>&nbsp;        cbRange = new javax.swing.JComboBox();</b>
+<b class="nc"><i>112</i>&nbsp;        lblAttack = new javax.swing.JLabel();</b>
+<b class="nc"><i>113</i>&nbsp;        cbAttackOption = new javax.swing.JComboBox();</b>
+<b class="nc"><i>114</i>&nbsp;        lblSkillLevel = new javax.swing.JLabel();</b>
+<b class="nc"><i>115</i>&nbsp;        cbSkillLevel = new javax.swing.JComboBox();</b>
+<b class="nc"><i>116</i>&nbsp;        lblNumWins = new javax.swing.JLabel();</b>
+<b class="nc"><i>117</i>&nbsp;        spnNumWins = new javax.swing.JSpinner();</b>
+<b class="nc"><i>118</i>&nbsp;        jSeparator2 = new javax.swing.JSeparator();</b>
+<b class="nc"><i>119</i>&nbsp;        jLabel1 = new javax.swing.JLabel();</b>
+<b class="nc"><i>120</i>&nbsp;        player1Panel = new mage.client.table.NewPlayerPanel();</b>
+<b class="nc"><i>121</i>&nbsp;        jSeparator3 = new javax.swing.JSeparator();</b>
+<b class="nc"><i>122</i>&nbsp;        jLabel2 = new javax.swing.JLabel();</b>
+<b class="nc"><i>123</i>&nbsp;        pnlOtherPlayers = new javax.swing.JPanel();</b>
+<b class="nc"><i>124</i>&nbsp;        jSeparator1 = new javax.swing.JSeparator();</b>
+<b class="nc"><i>125</i>&nbsp;        btnOK = new javax.swing.JButton();</b>
+<b class="nc"><i>126</i>&nbsp;        btnCancel = new javax.swing.JButton();</b>
+<b class="nc"><i>127</i>&nbsp;        lblQuitRatio = new javax.swing.JLabel();</b>
+<b class="nc"><i>128</i>&nbsp;        spnQuitRatio = new javax.swing.JSpinner();</b>
+<i>129</i>&nbsp;
+<b class="nc"><i>130</i>&nbsp;        setTitle(&quot;New Table&quot;);</b>
+<i>131</i>&nbsp;
+<b class="nc"><i>132</i>&nbsp;        lblName.setLabelFor(txtName);</b>
+<b class="nc"><i>133</i>&nbsp;        lblName.setText(&quot;Name:&quot;);</b>
+<i>134</i>&nbsp;
+<b class="nc"><i>135</i>&nbsp;        lblPassword.setLabelFor(txtName);</b>
+<b class="nc"><i>136</i>&nbsp;        lblPassword.setText(&quot;Password:&quot;);</b>
+<i>137</i>&nbsp;
+<b class="nc"><i>138</i>&nbsp;        lbDeckType.setText(&quot;Deck Type:&quot;);</b>
+<i>139</i>&nbsp;
+<b class="nc"><i>140</i>&nbsp;        lbTimeLimit.setText(&quot;Time Limit:&quot;);</b>
+<b class="nc"><i>141</i>&nbsp;        lbTimeLimit.setToolTipText(&quot;The active time a player may use to finish the match. If his or her time runs out, the player looses the current game.&quot;);</b>
+<i>142</i>&nbsp;
+<b class="nc"><i>143</i>&nbsp;        lblGameType.setText(&quot;Game Type:&quot;);</b>
+<i>144</i>&nbsp;
+<b class="nc"><i>145</i>&nbsp;        cbGameType.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>146</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>147</i>&nbsp;                cbGameTypeActionPerformed(evt);</b>
+<i>148</i>&nbsp;            }
+<i>149</i>&nbsp;        });
+<i>150</i>&nbsp;
+<b class="nc"><i>151</i>&nbsp;        chkRollbackTurnsAllowed.setText(&quot;Allow rollbacks&quot;);</b>
+<b class="nc"><i>152</i>&nbsp;        chkRollbackTurnsAllowed.setToolTipText(&quot;&lt;HTML&gt;Allow to rollback to the start of previous turns&lt;br&gt;\nif all players agree.\n&quot;);</b>
+<i>153</i>&nbsp;
+<b class="nc"><i>154</i>&nbsp;        chkRated.setText(&quot;Rated&quot;);</b>
+<b class="nc"><i>155</i>&nbsp;        chkRated.setToolTipText(&quot;Indicates if matches will be rated.&quot;);</b>
+<i>156</i>&nbsp;
+<b class="nc"><i>157</i>&nbsp;        lblFreeMulligans.setText(&quot;Free Mulligans:&quot;);</b>
+<b class="nc"><i>158</i>&nbsp;        lblFreeMulligans.setToolTipText(&quot;The number of mulligans a player can use without decreasing the number of drawn cards.&quot;);</b>
+<i>159</i>&nbsp;
+<b class="nc"><i>160</i>&nbsp;        lblNumPlayers.setLabelFor(spnNumPlayers);</b>
+<b class="nc"><i>161</i>&nbsp;        lblNumPlayers.setText(&quot;Players&quot;);</b>
+<i>162</i>&nbsp;
+<b class="nc"><i>163</i>&nbsp;        spnNumPlayers.addChangeListener(new javax.swing.event.ChangeListener() {</b>
+<i>164</i>&nbsp;            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+<b class="nc"><i>165</i>&nbsp;                numPlayersChanged(evt);</b>
+<i>166</i>&nbsp;            }
+<i>167</i>&nbsp;        });
+<i>168</i>&nbsp;
+<b class="nc"><i>169</i>&nbsp;        lblRange.setLabelFor(cbRange);</b>
+<b class="nc"><i>170</i>&nbsp;        lblRange.setText(&quot;Range of Influence&quot;);</b>
+<i>171</i>&nbsp;
+<b class="nc"><i>172</i>&nbsp;        cbRange.setToolTipText(&quot;&lt;HTML&gt;An option for multiplayer games.\nA player&#39;s range of influence is the maximum distance from that player, measured in player seats,&lt;br&gt;\nthat the player can affect. Players within that many seats of the player are within that player&#39;s range&lt;br&gt;\nof influence. Objects controlled by players within a player&#39;s range of influence are also within that&lt;br&gt;\nplayer&#39;s range of influence. Range of influence covers spells, abilities, effects, damage dealing, attacking,&lt;nr&gt;\nmaking choices, and winning the game.&quot;);</b>
+<i>173</i>&nbsp;
+<b class="nc"><i>174</i>&nbsp;        lblAttack.setLabelFor(cbAttackOption);</b>
+<b class="nc"><i>175</i>&nbsp;        lblAttack.setText(&quot;Attack Option&quot;);</b>
+<i>176</i>&nbsp;
+<b class="nc"><i>177</i>&nbsp;        cbAttackOption.setToolTipText(&quot;&lt;HTML&gt;An option for multiplayer games that defines&lt;br&gt;\nwhich opponents can be attacked from a player.&quot;);</b>
+<i>178</i>&nbsp;
+<b class="nc"><i>179</i>&nbsp;        lblSkillLevel.setLabelFor(cbAttackOption);</b>
+<b class="nc"><i>180</i>&nbsp;        lblSkillLevel.setText(&quot;Skill Level&quot;);</b>
+<i>181</i>&nbsp;
+<b class="nc"><i>182</i>&nbsp;        cbSkillLevel.setToolTipText(&quot;&lt;HTML&gt;This option can be used to make it easier to find matches&lt;br&gt;\nwith opponents of the appropriate skill level.&quot;);</b>
+<i>183</i>&nbsp;
+<b class="nc"><i>184</i>&nbsp;        lblNumWins.setLabelFor(spnNumWins);</b>
+<b class="nc"><i>185</i>&nbsp;        lblNumWins.setText(&quot;Wins&quot;);</b>
+<b class="nc"><i>186</i>&nbsp;        lblNumWins.setToolTipText(&quot;How many games has a player to win to win the match.&quot;);</b>
+<i>187</i>&nbsp;
+<b class="nc"><i>188</i>&nbsp;        spnNumWins.addChangeListener(new javax.swing.event.ChangeListener() {</b>
+<i>189</i>&nbsp;            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+<b class="nc"><i>190</i>&nbsp;                spnNumWinsnumPlayersChanged(evt);</b>
+<i>191</i>&nbsp;            }
+<i>192</i>&nbsp;        });
+<i>193</i>&nbsp;
+<b class="nc"><i>194</i>&nbsp;        jLabel1.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 11)); // NOI18N</b>
+<b class="nc"><i>195</i>&nbsp;        jLabel1.setText(&quot;Player 1 (You)&quot;);</b>
+<i>196</i>&nbsp;
+<b class="nc"><i>197</i>&nbsp;        jLabel2.setFont(new java.awt.Font(&quot;Tahoma&quot;, 1, 11)); // NOI18N</b>
+<b class="nc"><i>198</i>&nbsp;        jLabel2.setText(&quot;Other Players&quot;);</b>
+<i>199</i>&nbsp;
+<b class="nc"><i>200</i>&nbsp;        pnlOtherPlayers.setLayout(new java.awt.GridLayout(0, 1));</b>
+<i>201</i>&nbsp;
+<b class="nc"><i>202</i>&nbsp;        btnOK.setText(&quot;OK&quot;);</b>
+<b class="nc"><i>203</i>&nbsp;        btnOK.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>204</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>205</i>&nbsp;                btnOKActionPerformed(evt);</b>
+<i>206</i>&nbsp;            }
+<i>207</i>&nbsp;        });
+<i>208</i>&nbsp;
+<b class="nc"><i>209</i>&nbsp;        btnCancel.setText(&quot;Cancel&quot;);</b>
+<b class="nc"><i>210</i>&nbsp;        btnCancel.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>211</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>212</i>&nbsp;                btnCancelActionPerformed(evt);</b>
+<i>213</i>&nbsp;            }
+<i>214</i>&nbsp;        });
+<i>215</i>&nbsp;
+<b class="nc"><i>216</i>&nbsp;        lblQuitRatio.setText(&quot;Allowed quit %&quot;);</b>
+<i>217</i>&nbsp;
+<b class="nc"><i>218</i>&nbsp;        spnQuitRatio.setToolTipText(&quot;Players with quit % more than this value can&#39;t join this table&quot;);</b>
+<i>219</i>&nbsp;
+<b class="nc"><i>220</i>&nbsp;        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</b>
+<b class="nc"><i>221</i>&nbsp;        getContentPane().setLayout(layout);</b>
+<b class="nc"><i>222</i>&nbsp;        layout.setHorizontalGroup(</b>
+<b class="nc"><i>223</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>224</i>&nbsp;            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</b>
+<b class="nc"><i>225</i>&nbsp;                .addContainerGap()</b>
+<b class="nc"><i>226</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</b>
+<b class="nc"><i>227</i>&nbsp;                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()</b>
+<b class="nc"><i>228</i>&nbsp;                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>229</i>&nbsp;                            .addComponent(lblName)</b>
+<b class="nc"><i>230</i>&nbsp;                            .addComponent(lbDeckType)</b>
+<b class="nc"><i>231</i>&nbsp;                            .addComponent(lblGameType))</b>
+<b class="nc"><i>232</i>&nbsp;                        .addGap(6, 6, 6)</b>
+<b class="nc"><i>233</i>&nbsp;                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)</b>
+<b class="nc"><i>234</i>&nbsp;                            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>235</i>&nbsp;                                .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>236</i>&nbsp;                                .addGap(18, 18, 18)</b>
+<b class="nc"><i>237</i>&nbsp;                                .addComponent(chkRollbackTurnsAllowed)</b>
+<b class="nc"><i>238</i>&nbsp;                                .addGap(13, 13, 13)</b>
+<b class="nc"><i>239</i>&nbsp;                                .addComponent(lblFreeMulligans)</b>
+<b class="nc"><i>240</i>&nbsp;                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>241</i>&nbsp;                                .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>242</i>&nbsp;                            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>243</i>&nbsp;                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>244</i>&nbsp;                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>245</i>&nbsp;                                .addComponent(lbTimeLimit)</b>
+<b class="nc"><i>246</i>&nbsp;                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>247</i>&nbsp;                                .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>248</i>&nbsp;                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>249</i>&nbsp;                                .addComponent(lblPassword)</b>
+<b class="nc"><i>250</i>&nbsp;                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>251</i>&nbsp;                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>252</i>&nbsp;                            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>253</i>&nbsp;                                .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>254</i>&nbsp;                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</b>
+<b class="nc"><i>255</i>&nbsp;                                .addComponent(chkRated)</b>
+<b class="nc"><i>256</i>&nbsp;                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</b>
+<b class="nc"><i>257</i>&nbsp;                                .addComponent(lblQuitRatio)</b>
+<b class="nc"><i>258</i>&nbsp;                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>259</i>&nbsp;                                .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))</b>
+<b class="nc"><i>260</i>&nbsp;                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>261</i>&nbsp;                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>262</i>&nbsp;                    .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>263</i>&nbsp;                        .addGap(0, 0, Short.MAX_VALUE)</b>
+<b class="nc"><i>264</i>&nbsp;                        .addComponent(btnOK)</b>
+<b class="nc"><i>265</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>266</i>&nbsp;                        .addComponent(btnCancel))</b>
+<b class="nc"><i>267</i>&nbsp;                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()</b>
+<b class="nc"><i>268</i>&nbsp;                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>269</i>&nbsp;                            .addComponent(lblNumPlayers)</b>
+<b class="nc"><i>270</i>&nbsp;                            .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>271</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>272</i>&nbsp;                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>273</i>&nbsp;                            .addComponent(lblRange)</b>
+<b class="nc"><i>274</i>&nbsp;                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>275</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>276</i>&nbsp;                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>277</i>&nbsp;                            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>278</i>&nbsp;                                .addComponent(lblAttack)</b>
+<b class="nc"><i>279</i>&nbsp;                                .addGap(116, 116, 116)</b>
+<b class="nc"><i>280</i>&nbsp;                                .addComponent(lblSkillLevel))</b>
+<b class="nc"><i>281</i>&nbsp;                            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>282</i>&nbsp;                                .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>283</i>&nbsp;                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>284</i>&nbsp;                                .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))</b>
+<b class="nc"><i>285</i>&nbsp;                        .addGap(18, 18, 18)</b>
+<b class="nc"><i>286</i>&nbsp;                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>287</i>&nbsp;                            .addComponent(lblNumWins)</b>
+<b class="nc"><i>288</i>&nbsp;                            .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))</b>
+<b class="nc"><i>289</i>&nbsp;                    .addComponent(jSeparator2)</b>
+<b class="nc"><i>290</i>&nbsp;                    .addComponent(player1Panel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</b>
+<b class="nc"><i>291</i>&nbsp;                    .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</b>
+<b class="nc"><i>292</i>&nbsp;                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))</b>
+<b class="nc"><i>293</i>&nbsp;                .addContainerGap())</b>
+<b class="nc"><i>294</i>&nbsp;            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>295</i>&nbsp;                .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>296</i>&nbsp;                    .addContainerGap()</b>
+<b class="nc"><i>297</i>&nbsp;                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)</b>
+<b class="nc"><i>298</i>&nbsp;                    .addContainerGap()))</b>
+<i>299</i>&nbsp;        );
+<b class="nc"><i>300</i>&nbsp;        layout.setVerticalGroup(</b>
+<b class="nc"><i>301</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>302</i>&nbsp;            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>303</i>&nbsp;                .addGap(4, 4, 4)</b>
+<b class="nc"><i>304</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</b>
+<b class="nc"><i>305</i>&nbsp;                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>306</i>&nbsp;                    .addComponent(lblName)</b>
+<b class="nc"><i>307</i>&nbsp;                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>308</i>&nbsp;                    .addComponent(lblPassword)</b>
+<b class="nc"><i>309</i>&nbsp;                    .addComponent(lbTimeLimit)</b>
+<b class="nc"><i>310</i>&nbsp;                    .addComponent(cbTimeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>311</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>312</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</b>
+<b class="nc"><i>313</i>&nbsp;                    .addComponent(cbDeckType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>314</i>&nbsp;                    .addComponent(lbDeckType)</b>
+<b class="nc"><i>315</i>&nbsp;                    .addComponent(lblQuitRatio)</b>
+<b class="nc"><i>316</i>&nbsp;                    .addComponent(chkRated)</b>
+<b class="nc"><i>317</i>&nbsp;                    .addComponent(spnQuitRatio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>318</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>319</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>320</i>&nbsp;                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</b>
+<b class="nc"><i>321</i>&nbsp;                        .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>322</i>&nbsp;                        .addComponent(lblFreeMulligans)</b>
+<b class="nc"><i>323</i>&nbsp;                        .addComponent(chkRollbackTurnsAllowed))</b>
+<b class="nc"><i>324</i>&nbsp;                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</b>
+<b class="nc"><i>325</i>&nbsp;                        .addComponent(cbGameType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>326</i>&nbsp;                        .addComponent(lblGameType)))</b>
+<b class="nc"><i>327</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>328</i>&nbsp;                    .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>329</i>&nbsp;                        .addGap(6, 6, 6)</b>
+<b class="nc"><i>330</i>&nbsp;                        .addComponent(lblNumPlayers)</b>
+<b class="nc"><i>331</i>&nbsp;                        .addGap(0, 0, 0)</b>
+<b class="nc"><i>332</i>&nbsp;                        .addComponent(spnNumPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>333</i>&nbsp;                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</b>
+<b class="nc"><i>334</i>&nbsp;                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>335</i>&nbsp;                            .addComponent(lblSkillLevel)</b>
+<b class="nc"><i>336</i>&nbsp;                            .addComponent(lblNumWins)</b>
+<b class="nc"><i>337</i>&nbsp;                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</b>
+<b class="nc"><i>338</i>&nbsp;                                .addComponent(lblRange)</b>
+<b class="nc"><i>339</i>&nbsp;                                .addComponent(lblAttack)))</b>
+<b class="nc"><i>340</i>&nbsp;                        .addGap(0, 0, 0)</b>
+<b class="nc"><i>341</i>&nbsp;                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</b>
+<b class="nc"><i>342</i>&nbsp;                            .addComponent(cbRange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>343</i>&nbsp;                            .addComponent(cbAttackOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>344</i>&nbsp;                            .addComponent(cbSkillLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>345</i>&nbsp;                            .addComponent(spnNumWins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))</b>
+<b class="nc"><i>346</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>347</i>&nbsp;                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>348</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>349</i>&nbsp;                .addComponent(jLabel1)</b>
+<b class="nc"><i>350</i>&nbsp;                .addGap(0, 0, 0)</b>
+<b class="nc"><i>351</i>&nbsp;                .addComponent(player1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>352</i>&nbsp;                .addGap(16, 16, 16)</b>
+<b class="nc"><i>353</i>&nbsp;                .addComponent(jLabel2)</b>
+<b class="nc"><i>354</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>355</i>&nbsp;                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)</b>
+<b class="nc"><i>356</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)</b>
+<b class="nc"><i>357</i>&nbsp;                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>358</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>359</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</b>
+<b class="nc"><i>360</i>&nbsp;                    .addComponent(btnCancel)</b>
+<b class="nc"><i>361</i>&nbsp;                    .addComponent(btnOK))</b>
+<b class="nc"><i>362</i>&nbsp;                .addGap(0, 0, 0))</b>
+<b class="nc"><i>363</i>&nbsp;            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>364</i>&nbsp;                .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>365</i>&nbsp;                    .addGap(201, 201, 201)</b>
+<b class="nc"><i>366</i>&nbsp;                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>367</i>&nbsp;                    .addContainerGap(167, Short.MAX_VALUE)))</b>
+<i>368</i>&nbsp;        );
+<i>369</i>&nbsp;
+<b class="nc"><i>370</i>&nbsp;        pack();</b>
+<i>371</i>&nbsp;    }// &lt;/editor-fold&gt;//GEN-END:initComponents
+<i>372</i>&nbsp;
+<i>373</i>&nbsp;    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+<b class="nc"><i>374</i>&nbsp;        this.table = null;</b>
+<b class="nc"><i>375</i>&nbsp;        this.playerId = null;</b>
+<b class="nc"><i>376</i>&nbsp;        this.hideDialog();</b>
+<i>377</i>&nbsp;    }//GEN-LAST:event_btnCancelActionPerformed
+<i>378</i>&nbsp;
+<i>379</i>&nbsp;    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+<b class="nc"><i>380</i>&nbsp;        GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();</b>
+<b class="nc"><i>381</i>&nbsp;        MatchOptions options = new MatchOptions(this.txtName.getText(), gameType.getName(), false, 2);</b>
+<b class="nc"><i>382</i>&nbsp;        options.getPlayerTypes().add(&quot;Human&quot;);</b>
+<b class="nc"><i>383</i>&nbsp;        for (TablePlayerPanel player : players) {</b>
+<b class="nc"><i>384</i>&nbsp;            options.getPlayerTypes().add(player.getPlayerType());</b>
+<b class="nc"><i>385</i>&nbsp;        }</b>
+<b class="nc"><i>386</i>&nbsp;        options.setDeckType((String) this.cbDeckType.getSelectedItem());</b>
+<b class="nc"><i>387</i>&nbsp;        options.setLimited(false);</b>
+<b class="nc"><i>388</i>&nbsp;        options.setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());</b>
+<b class="nc"><i>389</i>&nbsp;        options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());</b>
+<b class="nc"><i>390</i>&nbsp;        options.setSkillLevel((SkillLevel) this.cbSkillLevel.getSelectedItem());</b>
+<b class="nc"><i>391</i>&nbsp;        options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());</b>
+<b class="nc"><i>392</i>&nbsp;        options.setWinsNeeded((Integer) this.spnNumWins.getValue());</b>
+<b class="nc"><i>393</i>&nbsp;        options.setRollbackTurnsAllowed(chkRollbackTurnsAllowed.isSelected());</b>
+<b class="nc"><i>394</i>&nbsp;        options.setRated(chkRated.isSelected());</b>
+<b class="nc"><i>395</i>&nbsp;        options.setFreeMulligans((Integer) this.spnFreeMulligans.getValue());</b>
+<b class="nc"><i>396</i>&nbsp;        options.setPassword(this.txtPassword.getText());</b>
+<b class="nc"><i>397</i>&nbsp;        options.setQuitRatio((Integer) this.spnQuitRatio.getValue());</b>
+<b class="nc"><i>398</i>&nbsp;        if (!checkMatchOptions(options)) {</b>
+<i>399</i>&nbsp;            return;
+<i>400</i>&nbsp;        }
+<b class="nc"><i>401</i>&nbsp;        saveGameSettingsToPrefs(options, this.player1Panel.getDeckFile());</b>
+<i>402</i>&nbsp;
+<b class="nc"><i>403</i>&nbsp;        table = SessionHandler.createTable(roomId, options);</b>
+<b class="nc"><i>404</i>&nbsp;        if (table == null) {</b>
+<b class="nc"><i>405</i>&nbsp;            JOptionPane.showMessageDialog(MageFrame.getDesktop(), &quot;Error creating table.&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</b>
+<i>406</i>&nbsp;            return;
+<i>407</i>&nbsp;        }
+<i>408</i>&nbsp;        try {
+<b class="nc"><i>409</i>&nbsp;            if (SessionHandler.joinTable(</b>
+<i>410</i>&nbsp;                    roomId,
+<b class="nc"><i>411</i>&nbsp;                    table.getTableId(),</b>
+<b class="nc"><i>412</i>&nbsp;                    this.player1Panel.getPlayerName(),</b>
+<i>413</i>&nbsp;                    &quot;Human&quot;, 1,
+<b class="nc"><i>414</i>&nbsp;                    DeckImporterUtil.importDeck(this.player1Panel.getDeckFile()),</b>
+<b class="nc"><i>415</i>&nbsp;                    this.txtPassword.getText())) {</b>
+<b class="nc"><i>416</i>&nbsp;                for (TablePlayerPanel player : players) {</b>
+<b class="nc"><i>417</i>&nbsp;                    if (!player.getPlayerType().equals(&quot;Human&quot;)) {</b>
+<b class="nc"><i>418</i>&nbsp;                        if (!player.joinTable(roomId, table.getTableId())) {</b>
+<i>419</i>&nbsp;                            // error message must be send by the server
+<b class="nc"><i>420</i>&nbsp;                            SessionHandler.removeTable(roomId, table.getTableId());</b>
+<b class="nc"><i>421</i>&nbsp;                            table = null;</b>
+<i>422</i>&nbsp;                            return;
+<i>423</i>&nbsp;                        }
+<i>424</i>&nbsp;                    }
+<b class="nc"><i>425</i>&nbsp;                }</b>
+<b class="nc"><i>426</i>&nbsp;                this.hideDialog();</b>
+<i>427</i>&nbsp;                return;
+<i>428</i>&nbsp;            }
+<b class="nc"><i>429</i>&nbsp;        } catch (FileNotFoundException ex) {</b>
+<b class="nc"><i>430</i>&nbsp;            handleError(ex);</b>
+<b class="nc"><i>431</i>&nbsp;        } catch (IOException ex) {</b>
+<b class="nc"><i>432</i>&nbsp;            handleError(ex);</b>
+<b class="nc"><i>433</i>&nbsp;        } catch (ClassNotFoundException ex) {</b>
+<b class="nc"><i>434</i>&nbsp;            handleError(ex);</b>
+<b class="nc"><i>435</i>&nbsp;        }</b>
+<i>436</i>&nbsp;        // JOptionPane.showMessageDialog(MageFrame.getDesktop(), &quot;Error joining table.&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);
+<b class="nc"><i>437</i>&nbsp;        SessionHandler.removeTable(roomId, table.getTableId());</b>
+<b class="nc"><i>438</i>&nbsp;        table = null;</b>
+<i>439</i>&nbsp;    }//GEN-LAST:event_btnOKActionPerformed
+<i>440</i>&nbsp;
+<i>441</i>&nbsp;    private void cbGameTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGameTypeActionPerformed
+<b class="nc"><i>442</i>&nbsp;        setGameOptions();</b>
+<i>443</i>&nbsp;    }//GEN-LAST:event_cbGameTypeActionPerformed
+<i>444</i>&nbsp;
+<i>445</i>&nbsp;    private void numPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_numPlayersChanged
+<b class="nc"><i>446</i>&nbsp;        int numPlayers = (Integer) this.spnNumPlayers.getValue() - 1;</b>
+<b class="nc"><i>447</i>&nbsp;        createPlayers(numPlayers);</b>
+<i>448</i>&nbsp;    }//GEN-LAST:event_numPlayersChanged
+<i>449</i>&nbsp;
+<i>450</i>&nbsp;    private void spnNumWinsnumPlayersChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnNumWinsnumPlayersChanged
+<i>451</i>&nbsp;        // TODO add your handling code here:
+<i>452</i>&nbsp;    }//GEN-LAST:event_spnNumWinsnumPlayersChanged
+<i>453</i>&nbsp;
+<i>454</i>&nbsp;    /**
+<i>455</i>&nbsp;     * Checks about not valid game option combinations and shows an error
+<i>456</i>&nbsp;     * message
+<i>457</i>&nbsp;     *
+<i>458</i>&nbsp;     * @return
+<i>459</i>&nbsp;     */
+<i>460</i>&nbsp;    private boolean checkMatchOptions(MatchOptions options) {
+<b class="nc"><i>461</i>&nbsp;        switch (options.getDeckType()) {</b>
+<i>462</i>&nbsp;            case &quot;Variant Magic - Commander&quot;:
+<i>463</i>&nbsp;            case &quot;Variant Magic - Duel Commander&quot;:
+<b class="nc"><i>464</i>&nbsp;                if (!options.getGameType().startsWith(&quot;Commander&quot;)) {</b>
+<b class="nc"><i>465</i>&nbsp;                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), &quot;Deck type Commander needs also a Commander game type&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</b>
+<b class="nc"><i>466</i>&nbsp;                    return false;</b>
+<i>467</i>&nbsp;                }
+<i>468</i>&nbsp;                break;
+<i>469</i>&nbsp;            case &quot;Variant Magic - Tiny Leaders&quot;:
+<b class="nc"><i>470</i>&nbsp;                if (!options.getGameType().startsWith(&quot;Tiny Leaders&quot;)) {</b>
+<b class="nc"><i>471</i>&nbsp;                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), &quot;Deck type Tiny Leaders needs also a Tiny Leaders game type&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</b>
+<b class="nc"><i>472</i>&nbsp;                    return false;</b>
+<i>473</i>&nbsp;                }
+<i>474</i>&nbsp;                break;
+<i>475</i>&nbsp;            case &quot;Variant Magic - Momir Basic&quot;:
+<b class="nc"><i>476</i>&nbsp;                if (!options.getGameType().startsWith(&quot;Momir Basic&quot;)) {</b>
+<b class="nc"><i>477</i>&nbsp;                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), &quot;Deck type Momir Basic needs also a Momir Basic game type&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</b>
+<b class="nc"><i>478</i>&nbsp;                    return false;</b>
+<i>479</i>&nbsp;                }
+<i>480</i>&nbsp;                break;
+<i>481</i>&nbsp;        }
+<b class="nc"><i>482</i>&nbsp;        switch (options.getGameType()) {</b>
+<i>483</i>&nbsp;            case &quot;Commander Two Player Duel&quot;:
+<i>484</i>&nbsp;            case &quot;Commander Free For All&quot;:
+<b class="nc"><i>485</i>&nbsp;                if (!options.getDeckType().equals(&quot;Variant Magic - Commander&quot;) &amp;&amp; !options.getDeckType().equals(&quot;Variant Magic - Duel Commander&quot;)) {</b>
+<b class="nc"><i>486</i>&nbsp;                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), &quot;Deck type Commander needs also a Commander game type&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</b>
+<b class="nc"><i>487</i>&nbsp;                    return false;</b>
+<i>488</i>&nbsp;                }
+<i>489</i>&nbsp;                break;
+<i>490</i>&nbsp;            case &quot;Tiny Leaders Two Player Duel&quot;:
+<b class="nc"><i>491</i>&nbsp;                if (!options.getDeckType().equals(&quot;Variant Magic - Tiny Leaders&quot;)) {</b>
+<b class="nc"><i>492</i>&nbsp;                    JOptionPane.showMessageDialog(MageFrame.getDesktop(), &quot;Deck type Tiny Leaders needs also a Tiny Leaders game type&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);</b>
+<b class="nc"><i>493</i>&nbsp;                    return false;</b>
+<i>494</i>&nbsp;                }
+<i>495</i>&nbsp;                break;
+<i>496</i>&nbsp;        }
+<b class="nc"><i>497</i>&nbsp;        return true;</b>
+<i>498</i>&nbsp;    }
+<i>499</i>&nbsp;
+<i>500</i>&nbsp;    private void setGameOptions() {
+<b class="nc"><i>501</i>&nbsp;        GameTypeView gameType = (GameTypeView) cbGameType.getSelectedItem();</b>
+<b class="nc"><i>502</i>&nbsp;        int oldValue = (Integer) this.spnNumPlayers.getValue();</b>
+<b class="nc"><i>503</i>&nbsp;        this.spnNumPlayers.setModel(new SpinnerNumberModel(gameType.getMinPlayers(), gameType.getMinPlayers(), gameType.getMaxPlayers(), 1));</b>
+<b class="nc"><i>504</i>&nbsp;        this.spnNumPlayers.setEnabled(gameType.getMinPlayers() != gameType.getMaxPlayers());</b>
+<b class="nc"><i>505</i>&nbsp;        if (oldValue &gt;= gameType.getMinPlayers() &amp;&amp; oldValue &lt;= gameType.getMaxPlayers()) {</b>
+<b class="nc"><i>506</i>&nbsp;            this.spnNumPlayers.setValue(oldValue);</b>
+<i>507</i>&nbsp;        }
+<b class="nc"><i>508</i>&nbsp;        this.cbAttackOption.setEnabled(gameType.isUseAttackOption());</b>
+<b class="nc"><i>509</i>&nbsp;        this.cbRange.setEnabled(gameType.isUseRange());</b>
+<b class="nc"><i>510</i>&nbsp;        createPlayers((Integer) spnNumPlayers.getValue() - 1);</b>
+<i>511</i>&nbsp;    }
+<i>512</i>&nbsp;
+<i>513</i>&nbsp;    private void createPlayers(int numPlayers) {
+<i>514</i>&nbsp;        // add missing player panels
+<b class="nc"><i>515</i>&nbsp;        if (numPlayers &gt; players.size()) {</b>
+<b class="nc"><i>516</i>&nbsp;            while (players.size() != numPlayers) {</b>
+<b class="nc"><i>517</i>&nbsp;                TablePlayerPanel playerPanel = new TablePlayerPanel();</b>
+<b class="nc"><i>518</i>&nbsp;                String playerType = &quot;Human&quot;;</b>
+<b class="nc"><i>519</i>&nbsp;                if (prefPlayerTypes.size() &gt;= players.size() &amp;&amp; players.size() &gt; 0) {</b>
+<b class="nc"><i>520</i>&nbsp;                    playerType = prefPlayerTypes.get(players.size() - 1);</b>
+<i>521</i>&nbsp;                }
+<b class="nc"><i>522</i>&nbsp;                playerPanel.init(players.size() + 2, playerType);</b>
+<b class="nc"><i>523</i>&nbsp;                players.add(playerPanel);</b>
+<b class="nc"><i>524</i>&nbsp;                playerPanel.addPlayerTypeEventListener(</b>
+<b class="nc"><i>525</i>&nbsp;                        new Listener&lt;Event&gt;() {</b>
+<i>526</i>&nbsp;                            @Override
+<i>527</i>&nbsp;                            public void event(Event event) {
+<b class="nc"><i>528</i>&nbsp;                                drawPlayers();</b>
+<i>529</i>&nbsp;                            }
+<i>530</i>&nbsp;                        }
+<i>531</i>&nbsp;                );
+<b class="nc"><i>532</i>&nbsp;            }</b>
+<i>533</i>&nbsp;
+<i>534</i>&nbsp;        } // remove player panels no longer needed
+<b class="nc"><i>535</i>&nbsp;        else if (numPlayers &lt; players.size()) {</b>
+<b class="nc"><i>536</i>&nbsp;            while (players.size() != numPlayers) {</b>
+<b class="nc"><i>537</i>&nbsp;                players.remove(players.size() - 1);</b>
+<i>538</i>&nbsp;            }
+<i>539</i>&nbsp;        }
+<b class="nc"><i>540</i>&nbsp;        drawPlayers();</b>
+<i>541</i>&nbsp;    }
+<i>542</i>&nbsp;
+<i>543</i>&nbsp;    private void drawPlayers() {
+<b class="nc"><i>544</i>&nbsp;        this.pnlOtherPlayers.removeAll();</b>
+<b class="nc"><i>545</i>&nbsp;        for (TablePlayerPanel panel : players) {</b>
+<b class="nc"><i>546</i>&nbsp;            this.pnlOtherPlayers.add(panel);</b>
+<b class="nc"><i>547</i>&nbsp;        }</b>
+<b class="nc"><i>548</i>&nbsp;        this.pack();</b>
+<b class="nc"><i>549</i>&nbsp;        this.revalidate();</b>
+<b class="nc"><i>550</i>&nbsp;        this.repaint();</b>
+<i>551</i>&nbsp;    }
+<i>552</i>&nbsp;
+<i>553</i>&nbsp;    private void handleError(Exception ex) {
+<b class="nc"><i>554</i>&nbsp;        logger.fatal(&quot;Error loading deck&quot;, ex);</b>
+<i>555</i>&nbsp;        //JOptionPane.showMessageDialog(MageFrame.getDesktop(), &quot;Error loading deck.&quot;, &quot;Error&quot;, JOptionPane.ERROR_MESSAGE);
+<b class="nc"><i>556</i>&nbsp;        MageFrame.getInstance().showErrorDialog(&quot;Error loading deck.&quot;, ex.getMessage());</b>
+<i>557</i>&nbsp;    }
+<i>558</i>&nbsp;
+<i>559</i>&nbsp;    public void showDialog(UUID roomId) {
+<b class="nc"><i>560</i>&nbsp;        this.roomId = roomId;</b>
+<b class="nc"><i>561</i>&nbsp;        if (!lastSessionId.equals(SessionHandler.getSessionId())) {</b>
+<b class="nc"><i>562</i>&nbsp;            lastSessionId = SessionHandler.getSessionId();</b>
+<b class="nc"><i>563</i>&nbsp;            this.player1Panel.setPlayerName(SessionHandler.getUserName());</b>
+<b class="nc"><i>564</i>&nbsp;            cbGameType.setModel(new DefaultComboBoxModel(SessionHandler.getGameTypes().toArray()));</b>
+<b class="nc"><i>565</i>&nbsp;            cbDeckType.setModel(new DefaultComboBoxModel(SessionHandler.getDeckTypes()));</b>
+<b class="nc"><i>566</i>&nbsp;            selectLimitedByDefault();</b>
+<b class="nc"><i>567</i>&nbsp;            cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));</b>
+<b class="nc"><i>568</i>&nbsp;            cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));</b>
+<b class="nc"><i>569</i>&nbsp;            cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));</b>
+<b class="nc"><i>570</i>&nbsp;            cbSkillLevel.setModel(new DefaultComboBoxModel(SkillLevel.values()));</b>
+<i>571</i>&nbsp;            // Update the existing player panels (neccessary if server was changes = new session)
+<b class="nc"><i>572</i>&nbsp;            int i = 2;</b>
+<b class="nc"><i>573</i>&nbsp;            for (TablePlayerPanel tablePlayerPanel : players) {</b>
+<b class="nc"><i>574</i>&nbsp;                tablePlayerPanel.init(i++, tablePlayerPanel.getPlayerType());</b>
+<b class="nc"><i>575</i>&nbsp;            }</b>
+<b class="nc"><i>576</i>&nbsp;            setGameSettingsFromPrefs();</b>
+<b class="nc"><i>577</i>&nbsp;            this.setModal(true);</b>
+<b class="nc"><i>578</i>&nbsp;            setGameOptions();</b>
+<b class="nc"><i>579</i>&nbsp;            this.setLocation(150, 100);</b>
+<i>580</i>&nbsp;        }
+<b class="nc"><i>581</i>&nbsp;        this.setVisible(true);</b>
+<i>582</i>&nbsp;    }
+<i>583</i>&nbsp;
+<i>584</i>&nbsp;    public TableView getTable() {
+<b class="nc"><i>585</i>&nbsp;        return table;</b>
+<i>586</i>&nbsp;    }
+<i>587</i>&nbsp;
+<i>588</i>&nbsp;    public UUID getPlayerId() {
+<b class="nc"><i>589</i>&nbsp;        return playerId;</b>
+<i>590</i>&nbsp;    }
+<i>591</i>&nbsp;
+<i>592</i>&nbsp;    private void selectLimitedByDefault() {
+<b class="nc"><i>593</i>&nbsp;        for (int i = 0; i &lt; cbDeckType.getItemCount(); i++) {</b>
+<b class="nc"><i>594</i>&nbsp;            String name = (String) cbDeckType.getItemAt(i);</b>
+<b class="nc"><i>595</i>&nbsp;            if (name.equals(LIMITED)) {</b>
+<b class="nc"><i>596</i>&nbsp;                cbDeckType.setSelectedIndex(i);</b>
+<b class="nc"><i>597</i>&nbsp;                break;</b>
+<i>598</i>&nbsp;            }
+<i>599</i>&nbsp;        }
+<i>600</i>&nbsp;    }
+<i>601</i>&nbsp;
+<i>602</i>&nbsp;    /**
+<i>603</i>&nbsp;     * set the table settings from java prefs
+<i>604</i>&nbsp;     */
+<i>605</i>&nbsp;    private void setGameSettingsFromPrefs() {
+<b class="nc"><i>606</i>&nbsp;        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME, &quot;Game&quot;));</b>
+<b class="nc"><i>607</i>&nbsp;        txtPassword.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, &quot;&quot;));</b>
+<i>608</i>&nbsp;
+<b class="nc"><i>609</i>&nbsp;        String playerTypes = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, &quot;Human&quot;);</b>
+<b class="nc"><i>610</i>&nbsp;        prefPlayerTypes.clear();</b>
+<b class="nc"><i>611</i>&nbsp;        prefPlayerTypes.addAll(Arrays.asList(playerTypes.split(&quot;,&quot;)));</b>
+<b class="nc"><i>612</i>&nbsp;        this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, &quot;2&quot;)));</b>
+<i>613</i>&nbsp;
+<b class="nc"><i>614</i>&nbsp;        String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, &quot;Two Player Duel&quot;);</b>
+<b class="nc"><i>615</i>&nbsp;        for (GameTypeView gtv : SessionHandler.getGameTypes()) {</b>
+<b class="nc"><i>616</i>&nbsp;            if (gtv.getName().equals(gameTypeName)) {</b>
+<b class="nc"><i>617</i>&nbsp;                cbGameType.setSelectedItem(gtv);</b>
+<b class="nc"><i>618</i>&nbsp;                break;</b>
+<i>619</i>&nbsp;            }
+<b class="nc"><i>620</i>&nbsp;        }</b>
+<b class="nc"><i>621</i>&nbsp;        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT, &quot;1500&quot;));</b>
+<b class="nc"><i>622</i>&nbsp;        for (MatchTimeLimit mtl : MatchTimeLimit.values()) {</b>
+<b class="nc"><i>623</i>&nbsp;            if (mtl.getTimeLimit() == timeLimit) {</b>
+<b class="nc"><i>624</i>&nbsp;                this.cbTimeLimit.setSelectedItem(mtl);</b>
+<b class="nc"><i>625</i>&nbsp;                break;</b>
+<i>626</i>&nbsp;            }
+<i>627</i>&nbsp;        }
+<b class="nc"><i>628</i>&nbsp;        cbDeckType.setSelectedItem(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE, &quot;Limited&quot;));</b>
+<b class="nc"><i>629</i>&nbsp;        String deckFile = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, null);</b>
+<b class="nc"><i>630</i>&nbsp;        if (deckFile != null) {</b>
+<b class="nc"><i>631</i>&nbsp;            this.player1Panel.setDeckFile(deckFile);</b>
+<i>632</i>&nbsp;        }
+<b class="nc"><i>633</i>&nbsp;        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, &quot;2&quot;)));</b>
+<b class="nc"><i>634</i>&nbsp;        this.chkRollbackTurnsAllowed.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED, &quot;Yes&quot;).equals(&quot;Yes&quot;));</b>
+<b class="nc"><i>635</i>&nbsp;        this.chkRated.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RATED, &quot;No&quot;).equals(&quot;Yes&quot;));</b>
+<b class="nc"><i>636</i>&nbsp;        this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS, &quot;0&quot;)));</b>
+<i>637</i>&nbsp;
+<b class="nc"><i>638</i>&nbsp;        int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, &quot;1&quot;));</b>
+<b class="nc"><i>639</i>&nbsp;        for (RangeOfInfluence roi : RangeOfInfluence.values()) {</b>
+<b class="nc"><i>640</i>&nbsp;            if (roi.getRange() == range) {</b>
+<b class="nc"><i>641</i>&nbsp;                this.cbRange.setSelectedItem(roi);</b>
+<b class="nc"><i>642</i>&nbsp;                break;</b>
+<i>643</i>&nbsp;            }
+<i>644</i>&nbsp;        }
+<b class="nc"><i>645</i>&nbsp;        String attackOption = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, &quot;Attack Multiple Players&quot;);</b>
+<b class="nc"><i>646</i>&nbsp;        for (MultiplayerAttackOption mao : MultiplayerAttackOption.values()) {</b>
+<b class="nc"><i>647</i>&nbsp;            if (mao.toString().equals(attackOption)) {</b>
+<b class="nc"><i>648</i>&nbsp;                this.cbAttackOption.setSelectedItem(mao);</b>
+<b class="nc"><i>649</i>&nbsp;                break;</b>
+<i>650</i>&nbsp;            }
+<i>651</i>&nbsp;        }
+<b class="nc"><i>652</i>&nbsp;        String skillLevelDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, &quot;Casual&quot;);</b>
+<b class="nc"><i>653</i>&nbsp;        for (SkillLevel skillLevel : SkillLevel.values()) {</b>
+<b class="nc"><i>654</i>&nbsp;            if (skillLevel.toString().equals(skillLevelDefault)) {</b>
+<b class="nc"><i>655</i>&nbsp;                this.cbSkillLevel.setSelectedItem(skillLevel);</b>
+<b class="nc"><i>656</i>&nbsp;                break;</b>
+<i>657</i>&nbsp;            }
+<i>658</i>&nbsp;        }
+<i>659</i>&nbsp;
+<b class="nc"><i>660</i>&nbsp;        this.spnQuitRatio.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO, &quot;100&quot;)));</b>
+<i>661</i>&nbsp;    }
+<i>662</i>&nbsp;
+<i>663</i>&nbsp;    /**
+<i>664</i>&nbsp;     * Save the settings to java prefs to reload it next time the dialog will be
+<i>665</i>&nbsp;     * created
+<i>666</i>&nbsp;     *
+<i>667</i>&nbsp;     * @param options
+<i>668</i>&nbsp;     * @param deckFile
+<i>669</i>&nbsp;     */
+<i>670</i>&nbsp;    private void saveGameSettingsToPrefs(MatchOptions options, String deckFile) {
+<b class="nc"><i>671</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NAME, options.getName());</b>
+<b class="nc"><i>672</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD, options.getPassword());</b>
+<b class="nc"><i>673</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE, options.getDeckType());</b>
+<b class="nc"><i>674</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT, Integer.toString(options.getPriorityTime()));</b>
+<b class="nc"><i>675</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, options.getGameType());</b>
+<b class="nc"><i>676</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, Integer.toString(options.getWinsNeeded()));</b>
+<b class="nc"><i>677</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ROLLBACK_TURNS_ALLOWED, options.isRollbackTurnsAllowed() ? &quot;Yes&quot; : &quot;No&quot;);</b>
+<b class="nc"><i>678</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RATED, options.isRated() ? &quot;Yes&quot; : &quot;No&quot;);</b>
+<b class="nc"><i>679</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS, Integer.toString(options.getFreeMulligans()));</b>
+<b class="nc"><i>680</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, deckFile);</b>
+<b class="nc"><i>681</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, spnNumPlayers.getValue().toString());</b>
+<b class="nc"><i>682</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, Integer.toString(options.getRange().getRange()));</b>
+<b class="nc"><i>683</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, options.getAttackOption().toString());</b>
+<b class="nc"><i>684</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_SKILL_LEVEL, options.getSkillLevel().toString());</b>
+<b class="nc"><i>685</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_QUIT_RATIO, Integer.toString(options.getQuitRatio()));</b>
+<b class="nc"><i>686</i>&nbsp;        StringBuilder playerTypesString = new StringBuilder();</b>
+<b class="nc"><i>687</i>&nbsp;        ListIterator iterator = players.listIterator();</b>
+<b class="nc"><i>688</i>&nbsp;        while (iterator.hasNext()) {</b>
+<b class="nc"><i>689</i>&nbsp;            if (playerTypesString.length() &gt; 0) {</b>
+<b class="nc"><i>690</i>&nbsp;                playerTypesString.append(&quot;,&quot;);</b>
+<i>691</i>&nbsp;            }
+<b class="nc"><i>692</i>&nbsp;            TablePlayerPanel tpp = (TablePlayerPanel) iterator.next();</b>
+<b class="nc"><i>693</i>&nbsp;            playerTypesString.append(tpp.getPlayerType());</b>
+<b class="nc"><i>694</i>&nbsp;        }</b>
+<b class="nc"><i>695</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PLAYER_TYPES, playerTypesString.toString());</b>
+<i>696</i>&nbsp;    }
+<i>697</i>&nbsp;
+<i>698</i>&nbsp;    // Variables declaration - do not modify//GEN-BEGIN:variables
+<i>699</i>&nbsp;    private javax.swing.JButton btnCancel;
+<i>700</i>&nbsp;    private javax.swing.JButton btnOK;
+<i>701</i>&nbsp;    private javax.swing.JComboBox cbAttackOption;
+<i>702</i>&nbsp;    private javax.swing.JComboBox cbDeckType;
+<i>703</i>&nbsp;    private javax.swing.JComboBox cbGameType;
+<i>704</i>&nbsp;    private javax.swing.JComboBox cbRange;
+<i>705</i>&nbsp;    private javax.swing.JComboBox cbSkillLevel;
+<i>706</i>&nbsp;    private javax.swing.JComboBox cbTimeLimit;
+<i>707</i>&nbsp;    private javax.swing.JCheckBox chkRollbackTurnsAllowed;
+<i>708</i>&nbsp;    private javax.swing.JCheckBox chkRated;
+<i>709</i>&nbsp;    private javax.swing.JLabel jLabel1;
+<i>710</i>&nbsp;    private javax.swing.JLabel jLabel2;
+<i>711</i>&nbsp;    private javax.swing.JSeparator jSeparator1;
+<i>712</i>&nbsp;    private javax.swing.JSeparator jSeparator2;
+<i>713</i>&nbsp;    private javax.swing.JSeparator jSeparator3;
+<i>714</i>&nbsp;    private javax.swing.JLabel lbDeckType;
+<i>715</i>&nbsp;    private javax.swing.JLabel lbTimeLimit;
+<i>716</i>&nbsp;    private javax.swing.JLabel lblAttack;
+<i>717</i>&nbsp;    private javax.swing.JLabel lblFreeMulligans;
+<i>718</i>&nbsp;    private javax.swing.JLabel lblGameType;
+<i>719</i>&nbsp;    private javax.swing.JLabel lblName;
+<i>720</i>&nbsp;    private javax.swing.JLabel lblNumPlayers;
+<i>721</i>&nbsp;    private javax.swing.JLabel lblNumWins;
+<i>722</i>&nbsp;    private javax.swing.JLabel lblPassword;
+<i>723</i>&nbsp;    private javax.swing.JLabel lblQuitRatio;
+<i>724</i>&nbsp;    private javax.swing.JLabel lblRange;
+<i>725</i>&nbsp;    private javax.swing.JLabel lblSkillLevel;
+<i>726</i>&nbsp;    private mage.client.table.NewPlayerPanel player1Panel;
+<i>727</i>&nbsp;    private javax.swing.JPanel pnlOtherPlayers;
+<i>728</i>&nbsp;    private javax.swing.JSpinner spnFreeMulligans;
+<i>729</i>&nbsp;    private javax.swing.JSpinner spnNumPlayers;
+<i>730</i>&nbsp;    private javax.swing.JSpinner spnNumWins;
+<i>731</i>&nbsp;    private javax.swing.JSpinner spnQuitRatio;
+<i>732</i>&nbsp;    private javax.swing.JTextField txtName;
+<i>733</i>&nbsp;    private javax.swing.JTextField txtPassword;
+<i>734</i>&nbsp;    // End of variables declaration//GEN-END:variables
+<i>735</i>&nbsp;
+<i>736</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,346 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RescueFromTheUnderworldReturnEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.r</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RescueFromTheUnderworldReturnEffect (mage.cards.r)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RescueFromTheUnderworldReturnEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.r;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.abilities.Ability;
+<i>32</i>&nbsp;import mage.abilities.DelayedTriggeredAbility;
+<i>33</i>&nbsp;import mage.abilities.Mode;
+<i>34</i>&nbsp;import mage.abilities.costs.Cost;
+<i>35</i>&nbsp;import mage.abilities.costs.common.SacrificeTargetCost;
+<i>36</i>&nbsp;import mage.abilities.effects.Effect;
+<i>37</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>38</i>&nbsp;import mage.abilities.effects.common.ExileSpellEffect;
+<i>39</i>&nbsp;import mage.cards.Card;
+<i>40</i>&nbsp;import mage.cards.CardImpl;
+<i>41</i>&nbsp;import mage.cards.CardSetInfo;
+<i>42</i>&nbsp;import mage.constants.CardType;
+<i>43</i>&nbsp;import mage.constants.Outcome;
+<i>44</i>&nbsp;import mage.constants.TargetController;
+<i>45</i>&nbsp;import mage.constants.Zone;
+<i>46</i>&nbsp;import mage.filter.common.FilterControlledCreaturePermanent;
+<i>47</i>&nbsp;import mage.filter.common.FilterCreatureCard;
+<i>48</i>&nbsp;import mage.game.Game;
+<i>49</i>&nbsp;import mage.game.events.GameEvent;
+<i>50</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>51</i>&nbsp;import mage.game.permanent.Permanent;
+<i>52</i>&nbsp;import mage.players.Player;
+<i>53</i>&nbsp;import mage.target.Target;
+<i>54</i>&nbsp;import mage.target.common.TargetCardInGraveyard;
+<i>55</i>&nbsp;import mage.target.common.TargetCardInYourGraveyard;
+<i>56</i>&nbsp;import mage.target.common.TargetControlledCreaturePermanent;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;/**
+<i>59</i>&nbsp; *
+<i>60</i>&nbsp; * Once you announce you’re casting Rescue from the Underworld, no player may
+<i>61</i>&nbsp; * attempt to stop you from casting the spell by removing the creature you want
+<i>62</i>&nbsp; * to sacrifice.
+<i>63</i>&nbsp; *
+<i>64</i>&nbsp; * If you sacrifice a creature token to cast Rescue from the Underworld, it
+<i>65</i>&nbsp; * won’t return to the battlefield, although the target creature card will.
+<i>66</i>&nbsp; *
+<i>67</i>&nbsp; * If either the sacrificed creature or the target creature card leaves the
+<i>68</i>&nbsp; * graveyard before the delayed triggered ability resolves during your next
+<i>69</i>&nbsp; * upkeep, it won’t return.
+<i>70</i>&nbsp; *
+<i>71</i>&nbsp; * However, if the sacrificed creature is put into another public zone instead
+<i>72</i>&nbsp; * of the graveyard, perhaps because it’s your commander or because of another
+<i>73</i>&nbsp; * replacement effect, it will return to the battlefield from the zone it went
+<i>74</i>&nbsp; * to.
+<i>75</i>&nbsp; *
+<i>76</i>&nbsp; * Rescue from the Underworld is exiled as it resolves, not later as its delayed
+<i>77</i>&nbsp; * trigger resolves.
+<i>78</i>&nbsp; *
+<i>79</i>&nbsp; *
+<i>80</i>&nbsp; * @author LevelX2
+<i>81</i>&nbsp; */
+<i>82</i>&nbsp;public class RescueFromTheUnderworld extends CardImpl {
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    public RescueFromTheUnderworld(UUID ownerId, CardSetInfo setInfo) {
+<i>85</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},&quot;{4}{B}&quot;);
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;        // As an additional cost to cast Rescue from the Underworld, sacrifice a creature.
+<i>88</i>&nbsp;        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent(&quot;a creature&quot;), false)));
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;        // Choose target creature card in your graveyard. Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. Exile Rescue from the Underworld.
+<i>91</i>&nbsp;        this.getSpellAbility().addEffect(new RescueFromTheUnderworldTextEffect());
+<i>92</i>&nbsp;        this.getSpellAbility().addEffect(new RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(new RescueFromTheUnderworldDelayedTriggeredAbility()));
+<i>93</i>&nbsp;        Target target = new TargetCardInYourGraveyard(new FilterCreatureCard(&quot;creature card in your graveyard&quot;));
+<i>94</i>&nbsp;        this.getSpellAbility().addTarget(target);
+<i>95</i>&nbsp;        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    public RescueFromTheUnderworld(final RescueFromTheUnderworld card) {
+<i>99</i>&nbsp;        super(card);
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    @Override
+<i>103</i>&nbsp;    public RescueFromTheUnderworld copy() {
+<i>104</i>&nbsp;        return new RescueFromTheUnderworld(this);
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;}
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;class RescueFromTheUnderworldTextEffect extends OneShotEffect {
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    public RescueFromTheUnderworldTextEffect() {
+<i>111</i>&nbsp;        super(Outcome.Benefit);
+<i>112</i>&nbsp;        this.staticText = &quot;Choose target creature card in your graveyard&quot;;
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;    public RescueFromTheUnderworldTextEffect(final RescueFromTheUnderworldTextEffect effect) {
+<i>116</i>&nbsp;        super(effect);
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    @Override
+<i>120</i>&nbsp;    public RescueFromTheUnderworldTextEffect copy() {
+<i>121</i>&nbsp;        return new RescueFromTheUnderworldTextEffect(this);
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    @Override
+<i>125</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>126</i>&nbsp;        return true;
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;}
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;class RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    protected DelayedTriggeredAbility ability;
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    public RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability) {
+<i>135</i>&nbsp;        super(ability.getEffects().get(0).getOutcome());
+<i>136</i>&nbsp;        this.ability = ability;
+<i>137</i>&nbsp;    }
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    public RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(final RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect effect) {
+<i>140</i>&nbsp;        super(effect);
+<i>141</i>&nbsp;        this.ability = effect.ability.copy();
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;    @Override
+<i>145</i>&nbsp;    public RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect copy() {
+<i>146</i>&nbsp;        return new RescueFromTheUnderworldCreateDelayedTriggeredAbilityEffect(this);
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    @Override
+<i>150</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>151</i>&nbsp;        DelayedTriggeredAbility delayedAbility = (DelayedTriggeredAbility) ability.copy();
+<i>152</i>&nbsp;        delayedAbility.getTargets().addAll(source.getTargets());
+<i>153</i>&nbsp;        for (Effect effect : delayedAbility.getEffects()) {
+<i>154</i>&nbsp;            effect.getTargetPointer().init(game, source);
+<i>155</i>&nbsp;        }
+<i>156</i>&nbsp;        // add the sacrificed creature as target
+<i>157</i>&nbsp;        for (Cost cost : source.getCosts()) {
+<i>158</i>&nbsp;            if (cost instanceof SacrificeTargetCost) {
+<i>159</i>&nbsp;                SacrificeTargetCost sacCost = (SacrificeTargetCost) cost;
+<i>160</i>&nbsp;                TargetCardInGraveyard target = new TargetCardInGraveyard();
+<i>161</i>&nbsp;                for (Permanent permanent : sacCost.getPermanents()) {
+<i>162</i>&nbsp;                    target.add(permanent.getId(), game);
+<i>163</i>&nbsp;                    delayedAbility.getTargets().add(target);
+<i>164</i>&nbsp;                }
+<i>165</i>&nbsp;            }
+<i>166</i>&nbsp;        }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;        game.addDelayedTriggeredAbility(delayedAbility, source);
+<i>169</i>&nbsp;        return true;
+<i>170</i>&nbsp;    }
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    @Override
+<i>173</i>&nbsp;    public String getText(Mode mode) {
+<i>174</i>&nbsp;        return ability.getRule();
+<i>175</i>&nbsp;    }
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;}
+<i>178</i>&nbsp;
+<i>179</i>&nbsp;class RescueFromTheUnderworldDelayedTriggeredAbility extends DelayedTriggeredAbility {
+<i>180</i>&nbsp;
+<i>181</i>&nbsp;    public RescueFromTheUnderworldDelayedTriggeredAbility() {
+<i>182</i>&nbsp;        this(new RescueFromTheUnderworldReturnEffect(), TargetController.YOU);
+<i>183</i>&nbsp;    }
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;    public RescueFromTheUnderworldDelayedTriggeredAbility(Effect effect, TargetController targetController) {
+<i>186</i>&nbsp;        super(effect);
+<i>187</i>&nbsp;    }
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;    public RescueFromTheUnderworldDelayedTriggeredAbility(RescueFromTheUnderworldDelayedTriggeredAbility ability) {
+<i>190</i>&nbsp;        super(ability);
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    @Override
+<i>194</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<i>195</i>&nbsp;        return event.getType() == EventType.UPKEEP_STEP_PRE;
+<i>196</i>&nbsp;    }
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    @Override
+<i>199</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<i>200</i>&nbsp;        return event.getPlayerId().equals(this.controllerId);
+<i>201</i>&nbsp;    }
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;    @Override
+<i>204</i>&nbsp;    public RescueFromTheUnderworldDelayedTriggeredAbility copy() {
+<i>205</i>&nbsp;        return new RescueFromTheUnderworldDelayedTriggeredAbility(this);
+<i>206</i>&nbsp;    }
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;    @Override
+<i>209</i>&nbsp;    public String getRule() {
+<i>210</i>&nbsp;        return &quot;Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep&quot;;
+<i>211</i>&nbsp;    }
+<i>212</i>&nbsp;}
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;class RescueFromTheUnderworldReturnEffect extends OneShotEffect {
+<i>215</i>&nbsp;
+<i>216</i>&nbsp;    public RescueFromTheUnderworldReturnEffect() {
+<b class="nc"><i>217</i>&nbsp;        super(Outcome.PutCreatureInPlay);</b>
+<i>218</i>&nbsp;    }
+<i>219</i>&nbsp;
+<i>220</i>&nbsp;    public RescueFromTheUnderworldReturnEffect(final RescueFromTheUnderworldReturnEffect effect) {
+<b class="nc"><i>221</i>&nbsp;        super(effect);</b>
+<i>222</i>&nbsp;    }
+<i>223</i>&nbsp;
+<i>224</i>&nbsp;    @Override
+<i>225</i>&nbsp;    public RescueFromTheUnderworldReturnEffect copy() {
+<b class="nc"><i>226</i>&nbsp;        return new RescueFromTheUnderworldReturnEffect(this);</b>
+<i>227</i>&nbsp;    }
+<i>228</i>&nbsp;
+<i>229</i>&nbsp;    @Override
+<i>230</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>231</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());</b>
+<b class="nc"><i>232</i>&nbsp;        if (controller != null) {</b>
+<i>233</i>&nbsp;            // Target card comes only back if in graveyard
+<b class="nc"><i>234</i>&nbsp;            for (UUID targetId : getTargetPointer().getTargets(game, source)) {</b>
+<b class="nc"><i>235</i>&nbsp;                Card card = game.getCard(targetId);</b>
+<b class="nc"><i>236</i>&nbsp;                if (card != null) {</b>
+<b class="nc"><i>237</i>&nbsp;                    controller.moveCards(card, Zone.BATTLEFIELD, source, game);</b>
+<i>238</i>&nbsp;                }
+<b class="nc"><i>239</i>&nbsp;            }</b>
+<i>240</i>&nbsp;            // However, if the sacrificed creature is put into another public zone instead of the graveyard,
+<i>241</i>&nbsp;            // perhaps because it’s your commander or because of another replacement effect, it will return
+<i>242</i>&nbsp;            // to the battlefield from the zone it went to.
+<b class="nc"><i>243</i>&nbsp;            if (source.getTargets().get(1) != null) {</b>
+<b class="nc"><i>244</i>&nbsp;                for (UUID targetId : ((Target) source.getTargets().get(1)).getTargets()) {</b>
+<b class="nc"><i>245</i>&nbsp;                    Card card = game.getCard(targetId);</b>
+<b class="nc"><i>246</i>&nbsp;                    if (card != null &amp;&amp; !card.isFaceDown(game)) {</b>
+<b class="nc"><i>247</i>&nbsp;                        Player player = game.getPlayer(card.getOwnerId());</b>
+<b class="nc"><i>248</i>&nbsp;                        if (player != null) {</b>
+<b class="nc"><i>249</i>&nbsp;                            Zone currentZone = game.getState().getZone(card.getId());</b>
+<b class="nc"><i>250</i>&nbsp;                            if (currentZone.equals(Zone.COMMAND) || currentZone.equals(Zone.GRAVEYARD) || currentZone.equals(Zone.EXILED)) {</b>
+<b class="nc"><i>251</i>&nbsp;                                return player.moveCards(card, Zone.BATTLEFIELD, source, game);</b>
+<i>252</i>&nbsp;                            }
+<i>253</i>&nbsp;                        }
+<i>254</i>&nbsp;                    }
+<b class="nc"><i>255</i>&nbsp;                }</b>
+<i>256</i>&nbsp;            }
+<b class="nc"><i>257</i>&nbsp;            return true;</b>
+<i>258</i>&nbsp;        }
+<b class="nc"><i>259</i>&nbsp;        return false;</b>
+<i>260</i>&nbsp;
+<i>261</i>&nbsp;    }
+<i>262</i>&nbsp;
+<i>263</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:36</div>
+</div>
+</body>
+</html>

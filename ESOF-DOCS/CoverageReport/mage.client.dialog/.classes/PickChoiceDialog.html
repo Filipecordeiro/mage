@@ -1,0 +1,418 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PickChoiceDialog</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.dialog</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PickChoiceDialog (mage.client.dialog)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PickChoiceDialog</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 94)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PickChoiceDialog$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PickChoiceDialog$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PickChoiceDialog$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PickChoiceDialog$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 104)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp;*
+<i>4</i>&nbsp;* Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp;* permitted provided that the following conditions are met:
+<i>6</i>&nbsp;*
+<i>7</i>&nbsp;*    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp;*       conditions and the following disclaimer.
+<i>9</i>&nbsp;*
+<i>10</i>&nbsp;*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp;*       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp;*       provided with the distribution.
+<i>13</i>&nbsp;*
+<i>14</i>&nbsp;* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp;* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp;* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp;* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp;* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp;* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp;* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp;* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp;*
+<i>24</i>&nbsp;* The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp;* authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp;* or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp;*/
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;/*
+<i>30</i>&nbsp; * PickNumberDialog.java
+<i>31</i>&nbsp; *
+<i>32</i>&nbsp; * Created on Feb 25, 2010, 12:03:39 PM
+<i>33</i>&nbsp; */
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;package mage.client.dialog;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;import java.awt.Point;
+<i>38</i>&nbsp;import java.util.Map;
+<i>39</i>&nbsp;import java.util.UUID;
+<i>40</i>&nbsp;import javax.swing.JLayeredPane;
+<i>41</i>&nbsp;import mage.choices.Choice;
+<i>42</i>&nbsp;import mage.client.MageFrame;
+<i>43</i>&nbsp;import mage.client.util.SettingsManager;
+<i>44</i>&nbsp;import mage.client.util.gui.GuiDisplayUtil;
+<i>45</i>&nbsp;import mage.client.util.gui.MageDialogState;
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;/**
+<i>48</i>&nbsp; *
+<i>49</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>50</i>&nbsp; */
+<b class="nc"><i>51</i>&nbsp;public class PickChoiceDialog extends MageDialog {</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /** Creates new form PickNumberDialog */
+<b class="nc"><i>54</i>&nbsp;    public PickChoiceDialog() {</b>
+<b class="nc"><i>55</i>&nbsp;        initComponents();</b>
+<b class="nc"><i>56</i>&nbsp;        this.setModal(true);</b>
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;    Choice choice;
+<i>59</i>&nbsp;    boolean autoSelect;
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState) {
+<b class="nc"><i>62</i>&nbsp;        this.lblMessage.setText(&quot;&lt;html&gt;&quot; + choice.getMessage());</b>
+<b class="nc"><i>63</i>&nbsp;        this.choice = choice;</b>
+<b class="nc"><i>64</i>&nbsp;        this.autoSelect = false;</b>
+<b class="nc"><i>65</i>&nbsp;        btnAutoSelect.setVisible(choice.isKeyChoice());</b>
+<i>66</i>&nbsp;        
+<b class="nc"><i>67</i>&nbsp;        if (choice.isKeyChoice()){</b>
+<i>68</i>&nbsp;
+<b class="nc"><i>69</i>&nbsp;            ComboItem[] comboItems = new ComboItem[choice.getKeyChoices().size()];</b>
+<b class="nc"><i>70</i>&nbsp;            int count = 0;</b>
+<b class="nc"><i>71</i>&nbsp;            for (Map.Entry&lt;String, String&gt; entry : choice.getKeyChoices().entrySet()) {</b>
+<b class="nc"><i>72</i>&nbsp;                comboItems[count] = new ComboItem(entry.getKey(), entry.getValue());</b>
+<b class="nc"><i>73</i>&nbsp;                count++;</b>
+<b class="nc"><i>74</i>&nbsp;            }</b>
+<b class="nc"><i>75</i>&nbsp;            this.lstChoices.setListData(comboItems);</b>
+<b class="nc"><i>76</i>&nbsp;        } else {</b>
+<b class="nc"><i>77</i>&nbsp;             this.lstChoices.setListData(choice.getChoices().toArray());</b>
+<i>78</i>&nbsp;        }
+<i>79</i>&nbsp;        
+<b class="nc"><i>80</i>&nbsp;        MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);</b>
+<b class="nc"><i>81</i>&nbsp;        if (mageDialogState != null) {</b>
+<b class="nc"><i>82</i>&nbsp;            mageDialogState.setStateToDialog(this);</b>
+<i>83</i>&nbsp;            
+<i>84</i>&nbsp;        } else {
+<b class="nc"><i>85</i>&nbsp;            Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());</b>
+<b class="nc"><i>86</i>&nbsp;            this.setLocation(centered.x, centered.y);</b>
+<b class="nc"><i>87</i>&nbsp;            GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);</b>
+<i>88</i>&nbsp;        }
+<i>89</i>&nbsp;        
+<i>90</i>&nbsp;
+<b class="nc"><i>91</i>&nbsp;        this.setVisible(true);</b>
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    public boolean isAutoSelect() {
+<b class="nc"><i>95</i>&nbsp;        return autoSelect;</b>
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    public void setChoice() {
+<b class="nc"><i>99</i>&nbsp;        if (this.lstChoices.getSelectedValue() == null) {</b>
+<b class="nc"><i>100</i>&nbsp;            choice.clearChoice();</b>
+<i>101</i>&nbsp;        }
+<i>102</i>&nbsp;        
+<b class="nc"><i>103</i>&nbsp;        if (choice.isKeyChoice()) {</b>
+<b class="nc"><i>104</i>&nbsp;            ComboItem item = (ComboItem)this.lstChoices.getSelectedValue();</b>
+<b class="nc"><i>105</i>&nbsp;            if (item != null) {</b>
+<b class="nc"><i>106</i>&nbsp;                choice.setChoiceByKey(item.getValue());</b>
+<i>107</i>&nbsp;            } else {
+<b class="nc"><i>108</i>&nbsp;                choice.clearChoice();</b>
+<i>109</i>&nbsp;            }
+<b class="nc"><i>110</i>&nbsp;        } else {</b>
+<b class="nc"><i>111</i>&nbsp;            choice.setChoice((String)this.lstChoices.getSelectedValue());</b>
+<i>112</i>&nbsp;        }
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;    /** This method is called from within the constructor to
+<i>116</i>&nbsp;     * initialize the form.
+<i>117</i>&nbsp;     * WARNING: Do NOT modify this code. The content of this method is
+<i>118</i>&nbsp;     * always regenerated by the Form Editor.
+<i>119</i>&nbsp;     */
+<i>120</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>121</i>&nbsp;    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+<i>122</i>&nbsp;    private void initComponents() {
+<i>123</i>&nbsp;
+<b class="nc"><i>124</i>&nbsp;        btnAutoSelect = new javax.swing.JButton();</b>
+<b class="nc"><i>125</i>&nbsp;        btnCancel = new javax.swing.JButton();</b>
+<b class="nc"><i>126</i>&nbsp;        btnOk = new javax.swing.JButton();</b>
+<b class="nc"><i>127</i>&nbsp;        jScrollPane1 = new javax.swing.JScrollPane();</b>
+<b class="nc"><i>128</i>&nbsp;        lstChoices = new javax.swing.JList();</b>
+<b class="nc"><i>129</i>&nbsp;        lblMessage = new javax.swing.JLabel();</b>
+<i>130</i>&nbsp;
+<b class="nc"><i>131</i>&nbsp;        setResizable(true);</b>
+<b class="nc"><i>132</i>&nbsp;        setMinimumSize(new java.awt.Dimension(280, 200));</b>
+<b class="nc"><i>133</i>&nbsp;        setName(&quot;&quot;); // NOI18N</b>
+<i>134</i>&nbsp;
+<b class="nc"><i>135</i>&nbsp;        btnAutoSelect.setText(&quot;Auto select&quot;);</b>
+<b class="nc"><i>136</i>&nbsp;        btnAutoSelect.setToolTipText(&quot;If you select an effect with \&quot;Auto select\&quot;, this effect will be selected the next time automatically first.&quot;);</b>
+<b class="nc"><i>137</i>&nbsp;        btnAutoSelect.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>138</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>139</i>&nbsp;                btnAutoSelectActionPerformed(evt);</b>
+<i>140</i>&nbsp;            }
+<i>141</i>&nbsp;        });
+<i>142</i>&nbsp;
+<b class="nc"><i>143</i>&nbsp;        btnCancel.setText(&quot;Cancel&quot;);</b>
+<b class="nc"><i>144</i>&nbsp;        btnCancel.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>145</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>146</i>&nbsp;                btnCancelActionPerformed(evt);</b>
+<i>147</i>&nbsp;            }
+<i>148</i>&nbsp;        });
+<i>149</i>&nbsp;
+<b class="nc"><i>150</i>&nbsp;        btnOk.setText(&quot;OK&quot;);</b>
+<b class="nc"><i>151</i>&nbsp;        btnOk.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>152</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>153</i>&nbsp;                btnOkActionPerformed(evt);</b>
+<i>154</i>&nbsp;            }
+<i>155</i>&nbsp;        });
+<i>156</i>&nbsp;
+<b class="nc"><i>157</i>&nbsp;        lstChoices.setModel(new javax.swing.AbstractListModel() {</b>
+<b class="nc"><i>158</i>&nbsp;            String[] strings = { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot;, &quot;Item 5&quot; };</b>
+<b class="nc"><i>159</i>&nbsp;            public int getSize() { return strings.length; }</b>
+<b class="nc"><i>160</i>&nbsp;            public Object getElementAt(int i) { return strings[i]; }</b>
+<i>161</i>&nbsp;        });
+<b class="nc"><i>162</i>&nbsp;        jScrollPane1.setViewportView(lstChoices);</b>
+<i>163</i>&nbsp;
+<b class="nc"><i>164</i>&nbsp;        lblMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</b>
+<b class="nc"><i>165</i>&nbsp;        lblMessage.setText(&quot;message&quot;);</b>
+<i>166</i>&nbsp;
+<b class="nc"><i>167</i>&nbsp;        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</b>
+<b class="nc"><i>168</i>&nbsp;        getContentPane().setLayout(layout);</b>
+<b class="nc"><i>169</i>&nbsp;        layout.setHorizontalGroup(</b>
+<b class="nc"><i>170</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>171</i>&nbsp;            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</b>
+<b class="nc"><i>172</i>&nbsp;                .addContainerGap()</b>
+<b class="nc"><i>173</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</b>
+<b class="nc"><i>174</i>&nbsp;                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)</b>
+<b class="nc"><i>175</i>&nbsp;                    .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>176</i>&nbsp;                        .addGap(0, 0, Short.MAX_VALUE)</b>
+<b class="nc"><i>177</i>&nbsp;                        .addComponent(btnAutoSelect)</b>
+<b class="nc"><i>178</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>179</i>&nbsp;                        .addComponent(btnOk)</b>
+<b class="nc"><i>180</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>181</i>&nbsp;                        .addComponent(btnCancel))</b>
+<b class="nc"><i>182</i>&nbsp;                    .addComponent(lblMessage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))</b>
+<b class="nc"><i>183</i>&nbsp;                .addContainerGap())</b>
+<i>184</i>&nbsp;        );
+<b class="nc"><i>185</i>&nbsp;        layout.setVerticalGroup(</b>
+<b class="nc"><i>186</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>187</i>&nbsp;            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</b>
+<b class="nc"><i>188</i>&nbsp;                .addGap(6, 6, 6)</b>
+<b class="nc"><i>189</i>&nbsp;                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>190</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>191</i>&nbsp;                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)</b>
+<b class="nc"><i>192</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>193</i>&nbsp;                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</b>
+<b class="nc"><i>194</i>&nbsp;                    .addComponent(btnCancel)</b>
+<b class="nc"><i>195</i>&nbsp;                    .addComponent(btnOk)</b>
+<b class="nc"><i>196</i>&nbsp;                    .addComponent(btnAutoSelect))</b>
+<b class="nc"><i>197</i>&nbsp;                .addGap(10, 10, 10))</b>
+<i>198</i>&nbsp;        );
+<i>199</i>&nbsp;
+<b class="nc"><i>200</i>&nbsp;        pack();</b>
+<i>201</i>&nbsp;    }// &lt;/editor-fold&gt;//GEN-END:initComponents
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+<b class="nc"><i>204</i>&nbsp;        setChoice();</b>
+<b class="nc"><i>205</i>&nbsp;        this.hideDialog();</b>
+<i>206</i>&nbsp;    }//GEN-LAST:event_btnOkActionPerformed
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+<b class="nc"><i>209</i>&nbsp;        this.lstChoices.clearSelection();</b>
+<b class="nc"><i>210</i>&nbsp;        this.choice.clearChoice();</b>
+<b class="nc"><i>211</i>&nbsp;        this.hideDialog();</b>
+<i>212</i>&nbsp;    }//GEN-LAST:event_btnCancelActionPerformed
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;    private void btnAutoSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoSelectActionPerformed
+<b class="nc"><i>215</i>&nbsp;        this.autoSelect = true;</b>
+<b class="nc"><i>216</i>&nbsp;        setChoice();</b>
+<b class="nc"><i>217</i>&nbsp;        this.hideDialog();</b>
+<i>218</i>&nbsp;    }//GEN-LAST:event_btnAutoSelectActionPerformed
+<i>219</i>&nbsp;
+<i>220</i>&nbsp;    // Variables declaration - do not modify//GEN-BEGIN:variables
+<i>221</i>&nbsp;    private javax.swing.JButton btnAutoSelect;
+<i>222</i>&nbsp;    private javax.swing.JButton btnCancel;
+<i>223</i>&nbsp;    private javax.swing.JButton btnOk;
+<i>224</i>&nbsp;    private javax.swing.JScrollPane jScrollPane1;
+<i>225</i>&nbsp;    private javax.swing.JLabel lblMessage;
+<i>226</i>&nbsp;    private javax.swing.JList lstChoices;
+<i>227</i>&nbsp;    // End of variables declaration//GEN-END:variables
+<i>228</i>&nbsp;
+<i>229</i>&nbsp;}
+<i>230</i>&nbsp;  class ComboItem {
+<i>231</i>&nbsp;
+<i>232</i>&nbsp;        private final String value;
+<i>233</i>&nbsp;        private final String label;
+<i>234</i>&nbsp;
+<i>235</i>&nbsp;        public ComboItem(String value, String label) {
+<i>236</i>&nbsp;            this.value = value;
+<i>237</i>&nbsp;            this.label = label;
+<i>238</i>&nbsp;        }
+<i>239</i>&nbsp;
+<i>240</i>&nbsp;        public String getValue() {
+<i>241</i>&nbsp;            return this.value;
+<i>242</i>&nbsp;        }
+<i>243</i>&nbsp;
+<i>244</i>&nbsp;        public String getLabel() {
+<i>245</i>&nbsp;            return this.label;
+<i>246</i>&nbsp;        }
+<i>247</i>&nbsp;
+<i>248</i>&nbsp;        @Override
+<i>249</i>&nbsp;        public String toString() {
+<i>250</i>&nbsp;            return label;
+<i>251</i>&nbsp;        }
+<i>252</i>&nbsp;    }
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

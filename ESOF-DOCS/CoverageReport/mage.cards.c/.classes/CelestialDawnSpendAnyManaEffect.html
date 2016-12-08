@@ -1,0 +1,364 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CelestialDawnSpendAnyManaEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.c</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CelestialDawnSpendAnyManaEffect (mage.cards.c)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CelestialDawnSpendAnyManaEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.c;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.MageObject;
+<i>32</i>&nbsp;import mage.ObjectColor;
+<i>33</i>&nbsp;import mage.abilities.Ability;
+<i>34</i>&nbsp;import mage.abilities.common.SimpleStaticAbility;
+<i>35</i>&nbsp;import mage.abilities.effects.AsThoughEffectImpl;
+<i>36</i>&nbsp;import mage.abilities.effects.AsThoughManaEffect;
+<i>37</i>&nbsp;import mage.abilities.effects.ContinuousEffectImpl;
+<i>38</i>&nbsp;import mage.abilities.mana.WhiteManaAbility;
+<i>39</i>&nbsp;import mage.cards.Card;
+<i>40</i>&nbsp;import mage.cards.CardImpl;
+<i>41</i>&nbsp;import mage.cards.CardSetInfo;
+<i>42</i>&nbsp;import mage.constants.AsThoughEffectType;
+<i>43</i>&nbsp;import mage.constants.CardType;
+<i>44</i>&nbsp;import mage.constants.Duration;
+<i>45</i>&nbsp;import mage.constants.Layer;
+<i>46</i>&nbsp;import mage.constants.ManaType;
+<i>47</i>&nbsp;import mage.constants.Outcome;
+<i>48</i>&nbsp;import mage.constants.SubLayer;
+<i>49</i>&nbsp;import mage.constants.Zone;
+<i>50</i>&nbsp;import mage.filter.common.FilterLandPermanent;
+<i>51</i>&nbsp;import mage.filter.common.FilterNonlandPermanent;
+<i>52</i>&nbsp;import mage.game.Game;
+<i>53</i>&nbsp;import mage.game.command.CommandObject;
+<i>54</i>&nbsp;import mage.game.permanent.Permanent;
+<i>55</i>&nbsp;import mage.game.stack.Spell;
+<i>56</i>&nbsp;import mage.players.ManaPoolItem;
+<i>57</i>&nbsp;import mage.players.Player;
+<i>58</i>&nbsp;import mage.sets.Commander;
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;/**
+<i>61</i>&nbsp; *
+<i>62</i>&nbsp; * @author LevelX2
+<i>63</i>&nbsp; */
+<i>64</i>&nbsp;public class CelestialDawn extends CardImpl {
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public CelestialDawn(UUID ownerId, CardSetInfo setInfo) {
+<i>67</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},&quot;{1}{W}{W}&quot;);
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;        // Lands you control are Plains.
+<i>70</i>&nbsp;        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CelestialDawnToPlainsEffect()));
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;        // Nonland cards you own that aren&#39;t on the battlefield, spells you control, and nonland permanents you control are white.
+<i>73</i>&nbsp;        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CelestialDawnToWhiteEffect()));
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;        // You may spend white mana as though it were mana of any color.
+<i>76</i>&nbsp;        // You may spend other mana only as though it were colorless mana.
+<i>77</i>&nbsp;        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CelestialDawnSpendAnyManaEffect());
+<i>78</i>&nbsp;        ability.addEffect(new CelestialDawnSpendColorlessManaEffect());
+<i>79</i>&nbsp;        this.addAbility(ability);
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    }
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public CelestialDawn(final CelestialDawn card) {
+<i>84</i>&nbsp;        super(card);
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    @Override
+<i>88</i>&nbsp;    public CelestialDawn copy() {
+<i>89</i>&nbsp;        return new CelestialDawn(this);
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;}
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;class CelestialDawnToPlainsEffect extends ContinuousEffectImpl {
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    private static final FilterLandPermanent filter = new FilterLandPermanent();
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    CelestialDawnToPlainsEffect() {
+<i>98</i>&nbsp;        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+<i>99</i>&nbsp;        this.staticText = &quot;Lands you control are Plains&quot;;
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    CelestialDawnToPlainsEffect(final CelestialDawnToPlainsEffect effect) {
+<i>103</i>&nbsp;        super(effect);
+<i>104</i>&nbsp;    }
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    @Override
+<i>107</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>108</i>&nbsp;        return false;
+<i>109</i>&nbsp;    }
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    @Override
+<i>112</i>&nbsp;    public CelestialDawnToPlainsEffect copy() {
+<i>113</i>&nbsp;        return new CelestialDawnToPlainsEffect(this);
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    @Override
+<i>117</i>&nbsp;    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+<i>118</i>&nbsp;        for (Permanent land : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+<i>119</i>&nbsp;            switch (layer) {
+<i>120</i>&nbsp;                case AbilityAddingRemovingEffects_6:
+<i>121</i>&nbsp;                    land.removeAllAbilities(source.getSourceId(), game);
+<i>122</i>&nbsp;                    land.addAbility(new WhiteManaAbility(), source.getSourceId(), game);
+<i>123</i>&nbsp;                    break;
+<i>124</i>&nbsp;                case TypeChangingEffects_4:
+<i>125</i>&nbsp;                    land.getSubtype(game).clear();
+<i>126</i>&nbsp;                    land.getSubtype(game).add(&quot;Plains&quot;);
+<i>127</i>&nbsp;                    break;
+<i>128</i>&nbsp;            }
+<i>129</i>&nbsp;        }
+<i>130</i>&nbsp;        return true;
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    @Override
+<i>134</i>&nbsp;    public boolean hasLayer(Layer layer) {
+<i>135</i>&nbsp;        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;}
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;class CelestialDawnToWhiteEffect extends ContinuousEffectImpl {
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;    public CelestialDawnToWhiteEffect() {
+<i>145</i>&nbsp;        super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
+<i>146</i>&nbsp;        staticText = &quot;Nonland cards you own that aren&#39;t on the battlefield, spells you control, and nonland permanents you control are white&quot;;
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    @Override
+<i>150</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>151</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());
+<i>152</i>&nbsp;        if (controller != null) {
+<i>153</i>&nbsp;            for (Permanent perm : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+<i>154</i>&nbsp;                setColor(perm.getColor(game), game);
+<i>155</i>&nbsp;            }
+<i>156</i>&nbsp;            // Stack
+<i>157</i>&nbsp;            for (MageObject object : game.getStack()) {
+<i>158</i>&nbsp;                if (object instanceof Spell &amp;&amp; ((Spell) object).getControllerId().equals(controller.getId())) {
+<i>159</i>&nbsp;                    setColor(object.getColor(game), game);
+<i>160</i>&nbsp;                }
+<i>161</i>&nbsp;            }
+<i>162</i>&nbsp;            // Exile
+<i>163</i>&nbsp;            for (Card card : game.getExile().getAllCards(game)) {
+<i>164</i>&nbsp;                if (card.getOwnerId().equals(controller.getId())) {
+<i>165</i>&nbsp;                    setColor(card.getColor(game), game);
+<i>166</i>&nbsp;                }
+<i>167</i>&nbsp;            }
+<i>168</i>&nbsp;            // Command
+<i>169</i>&nbsp;            for (CommandObject commandObject : game.getState().getCommand()) {
+<i>170</i>&nbsp;                if (commandObject instanceof Commander) {
+<i>171</i>&nbsp;                    if (commandObject.getControllerId().equals(controller.getId())) {
+<i>172</i>&nbsp;                        setColor(commandObject.getColor(game), game);
+<i>173</i>&nbsp;                    }
+<i>174</i>&nbsp;                }
+<i>175</i>&nbsp;            }
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;            // Hand
+<i>178</i>&nbsp;            for (Card card : controller.getHand().getCards(game)) {
+<i>179</i>&nbsp;                setColor(card.getColor(game), game);
+<i>180</i>&nbsp;            }
+<i>181</i>&nbsp;            // Library
+<i>182</i>&nbsp;            for (Card card : controller.getLibrary().getCards(game)) {
+<i>183</i>&nbsp;                setColor(card.getColor(game), game);
+<i>184</i>&nbsp;            }
+<i>185</i>&nbsp;            // Graveyard
+<i>186</i>&nbsp;            for (Card card : controller.getGraveyard().getCards(game)) {
+<i>187</i>&nbsp;                setColor(card.getColor(game), game);
+<i>188</i>&nbsp;            }
+<i>189</i>&nbsp;            return true;
+<i>190</i>&nbsp;        }
+<i>191</i>&nbsp;        return false;
+<i>192</i>&nbsp;    }
+<i>193</i>&nbsp;
+<i>194</i>&nbsp;    protected static void setColor(ObjectColor color, Game game) {
+<i>195</i>&nbsp;        color.setWhite(true);
+<i>196</i>&nbsp;        color.setGreen(false);
+<i>197</i>&nbsp;        color.setBlue(false);
+<i>198</i>&nbsp;        color.setBlack(false);
+<i>199</i>&nbsp;        color.setRed(false);
+<i>200</i>&nbsp;    }
+<i>201</i>&nbsp;
+<i>202</i>&nbsp;    @Override
+<i>203</i>&nbsp;    public CelestialDawnToWhiteEffect copy() {
+<i>204</i>&nbsp;        return new CelestialDawnToWhiteEffect(this);
+<i>205</i>&nbsp;    }
+<i>206</i>&nbsp;
+<i>207</i>&nbsp;    private CelestialDawnToWhiteEffect(CelestialDawnToWhiteEffect effect) {
+<i>208</i>&nbsp;        super(effect);
+<i>209</i>&nbsp;    }
+<i>210</i>&nbsp;
+<i>211</i>&nbsp;}
+<i>212</i>&nbsp;
+<i>213</i>&nbsp;class CelestialDawnSpendAnyManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+<i>214</i>&nbsp;
+<i>215</i>&nbsp;    public CelestialDawnSpendAnyManaEffect() {
+<b class="nc"><i>216</i>&nbsp;        super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.Custom, Outcome.Benefit);</b>
+<b class="nc"><i>217</i>&nbsp;        staticText = &quot;You may spend white mana as though it were mana of any color&quot;;</b>
+<i>218</i>&nbsp;    }
+<i>219</i>&nbsp;
+<i>220</i>&nbsp;    public CelestialDawnSpendAnyManaEffect(final CelestialDawnSpendAnyManaEffect effect) {
+<b class="nc"><i>221</i>&nbsp;        super(effect);</b>
+<i>222</i>&nbsp;    }
+<i>223</i>&nbsp;
+<i>224</i>&nbsp;    @Override
+<i>225</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>226</i>&nbsp;        return true;</b>
+<i>227</i>&nbsp;    }
+<i>228</i>&nbsp;
+<i>229</i>&nbsp;    @Override
+<i>230</i>&nbsp;    public CelestialDawnSpendAnyManaEffect copy() {
+<b class="nc"><i>231</i>&nbsp;        return new CelestialDawnSpendAnyManaEffect(this);</b>
+<i>232</i>&nbsp;    }
+<i>233</i>&nbsp;
+<i>234</i>&nbsp;    @Override
+<i>235</i>&nbsp;    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+<b class="nc"><i>236</i>&nbsp;        return affectedControllerId.equals(source.getControllerId());</b>
+<i>237</i>&nbsp;    }
+<i>238</i>&nbsp;
+<i>239</i>&nbsp;    @Override
+<i>240</i>&nbsp;    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+<b class="nc"><i>241</i>&nbsp;        if (mana.getWhite() &gt; 0) {</b>
+<b class="nc"><i>242</i>&nbsp;            return ManaType.WHITE;</b>
+<i>243</i>&nbsp;        }
+<b class="nc"><i>244</i>&nbsp;        return null;</b>
+<i>245</i>&nbsp;    }
+<i>246</i>&nbsp;}
+<i>247</i>&nbsp;
+<i>248</i>&nbsp;class CelestialDawnSpendColorlessManaEffect extends AsThoughEffectImpl implements AsThoughManaEffect {
+<i>249</i>&nbsp;
+<i>250</i>&nbsp;    public CelestialDawnSpendColorlessManaEffect() {
+<i>251</i>&nbsp;        super(AsThoughEffectType.SPEND_ONLY_MANA, Duration.Custom, Outcome.Detriment);
+<i>252</i>&nbsp;        staticText = &quot;You may spend other mana only as though it were colorless mana&quot;;
+<i>253</i>&nbsp;    }
+<i>254</i>&nbsp;
+<i>255</i>&nbsp;    public CelestialDawnSpendColorlessManaEffect(final CelestialDawnSpendColorlessManaEffect effect) {
+<i>256</i>&nbsp;        super(effect);
+<i>257</i>&nbsp;    }
+<i>258</i>&nbsp;
+<i>259</i>&nbsp;    @Override
+<i>260</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>261</i>&nbsp;        return true;
+<i>262</i>&nbsp;    }
+<i>263</i>&nbsp;
+<i>264</i>&nbsp;    @Override
+<i>265</i>&nbsp;    public CelestialDawnSpendColorlessManaEffect copy() {
+<i>266</i>&nbsp;        return new CelestialDawnSpendColorlessManaEffect(this);
+<i>267</i>&nbsp;    }
+<i>268</i>&nbsp;
+<i>269</i>&nbsp;    @Override
+<i>270</i>&nbsp;    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
+<i>271</i>&nbsp;        return affectedControllerId.equals(source.getControllerId());
+<i>272</i>&nbsp;    }
+<i>273</i>&nbsp;
+<i>274</i>&nbsp;    @Override
+<i>275</i>&nbsp;    public ManaType getAsThoughManaType(ManaType manaType, ManaPoolItem mana, UUID affectedControllerId, Ability source, Game game) {
+<i>276</i>&nbsp;        if (mana.getWhite() == 0 &amp;&amp; !ManaType.COLORLESS.equals(manaType)) {
+<i>277</i>&nbsp;            return null;
+<i>278</i>&nbsp;        }
+<i>279</i>&nbsp;        return manaType;
+<i>280</i>&nbsp;    }
+<i>281</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

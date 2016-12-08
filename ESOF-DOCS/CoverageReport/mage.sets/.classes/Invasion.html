@@ -1,0 +1,459 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Invasion</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.sets</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Invasion (mage.sets)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Invasion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (327/ 327)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.sets;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.GregorianCalendar;
+<i>31</i>&nbsp;import mage.constants.SetType;
+<i>32</i>&nbsp;import mage.cards.ExpansionSet;
+<i>33</i>&nbsp;import mage.constants.Rarity;
+<i>34</i>&nbsp;import java.util.List;
+<i>35</i>&nbsp;import mage.ObjectColor;
+<i>36</i>&nbsp;import mage.cards.CardGraphicInfo;
+<i>37</i>&nbsp;import mage.cards.FrameStyle;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;/**
+<i>40</i>&nbsp; *
+<i>41</i>&nbsp; * @author North
+<i>42</i>&nbsp; */
+<i>43</i>&nbsp;public class Invasion extends ExpansionSet {
+<b class="fc"><i>44</i>&nbsp;    private static final Invasion fINSTANCE = new Invasion();</b>
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    public static Invasion getInstance() {
+<b class="fc"><i>47</i>&nbsp;        return fINSTANCE;</b>
+<i>48</i>&nbsp;    }
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    private Invasion() {
+<b class="fc"><i>51</i>&nbsp;        super(&quot;Invasion&quot;, &quot;INV&quot;, &quot;mage.sets.invasion&quot;, new GregorianCalendar(2000, 9, 2).getTime(), SetType.EXPANSION);</b>
+<b class="fc"><i>52</i>&nbsp;        this.blockName = &quot;Invasion&quot;;</b>
+<b class="fc"><i>53</i>&nbsp;        this.hasBoosters = true;</b>
+<b class="fc"><i>54</i>&nbsp;        this.numBoosterLands = 0;</b>
+<b class="fc"><i>55</i>&nbsp;        this.numBoosterCommon = 11;</b>
+<b class="fc"><i>56</i>&nbsp;        this.numBoosterUncommon = 3;</b>
+<b class="fc"><i>57</i>&nbsp;        this.numBoosterRare = 1;</b>
+<b class="fc"><i>58</i>&nbsp;        this.ratioBoosterMythic = 0;</b>
+<b class="fc"><i>59</i>&nbsp;        cards.add(new SetCardInfo(&quot;Absorb&quot;, 226, Rarity.RARE, mage.cards.a.Absorb.class));</b>
+<b class="fc"><i>60</i>&nbsp;        cards.add(new SetCardInfo(&quot;Addle&quot;, 91, Rarity.UNCOMMON, mage.cards.a.Addle.class));</b>
+<b class="fc"><i>61</i>&nbsp;        cards.add(new SetCardInfo(&quot;Aether Rift&quot;, 227, Rarity.RARE, mage.cards.a.AetherRift.class));</b>
+<b class="fc"><i>62</i>&nbsp;        cards.add(new SetCardInfo(&quot;Aggressive Urge&quot;, 181, Rarity.COMMON, mage.cards.a.AggressiveUrge.class));</b>
+<b class="fc"><i>63</i>&nbsp;        cards.add(new SetCardInfo(&quot;Agonizing Demise&quot;, 92, Rarity.COMMON, mage.cards.a.AgonizingDemise.class));</b>
+<b class="fc"><i>64</i>&nbsp;        cards.add(new SetCardInfo(&quot;Alabaster Leech&quot;, 1, Rarity.RARE, mage.cards.a.AlabasterLeech.class));</b>
+<b class="fc"><i>65</i>&nbsp;        cards.add(new SetCardInfo(&quot;Alloy Golem&quot;, 297, Rarity.UNCOMMON, mage.cards.a.AlloyGolem.class));</b>
+<b class="fc"><i>66</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ancient Kavu&quot;, 136, Rarity.COMMON, mage.cards.a.AncientKavu.class));</b>
+<b class="fc"><i>67</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ancient Spring&quot;, 319, Rarity.COMMON, mage.cards.a.AncientSpring.class));</b>
+<b class="fc"><i>68</i>&nbsp;        cards.add(new SetCardInfo(&quot;Andradite Leech&quot;, 93, Rarity.RARE, mage.cards.a.AndraditeLeech.class));</b>
+<b class="fc"><i>69</i>&nbsp;        cards.add(new SetCardInfo(&quot;Angelic Shield&quot;, 228, Rarity.UNCOMMON, mage.cards.a.AngelicShield.class));</b>
+<b class="fc"><i>70</i>&nbsp;        cards.add(new SetCardInfo(&quot;Angel of Mercy&quot;, 2, Rarity.UNCOMMON, mage.cards.a.AngelOfMercy.class));</b>
+<b class="fc"><i>71</i>&nbsp;        cards.add(new SetCardInfo(&quot;Annihilate&quot;, 94, Rarity.UNCOMMON, mage.cards.a.Annihilate.class));</b>
+<b class="fc"><i>72</i>&nbsp;        cards.add(new SetCardInfo(&quot;Archaeological Dig&quot;, 320, Rarity.UNCOMMON, mage.cards.a.ArchaeologicalDig.class));</b>
+<b class="fc"><i>73</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ardent Soldier&quot;, 3, Rarity.COMMON, mage.cards.a.ArdentSoldier.class));</b>
+<b class="fc"><i>74</i>&nbsp;        cards.add(new SetCardInfo(&quot;Armadillo Cloak&quot;, 229, Rarity.COMMON, mage.cards.a.ArmadilloCloak.class));</b>
+<b class="fc"><i>75</i>&nbsp;        cards.add(new SetCardInfo(&quot;Armored Guardian&quot;, 230, Rarity.RARE, mage.cards.a.ArmoredGuardian.class));</b>
+<b class="fc"><i>76</i>&nbsp;        cards.add(new SetCardInfo(&quot;Artifact Mutation&quot;, 231, Rarity.RARE, mage.cards.a.ArtifactMutation.class));</b>
+<b class="fc"><i>77</i>&nbsp;        cards.add(new SetCardInfo(&quot;Assault // Battery&quot;, 295, Rarity.UNCOMMON, mage.cards.a.AssaultBattery.class));</b>
+<b class="fc"><i>78</i>&nbsp;        cards.add(new SetCardInfo(&quot;Aura Mutation&quot;, 232, Rarity.RARE, mage.cards.a.AuraMutation.class));</b>
+<b class="fc"><i>79</i>&nbsp;        cards.add(new SetCardInfo(&quot;Aura Shards&quot;, 233, Rarity.UNCOMMON, mage.cards.a.AuraShards.class));</b>
+<b class="fc"><i>80</i>&nbsp;        cards.add(new SetCardInfo(&quot;Backlash&quot;, 234, Rarity.UNCOMMON, mage.cards.b.Backlash.class));</b>
+<b class="fc"><i>81</i>&nbsp;        cards.add(new SetCardInfo(&quot;Benalish Emissary&quot;, 5, Rarity.UNCOMMON, mage.cards.b.BenalishEmissary.class));</b>
+<b class="fc"><i>82</i>&nbsp;        cards.add(new SetCardInfo(&quot;Benalish Heralds&quot;, 6, Rarity.UNCOMMON, mage.cards.b.BenalishHeralds.class));</b>
+<b class="fc"><i>83</i>&nbsp;        cards.add(new SetCardInfo(&quot;Benalish Lancer&quot;, 7, Rarity.COMMON, mage.cards.b.BenalishLancer.class));</b>
+<b class="fc"><i>84</i>&nbsp;        cards.add(new SetCardInfo(&quot;Benalish Trapper&quot;, 8, Rarity.COMMON, mage.cards.b.BenalishTrapper.class));</b>
+<b class="fc"><i>85</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bind&quot;, 182, Rarity.RARE, mage.cards.b.Bind.class));</b>
+<b class="fc"><i>86</i>&nbsp;        cards.add(new SetCardInfo(&quot;Blazing Specter&quot;, 236, Rarity.RARE, mage.cards.b.BlazingSpecter.class));</b>
+<b class="fc"><i>87</i>&nbsp;        cards.add(new SetCardInfo(&quot;Blinding Light&quot;, 9, Rarity.UNCOMMON, mage.cards.b.BlindingLight.class));</b>
+<b class="fc"><i>88</i>&nbsp;        cards.add(new SetCardInfo(&quot;Blind Seer&quot;, 47, Rarity.RARE, mage.cards.b.BlindSeer.class));</b>
+<b class="fc"><i>89</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bloodstone Cameo&quot;, 298, Rarity.UNCOMMON, mage.cards.b.BloodstoneCameo.class));</b>
+<b class="fc"><i>90</i>&nbsp;        cards.add(new SetCardInfo(&quot;Blurred Mongoose&quot;, 183, Rarity.RARE, mage.cards.b.BlurredMongoose.class));</b>
+<b class="fc"><i>91</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bog Initiate&quot;, 95, Rarity.COMMON, mage.cards.b.BogInitiate.class));</b>
+<b class="fc"><i>92</i>&nbsp;        cards.add(new SetCardInfo(&quot;Breaking Wave&quot;, 48, Rarity.RARE, mage.cards.b.BreakingWave.class));</b>
+<b class="fc"><i>93</i>&nbsp;        cards.add(new SetCardInfo(&quot;Breath of Darigaaz&quot;, 138, Rarity.UNCOMMON, mage.cards.b.BreathOfDarigaaz.class));</b>
+<b class="fc"><i>94</i>&nbsp;        cards.add(new SetCardInfo(&quot;Callous Giant&quot;, 139, Rarity.RARE, mage.cards.c.CallousGiant.class));</b>
+<b class="fc"><i>95</i>&nbsp;        cards.add(new SetCardInfo(&quot;Canopy Surge&quot;, 184, Rarity.UNCOMMON, mage.cards.c.CanopySurge.class));</b>
+<b class="fc"><i>96</i>&nbsp;        cards.add(new SetCardInfo(&quot;Capashen Unicorn&quot;, 10, Rarity.COMMON, mage.cards.c.CapashenUnicorn.class));</b>
+<b class="fc"><i>97</i>&nbsp;        cards.add(new SetCardInfo(&quot;Captain Sisay&quot;, 237, Rarity.RARE, mage.cards.c.CaptainSisay.class));</b>
+<b class="fc"><i>98</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cauldron Dance&quot;, 238, Rarity.UNCOMMON, mage.cards.c.CauldronDance.class));</b>
+<b class="fc"><i>99</i>&nbsp;        cards.add(new SetCardInfo(&quot;Chaotic Strike&quot;, 140, Rarity.UNCOMMON, mage.cards.c.ChaoticStrike.class));</b>
+<b class="fc"><i>100</i>&nbsp;        cards.add(new SetCardInfo(&quot;Charging Troll&quot;, 239, Rarity.UNCOMMON, mage.cards.c.ChargingTroll.class));</b>
+<b class="fc"><i>101</i>&nbsp;        cards.add(new SetCardInfo(&quot;Chromatic Sphere&quot;, 299, Rarity.UNCOMMON, mage.cards.c.ChromaticSphere.class));</b>
+<b class="fc"><i>102</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cinder Shade&quot;, 240, Rarity.UNCOMMON, mage.cards.c.CinderShade.class));</b>
+<b class="fc"><i>103</i>&nbsp;        cards.add(new SetCardInfo(&quot;Coalition Victory&quot;, 241, Rarity.RARE, mage.cards.c.CoalitionVictory.class));</b>
+<b class="fc"><i>104</i>&nbsp;        cards.add(new SetCardInfo(&quot;Coastal Tower&quot;, 321, Rarity.UNCOMMON, mage.cards.c.CoastalTower.class));</b>
+<b class="fc"><i>105</i>&nbsp;        cards.add(new SetCardInfo(&quot;Collapsing Borders&quot;, 141, Rarity.RARE, mage.cards.c.CollapsingBorders.class));</b>
+<b class="fc"><i>106</i>&nbsp;        cards.add(new SetCardInfo(&quot;Collective Restraint&quot;, 49, Rarity.RARE, mage.cards.c.CollectiveRestraint.class));</b>
+<b class="fc"><i>107</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cremate&quot;, 96, Rarity.UNCOMMON, mage.cards.c.Cremate.class));</b>
+<b class="fc"><i>108</i>&nbsp;        cards.add(new SetCardInfo(&quot;Crimson Acolyte&quot;, 11, Rarity.COMMON, mage.cards.c.CrimsonAcolyte.class));</b>
+<b class="fc"><i>109</i>&nbsp;        cards.add(new SetCardInfo(&quot;Crosis&#39;s Attendant&quot;, 300, Rarity.UNCOMMON, mage.cards.c.CrosissAttendant.class));</b>
+<b class="fc"><i>110</i>&nbsp;        cards.add(new SetCardInfo(&quot;Crosis, the Purger&quot;, 242, Rarity.RARE, mage.cards.c.CrosisThePurger.class));</b>
+<b class="fc"><i>111</i>&nbsp;        cards.add(new SetCardInfo(&quot;Crown of Flames&quot;, 142, Rarity.COMMON, mage.cards.c.CrownOfFlames.class));</b>
+<b class="fc"><i>112</i>&nbsp;        cards.add(new SetCardInfo(&quot;Crusading Knight&quot;, 12, Rarity.RARE, mage.cards.c.CrusadingKnight.class));</b>
+<b class="fc"><i>113</i>&nbsp;        cards.add(new SetCardInfo(&quot;Crypt Angel&quot;, 97, Rarity.RARE, mage.cards.c.CryptAngel.class));</b>
+<b class="fc"><i>114</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cursed Flesh&quot;, 98, Rarity.COMMON, mage.cards.c.CursedFlesh.class));</b>
+<b class="fc"><i>115</i>&nbsp;        cards.add(new SetCardInfo(&quot;Darigaaz&#39;s Attendant&quot;, 301, Rarity.UNCOMMON, mage.cards.d.DarigaazsAttendant.class));</b>
+<b class="fc"><i>116</i>&nbsp;        cards.add(new SetCardInfo(&quot;Darigaaz, the Igniter&quot;, 243, Rarity.RARE, mage.cards.d.DarigaazTheIgniter.class));</b>
+<b class="fc"><i>117</i>&nbsp;        cards.add(new SetCardInfo(&quot;Defiling Tears&quot;, 99, Rarity.UNCOMMON, mage.cards.d.DefilingTears.class));</b>
+<b class="fc"><i>118</i>&nbsp;        cards.add(new SetCardInfo(&quot;Devouring Strossus&quot;, 101, Rarity.RARE, mage.cards.d.DevouringStrossus.class));</b>
+<b class="fc"><i>119</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dismantling Blow&quot;, 14, Rarity.COMMON, mage.cards.d.DismantlingBlow.class));</b>
+<b class="fc"><i>120</i>&nbsp;        cards.add(new SetCardInfo(&quot;Disrupt&quot;, 51, Rarity.UNCOMMON, mage.cards.d.Disrupt.class));</b>
+<b class="fc"><i>121</i>&nbsp;        cards.add(new SetCardInfo(&quot;Distorting Wake&quot;, 52, Rarity.RARE, mage.cards.d.DistortingWake.class));</b>
+<b class="fc"><i>122</i>&nbsp;        cards.add(new SetCardInfo(&quot;Divine Presence&quot;, 15, Rarity.RARE, mage.cards.d.DivinePresence.class));</b>
+<b class="fc"><i>123</i>&nbsp;        cards.add(new SetCardInfo(&quot;Do or Die&quot;, 102, Rarity.RARE, mage.cards.d.DoOrDie.class));</b>
+<b class="fc"><i>124</i>&nbsp;        cards.add(new SetCardInfo(&quot;Drake-Skull Cameo&quot;, 302, Rarity.UNCOMMON, mage.cards.d.DrakeSkullCameo.class));</b>
+<b class="fc"><i>125</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dream Thrush&quot;, 53, Rarity.COMMON, mage.cards.d.DreamThrush.class));</b>
+<b class="fc"><i>126</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dredge&quot;, 103, Rarity.UNCOMMON, mage.cards.d.Dredge.class));</b>
+<b class="fc"><i>127</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dromar&#39;s Attendant&quot;, 303, Rarity.UNCOMMON, mage.cards.d.DromarsAttendant.class));</b>
+<b class="fc"><i>128</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dromar, the Banisher&quot;, 244, Rarity.RARE, mage.cards.d.DromarTheBanisher.class));</b>
+<b class="fc"><i>129</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dueling Grounds&quot;, 245, Rarity.RARE, mage.cards.d.DuelingGrounds.class));</b>
+<b class="fc"><i>130</i>&nbsp;        cards.add(new SetCardInfo(&quot;Duskwalker&quot;, 104, Rarity.COMMON, mage.cards.d.Duskwalker.class));</b>
+<b class="fc"><i>131</i>&nbsp;        cards.add(new SetCardInfo(&quot;Elfhame Palace&quot;, 322, Rarity.UNCOMMON, mage.cards.e.ElfhamePalace.class));</b>
+<b class="fc"><i>132</i>&nbsp;        cards.add(new SetCardInfo(&quot;Elfhame Sanctuary&quot;, 185, Rarity.UNCOMMON, mage.cards.e.ElfhameSanctuary.class));</b>
+<b class="fc"><i>133</i>&nbsp;        cards.add(new SetCardInfo(&quot;Elvish Champion&quot;, 186, Rarity.RARE, mage.cards.e.ElvishChampion.class));</b>
+<b class="fc"><i>134</i>&nbsp;        cards.add(new SetCardInfo(&quot;Empress Galina&quot;, 54, Rarity.RARE, mage.cards.e.EmpressGalina.class));</b>
+<b class="fc"><i>135</i>&nbsp;        cards.add(new SetCardInfo(&quot;Exclude&quot;, 56, Rarity.COMMON, mage.cards.e.Exclude.class));</b>
+<b class="fc"><i>136</i>&nbsp;        cards.add(new SetCardInfo(&quot;Exotic Curse&quot;, 105, Rarity.COMMON, mage.cards.e.ExoticCurse.class));</b>
+<b class="fc"><i>137</i>&nbsp;        cards.add(new SetCardInfo(&quot;Explosive Growth&quot;, 187, Rarity.COMMON, mage.cards.e.ExplosiveGrowth.class));</b>
+<b class="fc"><i>138</i>&nbsp;        cards.add(new SetCardInfo(&quot;Fact or Fiction&quot;, 57, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));</b>
+<b class="fc"><i>139</i>&nbsp;        cards.add(new SetCardInfo(&quot;Faerie Squadron&quot;, 58, Rarity.COMMON, mage.cards.f.FaerieSquadron.class));</b>
+<b class="fc"><i>140</i>&nbsp;        cards.add(new SetCardInfo(&quot;Fertile Ground&quot;, 188, Rarity.COMMON, mage.cards.f.FertileGround.class));</b>
+<b class="fc"><i>141</i>&nbsp;        cards.add(new SetCardInfo(&quot;Firebrand Ranger&quot;, 143, Rarity.UNCOMMON, mage.cards.f.FirebrandRanger.class));</b>
+<b class="fc"><i>142</i>&nbsp;        cards.add(new SetCardInfo(&quot;Firescreamer&quot;, 106, Rarity.COMMON, mage.cards.f.Firescreamer.class));</b>
+<b class="fc"><i>143</i>&nbsp;        cards.add(new SetCardInfo(&quot;Fires of Yavimaya&quot;, 246, Rarity.UNCOMMON, mage.cards.f.FiresOfYavimaya.class));</b>
+<b class="fc"><i>144</i>&nbsp;        cards.add(new SetCardInfo(&quot;Forest&quot;, 347, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>145</i>&nbsp;        cards.add(new SetCardInfo(&quot;Forest&quot;, 348, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>146</i>&nbsp;        cards.add(new SetCardInfo(&quot;Forest&quot;, 349, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>147</i>&nbsp;        cards.add(new SetCardInfo(&quot;Forest&quot;, 350, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>148</i>&nbsp;        cards.add(new SetCardInfo(&quot;Frenzied Tilling&quot;, 247, Rarity.COMMON, mage.cards.f.FrenziedTilling.class));</b>
+<b class="fc"><i>149</i>&nbsp;        cards.add(new SetCardInfo(&quot;Galina&#39;s Knight&quot;, 248, Rarity.COMMON, mage.cards.g.GalinasKnight.class));</b>
+<b class="fc"><i>150</i>&nbsp;        cards.add(new SetCardInfo(&quot;Geothermal Crevice&quot;, 323, Rarity.COMMON, mage.cards.g.GeothermalCrevice.class));</b>
+<b class="fc"><i>151</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ghitu Fire&quot;, 144, Rarity.RARE, mage.cards.g.GhituFire.class));</b>
+<b class="fc"><i>152</i>&nbsp;        cards.add(new SetCardInfo(&quot;Glimmering Angel&quot;, 17, Rarity.COMMON, mage.cards.g.GlimmeringAngel.class));</b>
+<b class="fc"><i>153</i>&nbsp;        cards.add(new SetCardInfo(&quot;Global Ruin&quot;, 18, Rarity.RARE, mage.cards.g.GlobalRuin.class));</b>
+<b class="fc"><i>154</i>&nbsp;        cards.add(new SetCardInfo(&quot;Goblin Spy&quot;, 145, Rarity.UNCOMMON, mage.cards.g.GoblinSpy.class));</b>
+<b class="fc"><i>155</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hanna, Ship&#39;s Navigator&quot;, 249, Rarity.RARE, mage.cards.h.HannaShipsNavigator.class));</b>
+<b class="fc"><i>156</i>&nbsp;        cards.add(new SetCardInfo(&quot;Harrow&quot;, 189, Rarity.COMMON, mage.cards.h.Harrow.class));</b>
+<b class="fc"><i>157</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hate Weaver&quot;, 108, Rarity.UNCOMMON, mage.cards.h.HateWeaver.class));</b>
+<b class="fc"><i>158</i>&nbsp;        cards.add(new SetCardInfo(&quot;Heroes&#39; Reunion&quot;, 250, Rarity.UNCOMMON, mage.cards.h.HeroesReunion.class));</b>
+<b class="fc"><i>159</i>&nbsp;        cards.add(new SetCardInfo(&quot;Holy Day&quot;, 20, Rarity.COMMON, mage.cards.h.HolyDay.class));</b>
+<b class="fc"><i>160</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hooded Kavu&quot;, 147, Rarity.COMMON, mage.cards.h.HoodedKavu.class));</b>
+<b class="fc"><i>161</i>&nbsp;        cards.add(new SetCardInfo(&quot;Horned Cheetah&quot;, 251, Rarity.UNCOMMON, mage.cards.h.HornedCheetah.class));</b>
+<b class="fc"><i>162</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hypnotic Cloud&quot;, 109, Rarity.COMMON, mage.cards.h.HypnoticCloud.class));</b>
+<b class="fc"><i>163</i>&nbsp;        cards.add(new SetCardInfo(&quot;Irrigation Ditch&quot;, 324, Rarity.COMMON, mage.cards.i.IrrigationDitch.class));</b>
+<b class="fc"><i>164</i>&nbsp;        cards.add(new SetCardInfo(&quot;Island&quot;, 335, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>165</i>&nbsp;        cards.add(new SetCardInfo(&quot;Island&quot;, 336, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>166</i>&nbsp;        cards.add(new SetCardInfo(&quot;Island&quot;, 337, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>167</i>&nbsp;        cards.add(new SetCardInfo(&quot;Island&quot;, 338, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>168</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jade Leech&quot;, 190, Rarity.RARE, mage.cards.j.JadeLeech.class));</b>
+<b class="fc"><i>169</i>&nbsp;        cards.add(new SetCardInfo(&quot;Juntu Stakes&quot;, 304, Rarity.RARE, mage.cards.j.JuntuStakes.class));</b>
+<b class="fc"><i>170</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kangee, Aerie Keeper&quot;, 253, Rarity.RARE, mage.cards.k.KangeeAerieKeeper.class));</b>
+<b class="fc"><i>171</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kavu Aggressor&quot;, 148, Rarity.COMMON, mage.cards.k.KavuAggressor.class));</b>
+<b class="fc"><i>172</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kavu Chameleon&quot;, 191, Rarity.UNCOMMON, mage.cards.k.KavuChameleon.class));</b>
+<b class="fc"><i>173</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kavu Climber&quot;, 192, Rarity.COMMON, mage.cards.k.KavuClimber.class));</b>
+<b class="fc"><i>174</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kavu Lair&quot;, 193, Rarity.RARE, mage.cards.k.KavuLair.class));</b>
+<b class="fc"><i>175</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kavu Monarch&quot;, 149, Rarity.RARE, mage.cards.k.KavuMonarch.class));</b>
+<b class="fc"><i>176</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kavu Runner&quot;, 150, Rarity.UNCOMMON, mage.cards.k.KavuRunner.class));</b>
+<b class="fc"><i>177</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kavu Scout&quot;, 151, Rarity.COMMON, mage.cards.k.KavuScout.class));</b>
+<b class="fc"><i>178</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kavu Titan&quot;, 194, Rarity.RARE, mage.cards.k.KavuTitan.class));</b>
+<b class="fc"><i>179</i>&nbsp;        cards.add(new SetCardInfo(&quot;Keldon Necropolis&quot;, 325, Rarity.RARE, mage.cards.k.KeldonNecropolis.class));</b>
+<b class="fc"><i>180</i>&nbsp;        cards.add(new SetCardInfo(&quot;Liberate&quot;, 21, Rarity.UNCOMMON, mage.cards.l.Liberate.class));</b>
+<b class="fc"><i>181</i>&nbsp;        cards.add(new SetCardInfo(&quot;Lightning Dart&quot;, 152, Rarity.UNCOMMON, mage.cards.l.LightningDart.class));</b>
+<b class="fc"><i>182</i>&nbsp;        cards.add(new SetCardInfo(&quot;Llanowar Cavalry&quot;, 195, Rarity.COMMON, mage.cards.l.LlanowarCavalry.class));</b>
+<b class="fc"><i>183</i>&nbsp;        cards.add(new SetCardInfo(&quot;Llanowar Elite&quot;, 196, Rarity.COMMON, mage.cards.l.LlanowarElite.class));</b>
+<b class="fc"><i>184</i>&nbsp;        cards.add(new SetCardInfo(&quot;Llanowar Knight&quot;, 254, Rarity.COMMON, mage.cards.l.LlanowarKnight.class));</b>
+<b class="fc"><i>185</i>&nbsp;        cards.add(new SetCardInfo(&quot;Llanowar Vanguard&quot;, 197, Rarity.COMMON, mage.cards.l.LlanowarVanguard.class));</b>
+<b class="fc"><i>186</i>&nbsp;        cards.add(new SetCardInfo(&quot;Lobotomy&quot;, 255, Rarity.UNCOMMON, mage.cards.l.Lobotomy.class));</b>
+<b class="fc"><i>187</i>&nbsp;        cards.add(new SetCardInfo(&quot;Lotus Guardian&quot;, 305, Rarity.RARE, mage.cards.l.LotusGuardian.class));</b>
+<b class="fc"><i>188</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mana Maze&quot;, 59, Rarity.RARE, mage.cards.m.ManaMaze.class));</b>
+<b class="fc"><i>189</i>&nbsp;        cards.add(new SetCardInfo(&quot;Maniacal Rage&quot;, 155, Rarity.COMMON, mage.cards.m.ManiacalRage.class));</b>
+<b class="fc"><i>190</i>&nbsp;        cards.add(new SetCardInfo(&quot;Manipulate Fate&quot;, 60, Rarity.UNCOMMON, mage.cards.m.ManipulateFate.class));</b>
+<b class="fc"><i>191</i>&nbsp;        cards.add(new SetCardInfo(&quot;Marauding Knight&quot;, 110, Rarity.RARE, mage.cards.m.MaraudingKnight.class));</b>
+<b class="fc"><i>192</i>&nbsp;        cards.add(new SetCardInfo(&quot;Metathran Transport&quot;, 62, Rarity.UNCOMMON, mage.cards.m.MetathranTransport.class));</b>
+<b class="fc"><i>193</i>&nbsp;        cards.add(new SetCardInfo(&quot;Metathran Zombie&quot;, 63, Rarity.COMMON, mage.cards.m.MetathranZombie.class));</b>
+<b class="fc"><i>194</i>&nbsp;        cards.add(new SetCardInfo(&quot;Meteor Storm&quot;, 256, Rarity.RARE, mage.cards.m.MeteorStorm.class));</b>
+<b class="fc"><i>195</i>&nbsp;        cards.add(new SetCardInfo(&quot;Might Weaver&quot;, 198, Rarity.UNCOMMON, mage.cards.m.MightWeaver.class));</b>
+<b class="fc"><i>196</i>&nbsp;        cards.add(new SetCardInfo(&quot;Molimo, Maro-Sorcerer&quot;, 199, Rarity.RARE, mage.cards.m.MolimoMaroSorcerer.class));</b>
+<b class="fc"><i>197</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mountain&quot;, 343, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>198</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mountain&quot;, 344, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>199</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mountain&quot;, 345, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>200</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mountain&quot;, 346, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>201</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mourning&quot;, 111, Rarity.COMMON, mage.cards.m.Mourning.class));</b>
+<b class="fc"><i>202</i>&nbsp;        cards.add(new SetCardInfo(&quot;Nightscape Apprentice&quot;, 112, Rarity.COMMON, mage.cards.n.NightscapeApprentice.class));</b>
+<b class="fc"><i>203</i>&nbsp;        cards.add(new SetCardInfo(&quot;Nightscape Master&quot;, 113, Rarity.RARE, mage.cards.n.NightscapeMaster.class));</b>
+<b class="fc"><i>204</i>&nbsp;        cards.add(new SetCardInfo(&quot;Noble Panther&quot;, 257, Rarity.RARE, mage.cards.n.NoblePanther.class));</b>
+<b class="fc"><i>205</i>&nbsp;        cards.add(new SetCardInfo(&quot;Nomadic Elf&quot;, 200, Rarity.COMMON, mage.cards.n.NomadicElf.class));</b>
+<b class="fc"><i>206</i>&nbsp;        cards.add(new SetCardInfo(&quot;Obliterate&quot;, 156, Rarity.RARE, mage.cards.o.Obliterate.class));</b>
+<b class="fc"><i>207</i>&nbsp;        cards.add(new SetCardInfo(&quot;Obsidian Acolyte&quot;, 22, Rarity.COMMON, mage.cards.o.ObsidianAcolyte.class));</b>
+<b class="fc"><i>208</i>&nbsp;        cards.add(new SetCardInfo(&quot;Opt&quot;, 64, Rarity.COMMON, mage.cards.o.Opt.class));</b>
+<b class="fc"><i>209</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ordered Migration&quot;, 258, Rarity.UNCOMMON, mage.cards.o.OrderedMigration.class));</b>
+<b class="fc"><i>210</i>&nbsp;        cards.add(new SetCardInfo(&quot;Orim&#39;s Touch&quot;, 23, Rarity.COMMON, mage.cards.o.OrimsTouch.class));</b>
+<b class="fc"><i>211</i>&nbsp;        cards.add(new SetCardInfo(&quot;Overload&quot;, 157, Rarity.COMMON, mage.cards.o.Overload.class));</b>
+<b class="fc"><i>212</i>&nbsp;        cards.add(new SetCardInfo(&quot;Pain // Suffering&quot;, 294, Rarity.UNCOMMON, mage.cards.p.PainSuffering.class));</b>
+<b class="fc"><i>213</i>&nbsp;        cards.add(new SetCardInfo(&quot;Phantasmal Terrain&quot;, 65, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));</b>
+<b class="fc"><i>214</i>&nbsp;        cards.add(new SetCardInfo(&quot;Phyrexian Altar&quot;, 306, Rarity.RARE, mage.cards.p.PhyrexianAltar.class));</b>
+<b class="fc"><i>215</i>&nbsp;        cards.add(new SetCardInfo(&quot;Phyrexian Battleflies&quot;, 114, Rarity.COMMON, mage.cards.p.PhyrexianBattleflies.class));</b>
+<b class="fc"><i>216</i>&nbsp;        cards.add(new SetCardInfo(&quot;Phyrexian Delver&quot;, 115, Rarity.RARE, mage.cards.p.PhyrexianDelver.class));</b>
+<b class="fc"><i>217</i>&nbsp;        cards.add(new SetCardInfo(&quot;Phyrexian Infiltrator&quot;, 116, Rarity.RARE, mage.cards.p.PhyrexianInfiltrator.class));</b>
+<b class="fc"><i>218</i>&nbsp;        cards.add(new SetCardInfo(&quot;Phyrexian Lens&quot;, 307, Rarity.RARE, mage.cards.p.PhyrexianLens.class));</b>
+<b class="fc"><i>219</i>&nbsp;        cards.add(new SetCardInfo(&quot;Phyrexian Reaper&quot;, 117, Rarity.COMMON, mage.cards.p.PhyrexianReaper.class));</b>
+<b class="fc"><i>220</i>&nbsp;        cards.add(new SetCardInfo(&quot;Phyrexian Slayer&quot;, 118, Rarity.COMMON, mage.cards.p.PhyrexianSlayer.class));</b>
+<b class="fc"><i>221</i>&nbsp;        cards.add(new SetCardInfo(&quot;Pincer Spider&quot;, 201, Rarity.COMMON, mage.cards.p.PincerSpider.class));</b>
+<b class="fc"><i>222</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plague Spitter&quot;, 119, Rarity.UNCOMMON, mage.cards.p.PlagueSpitter.class));</b>
+<b class="fc"><i>223</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plague Spores&quot;, 260, Rarity.COMMON, mage.cards.p.PlagueSpores.class));</b>
+<b class="fc"><i>224</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plains&quot;, 331, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>225</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plains&quot;, 332, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>226</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plains&quot;, 333, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>227</i>&nbsp;        cards.add(new SetCardInfo(&quot;Plains&quot;, 334, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>228</i>&nbsp;        cards.add(new SetCardInfo(&quot;Planar Portal&quot;, 308, Rarity.RARE, mage.cards.p.PlanarPortal.class));</b>
+<b class="fc"><i>229</i>&nbsp;        cards.add(new SetCardInfo(&quot;Pouncing Kavu&quot;, 158, Rarity.COMMON, mage.cards.p.PouncingKavu.class));</b>
+<b class="fc"><i>230</i>&nbsp;        cards.add(new SetCardInfo(&quot;Power Armor&quot;, 309, Rarity.UNCOMMON, mage.cards.p.PowerArmor.class));</b>
+<b class="fc"><i>231</i>&nbsp;        cards.add(new SetCardInfo(&quot;Prison Barricade&quot;, 25, Rarity.COMMON, mage.cards.p.PrisonBarricade.class));</b>
+<b class="fc"><i>232</i>&nbsp;        cards.add(new SetCardInfo(&quot;Probe&quot;, 66, Rarity.COMMON, mage.cards.p.Probe.class));</b>
+<b class="fc"><i>233</i>&nbsp;        cards.add(new SetCardInfo(&quot;Prohibit&quot;, 67, Rarity.COMMON, mage.cards.p.Prohibit.class));</b>
+<b class="fc"><i>234</i>&nbsp;        cards.add(new SetCardInfo(&quot;Pyre Zombie&quot;, 261, Rarity.RARE, mage.cards.p.PyreZombie.class));</b>
+<b class="fc"><i>235</i>&nbsp;        cards.add(new SetCardInfo(&quot;Quirion Elves&quot;, 203, Rarity.COMMON, mage.cards.q.QuirionElves.class));</b>
+<b class="fc"><i>236</i>&nbsp;        cards.add(new SetCardInfo(&quot;Quirion Sentinel&quot;, 204, Rarity.COMMON, mage.cards.q.QuirionSentinel.class));</b>
+<b class="fc"><i>237</i>&nbsp;        cards.add(new SetCardInfo(&quot;Quirion Trailblazer&quot;, 205, Rarity.COMMON, mage.cards.q.QuirionTrailblazer.class));</b>
+<b class="fc"><i>238</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rage Weaver&quot;, 159, Rarity.UNCOMMON, mage.cards.r.RageWeaver.class));</b>
+<b class="fc"><i>239</i>&nbsp;        cards.add(new SetCardInfo(&quot;Raging Kavu&quot;, 262, Rarity.RARE, mage.cards.r.RagingKavu.class));</b>
+<b class="fc"><i>240</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rainbow Crow&quot;, 69, Rarity.UNCOMMON, mage.cards.r.RainbowCrow.class));</b>
+<b class="fc"><i>241</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rampant Elephant&quot;, 28, Rarity.COMMON, mage.cards.r.RampantElephant.class));</b>
+<b class="fc"><i>242</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ravenous Rats&quot;, 120, Rarity.COMMON, mage.cards.r.RavenousRats.class));</b>
+<b class="fc"><i>243</i>&nbsp;        cards.add(new SetCardInfo(&quot;Razorfoot Griffin&quot;, 29, Rarity.COMMON, mage.cards.r.RazorfootGriffin.class));</b>
+<b class="fc"><i>244</i>&nbsp;        cards.add(new SetCardInfo(&quot;Reckless Assault&quot;, 263, Rarity.RARE, mage.cards.r.RecklessAssault.class));</b>
+<b class="fc"><i>245</i>&nbsp;        cards.add(new SetCardInfo(&quot;Reckless Spite&quot;, 121, Rarity.UNCOMMON, mage.cards.r.RecklessSpite.class));</b>
+<b class="fc"><i>246</i>&nbsp;        cards.add(new SetCardInfo(&quot;Recoil&quot;, 264, Rarity.COMMON, mage.cards.r.Recoil.class));</b>
+<b class="fc"><i>247</i>&nbsp;        cards.add(new SetCardInfo(&quot;Recover&quot;, 122, Rarity.COMMON, mage.cards.r.Recover.class));</b>
+<b class="fc"><i>248</i>&nbsp;        cards.add(new SetCardInfo(&quot;Repulse&quot;, 70, Rarity.COMMON, mage.cards.r.Repulse.class));</b>
+<b class="fc"><i>249</i>&nbsp;        cards.add(new SetCardInfo(&quot;Restock&quot;, 206, Rarity.RARE, mage.cards.r.Restock.class));</b>
+<b class="fc"><i>250</i>&nbsp;        cards.add(new SetCardInfo(&quot;Restrain&quot;, 30, Rarity.COMMON, mage.cards.r.Restrain.class));</b>
+<b class="fc"><i>251</i>&nbsp;        cards.add(new SetCardInfo(&quot;Reviving Dose&quot;, 31, Rarity.COMMON, mage.cards.r.RevivingDose.class));</b>
+<b class="fc"><i>252</i>&nbsp;        cards.add(new SetCardInfo(&quot;Reviving Vapors&quot;, 265, Rarity.UNCOMMON, mage.cards.r.RevivingVapors.class));</b>
+<b class="fc"><i>253</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rewards of Diversity&quot;, 32, Rarity.UNCOMMON, mage.cards.r.RewardsOfDiversity.class));</b>
+<b class="fc"><i>254</i>&nbsp;        cards.add(new SetCardInfo(&quot;Reya Dawnbringer&quot;, 33, Rarity.RARE, mage.cards.r.ReyaDawnbringer.class));</b>
+<b class="fc"><i>255</i>&nbsp;        cards.add(new SetCardInfo(&quot;Riptide Crab&quot;, 266, Rarity.UNCOMMON, mage.cards.r.RiptideCrab.class));</b>
+<b class="fc"><i>256</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rith&#39;s Attendant&quot;, 310, Rarity.UNCOMMON, mage.cards.r.RithsAttendant.class));</b>
+<b class="fc"><i>257</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rith, the Awakener&quot;, 267, Rarity.RARE, mage.cards.r.RithTheAwakener.class));</b>
+<b class="fc"><i>258</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rogue Kavu&quot;, 160, Rarity.COMMON, mage.cards.r.RogueKavu.class));</b>
+<b class="fc"><i>259</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rooting Kavu&quot;, 207, Rarity.UNCOMMON, mage.cards.r.RootingKavu.class));</b>
+<b class="fc"><i>260</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rout&quot;, 34, Rarity.RARE, mage.cards.r.Rout.class));</b>
+<b class="fc"><i>261</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ruby Leech&quot;, 161, Rarity.RARE, mage.cards.r.RubyLeech.class));</b>
+<b class="fc"><i>262</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sabertooth Nishoba&quot;, 268, Rarity.RARE, mage.cards.s.SabertoothNishoba.class));</b>
+<b class="fc"><i>263</i>&nbsp;        cards.add(new SetCardInfo(&quot;Salt Marsh&quot;, 326, Rarity.UNCOMMON, mage.cards.s.SaltMarsh.class));</b>
+<b class="fc"><i>264</i>&nbsp;        cards.add(new SetCardInfo(&quot;Samite Archer&quot;, 269, Rarity.UNCOMMON, mage.cards.s.SamiteArcher.class));</b>
+<b class="fc"><i>265</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sapphire Leech&quot;, 71, Rarity.RARE, mage.cards.s.SapphireLeech.class));</b>
+<b class="fc"><i>266</i>&nbsp;        cards.add(new SetCardInfo(&quot;Saproling Symbiosis&quot;, 209, Rarity.RARE, mage.cards.s.SaprolingSymbiosis.class));</b>
+<b class="fc"><i>267</i>&nbsp;        cards.add(new SetCardInfo(&quot;Savage Offensive&quot;, 162, Rarity.COMMON, mage.cards.s.SavageOffensive.class));</b>
+<b class="fc"><i>268</i>&nbsp;        cards.add(new SetCardInfo(&quot;Scarred Puma&quot;, 163, Rarity.COMMON, mage.cards.s.ScarredPuma.class));</b>
+<b class="fc"><i>269</i>&nbsp;        cards.add(new SetCardInfo(&quot;Scavenged Weaponry&quot;, 123, Rarity.COMMON, mage.cards.s.ScavengedWeaponry.class));</b>
+<b class="fc"><i>270</i>&nbsp;        cards.add(new SetCardInfo(&quot;Scorching Lava&quot;, 164, Rarity.COMMON, mage.cards.s.ScorchingLava.class));</b>
+<b class="fc"><i>271</i>&nbsp;        cards.add(new SetCardInfo(&quot;Scouting Trek&quot;, 210, Rarity.UNCOMMON, mage.cards.s.ScoutingTrek.class));</b>
+<b class="fc"><i>272</i>&nbsp;        cards.add(new SetCardInfo(&quot;Seashell Cameo&quot;, 311, Rarity.UNCOMMON, mage.cards.s.SeashellCameo.class));</b>
+<b class="fc"><i>273</i>&nbsp;        cards.add(new SetCardInfo(&quot;Seer&#39;s Vision&quot;, 270, Rarity.UNCOMMON, mage.cards.s.SeersVision.class));</b>
+<b class="fc"><i>274</i>&nbsp;        cards.add(new SetCardInfo(&quot;Serpentine Kavu&quot;, 211, Rarity.COMMON, mage.cards.s.SerpentineKavu.class));</b>
+<b class="fc"><i>275</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shackles&quot;, 37, Rarity.COMMON, mage.cards.s.Shackles.class));</b>
+<b class="fc"><i>276</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shimmering Wings&quot;, 72, Rarity.COMMON, mage.cards.s.ShimmeringWings.class));</b>
+<b class="fc"><i>277</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shivan Emissary&quot;, 166, Rarity.UNCOMMON, mage.cards.s.ShivanEmissary.class));</b>
+<b class="fc"><i>278</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shivan Harvest&quot;, 167, Rarity.UNCOMMON, mage.cards.s.ShivanHarvest.class));</b>
+<b class="fc"><i>279</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shivan Oasis&quot;, 327, Rarity.UNCOMMON, mage.cards.s.ShivanOasis.class));</b>
+<b class="fc"><i>280</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shivan Zombie&quot;, 271, Rarity.COMMON, mage.cards.s.ShivanZombie.class));</b>
+<b class="fc"><i>281</i>&nbsp;        cards.add(new SetCardInfo(&quot;Shoreline Raider&quot;, 73, Rarity.COMMON, mage.cards.s.ShorelineRaider.class));</b>
+<b class="fc"><i>282</i>&nbsp;        cards.add(new SetCardInfo(&quot;Simoon&quot;, 272, Rarity.UNCOMMON, mage.cards.s.Simoon.class));</b>
+<b class="fc"><i>283</i>&nbsp;        cards.add(new SetCardInfo(&quot;Skittish Kavu&quot;, 168, Rarity.UNCOMMON, mage.cards.s.SkittishKavu.class));</b>
+<b class="fc"><i>284</i>&nbsp;        cards.add(new SetCardInfo(&quot;Skizzik&quot;, 169, Rarity.RARE, mage.cards.s.Skizzik.class));</b>
+<b class="fc"><i>285</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sky Weaver&quot;, 74, Rarity.UNCOMMON, mage.cards.s.SkyWeaver.class));</b>
+<b class="fc"><i>286</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sleeper&#39;s Robe&quot;, 273, Rarity.UNCOMMON, mage.cards.s.SleepersRobe.class));</b>
+<b class="fc"><i>287</i>&nbsp;        cards.add(new SetCardInfo(&quot;Slimy Kavu&quot;, 170, Rarity.COMMON, mage.cards.s.SlimyKavu.class));</b>
+<b class="fc"><i>288</i>&nbsp;        cards.add(new SetCardInfo(&quot;Slinking Serpent&quot;, 274, Rarity.UNCOMMON, mage.cards.s.SlinkingSerpent.class));</b>
+<b class="fc"><i>289</i>&nbsp;        cards.add(new SetCardInfo(&quot;Smoldering Tar&quot;, 275, Rarity.UNCOMMON, mage.cards.s.SmolderingTar.class));</b>
+<b class="fc"><i>290</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sparring Golem&quot;, 312, Rarity.UNCOMMON, mage.cards.s.SparringGolem.class));</b>
+<b class="fc"><i>291</i>&nbsp;        cards.add(new SetCardInfo(&quot;Spinal Embrace&quot;, 276, Rarity.RARE, mage.cards.s.SpinalEmbrace.class));</b>
+<b class="fc"><i>292</i>&nbsp;        cards.add(new SetCardInfo(&quot;Spirit of Resistance&quot;, 38, Rarity.RARE, mage.cards.s.SpiritOfResistance.class));</b>
+<b class="fc"><i>293</i>&nbsp;        cards.add(new SetCardInfo(&quot;Spirit Weaver&quot;, 39, Rarity.UNCOMMON, mage.cards.s.SpiritWeaver.class));</b>
+<b class="fc"><i>294</i>&nbsp;        cards.add(new SetCardInfo(&quot;Spite // Malice&quot;, 293, Rarity.UNCOMMON, mage.cards.s.SpiteMalice.class));</b>
+<b class="fc"><i>295</i>&nbsp;        cards.add(new SetCardInfo(&quot;Spreading Plague&quot;, 125, Rarity.RARE, mage.cards.s.SpreadingPlague.class));</b>
+<b class="fc"><i>296</i>&nbsp;        cards.add(new SetCardInfo(&quot;Stalking Assassin&quot;, 277, Rarity.RARE, mage.cards.s.StalkingAssassin.class));</b>
+<b class="fc"><i>297</i>&nbsp;        cards.add(new SetCardInfo(&quot;Stand // Deliver&quot;, 292, Rarity.UNCOMMON, mage.cards.s.StandDeliver.class));</b>
+<b class="fc"><i>298</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sterling Grove&quot;, 278, Rarity.UNCOMMON, mage.cards.s.SterlingGrove.class));</b>
+<b class="fc"><i>299</i>&nbsp;        cards.add(new SetCardInfo(&quot;Stormscape Apprentice&quot;, 75, Rarity.COMMON, mage.cards.s.StormscapeApprentice.class));</b>
+<b class="fc"><i>300</i>&nbsp;        cards.add(new SetCardInfo(&quot;Stormscape Master&quot;, 76, Rarity.RARE, mage.cards.s.StormscapeMaster.class));</b>
+<b class="fc"><i>301</i>&nbsp;        cards.add(new SetCardInfo(&quot;Strength of Unity&quot;, 40, Rarity.COMMON, mage.cards.s.StrengthOfUnity.class));</b>
+<b class="fc"><i>302</i>&nbsp;        cards.add(new SetCardInfo(&quot;Stun&quot;, 172, Rarity.COMMON, mage.cards.s.Stun.class));</b>
+<b class="fc"><i>303</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sulfur Vent&quot;, 328, Rarity.COMMON, mage.cards.s.SulfurVent.class));</b>
+<b class="fc"><i>304</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sunscape Apprentice&quot;, 41, Rarity.COMMON, mage.cards.s.SunscapeApprentice.class));</b>
+<b class="fc"><i>305</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sunscape Master&quot;, 42, Rarity.RARE, mage.cards.s.SunscapeMaster.class));</b>
+<b class="fc"><i>306</i>&nbsp;        cards.add(new SetCardInfo(&quot;Swamp&quot;, 339, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>307</i>&nbsp;        cards.add(new SetCardInfo(&quot;Swamp&quot;, 340, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>308</i>&nbsp;        cards.add(new SetCardInfo(&quot;Swamp&quot;, 341, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>309</i>&nbsp;        cards.add(new SetCardInfo(&quot;Swamp&quot;, 342, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>310</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sway of Illusion&quot;, 77, Rarity.UNCOMMON, mage.cards.s.SwayOfIllusion.class));</b>
+<b class="fc"><i>311</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tainted Well&quot;, 126, Rarity.COMMON, mage.cards.t.TaintedWell.class));</b>
+<b class="fc"><i>312</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tangle&quot;, 213, Rarity.UNCOMMON, mage.cards.t.Tangle.class));</b>
+<b class="fc"><i>313</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tectonic Instability&quot;, 173, Rarity.RARE, mage.cards.t.TectonicInstability.class));</b>
+<b class="fc"><i>314</i>&nbsp;        cards.add(new SetCardInfo(&quot;Teferi&#39;s Care&quot;, 43, Rarity.UNCOMMON, mage.cards.t.TeferisCare.class));</b>
+<b class="fc"><i>315</i>&nbsp;        cards.add(new SetCardInfo(&quot;Teferi&#39;s Moat&quot;, 279, Rarity.RARE, mage.cards.t.TeferisMoat.class));</b>
+<b class="fc"><i>316</i>&nbsp;        cards.add(new SetCardInfo(&quot;Teferi&#39;s Response&quot;, 78, Rarity.RARE, mage.cards.t.TeferisResponse.class));</b>
+<b class="fc"><i>317</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tek&quot;, 313, Rarity.RARE, mage.cards.t.Tek.class));</b>
+<b class="fc"><i>318</i>&nbsp;        cards.add(new SetCardInfo(&quot;Thicket Elemental&quot;, 214, Rarity.RARE, mage.cards.t.ThicketElemental.class));</b>
+<b class="fc"><i>319</i>&nbsp;        cards.add(new SetCardInfo(&quot;Thornscape Apprentice&quot;, 215, Rarity.COMMON, mage.cards.t.ThornscapeApprentice.class));</b>
+<b class="fc"><i>320</i>&nbsp;        cards.add(new SetCardInfo(&quot;Thornscape Master&quot;, 216, Rarity.RARE, mage.cards.t.ThornscapeMaster.class));</b>
+<b class="fc"><i>321</i>&nbsp;        cards.add(new SetCardInfo(&quot;Thunderscape Apprentice&quot;, 174, Rarity.COMMON, mage.cards.t.ThunderscapeApprentice.class));</b>
+<b class="fc"><i>322</i>&nbsp;        cards.add(new SetCardInfo(&quot;Thunderscape Master&quot;, 175, Rarity.RARE, mage.cards.t.ThunderscapeMaster.class));</b>
+<b class="fc"><i>323</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tidal Visionary&quot;, 80, Rarity.COMMON, mage.cards.t.TidalVisionary.class));</b>
+<b class="fc"><i>324</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tigereye Cameo&quot;, 314, Rarity.UNCOMMON, mage.cards.t.TigereyeCameo.class));</b>
+<b class="fc"><i>325</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tinder Farm&quot;, 329, Rarity.COMMON, mage.cards.t.TinderFarm.class));</b>
+<b class="fc"><i>326</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tolarian Emissary&quot;, 81, Rarity.UNCOMMON, mage.cards.t.TolarianEmissary.class));</b>
+<b class="fc"><i>327</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tower Drake&quot;, 82, Rarity.COMMON, mage.cards.t.TowerDrake.class));</b>
+<b class="fc"><i>328</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tranquility&quot;, 217, Rarity.COMMON, mage.cards.t.Tranquility.class));</b>
+<b class="fc"><i>329</i>&nbsp;        cards.add(new SetCardInfo(&quot;Traveler&#39;s Cloak&quot;, 83, Rarity.COMMON, mage.cards.t.TravelersCloak.class));</b>
+<b class="fc"><i>330</i>&nbsp;        cards.add(new SetCardInfo(&quot;Treefolk Healer&quot;, 218, Rarity.UNCOMMON, mage.cards.t.TreefolkHealer.class));</b>
+<b class="fc"><i>331</i>&nbsp;        cards.add(new SetCardInfo(&quot;Trench Wurm&quot;, 127, Rarity.UNCOMMON, mage.cards.t.TrenchWurm.class));</b>
+<b class="fc"><i>332</i>&nbsp;        cards.add(new SetCardInfo(&quot;Treva&#39;s Attendant&quot;, 315, Rarity.UNCOMMON, mage.cards.t.TrevasAttendant.class));</b>
+<b class="fc"><i>333</i>&nbsp;        cards.add(new SetCardInfo(&quot;Treva, the Renewer&quot;, 280, Rarity.RARE, mage.cards.t.TrevaTheRenewer.class));</b>
+<b class="fc"><i>334</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tribal Flames&quot;, 176, Rarity.COMMON, mage.cards.t.TribalFlames.class));</b>
+<b class="fc"><i>335</i>&nbsp;        cards.add(new SetCardInfo(&quot;Troll-Horn Cameo&quot;, 316, Rarity.UNCOMMON, mage.cards.t.TrollHornCameo.class));</b>
+<b class="fc"><i>336</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tsabo&#39;s Decree&quot;, 129, Rarity.RARE, mage.cards.t.TsabosDecree.class));</b>
+<b class="fc"><i>337</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tsabo&#39;s Web&quot;, 317, Rarity.RARE, mage.cards.t.TsabosWeb.class));</b>
+<b class="fc"><i>338</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tsabo Tavoc&quot;, 281, Rarity.RARE, mage.cards.t.TsaboTavoc.class));</b>
+<b class="fc"><i>339</i>&nbsp;        cards.add(new SetCardInfo(&quot;Turf Wound&quot;, 177, Rarity.COMMON, mage.cards.t.TurfWound.class));</b>
+<b class="fc"><i>340</i>&nbsp;        cards.add(new SetCardInfo(&quot;Twilight&#39;s Call&quot;, 130, Rarity.RARE, mage.cards.t.TwilightsCall.class));</b>
+<b class="fc"><i>341</i>&nbsp;        cards.add(new SetCardInfo(&quot;Undermine&quot;, 282, Rarity.RARE, mage.cards.u.Undermine.class));</b>
+<b class="fc"><i>342</i>&nbsp;        cards.add(new SetCardInfo(&quot;Urborg Drake&quot;, 283, Rarity.UNCOMMON, mage.cards.u.UrborgDrake.class));</b>
+<b class="fc"><i>343</i>&nbsp;        cards.add(new SetCardInfo(&quot;Urborg Emissary&quot;, 131, Rarity.UNCOMMON, mage.cards.u.UrborgEmissary.class));</b>
+<b class="fc"><i>344</i>&nbsp;        cards.add(new SetCardInfo(&quot;Urborg Phantom&quot;, 132, Rarity.COMMON, mage.cards.u.UrborgPhantom.class));</b>
+<b class="fc"><i>345</i>&nbsp;        cards.add(new SetCardInfo(&quot;Urborg Shambler&quot;, 133, Rarity.UNCOMMON, mage.cards.u.UrborgShambler.class));</b>
+<b class="fc"><i>346</i>&nbsp;        cards.add(new SetCardInfo(&quot;Urborg Skeleton&quot;, 134, Rarity.COMMON, mage.cards.u.UrborgSkeleton.class));</b>
+<b class="fc"><i>347</i>&nbsp;        cards.add(new SetCardInfo(&quot;Urborg Volcano&quot;, 330, Rarity.UNCOMMON, mage.cards.u.UrborgVolcano.class));</b>
+<b class="fc"><i>348</i>&nbsp;        cards.add(new SetCardInfo(&quot;Urza&#39;s Filter&quot;, 318, Rarity.RARE, mage.cards.u.UrzasFilter.class));</b>
+<b class="fc"><i>349</i>&nbsp;        cards.add(new SetCardInfo(&quot;Urza&#39;s Rage&quot;, 178, Rarity.RARE, mage.cards.u.UrzasRage.class));</b>
+<b class="fc"><i>350</i>&nbsp;        cards.add(new SetCardInfo(&quot;Utopia Tree&quot;, 219, Rarity.RARE, mage.cards.u.UtopiaTree.class));</b>
+<b class="fc"><i>351</i>&nbsp;        cards.add(new SetCardInfo(&quot;Verdeloth the Ancient&quot;, 220, Rarity.RARE, mage.cards.v.VerdelothTheAncient.class));</b>
+<b class="fc"><i>352</i>&nbsp;        cards.add(new SetCardInfo(&quot;Verduran Emissary&quot;, 221, Rarity.UNCOMMON, mage.cards.v.VerduranEmissary.class));</b>
+<b class="fc"><i>353</i>&nbsp;        cards.add(new SetCardInfo(&quot;Viashino Grappler&quot;, 179, Rarity.COMMON, mage.cards.v.ViashinoGrappler.class));</b>
+<b class="fc"><i>354</i>&nbsp;        cards.add(new SetCardInfo(&quot;Vicious Kavu&quot;, 284, Rarity.UNCOMMON, mage.cards.v.ViciousKavu.class));</b>
+<b class="fc"><i>355</i>&nbsp;        cards.add(new SetCardInfo(&quot;Vile Consumption&quot;, 285, Rarity.RARE, mage.cards.v.VileConsumption.class));</b>
+<b class="fc"><i>356</i>&nbsp;        cards.add(new SetCardInfo(&quot;Vodalian Hypnotist&quot;, 84, Rarity.UNCOMMON, mage.cards.v.VodalianHypnotist.class));</b>
+<b class="fc"><i>357</i>&nbsp;        cards.add(new SetCardInfo(&quot;Vodalian Merchant&quot;, 85, Rarity.COMMON, mage.cards.v.VodalianMerchant.class));</b>
+<b class="fc"><i>358</i>&nbsp;        cards.add(new SetCardInfo(&quot;Vodalian Serpent&quot;, 86, Rarity.COMMON, mage.cards.v.VodalianSerpent.class));</b>
+<b class="fc"><i>359</i>&nbsp;        cards.add(new SetCardInfo(&quot;Vodalian Zombie&quot;, 286, Rarity.COMMON, mage.cards.v.VodalianZombie.class));</b>
+<b class="fc"><i>360</i>&nbsp;        cards.add(new SetCardInfo(&quot;Void&quot;, 287, Rarity.RARE, mage.cards.v.Void.class));</b>
+<b class="fc"><i>361</i>&nbsp;        cards.add(new SetCardInfo(&quot;Voracious Cobra&quot;, 288, Rarity.UNCOMMON, mage.cards.v.VoraciousCobra.class));</b>
+<b class="fc"><i>362</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wallop&quot;, 223, Rarity.UNCOMMON, mage.cards.w.Wallop.class));</b>
+<b class="fc"><i>363</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wandering Stream&quot;, 224, Rarity.COMMON, mage.cards.w.WanderingStream.class));</b>
+<b class="fc"><i>364</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wash Out&quot;, 87, Rarity.UNCOMMON, mage.cards.w.WashOut.class));</b>
+<b class="fc"><i>365</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wax // Wane&quot;, 296, Rarity.UNCOMMON, mage.cards.w.WaxWane.class));</b>
+<b class="fc"><i>366</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wayfaring Giant&quot;, 44, Rarity.UNCOMMON, mage.cards.w.WayfaringGiant.class));</b>
+<b class="fc"><i>367</i>&nbsp;        cards.add(new SetCardInfo(&quot;Whip Silk&quot;, 225, Rarity.COMMON, mage.cards.w.WhipSilk.class));</b>
+<b class="fc"><i>368</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wings of Hope&quot;, 289, Rarity.COMMON, mage.cards.w.WingsOfHope.class));</b>
+<b class="fc"><i>369</i>&nbsp;        cards.add(new SetCardInfo(&quot;Winnow&quot;, 45, Rarity.RARE, mage.cards.w.Winnow.class));</b>
+<b class="fc"><i>370</i>&nbsp;        cards.add(new SetCardInfo(&quot;Worldly Counsel&quot;, 89, Rarity.COMMON, mage.cards.w.WorldlyCounsel.class));</b>
+<b class="fc"><i>371</i>&nbsp;        cards.add(new SetCardInfo(&quot;Yavimaya Barbarian&quot;, 290, Rarity.COMMON, mage.cards.y.YavimayaBarbarian.class));</b>
+<b class="fc"><i>372</i>&nbsp;        cards.add(new SetCardInfo(&quot;Yavimaya Kavu&quot;, 291, Rarity.UNCOMMON, mage.cards.y.YavimayaKavu.class));</b>
+<b class="fc"><i>373</i>&nbsp;        cards.add(new SetCardInfo(&quot;Yawgmoth&#39;s Agenda&quot;, 135, Rarity.RARE, mage.cards.y.YawgmothsAgenda.class));</b>
+<b class="fc"><i>374</i>&nbsp;        cards.add(new SetCardInfo(&quot;Zap&quot;, 180, Rarity.COMMON, mage.cards.z.Zap.class));</b>
+<b class="fc"><i>375</i>&nbsp;    }</b>
+<i>376</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

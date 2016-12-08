@@ -1,0 +1,222 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ForgottenLore</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.f</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ForgottenLore (mage.cards.f)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ForgottenLore</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.f;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.abilities.Ability;
+<i>32</i>&nbsp;import mage.abilities.costs.Cost;
+<i>33</i>&nbsp;import mage.abilities.costs.mana.ManaCostsImpl;
+<i>34</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>35</i>&nbsp;import mage.cards.Card;
+<i>36</i>&nbsp;import mage.cards.CardImpl;
+<i>37</i>&nbsp;import mage.cards.CardSetInfo;
+<i>38</i>&nbsp;import mage.cards.Cards;
+<i>39</i>&nbsp;import mage.cards.CardsImpl;
+<i>40</i>&nbsp;import mage.constants.CardType;
+<i>41</i>&nbsp;import mage.constants.Outcome;
+<i>42</i>&nbsp;import mage.constants.Zone;
+<i>43</i>&nbsp;import mage.filter.FilterCard;
+<i>44</i>&nbsp;import mage.filter.predicate.Predicates;
+<i>45</i>&nbsp;import mage.filter.predicate.mageobject.CardIdPredicate;
+<i>46</i>&nbsp;import mage.filter.predicate.other.OwnerIdPredicate;
+<i>47</i>&nbsp;import mage.game.Game;
+<i>48</i>&nbsp;import mage.players.Player;
+<i>49</i>&nbsp;import mage.target.common.TargetCardInGraveyard;
+<i>50</i>&nbsp;import mage.target.common.TargetOpponent;
+<i>51</i>&nbsp;/**
+<i>52</i>&nbsp; *
+<i>53</i>&nbsp; * @author LoneFox
+<i>54</i>&nbsp; */
+<i>55</i>&nbsp;public class ForgottenLore extends CardImpl {
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    public ForgottenLore(UUID ownerId, CardSetInfo setInfo) {
+<b class="nc"><i>58</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},&quot;{G}&quot;);</b>
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;        // Target opponent chooses a card in your graveyard. You may pay {G}. If you do, repeat this process except that opponent can&#39;t choose a card already chosen for Forgotten Lore. Then put the last chosen card into your hand.
+<b class="nc"><i>61</i>&nbsp;        this.getSpellAbility().addEffect(new ForgottenLoreEffect());</b>
+<b class="nc"><i>62</i>&nbsp;        this.getSpellAbility().addTarget(new TargetOpponent());</b>
+<b class="nc"><i>63</i>&nbsp;    }</b>
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    public ForgottenLore(final ForgottenLore card) {
+<b class="nc"><i>66</i>&nbsp;        super(card);</b>
+<b class="nc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @Override
+<i>70</i>&nbsp;    public ForgottenLore copy() {
+<b class="nc"><i>71</i>&nbsp;        return new ForgottenLore(this);</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;}
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;class ForgottenLoreEffect extends OneShotEffect {
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    public ForgottenLoreEffect() {
+<i>78</i>&nbsp;        super(Outcome.Benefit);
+<i>79</i>&nbsp;        staticText = &quot;Target opponent chooses a card in your graveyard. You may pay {G}. If you do, repeat this process except that opponent can&#39;t choose a card already chosen for {this}. Then put the last chosen card into your hand.&quot;;
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    public ForgottenLoreEffect(final ForgottenLoreEffect effect) {
+<i>83</i>&nbsp;        super(effect);
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    @Override
+<i>87</i>&nbsp;    public ForgottenLoreEffect copy() {
+<i>88</i>&nbsp;        return new ForgottenLoreEffect(this);
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    @Override
+<i>92</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>93</i>&nbsp;        Player you = game.getPlayer(source.getControllerId());
+<i>94</i>&nbsp;        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+<i>95</i>&nbsp;        if(you != null &amp;&amp; opponent != null)
+<i>96</i>&nbsp;        {
+<i>97</i>&nbsp;            FilterCard filter = new FilterCard();
+<i>98</i>&nbsp;            filter.add(new OwnerIdPredicate(you.getId()));
+<i>99</i>&nbsp;            Cost cost = new ManaCostsImpl(&quot;{G}&quot;);
+<i>100</i>&nbsp;            TargetCardInGraveyard chosenCard;
+<i>101</i>&nbsp;            Card card = null;
+<i>102</i>&nbsp;            boolean done = false;
+<i>103</i>&nbsp;            do {
+<i>104</i>&nbsp;                chosenCard = new TargetCardInGraveyard(filter);
+<i>105</i>&nbsp;                chosenCard.setNotTarget(true);
+<i>106</i>&nbsp;                if(chosenCard.canChoose(opponent.getId(), game)) {
+<i>107</i>&nbsp;                    opponent.chooseTarget(Outcome.ReturnToHand, chosenCard, source, game);
+<i>108</i>&nbsp;                    card = game.getCard(chosenCard.getFirstTarget());
+<i>109</i>&nbsp;                    filter.add(Predicates.not(new CardIdPredicate(card.getId())));
+<i>110</i>&nbsp;                    game.informPlayers(&quot;Forgotten Lore: &quot; + opponent.getLogName() + &quot; has chosen &quot; + card.getLogName());
+<i>111</i>&nbsp;                }
+<i>112</i>&nbsp;                else {
+<i>113</i>&nbsp;                    done = true;
+<i>114</i>&nbsp;                }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;                if(!done) {
+<i>117</i>&nbsp;                    if(cost.canPay(source, source.getSourceId(), you.getId(), game) &amp;&amp; you.chooseUse(Outcome.Benefit, &quot;Pay {G} to choose a different card ?&quot;, source, game)) {
+<i>118</i>&nbsp;                        cost.clearPaid();
+<i>119</i>&nbsp;                        if(!cost.pay(source, game, source.getSourceId(), you.getId(), false, null)) {
+<i>120</i>&nbsp;                            done = true;
+<i>121</i>&nbsp;                        }
+<i>122</i>&nbsp;                    }
+<i>123</i>&nbsp;                    else {
+<i>124</i>&nbsp;                        done = true;
+<i>125</i>&nbsp;                    }
+<i>126</i>&nbsp;                }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;            } while(!done);
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;            if(card != null) {
+<i>131</i>&nbsp;                Cards cardsToHand = new CardsImpl();
+<i>132</i>&nbsp;                cardsToHand.add(card);
+<i>133</i>&nbsp;                you.moveCards(cardsToHand, Zone.HAND, source, game);
+<i>134</i>&nbsp;            }
+<i>135</i>&nbsp;            return true;
+<i>136</i>&nbsp;        }
+<i>137</i>&nbsp;        return false;
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

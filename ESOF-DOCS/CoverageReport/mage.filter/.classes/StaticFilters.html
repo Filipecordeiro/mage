@@ -1,0 +1,125 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: StaticFilters</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.filter</a> ]
+</div>
+
+<h1>Coverage Summary for Class: StaticFilters (mage.filter)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StaticFilters</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.filter;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import mage.constants.CardType;
+<i>9</i>&nbsp;import mage.filter.common.FilterArtifactCreaturePermanent;
+<i>10</i>&nbsp;import mage.filter.common.FilterControlledArtifactPermanent;
+<i>11</i>&nbsp;import mage.filter.common.FilterControlledPermanent;
+<i>12</i>&nbsp;import mage.filter.predicate.Predicates;
+<i>13</i>&nbsp;import mage.filter.predicate.mageobject.CardTypePredicate;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;/**
+<i>16</i>&nbsp; *
+<i>17</i>&nbsp; * @author LevelX2
+<i>18</i>&nbsp; */
+<b class="nc"><i>19</i>&nbsp;public class StaticFilters {</b>
+<i>20</i>&nbsp;
+<b class="nc"><i>21</i>&nbsp;    public static final FilterPermanent FILTER_PERMANENT_ARTIFACT_OR_CREATURE = new FilterPermanent(&quot;artifact or creature&quot;);</b>
+<b class="nc"><i>22</i>&nbsp;    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE = new FilterControlledPermanent(&quot;artifact or creature you control&quot;);</b>
+<b class="nc"><i>23</i>&nbsp;    public static final FilterControlledPermanent FILTER_CONTROLLED_PERMANENT_ARTIFACT = new FilterControlledArtifactPermanent();</b>
+<b class="nc"><i>24</i>&nbsp;    public static final FilterCard FILTER_CARD_ARTIFACT_OR_CREATURE = new FilterCard(&quot;artifact or creature card&quot;);</b>
+<b class="nc"><i>25</i>&nbsp;    public static final FilterArtifactCreaturePermanent FILTER_ARTIFACT_CREATURE_PERMANENT = new FilterArtifactCreaturePermanent();</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    static {
+<b class="nc"><i>28</i>&nbsp;        FILTER_PERMANENT_ARTIFACT_OR_CREATURE.add(Predicates.or(</b>
+<i>29</i>&nbsp;                new CardTypePredicate(CardType.ARTIFACT),
+<i>30</i>&nbsp;                new CardTypePredicate(CardType.CREATURE)
+<i>31</i>&nbsp;        ));
+<b class="nc"><i>32</i>&nbsp;        FILTER_CONTROLLED_PERMANENT_ARTIFACT_OR_CREATURE.add(Predicates.or(</b>
+<i>33</i>&nbsp;                new CardTypePredicate(CardType.ARTIFACT),
+<i>34</i>&nbsp;                new CardTypePredicate(CardType.CREATURE)
+<i>35</i>&nbsp;        ));
+<b class="nc"><i>36</i>&nbsp;        FILTER_CARD_ARTIFACT_OR_CREATURE.add(Predicates.or(</b>
+<i>37</i>&nbsp;                new CardTypePredicate(CardType.ARTIFACT),
+<i>38</i>&nbsp;                new CardTypePredicate(CardType.CREATURE)
+<i>39</i>&nbsp;        ));
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TamiyoTheMoonSage</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.t</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TamiyoTheMoonSage (mage.cards.t)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TamiyoTheMoonSage</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/ 16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.t;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.abilities.Ability;
+<i>32</i>&nbsp;import mage.abilities.LoyaltyAbility;
+<i>33</i>&nbsp;import mage.abilities.common.PlanswalkerEntersWithLoyalityCountersAbility;
+<i>34</i>&nbsp;import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
+<i>35</i>&nbsp;import mage.abilities.common.SimpleStaticAbility;
+<i>36</i>&nbsp;import mage.abilities.dynamicvalue.DynamicValue;
+<i>37</i>&nbsp;import mage.abilities.effects.Effect;
+<i>38</i>&nbsp;import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
+<i>39</i>&nbsp;import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+<i>40</i>&nbsp;import mage.abilities.effects.common.GetEmblemEffect;
+<i>41</i>&nbsp;import mage.abilities.effects.common.ReturnToHandTargetEffect;
+<i>42</i>&nbsp;import mage.abilities.effects.common.TapTargetEffect;
+<i>43</i>&nbsp;import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
+<i>44</i>&nbsp;import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect.HandSizeModification;
+<i>45</i>&nbsp;import mage.cards.CardImpl;
+<i>46</i>&nbsp;import mage.cards.CardSetInfo;
+<i>47</i>&nbsp;import mage.constants.CardType;
+<i>48</i>&nbsp;import mage.constants.Duration;
+<i>49</i>&nbsp;import mage.constants.SetTargetPointer;
+<i>50</i>&nbsp;import mage.constants.TargetController;
+<i>51</i>&nbsp;import mage.constants.Zone;
+<i>52</i>&nbsp;import mage.filter.FilterCard;
+<i>53</i>&nbsp;import mage.filter.common.FilterCreaturePermanent;
+<i>54</i>&nbsp;import mage.filter.predicate.permanent.TappedPredicate;
+<i>55</i>&nbsp;import mage.game.Game;
+<i>56</i>&nbsp;import mage.game.command.Emblem;
+<i>57</i>&nbsp;import mage.target.Target;
+<i>58</i>&nbsp;import mage.target.TargetPermanent;
+<i>59</i>&nbsp;import mage.target.TargetPlayer;
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;/**
+<i>62</i>&nbsp; *
+<i>63</i>&nbsp; * @author North, noxx
+<i>64</i>&nbsp; */
+<i>65</i>&nbsp;public class TamiyoTheMoonSage extends CardImpl {
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public TamiyoTheMoonSage(UUID ownerId, CardSetInfo setInfo) {
+<b class="fc"><i>68</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},&quot;{3}{U}{U}&quot;);</b>
+<b class="fc"><i>69</i>&nbsp;        this.subtype.add(&quot;Tamiyo&quot;);</b>
+<i>70</i>&nbsp;
+<b class="fc"><i>71</i>&nbsp;        this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));</b>
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;        // +1: Tap target permanent. It doesn&#39;t untap during its controller&#39;s next untap step.
+<b class="fc"><i>74</i>&nbsp;        LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect(), 1);</b>
+<b class="fc"><i>75</i>&nbsp;        ability.addEffect(new DontUntapInControllersNextUntapStepTargetEffect());</b>
+<b class="fc"><i>76</i>&nbsp;        Target target = new TargetPermanent();</b>
+<b class="fc"><i>77</i>&nbsp;        ability.addTarget(target);</b>
+<b class="fc"><i>78</i>&nbsp;        this.addAbility(ability);</b>
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;        // -2: Draw a card for each tapped creature target player controls.
+<b class="fc"><i>81</i>&nbsp;        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(new TappedCreaturesControlledByTargetCount()), -2);</b>
+<b class="fc"><i>82</i>&nbsp;        ability.addTarget(new TargetPlayer());</b>
+<b class="fc"><i>83</i>&nbsp;        this.addAbility(ability);</b>
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;        // -8: You get an emblem with &quot;You have no maximum hand size&quot; and &quot;Whenever a card is put into your graveyard from anywhere, you may return it to your hand.&quot;
+<b class="fc"><i>86</i>&nbsp;        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new TamiyoTheMoonSageEmblem()), -8));</b>
+<b class="fc"><i>87</i>&nbsp;    }</b>
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    public TamiyoTheMoonSage(final TamiyoTheMoonSage card) {
+<b class="fc"><i>90</i>&nbsp;        super(card);</b>
+<b class="fc"><i>91</i>&nbsp;    }</b>
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    @Override
+<i>94</i>&nbsp;    public TamiyoTheMoonSage copy() {
+<b class="fc"><i>95</i>&nbsp;        return new TamiyoTheMoonSage(this);</b>
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;}
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;class TappedCreaturesControlledByTargetCount implements DynamicValue {
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    static {
+<i>104</i>&nbsp;        filter.add(new TappedPredicate());
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    @Override
+<i>108</i>&nbsp;    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+<i>109</i>&nbsp;        return game.getBattlefield().countAll(filter, sourceAbility.getFirstTarget(), game);
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    @Override
+<i>113</i>&nbsp;    public DynamicValue copy() {
+<i>114</i>&nbsp;        return new TappedCreaturesControlledByTargetCount();
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    @Override
+<i>118</i>&nbsp;    public String toString() {
+<i>119</i>&nbsp;        return &quot;a&quot;;
+<i>120</i>&nbsp;    }
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    @Override
+<i>123</i>&nbsp;    public String getMessage() {
+<i>124</i>&nbsp;        return &quot;tapped creature target player controls&quot;;
+<i>125</i>&nbsp;    }
+<i>126</i>&nbsp;}
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;/**
+<i>129</i>&nbsp; * Emblem with &quot;You have no maximum hand size&quot; and &quot;Whenever a card is put into
+<i>130</i>&nbsp; * your graveyard from anywhere, you may return it to your hand.&quot;
+<i>131</i>&nbsp; */
+<i>132</i>&nbsp;class TamiyoTheMoonSageEmblem extends Emblem {
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    public TamiyoTheMoonSageEmblem() {
+<i>135</i>&nbsp;        this.setName(&quot;EMBLEM: Tamiyo, the Moon Sage&quot;);
+<i>136</i>&nbsp;        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));
+<i>137</i>&nbsp;        this.getAbilities().add(ability);
+<i>138</i>&nbsp;        Effect effect = new ReturnToHandTargetEffect();
+<i>139</i>&nbsp;        effect.setText(&quot;return it to your hand&quot;);
+<i>140</i>&nbsp;        this.getAbilities().add(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
+<i>141</i>&nbsp;                Zone.COMMAND, effect, true, new FilterCard(&quot;a card&quot;), TargetController.YOU, SetTargetPointer.CARD));
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TargetOpponentsCreaturePermanent</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.target.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TargetOpponentsCreaturePermanent (mage.target.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TargetOpponentsCreaturePermanent</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.target.common;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import mage.filter.common.FilterOpponentsCreaturePermanent;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; *
+<i>12</i>&nbsp; * @author Styxo
+<i>13</i>&nbsp; */
+<i>14</i>&nbsp;public class TargetOpponentsCreaturePermanent extends TargetCreaturePermanent {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    public TargetOpponentsCreaturePermanent() {
+<b class="nc"><i>17</i>&nbsp;        this(1, 1, new FilterOpponentsCreaturePermanent(), false);</b>
+<i>18</i>&nbsp;    }
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public TargetOpponentsCreaturePermanent(int numTargets) {
+<b class="nc"><i>21</i>&nbsp;        this(numTargets, numTargets, new FilterOpponentsCreaturePermanent(), false);</b>
+<i>22</i>&nbsp;    }
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    public TargetOpponentsCreaturePermanent(int minNumTargets, int maxNumTargets) {
+<b class="nc"><i>25</i>&nbsp;        this(minNumTargets, maxNumTargets, new FilterOpponentsCreaturePermanent(), false);</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public TargetOpponentsCreaturePermanent(FilterOpponentsCreaturePermanent filter) {
+<b class="nc"><i>29</i>&nbsp;        super(1, 1, filter, false);</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public TargetOpponentsCreaturePermanent(int minNumTargets, int maxNumTargets, FilterOpponentsCreaturePermanent filter, boolean notTarget) {
+<b class="nc"><i>33</i>&nbsp;        super(minNumTargets, maxNumTargets, filter, notTarget);</b>
+<b class="nc"><i>34</i>&nbsp;        this.targetName = filter.getMessage();</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public TargetOpponentsCreaturePermanent(final TargetOpponentsCreaturePermanent target) {
+<b class="nc"><i>38</i>&nbsp;        super(target);</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    @Override
+<i>42</i>&nbsp;    public TargetOpponentsCreaturePermanent copy() {
+<b class="nc"><i>43</i>&nbsp;        return new TargetOpponentsCreaturePermanent(this);</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

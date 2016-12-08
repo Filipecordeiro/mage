@@ -1,0 +1,221 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: KrovikanSorcererEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.k</a> ]
+</div>
+
+<h1>Coverage Summary for Class: KrovikanSorcererEffect (mage.cards.k)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KrovikanSorcererEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.k;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.MageInt;
+<i>32</i>&nbsp;import mage.ObjectColor;
+<i>33</i>&nbsp;import mage.abilities.Ability;
+<i>34</i>&nbsp;import mage.abilities.common.SimpleActivatedAbility;
+<i>35</i>&nbsp;import mage.abilities.costs.common.DiscardTargetCost;
+<i>36</i>&nbsp;import mage.abilities.costs.common.TapSourceCost;
+<i>37</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>38</i>&nbsp;import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+<i>39</i>&nbsp;import mage.cards.Card;
+<i>40</i>&nbsp;import mage.cards.CardImpl;
+<i>41</i>&nbsp;import mage.cards.CardSetInfo;
+<i>42</i>&nbsp;import mage.cards.Cards;
+<i>43</i>&nbsp;import mage.cards.CardsImpl;
+<i>44</i>&nbsp;import mage.constants.CardType;
+<i>45</i>&nbsp;import mage.constants.Outcome;
+<i>46</i>&nbsp;import mage.constants.Zone;
+<i>47</i>&nbsp;import mage.filter.FilterCard;
+<i>48</i>&nbsp;import mage.filter.predicate.Predicates;
+<i>49</i>&nbsp;import mage.filter.predicate.mageobject.ColorPredicate;
+<i>50</i>&nbsp;import mage.game.Game;
+<i>51</i>&nbsp;import mage.players.Player;
+<i>52</i>&nbsp;import mage.target.TargetCard;
+<i>53</i>&nbsp;import mage.target.common.TargetCardInHand;
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;/**
+<i>56</i>&nbsp; *
+<i>57</i>&nbsp; * @author emerald000
+<i>58</i>&nbsp; */
+<i>59</i>&nbsp;public class KrovikanSorcerer extends CardImpl {
+<i>60</i>&nbsp;    
+<i>61</i>&nbsp;    private static final FilterCard filterNonBlack = new FilterCard(&quot;a nonblack card&quot;);
+<i>62</i>&nbsp;    private static final FilterCard filterBlack = new FilterCard(&quot;a black card&quot;);
+<i>63</i>&nbsp;    static {
+<i>64</i>&nbsp;        filterNonBlack.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+<i>65</i>&nbsp;        filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public KrovikanSorcerer(UUID ownerId, CardSetInfo setInfo) {
+<i>69</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{2}{U}&quot;);
+<i>70</i>&nbsp;        this.subtype.add(&quot;Human&quot;);
+<i>71</i>&nbsp;        this.subtype.add(&quot;Wizard&quot;);
+<i>72</i>&nbsp;        this.power = new MageInt(1);
+<i>73</i>&nbsp;        this.toughness = new MageInt(1);
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;        // {tap}, Discard a nonblack card: Draw a card.
+<i>76</i>&nbsp;        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
+<i>77</i>&nbsp;        ability.addCost(new DiscardTargetCost(new TargetCardInHand(filterNonBlack)));
+<i>78</i>&nbsp;        this.addAbility(ability);
+<i>79</i>&nbsp;        
+<i>80</i>&nbsp;        // {tap}, Discard a black card: Draw two cards, then discard one of them.
+<i>81</i>&nbsp;        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KrovikanSorcererEffect(), new TapSourceCost());
+<i>82</i>&nbsp;        ability.addCost(new DiscardTargetCost(new TargetCardInHand(filterBlack)));
+<i>83</i>&nbsp;        this.addAbility(ability);
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public KrovikanSorcerer(final KrovikanSorcerer card) {
+<i>87</i>&nbsp;        super(card);
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    @Override
+<i>91</i>&nbsp;    public KrovikanSorcerer copy() {
+<i>92</i>&nbsp;        return new KrovikanSorcerer(this);
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;}
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;class KrovikanSorcererEffect extends OneShotEffect {
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    KrovikanSorcererEffect() {
+<b class="nc"><i>99</i>&nbsp;        super(Outcome.DrawCard);</b>
+<b class="nc"><i>100</i>&nbsp;        this.staticText = &quot;Draw two cards, then discard one of them&quot;;</b>
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    KrovikanSorcererEffect(final KrovikanSorcererEffect effect) {
+<b class="nc"><i>104</i>&nbsp;        super(effect);</b>
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    @Override
+<i>108</i>&nbsp;    public KrovikanSorcererEffect copy() {
+<b class="nc"><i>109</i>&nbsp;        return new KrovikanSorcererEffect(this);</b>
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    @Override
+<i>113</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>114</i>&nbsp;        Player player = game.getPlayer(source.getControllerId());</b>
+<b class="nc"><i>115</i>&nbsp;        if (player != null) {</b>
+<b class="nc"><i>116</i>&nbsp;            Cards initialHand = player.getHand().copy();</b>
+<b class="nc"><i>117</i>&nbsp;            player.drawCards(2, game);</b>
+<b class="nc"><i>118</i>&nbsp;            Cards drawnCards = new CardsImpl();</b>
+<b class="nc"><i>119</i>&nbsp;            for (UUID cardId : player.getHand()) {</b>
+<b class="nc"><i>120</i>&nbsp;                if (!initialHand.contains(cardId)) {</b>
+<b class="nc"><i>121</i>&nbsp;                    drawnCards.add(cardId);</b>
+<i>122</i>&nbsp;                }
+<b class="nc"><i>123</i>&nbsp;            }</b>
+<b class="nc"><i>124</i>&nbsp;            if (drawnCards.size() &gt; 0) {</b>
+<b class="nc"><i>125</i>&nbsp;                TargetCard cardToDiscard = new TargetCard(Zone.HAND, new FilterCard(&quot;card to discard&quot;));</b>
+<b class="nc"><i>126</i>&nbsp;                cardToDiscard.setNotTarget(true);</b>
+<b class="nc"><i>127</i>&nbsp;                if (player.choose(Outcome.Discard, drawnCards, cardToDiscard, game)) {</b>
+<b class="nc"><i>128</i>&nbsp;                    Card card = player.getHand().get(cardToDiscard.getFirstTarget(), game);</b>
+<b class="nc"><i>129</i>&nbsp;                    if (card != null) {</b>
+<b class="nc"><i>130</i>&nbsp;                        return player.discard(card, source, game);</b>
+<i>131</i>&nbsp;                    }
+<i>132</i>&nbsp;                }
+<i>133</i>&nbsp;            }
+<b class="nc"><i>134</i>&nbsp;            return true;</b>
+<i>135</i>&nbsp;        }
+<b class="nc"><i>136</i>&nbsp;        return false;</b>
+<i>137</i>&nbsp;    }
+<i>138</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:35</div>
+</div>
+</body>
+</html>

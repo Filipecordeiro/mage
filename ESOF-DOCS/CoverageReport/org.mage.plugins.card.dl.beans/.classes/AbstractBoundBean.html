@@ -1,0 +1,120 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AbstractBoundBean</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.mage.plugins.card.dl.beans</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AbstractBoundBean (org.mage.plugins.card.dl.beans)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractBoundBean</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/**
+<i>2</i>&nbsp; * AbstractBoundBean.java
+<i>3</i>&nbsp; * 
+<i>4</i>&nbsp; * Created on 24.08.2010
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;package org.mage.plugins.card.dl.beans;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.beans.PropertyChangeListener;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;/**
+<i>14</i>&nbsp; * The class AbstractBoundBean.
+<i>15</i>&nbsp; * 
+<i>16</i>&nbsp; * @version V0.0 24.08.2010
+<i>17</i>&nbsp; * @author Clemens Koza
+<i>18</i>&nbsp; */
+<b class="nc"><i>19</i>&nbsp;public abstract class AbstractBoundBean implements BoundBean {</b>
+<b class="nc"><i>20</i>&nbsp;    protected PropertyChangeSupport s = new PropertyChangeSupport(this);</b>
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    public void addPropertyChangeListener(PropertyChangeListener listener) {
+<b class="nc"><i>23</i>&nbsp;        s.addPropertyChangeListener(listener);</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+<b class="nc"><i>27</i>&nbsp;        s.addPropertyChangeListener(propertyName, listener);</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    public void removePropertyChangeListener(PropertyChangeListener listener) {
+<b class="nc"><i>31</i>&nbsp;        s.removePropertyChangeListener(listener);</b>
+<i>32</i>&nbsp;    }
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+<b class="nc"><i>35</i>&nbsp;        s.removePropertyChangeListener(propertyName, listener);</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

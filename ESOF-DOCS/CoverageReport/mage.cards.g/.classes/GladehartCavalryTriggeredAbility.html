@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GladehartCavalryTriggeredAbility</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.g</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GladehartCavalryTriggeredAbility (mage.cards.g)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GladehartCavalryTriggeredAbility</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (8/ 16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.g;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.MageInt;
+<i>32</i>&nbsp;import mage.abilities.TriggeredAbilityImpl;
+<i>33</i>&nbsp;import mage.abilities.effects.common.GainLifeEffect;
+<i>34</i>&nbsp;import mage.abilities.keyword.SupportAbility;
+<i>35</i>&nbsp;import mage.cards.CardImpl;
+<i>36</i>&nbsp;import mage.cards.CardSetInfo;
+<i>37</i>&nbsp;import mage.constants.CardType;
+<i>38</i>&nbsp;import mage.constants.Zone;
+<i>39</i>&nbsp;import mage.counters.CounterType;
+<i>40</i>&nbsp;import mage.game.Game;
+<i>41</i>&nbsp;import mage.game.events.GameEvent;
+<i>42</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>43</i>&nbsp;import mage.game.events.ZoneChangeEvent;
+<i>44</i>&nbsp;import mage.game.permanent.Permanent;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;/**
+<i>47</i>&nbsp; *
+<i>48</i>&nbsp; * @author fireshoes
+<i>49</i>&nbsp; */
+<i>50</i>&nbsp;public class GladehartCavalry extends CardImpl {
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public GladehartCavalry(UUID ownerId, CardSetInfo setInfo) {
+<i>53</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{5}{G}{G}&quot;);
+<i>54</i>&nbsp;        this.subtype.add(&quot;Elf&quot;);
+<i>55</i>&nbsp;        this.subtype.add(&quot;Knight&quot;);
+<i>56</i>&nbsp;        this.power = new MageInt(6);
+<i>57</i>&nbsp;        this.toughness = new MageInt(6);
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;        // When Gladehart Cavalry enters the battlefield, support 6.
+<i>60</i>&nbsp;        this.addAbility(new SupportAbility(this, 6));
+<i>61</i>&nbsp;        
+<i>62</i>&nbsp;        // Whenever a creature you control with a +1/+1 counter on it dies, you gain 2 life.
+<i>63</i>&nbsp;        this.addAbility(new GladehartCavalryTriggeredAbility());
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public GladehartCavalry(final GladehartCavalry card) {
+<i>67</i>&nbsp;        super(card);
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    @Override
+<i>71</i>&nbsp;    public GladehartCavalry copy() {
+<i>72</i>&nbsp;        return new GladehartCavalry(this);
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;}
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    public GladehartCavalryTriggeredAbility() {
+<b class="fc"><i>79</i>&nbsp;        super(Zone.BATTLEFIELD, new GainLifeEffect(2));</b>
+<b class="fc"><i>80</i>&nbsp;    }</b>
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    public GladehartCavalryTriggeredAbility(final GladehartCavalryTriggeredAbility ability) {
+<b class="fc"><i>83</i>&nbsp;        super(ability);</b>
+<b class="fc"><i>84</i>&nbsp;    }</b>
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    @Override
+<i>87</i>&nbsp;    public GladehartCavalryTriggeredAbility copy() {
+<b class="fc"><i>88</i>&nbsp;        return new GladehartCavalryTriggeredAbility(this);</b>
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    @Override
+<i>92</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<b class="fc"><i>93</i>&nbsp;        return event.getType() == EventType.ZONE_CHANGE;</b>
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    @Override
+<i>97</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<b class="fc"><i>98</i>&nbsp;        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD</b>
+<b class="nc"><i>99</i>&nbsp;                &amp;&amp; ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {</b>
+<b class="nc"><i>100</i>&nbsp;            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);</b>
+<b class="nc"><i>101</i>&nbsp;            if (permanent != null</b>
+<b class="nc"><i>102</i>&nbsp;                    &amp;&amp; permanent.getControllerId().equals(this.getControllerId())</b>
+<b class="nc"><i>103</i>&nbsp;                    &amp;&amp; permanent.getCardType().contains(CardType.CREATURE)</b>
+<b class="nc"><i>104</i>&nbsp;                    &amp;&amp; permanent.getCounters(game).getCount(CounterType.P1P1) &gt; 0) {</b>
+<b class="nc"><i>105</i>&nbsp;                return true;</b>
+<i>106</i>&nbsp;            }
+<i>107</i>&nbsp;        }
+<b class="fc"><i>108</i>&nbsp;        return false;</b>
+<i>109</i>&nbsp;    }
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    @Override
+<i>112</i>&nbsp;    public String getRule() {
+<b class="nc"><i>113</i>&nbsp;        return &quot;Whenever a creature you control with a +1/+1 counter on it dies, &quot; + super.getRule();</b>
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:35</div>
+</div>
+</body>
+</html>

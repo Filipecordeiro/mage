@@ -1,0 +1,244 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DarkDepthsAbility</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.d</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DarkDepthsAbility (mage.cards.d)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DarkDepthsAbility</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/ 8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.d;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.constants.CardType;
+<i>34</i>&nbsp;import mage.MageInt;
+<i>35</i>&nbsp;import mage.abilities.StateTriggeredAbility;
+<i>36</i>&nbsp;import mage.abilities.common.EntersBattlefieldAbility;
+<i>37</i>&nbsp;import mage.abilities.common.SimpleActivatedAbility;
+<i>38</i>&nbsp;import mage.abilities.costs.mana.ManaCostsImpl;
+<i>39</i>&nbsp;import mage.abilities.effects.common.CreateTokenEffect;
+<i>40</i>&nbsp;import mage.abilities.effects.common.SacrificeSourceEffect;
+<i>41</i>&nbsp;import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+<i>42</i>&nbsp;import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
+<i>43</i>&nbsp;import mage.abilities.keyword.FlyingAbility;
+<i>44</i>&nbsp;import mage.abilities.keyword.IndestructibleAbility;
+<i>45</i>&nbsp;import mage.cards.CardImpl;
+<i>46</i>&nbsp;import mage.cards.CardSetInfo;
+<i>47</i>&nbsp;import mage.constants.Zone;
+<i>48</i>&nbsp;import mage.counters.CounterType;
+<i>49</i>&nbsp;import mage.game.Game;
+<i>50</i>&nbsp;import mage.game.events.GameEvent;
+<i>51</i>&nbsp;import mage.game.permanent.Permanent;
+<i>52</i>&nbsp;import mage.game.permanent.token.Token;
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;/**
+<i>55</i>&nbsp; *
+<i>56</i>&nbsp; * @author Plopman
+<i>57</i>&nbsp; */
+<i>58</i>&nbsp;public class DarkDepths extends CardImpl {
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public DarkDepths(UUID ownerId, CardSetInfo setInfo) {
+<i>61</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.LAND},&quot;&quot;);
+<i>62</i>&nbsp;        this.supertype.add(&quot;Legendary&quot;);
+<i>63</i>&nbsp;        this.supertype.add(&quot;Snow&quot;);
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;        // Dark Depths enters the battlefield with ten ice counters on it.
+<i>66</i>&nbsp;        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.ICE.createInstance(10)), &quot;with ten ice counters on it&quot;));
+<i>67</i>&nbsp;        // {3}: Remove an ice counter from Dark Depths.
+<i>68</i>&nbsp;        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl(&quot;{3}&quot;)));
+<i>69</i>&nbsp;        // When Dark Depths has no ice counters on it, sacrifice it. If you do, put a legendary 20/20 black Avatar creature token with flying and &quot;This creature is indestructible&quot; named Marit Lage onto the battlefield.
+<i>70</i>&nbsp;        this.addAbility(new DarkDepthsAbility());
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    public DarkDepths(final DarkDepths card) {
+<i>74</i>&nbsp;        super(card);
+<i>75</i>&nbsp;    }
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    @Override
+<i>78</i>&nbsp;    public DarkDepths copy() {
+<i>79</i>&nbsp;        return new DarkDepths(this);
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;}
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;class DarkDepthsSacrificeEffect extends SacrificeSourceEffect {
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    private boolean sacrificed = false;
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    public DarkDepthsSacrificeEffect(){
+<i>88</i>&nbsp;        super();
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    public DarkDepthsSacrificeEffect(final DarkDepthsSacrificeEffect effect) {
+<i>92</i>&nbsp;        super(effect);
+<i>93</i>&nbsp;        this.sacrificed = effect.sacrificed;
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    @Override
+<i>97</i>&nbsp;    public DarkDepthsSacrificeEffect copy() {
+<i>98</i>&nbsp;        return new DarkDepthsSacrificeEffect(this);
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    @Override
+<i>102</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>103</i>&nbsp;        sacrificed = super.apply(game, source);
+<i>104</i>&nbsp;        if (sacrificed) {
+<i>105</i>&nbsp;            new CreateTokenEffect(new MaritLageToken()).apply(game, source);
+<i>106</i>&nbsp;        }
+<i>107</i>&nbsp;        return sacrificed;
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    public boolean isSacrificed() {
+<i>111</i>&nbsp;        return sacrificed;
+<i>112</i>&nbsp;    }
+<i>113</i>&nbsp;}
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;class DarkDepthsAbility extends StateTriggeredAbility {
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    public DarkDepthsAbility() {
+<b class="fc"><i>118</i>&nbsp;        super(Zone.BATTLEFIELD, new DarkDepthsSacrificeEffect());</b>
+<b class="fc"><i>119</i>&nbsp;    }</b>
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;    public DarkDepthsAbility(final DarkDepthsAbility ability) {
+<b class="fc"><i>122</i>&nbsp;        super(ability);</b>
+<b class="fc"><i>123</i>&nbsp;    }</b>
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    @Override
+<i>126</i>&nbsp;    public DarkDepthsAbility copy() {
+<b class="fc"><i>127</i>&nbsp;        return new DarkDepthsAbility(this);</b>
+<i>128</i>&nbsp;    }
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    @Override
+<i>131</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<b class="fc"><i>132</i>&nbsp;        Permanent permanent = game.getPermanent(getSourceId());</b>
+<b class="fc"><i>133</i>&nbsp;        return permanent != null &amp;&amp; permanent.getCounters(game).getCount(CounterType.ICE) == 0;</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    @Override
+<i>137</i>&nbsp;    public String getRule() {
+<b class="nc"><i>138</i>&nbsp;        return &quot;When {this} has no ice counters on it, sacrifice it. If you do, put a legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage onto the battlefield.&quot;;</b>
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;}
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;class MaritLageToken extends Token {
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;    public MaritLageToken() {
+<i>147</i>&nbsp;        super(&quot;Marit Lage&quot;, &quot;legendary 20/20 black Avatar creature token with flying and indestructible named Marit Lage&quot;);
+<i>148</i>&nbsp;        this.setOriginalExpansionSetCode(&quot;CSP&quot;);
+<i>149</i>&nbsp;        cardType.add(CardType.CREATURE);
+<i>150</i>&nbsp;        subtype.add(&quot;Avatar&quot;);
+<i>151</i>&nbsp;        supertype.add(&quot;Legendary&quot;);
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;        color.setBlack(true);
+<i>154</i>&nbsp;        power = new MageInt(20);
+<i>155</i>&nbsp;        toughness = new MageInt(20);
+<i>156</i>&nbsp;        
+<i>157</i>&nbsp;        this.addAbility(FlyingAbility.getInstance());
+<i>158</i>&nbsp;        this.addAbility(IndestructibleAbility.getInstance());
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;    }
+<i>161</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

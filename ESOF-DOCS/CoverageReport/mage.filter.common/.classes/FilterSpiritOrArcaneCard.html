@@ -1,0 +1,109 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FilterSpiritOrArcaneCard</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.filter.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FilterSpiritOrArcaneCard (mage.filter.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FilterSpiritOrArcaneCard</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.filter.common;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import mage.filter.FilterSpell;
+<i>4</i>&nbsp;import mage.filter.predicate.Predicates;
+<i>5</i>&nbsp;import mage.filter.predicate.mageobject.SubtypePredicate;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public class FilterSpiritOrArcaneCard extends FilterSpell {
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;    public FilterSpiritOrArcaneCard() {
+<b class="nc"><i>10</i>&nbsp;        this(&quot;a Spirit or Arcane spell&quot;);</b>
+<i>11</i>&nbsp;    }
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    public FilterSpiritOrArcaneCard(String name) {
+<b class="nc"><i>14</i>&nbsp;        super(name);</b>
+<b class="nc"><i>15</i>&nbsp;        this.add(Predicates.or(new SubtypePredicate(&quot;Spirit&quot;),new SubtypePredicate(&quot;Arcane&quot;)));</b>
+<i>16</i>&nbsp;    }
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public FilterSpiritOrArcaneCard(final FilterSpiritOrArcaneCard filter) {
+<b class="nc"><i>19</i>&nbsp;        super(filter);</b>
+<i>20</i>&nbsp;    }
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    @Override
+<i>23</i>&nbsp;    public FilterSpiritOrArcaneCard copy() {
+<b class="nc"><i>24</i>&nbsp;        return new FilterSpiritOrArcaneCard(this);</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

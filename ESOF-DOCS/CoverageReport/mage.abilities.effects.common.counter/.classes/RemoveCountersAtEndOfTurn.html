@@ -1,0 +1,233 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RemoveCountersAtEndOfTurn</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common.counter</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RemoveCountersAtEndOfTurn (mage.abilities.effects.common.counter)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RemoveCountersAtEndOfTurn</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.effects.common.counter;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.abilities.Ability;
+<i>32</i>&nbsp;import mage.abilities.DelayedTriggeredAbility;
+<i>33</i>&nbsp;import mage.abilities.Mode;
+<i>34</i>&nbsp;import mage.abilities.common.delayed.AtTheBeginOfNextCleanupDelayedTriggeredAbility;
+<i>35</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>36</i>&nbsp;import mage.constants.Outcome;
+<i>37</i>&nbsp;import mage.counters.CounterType;
+<i>38</i>&nbsp;import mage.game.Game;
+<i>39</i>&nbsp;import mage.game.permanent.Permanent;
+<i>40</i>&nbsp;import mage.target.Target;
+<i>41</i>&nbsp;import mage.util.CardUtil;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;/**
+<i>44</i>&nbsp; *
+<i>45</i>&nbsp; * @author LoneFox
+<i>46</i>&nbsp; */
+<i>47</i>&nbsp;public class DistributeCountersEffect extends OneShotEffect {
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    private final CounterType counterType;
+<i>50</i>&nbsp;    private final int amount;
+<i>51</i>&nbsp;    private final boolean removeAtEndOfTurn;
+<i>52</i>&nbsp;    private final String targetDescription;
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    public DistributeCountersEffect(CounterType counterType, int amount, boolean removeAtEndOfTurn, String targetDescription) {
+<i>55</i>&nbsp;        super(Outcome.BoostCreature);
+<i>56</i>&nbsp;        this.counterType = counterType;
+<i>57</i>&nbsp;        this.amount = amount;
+<i>58</i>&nbsp;        this.removeAtEndOfTurn = removeAtEndOfTurn;
+<i>59</i>&nbsp;        this.targetDescription = targetDescription;
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public DistributeCountersEffect(final DistributeCountersEffect effect) {
+<i>63</i>&nbsp;        super(effect);
+<i>64</i>&nbsp;        this.counterType = effect.counterType;
+<i>65</i>&nbsp;        this.amount = effect.amount;
+<i>66</i>&nbsp;        this.removeAtEndOfTurn = effect.removeAtEndOfTurn;
+<i>67</i>&nbsp;        this.targetDescription = effect.targetDescription;
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    @Override
+<i>71</i>&nbsp;    public DistributeCountersEffect copy() {
+<i>72</i>&nbsp;        return new DistributeCountersEffect(this);
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    @Override
+<i>76</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>77</i>&nbsp;        if (source.getTargets().size() &gt; 0) {
+<i>78</i>&nbsp;            Target multiTarget = source.getTargets().get(0);
+<i>79</i>&nbsp;            for (UUID target : multiTarget.getTargets()) {
+<i>80</i>&nbsp;                Permanent permanent = game.getPermanent(target);
+<i>81</i>&nbsp;                if (permanent != null) {
+<i>82</i>&nbsp;                    permanent.addCounters(counterType.createInstance(multiTarget.getTargetAmount(target)), game);
+<i>83</i>&nbsp;                }
+<i>84</i>&nbsp;            }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;            if (removeAtEndOfTurn) {
+<i>87</i>&nbsp;                DelayedTriggeredAbility ability = new AtTheBeginOfNextCleanupDelayedTriggeredAbility(
+<i>88</i>&nbsp;                        new RemoveCountersAtEndOfTurn(counterType));
+<i>89</i>&nbsp;                ability.getTargets().addAll(source.getTargets());
+<i>90</i>&nbsp;                game.addDelayedTriggeredAbility(ability, source);
+<i>91</i>&nbsp;            }
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;            return true;
+<i>94</i>&nbsp;        }
+<i>95</i>&nbsp;        return false;
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    @Override
+<i>99</i>&nbsp;    public String getText(Mode mode) {
+<i>100</i>&nbsp;        if (!staticText.isEmpty()) {
+<i>101</i>&nbsp;            return staticText;
+<i>102</i>&nbsp;        }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;        String name = counterType.getName();
+<i>105</i>&nbsp;        String text = &quot;distribute &quot; + CardUtil.numberToText(amount) + &quot; &quot; + name + &quot; counters among &quot; + targetDescription + &quot;.&quot;;
+<i>106</i>&nbsp;        if (removeAtEndOfTurn) {
+<i>107</i>&nbsp;            text += &quot; For each &quot; + name + &quot; counter you put on a creature this way, remove a &quot;
+<i>108</i>&nbsp;                    + name + &quot; counter from that creature at the beginning of the next cleanup step.&quot;;
+<i>109</i>&nbsp;        }
+<i>110</i>&nbsp;        return text;
+<i>111</i>&nbsp;    }
+<i>112</i>&nbsp;}
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;class RemoveCountersAtEndOfTurn extends OneShotEffect {
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    private final CounterType counterType;
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;    public RemoveCountersAtEndOfTurn(CounterType counterType) {
+<b class="nc"><i>119</i>&nbsp;        super(Outcome.Detriment);</b>
+<b class="nc"><i>120</i>&nbsp;        this.counterType = counterType;</b>
+<b class="nc"><i>121</i>&nbsp;        String name = counterType.getName();</b>
+<b class="nc"><i>122</i>&nbsp;        staticText = &quot;For each &quot; + name + &quot; counter you put on a creature this way, remove a &quot;</b>
+<i>123</i>&nbsp;                + name + &quot; counter from that creature at the beginning of the next cleanup step.&quot;;
+<i>124</i>&nbsp;    }
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    public RemoveCountersAtEndOfTurn(final RemoveCountersAtEndOfTurn effect) {
+<b class="nc"><i>127</i>&nbsp;        super(effect);</b>
+<b class="nc"><i>128</i>&nbsp;        this.counterType = effect.counterType;</b>
+<i>129</i>&nbsp;    }
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;    @Override
+<i>132</i>&nbsp;    public RemoveCountersAtEndOfTurn copy() {
+<b class="nc"><i>133</i>&nbsp;        return new RemoveCountersAtEndOfTurn(this);</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    @Override
+<i>137</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>138</i>&nbsp;        if (source.getTargets().size() &gt; 0) {</b>
+<b class="nc"><i>139</i>&nbsp;            Target multiTarget = source.getTargets().get(0);</b>
+<b class="nc"><i>140</i>&nbsp;            for (UUID target : multiTarget.getTargets()) {</b>
+<b class="nc"><i>141</i>&nbsp;                Permanent permanent = game.getPermanent(target);</b>
+<b class="nc"><i>142</i>&nbsp;                if (permanent != null) {</b>
+<b class="nc"><i>143</i>&nbsp;                    permanent.removeCounters(counterType.getName(), multiTarget.getTargetAmount(target), game);</b>
+<i>144</i>&nbsp;                }
+<b class="nc"><i>145</i>&nbsp;            }</b>
+<b class="nc"><i>146</i>&nbsp;            return true;</b>
+<i>147</i>&nbsp;        }
+<b class="nc"><i>148</i>&nbsp;        return false;</b>
+<i>149</i>&nbsp;    }
+<i>150</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

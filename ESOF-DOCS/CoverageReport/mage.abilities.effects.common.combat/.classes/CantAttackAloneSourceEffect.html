@@ -1,0 +1,126 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CantAttackAloneSourceEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common.combat</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CantAttackAloneSourceEffect (mage.abilities.effects.common.combat)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CantAttackAloneSourceEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/ 8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.abilities.effects.common.combat;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import mage.abilities.Ability;
+<i>9</i>&nbsp;import mage.abilities.effects.RestrictionEffect;
+<i>10</i>&nbsp;import mage.constants.Duration;
+<i>11</i>&nbsp;import mage.game.Game;
+<i>12</i>&nbsp;import mage.game.permanent.Permanent;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;/**
+<i>15</i>&nbsp; *
+<i>16</i>&nbsp; * @author LevelX2
+<i>17</i>&nbsp; */
+<i>18</i>&nbsp;public class CantAttackAloneSourceEffect extends RestrictionEffect {
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public CantAttackAloneSourceEffect() {
+<b class="fc"><i>21</i>&nbsp;        super(Duration.WhileOnBattlefield);</b>
+<b class="fc"><i>22</i>&nbsp;        staticText = &quot;{this} can&#39;t attack alone&quot;;</b>
+<b class="fc"><i>23</i>&nbsp;    }</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    public CantAttackAloneSourceEffect(final CantAttackAloneSourceEffect effect) {
+<b class="fc"><i>26</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>27</i>&nbsp;    }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Override
+<i>30</i>&nbsp;    public CantAttackAloneSourceEffect copy() {
+<b class="fc"><i>31</i>&nbsp;        return new CantAttackAloneSourceEffect(this);</b>
+<i>32</i>&nbsp;    }
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    @Override
+<i>35</i>&nbsp;    public boolean canAttackCheckAfter(int numberOfAttackers, Ability source, Game game) {
+<b class="fc"><i>36</i>&nbsp;        return numberOfAttackers &gt; 1;</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    @Override
+<i>40</i>&nbsp;    public boolean applies(Permanent permanent, Ability source, Game game) {
+<b class="fc"><i>41</i>&nbsp;        return source.getSourceId().equals(permanent.getId());</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

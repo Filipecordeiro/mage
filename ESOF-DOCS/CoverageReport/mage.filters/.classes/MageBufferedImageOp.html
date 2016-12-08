@@ -1,0 +1,151 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MageBufferedImageOp</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.filters</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MageBufferedImageOp (mage.filters)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MageBufferedImageOp</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.filters;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.awt.*;
+<i>4</i>&nbsp;import java.awt.geom.Point2D;
+<i>5</i>&nbsp;import java.awt.geom.Rectangle2D;
+<i>6</i>&nbsp;import java.awt.image.BufferedImage;
+<i>7</i>&nbsp;import java.awt.image.BufferedImageOp;
+<i>8</i>&nbsp;import java.awt.image.ColorModel;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * Mage abstract class that implements single-input/single-output
+<i>12</i>&nbsp; * operations performed on {@link java.awt.image.BufferedImage}.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * @author nantuko
+<i>15</i>&nbsp; */
+<b class="nc"><i>16</i>&nbsp;public abstract class MageBufferedImageOp implements BufferedImageOp {</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    /**
+<i>19</i>&nbsp;     * Creates compatible image for @param src image.
+<i>20</i>&nbsp;     */
+<i>21</i>&nbsp;    public BufferedImage createCompatibleDestImage(BufferedImage src, ColorModel dest) {
+<b class="nc"><i>22</i>&nbsp;        if (dest == null) {</b>
+<b class="nc"><i>23</i>&nbsp;            dest = src.getColorModel();</b>
+<i>24</i>&nbsp;        }
+<b class="nc"><i>25</i>&nbsp;        return new BufferedImage(dest, dest.createCompatibleWritableRaster(src.getWidth(), src.getHeight()), dest.isAlphaPremultiplied(), null);</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public RenderingHints getRenderingHints() {
+<b class="nc"><i>29</i>&nbsp;        return null;</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public Rectangle2D getBounds2D(BufferedImage src) {
+<b class="nc"><i>33</i>&nbsp;        return new Rectangle(0, 0, src.getWidth(), src.getHeight());</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    public Point2D getPoint2D(Point2D srcPt, Point2D destPt) {
+<b class="nc"><i>37</i>&nbsp;        if (destPt == null) {</b>
+<b class="nc"><i>38</i>&nbsp;            destPt = new Point2D.Double();</b>
+<i>39</i>&nbsp;        }
+<b class="nc"><i>40</i>&nbsp;        destPt.setLocation(srcPt.getX(), srcPt.getY());</b>
+<b class="nc"><i>41</i>&nbsp;        return destPt;</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    /**
+<i>45</i>&nbsp;     * Gets ARGB pixels from image. Solves the performance
+<i>46</i>&nbsp;     * issue of BufferedImage.getRGB method.
+<i>47</i>&nbsp;     */
+<i>48</i>&nbsp;    public int[] getRGB(BufferedImage image, int x, int y, int width, int height, int[] pixels) {
+<b class="nc"><i>49</i>&nbsp;        int type = image.getType();</b>
+<b class="nc"><i>50</i>&nbsp;        if (type == BufferedImage.TYPE_INT_ARGB || type == BufferedImage.TYPE_INT_RGB) {</b>
+<b class="nc"><i>51</i>&nbsp;            return (int[]) image.getRaster().getDataElements(x, y, width, height, pixels);</b>
+<i>52</i>&nbsp;        }
+<b class="nc"><i>53</i>&nbsp;        return image.getRGB(x, y, width, height, pixels, 0, width);</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    /**
+<i>57</i>&nbsp;     * Sets ARGB pixels in image. Solves the performance
+<i>58</i>&nbsp;     * issue of BufferedImage.setRGB method.
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    public void setRGB(BufferedImage image, int x, int y, int width, int height, int[] pixels) {
+<b class="nc"><i>61</i>&nbsp;        int type = image.getType();</b>
+<b class="nc"><i>62</i>&nbsp;        if (type == BufferedImage.TYPE_INT_ARGB || type == BufferedImage.TYPE_INT_RGB) {</b>
+<b class="nc"><i>63</i>&nbsp;            image.getRaster().setDataElements(x, y, width, height, pixels);</b>
+<i>64</i>&nbsp;        } else {
+<b class="nc"><i>65</i>&nbsp;            image.setRGB(x, y, width, height, pixels, 0, width);</b>
+<i>66</i>&nbsp;        }
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

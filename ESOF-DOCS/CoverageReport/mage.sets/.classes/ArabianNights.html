@@ -1,0 +1,231 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ArabianNights</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.sets</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ArabianNights (mage.sets)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArabianNights</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (97/ 97)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.sets;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.GregorianCalendar;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;import mage.cards.ExpansionSet;
+<i>33</i>&nbsp;import mage.constants.SetType;
+<i>34</i>&nbsp;import mage.constants.Rarity;
+<i>35</i>&nbsp;import java.util.List;
+<i>36</i>&nbsp;import mage.ObjectColor;
+<i>37</i>&nbsp;import mage.cards.CardGraphicInfo;
+<i>38</i>&nbsp;import mage.cards.FrameStyle;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;/**
+<i>41</i>&nbsp; *
+<i>42</i>&nbsp; * @author North
+<i>43</i>&nbsp; */
+<i>44</i>&nbsp;public class ArabianNights extends ExpansionSet {
+<i>45</i>&nbsp;
+<b class="fc"><i>46</i>&nbsp;    private static final ArabianNights fINSTANCE = new ArabianNights();</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    public static ArabianNights getInstance() {
+<b class="fc"><i>49</i>&nbsp;        return fINSTANCE;</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    private ArabianNights() {
+<b class="fc"><i>53</i>&nbsp;        super(&quot;Arabian Nights&quot;, &quot;ARN&quot;, &quot;mage.sets.arabiannights&quot;, new GregorianCalendar(1993, 11, 1).getTime(), SetType.EXPANSION);</b>
+<b class="fc"><i>54</i>&nbsp;        this.hasBasicLands = false;</b>
+<b class="fc"><i>55</i>&nbsp;        this.hasBoosters = true;</b>
+<b class="fc"><i>56</i>&nbsp;        this.numBoosterLands = 1;</b>
+<b class="fc"><i>57</i>&nbsp;        this.numBoosterCommon = 10;</b>
+<b class="fc"><i>58</i>&nbsp;        this.numBoosterUncommon = 3;</b>
+<b class="fc"><i>59</i>&nbsp;        this.numBoosterRare = 1;</b>
+<b class="fc"><i>60</i>&nbsp;        this.ratioBoosterMythic = 0;</b>
+<b class="fc"><i>61</i>&nbsp;        cards.add(new SetCardInfo(&quot;Abu Ja&#39;far&quot;, 55, Rarity.UNCOMMON, mage.cards.a.AbuJafar.class));</b>
+<b class="fc"><i>62</i>&nbsp;        cards.add(new SetCardInfo(&quot;Aladdin&quot;, 42, Rarity.RARE, mage.cards.a.Aladdin.class));</b>
+<b class="fc"><i>63</i>&nbsp;        cards.add(new SetCardInfo(&quot;Aladdin&#39;s Lamp&quot;, 70, Rarity.RARE, mage.cards.a.AladdinsLamp.class));</b>
+<b class="fc"><i>64</i>&nbsp;        cards.add(new SetCardInfo(&quot;Aladdin&#39;s Ring&quot;, 71, Rarity.RARE, mage.cards.a.AladdinsRing.class));</b>
+<b class="fc"><i>65</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ali Baba&quot;, 43, Rarity.UNCOMMON, mage.cards.a.AliBaba.class));</b>
+<b class="fc"><i>66</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ali from Cairo&quot;, 44, Rarity.RARE, mage.cards.a.AliFromCairo.class));</b>
+<b class="fc"><i>67</i>&nbsp;        cards.add(new SetCardInfo(&quot;Army of Allah&quot;, 56, Rarity.COMMON, mage.cards.a.ArmyOfAllah1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>68</i>&nbsp;        cards.add(new SetCardInfo(&quot;Army of Allah&quot;, 57, Rarity.COMMON, mage.cards.a.ArmyOfAllah1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>69</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bazaar of Baghdad&quot;, 84, Rarity.UNCOMMON, mage.cards.b.BazaarOfBaghdad.class));</b>
+<b class="fc"><i>70</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bird Maiden&quot;, 45, Rarity.COMMON, mage.cards.b.BirdMaiden.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>71</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bird Maiden&quot;, 46, Rarity.COMMON, mage.cards.b.BirdMaiden.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>72</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bottle of Suleiman&quot;, 72, Rarity.RARE, mage.cards.b.BottleOfSuleiman.class));</b>
+<b class="fc"><i>73</i>&nbsp;        cards.add(new SetCardInfo(&quot;Brass Man&quot;, 73, Rarity.UNCOMMON, mage.cards.b.BrassMan.class));</b>
+<b class="fc"><i>74</i>&nbsp;        cards.add(new SetCardInfo(&quot;City in a Bottle&quot;, 74, Rarity.RARE, mage.cards.c.CityInABottle.class));</b>
+<b class="fc"><i>75</i>&nbsp;        cards.add(new SetCardInfo(&quot;City of Brass&quot;, 85, Rarity.UNCOMMON, mage.cards.c.CityOfBrass.class));</b>
+<b class="fc"><i>76</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cuombajj Witches&quot;, 1, Rarity.COMMON, mage.cards.c.CuombajjWitches.class));</b>
+<b class="fc"><i>77</i>&nbsp;        cards.add(new SetCardInfo(&quot;Cyclone&quot;, 29, Rarity.UNCOMMON, mage.cards.c.Cyclone.class));</b>
+<b class="fc"><i>78</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dancing Scimitar&quot;, 75, Rarity.RARE, mage.cards.d.DancingScimitar.class));</b>
+<b class="fc"><i>79</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dandan&quot;, 16, Rarity.COMMON, mage.cards.d.Dandan.class));</b>
+<b class="fc"><i>80</i>&nbsp;        cards.add(new SetCardInfo(&quot;Desert&quot;, 86, Rarity.COMMON, mage.cards.d.Desert.class));</b>
+<b class="fc"><i>81</i>&nbsp;        cards.add(new SetCardInfo(&quot;Desert Nomads&quot;, 47, Rarity.COMMON, mage.cards.d.DesertNomads.class));</b>
+<b class="fc"><i>82</i>&nbsp;        cards.add(new SetCardInfo(&quot;Desert Twister&quot;, 30, Rarity.UNCOMMON, mage.cards.d.DesertTwister.class));</b>
+<b class="fc"><i>83</i>&nbsp;        cards.add(new SetCardInfo(&quot;Diamond Valley&quot;, 87, Rarity.UNCOMMON, mage.cards.d.DiamondValley.class));</b>
+<b class="fc"><i>84</i>&nbsp;        cards.add(new SetCardInfo(&quot;Drop of Honey&quot;, 31, Rarity.RARE, mage.cards.d.DropOfHoney.class));</b>
+<b class="fc"><i>85</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ebony Horse&quot;, 76, Rarity.RARE, mage.cards.e.EbonyHorse.class));</b>
+<b class="fc"><i>86</i>&nbsp;        cards.add(new SetCardInfo(&quot;Elephant Graveyard&quot;, 88, Rarity.RARE, mage.cards.e.ElephantGraveyard.class));</b>
+<b class="fc"><i>87</i>&nbsp;        cards.add(new SetCardInfo(&quot;El-Hajjaj&quot;, 2, Rarity.RARE, mage.cards.e.ElHajjaj.class));</b>
+<b class="fc"><i>88</i>&nbsp;        cards.add(new SetCardInfo(&quot;Erg Raiders&quot;, 3, Rarity.COMMON, mage.cards.e.ErgRaiders.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>89</i>&nbsp;        cards.add(new SetCardInfo(&quot;Erg Raiders&quot;, 4, Rarity.COMMON, mage.cards.e.ErgRaiders.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>90</i>&nbsp;        cards.add(new SetCardInfo(&quot;Erhnam Djinn&quot;, 32, Rarity.RARE, mage.cards.e.ErhnamDjinn.class));</b>
+<b class="fc"><i>91</i>&nbsp;        cards.add(new SetCardInfo(&quot;Eye for an Eye&quot;, 59, Rarity.UNCOMMON, mage.cards.e.EyeForAnEye.class));</b>
+<b class="fc"><i>92</i>&nbsp;        cards.add(new SetCardInfo(&quot;Fishliver Oil&quot;, 17, Rarity.COMMON, mage.cards.f.FishliverOil1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>93</i>&nbsp;        cards.add(new SetCardInfo(&quot;Fishliver Oil&quot;, 18, Rarity.COMMON, mage.cards.f.FishliverOil1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>94</i>&nbsp;        cards.add(new SetCardInfo(&quot;Flying Carpet&quot;, 77, Rarity.UNCOMMON, mage.cards.f.FlyingCarpet.class));</b>
+<b class="fc"><i>95</i>&nbsp;        cards.add(new SetCardInfo(&quot;Flying Men&quot;, 19, Rarity.COMMON, mage.cards.f.FlyingMen.class));</b>
+<b class="fc"><i>96</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ghazban Ogre&quot;, 33, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));</b>
+<b class="fc"><i>97</i>&nbsp;        cards.add(new SetCardInfo(&quot;Giant Tortoise&quot;, 20, Rarity.COMMON, mage.cards.g.GiantTortoise.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>98</i>&nbsp;        cards.add(new SetCardInfo(&quot;Giant Tortoise&quot;, 21, Rarity.COMMON, mage.cards.g.GiantTortoise.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>99</i>&nbsp;        cards.add(new SetCardInfo(&quot;Guardian Beast&quot;, 5, Rarity.RARE, mage.cards.g.GuardianBeast.class));</b>
+<b class="fc"><i>100</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hasran Ogress&quot;, 6, Rarity.COMMON, mage.cards.h.HasranOgress.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>101</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hasran Ogress&quot;, 7, Rarity.COMMON, mage.cards.h.HasranOgress.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>102</i>&nbsp;        cards.add(new SetCardInfo(&quot;Hurr Jackal&quot;, 48, Rarity.COMMON, mage.cards.h.HurrJackal.class));</b>
+<b class="fc"><i>103</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ifh-Biff Efreet&quot;, 34, Rarity.RARE, mage.cards.i.IfhBiffEfreet.class));</b>
+<b class="fc"><i>104</i>&nbsp;        cards.add(new SetCardInfo(&quot;Island Fish Jasconius&quot;, 22, Rarity.RARE, mage.cards.i.IslandFishJasconius.class));</b>
+<b class="fc"><i>105</i>&nbsp;        cards.add(new SetCardInfo(&quot;Island of Wak-Wak&quot;, 89, Rarity.RARE, mage.cards.i.IslandOfWakWak.class));</b>
+<b class="fc"><i>106</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jandor&#39;s Ring&quot;, 78, Rarity.RARE, mage.cards.j.JandorsRing.class));</b>
+<b class="fc"><i>107</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jandor&#39;s Saddlebags&quot;, 79, Rarity.RARE, mage.cards.j.JandorsSaddlebags.class));</b>
+<b class="fc"><i>108</i>&nbsp;        cards.add(new SetCardInfo(&quot;Jihad&quot;, 60, Rarity.RARE, mage.cards.j.Jihad.class));</b>
+<b class="fc"><i>109</i>&nbsp;        cards.add(new SetCardInfo(&quot;Junún Efreet&quot;, 8, Rarity.RARE, mage.cards.j.JununEfreet.class));</b>
+<b class="fc"><i>110</i>&nbsp;        cards.add(new SetCardInfo(&quot;Juzam Djinn&quot;, 9, Rarity.RARE, mage.cards.j.JuzamDjinn.class));</b>
+<b class="fc"><i>111</i>&nbsp;        cards.add(new SetCardInfo(&quot;Khabal Ghoul&quot;, 10, Rarity.UNCOMMON, mage.cards.k.KhabalGhoul.class));</b>
+<b class="fc"><i>112</i>&nbsp;        cards.add(new SetCardInfo(&quot;King Suleiman&quot;, 61, Rarity.RARE, mage.cards.k.KingSuleiman.class));</b>
+<b class="fc"><i>113</i>&nbsp;        cards.add(new SetCardInfo(&quot;Kird Ape&quot;, 49, Rarity.COMMON, mage.cards.k.KirdApe.class));</b>
+<b class="fc"><i>114</i>&nbsp;        cards.add(new SetCardInfo(&quot;Library of Alexandria&quot;, 90, Rarity.UNCOMMON, mage.cards.l.LibraryOfAlexandria.class));</b>
+<b class="fc"><i>115</i>&nbsp;        cards.add(new SetCardInfo(&quot;Magnetic Mountain&quot;, 50, Rarity.UNCOMMON, mage.cards.m.MagneticMountain.class));</b>
+<b class="fc"><i>116</i>&nbsp;        cards.add(new SetCardInfo(&quot;Merchant Ship&quot;, 23, Rarity.UNCOMMON, mage.cards.m.MerchantShip.class));</b>
+<b class="fc"><i>117</i>&nbsp;        cards.add(new SetCardInfo(&quot;Metamorphosis&quot;, 35, Rarity.COMMON, mage.cards.m.Metamorphosis.class));</b>
+<b class="fc"><i>118</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mijae Djinn&quot;, 51, Rarity.RARE, mage.cards.m.MijaeDjinn.class));</b>
+<b class="fc"><i>119</i>&nbsp;        cards.add(new SetCardInfo(&quot;Moorish Cavalry&quot;, 62, Rarity.COMMON, mage.cards.m.MoorishCavalry.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>120</i>&nbsp;        cards.add(new SetCardInfo(&quot;Moorish Cavalry&quot;, 63, Rarity.COMMON, mage.cards.m.MoorishCavalry.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>121</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mountain&quot;, 91, Rarity.COMMON, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>122</i>&nbsp;        cards.add(new SetCardInfo(&quot;Nafs Asp&quot;, 36, Rarity.COMMON, mage.cards.n.NafsAsp1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>123</i>&nbsp;        cards.add(new SetCardInfo(&quot;Nafs Asp&quot;, 37, Rarity.COMMON, mage.cards.n.NafsAsp1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>124</i>&nbsp;        cards.add(new SetCardInfo(&quot;Oasis&quot;, 92, Rarity.UNCOMMON, mage.cards.o.Oasis.class));</b>
+<b class="fc"><i>125</i>&nbsp;        cards.add(new SetCardInfo(&quot;Old Man of the Sea&quot;, 24, Rarity.RARE, mage.cards.o.OldManOfTheSea.class));</b>
+<b class="fc"><i>126</i>&nbsp;        cards.add(new SetCardInfo(&quot;Oubliette&quot;, 11, Rarity.COMMON, mage.cards.o.Oubliette1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>127</i>&nbsp;        cards.add(new SetCardInfo(&quot;Oubliette&quot;, 12, Rarity.COMMON, mage.cards.o.Oubliette1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>128</i>&nbsp;        cards.add(new SetCardInfo(&quot;Piety&quot;, 64, Rarity.COMMON, mage.cards.p.Piety1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>129</i>&nbsp;        cards.add(new SetCardInfo(&quot;Piety&quot;, 65, Rarity.COMMON, mage.cards.p.Piety1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>130</i>&nbsp;        cards.add(new SetCardInfo(&quot;Pyramids&quot;, 81, Rarity.RARE, mage.cards.p.Pyramids.class));</b>
+<b class="fc"><i>131</i>&nbsp;        cards.add(new SetCardInfo(&quot;Repentant Blacksmith&quot;, 66, Rarity.RARE, mage.cards.r.RepentantBlacksmith.class));</b>
+<b class="fc"><i>132</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rukh Egg&quot;, 52, Rarity.COMMON, mage.cards.r.RukhEgg1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>133</i>&nbsp;        cards.add(new SetCardInfo(&quot;Rukh Egg&quot;, 53, Rarity.COMMON, mage.cards.r.RukhEgg1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>134</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sandals of Abdallah&quot;, 83, Rarity.UNCOMMON, mage.cards.s.SandalsOfAbdallah.class));</b>
+<b class="fc"><i>135</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sandstorm&quot;, 38, Rarity.COMMON, mage.cards.s.Sandstorm.class));</b>
+<b class="fc"><i>136</i>&nbsp;        cards.add(new SetCardInfo(&quot;Serendib Djinn&quot;, 25, Rarity.RARE, mage.cards.s.SerendibDjinn.class));</b>
+<b class="fc"><i>137</i>&nbsp;        cards.add(new SetCardInfo(&quot;Serendib Efreet&quot;, 26, Rarity.RARE, mage.cards.s.SerendibEfreet.class));</b>
+<b class="fc"><i>138</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sindbad&quot;, 27, Rarity.UNCOMMON, mage.cards.s.Sindbad.class));</b>
+<b class="fc"><i>139</i>&nbsp;        cards.add(new SetCardInfo(&quot;Singing Tree&quot;, 39, Rarity.RARE, mage.cards.s.SingingTree.class));</b>
+<b class="fc"><i>140</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sorceress Queen&quot;, 13, Rarity.UNCOMMON, mage.cards.s.SorceressQueen.class));</b>
+<b class="fc"><i>141</i>&nbsp;        cards.add(new SetCardInfo(&quot;Stone-Throwing Devils&quot;, 14, Rarity.COMMON, mage.cards.s.StoneThrowingDevils1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>142</i>&nbsp;        cards.add(new SetCardInfo(&quot;Stone-Throwing Devils&quot;, 15, Rarity.COMMON, mage.cards.s.StoneThrowingDevils1.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>143</i>&nbsp;        cards.add(new SetCardInfo(&quot;Unstable Mutation&quot;, 28, Rarity.COMMON, mage.cards.u.UnstableMutation.class));</b>
+<b class="fc"><i>144</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wyluli Wolf&quot;, 40, Rarity.COMMON, mage.cards.w.WyluliWolf.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>145</i>&nbsp;        cards.add(new SetCardInfo(&quot;Wyluli Wolf&quot;, 41, Rarity.COMMON, mage.cards.w.WyluliWolf.class, new CardGraphicInfo(null, true)));</b>
+<b class="fc"><i>146</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ydwen Efreet&quot;, 54, Rarity.RARE, mage.cards.y.YdwenEfreet.class));</b>
+<b class="fc"><i>147</i>&nbsp;    }</b>
+<i>148</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

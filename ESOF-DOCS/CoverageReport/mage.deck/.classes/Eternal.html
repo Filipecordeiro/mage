@@ -1,0 +1,745 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Eternal</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.deck</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Eternal (mage.deck)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Eternal</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 618)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;* Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp;*
+<i>4</i>&nbsp;* Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp;* permitted provided that the following conditions are met:
+<i>6</i>&nbsp;*
+<i>7</i>&nbsp;*    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp;*       conditions and the following disclaimer.
+<i>9</i>&nbsp;*
+<i>10</i>&nbsp;*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp;*       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp;*       provided with the distribution.
+<i>13</i>&nbsp;*
+<i>14</i>&nbsp;* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp;* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp;* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp;* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp;* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp;* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp;* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp;* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp;*
+<i>24</i>&nbsp;* The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp;* authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp;* or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp;*/
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;package mage.deck;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;import mage.cards.decks.Constructed;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;/**
+<i>34</i>&nbsp; * This class implements the new casual format &quot;Eternal&quot;, which is legacy with no reserved list cards legal.
+<i>35</i>&nbsp; * Banlist taken from &lt;https://www.reddit.com/r/mtgEternal/&gt;
+<i>36</i>&nbsp; *
+<i>37</i>&nbsp; * @author marthinwurer@gmail.com
+<i>38</i>&nbsp; */
+<i>39</i>&nbsp;public class Eternal extends Constructed {
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;	public Eternal() {
+<b class="nc"><i>42</i>&nbsp;        super(&quot;Constructed - Eternal&quot;);</b>
+<i>43</i>&nbsp;       
+<b class="nc"><i>44</i>&nbsp;        banned.add(&quot;Abeyance&quot;);</b>
+<b class="nc"><i>45</i>&nbsp;        banned.add(&quot;Aboroth&quot;);</b>
+<b class="nc"><i>46</i>&nbsp;        banned.add(&quot;Academy Rector&quot;);</b>
+<b class="nc"><i>47</i>&nbsp;        banned.add(&quot;Acid Rain&quot;);</b>
+<b class="nc"><i>48</i>&nbsp;        banned.add(&quot;Acidic Dagger&quot;);</b>
+<b class="nc"><i>49</i>&nbsp;        banned.add(&quot;Adun Oakenshield&quot;);</b>
+<b class="nc"><i>50</i>&nbsp;        banned.add(&quot;Advantageous Proclamation&quot;);</b>
+<b class="nc"><i>51</i>&nbsp;        banned.add(&quot;Aegis of the Meek&quot;);</b>
+<b class="nc"><i>52</i>&nbsp;        banned.add(&quot;Aeolipile&quot;);</b>
+<b class="nc"><i>53</i>&nbsp;        banned.add(&quot;Afiya Grove&quot;);</b>
+<b class="nc"><i>54</i>&nbsp;        banned.add(&quot;Aku Djinn&quot;);</b>
+<b class="nc"><i>55</i>&nbsp;        banned.add(&quot;Al-abara&#39;s Carpet&quot;);</b>
+<b class="nc"><i>56</i>&nbsp;        banned.add(&quot;Alchor&#39;s Tomb&quot;);</b>
+<b class="nc"><i>57</i>&nbsp;        banned.add(&quot;Ali from Cairo&quot;);</b>
+<b class="nc"><i>58</i>&nbsp;        banned.add(&quot;All Hallow&#39;s Eve&quot;);</b>
+<b class="nc"><i>59</i>&nbsp;        banned.add(&quot;Altar of Bone&quot;);</b>
+<b class="nc"><i>60</i>&nbsp;        banned.add(&quot;Aluren&quot;);</b>
+<b class="nc"><i>61</i>&nbsp;        banned.add(&quot;Amulet of Quoz&quot;);</b>
+<b class="nc"><i>62</i>&nbsp;        banned.add(&quot;Amulet of Unmaking&quot;);</b>
+<b class="nc"><i>63</i>&nbsp;        banned.add(&quot;An-Zerrin Ruins&quot;);</b>
+<b class="nc"><i>64</i>&nbsp;        banned.add(&quot;Anaba Ancestor&quot;);</b>
+<b class="nc"><i>65</i>&nbsp;        banned.add(&quot;Anaba Spirit Crafter&quot;);</b>
+<b class="nc"><i>66</i>&nbsp;        banned.add(&quot;Ancestral Knowledge&quot;);</b>
+<b class="nc"><i>67</i>&nbsp;        banned.add(&quot;Ancestral Recall&quot;);</b>
+<b class="nc"><i>68</i>&nbsp;        banned.add(&quot;Angus Mackenzie&quot;);</b>
+<b class="nc"><i>69</i>&nbsp;        banned.add(&quot;Anvil of Bogardan&quot;);</b>
+<b class="nc"><i>70</i>&nbsp;        banned.add(&quot;Apocalypse Chime&quot;);</b>
+<b class="nc"><i>71</i>&nbsp;        banned.add(&quot;Apocalypse&quot;);</b>
+<b class="nc"><i>72</i>&nbsp;        banned.add(&quot;Argivian Archaeologist&quot;);</b>
+<b class="nc"><i>73</i>&nbsp;        banned.add(&quot;Argothian Wurm&quot;);</b>
+<b class="nc"><i>74</i>&nbsp;        banned.add(&quot;Ashnod&#39;s Cylix&quot;);</b>
+<b class="nc"><i>75</i>&nbsp;        banned.add(&quot;Asmira, Holy Avenger&quot;);</b>
+<b class="nc"><i>76</i>&nbsp;        banned.add(&quot;Auspicious Ancestor&quot;);</b>
+<b class="nc"><i>77</i>&nbsp;        banned.add(&quot;Autumn Willow&quot;);</b>
+<b class="nc"><i>78</i>&nbsp;        banned.add(&quot;Avenging Angel&quot;);</b>
+<b class="nc"><i>79</i>&nbsp;        banned.add(&quot;Avizoa&quot;);</b>
+<b class="nc"><i>80</i>&nbsp;        banned.add(&quot;Aysen Crusader&quot;);</b>
+<b class="nc"><i>81</i>&nbsp;        banned.add(&quot;Aysen Highway&quot;);</b>
+<b class="nc"><i>82</i>&nbsp;        banned.add(&quot;Backup Plan&quot;);</b>
+<b class="nc"><i>83</i>&nbsp;        banned.add(&quot;Badlands&quot;);</b>
+<b class="nc"><i>84</i>&nbsp;        banned.add(&quot;Baki&#39;s Curse&quot;);</b>
+<b class="nc"><i>85</i>&nbsp;        banned.add(&quot;Balance&quot;);</b>
+<b class="nc"><i>86</i>&nbsp;        banned.add(&quot;Balduvian Hydra&quot;);</b>
+<b class="nc"><i>87</i>&nbsp;        banned.add(&quot;Balduvian Trading Post&quot;);</b>
+<b class="nc"><i>88</i>&nbsp;        banned.add(&quot;Balm of Restoration&quot;);</b>
+<b class="nc"><i>89</i>&nbsp;        banned.add(&quot;Baron Sengir&quot;);</b>
+<b class="nc"><i>90</i>&nbsp;        banned.add(&quot;Barreling Attack&quot;);</b>
+<b class="nc"><i>91</i>&nbsp;        banned.add(&quot;Barrin, Master Wizard&quot;);</b>
+<b class="nc"><i>92</i>&nbsp;        banned.add(&quot;Bartel Runeaxe&quot;);</b>
+<b class="nc"><i>93</i>&nbsp;        banned.add(&quot;Bayou&quot;);</b>
+<b class="nc"><i>94</i>&nbsp;        banned.add(&quot;Bazaar of Baghdad&quot;);</b>
+<b class="nc"><i>95</i>&nbsp;        banned.add(&quot;Bazaar of Wonders&quot;);</b>
+<b class="nc"><i>96</i>&nbsp;        banned.add(&quot;Beast Walkers&quot;);</b>
+<b class="nc"><i>97</i>&nbsp;        banned.add(&quot;Benthic Djinn&quot;);</b>
+<b class="nc"><i>98</i>&nbsp;        banned.add(&quot;Black Carriage&quot;);</b>
+<b class="nc"><i>99</i>&nbsp;        banned.add(&quot;Black Lotus&quot;);</b>
+<b class="nc"><i>100</i>&nbsp;        banned.add(&quot;Blaze of Glory&quot;);</b>
+<b class="nc"><i>101</i>&nbsp;        banned.add(&quot;Blizzard&quot;);</b>
+<b class="nc"><i>102</i>&nbsp;        banned.add(&quot;Bogardan Phoenix&quot;);</b>
+<b class="nc"><i>103</i>&nbsp;        banned.add(&quot;Bone Dancer&quot;);</b>
+<b class="nc"><i>104</i>&nbsp;        banned.add(&quot;Bone Mask&quot;);</b>
+<b class="nc"><i>105</i>&nbsp;        banned.add(&quot;Boris Devilboon&quot;);</b>
+<b class="nc"><i>106</i>&nbsp;        banned.add(&quot;Bosium Strip&quot;);</b>
+<b class="nc"><i>107</i>&nbsp;        banned.add(&quot;Brago&#39;s Favor&quot;);</b>
+<b class="nc"><i>108</i>&nbsp;        banned.add(&quot;Braingeyser&quot;);</b>
+<b class="nc"><i>109</i>&nbsp;        banned.add(&quot;Brand of Ill Omen&quot;);</b>
+<b class="nc"><i>110</i>&nbsp;        banned.add(&quot;Breathstealer&#39;s Crypt&quot;);</b>
+<b class="nc"><i>111</i>&nbsp;        banned.add(&quot;Bronze Tablet&quot;);</b>
+<b class="nc"><i>112</i>&nbsp;        banned.add(&quot;Brushwagg&quot;);</b>
+<b class="nc"><i>113</i>&nbsp;        banned.add(&quot;Bubble Matrix&quot;);</b>
+<b class="nc"><i>114</i>&nbsp;        banned.add(&quot;Cadaverous Bloom&quot;);</b>
+<b class="nc"><i>115</i>&nbsp;        banned.add(&quot;Call to Arms&quot;);</b>
+<b class="nc"><i>116</i>&nbsp;        banned.add(&quot;Candelabra of Tawnos&quot;);</b>
+<b class="nc"><i>117</i>&nbsp;        banned.add(&quot;Canopy Dragon&quot;);</b>
+<b class="nc"><i>118</i>&nbsp;        banned.add(&quot;Carnival of Souls&quot;);</b>
+<b class="nc"><i>119</i>&nbsp;        banned.add(&quot;Carrion&quot;);</b>
+<b class="nc"><i>120</i>&nbsp;        banned.add(&quot;Catacomb Dragon&quot;);</b>
+<b class="nc"><i>121</i>&nbsp;        banned.add(&quot;Caverns of Despair&quot;);</b>
+<b class="nc"><i>122</i>&nbsp;        banned.add(&quot;Chain Stasis&quot;);</b>
+<b class="nc"><i>123</i>&nbsp;        banned.add(&quot;Chains of Mephistopheles&quot;);</b>
+<b class="nc"><i>124</i>&nbsp;        banned.add(&quot;Channel&quot;);</b>
+<b class="nc"><i>125</i>&nbsp;        banned.add(&quot;Chaos Harlequin&quot;);</b>
+<b class="nc"><i>126</i>&nbsp;        banned.add(&quot;Chaos Orb&quot;);</b>
+<b class="nc"><i>127</i>&nbsp;        banned.add(&quot;Chaosphere&quot;);</b>
+<b class="nc"><i>128</i>&nbsp;        banned.add(&quot;Chromatic Armor&quot;);</b>
+<b class="nc"><i>129</i>&nbsp;        banned.add(&quot;Chronatog&quot;);</b>
+<b class="nc"><i>130</i>&nbsp;        banned.add(&quot;Circle of Despair&quot;);</b>
+<b class="nc"><i>131</i>&nbsp;        banned.add(&quot;Citanul Centaurs&quot;);</b>
+<b class="nc"><i>132</i>&nbsp;        banned.add(&quot;Citanul Druid&quot;);</b>
+<b class="nc"><i>133</i>&nbsp;        banned.add(&quot;City in a Bottle&quot;);</b>
+<b class="nc"><i>134</i>&nbsp;        banned.add(&quot;City of Shadows&quot;);</b>
+<b class="nc"><i>135</i>&nbsp;        banned.add(&quot;City of Solitude&quot;);</b>
+<b class="nc"><i>136</i>&nbsp;        banned.add(&quot;City of Traitors&quot;);</b>
+<b class="nc"><i>137</i>&nbsp;        banned.add(&quot;Cleanse&quot;);</b>
+<b class="nc"><i>138</i>&nbsp;        banned.add(&quot;Cleansing&quot;);</b>
+<b class="nc"><i>139</i>&nbsp;        banned.add(&quot;Commander Greven il-Vec&quot;);</b>
+<b class="nc"><i>140</i>&nbsp;        banned.add(&quot;Conch Horn&quot;);</b>
+<b class="nc"><i>141</i>&nbsp;        banned.add(&quot;Contract from Below&quot;);</b>
+<b class="nc"><i>142</i>&nbsp;        banned.add(&quot;Copy Artifact&quot;);</b>
+<b class="nc"><i>143</i>&nbsp;        banned.add(&quot;Corpse Dance&quot;);</b>
+<b class="nc"><i>144</i>&nbsp;        banned.add(&quot;Corrosion&quot;);</b>
+<b class="nc"><i>145</i>&nbsp;        banned.add(&quot;Covetous Dragon&quot;);</b>
+<b class="nc"><i>146</i>&nbsp;        banned.add(&quot;Crovax the Cursed&quot;);</b>
+<b class="nc"><i>147</i>&nbsp;        banned.add(&quot;Cursed Scroll&quot;);</b>
+<b class="nc"><i>148</i>&nbsp;        banned.add(&quot;Cycle of Life&quot;);</b>
+<b class="nc"><i>149</i>&nbsp;        banned.add(&quot;Cyclopean Tomb&quot;);</b>
+<b class="nc"><i>150</i>&nbsp;        banned.add(&quot;Damping Field&quot;);</b>
+<b class="nc"><i>151</i>&nbsp;        banned.add(&quot;Darkpact&quot;);</b>
+<b class="nc"><i>152</i>&nbsp;        banned.add(&quot;Daughter of Autumn&quot;);</b>
+<b class="nc"><i>153</i>&nbsp;        banned.add(&quot;Debt of Loyalty&quot;);</b>
+<b class="nc"><i>154</i>&nbsp;        banned.add(&quot;Delif&#39;s Cube&quot;);</b>
+<b class="nc"><i>155</i>&nbsp;        banned.add(&quot;Demonic Attorney&quot;);</b>
+<b class="nc"><i>156</i>&nbsp;        banned.add(&quot;Demonic Consultation&quot;);</b>
+<b class="nc"><i>157</i>&nbsp;        banned.add(&quot;Demonic Hordes&quot;);</b>
+<b class="nc"><i>158</i>&nbsp;        banned.add(&quot;Demonic Tutor&quot;);</b>
+<b class="nc"><i>159</i>&nbsp;        banned.add(&quot;Deranged Hermit&quot;);</b>
+<b class="nc"><i>160</i>&nbsp;        banned.add(&quot;Diamond Kaleidoscope&quot;);</b>
+<b class="nc"><i>161</i>&nbsp;        banned.add(&quot;Diamond Valley&quot;);</b>
+<b class="nc"><i>162</i>&nbsp;        banned.add(&quot;Didgeridoo&quot;);</b>
+<b class="nc"><i>163</i>&nbsp;        banned.add(&quot;Dig Through Time&quot;);</b>
+<b class="nc"><i>164</i>&nbsp;        banned.add(&quot;Discordant Spirit&quot;);</b>
+<b class="nc"><i>165</i>&nbsp;        banned.add(&quot;Disharmony&quot;);</b>
+<b class="nc"><i>166</i>&nbsp;        banned.add(&quot;Divine Intervention&quot;);</b>
+<b class="nc"><i>167</i>&nbsp;        banned.add(&quot;Divine Retribution&quot;);</b>
+<b class="nc"><i>168</i>&nbsp;        banned.add(&quot;Dominating Licid&quot;);</b>
+<b class="nc"><i>169</i>&nbsp;        banned.add(&quot;Donate&quot;);</b>
+<b class="nc"><i>170</i>&nbsp;        banned.add(&quot;Double Stroke&quot;);</b>
+<b class="nc"><i>171</i>&nbsp;        banned.add(&quot;Draconian Cylix&quot;);</b>
+<b class="nc"><i>172</i>&nbsp;        banned.add(&quot;Dream Halls&quot;);</b>
+<b class="nc"><i>173</i>&nbsp;        banned.add(&quot;Drop of Honey&quot;);</b>
+<b class="nc"><i>174</i>&nbsp;        banned.add(&quot;Dwarven Armorer&quot;);</b>
+<b class="nc"><i>175</i>&nbsp;        banned.add(&quot;Dwarven Pony&quot;);</b>
+<b class="nc"><i>176</i>&nbsp;        banned.add(&quot;Dwarven Sea Clan&quot;);</b>
+<b class="nc"><i>177</i>&nbsp;        banned.add(&quot;Dwarven Thaumaturgist&quot;);</b>
+<b class="nc"><i>178</i>&nbsp;        banned.add(&quot;Dystopia&quot;);</b>
+<b class="nc"><i>179</i>&nbsp;        banned.add(&quot;Earthcraft&quot;);</b>
+<b class="nc"><i>180</i>&nbsp;        banned.add(&quot;Earthlink&quot;);</b>
+<b class="nc"><i>181</i>&nbsp;        banned.add(&quot;Ebon Praetor&quot;);</b>
+<b class="nc"><i>182</i>&nbsp;        banned.add(&quot;Eladamri, Lord of Leaves&quot;);</b>
+<b class="nc"><i>183</i>&nbsp;        banned.add(&quot;Elder Spawn&quot;);</b>
+<b class="nc"><i>184</i>&nbsp;        banned.add(&quot;Elephant Graveyard&quot;);</b>
+<b class="nc"><i>185</i>&nbsp;        banned.add(&quot;Elkin Lair&quot;);</b>
+<b class="nc"><i>186</i>&nbsp;        banned.add(&quot;Elven Lyre&quot;);</b>
+<b class="nc"><i>187</i>&nbsp;        banned.add(&quot;Elvish Farmer&quot;);</b>
+<b class="nc"><i>188</i>&nbsp;        banned.add(&quot;Emberwilde Caliph&quot;);</b>
+<b class="nc"><i>189</i>&nbsp;        banned.add(&quot;Emberwilde Djinn&quot;);</b>
+<b class="nc"><i>190</i>&nbsp;        banned.add(&quot;Energy Bolt&quot;);</b>
+<b class="nc"><i>191</i>&nbsp;        banned.add(&quot;Energy Storm&quot;);</b>
+<b class="nc"><i>192</i>&nbsp;        banned.add(&quot;Energy Vortex&quot;);</b>
+<b class="nc"><i>193</i>&nbsp;        banned.add(&quot;Equipoise&quot;);</b>
+<b class="nc"><i>194</i>&nbsp;        banned.add(&quot;Ertai&#39;s Familiar&quot;);</b>
+<b class="nc"><i>195</i>&nbsp;        banned.add(&quot;Ertai, Wizard Adept&quot;);</b>
+<b class="nc"><i>196</i>&nbsp;        banned.add(&quot;Escaped Shapeshifter&quot;);</b>
+<b class="nc"><i>197</i>&nbsp;        banned.add(&quot;Eternal Flame&quot;);</b>
+<b class="nc"><i>198</i>&nbsp;        banned.add(&quot;Eureka&quot;);</b>
+<b class="nc"><i>199</i>&nbsp;        banned.add(&quot;Exalted Dragon&quot;);</b>
+<b class="nc"><i>200</i>&nbsp;        banned.add(&quot;Exorcist&quot;);</b>
+<b class="nc"><i>201</i>&nbsp;        banned.add(&quot;Eye of Singularity&quot;);</b>
+<b class="nc"><i>202</i>&nbsp;        banned.add(&quot;Faerie Noble&quot;);</b>
+<b class="nc"><i>203</i>&nbsp;        banned.add(&quot;Falling Star&quot;);</b>
+<b class="nc"><i>204</i>&nbsp;        banned.add(&quot;Farmstead&quot;);</b>
+<b class="nc"><i>205</i>&nbsp;        banned.add(&quot;Fastbond&quot;);</b>
+<b class="nc"><i>206</i>&nbsp;        banned.add(&quot;Fatal Lore&quot;);</b>
+<b class="nc"><i>207</i>&nbsp;        banned.add(&quot;Femeref Enchantress&quot;);</b>
+<b class="nc"><i>208</i>&nbsp;        banned.add(&quot;Field of Dreams&quot;);</b>
+<b class="nc"><i>209</i>&nbsp;        banned.add(&quot;Firestorm Hellkite&quot;);</b>
+<b class="nc"><i>210</i>&nbsp;        banned.add(&quot;Firestorm Phoenix&quot;);</b>
+<b class="nc"><i>211</i>&nbsp;        banned.add(&quot;Firestorm&quot;);</b>
+<b class="nc"><i>212</i>&nbsp;        banned.add(&quot;Flash&quot;);</b>
+<b class="nc"><i>213</i>&nbsp;        banned.add(&quot;Flooded Shoreline&quot;);</b>
+<b class="nc"><i>214</i>&nbsp;        banned.add(&quot;Floodwater Dam&quot;);</b>
+<b class="nc"><i>215</i>&nbsp;        banned.add(&quot;Flow of Maggots&quot;);</b>
+<b class="nc"><i>216</i>&nbsp;        banned.add(&quot;Forbidden Ritual&quot;);</b>
+<b class="nc"><i>217</i>&nbsp;        banned.add(&quot;Forcefield&quot;);</b>
+<b class="nc"><i>218</i>&nbsp;        banned.add(&quot;Forethought Amulet&quot;);</b>
+<b class="nc"><i>219</i>&nbsp;        banned.add(&quot;Fork&quot;);</b>
+<b class="nc"><i>220</i>&nbsp;        banned.add(&quot;Formation&quot;);</b>
+<b class="nc"><i>221</i>&nbsp;        banned.add(&quot;Forsaken Wastes&quot;);</b>
+<b class="nc"><i>222</i>&nbsp;        banned.add(&quot;Frankenstein&#39;s Monster&quot;);</b>
+<b class="nc"><i>223</i>&nbsp;        banned.add(&quot;Frantic Search&quot;);</b>
+<b class="nc"><i>224</i>&nbsp;        banned.add(&quot;Frenetic Efreet&quot;);</b>
+<b class="nc"><i>225</i>&nbsp;        banned.add(&quot;Fungal Bloom&quot;);</b>
+<b class="nc"><i>226</i>&nbsp;        banned.add(&quot;Fungus Elemental&quot;);</b>
+<b class="nc"><i>227</i>&nbsp;        banned.add(&quot;Fyndhorn Pollen&quot;);</b>
+<b class="nc"><i>228</i>&nbsp;        banned.add(&quot;Gaea&#39;s Avenger&quot;);</b>
+<b class="nc"><i>229</i>&nbsp;        banned.add(&quot;Gaea&#39;s Cradle&quot;);</b>
+<b class="nc"><i>230</i>&nbsp;        banned.add(&quot;Gallowbraid&quot;);</b>
+<b class="nc"><i>231</i>&nbsp;        banned.add(&quot;Gargantuan Gorilla&quot;);</b>
+<b class="nc"><i>232</i>&nbsp;        banned.add(&quot;Gate to Phyrexia&quot;);</b>
+<b class="nc"><i>233</i>&nbsp;        banned.add(&quot;Gauntlet of Might&quot;);</b>
+<b class="nc"><i>234</i>&nbsp;        banned.add(&quot;General Jarkeld&quot;);</b>
+<b class="nc"><i>235</i>&nbsp;        banned.add(&quot;Gilded Drake&quot;);</b>
+<b class="nc"><i>236</i>&nbsp;        banned.add(&quot;Glacial Crevasses&quot;);</b>
+<b class="nc"><i>237</i>&nbsp;        banned.add(&quot;Goblin Bomb&quot;);</b>
+<b class="nc"><i>238</i>&nbsp;        banned.add(&quot;Goblin Flotilla&quot;);</b>
+<b class="nc"><i>239</i>&nbsp;        banned.add(&quot;Goblin Recruiter&quot;);</b>
+<b class="nc"><i>240</i>&nbsp;        banned.add(&quot;Goblin Wizard&quot;);</b>
+<b class="nc"><i>241</i>&nbsp;        banned.add(&quot;Golgothian Sylex&quot;);</b>
+<b class="nc"><i>242</i>&nbsp;        banned.add(&quot;Gosta Dirk&quot;);</b>
+<b class="nc"><i>243</i>&nbsp;        banned.add(&quot;Grandmother Sengir&quot;);</b>
+<b class="nc"><i>244</i>&nbsp;        banned.add(&quot;Granite Gargoyle&quot;);</b>
+<b class="nc"><i>245</i>&nbsp;        banned.add(&quot;Grave Robbers&quot;);</b>
+<b class="nc"><i>246</i>&nbsp;        banned.add(&quot;Gravebind&quot;);</b>
+<b class="nc"><i>247</i>&nbsp;        banned.add(&quot;Gravity Sphere&quot;);</b>
+<b class="nc"><i>248</i>&nbsp;        banned.add(&quot;Great Whale&quot;);</b>
+<b class="nc"><i>249</i>&nbsp;        banned.add(&quot;Griffin Canyon&quot;);</b>
+<b class="nc"><i>250</i>&nbsp;        banned.add(&quot;Grim Feast&quot;);</b>
+<b class="nc"><i>251</i>&nbsp;        banned.add(&quot;Grim Monolith&quot;);</b>
+<b class="nc"><i>252</i>&nbsp;        banned.add(&quot;Guardian Beast&quot;);</b>
+<b class="nc"><i>253</i>&nbsp;        banned.add(&quot;Guiding Spirit&quot;);</b>
+<b class="nc"><i>254</i>&nbsp;        banned.add(&quot;Gush&quot;);</b>
+<b class="nc"><i>255</i>&nbsp;        banned.add(&quot;Gustha&#39;s Scepter&quot;);</b>
+<b class="nc"><i>256</i>&nbsp;        banned.add(&quot;Gwendlyn Di Corci&quot;);</b>
+<b class="nc"><i>257</i>&nbsp;        banned.add(&quot;Hakim, Loreweaver&quot;);</b>
+<b class="nc"><i>258</i>&nbsp;        banned.add(&quot;Halfdane&quot;);</b>
+<b class="nc"><i>259</i>&nbsp;        banned.add(&quot;Hall of Gemstone&quot;);</b>
+<b class="nc"><i>260</i>&nbsp;        banned.add(&quot;Halls of Mist&quot;);</b>
+<b class="nc"><i>261</i>&nbsp;        banned.add(&quot;Hand of Justice&quot;);</b>
+<b class="nc"><i>262</i>&nbsp;        banned.add(&quot;Harbinger of Night&quot;);</b>
+<b class="nc"><i>263</i>&nbsp;        banned.add(&quot;Hatred&quot;);</b>
+<b class="nc"><i>264</i>&nbsp;        banned.add(&quot;Haunting Wind&quot;);</b>
+<b class="nc"><i>265</i>&nbsp;        banned.add(&quot;Hazduhr the Abbot&quot;);</b>
+<b class="nc"><i>266</i>&nbsp;        banned.add(&quot;Hazezon Tamar&quot;);</b>
+<b class="nc"><i>267</i>&nbsp;        banned.add(&quot;Heart Wolf&quot;);</b>
+<b class="nc"><i>268</i>&nbsp;        banned.add(&quot;Heart of Bogardan&quot;);</b>
+<b class="nc"><i>269</i>&nbsp;        banned.add(&quot;Heart of Yavimaya&quot;);</b>
+<b class="nc"><i>270</i>&nbsp;        banned.add(&quot;Heat Stroke&quot;);</b>
+<b class="nc"><i>271</i>&nbsp;        banned.add(&quot;Hellfire&quot;);</b>
+<b class="nc"><i>272</i>&nbsp;        banned.add(&quot;Helm of Obedience&quot;);</b>
+<b class="nc"><i>273</i>&nbsp;        banned.add(&quot;Herald of Serra&quot;);</b>
+<b class="nc"><i>274</i>&nbsp;        banned.add(&quot;Hermit Druid&quot;);</b>
+<b class="nc"><i>275</i>&nbsp;        banned.add(&quot;Hidden Path&quot;);</b>
+<b class="nc"><i>276</i>&nbsp;        banned.add(&quot;Hivis of the Scale&quot;);</b>
+<b class="nc"><i>277</i>&nbsp;        banned.add(&quot;Homarid Shaman&quot;);</b>
+<b class="nc"><i>278</i>&nbsp;        banned.add(&quot;Hot Springs&quot;);</b>
+<b class="nc"><i>279</i>&nbsp;        banned.add(&quot;Humility&quot;);</b>
+<b class="nc"><i>280</i>&nbsp;        banned.add(&quot;Icatian Lieutenant&quot;);</b>
+<b class="nc"><i>281</i>&nbsp;        banned.add(&quot;Icatian Skirmishers&quot;);</b>
+<b class="nc"><i>282</i>&nbsp;        banned.add(&quot;Ice Cauldron&quot;);</b>
+<b class="nc"><i>283</i>&nbsp;        banned.add(&quot;Ifh-Biff Efreet&quot;);</b>
+<b class="nc"><i>284</i>&nbsp;        banned.add(&quot;Illusionary Mask&quot;);</b>
+<b class="nc"><i>285</i>&nbsp;        banned.add(&quot;Illusionary Presence&quot;);</b>
+<b class="nc"><i>286</i>&nbsp;        banned.add(&quot;Illusions of Grandeur&quot;);</b>
+<b class="nc"><i>287</i>&nbsp;        banned.add(&quot;Immediate Action&quot;);</b>
+<b class="nc"><i>288</i>&nbsp;        banned.add(&quot;Imperial Seal&quot;);</b>
+<b class="nc"><i>289</i>&nbsp;        banned.add(&quot;Implements of Sacrifice&quot;);</b>
+<b class="nc"><i>290</i>&nbsp;        banned.add(&quot;Imprison&quot;);</b>
+<b class="nc"><i>291</i>&nbsp;        banned.add(&quot;In the Eye of Chaos&quot;);</b>
+<b class="nc"><i>292</i>&nbsp;        banned.add(&quot;Infernal Denizen&quot;);</b>
+<b class="nc"><i>293</i>&nbsp;        banned.add(&quot;Infernal Tribute&quot;);</b>
+<b class="nc"><i>294</i>&nbsp;        banned.add(&quot;Infinite Authority&quot;);</b>
+<b class="nc"><i>295</i>&nbsp;        banned.add(&quot;Inner Sanctum&quot;);</b>
+<b class="nc"><i>296</i>&nbsp;        banned.add(&quot;Intuition&quot;);</b>
+<b class="nc"><i>297</i>&nbsp;        banned.add(&quot;Invoke Prejudice&quot;);</b>
+<b class="nc"><i>298</i>&nbsp;        banned.add(&quot;Island of Wak-Wak&quot;);</b>
+<b class="nc"><i>299</i>&nbsp;        banned.add(&quot;Iterative Analysis&quot;);</b>
+<b class="nc"><i>300</i>&nbsp;        banned.add(&quot;Ivory Gargoyle&quot;);</b>
+<b class="nc"><i>301</i>&nbsp;        banned.add(&quot;Jabari&#39;s Influence&quot;);</b>
+<b class="nc"><i>302</i>&nbsp;        banned.add(&quot;Jacques le Vert&quot;);</b>
+<b class="nc"><i>303</i>&nbsp;        banned.add(&quot;Jester&#39;s Mask&quot;);</b>
+<b class="nc"><i>304</i>&nbsp;        banned.add(&quot;Jeweled Bird&quot;);</b>
+<b class="nc"><i>305</i>&nbsp;        banned.add(&quot;Jihad&quot;);</b>
+<b class="nc"><i>306</i>&nbsp;        banned.add(&quot;Jovial Evil&quot;);</b>
+<b class="nc"><i>307</i>&nbsp;        banned.add(&quot;Jungle Patrol&quot;);</b>
+<b class="nc"><i>308</i>&nbsp;        banned.add(&quot;Juzam Djinn&quot;);</b>
+<b class="nc"><i>309</i>&nbsp;        banned.add(&quot;Kaervek&#39;s Spite&quot;);</b>
+<b class="nc"><i>310</i>&nbsp;        banned.add(&quot;Karn, Silver Golem&quot;);</b>
+<b class="nc"><i>311</i>&nbsp;        banned.add(&quot;Katabatic Winds&quot;);</b>
+<b class="nc"><i>312</i>&nbsp;        banned.add(&quot;Kaysa&quot;);</b>
+<b class="nc"><i>313</i>&nbsp;        banned.add(&quot;Keeper of Tresserhorn&quot;);</b>
+<b class="nc"><i>314</i>&nbsp;        banned.add(&quot;Khabal Ghoul&quot;);</b>
+<b class="nc"><i>315</i>&nbsp;        banned.add(&quot;King Suleiman&quot;);</b>
+<b class="nc"><i>316</i>&nbsp;        banned.add(&quot;Kjeldoran Knight&quot;);</b>
+<b class="nc"><i>317</i>&nbsp;        banned.add(&quot;Kjeldoran Outpost&quot;);</b>
+<b class="nc"><i>318</i>&nbsp;        banned.add(&quot;Kjeldoran Phalanx&quot;);</b>
+<b class="nc"><i>319</i>&nbsp;        banned.add(&quot;Knights of Thorn&quot;);</b>
+<b class="nc"><i>320</i>&nbsp;        banned.add(&quot;Knowledge Vault&quot;);</b>
+<b class="nc"><i>321</i>&nbsp;        banned.add(&quot;Kobold Overlord&quot;);</b>
+<b class="nc"><i>322</i>&nbsp;        banned.add(&quot;Kookus&quot;);</b>
+<b class="nc"><i>323</i>&nbsp;        banned.add(&quot;Koskun Falls&quot;);</b>
+<b class="nc"><i>324</i>&nbsp;        banned.add(&quot;Krovikan Horror&quot;);</b>
+<b class="nc"><i>325</i>&nbsp;        banned.add(&quot;Kudzu&quot;);</b>
+<b class="nc"><i>326</i>&nbsp;        banned.add(&quot;Kukemssa Pirates&quot;);</b>
+<b class="nc"><i>327</i>&nbsp;        banned.add(&quot;Lady Caleria&quot;);</b>
+<b class="nc"><i>328</i>&nbsp;        banned.add(&quot;Lady Evangela&quot;);</b>
+<b class="nc"><i>329</i>&nbsp;        banned.add(&quot;Lake of the Dead&quot;);</b>
+<b class="nc"><i>330</i>&nbsp;        banned.add(&quot;Land Cap&quot;);</b>
+<b class="nc"><i>331</i>&nbsp;        banned.add(&quot;Land Equilibrium&quot;);</b>
+<b class="nc"><i>332</i>&nbsp;        banned.add(&quot;Lava Tubes&quot;);</b>
+<b class="nc"><i>333</i>&nbsp;        banned.add(&quot;Leeches&quot;);</b>
+<b class="nc"><i>334</i>&nbsp;        banned.add(&quot;Leering Gargoyle&quot;);</b>
+<b class="nc"><i>335</i>&nbsp;        banned.add(&quot;Library of Alexandria&quot;);</b>
+<b class="nc"><i>336</i>&nbsp;        banned.add(&quot;Lich&quot;);</b>
+<b class="nc"><i>337</i>&nbsp;        banned.add(&quot;Lichenthrope&quot;);</b>
+<b class="nc"><i>338</i>&nbsp;        banned.add(&quot;Liege of the Hollows&quot;);</b>
+<b class="nc"><i>339</i>&nbsp;        banned.add(&quot;Life Matrix&quot;);</b>
+<b class="nc"><i>340</i>&nbsp;        banned.add(&quot;Lifeblood&quot;);</b>
+<b class="nc"><i>341</i>&nbsp;        banned.add(&quot;Lifeline&quot;);</b>
+<b class="nc"><i>342</i>&nbsp;        banned.add(&quot;Lightning Blow&quot;);</b>
+<b class="nc"><i>343</i>&nbsp;        banned.add(&quot;Lightning Cloud&quot;);</b>
+<b class="nc"><i>344</i>&nbsp;        banned.add(&quot;Lightning Dragon&quot;);</b>
+<b class="nc"><i>345</i>&nbsp;        banned.add(&quot;Lion&#39;s Eye Diamond&quot;);</b>
+<b class="nc"><i>346</i>&nbsp;        banned.add(&quot;Living Plane&quot;);</b>
+<b class="nc"><i>347</i>&nbsp;        banned.add(&quot;Livonya Silone&quot;);</b>
+<b class="nc"><i>348</i>&nbsp;        banned.add(&quot;Lodestone Bauble&quot;);</b>
+<b class="nc"><i>349</i>&nbsp;        banned.add(&quot;Lord of Tresserhorn&quot;);</b>
+<b class="nc"><i>350</i>&nbsp;        banned.add(&quot;Lotus Vale&quot;);</b>
+<b class="nc"><i>351</i>&nbsp;        banned.add(&quot;Lure of Prey&quot;);</b>
+<b class="nc"><i>352</i>&nbsp;        banned.add(&quot;Lurker&quot;);</b>
+<b class="nc"><i>353</i>&nbsp;        banned.add(&quot;Malignant Growth&quot;);</b>
+<b class="nc"><i>354</i>&nbsp;        banned.add(&quot;Mammoth Harness&quot;);</b>
+<b class="nc"><i>355</i>&nbsp;        banned.add(&quot;Mana Crypt&quot;);</b>
+<b class="nc"><i>356</i>&nbsp;        banned.add(&quot;Mana Drain&quot;);</b>
+<b class="nc"><i>357</i>&nbsp;        banned.add(&quot;Mana Matrix&quot;);</b>
+<b class="nc"><i>358</i>&nbsp;        banned.add(&quot;Mana Vault&quot;);</b>
+<b class="nc"><i>359</i>&nbsp;        banned.add(&quot;Mana Vortex&quot;);</b>
+<b class="nc"><i>360</i>&nbsp;        banned.add(&quot;Mana Web&quot;);</b>
+<b class="nc"><i>361</i>&nbsp;        banned.add(&quot;Mangara&#39;s Tome&quot;);</b>
+<b class="nc"><i>362</i>&nbsp;        banned.add(&quot;Maraxus of Keld&quot;);</b>
+<b class="nc"><i>363</i>&nbsp;        banned.add(&quot;Marjhan&quot;);</b>
+<b class="nc"><i>364</i>&nbsp;        banned.add(&quot;Marton Stromgald&quot;);</b>
+<b class="nc"><i>365</i>&nbsp;        banned.add(&quot;Martyr&#39;s Cry&quot;);</b>
+<b class="nc"><i>366</i>&nbsp;        banned.add(&quot;Martyrs of Korlis&quot;);</b>
+<b class="nc"><i>367</i>&nbsp;        banned.add(&quot;Master of the Hunt&quot;);</b>
+<b class="nc"><i>368</i>&nbsp;        banned.add(&quot;Masticore&quot;);</b>
+<b class="nc"><i>369</i>&nbsp;        banned.add(&quot;Meditate&quot;);</b>
+<b class="nc"><i>370</i>&nbsp;        banned.add(&quot;Memory Jar&quot;);</b>
+<b class="nc"><i>371</i>&nbsp;        banned.add(&quot;Mental Misstep&quot;);</b>
+<b class="nc"><i>372</i>&nbsp;        banned.add(&quot;Mercenaries&quot;);</b>
+<b class="nc"><i>373</i>&nbsp;        banned.add(&quot;Merchant Ship&quot;);</b>
+<b class="nc"><i>374</i>&nbsp;        banned.add(&quot;Mesmeric Trance&quot;);</b>
+<b class="nc"><i>375</i>&nbsp;        banned.add(&quot;Metalworker&quot;);</b>
+<b class="nc"><i>376</i>&nbsp;        banned.add(&quot;Mightstone&quot;);</b>
+<b class="nc"><i>377</i>&nbsp;        banned.add(&quot;Mind Over Matter&quot;);</b>
+<b class="nc"><i>378</i>&nbsp;        banned.add(&quot;Mind Twist&quot;);</b>
+<b class="nc"><i>379</i>&nbsp;        banned.add(&quot;Mind&#39;s Desire&quot;);</b>
+<b class="nc"><i>380</i>&nbsp;        banned.add(&quot;Mindbender Spores&quot;);</b>
+<b class="nc"><i>381</i>&nbsp;        banned.add(&quot;Minion of Tevesh Szat&quot;);</b>
+<b class="nc"><i>382</i>&nbsp;        banned.add(&quot;Mirror Universe&quot;);</b>
+<b class="nc"><i>383</i>&nbsp;        banned.add(&quot;Misers&#39; Cage&quot;);</b>
+<b class="nc"><i>384</i>&nbsp;        banned.add(&quot;Misfortune&quot;);</b>
+<b class="nc"><i>385</i>&nbsp;        banned.add(&quot;Mishra&#39;s Workshop&quot;);</b>
+<b class="nc"><i>386</i>&nbsp;        banned.add(&quot;Mist Dragon&quot;);</b>
+<b class="nc"><i>387</i>&nbsp;        banned.add(&quot;Moat&quot;);</b>
+<b class="nc"><i>388</i>&nbsp;        banned.add(&quot;Mold Demon&quot;);</b>
+<b class="nc"><i>389</i>&nbsp;        banned.add(&quot;Morinfen&quot;);</b>
+<b class="nc"><i>390</i>&nbsp;        banned.add(&quot;Morphling&quot;);</b>
+<b class="nc"><i>391</i>&nbsp;        banned.add(&quot;Mountain Titan&quot;);</b>
+<b class="nc"><i>392</i>&nbsp;        banned.add(&quot;Mox Diamond&quot;);</b>
+<b class="nc"><i>393</i>&nbsp;        banned.add(&quot;Mox Emerald&quot;);</b>
+<b class="nc"><i>394</i>&nbsp;        banned.add(&quot;Mox Jet&quot;);</b>
+<b class="nc"><i>395</i>&nbsp;        banned.add(&quot;Mox Pearl&quot;);</b>
+<b class="nc"><i>396</i>&nbsp;        banned.add(&quot;Mox Ruby&quot;);</b>
+<b class="nc"><i>397</i>&nbsp;        banned.add(&quot;Mox Sapphire&quot;);</b>
+<b class="nc"><i>398</i>&nbsp;        banned.add(&quot;Mudslide&quot;);</b>
+<b class="nc"><i>399</i>&nbsp;        banned.add(&quot;Multani, Maro-Sorcerer&quot;);</b>
+<b class="nc"><i>400</i>&nbsp;        banned.add(&quot;Musician&quot;);</b>
+<b class="nc"><i>401</i>&nbsp;        banned.add(&quot;Muzzio&#39;s Preparations&quot;);</b>
+<b class="nc"><i>402</i>&nbsp;        banned.add(&quot;Mwonvuli Ooze&quot;);</b>
+<b class="nc"><i>403</i>&nbsp;        banned.add(&quot;Mystic Decree&quot;);</b>
+<b class="nc"><i>404</i>&nbsp;        banned.add(&quot;Mystic Might&quot;);</b>
+<b class="nc"><i>405</i>&nbsp;        banned.add(&quot;Mystical Tutor&quot;);</b>
+<b class="nc"><i>406</i>&nbsp;        banned.add(&quot;Nameless Race&quot;);</b>
+<b class="nc"><i>407</i>&nbsp;        banned.add(&quot;Narwhal&quot;);</b>
+<b class="nc"><i>408</i>&nbsp;        banned.add(&quot;Natural Balance&quot;);</b>
+<b class="nc"><i>409</i>&nbsp;        banned.add(&quot;Natural Selection&quot;);</b>
+<b class="nc"><i>410</i>&nbsp;        banned.add(&quot;Nature&#39;s Wrath&quot;);</b>
+<b class="nc"><i>411</i>&nbsp;        banned.add(&quot;Necropotence&quot;);</b>
+<b class="nc"><i>412</i>&nbsp;        banned.add(&quot;Nether Void&quot;);</b>
+<b class="nc"><i>413</i>&nbsp;        banned.add(&quot;Niall Silvain&quot;);</b>
+<b class="nc"><i>414</i>&nbsp;        banned.add(&quot;North Star&quot;);</b>
+<b class="nc"><i>415</i>&nbsp;        banned.add(&quot;Nova Pentacle&quot;);</b>
+<b class="nc"><i>416</i>&nbsp;        banned.add(&quot;Null Chamber&quot;);</b>
+<b class="nc"><i>417</i>&nbsp;        banned.add(&quot;Null Rod&quot;);</b>
+<b class="nc"><i>418</i>&nbsp;        banned.add(&quot;Oath of Druids&quot;);</b>
+<b class="nc"><i>419</i>&nbsp;        banned.add(&quot;Oath of Ghouls&quot;);</b>
+<b class="nc"><i>420</i>&nbsp;        banned.add(&quot;Ogre Enforcer&quot;);</b>
+<b class="nc"><i>421</i>&nbsp;        banned.add(&quot;Old Man of the Sea&quot;);</b>
+<b class="nc"><i>422</i>&nbsp;        banned.add(&quot;Omen of Fire&quot;);</b>
+<b class="nc"><i>423</i>&nbsp;        banned.add(&quot;Opal Archangel&quot;);</b>
+<b class="nc"><i>424</i>&nbsp;        banned.add(&quot;Opalescence&quot;);</b>
+<b class="nc"><i>425</i>&nbsp;        banned.add(&quot;Orim, Samite Healer&quot;);</b>
+<b class="nc"><i>426</i>&nbsp;        banned.add(&quot;Palinchron&quot;);</b>
+<b class="nc"><i>427</i>&nbsp;        banned.add(&quot;Paradigm Shift&quot;);</b>
+<b class="nc"><i>428</i>&nbsp;        banned.add(&quot;Paupers&#39; Cage&quot;);</b>
+<b class="nc"><i>429</i>&nbsp;        banned.add(&quot;Peacekeeper&quot;);</b>
+<b class="nc"><i>430</i>&nbsp;        banned.add(&quot;Pendrell Mists&quot;);</b>
+<b class="nc"><i>431</i>&nbsp;        banned.add(&quot;Phantasmal Sphere&quot;);</b>
+<b class="nc"><i>432</i>&nbsp;        banned.add(&quot;Phelddagrif&quot;);</b>
+<b class="nc"><i>433</i>&nbsp;        banned.add(&quot;Phyrexian Devourer&quot;);</b>
+<b class="nc"><i>434</i>&nbsp;        banned.add(&quot;Phyrexian Dreadnought&quot;);</b>
+<b class="nc"><i>435</i>&nbsp;        banned.add(&quot;Phyrexian Marauder&quot;);</b>
+<b class="nc"><i>436</i>&nbsp;        banned.add(&quot;Phyrexian Negator&quot;);</b>
+<b class="nc"><i>437</i>&nbsp;        banned.add(&quot;Phyrexian Portal&quot;);</b>
+<b class="nc"><i>438</i>&nbsp;        banned.add(&quot;Phyrexian Purge&quot;);</b>
+<b class="nc"><i>439</i>&nbsp;        banned.add(&quot;Phyrexian Tribute&quot;);</b>
+<b class="nc"><i>440</i>&nbsp;        banned.add(&quot;Pillar Tombs of Aku&quot;);</b>
+<b class="nc"><i>441</i>&nbsp;        banned.add(&quot;Pixie Queen&quot;);</b>
+<b class="nc"><i>442</i>&nbsp;        banned.add(&quot;Planar Gate&quot;);</b>
+<b class="nc"><i>443</i>&nbsp;        banned.add(&quot;Plateau (Brudi)&quot;);</b>
+<b class="nc"><i>444</i>&nbsp;        banned.add(&quot;Plateau (Tucker)&quot;);</b>
+<b class="nc"><i>445</i>&nbsp;        banned.add(&quot;Polar Kraken&quot;);</b>
+<b class="nc"><i>446</i>&nbsp;        banned.add(&quot;Political Trickery&quot;);</b>
+<b class="nc"><i>447</i>&nbsp;        banned.add(&quot;Powder Keg&quot;);</b>
+<b class="nc"><i>448</i>&nbsp;        banned.add(&quot;Power Artifact&quot;);</b>
+<b class="nc"><i>449</i>&nbsp;        banned.add(&quot;Power Play&quot;);</b>
+<b class="nc"><i>450</i>&nbsp;        banned.add(&quot;Powerleech&quot;);</b>
+<b class="nc"><i>451</i>&nbsp;        banned.add(&quot;Preacher&quot;);</b>
+<b class="nc"><i>452</i>&nbsp;        banned.add(&quot;Preferred Selection&quot;);</b>
+<b class="nc"><i>453</i>&nbsp;        banned.add(&quot;Prismatic Lace&quot;);</b>
+<b class="nc"><i>454</i>&nbsp;        banned.add(&quot;Psychic Allergy&quot;);</b>
+<b class="nc"><i>455</i>&nbsp;        banned.add(&quot;Psychic Vortex&quot;);</b>
+<b class="nc"><i>456</i>&nbsp;        banned.add(&quot;Purgatory&quot;);</b>
+<b class="nc"><i>457</i>&nbsp;        banned.add(&quot;Purraj of Urborg&quot;);</b>
+<b class="nc"><i>458</i>&nbsp;        banned.add(&quot;Pygmy Hippo&quot;);</b>
+<b class="nc"><i>459</i>&nbsp;        banned.add(&quot;Pyramids&quot;);</b>
+<b class="nc"><i>460</i>&nbsp;        banned.add(&quot;Quarum Trench Gnomes&quot;);</b>
+<b class="nc"><i>461</i>&nbsp;        banned.add(&quot;Quirion Druid&quot;);</b>
+<b class="nc"><i>462</i>&nbsp;        banned.add(&quot;Radiant, Archangel&quot;);</b>
+<b class="nc"><i>463</i>&nbsp;        banned.add(&quot;Raging River&quot;);</b>
+<b class="nc"><i>464</i>&nbsp;        banned.add(&quot;Ragnar&quot;);</b>
+<b class="nc"><i>465</i>&nbsp;        banned.add(&quot;Rainbow Efreet&quot;);</b>
+<b class="nc"><i>466</i>&nbsp;        banned.add(&quot;Rainbow Vale&quot;);</b>
+<b class="nc"><i>467</i>&nbsp;        banned.add(&quot;Ramses Overdark&quot;);</b>
+<b class="nc"><i>468</i>&nbsp;        banned.add(&quot;Rapid Fire&quot;);</b>
+<b class="nc"><i>469</i>&nbsp;        banned.add(&quot;Rashida Scalebane&quot;);</b>
+<b class="nc"><i>470</i>&nbsp;        banned.add(&quot;Rasputin Dreamweaver&quot;);</b>
+<b class="nc"><i>471</i>&nbsp;        banned.add(&quot;Razor Pendulum&quot;);</b>
+<b class="nc"><i>472</i>&nbsp;        banned.add(&quot;Reality Twist&quot;);</b>
+<b class="nc"><i>473</i>&nbsp;        banned.add(&quot;Rebirth&quot;);</b>
+<b class="nc"><i>474</i>&nbsp;        banned.add(&quot;Recurring Nightmare&quot;);</b>
+<b class="nc"><i>475</i>&nbsp;        banned.add(&quot;Recycle&quot;);</b>
+<b class="nc"><i>476</i>&nbsp;        banned.add(&quot;Reflect Damage&quot;);</b>
+<b class="nc"><i>477</i>&nbsp;        banned.add(&quot;Reparations&quot;);</b>
+<b class="nc"><i>478</i>&nbsp;        banned.add(&quot;Replenish&quot;);</b>
+<b class="nc"><i>479</i>&nbsp;        banned.add(&quot;Retribution of the Meek&quot;);</b>
+<b class="nc"><i>480</i>&nbsp;        banned.add(&quot;Reveka, Wizard Savant&quot;);</b>
+<b class="nc"><i>481</i>&nbsp;        banned.add(&quot;Reverberation&quot;);</b>
+<b class="nc"><i>482</i>&nbsp;        banned.add(&quot;Righteous War&quot;);</b>
+<b class="nc"><i>483</i>&nbsp;        banned.add(&quot;Ring of Gix&quot;);</b>
+<b class="nc"><i>484</i>&nbsp;        banned.add(&quot;Ring of Immortals&quot;);</b>
+<b class="nc"><i>485</i>&nbsp;        banned.add(&quot;Ring of Ma&#39;ruf&quot;);</b>
+<b class="nc"><i>486</i>&nbsp;        banned.add(&quot;Ring of Renewal&quot;);</b>
+<b class="nc"><i>487</i>&nbsp;        banned.add(&quot;Ritual of Subdual&quot;);</b>
+<b class="nc"><i>488</i>&nbsp;        banned.add(&quot;Ritual of the Machine&quot;);</b>
+<b class="nc"><i>489</i>&nbsp;        banned.add(&quot;River Delta&quot;);</b>
+<b class="nc"><i>490</i>&nbsp;        banned.add(&quot;River Merfolk&quot;);</b>
+<b class="nc"><i>491</i>&nbsp;        banned.add(&quot;Roc of Kher Ridges&quot;);</b>
+<b class="nc"><i>492</i>&nbsp;        banned.add(&quot;Rock Basilisk&quot;);</b>
+<b class="nc"><i>493</i>&nbsp;        banned.add(&quot;Rock Hydra&quot;);</b>
+<b class="nc"><i>494</i>&nbsp;        banned.add(&quot;Rofellos, Llanowar Emissary&quot;);</b>
+<b class="nc"><i>495</i>&nbsp;        banned.add(&quot;Rogue Skycaptain&quot;);</b>
+<b class="nc"><i>496</i>&nbsp;        banned.add(&quot;Rohgahh of Kher Keep&quot;);</b>
+<b class="nc"><i>497</i>&nbsp;        banned.add(&quot;Royal Decree&quot;);</b>
+<b class="nc"><i>498</i>&nbsp;        banned.add(&quot;Rysorian Badger&quot;);</b>
+<b class="nc"><i>499</i>&nbsp;        banned.add(&quot;Sandals of Abdallah&quot;);</b>
+<b class="nc"><i>500</i>&nbsp;        banned.add(&quot;Sands of Time&quot;);</b>
+<b class="nc"><i>501</i>&nbsp;        banned.add(&quot;Sarcomancy&quot;);</b>
+<b class="nc"><i>502</i>&nbsp;        banned.add(&quot;Savannah&quot;);</b>
+<b class="nc"><i>503</i>&nbsp;        banned.add(&quot;Sawback Manticore&quot;);</b>
+<b class="nc"><i>504</i>&nbsp;        banned.add(&quot;Scarwood Bandits&quot;);</b>
+<b class="nc"><i>505</i>&nbsp;        banned.add(&quot;Scorched Ruins&quot;);</b>
+<b class="nc"><i>506</i>&nbsp;        banned.add(&quot;Scrubland&quot;);</b>
+<b class="nc"><i>507</i>&nbsp;        banned.add(&quot;Season of the Witch&quot;);</b>
+<b class="nc"><i>508</i>&nbsp;        banned.add(&quot;Second Chance&quot;);</b>
+<b class="nc"><i>509</i>&nbsp;        banned.add(&quot;Secret Summoning&quot;);</b>
+<b class="nc"><i>510</i>&nbsp;        banned.add(&quot;Secrets of Paradise&quot;);</b>
+<b class="nc"><i>511</i>&nbsp;        banned.add(&quot;Sedge Troll&quot;);</b>
+<b class="nc"><i>512</i>&nbsp;        banned.add(&quot;Seeds of Innocence&quot;);</b>
+<b class="nc"><i>513</i>&nbsp;        banned.add(&quot;Selenia, Dark Angel&quot;);</b>
+<b class="nc"><i>514</i>&nbsp;        banned.add(&quot;Sentinel Dispatch&quot;);</b>
+<b class="nc"><i>515</i>&nbsp;        banned.add(&quot;Serendib Djinn&quot;);</b>
+<b class="nc"><i>516</i>&nbsp;        banned.add(&quot;Serra Aviary&quot;);</b>
+<b class="nc"><i>517</i>&nbsp;        banned.add(&quot;Serra&#39;s Sanctum&quot;);</b>
+<b class="nc"><i>518</i>&nbsp;        banned.add(&quot;Shahrazad&quot;);</b>
+<b class="nc"><i>519</i>&nbsp;        banned.add(&quot;Shallow Grave&quot;);</b>
+<b class="nc"><i>520</i>&nbsp;        banned.add(&quot;Shauku, Endbringer&quot;);</b>
+<b class="nc"><i>521</i>&nbsp;        banned.add(&quot;Sheltered Valley&quot;);</b>
+<b class="nc"><i>522</i>&nbsp;        banned.add(&quot;Shimmer&quot;);</b>
+<b class="nc"><i>523</i>&nbsp;        banned.add(&quot;Sidar Jabari&quot;);</b>
+<b class="nc"><i>524</i>&nbsp;        banned.add(&quot;Silver Wyvern&quot;);</b>
+<b class="nc"><i>525</i>&nbsp;        banned.add(&quot;Singing Tree&quot;);</b>
+<b class="nc"><i>526</i>&nbsp;        banned.add(&quot;Skeleton Ship&quot;);</b>
+<b class="nc"><i>527</i>&nbsp;        banned.add(&quot;Skullclamp&quot;);</b>
+<b class="nc"><i>528</i>&nbsp;        banned.add(&quot;Sliver Queen&quot;);</b>
+<b class="nc"><i>529</i>&nbsp;        banned.add(&quot;Snowblind&quot;);</b>
+<b class="nc"><i>530</i>&nbsp;        banned.add(&quot;Sol Ring&quot;);</b>
+<b class="nc"><i>531</i>&nbsp;        banned.add(&quot;Soldevi Digger&quot;);</b>
+<b class="nc"><i>532</i>&nbsp;        banned.add(&quot;Soldevi Excavations&quot;);</b>
+<b class="nc"><i>533</i>&nbsp;        banned.add(&quot;Soldevi Golem&quot;);</b>
+<b class="nc"><i>534</i>&nbsp;        banned.add(&quot;Soraya the Falconer&quot;);</b>
+<b class="nc"><i>535</i>&nbsp;        banned.add(&quot;Sorrow&#39;s Path&quot;);</b>
+<b class="nc"><i>536</i>&nbsp;        banned.add(&quot;Soul Echo&quot;);</b>
+<b class="nc"><i>537</i>&nbsp;        banned.add(&quot;Spectral Guardian&quot;);</b>
+<b class="nc"><i>538</i>&nbsp;        banned.add(&quot;Spinal Villain&quot;);</b>
+<b class="nc"><i>539</i>&nbsp;        banned.add(&quot;Spirit Shield&quot;);</b>
+<b class="nc"><i>540</i>&nbsp;        banned.add(&quot;Spirit of the Night&quot;);</b>
+<b class="nc"><i>541</i>&nbsp;        banned.add(&quot;Spiritual Sanctuary&quot;);</b>
+<b class="nc"><i>542</i>&nbsp;        banned.add(&quot;Splintering Wind&quot;);</b>
+<b class="nc"><i>543</i>&nbsp;        banned.add(&quot;Spoils of Evil&quot;);</b>
+<b class="nc"><i>544</i>&nbsp;        banned.add(&quot;Spoils of War&quot;);</b>
+<b class="nc"><i>545</i>&nbsp;        banned.add(&quot;Squandered Resources&quot;);</b>
+<b class="nc"><i>546</i>&nbsp;        banned.add(&quot;Stone Calendar&quot;);</b>
+<b class="nc"><i>547</i>&nbsp;        banned.add(&quot;Storm Spirit&quot;);</b>
+<b class="nc"><i>548</i>&nbsp;        banned.add(&quot;Storm World&quot;);</b>
+<b class="nc"><i>549</i>&nbsp;        banned.add(&quot;Strip Mine&quot;);</b>
+<b class="nc"><i>550</i>&nbsp;        banned.add(&quot;Su-Chi&quot;);</b>
+<b class="nc"><i>551</i>&nbsp;        banned.add(&quot;Subterranean Spirit&quot;);</b>
+<b class="nc"><i>552</i>&nbsp;        banned.add(&quot;Suleiman&#39;s Legacy&quot;);</b>
+<b class="nc"><i>553</i>&nbsp;        banned.add(&quot;Survival of the Fittest&quot;);</b>
+<b class="nc"><i>554</i>&nbsp;        banned.add(&quot;Sustaining Spirit&quot;);</b>
+<b class="nc"><i>555</i>&nbsp;        banned.add(&quot;Sword of the Ages&quot;);</b>
+<b class="nc"><i>556</i>&nbsp;        banned.add(&quot;Sworn Defender&quot;);</b>
+<b class="nc"><i>557</i>&nbsp;        banned.add(&quot;Taiga&quot;);</b>
+<b class="nc"><i>558</i>&nbsp;        banned.add(&quot;Tainted Specter&quot;);</b>
+<b class="nc"><i>559</i>&nbsp;        banned.add(&quot;Taniwha&quot;);</b>
+<b class="nc"><i>560</i>&nbsp;        banned.add(&quot;Tawnos&#39;s Coffin&quot;);</b>
+<b class="nc"><i>561</i>&nbsp;        banned.add(&quot;Teeka&#39;s Dragon&quot;);</b>
+<b class="nc"><i>562</i>&nbsp;        banned.add(&quot;Teferi&#39;s Imp&quot;);</b>
+<b class="nc"><i>563</i>&nbsp;        banned.add(&quot;Teferi&#39;s Isle&quot;);</b>
+<b class="nc"><i>564</i>&nbsp;        banned.add(&quot;Teferi&#39;s Realm&quot;);</b>
+<b class="nc"><i>565</i>&nbsp;        banned.add(&quot;Telekinesis&quot;);</b>
+<b class="nc"><i>566</i>&nbsp;        banned.add(&quot;Telim&#39;Tor&quot;);</b>
+<b class="nc"><i>567</i>&nbsp;        banned.add(&quot;Telim&#39;Tor&#39;s Edict&quot;);</b>
+<b class="nc"><i>568</i>&nbsp;        banned.add(&quot;Tempest Efreet&quot;);</b>
+<b class="nc"><i>569</i>&nbsp;        banned.add(&quot;Temporal Aperture&quot;);</b>
+<b class="nc"><i>570</i>&nbsp;        banned.add(&quot;Tetsuo Umezawa&quot;);</b>
+<b class="nc"><i>571</i>&nbsp;        banned.add(&quot;Thawing Glaciers&quot;);</b>
+<b class="nc"><i>572</i>&nbsp;        banned.add(&quot;The Abyss&quot;);</b>
+<b class="nc"><i>573</i>&nbsp;        banned.add(&quot;The Tabernacle at Pendrell Vale&quot;);</b>
+<b class="nc"><i>574</i>&nbsp;        banned.add(&quot;Thelon&#39;s Curse&quot;);</b>
+<b class="nc"><i>575</i>&nbsp;        banned.add(&quot;Thelonite Monk&quot;);</b>
+<b class="nc"><i>576</i>&nbsp;        banned.add(&quot;Thought Lash&quot;);</b>
+<b class="nc"><i>577</i>&nbsp;        banned.add(&quot;Thran Tome&quot;);</b>
+<b class="nc"><i>578</i>&nbsp;        banned.add(&quot;Three Wishes&quot;);</b>
+<b class="nc"><i>579</i>&nbsp;        banned.add(&quot;Thrull Champion&quot;);</b>
+<b class="nc"><i>580</i>&nbsp;        banned.add(&quot;Thunder Spirit&quot;);</b>
+<b class="nc"><i>581</i>&nbsp;        banned.add(&quot;Tidal Control&quot;);</b>
+<b class="nc"><i>582</i>&nbsp;        banned.add(&quot;Timberline Ridge&quot;);</b>
+<b class="nc"><i>583</i>&nbsp;        banned.add(&quot;Time Spiral&quot;);</b>
+<b class="nc"><i>584</i>&nbsp;        banned.add(&quot;Time Vault&quot;);</b>
+<b class="nc"><i>585</i>&nbsp;        banned.add(&quot;Time Walk&quot;);</b>
+<b class="nc"><i>586</i>&nbsp;        banned.add(&quot;Timetwister&quot;);</b>
+<b class="nc"><i>587</i>&nbsp;        banned.add(&quot;Timetwister&quot;);</b>
+<b class="nc"><i>588</i>&nbsp;        banned.add(&quot;Timmerian Fiends&quot;);</b>
+<b class="nc"><i>589</i>&nbsp;        banned.add(&quot;Tinker&quot;);</b>
+<b class="nc"><i>590</i>&nbsp;        banned.add(&quot;Tithe&quot;);</b>
+<b class="nc"><i>591</i>&nbsp;        banned.add(&quot;Tolarian Academy&quot;);</b>
+<b class="nc"><i>592</i>&nbsp;        banned.add(&quot;Tolarian Entrancer&quot;);</b>
+<b class="nc"><i>593</i>&nbsp;        banned.add(&quot;Tolarian Serpent&quot;);</b>
+<b class="nc"><i>594</i>&nbsp;        banned.add(&quot;Tombstone Stairwell&quot;);</b>
+<b class="nc"><i>595</i>&nbsp;        banned.add(&quot;Tornado&quot;);</b>
+<b class="nc"><i>596</i>&nbsp;        banned.add(&quot;Torrent of Lava&quot;);</b>
+<b class="nc"><i>597</i>&nbsp;        banned.add(&quot;Tourach&#39;s Gate&quot;);</b>
+<b class="nc"><i>598</i>&nbsp;        banned.add(&quot;Tracker&quot;);</b>
+<b class="nc"><i>599</i>&nbsp;        banned.add(&quot;Trailblazer&quot;);</b>
+<b class="nc"><i>600</i>&nbsp;        banned.add(&quot;Transmute Artifact&quot;);</b>
+<b class="nc"><i>601</i>&nbsp;        banned.add(&quot;Treachery&quot;);</b>
+<b class="nc"><i>602</i>&nbsp;        banned.add(&quot;Treasure Cruise&quot;);</b>
+<b class="nc"><i>603</i>&nbsp;        banned.add(&quot;Triangle of War&quot;);</b>
+<b class="nc"><i>604</i>&nbsp;        banned.add(&quot;Tropical Island&quot;);</b>
+<b class="nc"><i>605</i>&nbsp;        banned.add(&quot;Tuknir Deathlock&quot;);</b>
+<b class="nc"><i>606</i>&nbsp;        banned.add(&quot;Tundra&quot;);</b>
+<b class="nc"><i>607</i>&nbsp;        banned.add(&quot;Two-Headed Giant of Foriys&quot;);</b>
+<b class="nc"><i>608</i>&nbsp;        banned.add(&quot;Typhoon&quot;);</b>
+<b class="nc"><i>609</i>&nbsp;        banned.add(&quot;Underground Sea&quot;);</b>
+<b class="nc"><i>610</i>&nbsp;        banned.add(&quot;Undiscovered Paradise&quot;);</b>
+<b class="nc"><i>611</i>&nbsp;        banned.add(&quot;Unexpected Potential&quot;);</b>
+<b class="nc"><i>612</i>&nbsp;        banned.add(&quot;Unfulfilled Desires&quot;);</b>
+<b class="nc"><i>613</i>&nbsp;        banned.add(&quot;Ur-Drago&quot;);</b>
+<b class="nc"><i>614</i>&nbsp;        banned.add(&quot;Urborg Justice&quot;);</b>
+<b class="nc"><i>615</i>&nbsp;        banned.add(&quot;Urborg Stalker&quot;);</b>
+<b class="nc"><i>616</i>&nbsp;        banned.add(&quot;Urza&#39;s Miter&quot;);</b>
+<b class="nc"><i>617</i>&nbsp;        banned.add(&quot;Vampiric Tutor&quot;);</b>
+<b class="nc"><i>618</i>&nbsp;        banned.add(&quot;Varchild&#39;s War-Riders&quot;);</b>
+<b class="nc"><i>619</i>&nbsp;        banned.add(&quot;Veldrane of Sengir&quot;);</b>
+<b class="nc"><i>620</i>&nbsp;        banned.add(&quot;Veldt&quot;);</b>
+<b class="nc"><i>621</i>&nbsp;        banned.add(&quot;Ventifact Bottle&quot;);</b>
+<b class="nc"><i>622</i>&nbsp;        banned.add(&quot;Vesuvan Doppelganger&quot;);</b>
+<b class="nc"><i>623</i>&nbsp;        banned.add(&quot;Veteran Bodyguard&quot;);</b>
+<b class="nc"><i>624</i>&nbsp;        banned.add(&quot;Viashivan Dragon&quot;);</b>
+<b class="nc"><i>625</i>&nbsp;        banned.add(&quot;Vodalian Knights&quot;);</b>
+<b class="nc"><i>626</i>&nbsp;        banned.add(&quot;Vodalian War Machine&quot;);</b>
+<b class="nc"><i>627</i>&nbsp;        banned.add(&quot;Volcanic Island&quot;);</b>
+<b class="nc"><i>628</i>&nbsp;        banned.add(&quot;Volrath&#39;s Shapeshifter&quot;);</b>
+<b class="nc"><i>629</i>&nbsp;        banned.add(&quot;Volrath&#39;s Stronghold&quot;);</b>
+<b class="nc"><i>630</i>&nbsp;        banned.add(&quot;Wall of Kelp&quot;);</b>
+<b class="nc"><i>631</i>&nbsp;        banned.add(&quot;Wandering Mage&quot;);</b>
+<b class="nc"><i>632</i>&nbsp;        banned.add(&quot;Warping Wurm&quot;);</b>
+<b class="nc"><i>633</i>&nbsp;        banned.add(&quot;Wave of Terror&quot;);</b>
+<b class="nc"><i>634</i>&nbsp;        banned.add(&quot;Weakstone&quot;);</b>
+<b class="nc"><i>635</i>&nbsp;        banned.add(&quot;Weatherseed Treefolk&quot;);</b>
+<b class="nc"><i>636</i>&nbsp;        banned.add(&quot;Well of Knowledge&quot;);</b>
+<b class="nc"><i>637</i>&nbsp;        banned.add(&quot;Wellspring&quot;);</b>
+<b class="nc"><i>638</i>&nbsp;        banned.add(&quot;Wheel of Fortune&quot;);</b>
+<b class="nc"><i>639</i>&nbsp;        banned.add(&quot;Willow Priestess&quot;);</b>
+<b class="nc"><i>640</i>&nbsp;        banned.add(&quot;Willow Satyr&quot;);</b>
+<b class="nc"><i>641</i>&nbsp;        banned.add(&quot;Windfall&quot;);</b>
+<b class="nc"><i>642</i>&nbsp;        banned.add(&quot;Winding Canyons&quot;);</b>
+<b class="nc"><i>643</i>&nbsp;        banned.add(&quot;Winter Sky&quot;);</b>
+<b class="nc"><i>644</i>&nbsp;        banned.add(&quot;Winter&#39;s Chill&quot;);</b>
+<b class="nc"><i>645</i>&nbsp;        banned.add(&quot;Winter&#39;s Night&quot;);</b>
+<b class="nc"><i>646</i>&nbsp;        banned.add(&quot;Wood Elemental&quot;);</b>
+<b class="nc"><i>647</i>&nbsp;        banned.add(&quot;Word of Command&quot;);</b>
+<b class="nc"><i>648</i>&nbsp;        banned.add(&quot;Worldknit&quot;);</b>
+<b class="nc"><i>649</i>&nbsp;        banned.add(&quot;Worms of the Earth&quot;);</b>
+<b class="nc"><i>650</i>&nbsp;        banned.add(&quot;Wormwood Treefolk&quot;);</b>
+<b class="nc"><i>651</i>&nbsp;        banned.add(&quot;Xanthic Statue&quot;);</b>
+<b class="nc"><i>652</i>&nbsp;        banned.add(&quot;Yare&quot;);</b>
+<b class="nc"><i>653</i>&nbsp;        banned.add(&quot;Yavimaya Hollow&quot;);</b>
+<b class="nc"><i>654</i>&nbsp;        banned.add(&quot;Yawgmoth&#39;s Bargain&quot;);</b>
+<b class="nc"><i>655</i>&nbsp;        banned.add(&quot;Yawgmoth&#39;s Will&quot;);</b>
+<b class="nc"><i>656</i>&nbsp;        banned.add(&quot;Zelyon Sword&quot;);</b>
+<b class="nc"><i>657</i>&nbsp;        banned.add(&quot;Zephid&quot;);</b>
+<b class="nc"><i>658</i>&nbsp;        banned.add(&quot;Zhalfirin Crusader&quot;);</b>
+<b class="nc"><i>659</i>&nbsp;        banned.add(&quot;Zirilan of the Claw&quot;);</b>
+<b class="nc"><i>660</i>&nbsp;        banned.add(&quot;Zuberi, Golden Feather&quot;);</b>
+<i>661</i>&nbsp;    }
+<i>662</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

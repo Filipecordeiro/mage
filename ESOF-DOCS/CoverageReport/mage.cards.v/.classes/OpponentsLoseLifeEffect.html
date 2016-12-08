@@ -1,0 +1,245 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: OpponentsLoseLifeEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.v</a> ]
+</div>
+
+<h1>Coverage Summary for Class: OpponentsLoseLifeEffect (mage.cards.v)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OpponentsLoseLifeEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;/*
+<i>3</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>4</i>&nbsp; *
+<i>5</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>6</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>9</i>&nbsp; *        conditions and the following disclaimer.
+<i>10</i>&nbsp; *
+<i>11</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>12</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>13</i>&nbsp; *        provided with the distribution.
+<i>14</i>&nbsp; *
+<i>15</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>16</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>17</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>18</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>19</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>20</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>21</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>22</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>23</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>24</i>&nbsp; *
+<i>25</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>26</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>27</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>28</i>&nbsp; */
+<i>29</i>&nbsp;package mage.cards.v;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;import java.util.UUID;
+<i>32</i>&nbsp;import mage.MageInt;
+<i>33</i>&nbsp;import mage.abilities.Ability;
+<i>34</i>&nbsp;import mage.abilities.DelayedTriggeredAbility;
+<i>35</i>&nbsp;import mage.abilities.common.SimpleActivatedAbility;
+<i>36</i>&nbsp;import mage.abilities.costs.mana.ManaCostsImpl;
+<i>37</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>38</i>&nbsp;import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+<i>39</i>&nbsp;import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+<i>40</i>&nbsp;import mage.abilities.keyword.LifelinkAbility;
+<i>41</i>&nbsp;import mage.cards.CardImpl;
+<i>42</i>&nbsp;import mage.cards.CardSetInfo;
+<i>43</i>&nbsp;import mage.constants.CardType;
+<i>44</i>&nbsp;import mage.constants.Duration;
+<i>45</i>&nbsp;import mage.constants.Outcome;
+<i>46</i>&nbsp;import mage.constants.Zone;
+<i>47</i>&nbsp;import mage.game.Game;
+<i>48</i>&nbsp;import mage.game.events.GameEvent;
+<i>49</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>50</i>&nbsp;import mage.players.Player;
+<i>51</i>&nbsp;import mage.target.common.TargetCreaturePermanent;
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;/**
+<i>54</i>&nbsp; * Gatecrash FAQ (01.2013)
+<i>55</i>&nbsp; * Multiple instances of lifelink are redundant. Giving the same creature lifelink
+<i>56</i>&nbsp; * more than once won&#39;t cause you to gain additional life.
+<i>57</i>&nbsp; *
+<i>58</i>&nbsp; * Each time the second ability resolves, a delayed triggered ability is created.
+<i>59</i>&nbsp; * Whenever you gain life that turn, each of those abilities will trigger. For
+<i>60</i>&nbsp; * example, if you activate the second ability twice (and let those abilities resolve)
+<i>61</i>&nbsp; * and then you gain 2 life, each opponent will lose a total of 4 life. Each instance
+<i>62</i>&nbsp; * will cause two abilities to trigger, each causing that player to lose 2 life.
+<i>63</i>&nbsp; *
+<i>64</i>&nbsp; * @author LevelX2
+<i>65</i>&nbsp; */
+<i>66</i>&nbsp;public class VizkopaGuildmage extends CardImpl {
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public VizkopaGuildmage(UUID ownerId, CardSetInfo setInfo) {
+<i>69</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{W}{B}&quot;);
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;        this.subtype.add(&quot;Human&quot;);
+<i>72</i>&nbsp;        this.subtype.add(&quot;Wizard&quot;);
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;        this.power = new MageInt(2);
+<i>76</i>&nbsp;        this.toughness = new MageInt(2);
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;        // 1{W}{B}: Target creature gains lifelink until end of turn.
+<i>79</i>&nbsp;        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn),new ManaCostsImpl(&quot;{1}{W}{B}&quot;));
+<i>80</i>&nbsp;        ability.addTarget(new TargetCreaturePermanent());
+<i>81</i>&nbsp;        this.addAbility(ability);
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;        // 1{W}{B}: Whenever you gain life this turn, each opponent loses that much life.
+<i>84</i>&nbsp;        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new VizkopaGuildmageDelayedTriggeredAbility()), new ManaCostsImpl(&quot;{1}{W}{B}&quot;)));
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    public VizkopaGuildmage(final VizkopaGuildmage card) {
+<i>89</i>&nbsp;        super(card);
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    @Override
+<i>93</i>&nbsp;    public VizkopaGuildmage copy() {
+<i>94</i>&nbsp;        return new VizkopaGuildmage(this);
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;}
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility {
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    public VizkopaGuildmageDelayedTriggeredAbility() {
+<i>101</i>&nbsp;        super(new OpponentsLoseLifeEffect(), Duration.EndOfTurn, false);
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    public VizkopaGuildmageDelayedTriggeredAbility(VizkopaGuildmageDelayedTriggeredAbility ability) {
+<i>105</i>&nbsp;        super(ability);
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    @Override
+<i>109</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<i>110</i>&nbsp;        return event.getType() == EventType.GAINED_LIFE;
+<i>111</i>&nbsp;    }
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;    @Override
+<i>114</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<i>115</i>&nbsp;        if (event.getTargetId().equals(controllerId)) {
+<i>116</i>&nbsp;            getEffects().get(0).setValue(&quot;amountLifeGained&quot;, event.getAmount());
+<i>117</i>&nbsp;            return true;
+<i>118</i>&nbsp;        }
+<i>119</i>&nbsp;        return false;
+<i>120</i>&nbsp;    }
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    @Override
+<i>123</i>&nbsp;    public VizkopaGuildmageDelayedTriggeredAbility copy() {
+<i>124</i>&nbsp;        return new VizkopaGuildmageDelayedTriggeredAbility(this);
+<i>125</i>&nbsp;    }
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    @Override
+<i>128</i>&nbsp;    public String getRule() {
+<i>129</i>&nbsp;        return &quot;Whenever you gain life this turn, &quot; + modes.getText();
+<i>130</i>&nbsp;    }
+<i>131</i>&nbsp;}
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;class OpponentsLoseLifeEffect extends OneShotEffect {
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    public OpponentsLoseLifeEffect() {
+<b class="nc"><i>136</i>&nbsp;        super(Outcome.Damage);</b>
+<b class="nc"><i>137</i>&nbsp;        this.staticText = &quot;each opponent loses that much life&quot;;</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    public OpponentsLoseLifeEffect(final OpponentsLoseLifeEffect effect) {
+<b class="nc"><i>141</i>&nbsp;        super(effect);</b>
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;    @Override
+<i>145</i>&nbsp;    public OpponentsLoseLifeEffect copy() {
+<b class="nc"><i>146</i>&nbsp;        return new OpponentsLoseLifeEffect(this);</b>
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    @Override
+<i>150</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>151</i>&nbsp;        Integer amountLifeGained = (Integer) this.getValue(&quot;amountLifeGained&quot;);</b>
+<b class="nc"><i>152</i>&nbsp;        if (amountLifeGained != null ) {</b>
+<b class="nc"><i>153</i>&nbsp;            for (UUID opponentId: game.getOpponents(source.getControllerId())) {</b>
+<b class="nc"><i>154</i>&nbsp;                Player opponent = game.getPlayer(opponentId);</b>
+<b class="nc"><i>155</i>&nbsp;                if (opponent != null) {</b>
+<b class="nc"><i>156</i>&nbsp;                    opponent.loseLife(amountLifeGained, game, false);</b>
+<i>157</i>&nbsp;                }
+<b class="nc"><i>158</i>&nbsp;            }</b>
+<i>159</i>&nbsp;        }
+<b class="nc"><i>160</i>&nbsp;        return false;</b>
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:36</div>
+</div>
+</body>
+</html>

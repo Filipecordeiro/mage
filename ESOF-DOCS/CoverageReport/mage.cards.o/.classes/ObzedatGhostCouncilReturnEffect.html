@@ -1,0 +1,273 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ObzedatGhostCouncilReturnEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.o</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ObzedatGhostCouncilReturnEffect (mage.cards.o)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObzedatGhostCouncilReturnEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.5%
+  </span>
+  <span class="absValue">
+    (5/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; /*
+<i>3</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>4</i>&nbsp; *
+<i>5</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>6</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>9</i>&nbsp; *        conditions and the following disclaimer.
+<i>10</i>&nbsp; *
+<i>11</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>12</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>13</i>&nbsp; *        provided with the distribution.
+<i>14</i>&nbsp; *
+<i>15</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>16</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>17</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>18</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>19</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>20</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>21</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>22</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>23</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>24</i>&nbsp; *
+<i>25</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>26</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>27</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>28</i>&nbsp; */
+<i>29</i>&nbsp;package mage.cards.o;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;import java.util.UUID;
+<i>32</i>&nbsp;import mage.MageInt;
+<i>33</i>&nbsp;import mage.abilities.Ability;
+<i>34</i>&nbsp;import mage.abilities.DelayedTriggeredAbility;
+<i>35</i>&nbsp;import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+<i>36</i>&nbsp;import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+<i>37</i>&nbsp;import mage.abilities.effects.Effect;
+<i>38</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>39</i>&nbsp;import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
+<i>40</i>&nbsp;import mage.abilities.effects.common.GainLifeEffect;
+<i>41</i>&nbsp;import mage.abilities.effects.common.LoseLifeTargetEffect;
+<i>42</i>&nbsp;import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+<i>43</i>&nbsp;import mage.abilities.keyword.HasteAbility;
+<i>44</i>&nbsp;import mage.cards.Card;
+<i>45</i>&nbsp;import mage.cards.CardImpl;
+<i>46</i>&nbsp;import mage.cards.CardSetInfo;
+<i>47</i>&nbsp;import mage.constants.CardType;
+<i>48</i>&nbsp;import mage.constants.Duration;
+<i>49</i>&nbsp;import mage.constants.Outcome;
+<i>50</i>&nbsp;import mage.constants.TargetController;
+<i>51</i>&nbsp;import mage.constants.Zone;
+<i>52</i>&nbsp;import mage.game.ExileZone;
+<i>53</i>&nbsp;import mage.game.Game;
+<i>54</i>&nbsp;import mage.game.events.GameEvent;
+<i>55</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>56</i>&nbsp;import mage.game.permanent.Permanent;
+<i>57</i>&nbsp;import mage.players.Player;
+<i>58</i>&nbsp;import mage.target.common.TargetOpponent;
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;/**
+<i>61</i>&nbsp; *
+<i>62</i>&nbsp; * @author Plopman
+<i>63</i>&nbsp; */
+<i>64</i>&nbsp;public class ObzedatGhostCouncil extends CardImpl {
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public ObzedatGhostCouncil(UUID ownerId, CardSetInfo setInfo) {
+<i>67</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{1}{W}{W}{B}{B}&quot;);
+<i>68</i>&nbsp;        this.subtype.add(&quot;Spirit&quot;);
+<i>69</i>&nbsp;        this.subtype.add(&quot;Advisor&quot;);
+<i>70</i>&nbsp;        this.supertype.add(&quot;Legendary&quot;);
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;        this.power = new MageInt(5);
+<i>73</i>&nbsp;        this.toughness = new MageInt(5);
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;        //When Obzedat, Ghost Council enters the battlefield, target opponent loses 2 life and you gain 2 life.
+<i>76</i>&nbsp;        Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(2));
+<i>77</i>&nbsp;        ability.addEffect(new GainLifeEffect(2));
+<i>78</i>&nbsp;        ability.addTarget(new TargetOpponent());
+<i>79</i>&nbsp;        this.addAbility(ability);
+<i>80</i>&nbsp;        //At the beginning of your end step you may exile Obzedat. If you do, return it to the battlefield under it&#39;s owner&#39;s control at the beginning of your next upkeep. It gains haste.
+<i>81</i>&nbsp;        Ability ability2 = new BeginningOfYourEndStepTriggeredAbility(new ObzedatGhostCouncilExileSourceEffect(), true);
+<i>82</i>&nbsp;        ability2.addEffect(new CreateDelayedTriggeredAbilityEffect(new BeginningOfYourUpkeepdelayTriggeredAbility()));
+<i>83</i>&nbsp;        this.addAbility(ability2);
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public ObzedatGhostCouncil(final ObzedatGhostCouncil card) {
+<i>87</i>&nbsp;        super(card);
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    @Override
+<i>91</i>&nbsp;    public ObzedatGhostCouncil copy() {
+<i>92</i>&nbsp;        return new ObzedatGhostCouncil(this);
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;}
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect {
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    public ObzedatGhostCouncilExileSourceEffect() {
+<i>99</i>&nbsp;        super(Outcome.Exile);
+<i>100</i>&nbsp;        staticText = &quot;Exile {this}&quot;;
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    public ObzedatGhostCouncilExileSourceEffect(final ObzedatGhostCouncilExileSourceEffect effect) {
+<i>104</i>&nbsp;        super(effect);
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    @Override
+<i>108</i>&nbsp;    public ObzedatGhostCouncilExileSourceEffect copy() {
+<i>109</i>&nbsp;        return new ObzedatGhostCouncilExileSourceEffect(this);
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    @Override
+<i>113</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>114</i>&nbsp;        Permanent permanent = game.getPermanent(source.getSourceId());
+<i>115</i>&nbsp;        if (permanent != null) {
+<i>116</i>&nbsp;            return permanent.moveToExile(source.getSourceId(), permanent.getName(), source.getSourceId(), game);
+<i>117</i>&nbsp;        }
+<i>118</i>&nbsp;        return false;
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;}
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility {
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    public BeginningOfYourUpkeepdelayTriggeredAbility() {
+<i>126</i>&nbsp;        this(new ObzedatGhostCouncilReturnEffect(), TargetController.YOU);
+<i>127</i>&nbsp;        this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.Custom));
+<i>128</i>&nbsp;    }
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    public BeginningOfYourUpkeepdelayTriggeredAbility(Effect effect, TargetController targetController) {
+<i>131</i>&nbsp;        super(effect);
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    public BeginningOfYourUpkeepdelayTriggeredAbility(BeginningOfYourUpkeepdelayTriggeredAbility ability) {
+<i>135</i>&nbsp;        super(ability);
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;    @Override
+<i>139</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<i>140</i>&nbsp;        return event.getType() == EventType.UPKEEP_STEP_PRE;
+<i>141</i>&nbsp;    }
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;    @Override
+<i>144</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<i>145</i>&nbsp;        return event.getPlayerId().equals(this.controllerId);
+<i>146</i>&nbsp;    }
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;    @Override
+<i>149</i>&nbsp;    public BeginningOfYourUpkeepdelayTriggeredAbility copy() {
+<i>150</i>&nbsp;        return new BeginningOfYourUpkeepdelayTriggeredAbility(this);
+<i>151</i>&nbsp;    }
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    @Override
+<i>154</i>&nbsp;    public String getRule() {
+<i>155</i>&nbsp;        return &quot;If you do, return it to the battlefield under it&#39;s owner&#39;s control at the beginning of your next upkeep. It gains haste&quot;;
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;}
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;class ObzedatGhostCouncilReturnEffect extends OneShotEffect {
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;    public ObzedatGhostCouncilReturnEffect() {
+<b class="fc"><i>162</i>&nbsp;        super(Outcome.Benefit);</b>
+<b class="fc"><i>163</i>&nbsp;    }</b>
+<i>164</i>&nbsp;
+<i>165</i>&nbsp;    public ObzedatGhostCouncilReturnEffect(final ObzedatGhostCouncilReturnEffect effect) {
+<b class="fc"><i>166</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>167</i>&nbsp;    }</b>
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;    @Override
+<i>170</i>&nbsp;    public ObzedatGhostCouncilReturnEffect copy() {
+<b class="fc"><i>171</i>&nbsp;        return new ObzedatGhostCouncilReturnEffect(this);</b>
+<i>172</i>&nbsp;    }
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;    @Override
+<i>175</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>176</i>&nbsp;        Card card = game.getCard(source.getSourceId());</b>
+<b class="nc"><i>177</i>&nbsp;        if (card != null) {</b>
+<b class="nc"><i>178</i>&nbsp;            ExileZone currentZone = game.getState().getExile().getExileZone(source.getSourceId());</b>
+<i>179</i>&nbsp;            // return it only from the own exile zone
+<b class="nc"><i>180</i>&nbsp;            if (currentZone != null &amp;&amp; currentZone.size() &gt; 0) {</b>
+<b class="nc"><i>181</i>&nbsp;                Player owner = game.getPlayer(card.getOwnerId());</b>
+<b class="nc"><i>182</i>&nbsp;                if (owner != null &amp;&amp; owner.moveCards(card, Zone.BATTLEFIELD, source, game)) {</b>
+<b class="nc"><i>183</i>&nbsp;                    return true;</b>
+<i>184</i>&nbsp;                }
+<i>185</i>&nbsp;            }
+<i>186</i>&nbsp;        }
+<b class="nc"><i>187</i>&nbsp;        return false;</b>
+<i>188</i>&nbsp;    }
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:36</div>
+</div>
+</body>
+</html>

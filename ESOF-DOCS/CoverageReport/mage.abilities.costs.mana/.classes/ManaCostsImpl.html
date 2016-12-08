@@ -1,0 +1,589 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ManaCostsImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.costs.mana</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ManaCostsImpl (mage.abilities.costs.mana)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ManaCostsImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80.6%
+  </span>
+  <span class="absValue">
+    (29/ 36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87%
+  </span>
+  <span class="absValue">
+    (221/ 254)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.costs.mana;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.ArrayList;
+<i>31</i>&nbsp;import java.util.HashMap;
+<i>32</i>&nbsp;import java.util.List;
+<i>33</i>&nbsp;import java.util.Map;
+<i>34</i>&nbsp;import java.util.UUID;
+<i>35</i>&nbsp;import mage.Mana;
+<i>36</i>&nbsp;import mage.abilities.Ability;
+<i>37</i>&nbsp;import mage.abilities.costs.Cost;
+<i>38</i>&nbsp;import mage.abilities.costs.VariableCost;
+<i>39</i>&nbsp;import mage.abilities.mana.ManaOptions;
+<i>40</i>&nbsp;import mage.constants.ColoredManaSymbol;
+<i>41</i>&nbsp;import mage.filter.Filter;
+<i>42</i>&nbsp;import mage.game.Game;
+<i>43</i>&nbsp;import mage.players.ManaPool;
+<i>44</i>&nbsp;import mage.players.Player;
+<i>45</i>&nbsp;import mage.target.Targets;
+<i>46</i>&nbsp;import mage.util.ManaUtil;
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;/**
+<i>49</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>50</i>&nbsp; * @param &lt;T&gt;
+<i>51</i>&nbsp; */
+<i>52</i>&nbsp;public class ManaCostsImpl&lt;T extends ManaCost&gt; extends ArrayList&lt;T&gt; implements ManaCosts&lt;T&gt; {
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    protected UUID id;
+<b class="fc"><i>55</i>&nbsp;    protected String text = null;</b>
+<i>56</i>&nbsp;
+<b class="fc"><i>57</i>&nbsp;    private static Map&lt;String, ManaCosts&gt; costs = new HashMap&lt;&gt;();</b>
+<i>58</i>&nbsp;
+<b class="fc"><i>59</i>&nbsp;    public ManaCostsImpl() {</b>
+<b class="fc"><i>60</i>&nbsp;        this.id = UUID.randomUUID();</b>
+<b class="fc"><i>61</i>&nbsp;    }</b>
+<i>62</i>&nbsp;
+<b class="fc"><i>63</i>&nbsp;    public ManaCostsImpl(String mana) {</b>
+<b class="fc"><i>64</i>&nbsp;        this.id = UUID.randomUUID();</b>
+<b class="fc"><i>65</i>&nbsp;        load(mana);</b>
+<b class="fc"><i>66</i>&nbsp;    }</b>
+<i>67</i>&nbsp;
+<b class="fc"><i>68</i>&nbsp;    public ManaCostsImpl(final ManaCostsImpl&lt;T&gt; costs) {</b>
+<b class="fc"><i>69</i>&nbsp;        this.id = costs.id;</b>
+<b class="fc"><i>70</i>&nbsp;        for (T cost : costs) {</b>
+<b class="fc"><i>71</i>&nbsp;            this.add(cost.copy());</b>
+<b class="fc"><i>72</i>&nbsp;        }</b>
+<b class="fc"><i>73</i>&nbsp;    }</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    @Override
+<i>76</i>&nbsp;    public final boolean add(ManaCost cost) {
+<b class="fc"><i>77</i>&nbsp;        if (cost instanceof ManaCosts) {</b>
+<b class="fc"><i>78</i>&nbsp;            for (ManaCost manaCost : (ManaCosts&lt;T&gt;) cost) {</b>
+<b class="fc"><i>79</i>&nbsp;                super.add((T) manaCost);</b>
+<b class="fc"><i>80</i>&nbsp;            }</b>
+<b class="fc"><i>81</i>&nbsp;            return true;</b>
+<i>82</i>&nbsp;        } else {
+<b class="fc"><i>83</i>&nbsp;            return super.add((T) cost);</b>
+<i>84</i>&nbsp;        }
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    @Override
+<i>88</i>&nbsp;    public int convertedManaCost() {
+<b class="fc"><i>89</i>&nbsp;        int total = 0;</b>
+<b class="fc"><i>90</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>91</i>&nbsp;            total += cost.convertedManaCost();</b>
+<b class="fc"><i>92</i>&nbsp;        }</b>
+<b class="fc"><i>93</i>&nbsp;        return total;</b>
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    @Override
+<i>97</i>&nbsp;    public Mana getMana() {
+<b class="fc"><i>98</i>&nbsp;        Mana mana = new Mana();</b>
+<b class="fc"><i>99</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>100</i>&nbsp;            mana.add(cost.getMana());</b>
+<b class="fc"><i>101</i>&nbsp;        }</b>
+<b class="fc"><i>102</i>&nbsp;        return mana;</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    @Override
+<i>106</i>&nbsp;    public List&lt;Mana&gt; getManaOptions() {
+<b class="fc"><i>107</i>&nbsp;        List&lt;Mana&gt; manaVariants = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>108</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>109</i>&nbsp;            manaVariants.addAll(cost.getManaOptions());</b>
+<b class="fc"><i>110</i>&nbsp;        }</b>
+<b class="fc"><i>111</i>&nbsp;        return manaVariants;</b>
+<i>112</i>&nbsp;    }
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    @Override
+<i>115</i>&nbsp;    public Mana getPayment() {
+<b class="fc"><i>116</i>&nbsp;        Mana manaTotal = new Mana();</b>
+<b class="fc"><i>117</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>118</i>&nbsp;            manaTotal.add(cost.getPayment());</b>
+<b class="fc"><i>119</i>&nbsp;        }</b>
+<b class="fc"><i>120</i>&nbsp;        return manaTotal;</b>
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    @Override
+<i>124</i>&nbsp;    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
+<b class="fc"><i>125</i>&nbsp;        return pay(ability, game, sourceId, controllerId, noMana, this);</b>
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    @Override
+<i>129</i>&nbsp;    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana, Cost costToPay) {
+<b class="fc"><i>130</i>&nbsp;        if (this.isEmpty() || noMana) {</b>
+<b class="fc"><i>131</i>&nbsp;            setPaid();</b>
+<b class="fc"><i>132</i>&nbsp;            return true;</b>
+<i>133</i>&nbsp;        }
+<i>134</i>&nbsp;
+<b class="fc"><i>135</i>&nbsp;        Player player = game.getPlayer(controllerId);</b>
+<b class="fc"><i>136</i>&nbsp;        assignPayment(game, ability, player.getManaPool(), this);</b>
+<b class="fc"><i>137</i>&nbsp;        game.getState().getSpecialActions().removeManaActions();</b>
+<b class="fc"><i>138</i>&nbsp;        while (!isPaid()) {</b>
+<b class="fc"><i>139</i>&nbsp;            ManaCost unpaid = this.getUnpaid();</b>
+<b class="fc"><i>140</i>&nbsp;            String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);</b>
+<b class="fc"><i>141</i>&nbsp;            if (player.playMana(ability, unpaid, promptText, game)) {</b>
+<b class="fc"><i>142</i>&nbsp;                assignPayment(game, ability, player.getManaPool(), this);</b>
+<i>143</i>&nbsp;            } else {
+<b class="fc"><i>144</i>&nbsp;                return false;</b>
+<i>145</i>&nbsp;            }
+<b class="fc"><i>146</i>&nbsp;            game.getState().getSpecialActions().removeManaActions();</b>
+<b class="fc"><i>147</i>&nbsp;        }</b>
+<b class="fc"><i>148</i>&nbsp;        return true;</b>
+<i>149</i>&nbsp;    }
+<i>150</i>&nbsp;
+<i>151</i>&nbsp;    /**
+<i>152</i>&nbsp;     * bookmarks the current state and restores it if player doesn&#39;t pay the
+<i>153</i>&nbsp;     * mana cost
+<i>154</i>&nbsp;     *
+<i>155</i>&nbsp;     * @param ability
+<i>156</i>&nbsp;     * @param game
+<i>157</i>&nbsp;     * @param sourceId
+<i>158</i>&nbsp;     * @param payingPlayerId
+<i>159</i>&nbsp;     * @return true if the cost was paid
+<i>160</i>&nbsp;     */
+<i>161</i>&nbsp;    @Override
+<i>162</i>&nbsp;    public boolean payOrRollback(Ability ability, Game game, UUID sourceId, UUID payingPlayerId) {
+<b class="nc"><i>163</i>&nbsp;        int bookmark = game.bookmarkState();</b>
+<b class="nc"><i>164</i>&nbsp;        if (pay(ability, game, sourceId, payingPlayerId, false, null)) {</b>
+<b class="nc"><i>165</i>&nbsp;            game.removeBookmark(bookmark);</b>
+<b class="nc"><i>166</i>&nbsp;            return true;</b>
+<i>167</i>&nbsp;        }
+<b class="nc"><i>168</i>&nbsp;        game.restoreState(bookmark, ability.getRule());</b>
+<b class="nc"><i>169</i>&nbsp;        return false;</b>
+<i>170</i>&nbsp;    }
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    @Override
+<i>173</i>&nbsp;    public ManaCosts&lt;T&gt; getUnpaid() {
+<b class="fc"><i>174</i>&nbsp;        ManaCosts&lt;T&gt; unpaid = new ManaCostsImpl&lt;&gt;();</b>
+<b class="fc"><i>175</i>&nbsp;        for (T cost : this) {</b>
+<b class="fc"><i>176</i>&nbsp;            if (!(cost instanceof VariableManaCost) &amp;&amp; !cost.isPaid()) {</b>
+<b class="fc"><i>177</i>&nbsp;                unpaid.add((T) cost.getUnpaid());</b>
+<i>178</i>&nbsp;            }
+<b class="fc"><i>179</i>&nbsp;        }</b>
+<b class="fc"><i>180</i>&nbsp;        return unpaid;</b>
+<i>181</i>&nbsp;    }
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;    @Override
+<i>184</i>&nbsp;    public ManaCosts&lt;T&gt; getUnpaidVariableCosts() {
+<b class="nc"><i>185</i>&nbsp;        ManaCosts&lt;T&gt; unpaid = new ManaCostsImpl&lt;&gt;();</b>
+<b class="nc"><i>186</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="nc"><i>187</i>&nbsp;            if (cost instanceof VariableManaCost &amp;&amp; !cost.isPaid()) {</b>
+<b class="nc"><i>188</i>&nbsp;                unpaid.add((T) cost.getUnpaid());</b>
+<i>189</i>&nbsp;            }
+<b class="nc"><i>190</i>&nbsp;        }</b>
+<b class="nc"><i>191</i>&nbsp;        return unpaid;</b>
+<i>192</i>&nbsp;    }
+<i>193</i>&nbsp;
+<i>194</i>&nbsp;    @Override
+<i>195</i>&nbsp;    public List&lt;VariableCost&gt; getVariableCosts() {
+<b class="fc"><i>196</i>&nbsp;        List&lt;VariableCost&gt; variableCosts = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>197</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>198</i>&nbsp;            if (cost instanceof VariableCost) {</b>
+<b class="fc"><i>199</i>&nbsp;                variableCosts.add((VariableCost) cost);</b>
+<i>200</i>&nbsp;            }
+<b class="fc"><i>201</i>&nbsp;        }</b>
+<b class="fc"><i>202</i>&nbsp;        return variableCosts;</b>
+<i>203</i>&nbsp;    }
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;    @Override
+<i>206</i>&nbsp;    public int getX() {
+<b class="fc"><i>207</i>&nbsp;        int amount = 0;</b>
+<b class="fc"><i>208</i>&nbsp;        List&lt;VariableCost&gt; variableCosts = getVariableCosts();</b>
+<b class="fc"><i>209</i>&nbsp;        if (!variableCosts.isEmpty()) {</b>
+<b class="fc"><i>210</i>&nbsp;            amount = variableCosts.get(0).getAmount();</b>
+<i>211</i>&nbsp;        }
+<b class="fc"><i>212</i>&nbsp;        return amount;</b>
+<i>213</i>&nbsp;    }
+<i>214</i>&nbsp;
+<i>215</i>&nbsp;    @Override
+<i>216</i>&nbsp;    public void setX(int x) {
+<b class="fc"><i>217</i>&nbsp;        List&lt;VariableCost&gt; variableCosts = getVariableCosts();</b>
+<b class="fc"><i>218</i>&nbsp;        if (!variableCosts.isEmpty()) {</b>
+<b class="fc"><i>219</i>&nbsp;            variableCosts.get(0).setAmount(x);</b>
+<i>220</i>&nbsp;        }
+<b class="fc"><i>221</i>&nbsp;    }</b>
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;    @Override
+<i>224</i>&nbsp;    public void setPayment(Mana mana) {
+<b class="nc"><i>225</i>&nbsp;    }</b>
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;    @Override
+<i>228</i>&nbsp;    public void assignPayment(Game game, Ability ability, ManaPool pool, Cost costToPay) {
+<b class="fc"><i>229</i>&nbsp;        if (!pool.isAutoPayment() &amp;&amp; pool.getUnlockedManaType() == null) {</b>
+<i>230</i>&nbsp;            // if auto payment is inactive and no mana type was clicked manually - do nothing
+<b class="nc"><i>231</i>&nbsp;            return;</b>
+<i>232</i>&nbsp;        }
+<i>233</i>&nbsp;        // attempt to pay colorless costs (not generic) mana costs first
+<b class="fc"><i>234</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>235</i>&nbsp;            if (!cost.isPaid() &amp;&amp; cost instanceof ColorlessManaCost) {</b>
+<b class="fc"><i>236</i>&nbsp;                cost.assignPayment(game, ability, pool, costToPay);</b>
+<b class="fc"><i>237</i>&nbsp;                if (pool.count() == 0) {</b>
+<b class="fc"><i>238</i>&nbsp;                    return;</b>
+<i>239</i>&nbsp;                }
+<i>240</i>&nbsp;            }
+<b class="fc"><i>241</i>&nbsp;        }</b>
+<i>242</i>&nbsp;        //attempt to pay colored costs first
+<b class="fc"><i>243</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>244</i>&nbsp;            if (!cost.isPaid() &amp;&amp; cost instanceof ColoredManaCost) {</b>
+<b class="fc"><i>245</i>&nbsp;                cost.assignPayment(game, ability, pool, costToPay);</b>
+<b class="fc"><i>246</i>&nbsp;                if (pool.count() == 0) {</b>
+<b class="fc"><i>247</i>&nbsp;                    return;</b>
+<i>248</i>&nbsp;                }
+<i>249</i>&nbsp;            }
+<b class="fc"><i>250</i>&nbsp;        }</b>
+<i>251</i>&nbsp;
+<b class="fc"><i>252</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>253</i>&nbsp;            if (!cost.isPaid() &amp;&amp; cost instanceof HybridManaCost) {</b>
+<b class="fc"><i>254</i>&nbsp;                cost.assignPayment(game, ability, pool, costToPay);</b>
+<b class="fc"><i>255</i>&nbsp;                if (pool.count() == 0) {</b>
+<b class="fc"><i>256</i>&nbsp;                    return;</b>
+<i>257</i>&nbsp;                }
+<i>258</i>&nbsp;            }
+<b class="fc"><i>259</i>&nbsp;        }</b>
+<i>260</i>&nbsp;
+<i>261</i>&nbsp;        // Mono Hybrid mana costs
+<i>262</i>&nbsp;        // First try only to pay colored mana with the pool
+<b class="fc"><i>263</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>264</i>&nbsp;            if (!cost.isPaid() &amp;&amp; cost instanceof MonoHybridManaCost) {</b>
+<b class="fc"><i>265</i>&nbsp;                if (((cost.containsColor(ColoredManaSymbol.W)) &amp;&amp; pool.getWhite() &gt; 0)</b>
+<b class="fc"><i>266</i>&nbsp;                        || ((cost.containsColor(ColoredManaSymbol.B)) &amp;&amp; pool.getBlack() &gt; 0)</b>
+<b class="fc"><i>267</i>&nbsp;                        || ((cost.containsColor(ColoredManaSymbol.R)) &amp;&amp; pool.getRed() &gt; 0)</b>
+<b class="fc"><i>268</i>&nbsp;                        || ((cost.containsColor(ColoredManaSymbol.G)) &amp;&amp; pool.getGreen() &gt; 0)</b>
+<b class="fc"><i>269</i>&nbsp;                        || ((cost.containsColor(ColoredManaSymbol.U)) &amp;&amp; pool.getBlue() &gt; 0)) {</b>
+<b class="fc"><i>270</i>&nbsp;                    cost.assignPayment(game, ability, pool, costToPay);</b>
+<b class="fc"><i>271</i>&nbsp;                    if (pool.count() == 0) {</b>
+<b class="fc"><i>272</i>&nbsp;                        return;</b>
+<i>273</i>&nbsp;                    }
+<i>274</i>&nbsp;                }
+<i>275</i>&nbsp;            }
+<b class="fc"><i>276</i>&nbsp;        }</b>
+<i>277</i>&nbsp;        // if colored didn&#39;t fit pay colorless with the mana
+<b class="fc"><i>278</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>279</i>&nbsp;            if (!cost.isPaid() &amp;&amp; cost instanceof MonoHybridManaCost) {</b>
+<b class="fc"><i>280</i>&nbsp;                cost.assignPayment(game, ability, pool, costToPay);</b>
+<b class="fc"><i>281</i>&nbsp;                if (pool.count() == 0) {</b>
+<b class="fc"><i>282</i>&nbsp;                    return;</b>
+<i>283</i>&nbsp;                }
+<i>284</i>&nbsp;            }
+<b class="fc"><i>285</i>&nbsp;        }</b>
+<i>286</i>&nbsp;
+<b class="fc"><i>287</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>288</i>&nbsp;            if (!cost.isPaid() &amp;&amp; cost instanceof SnowManaCost) {</b>
+<b class="nc"><i>289</i>&nbsp;                cost.assignPayment(game, ability, pool, costToPay);</b>
+<b class="nc"><i>290</i>&nbsp;                if (pool.count() == 0) {</b>
+<b class="nc"><i>291</i>&nbsp;                    return;</b>
+<i>292</i>&nbsp;                }
+<i>293</i>&nbsp;            }
+<b class="fc"><i>294</i>&nbsp;        }</b>
+<i>295</i>&nbsp;
+<b class="fc"><i>296</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>297</i>&nbsp;            if (!cost.isPaid() &amp;&amp; cost instanceof GenericManaCost) {</b>
+<b class="fc"><i>298</i>&nbsp;                cost.assignPayment(game, ability, pool, costToPay);</b>
+<b class="fc"><i>299</i>&nbsp;                if (pool.count() == 0) {</b>
+<b class="fc"><i>300</i>&nbsp;                    return;</b>
+<i>301</i>&nbsp;                }
+<i>302</i>&nbsp;            }
+<b class="fc"><i>303</i>&nbsp;        }</b>
+<i>304</i>&nbsp;
+<b class="fc"><i>305</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>306</i>&nbsp;            if (!cost.isPaid() &amp;&amp; cost instanceof VariableManaCost) {</b>
+<b class="nc"><i>307</i>&nbsp;                cost.assignPayment(game, ability, pool, costToPay);</b>
+<i>308</i>&nbsp;            }
+<b class="fc"><i>309</i>&nbsp;        }</b>
+<i>310</i>&nbsp;        // stop using mana of the clicked mana type
+<b class="fc"><i>311</i>&nbsp;        pool.lockManaType();</b>
+<b class="fc"><i>312</i>&nbsp;    }</b>
+<i>313</i>&nbsp;
+<i>314</i>&nbsp;    @Override
+<i>315</i>&nbsp;    public final void load(String mana) {
+<b class="fc"><i>316</i>&nbsp;        this.clear();</b>
+<b class="fc"><i>317</i>&nbsp;        if (costs.containsKey(mana)) {</b>
+<b class="fc"><i>318</i>&nbsp;            ManaCosts&lt;ManaCost&gt; savedCosts = costs.get(mana);</b>
+<b class="fc"><i>319</i>&nbsp;            for (ManaCost cost : savedCosts) {</b>
+<b class="fc"><i>320</i>&nbsp;                this.add(cost.copy());</b>
+<b class="fc"><i>321</i>&nbsp;            }</b>
+<b class="fc"><i>322</i>&nbsp;        } else {</b>
+<b class="fc"><i>323</i>&nbsp;            if (mana == null || mana.isEmpty()) {</b>
+<b class="fc"><i>324</i>&nbsp;                return;</b>
+<i>325</i>&nbsp;            }
+<b class="fc"><i>326</i>&nbsp;            String[] symbols = mana.split(&quot;^\\{|\\}\\{|\\}$&quot;);</b>
+<b class="fc"><i>327</i>&nbsp;            int modifierForX = 0;</b>
+<b class="fc"><i>328</i>&nbsp;            for (String symbol : symbols) {</b>
+<b class="fc"><i>329</i>&nbsp;                if (symbol.length() &gt; 0) {</b>
+<b class="fc"><i>330</i>&nbsp;                    if (symbol.length() == 1 || isNumeric(symbol)) {</b>
+<b class="fc"><i>331</i>&nbsp;                        if (Character.isDigit(symbol.charAt(0))) {</b>
+<b class="fc"><i>332</i>&nbsp;                            this.add(new GenericManaCost(Integer.valueOf(symbol)));</b>
+<b class="fc"><i>333</i>&nbsp;                        } else if (symbol.equals(&quot;S&quot;)) {</b>
+<b class="fc"><i>334</i>&nbsp;                            this.add(new SnowManaCost());</b>
+<b class="fc"><i>335</i>&nbsp;                        } else if (symbol.equals(&quot;C&quot;)) {</b>
+<b class="fc"><i>336</i>&nbsp;                            this.add(new ColorlessManaCost(1));</b>
+<b class="fc"><i>337</i>&nbsp;                        } else if (!symbol.equals(&quot;X&quot;)) {</b>
+<b class="fc"><i>338</i>&nbsp;                            this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));</b>
+<i>339</i>&nbsp;                        } else // check X wasn&#39;t added before
+<b class="fc"><i>340</i>&nbsp;                        if (modifierForX == 0) {</b>
+<i>341</i>&nbsp;                            // count X occurence
+<b class="fc"><i>342</i>&nbsp;                            for (String s : symbols) {</b>
+<b class="fc"><i>343</i>&nbsp;                                if (s.equals(&quot;X&quot;)) {</b>
+<b class="fc"><i>344</i>&nbsp;                                    modifierForX++;</b>
+<i>345</i>&nbsp;                                }
+<i>346</i>&nbsp;                            }
+<b class="fc"><i>347</i>&nbsp;                            this.add(new VariableManaCost(modifierForX));</b>
+<i>348</i>&nbsp;                        } //TODO: handle multiple {X} and/or {Y} symbols
+<b class="fc"><i>349</i>&nbsp;                    } else if (Character.isDigit(symbol.charAt(0))) {</b>
+<b class="fc"><i>350</i>&nbsp;                        this.add(new MonoHybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(2))));</b>
+<b class="fc"><i>351</i>&nbsp;                    } else if (symbol.contains(&quot;P&quot;)) {</b>
+<b class="fc"><i>352</i>&nbsp;                        this.add(new PhyrexianManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));</b>
+<i>353</i>&nbsp;                    } else {
+<b class="fc"><i>354</i>&nbsp;                        this.add(new HybridManaCost(ColoredManaSymbol.lookup(symbol.charAt(0)), ColoredManaSymbol.lookup(symbol.charAt(2))));</b>
+<i>355</i>&nbsp;                    }
+<i>356</i>&nbsp;                }
+<i>357</i>&nbsp;            }
+<b class="fc"><i>358</i>&nbsp;            costs.put(mana, this.copy());</b>
+<i>359</i>&nbsp;        }
+<b class="fc"><i>360</i>&nbsp;    }</b>
+<i>361</i>&nbsp;
+<i>362</i>&nbsp;    private boolean isNumeric(String symbol) {
+<i>363</i>&nbsp;        try {
+<b class="fc"><i>364</i>&nbsp;            Integer.parseInt(symbol);</b>
+<b class="fc"><i>365</i>&nbsp;            return true;</b>
+<b class="fc"><i>366</i>&nbsp;        } catch (NumberFormatException e) {</b>
+<b class="fc"><i>367</i>&nbsp;            return false;</b>
+<i>368</i>&nbsp;        }
+<i>369</i>&nbsp;    }
+<i>370</i>&nbsp;
+<i>371</i>&nbsp;    @Override
+<i>372</i>&nbsp;    public List&lt;String&gt; getSymbols() {
+<b class="fc"><i>373</i>&nbsp;        List&lt;String&gt; symbols = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>374</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>375</i>&nbsp;            symbols.add(cost.getText());</b>
+<b class="fc"><i>376</i>&nbsp;        }</b>
+<b class="fc"><i>377</i>&nbsp;        return symbols;</b>
+<i>378</i>&nbsp;    }
+<i>379</i>&nbsp;
+<i>380</i>&nbsp;    @Override
+<i>381</i>&nbsp;    public UUID getId() {
+<b class="nc"><i>382</i>&nbsp;        return this.id;</b>
+<i>383</i>&nbsp;    }
+<i>384</i>&nbsp;
+<i>385</i>&nbsp;    @Override
+<i>386</i>&nbsp;    public void setText(String text) {
+<b class="nc"><i>387</i>&nbsp;        this.text = text;</b>
+<b class="nc"><i>388</i>&nbsp;    }</b>
+<i>389</i>&nbsp;
+<i>390</i>&nbsp;    @Override
+<i>391</i>&nbsp;    public String getText() {
+<b class="fc"><i>392</i>&nbsp;        if (text != null) {</b>
+<b class="nc"><i>393</i>&nbsp;            return text;</b>
+<i>394</i>&nbsp;        }
+<b class="fc"><i>395</i>&nbsp;        if (this.isEmpty()) {</b>
+<b class="fc"><i>396</i>&nbsp;            return &quot;&quot;;</b>
+<i>397</i>&nbsp;        }
+<i>398</i>&nbsp;
+<b class="fc"><i>399</i>&nbsp;        StringBuilder sbText = new StringBuilder();</b>
+<b class="fc"><i>400</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>401</i>&nbsp;            if (cost instanceof GenericManaCost) {</b>
+<b class="fc"><i>402</i>&nbsp;                sbText.append(cost.getText());</b>
+<i>403</i>&nbsp;            }
+<b class="fc"><i>404</i>&nbsp;        }</b>
+<b class="fc"><i>405</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>406</i>&nbsp;            if (!(cost instanceof GenericManaCost)) {</b>
+<b class="fc"><i>407</i>&nbsp;                sbText.append(cost.getText());</b>
+<i>408</i>&nbsp;            }
+<b class="fc"><i>409</i>&nbsp;        }</b>
+<b class="fc"><i>410</i>&nbsp;        return sbText.toString();</b>
+<i>411</i>&nbsp;    }
+<i>412</i>&nbsp;
+<i>413</i>&nbsp;    @Override
+<i>414</i>&nbsp;    public ManaOptions getOptions() {
+<b class="fc"><i>415</i>&nbsp;        ManaOptions options = new ManaOptions();</b>
+<b class="fc"><i>416</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="fc"><i>417</i>&nbsp;            options.addMana(cost.getOptions());</b>
+<b class="fc"><i>418</i>&nbsp;        }</b>
+<b class="fc"><i>419</i>&nbsp;        return options;</b>
+<i>420</i>&nbsp;    }
+<i>421</i>&nbsp;
+<i>422</i>&nbsp;    @Override
+<i>423</i>&nbsp;    public boolean testPay(Mana testMana) {
+<b class="nc"><i>424</i>&nbsp;        for (ManaCost cost : this) {</b>
+<b class="nc"><i>425</i>&nbsp;            if (cost.testPay(testMana)) {</b>
+<b class="nc"><i>426</i>&nbsp;                return true;</b>
+<i>427</i>&nbsp;            }
+<b class="nc"><i>428</i>&nbsp;        }</b>
+<b class="nc"><i>429</i>&nbsp;        return false;</b>
+<i>430</i>&nbsp;    }
+<i>431</i>&nbsp;
+<i>432</i>&nbsp;    @Override
+<i>433</i>&nbsp;    public boolean canPay(Ability ability, UUID sourceId, UUID controllerId, Game game) {
+<b class="fc"><i>434</i>&nbsp;        for (T cost : this) {</b>
+<b class="fc"><i>435</i>&nbsp;            if (!cost.canPay(ability, sourceId, controllerId, game)) {</b>
+<b class="nc"><i>436</i>&nbsp;                return false;</b>
+<i>437</i>&nbsp;            }
+<b class="fc"><i>438</i>&nbsp;        }</b>
+<b class="fc"><i>439</i>&nbsp;        return true;</b>
+<i>440</i>&nbsp;    }
+<i>441</i>&nbsp;
+<i>442</i>&nbsp;    @Override
+<i>443</i>&nbsp;    public boolean isPaid() {
+<b class="fc"><i>444</i>&nbsp;        for (T cost : this) {</b>
+<b class="fc"><i>445</i>&nbsp;            if (!(cost instanceof VariableManaCost) &amp;&amp; !cost.isPaid()) {</b>
+<b class="fc"><i>446</i>&nbsp;                return false;</b>
+<i>447</i>&nbsp;            }
+<b class="fc"><i>448</i>&nbsp;        }</b>
+<b class="fc"><i>449</i>&nbsp;        return true;</b>
+<i>450</i>&nbsp;    }
+<i>451</i>&nbsp;
+<i>452</i>&nbsp;    @Override
+<i>453</i>&nbsp;    public void clearPaid() {
+<b class="fc"><i>454</i>&nbsp;        for (T cost : this) {</b>
+<b class="fc"><i>455</i>&nbsp;            cost.clearPaid();</b>
+<b class="fc"><i>456</i>&nbsp;        }</b>
+<b class="fc"><i>457</i>&nbsp;    }</b>
+<i>458</i>&nbsp;
+<i>459</i>&nbsp;    @Override
+<i>460</i>&nbsp;    public void setPaid() {
+<b class="fc"><i>461</i>&nbsp;        for (T cost : this) {</b>
+<b class="fc"><i>462</i>&nbsp;            cost.setPaid();</b>
+<b class="fc"><i>463</i>&nbsp;        }</b>
+<b class="fc"><i>464</i>&nbsp;    }</b>
+<i>465</i>&nbsp;
+<i>466</i>&nbsp;    @Override
+<i>467</i>&nbsp;    public Targets getTargets() {
+<b class="nc"><i>468</i>&nbsp;        Targets targets = new Targets();</b>
+<b class="nc"><i>469</i>&nbsp;        for (T cost : this) {</b>
+<b class="nc"><i>470</i>&nbsp;            targets.addAll(cost.getTargets());</b>
+<b class="nc"><i>471</i>&nbsp;        }</b>
+<b class="nc"><i>472</i>&nbsp;        return targets;</b>
+<i>473</i>&nbsp;    }
+<i>474</i>&nbsp;
+<i>475</i>&nbsp;    @Override
+<i>476</i>&nbsp;    public ManaCosts&lt;T&gt; copy() {
+<b class="fc"><i>477</i>&nbsp;        return new ManaCostsImpl&lt;&gt;(this);</b>
+<i>478</i>&nbsp;    }
+<i>479</i>&nbsp;
+<i>480</i>&nbsp;    @Override
+<i>481</i>&nbsp;    public Filter getSourceFilter() {
+<b class="fc"><i>482</i>&nbsp;        for (T cost : this) {</b>
+<b class="fc"><i>483</i>&nbsp;            if (cost.getSourceFilter() != null) {</b>
+<b class="fc"><i>484</i>&nbsp;                return cost.getSourceFilter();</b>
+<i>485</i>&nbsp;            }
+<b class="fc"><i>486</i>&nbsp;        }</b>
+<b class="fc"><i>487</i>&nbsp;        return null;</b>
+<i>488</i>&nbsp;    }
+<i>489</i>&nbsp;
+<i>490</i>&nbsp;    @Override
+<i>491</i>&nbsp;    public void setSourceFilter(Filter filter) {
+<b class="fc"><i>492</i>&nbsp;        for (T cost : this) {</b>
+<b class="fc"><i>493</i>&nbsp;            cost.setSourceFilter(filter);</b>
+<b class="fc"><i>494</i>&nbsp;        }</b>
+<b class="fc"><i>495</i>&nbsp;    }</b>
+<i>496</i>&nbsp;
+<i>497</i>&nbsp;    @Override
+<i>498</i>&nbsp;    public boolean containsColor(ColoredManaSymbol coloredManaSymbol) {
+<b class="fc"><i>499</i>&nbsp;        for (ManaCost manaCost : this) {</b>
+<b class="fc"><i>500</i>&nbsp;            if (manaCost.containsColor(coloredManaSymbol)) {</b>
+<b class="fc"><i>501</i>&nbsp;                return true;</b>
+<i>502</i>&nbsp;            }
+<b class="fc"><i>503</i>&nbsp;        }</b>
+<b class="fc"><i>504</i>&nbsp;        return false;</b>
+<i>505</i>&nbsp;    }
+<i>506</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

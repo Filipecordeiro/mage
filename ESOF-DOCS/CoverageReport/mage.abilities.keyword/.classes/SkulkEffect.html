@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SkulkEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.keyword</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SkulkEffect (mage.abilities.keyword)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SkulkEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/ 8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * To change this license header, choose License Headers in Project Properties.
+<i>3</i>&nbsp; * To change this template file, choose Tools | Templates
+<i>4</i>&nbsp; * and open the template in the editor.
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;package mage.abilities.keyword;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import mage.abilities.Ability;
+<i>9</i>&nbsp;import mage.abilities.StaticAbility;
+<i>10</i>&nbsp;import mage.abilities.effects.RestrictionEffect;
+<i>11</i>&nbsp;import mage.constants.Duration;
+<i>12</i>&nbsp;import mage.constants.Zone;
+<i>13</i>&nbsp;import mage.game.Game;
+<i>14</i>&nbsp;import mage.game.permanent.Permanent;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;/**
+<i>17</i>&nbsp; *
+<i>18</i>&nbsp; * @author LevelX2
+<i>19</i>&nbsp; */
+<i>20</i>&nbsp;public class SkulkAbility extends StaticAbility {
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    public SkulkAbility() {
+<i>23</i>&nbsp;        super(Zone.BATTLEFIELD, new SkulkEffect(Duration.WhileOnBattlefield));
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public SkulkAbility(final SkulkAbility ability) {
+<i>27</i>&nbsp;        super(ability);
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    @Override
+<i>31</i>&nbsp;    public Ability copy() {
+<i>32</i>&nbsp;        return new SkulkAbility(this);
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    @Override
+<i>36</i>&nbsp;    public String getRule() {
+<i>37</i>&nbsp;        return &quot;Skulk &lt;i&gt;(This creature can&#39;t be blocked by creatures with greater power.)&lt;/i&gt;&quot;;
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;}
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;class SkulkEffect extends RestrictionEffect {
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public SkulkEffect(Duration duration) {
+<b class="fc"><i>45</i>&nbsp;        super(duration);</b>
+<b class="fc"><i>46</i>&nbsp;        staticText = &quot;Skulk &lt;i&gt;(This creature can&#39;t be blocked by creatures with greater power.)&lt;/i&gt;&quot;;</b>
+<b class="fc"><i>47</i>&nbsp;    }</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    public SkulkEffect(final SkulkEffect effect) {
+<b class="fc"><i>50</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>51</i>&nbsp;    }</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    @Override
+<i>54</i>&nbsp;    public boolean applies(Permanent permanent, Ability source, Game game) {
+<b class="fc"><i>55</i>&nbsp;        return permanent.getId().equals(source.getSourceId());</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    @Override
+<i>59</i>&nbsp;    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+<b class="nc"><i>60</i>&nbsp;        return blocker.getPower().getValue() &lt;= attacker.getPower().getValue();</b>
+<i>61</i>&nbsp;    }
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    @Override
+<i>64</i>&nbsp;    public SkulkEffect copy() {
+<b class="fc"><i>65</i>&nbsp;        return new SkulkEffect(this);</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AllianceOfArmsEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.a</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AllianceOfArmsEffect (mage.cards.a)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AllianceOfArmsEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.a;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.abilities.Ability;
+<i>32</i>&nbsp;import mage.abilities.costs.Cost;
+<i>33</i>&nbsp;import mage.abilities.costs.mana.GenericManaCost;
+<i>34</i>&nbsp;import mage.abilities.effects.Effect;
+<i>35</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>36</i>&nbsp;import mage.abilities.effects.common.CreateTokenTargetEffect;
+<i>37</i>&nbsp;import mage.cards.CardImpl;
+<i>38</i>&nbsp;import mage.cards.CardSetInfo;
+<i>39</i>&nbsp;import mage.constants.CardType;
+<i>40</i>&nbsp;import mage.constants.Outcome;
+<i>41</i>&nbsp;import mage.game.Game;
+<i>42</i>&nbsp;import mage.game.permanent.token.SoldierToken;
+<i>43</i>&nbsp;import mage.players.Player;
+<i>44</i>&nbsp;import mage.target.targetpointer.FixedTarget;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;/**
+<i>47</i>&nbsp; *
+<i>48</i>&nbsp; * @author LevelX2
+<i>49</i>&nbsp; */
+<i>50</i>&nbsp;public class AllianceOfArms extends CardImpl {
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public AllianceOfArms(UUID ownerId, CardSetInfo setInfo) {
+<i>53</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},&quot;{W}&quot;);
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;        // Join forces - Starting with you, each player may pay any amount of mana. Each player puts X 1/1 white Soldier creature tokens onto the battlefield, where X is the total amount of mana paid this way.
+<i>57</i>&nbsp;        this.getSpellAbility().addEffect(new AllianceOfArmsEffect());
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public AllianceOfArms(final AllianceOfArms card) {
+<i>61</i>&nbsp;        super(card);
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    @Override
+<i>65</i>&nbsp;    public AllianceOfArms copy() {
+<i>66</i>&nbsp;        return new AllianceOfArms(this);
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;}
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;class AllianceOfArmsEffect extends OneShotEffect {
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public AllianceOfArmsEffect() {
+<b class="nc"><i>73</i>&nbsp;        super(Outcome.Detriment);</b>
+<b class="nc"><i>74</i>&nbsp;        this.staticText = &quot;&lt;i&gt;Join forces&lt;/i&gt; - Starting with you, each player may pay any amount of mana. Each player puts X 1/1 white Soldier creature tokens onto the battlefield, where X is the total amount of mana paid this way&quot;;</b>
+<i>75</i>&nbsp;    }
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    public AllianceOfArmsEffect(final AllianceOfArmsEffect effect) {
+<b class="nc"><i>78</i>&nbsp;        super(effect);</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    @Override
+<i>82</i>&nbsp;    public AllianceOfArmsEffect copy() {
+<b class="nc"><i>83</i>&nbsp;        return new AllianceOfArmsEffect(this);</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    @Override
+<i>87</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>88</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());</b>
+<b class="nc"><i>89</i>&nbsp;        if (controller != null) {</b>
+<b class="nc"><i>90</i>&nbsp;            int xSum = 0;</b>
+<b class="nc"><i>91</i>&nbsp;            xSum += playerPaysXGenericMana(controller, source, game);</b>
+<b class="nc"><i>92</i>&nbsp;            for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {</b>
+<b class="nc"><i>93</i>&nbsp;                if (playerId != controller.getId()) {</b>
+<b class="nc"><i>94</i>&nbsp;                    Player player = game.getPlayer(playerId);</b>
+<b class="nc"><i>95</i>&nbsp;                    if (player != null) {</b>
+<b class="nc"><i>96</i>&nbsp;                        xSum += playerPaysXGenericMana(player, source, game);</b>
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;                    }
+<i>99</i>&nbsp;                }
+<b class="nc"><i>100</i>&nbsp;            }</b>
+<b class="nc"><i>101</i>&nbsp;            if (xSum &gt; 0) {</b>
+<b class="nc"><i>102</i>&nbsp;                for(UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {</b>
+<b class="nc"><i>103</i>&nbsp;                    Effect effect = new CreateTokenTargetEffect(new SoldierToken(), xSum);</b>
+<b class="nc"><i>104</i>&nbsp;                    effect.setTargetPointer(new FixedTarget(playerId));</b>
+<b class="nc"><i>105</i>&nbsp;                    effect.apply(game, source);</b>
+<b class="nc"><i>106</i>&nbsp;                }</b>
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;            }
+<i>109</i>&nbsp;            // prevent undo
+<b class="nc"><i>110</i>&nbsp;            controller.resetStoredBookmark(game);</b>
+<b class="nc"><i>111</i>&nbsp;            return true;</b>
+<i>112</i>&nbsp;        }
+<b class="nc"><i>113</i>&nbsp;        return false;</b>
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    protected static int playerPaysXGenericMana(Player player, Ability source, Game game) {
+<b class="nc"><i>117</i>&nbsp;        int xValue = 0;</b>
+<b class="nc"><i>118</i>&nbsp;        boolean payed = false;</b>
+<b class="nc"><i>119</i>&nbsp;        while (player.canRespond() &amp;&amp; !payed) {</b>
+<b class="nc"><i>120</i>&nbsp;            xValue = player.announceXMana(0, Integer.MAX_VALUE, &quot;How much mana will you pay?&quot;, game, source);</b>
+<b class="nc"><i>121</i>&nbsp;            if (xValue &gt; 0) {</b>
+<b class="nc"><i>122</i>&nbsp;                Cost cost = new GenericManaCost(xValue);</b>
+<b class="nc"><i>123</i>&nbsp;                payed = cost.pay(source, game, source.getSourceId(), player.getId(), false, null);</b>
+<b class="nc"><i>124</i>&nbsp;            } else {</b>
+<b class="nc"><i>125</i>&nbsp;                payed = true;</b>
+<i>126</i>&nbsp;            }
+<i>127</i>&nbsp;        }
+<b class="nc"><i>128</i>&nbsp;        game.informPlayers(new StringBuilder(player.getLogName()).append(&quot; pays {&quot;).append(xValue).append(&quot;}.&quot;).toString());</b>
+<b class="nc"><i>129</i>&nbsp;        return xValue;</b>
+<i>130</i>&nbsp;    }
+<i>131</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

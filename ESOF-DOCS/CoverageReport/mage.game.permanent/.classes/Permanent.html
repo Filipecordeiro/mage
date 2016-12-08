@@ -1,0 +1,407 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Permanent</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.game.permanent</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Permanent (mage.game.permanent)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Permanent</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.game.permanent;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.ArrayList;
+<i>31</i>&nbsp;import java.util.HashSet;
+<i>32</i>&nbsp;import java.util.List;
+<i>33</i>&nbsp;import java.util.UUID;
+<i>34</i>&nbsp;import mage.MageObject;
+<i>35</i>&nbsp;import mage.MageObjectReference;
+<i>36</i>&nbsp;import mage.abilities.Ability;
+<i>37</i>&nbsp;import mage.cards.Card;
+<i>38</i>&nbsp;import mage.constants.Rarity;
+<i>39</i>&nbsp;import mage.constants.Zone;
+<i>40</i>&nbsp;import mage.game.Controllable;
+<i>41</i>&nbsp;import mage.game.Game;
+<i>42</i>&nbsp;import mage.game.GameState;
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;public interface Permanent extends Card, Controllable {
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    void setControllerId(UUID controllerId);
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    boolean isTapped();
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    boolean untap(Game game);
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    boolean tap(Game game);
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    /**
+<i>55</i>&nbsp;     * use tap(game)
+<i>56</i>&nbsp;     * &lt;p&gt;
+<i>57</i>&nbsp;     * setTapped doesn&#39;t trigger TAPPED event and should be used only if you
+<i>58</i>&nbsp;     * want permanent to enter battlefield tapped&lt;/p&gt;
+<i>59</i>&nbsp;     *
+<i>60</i>&nbsp;     * @param tapped
+<i>61</i>&nbsp;     * @deprecated
+<i>62</i>&nbsp;     */
+<i>63</i>&nbsp;    @Deprecated
+<i>64</i>&nbsp;    void setTapped(boolean tapped);
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    boolean canTap();
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    boolean isFlipped();
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    boolean unflip(Game game);
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    boolean flip(Game game);
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    boolean transform(Game game);
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    boolean isTransformed();
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    void setTransformed(boolean value);
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    boolean isPhasedIn();
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    boolean phaseIn(Game game);
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    boolean phaseOut(Game game);
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    boolean isMonstrous();
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    void setMonstrous(boolean value);
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    boolean isRenowned();
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    void setRenowned(boolean value);
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    void setCardNumber(String cid);
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    void setExpansionSetCode(String expansionSetCode);
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    void setRarity(Rarity rarity);
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    void setFlipCard(boolean flipCard);
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    void setFlipCardName(String flipCardName);
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    void setSecondCardFace(Card card);
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    List&lt;UUID&gt; getAttachments();
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    UUID getAttachedTo();
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    int getAttachedToZoneChangeCounter();
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    void attachTo(UUID permanentId, Game game);
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    boolean addAttachment(UUID permanentId, Game game);
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    boolean removeAttachment(UUID permanentId, Game game);
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;    boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    boolean hasProtectionFrom(MageObject source, Game game);
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    boolean cantBeAttachedBy(MageObject source, Game game);
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    boolean wasControlledFromStartOfControllerTurn();
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    boolean hasSummoningSickness();
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    int getDamage();
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable);
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    int damage(int damage, UUID sourceId, Game game, boolean combat, boolean preventable, ArrayList&lt;UUID&gt; appliedEffects);
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    /**
+<i>135</i>&nbsp;     * used in combat only to deal damage at the same time
+<i>136</i>&nbsp;     *
+<i>137</i>&nbsp;     * @param damage
+<i>138</i>&nbsp;     * @param sourceId
+<i>139</i>&nbsp;     * @param game
+<i>140</i>&nbsp;     * @param preventable
+<i>141</i>&nbsp;     * @param combat
+<i>142</i>&nbsp;     * @return
+<i>143</i>&nbsp;     */
+<i>144</i>&nbsp;    int markDamage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;    int applyDamage(Game game);
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;    void removeAllDamage(Game game);
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;    void reset(Game game);
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;    boolean destroy(UUID sourceId, Game game, boolean noRegen);
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    boolean sacrifice(UUID sourceId, Game game);
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;    boolean regenerate(UUID sourceId, Game game);
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    boolean fight(Permanent fightTarget, Ability source, Game game);
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;    boolean entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;    String getValue(GameState state);
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;    @Deprecated
+<i>165</i>&nbsp;    void addAbility(Ability ability);
+<i>166</i>&nbsp;
+<i>167</i>&nbsp;    @Deprecated
+<i>168</i>&nbsp;    void addAbility(Ability ability, Game game);
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;    void addAbility(Ability ability, UUID sourceId, Game game);
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;    void addAbility(Ability ability, UUID sourceId, Game game, boolean createNewId);
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;    void removeAllAbilities(UUID sourceId, Game game);
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;    void addLoyaltyUsed();
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;    boolean canLoyaltyBeUsed(Game game);
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;    public void resetControl();
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;    boolean changeControllerId(UUID controllerId, Game game);
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    boolean checkControlChanged(Game game);
+<i>185</i>&nbsp;
+<i>186</i>&nbsp;    void beginningOfTurn(Game game);
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;    void endOfTurn(Game game);
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;    int getTurnsOnBattlefield();
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;    void addPower(int power);
+<i>193</i>&nbsp;
+<i>194</i>&nbsp;    void addToughness(int toughness);
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;    boolean isAttacking();
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    int getBlocking();
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;    void setAttacking(boolean attacking);
+<i>201</i>&nbsp;
+<i>202</i>&nbsp;    void setBlocking(int blocking);
+<i>203</i>&nbsp;
+<i>204</i>&nbsp;    int getMaxBlocks();
+<i>205</i>&nbsp;
+<i>206</i>&nbsp;    void setMaxBlocks(int maxBlocks);
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;    int getMinBlockedBy();
+<i>209</i>&nbsp;
+<i>210</i>&nbsp;    void setMinBlockedBy(int minBlockedBy);
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;    int getMaxBlockedBy();
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;    boolean isRemovedFromCombat();
+<i>215</i>&nbsp;
+<i>216</i>&nbsp;    void setRemovedFromCombat(boolean removedFromCombat);
+<i>217</i>&nbsp;
+<i>218</i>&nbsp;    /**
+<i>219</i>&nbsp;     * Sets the maximum number of blockers the creature can be blocked by.
+<i>220</i>&nbsp;     * Default = 0 which means there is no restriction in the number of
+<i>221</i>&nbsp;     * blockers.
+<i>222</i>&nbsp;     *
+<i>223</i>&nbsp;     * @param maxBlockedBy maximum number of blockers
+<i>224</i>&nbsp;     */
+<i>225</i>&nbsp;    void setMaxBlockedBy(int maxBlockedBy);
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;    boolean canAttack(Game game);
+<i>228</i>&nbsp;
+<i>229</i>&nbsp;    /**
+<i>230</i>&nbsp;     *
+<i>231</i>&nbsp;     * @param defenderId id of planeswalker or player to attack
+<i>232</i>&nbsp;     * @param game
+<i>233</i>&nbsp;     * @return
+<i>234</i>&nbsp;     */
+<i>235</i>&nbsp;    boolean canAttack(UUID defenderId, Game game);
+<i>236</i>&nbsp;
+<i>237</i>&nbsp;    boolean canBlock(UUID attackerId, Game game);
+<i>238</i>&nbsp;
+<i>239</i>&nbsp;    boolean canBlockAny(Game game);
+<i>240</i>&nbsp;
+<i>241</i>&nbsp;    /**
+<i>242</i>&nbsp;     * Checks by restriction effects if the permanent can use activated
+<i>243</i>&nbsp;     * abilities
+<i>244</i>&nbsp;     *
+<i>245</i>&nbsp;     * @param game
+<i>246</i>&nbsp;     * @return true - permanent can use activated abilities
+<i>247</i>&nbsp;     */
+<i>248</i>&nbsp;    boolean canUseActivatedAbilities(Game game);
+<i>249</i>&nbsp;
+<i>250</i>&nbsp;    /**
+<i>251</i>&nbsp;     * Checks by restriction effects if the permanent can transform
+<i>252</i>&nbsp;     *
+<i>253</i>&nbsp;     * @param ability the ability that causes the transform
+<i>254</i>&nbsp;     * @param game
+<i>255</i>&nbsp;     * @return true - permanent can transform
+<i>256</i>&nbsp;     */
+<i>257</i>&nbsp;    boolean canTransform(Ability ability, Game game);
+<i>258</i>&nbsp;
+<i>259</i>&nbsp;    boolean removeFromCombat(Game game);
+<i>260</i>&nbsp;
+<i>261</i>&nbsp;    boolean removeFromCombat(Game game, boolean withInfo);
+<i>262</i>&nbsp;
+<i>263</i>&nbsp;    boolean isDeathtouched();
+<i>264</i>&nbsp;
+<i>265</i>&nbsp;    /**
+<i>266</i>&nbsp;     * Returns a list of object refrences that dealt damage this turn to this
+<i>267</i>&nbsp;     * permanent
+<i>268</i>&nbsp;     *
+<i>269</i>&nbsp;     * @return
+<i>270</i>&nbsp;     */
+<i>271</i>&nbsp;    HashSet&lt;MageObjectReference&gt; getDealtDamageByThisTurn();
+<i>272</i>&nbsp;
+<i>273</i>&nbsp;    /**
+<i>274</i>&nbsp;     * Imprint some other card to this one.
+<i>275</i>&nbsp;     *
+<i>276</i>&nbsp;     * @param imprintedCard Card to count as imprinted
+<i>277</i>&nbsp;     * @param game
+<i>278</i>&nbsp;     * @return true if card was imprinted
+<i>279</i>&nbsp;     */
+<i>280</i>&nbsp;    boolean imprint(UUID imprintedCard, Game game);
+<i>281</i>&nbsp;
+<i>282</i>&nbsp;    /**
+<i>283</i>&nbsp;     * Removes all imprinted cards from permanent.
+<i>284</i>&nbsp;     *
+<i>285</i>&nbsp;     * @param game
+<i>286</i>&nbsp;     * @return
+<i>287</i>&nbsp;     */
+<i>288</i>&nbsp;    boolean clearImprinted(Game game);
+<i>289</i>&nbsp;
+<i>290</i>&nbsp;    /**
+<i>291</i>&nbsp;     * Get card that was imprinted on this one.
+<i>292</i>&nbsp;     *
+<i>293</i>&nbsp;     * Can be null if no card was imprinted.
+<i>294</i>&nbsp;     *
+<i>295</i>&nbsp;     * @return Imprinted card UUID.
+<i>296</i>&nbsp;     */
+<i>297</i>&nbsp;    List&lt;UUID&gt; getImprinted();
+<i>298</i>&nbsp;
+<i>299</i>&nbsp;    /**
+<i>300</i>&nbsp;     * Allows to connect any card to permanent. Very similar to Imprint except
+<i>301</i>&nbsp;     * that it is for internal use only.
+<i>302</i>&nbsp;     *
+<i>303</i>&nbsp;     * @param key
+<i>304</i>&nbsp;     * @param connectedCard
+<i>305</i>&nbsp;     */
+<i>306</i>&nbsp;    void addConnectedCard(String key, UUID connectedCard);
+<i>307</i>&nbsp;
+<i>308</i>&nbsp;    /**
+<i>309</i>&nbsp;     * Returns connected cards. Very similar to Imprint except that it is for
+<i>310</i>&nbsp;     * internal use only.
+<i>311</i>&nbsp;     *
+<i>312</i>&nbsp;     * @param key
+<i>313</i>&nbsp;     * @return
+<i>314</i>&nbsp;     */
+<i>315</i>&nbsp;    List&lt;UUID&gt; getConnectedCards(String key);
+<i>316</i>&nbsp;
+<i>317</i>&nbsp;    /**
+<i>318</i>&nbsp;     * Clear all connected cards.
+<i>319</i>&nbsp;     *
+<i>320</i>&nbsp;     * @param key
+<i>321</i>&nbsp;     */
+<i>322</i>&nbsp;    void clearConnectedCards(String key);
+<i>323</i>&nbsp;
+<i>324</i>&nbsp;    /**
+<i>325</i>&nbsp;     * Sets paired card.
+<i>326</i>&nbsp;     *
+<i>327</i>&nbsp;     * @param pairedCard
+<i>328</i>&nbsp;     */
+<i>329</i>&nbsp;    void setPairedCard(MageObjectReference pairedCard);
+<i>330</i>&nbsp;
+<i>331</i>&nbsp;    /**
+<i>332</i>&nbsp;     * Gets paired card. Can return null.
+<i>333</i>&nbsp;     *
+<i>334</i>&nbsp;     * @return
+<i>335</i>&nbsp;     */
+<i>336</i>&nbsp;    MageObjectReference getPairedCard();
+<i>337</i>&nbsp;
+<i>338</i>&nbsp;    /**
+<i>339</i>&nbsp;     * Makes permanent paired with no other permanent.
+<i>340</i>&nbsp;     */
+<i>341</i>&nbsp;    void clearPairedCard();
+<i>342</i>&nbsp;
+<i>343</i>&nbsp;    void setMorphed(boolean value);
+<i>344</i>&nbsp;
+<i>345</i>&nbsp;    boolean isMorphed();
+<i>346</i>&nbsp;
+<i>347</i>&nbsp;    void setManifested(boolean value);
+<i>348</i>&nbsp;
+<i>349</i>&nbsp;    boolean isManifested();
+<i>350</i>&nbsp;
+<i>351</i>&nbsp;    @Override
+<i>352</i>&nbsp;    Permanent copy();
+<i>353</i>&nbsp;
+<i>354</i>&nbsp;    // Simple int counter to set a timewise create order , the lower the number the earlier the object was created
+<i>355</i>&nbsp;    // if objects enter the battlefield at the same time they can get (and should) get the same number.
+<i>356</i>&nbsp;    int getCreateOrder();
+<i>357</i>&nbsp;
+<i>358</i>&nbsp;    void setCreateOrder(int createOrder);
+<i>359</i>&nbsp;
+<i>360</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

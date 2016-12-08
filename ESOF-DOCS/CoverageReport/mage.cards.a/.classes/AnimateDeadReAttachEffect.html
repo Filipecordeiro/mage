@@ -1,0 +1,350 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AnimateDeadReAttachEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.a</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AnimateDeadReAttachEffect (mage.cards.a)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnimateDeadReAttachEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (22/ 24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.a;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.MageObjectReference;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+<i>34</i>&nbsp;import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+<i>35</i>&nbsp;import mage.abilities.common.SimpleStaticAbility;
+<i>36</i>&nbsp;import mage.abilities.condition.common.SourceOnBattlefieldCondition;
+<i>37</i>&nbsp;import mage.abilities.decorator.ConditionalTriggeredAbility;
+<i>38</i>&nbsp;import mage.abilities.effects.ContinuousEffectImpl;
+<i>39</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>40</i>&nbsp;import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
+<i>41</i>&nbsp;import mage.abilities.effects.common.continuous.SourceEffect;
+<i>42</i>&nbsp;import mage.abilities.keyword.EnchantAbility;
+<i>43</i>&nbsp;import mage.cards.Card;
+<i>44</i>&nbsp;import mage.cards.CardImpl;
+<i>45</i>&nbsp;import mage.cards.CardSetInfo;
+<i>46</i>&nbsp;import mage.constants.CardType;
+<i>47</i>&nbsp;import mage.constants.Duration;
+<i>48</i>&nbsp;import mage.constants.Layer;
+<i>49</i>&nbsp;import mage.constants.Outcome;
+<i>50</i>&nbsp;import mage.constants.SubLayer;
+<i>51</i>&nbsp;import mage.constants.Zone;
+<i>52</i>&nbsp;import mage.filter.common.FilterCreatureCard;
+<i>53</i>&nbsp;import mage.filter.common.FilterCreaturePermanent;
+<i>54</i>&nbsp;import mage.filter.predicate.permanent.PermanentIdPredicate;
+<i>55</i>&nbsp;import mage.game.Game;
+<i>56</i>&nbsp;import mage.game.permanent.Permanent;
+<i>57</i>&nbsp;import mage.players.Player;
+<i>58</i>&nbsp;import mage.target.Target;
+<i>59</i>&nbsp;import mage.target.common.TargetCardInGraveyard;
+<i>60</i>&nbsp;import mage.target.common.TargetCreaturePermanent;
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;/**
+<i>63</i>&nbsp; *
+<i>64</i>&nbsp; * @author LevelX2
+<i>65</i>&nbsp; */
+<i>66</i>&nbsp;public class AnimateDead extends CardImpl {
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public AnimateDead(UUID ownerId, CardSetInfo setInfo) {
+<i>69</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},&quot;{1}{B}&quot;);
+<i>70</i>&nbsp;        this.subtype.add(&quot;Aura&quot;);
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;        // Enchant creature card in a graveyard
+<i>73</i>&nbsp;        TargetCardInGraveyard auraTarget = new TargetCardInGraveyard(new FilterCreatureCard(&quot;creature card in a graveyard&quot;));
+<i>74</i>&nbsp;        this.getSpellAbility().addTarget(auraTarget);
+<i>75</i>&nbsp;        this.getSpellAbility().addEffect(new AnimateDeadAttachEffect(Outcome.PutCreatureInPlay));
+<i>76</i>&nbsp;        Ability enchantAbility = new EnchantAbility(auraTarget.getTargetName());
+<i>77</i>&nbsp;        this.addAbility(enchantAbility);
+<i>78</i>&nbsp;        // When Animate Dead enters the battlefield, if it&#39;s on the battlefield, it loses &quot;enchant creature card in a graveyard&quot;
+<i>79</i>&nbsp;        // and gains &quot;enchant creature put onto the battlefield with Animate Dead.&quot; Return enchanted creature card to the battlefield
+<i>80</i>&nbsp;        // under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature&#39;s controller sacrifices it.
+<i>81</i>&nbsp;        Ability ability = new ConditionalTriggeredAbility(
+<i>82</i>&nbsp;                new EntersBattlefieldTriggeredAbility(new AnimateDeadReAttachEffect(), false),
+<i>83</i>&nbsp;                SourceOnBattlefieldCondition.getInstance(),
+<i>84</i>&nbsp;                &quot;When {this} enters the battlefield, if it&#39;s on the battlefield, it loses \&quot;enchant creature card in a graveyard\&quot; and gains \&quot;enchant creature put onto the battlefield with {this}.\&quot; Return enchanted creature card to the battlefield under your control and attach {this} to it.&quot;);
+<i>85</i>&nbsp;        ability.addEffect(new AnimateDeadChangeAbilityEffect());
+<i>86</i>&nbsp;        this.addAbility(ability);
+<i>87</i>&nbsp;        this.addAbility(new LeavesBattlefieldTriggeredAbility(new AnimateDeadLeavesBattlefieldTriggeredEffect(), false));
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;        // Enchanted creature gets -1/-0.
+<i>90</i>&nbsp;        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, 0, Duration.WhileOnBattlefield)));
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    public AnimateDead(final AnimateDead card) {
+<i>95</i>&nbsp;        super(card);
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    @Override
+<i>99</i>&nbsp;    public AnimateDead copy() {
+<i>100</i>&nbsp;        return new AnimateDead(this);
+<i>101</i>&nbsp;    }
+<i>102</i>&nbsp;}
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;class AnimateDeadReAttachEffect extends OneShotEffect {
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    public AnimateDeadReAttachEffect() {
+<b class="fc"><i>107</i>&nbsp;        super(Outcome.Benefit);</b>
+<b class="fc"><i>108</i>&nbsp;        this.staticText = &quot;Return enchanted creature card to the battlefield under your control and attach {this} to it&quot;;</b>
+<b class="fc"><i>109</i>&nbsp;    }</b>
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    public AnimateDeadReAttachEffect(final AnimateDeadReAttachEffect effect) {
+<b class="fc"><i>112</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>113</i>&nbsp;    }</b>
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;    @Override
+<i>116</i>&nbsp;    public AnimateDeadReAttachEffect copy() {
+<b class="fc"><i>117</i>&nbsp;        return new AnimateDeadReAttachEffect(this);</b>
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    @Override
+<i>121</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="fc"><i>122</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());</b>
+<b class="fc"><i>123</i>&nbsp;        Permanent enchantment = game.getPermanent(source.getSourceId());</b>
+<i>124</i>&nbsp;
+<b class="fc"><i>125</i>&nbsp;        if (controller != null &amp;&amp; enchantment != null) {</b>
+<b class="fc"><i>126</i>&nbsp;            Card cardInGraveyard = game.getCard(enchantment.getAttachedTo());</b>
+<b class="fc"><i>127</i>&nbsp;            if (cardInGraveyard == null) {</b>
+<b class="nc"><i>128</i>&nbsp;                return true;</b>
+<i>129</i>&nbsp;            }
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;            // put card into play
+<b class="fc"><i>132</i>&nbsp;            controller.moveCards(cardInGraveyard, Zone.BATTLEFIELD, source, game);</b>
+<b class="fc"><i>133</i>&nbsp;            Permanent enchantedCreature = game.getPermanent(cardInGraveyard.getId());</b>
+<i>134</i>&nbsp;
+<b class="fc"><i>135</i>&nbsp;            FilterCreaturePermanent filter = new FilterCreaturePermanent(&quot;enchant creature put onto the battlefield with Animate Dead&quot;);</b>
+<b class="fc"><i>136</i>&nbsp;            filter.add(new PermanentIdPredicate(cardInGraveyard.getId()));</b>
+<b class="fc"><i>137</i>&nbsp;            Target target = new TargetCreaturePermanent(filter);</b>
+<i>138</i>&nbsp;            //enchantAbility.setTargetName(target.getTargetName());
+<b class="fc"><i>139</i>&nbsp;            if (enchantedCreature != null) {</b>
+<b class="fc"><i>140</i>&nbsp;                target.addTarget(enchantedCreature.getId(), source, game);</b>
+<b class="fc"><i>141</i>&nbsp;                enchantment.getSpellAbility().getTargets().clear();</b>
+<b class="fc"><i>142</i>&nbsp;                enchantment.getSpellAbility().getTargets().add(target);</b>
+<b class="fc"><i>143</i>&nbsp;                enchantedCreature.addAttachment(enchantment.getId(), game);</b>
+<i>144</i>&nbsp;            }
+<b class="fc"><i>145</i>&nbsp;            return true;</b>
+<i>146</i>&nbsp;        }
+<i>147</i>&nbsp;
+<b class="nc"><i>148</i>&nbsp;        return false;</b>
+<i>149</i>&nbsp;    }
+<i>150</i>&nbsp;}
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;class AnimateDeadLeavesBattlefieldTriggeredEffect extends OneShotEffect {
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    public AnimateDeadLeavesBattlefieldTriggeredEffect() {
+<i>155</i>&nbsp;        super(Outcome.Benefit);
+<i>156</i>&nbsp;        this.staticText = &quot;enchanted creature&#39;s controller sacrifices it&quot;;
+<i>157</i>&nbsp;    }
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;    public AnimateDeadLeavesBattlefieldTriggeredEffect(final AnimateDeadLeavesBattlefieldTriggeredEffect effect) {
+<i>160</i>&nbsp;        super(effect);
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    @Override
+<i>164</i>&nbsp;    public AnimateDeadLeavesBattlefieldTriggeredEffect copy() {
+<i>165</i>&nbsp;        return new AnimateDeadLeavesBattlefieldTriggeredEffect(this);
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;    @Override
+<i>169</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>170</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());
+<i>171</i>&nbsp;        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
+<i>172</i>&nbsp;        if (controller != null &amp;&amp; sourcePermanent != null) {
+<i>173</i>&nbsp;            if (sourcePermanent.getAttachedTo() != null) {
+<i>174</i>&nbsp;                Permanent attachedTo = game.getPermanent(sourcePermanent.getAttachedTo());
+<i>175</i>&nbsp;                if (attachedTo != null) {
+<i>176</i>&nbsp;                    attachedTo.sacrifice(source.getSourceId(), game);
+<i>177</i>&nbsp;                }
+<i>178</i>&nbsp;            }
+<i>179</i>&nbsp;            return true;
+<i>180</i>&nbsp;        }
+<i>181</i>&nbsp;        return false;
+<i>182</i>&nbsp;    }
+<i>183</i>&nbsp;}
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;class AnimateDeadAttachEffect extends OneShotEffect {
+<i>186</i>&nbsp;
+<i>187</i>&nbsp;    public AnimateDeadAttachEffect(Outcome outcome) {
+<i>188</i>&nbsp;        super(outcome);
+<i>189</i>&nbsp;    }
+<i>190</i>&nbsp;
+<i>191</i>&nbsp;    public AnimateDeadAttachEffect(Outcome outcome, String rule) {
+<i>192</i>&nbsp;        super(outcome);
+<i>193</i>&nbsp;        staticText = rule;
+<i>194</i>&nbsp;    }
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;    public AnimateDeadAttachEffect(final AnimateDeadAttachEffect effect) {
+<i>197</i>&nbsp;        super(effect);
+<i>198</i>&nbsp;    }
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;    @Override
+<i>201</i>&nbsp;    public AnimateDeadAttachEffect copy() {
+<i>202</i>&nbsp;        return new AnimateDeadAttachEffect(this);
+<i>203</i>&nbsp;    }
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;    @Override
+<i>206</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>207</i>&nbsp;        Card card = game.getCard(source.getFirstTarget());
+<i>208</i>&nbsp;        if (card != null &amp;&amp; game.getState().getZone(source.getFirstTarget()).equals(Zone.GRAVEYARD)) {
+<i>209</i>&nbsp;            // Card have no attachedTo attribute yet so write ref only to enchantment now
+<i>210</i>&nbsp;            Permanent enchantment = game.getPermanent(source.getSourceId());
+<i>211</i>&nbsp;            if (enchantment != null) {
+<i>212</i>&nbsp;                enchantment.attachTo(card.getId(), game);
+<i>213</i>&nbsp;            }
+<i>214</i>&nbsp;            return true;
+<i>215</i>&nbsp;        }
+<i>216</i>&nbsp;        return false;
+<i>217</i>&nbsp;    }
+<i>218</i>&nbsp;
+<i>219</i>&nbsp;}
+<i>220</i>&nbsp;
+<i>221</i>&nbsp;class AnimateDeadChangeAbilityEffect extends ContinuousEffectImpl implements SourceEffect {
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;    private final static Ability newAbility = new EnchantAbility(&quot;creature put onto the battlefield with Animate Dead&quot;);
+<i>224</i>&nbsp;
+<i>225</i>&nbsp;    static {
+<i>226</i>&nbsp;        newAbility.setRuleAtTheTop(true);
+<i>227</i>&nbsp;    }
+<i>228</i>&nbsp;
+<i>229</i>&nbsp;    public AnimateDeadChangeAbilityEffect() {
+<i>230</i>&nbsp;        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+<i>231</i>&nbsp;        staticText = &quot;it loses \&quot;enchant creature card in a graveyard\&quot; and gains \&quot;enchant creature put onto the battlefield with Animate Dead\&quot;&quot;;
+<i>232</i>&nbsp;    }
+<i>233</i>&nbsp;
+<i>234</i>&nbsp;    public AnimateDeadChangeAbilityEffect(final AnimateDeadChangeAbilityEffect effect) {
+<i>235</i>&nbsp;        super(effect);
+<i>236</i>&nbsp;    }
+<i>237</i>&nbsp;
+<i>238</i>&nbsp;    @Override
+<i>239</i>&nbsp;    public AnimateDeadChangeAbilityEffect copy() {
+<i>240</i>&nbsp;        return new AnimateDeadChangeAbilityEffect(this);
+<i>241</i>&nbsp;    }
+<i>242</i>&nbsp;
+<i>243</i>&nbsp;    @Override
+<i>244</i>&nbsp;    public void init(Ability source, Game game) {
+<i>245</i>&nbsp;        super.init(source, game);
+<i>246</i>&nbsp;        affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
+<i>247</i>&nbsp;    }
+<i>248</i>&nbsp;
+<i>249</i>&nbsp;    @Override
+<i>250</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>251</i>&nbsp;        Permanent permanent = affectedObjectList.get(0).getPermanent(game);
+<i>252</i>&nbsp;        if (permanent != null) {
+<i>253</i>&nbsp;            Ability abilityToRemove = null;
+<i>254</i>&nbsp;            for (Ability ability : permanent.getAbilities()) {
+<i>255</i>&nbsp;                if (ability instanceof EnchantAbility) {
+<i>256</i>&nbsp;                    abilityToRemove = ability;
+<i>257</i>&nbsp;                }
+<i>258</i>&nbsp;            }
+<i>259</i>&nbsp;            if (abilityToRemove != null) {
+<i>260</i>&nbsp;                permanent.getAbilities().remove(abilityToRemove);
+<i>261</i>&nbsp;            }
+<i>262</i>&nbsp;            permanent.addAbility(newAbility, source.getSourceId(), game);
+<i>263</i>&nbsp;            return true;
+<i>264</i>&nbsp;        }
+<i>265</i>&nbsp;        return false;
+<i>266</i>&nbsp;    }
+<i>267</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CardsInControllerGraveCondition</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.condition.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CardsInControllerGraveCondition (mage.abilities.condition.common)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CardsInControllerGraveCondition</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (10/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.abilities.condition.common;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import mage.abilities.Ability;
+<i>4</i>&nbsp;import mage.abilities.condition.Condition;
+<i>5</i>&nbsp;import mage.filter.FilterCard;
+<i>6</i>&nbsp;import mage.game.Game;
+<i>7</i>&nbsp;import mage.players.Player;
+<i>8</i>&nbsp;import mage.util.CardUtil;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * Condition for - Controller has X or more cards in his or her graveyard
+<i>12</i>&nbsp; *
+<i>13</i>&nbsp; * @author LevelX2
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;public class CardsInControllerGraveCondition implements Condition {
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    private final int value;
+<i>18</i>&nbsp;    private final FilterCard filter;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public CardsInControllerGraveCondition(int value) {
+<b class="fc"><i>21</i>&nbsp;        this(value, null);</b>
+<b class="fc"><i>22</i>&nbsp;    }</b>
+<i>23</i>&nbsp;
+<b class="fc"><i>24</i>&nbsp;    public CardsInControllerGraveCondition(int value, FilterCard filter) {</b>
+<b class="fc"><i>25</i>&nbsp;        this.value = value;</b>
+<b class="fc"><i>26</i>&nbsp;        this.filter = filter;</b>
+<b class="fc"><i>27</i>&nbsp;    }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Override
+<i>30</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="fc"><i>31</i>&nbsp;        Player player = game.getPlayer(source.getControllerId());</b>
+<b class="fc"><i>32</i>&nbsp;        if (filter != null) {</b>
+<b class="nc"><i>33</i>&nbsp;            return player != null &amp;&amp; player.getGraveyard().count(filter, source.getSourceId(), source.getControllerId(), game) &gt;= value;</b>
+<i>34</i>&nbsp;        }
+<b class="fc"><i>35</i>&nbsp;        return player != null &amp;&amp; player.getGraveyard().size() &gt;= value;</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    @Override
+<i>39</i>&nbsp;    public String toString() {
+<b class="fc"><i>40</i>&nbsp;        return &quot;there are &quot; + CardUtil.numberToText(value, &quot;one&quot;) + &quot; or more &quot;</b>
+<b class="nc"><i>41</i>&nbsp;                + (filter == null ? &quot;cards&quot; : filter.getMessage())</b>
+<i>42</i>&nbsp;                + &quot; in your graveyard&quot;;
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

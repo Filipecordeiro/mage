@@ -1,0 +1,2581 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ReplayTask</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.game</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ReplayTask (mage.client.game)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReplayTask</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.client.game;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.awt.AWTEvent;
+<i>31</i>&nbsp;import java.awt.BorderLayout;
+<i>32</i>&nbsp;import java.awt.Color;
+<i>33</i>&nbsp;import java.awt.Component;
+<i>34</i>&nbsp;import java.awt.Container;
+<i>35</i>&nbsp;import java.awt.Dimension;
+<i>36</i>&nbsp;import java.awt.Font;
+<i>37</i>&nbsp;import java.awt.GridBagConstraints;
+<i>38</i>&nbsp;import java.awt.GridBagLayout;
+<i>39</i>&nbsp;import java.awt.Point;
+<i>40</i>&nbsp;import java.awt.Rectangle;
+<i>41</i>&nbsp;import java.awt.event.ActionEvent;
+<i>42</i>&nbsp;import java.awt.event.ActionListener;
+<i>43</i>&nbsp;import java.awt.event.ComponentAdapter;
+<i>44</i>&nbsp;import java.awt.event.ComponentEvent;
+<i>45</i>&nbsp;import java.awt.event.ComponentListener;
+<i>46</i>&nbsp;import java.awt.event.InputEvent;
+<i>47</i>&nbsp;import java.awt.event.KeyEvent;
+<i>48</i>&nbsp;import java.awt.event.MouseAdapter;
+<i>49</i>&nbsp;import java.awt.event.MouseEvent;
+<i>50</i>&nbsp;import java.awt.event.MouseListener;
+<i>51</i>&nbsp;import java.io.Serializable;
+<i>52</i>&nbsp;import java.util.ArrayList;
+<i>53</i>&nbsp;import java.util.Collection;
+<i>54</i>&nbsp;import java.util.HashMap;
+<i>55</i>&nbsp;import java.util.Iterator;
+<i>56</i>&nbsp;import java.util.LinkedHashMap;
+<i>57</i>&nbsp;import java.util.List;
+<i>58</i>&nbsp;import java.util.Map;
+<i>59</i>&nbsp;import java.util.Set;
+<i>60</i>&nbsp;import java.util.UUID;
+<i>61</i>&nbsp;import java.util.concurrent.CancellationException;
+<i>62</i>&nbsp;import java.util.concurrent.ExecutionException;
+<i>63</i>&nbsp;import javax.swing.AbstractAction;
+<i>64</i>&nbsp;import javax.swing.BorderFactory;
+<i>65</i>&nbsp;import javax.swing.GroupLayout;
+<i>66</i>&nbsp;import javax.swing.GroupLayout.Alignment;
+<i>67</i>&nbsp;import javax.swing.ImageIcon;
+<i>68</i>&nbsp;import javax.swing.JButton;
+<i>69</i>&nbsp;import javax.swing.JComponent;
+<i>70</i>&nbsp;import javax.swing.JLayeredPane;
+<i>71</i>&nbsp;import javax.swing.JMenuItem;
+<i>72</i>&nbsp;import javax.swing.JOptionPane;
+<i>73</i>&nbsp;import javax.swing.JPanel;
+<i>74</i>&nbsp;import javax.swing.JPopupMenu;
+<i>75</i>&nbsp;import javax.swing.KeyStroke;
+<i>76</i>&nbsp;import javax.swing.SwingUtilities;
+<i>77</i>&nbsp;import javax.swing.SwingWorker;
+<i>78</i>&nbsp;import javax.swing.Timer;
+<i>79</i>&nbsp;import javax.swing.border.Border;
+<i>80</i>&nbsp;import javax.swing.border.EmptyBorder;
+<i>81</i>&nbsp;import javax.swing.border.LineBorder;
+<i>82</i>&nbsp;import javax.swing.plaf.basic.BasicSplitPaneDivider;
+<i>83</i>&nbsp;import javax.swing.plaf.basic.BasicSplitPaneUI;
+<i>84</i>&nbsp;import mage.cards.Card;
+<i>85</i>&nbsp;import mage.cards.action.ActionCallback;
+<i>86</i>&nbsp;import mage.choices.Choice;
+<i>87</i>&nbsp;import mage.client.MageFrame;
+<i>88</i>&nbsp;import mage.client.SessionHandler;
+<i>89</i>&nbsp;import mage.client.cards.BigCard;
+<i>90</i>&nbsp;import mage.client.chat.ChatPanelBasic;
+<i>91</i>&nbsp;import mage.client.combat.CombatManager;
+<i>92</i>&nbsp;import mage.client.components.HoverButton;
+<i>93</i>&nbsp;import mage.client.components.MageComponents;
+<i>94</i>&nbsp;import mage.client.components.ext.dlg.DialogManager;
+<i>95</i>&nbsp;import mage.client.components.layout.RelativeLayout;
+<i>96</i>&nbsp;import mage.client.dialog.CardInfoWindowDialog;
+<i>97</i>&nbsp;import mage.client.dialog.CardInfoWindowDialog.ShowType;
+<i>98</i>&nbsp;import mage.client.dialog.PickChoiceDialog;
+<i>99</i>&nbsp;import mage.client.dialog.PickNumberDialog;
+<i>100</i>&nbsp;import mage.client.dialog.PickPileDialog;
+<i>101</i>&nbsp;import mage.client.dialog.PreferencesDialog;
+<i>102</i>&nbsp;import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT;
+<i>103</i>&nbsp;import static mage.client.dialog.PreferencesDialog.KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE;
+<i>104</i>&nbsp;import static mage.client.dialog.PreferencesDialog.KEY_USE_FIRST_MANA_ABILITY;
+<i>105</i>&nbsp;import mage.client.dialog.ShowCardsDialog;
+<i>106</i>&nbsp;import mage.client.game.FeedbackPanel.FeedbackMode;
+<i>107</i>&nbsp;import mage.client.plugins.adapters.MageActionCallback;
+<i>108</i>&nbsp;import mage.client.plugins.impl.Plugins;
+<i>109</i>&nbsp;import mage.client.util.CardsViewUtil;
+<i>110</i>&nbsp;import mage.client.util.Event;
+<i>111</i>&nbsp;import mage.client.util.GUISizeHelper;
+<i>112</i>&nbsp;import mage.client.util.GameManager;
+<i>113</i>&nbsp;import mage.client.util.Listener;
+<i>114</i>&nbsp;import mage.client.util.audio.AudioManager;
+<i>115</i>&nbsp;import mage.client.util.gui.ArrowBuilder;
+<i>116</i>&nbsp;import mage.client.util.gui.MageDialogState;
+<i>117</i>&nbsp;import mage.constants.Constants;
+<i>118</i>&nbsp;import mage.constants.EnlargeMode;
+<i>119</i>&nbsp;import mage.constants.PhaseStep;
+<i>120</i>&nbsp;import mage.constants.PlayerAction;
+<i>121</i>&nbsp;import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_FIRST;
+<i>122</i>&nbsp;import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_ABILITY_LAST;
+<i>123</i>&nbsp;import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_FIRST;
+<i>124</i>&nbsp;import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_NAME_LAST;
+<i>125</i>&nbsp;import static mage.constants.PlayerAction.TRIGGER_AUTO_ORDER_RESET_ALL;
+<i>126</i>&nbsp;import mage.constants.Zone;
+<i>127</i>&nbsp;import mage.game.events.PlayerQueryEvent;
+<i>128</i>&nbsp;import mage.view.AbilityPickerView;
+<i>129</i>&nbsp;import mage.view.CardView;
+<i>130</i>&nbsp;import mage.view.CardsView;
+<i>131</i>&nbsp;import mage.view.ExileView;
+<i>132</i>&nbsp;import mage.view.GameView;
+<i>133</i>&nbsp;import mage.view.LookedAtView;
+<i>134</i>&nbsp;import mage.view.MatchView;
+<i>135</i>&nbsp;import mage.view.PlayerView;
+<i>136</i>&nbsp;import mage.view.RevealedView;
+<i>137</i>&nbsp;import mage.view.SimpleCardsView;
+<i>138</i>&nbsp;import mage.view.UserRequestMessage;
+<i>139</i>&nbsp;import org.apache.log4j.Logger;
+<i>140</i>&nbsp;import org.mage.card.arcane.CardPanel;
+<i>141</i>&nbsp;import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;/**
+<i>144</i>&nbsp; *
+<i>145</i>&nbsp; * @author BetaSteward_at_googlemail.com, nantuko8
+<i>146</i>&nbsp; */
+<i>147</i>&nbsp;public final class GamePanel extends javax.swing.JPanel {
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    private static final Logger logger = Logger.getLogger(GamePanel.class);
+<i>150</i>&nbsp;    private static final String YOUR_HAND = &quot;Your hand&quot;;
+<i>151</i>&nbsp;    private static final int X_PHASE_WIDTH = 55;
+<i>152</i>&nbsp;    private static final int STACK_MIN_CARDS_OFFSET_Y = 7;  // TODO: Size bui GUISize value
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    private static final String CMD_AUTO_ORDER_FIRST = &quot;cmdAutoOrderFirst&quot;;
+<i>155</i>&nbsp;    private static final String CMD_AUTO_ORDER_LAST = &quot;cmdAutoOrderLast&quot;;
+<i>156</i>&nbsp;    private static final String CMD_AUTO_ORDER_NAME_FIRST = &quot;cmdAutoOrderNameFirst&quot;;
+<i>157</i>&nbsp;    private static final String CMD_AUTO_ORDER_NAME_LAST = &quot;cmdAutoOrderNameLast&quot;;
+<i>158</i>&nbsp;    private static final String CMD_AUTO_ORDER_RESET_ALL = &quot;cmdAutoOrderResetAll&quot;;
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;    private final Map&lt;UUID, PlayAreaPanel&gt; players = new HashMap&lt;&gt;();
+<i>161</i>&nbsp;    private final Map&lt;UUID, Boolean&gt; playersWhoLeft = new HashMap&lt;&gt;();
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    // non modal frames
+<i>164</i>&nbsp;    private final Map&lt;UUID, CardInfoWindowDialog&gt; exiles = new HashMap&lt;&gt;();
+<i>165</i>&nbsp;    private final Map&lt;String, CardInfoWindowDialog&gt; revealed = new HashMap&lt;&gt;();
+<i>166</i>&nbsp;    private final Map&lt;String, CardInfoWindowDialog&gt; lookedAt = new HashMap&lt;&gt;();
+<i>167</i>&nbsp;    private final Map&lt;String, CardInfoWindowDialog&gt; graveyardWindows = new HashMap&lt;&gt;();
+<i>168</i>&nbsp;    private final Map&lt;String, CardsView&gt; graveyards = new HashMap&lt;&gt;();
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;    private final ArrayList&lt;ShowCardsDialog&gt; pickTarget = new ArrayList&lt;&gt;();
+<i>171</i>&nbsp;    private UUID gameId;
+<i>172</i>&nbsp;    private UUID playerId; // playerId of the player
+<i>173</i>&nbsp;    GamePane gamePane;
+<i>174</i>&nbsp;    private ReplayTask replayTask;
+<i>175</i>&nbsp;    private final PickNumberDialog pickNumber;
+<i>176</i>&nbsp;    private JLayeredPane jLayeredPane;
+<i>177</i>&nbsp;    private String chosenHandKey = &quot;You&quot;;
+<i>178</i>&nbsp;    private boolean smallMode = false;
+<i>179</i>&nbsp;    private boolean initialized = false;
+<i>180</i>&nbsp;
+<i>181</i>&nbsp;    private boolean menuNameSet = false;
+<i>182</i>&nbsp;    private boolean handCardsOfOpponentAvailable = false;
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    private Map&lt;String, Card&gt; loadedCards = new HashMap&lt;&gt;();
+<i>185</i>&nbsp;
+<i>186</i>&nbsp;    private int storedHeight;
+<i>187</i>&nbsp;    private Map&lt;String, HoverButton&gt; hoverButtons;
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;    private MageDialogState choiceWindowState;
+<i>190</i>&nbsp;
+<i>191</i>&nbsp;    private boolean initComponents;
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    private Timer resizeTimer;
+<i>194</i>&nbsp;
+<i>195</i>&nbsp;    private enum PopUpMenuType {
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;        TRIGGER_ORDER
+<i>198</i>&nbsp;    }
+<i>199</i>&nbsp;    // CardView popupMenu was invoked last
+<i>200</i>&nbsp;    private CardView cardViewPopupMenu;
+<i>201</i>&nbsp;
+<i>202</i>&nbsp;    // popup menu for triggered abilities order
+<i>203</i>&nbsp;    private JPopupMenu popupMenuTriggerOrder;
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;    public GamePanel() {
+<i>206</i>&nbsp;        initComponents = true;
+<i>207</i>&nbsp;        initComponents();
+<i>208</i>&nbsp;
+<i>209</i>&nbsp;        pickNumber = new PickNumberDialog();
+<i>210</i>&nbsp;        MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;        this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;        this.stackObjects.setMinOffsetY(STACK_MIN_CARDS_OFFSET_Y);
+<i>215</i>&nbsp;
+<i>216</i>&nbsp;        // Override layout (I can&#39;t edit generated code)
+<i>217</i>&nbsp;        this.setLayout(new BorderLayout());
+<i>218</i>&nbsp;        final JLayeredPane jLayeredBackgroundPane = new JLayeredPane();
+<i>219</i>&nbsp;        jLayeredBackgroundPane.setSize(1024, 768);
+<i>220</i>&nbsp;        this.add(jLayeredBackgroundPane);
+<i>221</i>&nbsp;        jLayeredBackgroundPane.add(jSplitPane0, JLayeredPane.DEFAULT_LAYER);
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;        Map&lt;String, JComponent&gt; myUi = getUIComponents(jLayeredBackgroundPane);
+<i>224</i>&nbsp;        Plugins.getInstance().updateGamePanel(myUi);
+<i>225</i>&nbsp;
+<i>226</i>&nbsp;        // Enlarge jlayeredpane on resize of game panel
+<i>227</i>&nbsp;        addComponentListener(new ComponentAdapter() {
+<i>228</i>&nbsp;            @Override
+<i>229</i>&nbsp;            public void componentResized(ComponentEvent e) {
+<i>230</i>&nbsp;                int width = ((JComponent) e.getSource()).getWidth();
+<i>231</i>&nbsp;                int height = ((JComponent) e.getSource()).getHeight();
+<i>232</i>&nbsp;                jLayeredBackgroundPane.setSize(width, height);
+<i>233</i>&nbsp;                jSplitPane0.setSize(width, height);
+<i>234</i>&nbsp;
+<i>235</i>&nbsp;                if (height &lt; storedHeight) {
+<i>236</i>&nbsp;                    pnlBattlefield.setSize(0, 200);
+<i>237</i>&nbsp;                }
+<i>238</i>&nbsp;                storedHeight = height;
+<i>239</i>&nbsp;
+<i>240</i>&nbsp;                sizeToScreen();
+<i>241</i>&nbsp;
+<i>242</i>&nbsp;                if (!initialized) {
+<i>243</i>&nbsp;                    String state = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, null);
+<i>244</i>&nbsp;                    if (state != null &amp;&amp; state.equals(&quot;down&quot;)) {
+<i>245</i>&nbsp;                        jSplitPane0.setDividerLocation(1.0);
+<i>246</i>&nbsp;                    }
+<i>247</i>&nbsp;                    initialized = true;
+<i>248</i>&nbsp;                }
+<i>249</i>&nbsp;
+<i>250</i>&nbsp;            }
+<i>251</i>&nbsp;        });
+<i>252</i>&nbsp;        // Resize the width of the stack area if the size of the play area is changed
+<i>253</i>&nbsp;        ComponentAdapter componentAdapterPlayField = new ComponentAdapter() {
+<i>254</i>&nbsp;            @Override
+<i>255</i>&nbsp;            public void componentResized(ComponentEvent e) {
+<i>256</i>&nbsp;                if (!initComponents) {
+<i>257</i>&nbsp;                    if (resizeTimer.isRunning()) {
+<i>258</i>&nbsp;                        resizeTimer.restart();
+<i>259</i>&nbsp;                    } else {
+<i>260</i>&nbsp;                        resizeTimer.start();
+<i>261</i>&nbsp;                    }
+<i>262</i>&nbsp;                }
+<i>263</i>&nbsp;            }
+<i>264</i>&nbsp;        };
+<i>265</i>&nbsp;
+<i>266</i>&nbsp;        resizeTimer = new Timer(1000, new ActionListener() {
+<i>267</i>&nbsp;            @Override
+<i>268</i>&nbsp;            public void actionPerformed(ActionEvent evt) {
+<i>269</i>&nbsp;                SwingUtilities.invokeLater(new Runnable() {
+<i>270</i>&nbsp;                    @Override
+<i>271</i>&nbsp;                    public void run() {
+<i>272</i>&nbsp;                        resizeTimer.stop();
+<i>273</i>&nbsp;                        setGUISize();
+<i>274</i>&nbsp;                        feedbackPanel.changeGUISize();
+<i>275</i>&nbsp;
+<i>276</i>&nbsp;                    }
+<i>277</i>&nbsp;                });
+<i>278</i>&nbsp;            }
+<i>279</i>&nbsp;        });
+<i>280</i>&nbsp;
+<i>281</i>&nbsp;        pnlHelperHandButtonsStackArea.addComponentListener(componentAdapterPlayField);
+<i>282</i>&nbsp;        initComponents = false;
+<i>283</i>&nbsp;    }
+<i>284</i>&nbsp;
+<i>285</i>&nbsp;    private Map&lt;String, JComponent&gt; getUIComponents(JLayeredPane jLayeredPane) {
+<i>286</i>&nbsp;        Map&lt;String, JComponent&gt; components = new HashMap&lt;&gt;();
+<i>287</i>&nbsp;
+<i>288</i>&nbsp;        components.put(&quot;jSplitPane1&quot;, jSplitPane1);
+<i>289</i>&nbsp;        components.put(&quot;pnlBattlefield&quot;, pnlBattlefield);
+<i>290</i>&nbsp;        components.put(&quot;pnlHelperHandButtonsStackArea&quot;, pnlHelperHandButtonsStackArea);
+<i>291</i>&nbsp;        components.put(&quot;hand&quot;, handContainer);
+<i>292</i>&nbsp;        components.put(&quot;gameChatPanel&quot;, gameChatPanel);
+<i>293</i>&nbsp;        components.put(&quot;userChatPanel&quot;, userChatPanel);
+<i>294</i>&nbsp;        components.put(&quot;jLayeredPane&quot;, jLayeredPane);
+<i>295</i>&nbsp;        components.put(&quot;gamePanel&quot;, this);
+<i>296</i>&nbsp;
+<i>297</i>&nbsp;        return components;
+<i>298</i>&nbsp;    }
+<i>299</i>&nbsp;
+<i>300</i>&nbsp;    public void cleanUp() {
+<i>301</i>&nbsp;        MageFrame.removeGame(gameId);
+<i>302</i>&nbsp;        saveDividerLocations();
+<i>303</i>&nbsp;        this.gameChatPanel.disconnect();
+<i>304</i>&nbsp;        this.userChatPanel.disconnect();
+<i>305</i>&nbsp;
+<i>306</i>&nbsp;        this.removeListener();
+<i>307</i>&nbsp;
+<i>308</i>&nbsp;        this.handContainer.cleanUp();
+<i>309</i>&nbsp;        this.stackObjects.cleanUp();
+<i>310</i>&nbsp;        for (Map.Entry&lt;UUID, PlayAreaPanel&gt; playAreaPanelEntry : players.entrySet()) {
+<i>311</i>&nbsp;            playAreaPanelEntry.getValue().CleanUp();
+<i>312</i>&nbsp;        }
+<i>313</i>&nbsp;        this.players.clear();
+<i>314</i>&nbsp;        this.playersWhoLeft.clear();
+<i>315</i>&nbsp;
+<i>316</i>&nbsp;        jLayeredPane.remove(abilityPicker);
+<i>317</i>&nbsp;        this.abilityPicker.cleanUp();
+<i>318</i>&nbsp;
+<i>319</i>&nbsp;        jLayeredPane.remove(DialogManager.getManager(gameId));
+<i>320</i>&nbsp;        DialogManager.removeGame(gameId);
+<i>321</i>&nbsp;
+<i>322</i>&nbsp;        if (pickNumber != null) {
+<i>323</i>&nbsp;            pickNumber.removeDialog();
+<i>324</i>&nbsp;        }
+<i>325</i>&nbsp;        for (CardInfoWindowDialog exileDialog : exiles.values()) {
+<i>326</i>&nbsp;            exileDialog.cleanUp();
+<i>327</i>&nbsp;            exileDialog.removeDialog();
+<i>328</i>&nbsp;        }
+<i>329</i>&nbsp;        for (CardInfoWindowDialog graveyardDialog : graveyardWindows.values()) {
+<i>330</i>&nbsp;            graveyardDialog.cleanUp();
+<i>331</i>&nbsp;            graveyardDialog.removeDialog();
+<i>332</i>&nbsp;        }
+<i>333</i>&nbsp;        for (CardInfoWindowDialog revealDialog : revealed.values()) {
+<i>334</i>&nbsp;            revealDialog.cleanUp();
+<i>335</i>&nbsp;            revealDialog.removeDialog();
+<i>336</i>&nbsp;        }
+<i>337</i>&nbsp;        for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
+<i>338</i>&nbsp;            lookedAtDialog.cleanUp();
+<i>339</i>&nbsp;            lookedAtDialog.removeDialog();
+<i>340</i>&nbsp;        }
+<i>341</i>&nbsp;        for (ShowCardsDialog pickTargetDialog : pickTarget) {
+<i>342</i>&nbsp;            pickTargetDialog.cleanUp();
+<i>343</i>&nbsp;            pickTargetDialog.removeDialog();
+<i>344</i>&nbsp;        }
+<i>345</i>&nbsp;        Plugins.getInstance().getActionCallback().hideTooltipPopup();
+<i>346</i>&nbsp;        try {
+<i>347</i>&nbsp;            Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
+<i>348</i>&nbsp;            popupContainer.setVisible(false);
+<i>349</i>&nbsp;        } catch (InterruptedException ex) {
+<i>350</i>&nbsp;            logger.fatal(&quot;popupContainer error:&quot;, ex);
+<i>351</i>&nbsp;        }
+<i>352</i>&nbsp;        jPanel2.remove(bigCard);
+<i>353</i>&nbsp;        this.bigCard = null;
+<i>354</i>&nbsp;    }
+<i>355</i>&nbsp;
+<i>356</i>&nbsp;    public void changeGUISize() {
+<i>357</i>&nbsp;        initComponents = true;
+<i>358</i>&nbsp;        setGUISize();
+<i>359</i>&nbsp;        stackObjects.changeGUISize();
+<i>360</i>&nbsp;        feedbackPanel.changeGUISize();
+<i>361</i>&nbsp;        handContainer.changeGUISize();
+<i>362</i>&nbsp;        for (PlayAreaPanel playAreaPanel : players.values()) {
+<i>363</i>&nbsp;            playAreaPanel.changeGUISize();
+<i>364</i>&nbsp;        }
+<i>365</i>&nbsp;
+<i>366</i>&nbsp;        for (CardInfoWindowDialog cardInfoWindowDialog : exiles.values()) {
+<i>367</i>&nbsp;            cardInfoWindowDialog.changeGUISize();
+<i>368</i>&nbsp;        }
+<i>369</i>&nbsp;        for (CardInfoWindowDialog cardInfoWindowDialog : revealed.values()) {
+<i>370</i>&nbsp;            cardInfoWindowDialog.changeGUISize();
+<i>371</i>&nbsp;        }
+<i>372</i>&nbsp;        for (CardInfoWindowDialog cardInfoWindowDialog : lookedAt.values()) {
+<i>373</i>&nbsp;            cardInfoWindowDialog.changeGUISize();
+<i>374</i>&nbsp;        }
+<i>375</i>&nbsp;        for (CardInfoWindowDialog cardInfoWindowDialog : graveyardWindows.values()) {
+<i>376</i>&nbsp;            cardInfoWindowDialog.changeGUISize();
+<i>377</i>&nbsp;        }
+<i>378</i>&nbsp;        for (ShowCardsDialog showCardsDialog : pickTarget) {
+<i>379</i>&nbsp;            showCardsDialog.changeGUISize();
+<i>380</i>&nbsp;        }
+<i>381</i>&nbsp;
+<i>382</i>&nbsp;        this.revalidate();
+<i>383</i>&nbsp;        this.repaint();
+<i>384</i>&nbsp;        initComponents = false;
+<i>385</i>&nbsp;    }
+<i>386</i>&nbsp;
+<i>387</i>&nbsp;    private void setGUISize() {
+<i>388</i>&nbsp;        jSplitPane0.setDividerSize(GUISizeHelper.dividerBarSize);
+<i>389</i>&nbsp;        jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
+<i>390</i>&nbsp;        jSplitPane2.setDividerSize(GUISizeHelper.dividerBarSize);
+<i>391</i>&nbsp;        stackObjects.setCardDimension(GUISizeHelper.handCardDimension);
+<i>392</i>&nbsp;
+<i>393</i>&nbsp;        txtSpellsCast.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
+<i>394</i>&nbsp;        txtHoldPriority.setFont(new Font(GUISizeHelper.gameDialogAreaFont.getFontName(), Font.BOLD, GUISizeHelper.gameDialogAreaFont.getSize()));
+<i>395</i>&nbsp;        GUISizeHelper.changePopupMenuFont(popupMenuTriggerOrder);
+<i>396</i>&nbsp;
+<i>397</i>&nbsp;        int newStackWidth = pnlHelperHandButtonsStackArea.getWidth() * GUISizeHelper.stackWidth / 100;
+<i>398</i>&nbsp;        if (newStackWidth &lt; 410) {
+<i>399</i>&nbsp;            newStackWidth = 410;
+<i>400</i>&nbsp;        }
+<i>401</i>&nbsp;        Dimension newDimension = new Dimension(pnlHelperHandButtonsStackArea.getWidth() - newStackWidth, GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
+<i>402</i>&nbsp;        handContainer.setPreferredSize(newDimension);
+<i>403</i>&nbsp;        handContainer.setMaximumSize(newDimension);
+<i>404</i>&nbsp;
+<i>405</i>&nbsp;        newDimension = new Dimension(newStackWidth, STACK_MIN_CARDS_OFFSET_Y + GUISizeHelper.handCardDimension.height + GUISizeHelper.scrollBarSize);
+<i>406</i>&nbsp;        stackObjects.setPreferredSize(newDimension);
+<i>407</i>&nbsp;        stackObjects.setMinimumSize(newDimension);
+<i>408</i>&nbsp;        stackObjects.setMaximumSize(newDimension);
+<i>409</i>&nbsp;
+<i>410</i>&nbsp;        newDimension = new Dimension(newStackWidth, (int) pnlShortCuts.getPreferredSize().getHeight());
+<i>411</i>&nbsp;        pnlShortCuts.setPreferredSize(newDimension);
+<i>412</i>&nbsp;        pnlShortCuts.setMinimumSize(newDimension);
+<i>413</i>&nbsp;        pnlShortCuts.setMaximumSize(newDimension);
+<i>414</i>&nbsp;    }
+<i>415</i>&nbsp;
+<i>416</i>&nbsp;    private void saveDividerLocations() {
+<i>417</i>&nbsp;        // save panel sizes and divider locations.
+<i>418</i>&nbsp;        Rectangle rec = MageFrame.getDesktop().getBounds();
+<i>419</i>&nbsp;        String sb = Double.toString(rec.getWidth()) + &quot;x&quot; + Double.toString(rec.getHeight());
+<i>420</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb);
+<i>421</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, Integer.toString(this.jSplitPane0.getDividerLocation()));
+<i>422</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
+<i>423</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
+<i>424</i>&nbsp;    }
+<i>425</i>&nbsp;
+<i>426</i>&nbsp;    private void restoreDividerLocations() {
+<i>427</i>&nbsp;        Rectangle rec = MageFrame.getDesktop().getBounds();
+<i>428</i>&nbsp;        if (rec != null) {
+<i>429</i>&nbsp;            String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
+<i>430</i>&nbsp;            String sb = Double.toString(rec.getWidth()) + &quot;x&quot; + Double.toString(rec.getHeight());
+<i>431</i>&nbsp;            // use divider positions only if screen size is the same as it was the time the settings were saved
+<i>432</i>&nbsp;            if (size != null &amp;&amp; size.equals(sb)) {
+<i>433</i>&nbsp;
+<i>434</i>&nbsp;                String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, null);
+<i>435</i>&nbsp;                if (location != null &amp;&amp; jSplitPane0 != null) {
+<i>436</i>&nbsp;                    jSplitPane0.setDividerLocation(Integer.parseInt(location));
+<i>437</i>&nbsp;                }
+<i>438</i>&nbsp;                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, null);
+<i>439</i>&nbsp;                if (location != null &amp;&amp; jSplitPane1 != null) {
+<i>440</i>&nbsp;                    jSplitPane1.setDividerLocation(Integer.parseInt(location));
+<i>441</i>&nbsp;                }
+<i>442</i>&nbsp;                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_2, null);
+<i>443</i>&nbsp;                if (location != null &amp;&amp; jSplitPane2 != null) {
+<i>444</i>&nbsp;                    jSplitPane2.setDividerLocation(Integer.parseInt(location));
+<i>445</i>&nbsp;                }
+<i>446</i>&nbsp;            }
+<i>447</i>&nbsp;        }
+<i>448</i>&nbsp;    }
+<i>449</i>&nbsp;
+<i>450</i>&nbsp;    private void sizeToScreen() {
+<i>451</i>&nbsp;        Rectangle rect = this.getBounds();
+<i>452</i>&nbsp;
+<i>453</i>&nbsp;        if (rect.height &lt; 720) {
+<i>454</i>&nbsp;            if (!smallMode) {
+<i>455</i>&nbsp;                smallMode = true;
+<i>456</i>&nbsp;                Dimension bbDimension = new Dimension(128, 184);
+<i>457</i>&nbsp;                bigCard.setMaximumSize(bbDimension);
+<i>458</i>&nbsp;                bigCard.setMinimumSize(bbDimension);
+<i>459</i>&nbsp;                bigCard.setPreferredSize(bbDimension);
+<i>460</i>&nbsp;                pnlShortCuts.revalidate();
+<i>461</i>&nbsp;                pnlShortCuts.repaint();
+<i>462</i>&nbsp;                for (PlayAreaPanel p : players.values()) {
+<i>463</i>&nbsp;                    p.sizePlayer(smallMode);
+<i>464</i>&nbsp;                }
+<i>465</i>&nbsp;            }
+<i>466</i>&nbsp;        } else if (smallMode) {
+<i>467</i>&nbsp;            smallMode = false;
+<i>468</i>&nbsp;            Dimension bbDimension = new Dimension(256, 367);
+<i>469</i>&nbsp;            bigCard.setMaximumSize(bbDimension);
+<i>470</i>&nbsp;            bigCard.setMinimumSize(bbDimension);
+<i>471</i>&nbsp;            bigCard.setPreferredSize(bbDimension);
+<i>472</i>&nbsp;            pnlShortCuts.revalidate();
+<i>473</i>&nbsp;            pnlShortCuts.repaint();
+<i>474</i>&nbsp;            for (PlayAreaPanel p : players.values()) {
+<i>475</i>&nbsp;                p.sizePlayer(smallMode);
+<i>476</i>&nbsp;            }
+<i>477</i>&nbsp;        }
+<i>478</i>&nbsp;
+<i>479</i>&nbsp;        ArrowBuilder.getBuilder().setSize(rect.width, rect.height);
+<i>480</i>&nbsp;
+<i>481</i>&nbsp;        DialogManager.getManager(gameId).setScreenWidth(rect.width);
+<i>482</i>&nbsp;        DialogManager.getManager(gameId).setScreenHeight(rect.height);
+<i>483</i>&nbsp;        DialogManager.getManager(gameId).setBounds(0, 0, rect.width, rect.height);
+<i>484</i>&nbsp;    }
+<i>485</i>&nbsp;
+<i>486</i>&nbsp;    public synchronized void showGame(UUID gameId, UUID playerId, GamePane gamePane) {
+<i>487</i>&nbsp;        this.gameId = gameId;
+<i>488</i>&nbsp;        this.gamePane = gamePane;
+<i>489</i>&nbsp;        this.playerId = playerId;
+<i>490</i>&nbsp;        MageFrame.addGame(gameId, this);
+<i>491</i>&nbsp;        this.feedbackPanel.init(gameId);
+<i>492</i>&nbsp;        this.feedbackPanel.clear();
+<i>493</i>&nbsp;        this.abilityPicker.init(gameId);
+<i>494</i>&nbsp;
+<i>495</i>&nbsp;        this.btnConcede.setVisible(true);
+<i>496</i>&nbsp;        this.btnStopWatching.setVisible(false);
+<i>497</i>&nbsp;        this.btnSwitchHands.setVisible(false);
+<i>498</i>&nbsp;        this.btnCancelSkip.setVisible(true);
+<i>499</i>&nbsp;
+<i>500</i>&nbsp;        this.btnSkipToNextTurn.setVisible(true);
+<i>501</i>&nbsp;        this.btnSkipToEndTurn.setVisible(true);
+<i>502</i>&nbsp;        this.btnSkipToNextMain.setVisible(true);
+<i>503</i>&nbsp;        this.btnSkipStack.setVisible(true);
+<i>504</i>&nbsp;        this.btnSkipToYourTurn.setVisible(true);
+<i>505</i>&nbsp;        this.btnSkipToEndStepBeforeYourTurn.setVisible(true);
+<i>506</i>&nbsp;
+<i>507</i>&nbsp;        this.pnlReplay.setVisible(false);
+<i>508</i>&nbsp;
+<i>509</i>&nbsp;        this.gameChatPanel.clear();
+<i>510</i>&nbsp;        this.gameChatPanel.connect(SessionHandler.getGameChatId(gameId));
+<i>511</i>&nbsp;        if (!SessionHandler.joinGame(gameId)) {
+<i>512</i>&nbsp;            removeGame();
+<i>513</i>&nbsp;        } else {
+<i>514</i>&nbsp;            // play start sound
+<i>515</i>&nbsp;            AudioManager.playYourGameStarted();
+<i>516</i>&nbsp;        }
+<i>517</i>&nbsp;    }
+<i>518</i>&nbsp;
+<i>519</i>&nbsp;    public synchronized void watchGame(UUID gameId, GamePane gamePane) {
+<i>520</i>&nbsp;        this.gameId = gameId;
+<i>521</i>&nbsp;        this.gamePane = gamePane;
+<i>522</i>&nbsp;        this.playerId = null;
+<i>523</i>&nbsp;        MageFrame.addGame(gameId, this);
+<i>524</i>&nbsp;        this.feedbackPanel.init(gameId);
+<i>525</i>&nbsp;        this.feedbackPanel.clear();
+<i>526</i>&nbsp;
+<i>527</i>&nbsp;        this.btnConcede.setVisible(false);
+<i>528</i>&nbsp;        this.btnStopWatching.setVisible(true);
+<i>529</i>&nbsp;        this.btnSwitchHands.setVisible(false);
+<i>530</i>&nbsp;        this.chosenHandKey = &quot;&quot;;
+<i>531</i>&nbsp;        this.btnCancelSkip.setVisible(false);
+<i>532</i>&nbsp;
+<i>533</i>&nbsp;        this.btnSkipToNextTurn.setVisible(false);
+<i>534</i>&nbsp;        this.btnSkipToEndTurn.setVisible(false);
+<i>535</i>&nbsp;        this.btnSkipToNextMain.setVisible(false);
+<i>536</i>&nbsp;        this.btnSkipStack.setVisible(false);
+<i>537</i>&nbsp;        this.btnSkipToYourTurn.setVisible(false);
+<i>538</i>&nbsp;        this.btnSkipToEndStepBeforeYourTurn.setVisible(false);
+<i>539</i>&nbsp;
+<i>540</i>&nbsp;        this.pnlReplay.setVisible(false);
+<i>541</i>&nbsp;        this.gameChatPanel.clear();
+<i>542</i>&nbsp;        this.gameChatPanel.connect(SessionHandler.getGameChatId(gameId));
+<i>543</i>&nbsp;        if (!SessionHandler.watchGame(gameId)) {
+<i>544</i>&nbsp;            removeGame();
+<i>545</i>&nbsp;        }
+<i>546</i>&nbsp;        for (PlayAreaPanel panel : getPlayers().values()) {
+<i>547</i>&nbsp;            panel.setPlayingMode(false);
+<i>548</i>&nbsp;        }
+<i>549</i>&nbsp;    }
+<i>550</i>&nbsp;
+<i>551</i>&nbsp;    public synchronized void replayGame(UUID gameId) {
+<i>552</i>&nbsp;        this.gameId = gameId;
+<i>553</i>&nbsp;        this.playerId = null;
+<i>554</i>&nbsp;        MageFrame.addGame(gameId, this);
+<i>555</i>&nbsp;        this.feedbackPanel.init(gameId);
+<i>556</i>&nbsp;        this.feedbackPanel.clear();
+<i>557</i>&nbsp;        this.btnConcede.setVisible(false);
+<i>558</i>&nbsp;        this.btnSkipToNextTurn.setVisible(false);
+<i>559</i>&nbsp;        this.btnSwitchHands.setVisible(false);
+<i>560</i>&nbsp;        this.btnStopWatching.setVisible(false);
+<i>561</i>&nbsp;        this.pnlReplay.setVisible(true);
+<i>562</i>&nbsp;        this.gameChatPanel.clear();
+<i>563</i>&nbsp;        if (!SessionHandler.startReplay(gameId)) {
+<i>564</i>&nbsp;            removeGame();
+<i>565</i>&nbsp;        }
+<i>566</i>&nbsp;        for (PlayAreaPanel panel : getPlayers().values()) {
+<i>567</i>&nbsp;            panel.setPlayingMode(false);
+<i>568</i>&nbsp;        }
+<i>569</i>&nbsp;    }
+<i>570</i>&nbsp;
+<i>571</i>&nbsp;    /**
+<i>572</i>&nbsp;     * Closes the game and it&#39;s resources
+<i>573</i>&nbsp;     */
+<i>574</i>&nbsp;    public void removeGame() {
+<i>575</i>&nbsp;        Component c = this.getParent();
+<i>576</i>&nbsp;        while (c != null &amp;&amp; !(c instanceof GamePane)) {
+<i>577</i>&nbsp;            c = c.getParent();
+<i>578</i>&nbsp;        }
+<i>579</i>&nbsp;        if (c != null) {
+<i>580</i>&nbsp;            ((GamePane) c).removeGame();
+<i>581</i>&nbsp;        }
+<i>582</i>&nbsp;    }
+<i>583</i>&nbsp;
+<i>584</i>&nbsp;    public synchronized void init(GameView game) {
+<i>585</i>&nbsp;        addPlayers(game);
+<i>586</i>&nbsp;        // default menu states
+<i>587</i>&nbsp;        setMenuStates(
+<i>588</i>&nbsp;                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, &quot;true&quot;).equals(&quot;true&quot;),
+<i>589</i>&nbsp;                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, &quot;true&quot;).equals(&quot;true&quot;),
+<i>590</i>&nbsp;                PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, &quot;false&quot;).equals(&quot;true&quot;),
+<i>591</i>&nbsp;                holdingPriority
+<i>592</i>&nbsp;        );
+<i>593</i>&nbsp;
+<i>594</i>&nbsp;        updateGame(game);
+<i>595</i>&nbsp;    }
+<i>596</i>&nbsp;
+<i>597</i>&nbsp;    private void addPlayers(GameView game) {
+<i>598</i>&nbsp;        this.players.clear();
+<i>599</i>&nbsp;        this.playersWhoLeft.clear();
+<i>600</i>&nbsp;        this.pnlBattlefield.removeAll();
+<i>601</i>&nbsp;        //arrange players in a circle with the session player at the bottom left
+<i>602</i>&nbsp;        int numSeats = game.getPlayers().size();
+<i>603</i>&nbsp;        int numColumns = (numSeats + 1) / 2;
+<i>604</i>&nbsp;        boolean oddNumber = (numColumns &gt; 1 &amp;&amp; numSeats % 2 == 1);
+<i>605</i>&nbsp;        int col = 0;
+<i>606</i>&nbsp;        int row = 1;
+<i>607</i>&nbsp;        int playerSeat = 0;
+<i>608</i>&nbsp;        if (playerId != null) {
+<i>609</i>&nbsp;            for (PlayerView player : game.getPlayers()) {
+<i>610</i>&nbsp;                if (playerId.equals(player.getPlayerId())) {
+<i>611</i>&nbsp;                    break;
+<i>612</i>&nbsp;                }
+<i>613</i>&nbsp;                playerSeat++;
+<i>614</i>&nbsp;            }
+<i>615</i>&nbsp;        }
+<i>616</i>&nbsp;        PlayerView player = game.getPlayers().get(playerSeat);
+<i>617</i>&nbsp;        PlayAreaPanel playAreaPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
+<i>618</i>&nbsp;                new PlayAreaPanelOptions(game.isPlayer(), game.isPlayer(), game.isRollbackTurnsAllowed(), row == 0));
+<i>619</i>&nbsp;        players.put(player.getPlayerId(), playAreaPanel);
+<i>620</i>&nbsp;        playersWhoLeft.put(player.getPlayerId(), false);
+<i>621</i>&nbsp;        GridBagConstraints c = new GridBagConstraints();
+<i>622</i>&nbsp;        c.fill = GridBagConstraints.BOTH;
+<i>623</i>&nbsp;        c.weightx = 0.5;
+<i>624</i>&nbsp;        c.weighty = 0.5;
+<i>625</i>&nbsp;        if (oddNumber) {
+<i>626</i>&nbsp;            c.gridwidth = 2;
+<i>627</i>&nbsp;        }
+<i>628</i>&nbsp;        c.gridx = col;
+<i>629</i>&nbsp;        c.gridy = 0;
+<i>630</i>&nbsp;
+<i>631</i>&nbsp;        // Top panel (row=0)
+<i>632</i>&nbsp;        JPanel topPanel = new JPanel();
+<i>633</i>&nbsp;        topPanel.setOpaque(false);
+<i>634</i>&nbsp;
+<i>635</i>&nbsp;        // Bottom panel (row=1)
+<i>636</i>&nbsp;        JPanel bottomPanel = new JPanel();
+<i>637</i>&nbsp;        bottomPanel.setOpaque(false);
+<i>638</i>&nbsp;        topPanel.setLayout(new GridBagLayout());
+<i>639</i>&nbsp;        bottomPanel.setLayout(new GridBagLayout());
+<i>640</i>&nbsp;
+<i>641</i>&nbsp;        bottomPanel.add(playAreaPanel, c);
+<i>642</i>&nbsp;        playAreaPanel.setVisible(true);
+<i>643</i>&nbsp;        if (oddNumber) {
+<i>644</i>&nbsp;            col++;
+<i>645</i>&nbsp;        }
+<i>646</i>&nbsp;        int playerNum = playerSeat + 1;
+<i>647</i>&nbsp;        if (playerNum &gt;= numSeats) {
+<i>648</i>&nbsp;            playerNum = 0;
+<i>649</i>&nbsp;        }
+<i>650</i>&nbsp;        while (true) {
+<i>651</i>&nbsp;            if (row == 1) {
+<i>652</i>&nbsp;                col++;
+<i>653</i>&nbsp;            } else {
+<i>654</i>&nbsp;                col--;
+<i>655</i>&nbsp;            }
+<i>656</i>&nbsp;            if (col &gt;= numColumns) {
+<i>657</i>&nbsp;                row = 0;
+<i>658</i>&nbsp;                col = numColumns - 1;
+<i>659</i>&nbsp;            }
+<i>660</i>&nbsp;            player = game.getPlayers().get(playerNum);
+<i>661</i>&nbsp;            PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, game.getPriorityTime(), this,
+<i>662</i>&nbsp;                    new PlayAreaPanelOptions(game.isPlayer(), false, game.isRollbackTurnsAllowed(), row == 0));
+<i>663</i>&nbsp;            players.put(player.getPlayerId(), playerPanel);
+<i>664</i>&nbsp;            playersWhoLeft.put(player.getPlayerId(), false);
+<i>665</i>&nbsp;            c = new GridBagConstraints();
+<i>666</i>&nbsp;            c.fill = GridBagConstraints.BOTH;
+<i>667</i>&nbsp;            c.weightx = 0.5;
+<i>668</i>&nbsp;            c.weighty = 0.5;
+<i>669</i>&nbsp;            c.gridx = col;
+<i>670</i>&nbsp;            c.gridy = 0;
+<i>671</i>&nbsp;
+<i>672</i>&nbsp;            if (row == 0) {
+<i>673</i>&nbsp;                topPanel.add(playerPanel, c);
+<i>674</i>&nbsp;            } else {
+<i>675</i>&nbsp;                bottomPanel.add(playerPanel, c);
+<i>676</i>&nbsp;            }
+<i>677</i>&nbsp;
+<i>678</i>&nbsp;            playerPanel.setVisible(true);
+<i>679</i>&nbsp;            playerNum++;
+<i>680</i>&nbsp;            if (playerNum &gt;= numSeats) {
+<i>681</i>&nbsp;                playerNum = 0;
+<i>682</i>&nbsp;            }
+<i>683</i>&nbsp;            if (playerNum == playerSeat) {
+<i>684</i>&nbsp;                break;
+<i>685</i>&nbsp;            }
+<i>686</i>&nbsp;        }
+<i>687</i>&nbsp;        for (PlayAreaPanel p : players.values()) {
+<i>688</i>&nbsp;            p.sizePlayer(smallMode);
+<i>689</i>&nbsp;        }
+<i>690</i>&nbsp;
+<i>691</i>&nbsp;        GridBagConstraints panelC = new GridBagConstraints();
+<i>692</i>&nbsp;        panelC.fill = GridBagConstraints.BOTH;
+<i>693</i>&nbsp;        panelC.weightx = 0.5;
+<i>694</i>&nbsp;        panelC.weighty = 0.5;
+<i>695</i>&nbsp;        panelC.gridwidth = 1;
+<i>696</i>&nbsp;        panelC.gridy = 0;
+<i>697</i>&nbsp;        this.pnlBattlefield.add(topPanel, panelC);
+<i>698</i>&nbsp;        panelC.gridy = 1;
+<i>699</i>&nbsp;        this.pnlBattlefield.add(bottomPanel, panelC);
+<i>700</i>&nbsp;    }
+<i>701</i>&nbsp;
+<i>702</i>&nbsp;    public synchronized void updateGame(GameView game) {
+<i>703</i>&nbsp;        updateGame(game, null);
+<i>704</i>&nbsp;    }
+<i>705</i>&nbsp;
+<i>706</i>&nbsp;    public synchronized void updateGame(GameView game, Map&lt;String, Serializable&gt; options) {
+<i>707</i>&nbsp;        if (playerId == null &amp;&amp; game.getWatchedHands() == null) {
+<i>708</i>&nbsp;            this.handContainer.setVisible(false);
+<i>709</i>&nbsp;        } else {
+<i>710</i>&nbsp;            this.handContainer.setVisible(true);
+<i>711</i>&nbsp;            handCards.clear();
+<i>712</i>&nbsp;            if (game.getWatchedHands() != null) {
+<i>713</i>&nbsp;                for (Map.Entry&lt;String, SimpleCardsView&gt; hand : game.getWatchedHands().entrySet()) {
+<i>714</i>&nbsp;                    handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
+<i>715</i>&nbsp;                }
+<i>716</i>&nbsp;            }
+<i>717</i>&nbsp;            if (playerId != null) {
+<i>718</i>&nbsp;                handCards.put(YOUR_HAND, game.getHand());
+<i>719</i>&nbsp;                // Mark playable
+<i>720</i>&nbsp;                if (game.getCanPlayInHand() != null) {
+<i>721</i>&nbsp;                    for (CardView card : handCards.get(YOUR_HAND).values()) {
+<i>722</i>&nbsp;                        if (game.getCanPlayInHand().contains(card.getId())) {
+<i>723</i>&nbsp;                            card.setPlayable(true);
+<i>724</i>&nbsp;                        }
+<i>725</i>&nbsp;                    }
+<i>726</i>&nbsp;                }
+<i>727</i>&nbsp;                // Get opponents hand cards if available (only possible for players)
+<i>728</i>&nbsp;                if (game.getOpponentHands() != null) {
+<i>729</i>&nbsp;                    for (Map.Entry&lt;String, SimpleCardsView&gt; hand : game.getOpponentHands().entrySet()) {
+<i>730</i>&nbsp;                        handCards.put(hand.getKey(), CardsViewUtil.convertSimple(hand.getValue(), loadedCards));
+<i>731</i>&nbsp;                    }
+<i>732</i>&nbsp;                }
+<i>733</i>&nbsp;                if (!handCards.containsKey(chosenHandKey)) {
+<i>734</i>&nbsp;                    chosenHandKey = YOUR_HAND;
+<i>735</i>&nbsp;                }
+<i>736</i>&nbsp;            } else if (chosenHandKey.isEmpty() &amp;&amp; handCards.size() &gt; 0) {
+<i>737</i>&nbsp;                chosenHandKey = handCards.keySet().iterator().next();
+<i>738</i>&nbsp;            }
+<i>739</i>&nbsp;            if (chosenHandKey != null &amp;&amp; handCards.containsKey(chosenHandKey)) {
+<i>740</i>&nbsp;                handContainer.loadCards(handCards.get(chosenHandKey), bigCard, gameId);
+<i>741</i>&nbsp;            }
+<i>742</i>&nbsp;
+<i>743</i>&nbsp;            hideAll();
+<i>744</i>&nbsp;
+<i>745</i>&nbsp;            if (playerId != null) {
+<i>746</i>&nbsp;                // set visible only if we have any other hand visible than ours
+<i>747</i>&nbsp;                btnSwitchHands.setVisible(handCards.size() &gt; 1);
+<i>748</i>&nbsp;                boolean change = (handCardsOfOpponentAvailable != (game.getOpponentHands() != null));
+<i>749</i>&nbsp;                if (change) {
+<i>750</i>&nbsp;                    handCardsOfOpponentAvailable = !handCardsOfOpponentAvailable;
+<i>751</i>&nbsp;                    if (handCardsOfOpponentAvailable) {
+<i>752</i>&nbsp;                        JOptionPane.showMessageDialog(null, &quot;You control other player&#39;s turn. \nUse \&quot;Switch Hand\&quot; button to switch between cards in different hands.&quot;);
+<i>753</i>&nbsp;                    } else {
+<i>754</i>&nbsp;                        JOptionPane.showMessageDialog(null, &quot;You lost control on other player&#39;s turn.&quot;);
+<i>755</i>&nbsp;                    }
+<i>756</i>&nbsp;                }
+<i>757</i>&nbsp;            } else {
+<i>758</i>&nbsp;                btnSwitchHands.setVisible(!handCards.isEmpty());
+<i>759</i>&nbsp;            }
+<i>760</i>&nbsp;        }
+<i>761</i>&nbsp;
+<i>762</i>&nbsp;        if (game.getPhase() != null) {
+<i>763</i>&nbsp;            this.txtPhase.setText(game.getPhase().toString());
+<i>764</i>&nbsp;        } else {
+<i>765</i>&nbsp;            this.txtPhase.setText(&quot;&quot;);
+<i>766</i>&nbsp;        }
+<i>767</i>&nbsp;
+<i>768</i>&nbsp;        if (game.getStep() != null) {
+<i>769</i>&nbsp;            updatePhases(game.getStep());
+<i>770</i>&nbsp;            this.txtStep.setText(game.getStep().toString());
+<i>771</i>&nbsp;        } else {
+<i>772</i>&nbsp;            logger.debug(&quot;Step is empty&quot;);
+<i>773</i>&nbsp;            this.txtStep.setText(&quot;&quot;);
+<i>774</i>&nbsp;        }
+<i>775</i>&nbsp;        if (game.getSpellsCastCurrentTurn() &gt; 0 &amp;&amp; PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_SHOW_STORM_COUNTER, &quot;true&quot;).equals(&quot;true&quot;)) {
+<i>776</i>&nbsp;            this.txtSpellsCast.setVisible(true);
+<i>777</i>&nbsp;            this.txtSpellsCast.setText(&quot; &quot; + Integer.toString(game.getSpellsCastCurrentTurn()) + &quot; &quot;);
+<i>778</i>&nbsp;        } else {
+<i>779</i>&nbsp;            this.txtSpellsCast.setVisible(false);
+<i>780</i>&nbsp;        }
+<i>781</i>&nbsp;
+<i>782</i>&nbsp;        this.txtActivePlayer.setText(game.getActivePlayerName());
+<i>783</i>&nbsp;        this.txtPriority.setText(game.getPriorityPlayerName());
+<i>784</i>&nbsp;        this.txtTurn.setText(Integer.toString(game.getTurn()));
+<i>785</i>&nbsp;
+<i>786</i>&nbsp;        List&lt;UUID&gt; possibleAttackers = new ArrayList&lt;&gt;();
+<i>787</i>&nbsp;        if (options != null &amp;&amp; options.containsKey(Constants.Option.POSSIBLE_ATTACKERS)) {
+<i>788</i>&nbsp;            if (options.get(Constants.Option.POSSIBLE_ATTACKERS) instanceof List) {
+<i>789</i>&nbsp;                possibleAttackers.addAll((List) options.get(Constants.Option.POSSIBLE_ATTACKERS));
+<i>790</i>&nbsp;            }
+<i>791</i>&nbsp;        }
+<i>792</i>&nbsp;
+<i>793</i>&nbsp;        for (PlayerView player : game.getPlayers()) {
+<i>794</i>&nbsp;            if (players.containsKey(player.getPlayerId())) {
+<i>795</i>&nbsp;                if (!possibleAttackers.isEmpty()) {
+<i>796</i>&nbsp;                    for (UUID permanentId : possibleAttackers) {
+<i>797</i>&nbsp;                        if (player.getBattlefield().containsKey(permanentId)) {
+<i>798</i>&nbsp;                            player.getBattlefield().get(permanentId).setCanAttack(true);
+<i>799</i>&nbsp;                        }
+<i>800</i>&nbsp;                    }
+<i>801</i>&nbsp;                }
+<i>802</i>&nbsp;                players.get(player.getPlayerId()).update(player);
+<i>803</i>&nbsp;                if (player.getPlayerId().equals(playerId)) {
+<i>804</i>&nbsp;                    updateSkipButtons(player.isPassedTurn(), player.isPassedUntilEndOfTurn(), player.isPassedUntilNextMain(), player.isPassedAllTurns(), player.isPassedUntilStackResolved(),
+<i>805</i>&nbsp;                            player.isPassedUntilEndStepBeforeMyTurn());
+<i>806</i>&nbsp;                }
+<i>807</i>&nbsp;                // update open or remove closed graveyard windows
+<i>808</i>&nbsp;                graveyards.put(player.getName(), player.getGraveyard());
+<i>809</i>&nbsp;                if (graveyardWindows.containsKey(player.getName())) {
+<i>810</i>&nbsp;                    CardInfoWindowDialog cardInfoWindowDialog = graveyardWindows.get(player.getName());
+<i>811</i>&nbsp;                    if (cardInfoWindowDialog.isClosed()) {
+<i>812</i>&nbsp;                        graveyardWindows.remove(player.getName());
+<i>813</i>&nbsp;                    } else {
+<i>814</i>&nbsp;                        cardInfoWindowDialog.loadCards(player.getGraveyard(), bigCard, gameId, false);
+<i>815</i>&nbsp;                    }
+<i>816</i>&nbsp;                }
+<i>817</i>&nbsp;                // show top card window
+<i>818</i>&nbsp;                if (player.getTopCard() != null) {
+<i>819</i>&nbsp;                    CardsView cardsView = new CardsView();
+<i>820</i>&nbsp;                    cardsView.put(player.getTopCard().getId(), player.getTopCard());
+<i>821</i>&nbsp;                    handleGameInfoWindow(revealed, ShowType.REVEAL_TOP_LIBRARY, player.getName() + &quot;&#39;s top library card&quot;, cardsView);
+<i>822</i>&nbsp;                }
+<i>823</i>&nbsp;            } else {
+<i>824</i>&nbsp;                logger.warn(&quot;Couldn&#39;t find player.&quot;);
+<i>825</i>&nbsp;                logger.warn(&quot;   uuid:&quot; + player.getPlayerId());
+<i>826</i>&nbsp;                logger.warn(&quot;   players:&quot;);
+<i>827</i>&nbsp;                for (PlayAreaPanel p : players.values()) {
+<i>828</i>&nbsp;                    logger.warn(&quot;&quot; + p);
+<i>829</i>&nbsp;                }
+<i>830</i>&nbsp;            }
+<i>831</i>&nbsp;        }
+<i>832</i>&nbsp;        if (!menuNameSet) {
+<i>833</i>&nbsp;            StringBuilder sb = new StringBuilder();
+<i>834</i>&nbsp;            if (playerId == null) {
+<i>835</i>&nbsp;                sb.append(&quot;Watching: &quot;);
+<i>836</i>&nbsp;            } else {
+<i>837</i>&nbsp;                sb.append(&quot;Playing: &quot;);
+<i>838</i>&nbsp;            }
+<i>839</i>&nbsp;            boolean first = true;
+<i>840</i>&nbsp;            for (PlayerView player : game.getPlayers()) {
+<i>841</i>&nbsp;                if (first) {
+<i>842</i>&nbsp;                    first = false;
+<i>843</i>&nbsp;                } else {
+<i>844</i>&nbsp;                    sb.append(&quot; - &quot;);
+<i>845</i>&nbsp;                }
+<i>846</i>&nbsp;                sb.append(player.getName());
+<i>847</i>&nbsp;            }
+<i>848</i>&nbsp;            menuNameSet = true;
+<i>849</i>&nbsp;            gamePane.setTitle(sb.toString());
+<i>850</i>&nbsp;        }
+<i>851</i>&nbsp;
+<i>852</i>&nbsp;        GameManager.getInstance().setStackSize(game.getStack().size());
+<i>853</i>&nbsp;        displayStack(game, bigCard, feedbackPanel, gameId);
+<i>854</i>&nbsp;
+<i>855</i>&nbsp;        for (ExileView exile : game.getExile()) {
+<i>856</i>&nbsp;            if (!exiles.containsKey(exile.getId())) {
+<i>857</i>&nbsp;                CardInfoWindowDialog newExile = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
+<i>858</i>&nbsp;                exiles.put(exile.getId(), newExile);
+<i>859</i>&nbsp;                MageFrame.getDesktop().add(newExile, JLayeredPane.MODAL_LAYER);
+<i>860</i>&nbsp;                newExile.show();
+<i>861</i>&nbsp;            }
+<i>862</i>&nbsp;            exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
+<i>863</i>&nbsp;        }
+<i>864</i>&nbsp;
+<i>865</i>&nbsp;        showRevealed(game);
+<i>866</i>&nbsp;        showLookedAt(game);
+<i>867</i>&nbsp;        if (game.getCombat().size() &gt; 0) {
+<i>868</i>&nbsp;            CombatManager.getInstance().showCombat(game.getCombat(), gameId);
+<i>869</i>&nbsp;        } else {
+<i>870</i>&nbsp;            CombatManager.getInstance().hideCombat(gameId);
+<i>871</i>&nbsp;        }
+<i>872</i>&nbsp;
+<i>873</i>&nbsp;        for (PlayerView player : game.getPlayers()) {
+<i>874</i>&nbsp;            if (player.hasLeft() &amp;&amp; !playersWhoLeft.get(player.getPlayerId())) {
+<i>875</i>&nbsp;                PlayAreaPanel playerLeftPanel = players.get(player.getPlayerId());
+<i>876</i>&nbsp;                playersWhoLeft.put(player.getPlayerId(), true);
+<i>877</i>&nbsp;
+<i>878</i>&nbsp;                Container parent = playerLeftPanel.getParent();
+<i>879</i>&nbsp;                GridBagLayout layout = (GridBagLayout) parent.getLayout();
+<i>880</i>&nbsp;
+<i>881</i>&nbsp;                for (Component otherPanel : parent.getComponents()) {
+<i>882</i>&nbsp;
+<i>883</i>&nbsp;                    if (otherPanel instanceof PlayAreaPanel) {
+<i>884</i>&nbsp;                        GridBagConstraints gbc = layout.getConstraints(otherPanel);
+<i>885</i>&nbsp;                        if (gbc.weightx &gt; 0.1) {
+<i>886</i>&nbsp;                            gbc.weightx = 0.99;
+<i>887</i>&nbsp;                        }
+<i>888</i>&nbsp;                        gbc.fill = GridBagConstraints.BOTH;
+<i>889</i>&nbsp;                        gbc.anchor = GridBagConstraints.WEST;
+<i>890</i>&nbsp;                        if (gbc.gridx &gt; 0) {
+<i>891</i>&nbsp;                            gbc.anchor = GridBagConstraints.EAST;
+<i>892</i>&nbsp;                        }
+<i>893</i>&nbsp;                        if (otherPanel == playerLeftPanel) {
+<i>894</i>&nbsp;                            gbc.weightx = 0.01;
+<i>895</i>&nbsp;                            Dimension d = playerLeftPanel.getPreferredSize();
+<i>896</i>&nbsp;                            d.width = 95;
+<i>897</i>&nbsp;                            otherPanel.setPreferredSize(d);
+<i>898</i>&nbsp;                        }
+<i>899</i>&nbsp;                        parent.remove(otherPanel);
+<i>900</i>&nbsp;                        parent.add(otherPanel, gbc);
+<i>901</i>&nbsp;                    }
+<i>902</i>&nbsp;                }
+<i>903</i>&nbsp;
+<i>904</i>&nbsp;                parent.validate();
+<i>905</i>&nbsp;                parent.repaint();
+<i>906</i>&nbsp;            }
+<i>907</i>&nbsp;        }
+<i>908</i>&nbsp;
+<i>909</i>&nbsp;        feedbackPanel.disableUndo();
+<i>910</i>&nbsp;
+<i>911</i>&nbsp;        this.revalidate();
+<i>912</i>&nbsp;        this.repaint();
+<i>913</i>&nbsp;    }
+<i>914</i>&nbsp;
+<i>915</i>&nbsp;    static final int BORDER_SIZE = 2;
+<i>916</i>&nbsp;
+<i>917</i>&nbsp;    private void updateSkipButtons(boolean turn, boolean endOfTurn, boolean nextMain, boolean allTurns, boolean stack, boolean endStepBeforeYourStep) {
+<i>918</i>&nbsp;        if (turn) { //F4
+<i>919</i>&nbsp;            btnSkipToNextTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
+<i>920</i>&nbsp;        } else {
+<i>921</i>&nbsp;            btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>922</i>&nbsp;        }
+<i>923</i>&nbsp;        if (endOfTurn) { // F5
+<i>924</i>&nbsp;            btnSkipToEndTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
+<i>925</i>&nbsp;        } else {
+<i>926</i>&nbsp;            btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>927</i>&nbsp;        }
+<i>928</i>&nbsp;        if (nextMain) { // F7
+<i>929</i>&nbsp;            btnSkipToNextMain.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
+<i>930</i>&nbsp;        } else {
+<i>931</i>&nbsp;            btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>932</i>&nbsp;        }
+<i>933</i>&nbsp;        if (stack) { // F8
+<i>934</i>&nbsp;            btnSkipStack.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
+<i>935</i>&nbsp;        } else {
+<i>936</i>&nbsp;            btnSkipStack.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>937</i>&nbsp;        }
+<i>938</i>&nbsp;        if (allTurns) { // F9
+<i>939</i>&nbsp;            btnSkipToYourTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
+<i>940</i>&nbsp;        } else {
+<i>941</i>&nbsp;            btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>942</i>&nbsp;        }
+<i>943</i>&nbsp;
+<i>944</i>&nbsp;        if (endStepBeforeYourStep) { // F11
+<i>945</i>&nbsp;            btnSkipToEndStepBeforeYourTurn.setBorder(new LineBorder(Color.orange, BORDER_SIZE));
+<i>946</i>&nbsp;        } else {
+<i>947</i>&nbsp;            btnSkipToEndStepBeforeYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>948</i>&nbsp;        }
+<i>949</i>&nbsp;
+<i>950</i>&nbsp;    }
+<i>951</i>&nbsp;
+<i>952</i>&nbsp;    /**
+<i>953</i>&nbsp;     * Set the same state for menu selections to all player areas.
+<i>954</i>&nbsp;     *
+<i>955</i>&nbsp;     * @param manaPoolAutomatic
+<i>956</i>&nbsp;     * @param manaPoolAutomaticRestricted
+<i>957</i>&nbsp;     * @param useFirstManaAbility
+<i>958</i>&nbsp;     */
+<i>959</i>&nbsp;    public void setMenuStates(boolean manaPoolAutomatic, boolean manaPoolAutomaticRestricted, boolean useFirstManaAbility, boolean holdPriority) {
+<i>960</i>&nbsp;        for (PlayAreaPanel playAreaPanel : players.values()) {
+<i>961</i>&nbsp;            playAreaPanel.setMenuStates(manaPoolAutomatic, manaPoolAutomaticRestricted, useFirstManaAbility, holdPriority);
+<i>962</i>&nbsp;        }
+<i>963</i>&nbsp;    }
+<i>964</i>&nbsp;
+<i>965</i>&nbsp;    private void displayStack(GameView game, BigCard bigCard, FeedbackPanel feedbackPanel, UUID gameId) {
+<i>966</i>&nbsp;        this.stackObjects.loadCards(game.getStack(), bigCard, gameId, true);
+<i>967</i>&nbsp;    }
+<i>968</i>&nbsp;
+<i>969</i>&nbsp;    /**
+<i>970</i>&nbsp;     * Update phase buttons\labels.
+<i>971</i>&nbsp;     */
+<i>972</i>&nbsp;    private void updatePhases(PhaseStep step) {
+<i>973</i>&nbsp;        if (step == null) {
+<i>974</i>&nbsp;            logger.warn(&quot;step is null&quot;);
+<i>975</i>&nbsp;            return;
+<i>976</i>&nbsp;        }
+<i>977</i>&nbsp;        if (currentStep != null) {
+<i>978</i>&nbsp;            currentStep.setLocation(prevPoint);
+<i>979</i>&nbsp;        }
+<i>980</i>&nbsp;        switch (step) {
+<i>981</i>&nbsp;            case UNTAP:
+<i>982</i>&nbsp;                updateButton(&quot;Untap&quot;);
+<i>983</i>&nbsp;                break;
+<i>984</i>&nbsp;            case UPKEEP:
+<i>985</i>&nbsp;                updateButton(&quot;Upkeep&quot;);
+<i>986</i>&nbsp;                break;
+<i>987</i>&nbsp;            case DRAW:
+<i>988</i>&nbsp;                updateButton(&quot;Draw&quot;);
+<i>989</i>&nbsp;                break;
+<i>990</i>&nbsp;            case PRECOMBAT_MAIN:
+<i>991</i>&nbsp;                updateButton(&quot;Main1&quot;);
+<i>992</i>&nbsp;                break;
+<i>993</i>&nbsp;            case BEGIN_COMBAT:
+<i>994</i>&nbsp;                updateButton(&quot;Combat_Start&quot;);
+<i>995</i>&nbsp;                break;
+<i>996</i>&nbsp;            case DECLARE_ATTACKERS:
+<i>997</i>&nbsp;                updateButton(&quot;Combat_Attack&quot;);
+<i>998</i>&nbsp;                break;
+<i>999</i>&nbsp;            case DECLARE_BLOCKERS:
+<i>1000</i>&nbsp;                updateButton(&quot;Combat_Block&quot;);
+<i>1001</i>&nbsp;                break;
+<i>1002</i>&nbsp;            case FIRST_COMBAT_DAMAGE:
+<i>1003</i>&nbsp;            case COMBAT_DAMAGE:
+<i>1004</i>&nbsp;                updateButton(&quot;Combat_Damage&quot;);
+<i>1005</i>&nbsp;                break;
+<i>1006</i>&nbsp;            case END_COMBAT:
+<i>1007</i>&nbsp;                updateButton(&quot;Combat_End&quot;);
+<i>1008</i>&nbsp;                break;
+<i>1009</i>&nbsp;            case POSTCOMBAT_MAIN:
+<i>1010</i>&nbsp;                updateButton(&quot;Main2&quot;);
+<i>1011</i>&nbsp;                break;
+<i>1012</i>&nbsp;            case END_TURN:
+<i>1013</i>&nbsp;                updateButton(&quot;Cleanup&quot;);
+<i>1014</i>&nbsp;                break;
+<i>1015</i>&nbsp;        }
+<i>1016</i>&nbsp;    }
+<i>1017</i>&nbsp;
+<i>1018</i>&nbsp;    private void updateButton(String name) {
+<i>1019</i>&nbsp;        if (hoverButtons.containsKey(name)) {
+<i>1020</i>&nbsp;            currentStep = hoverButtons.get(name);
+<i>1021</i>&nbsp;            prevPoint = currentStep.getLocation();
+<i>1022</i>&nbsp;            currentStep.setLocation(prevPoint.x - 15, prevPoint.y);
+<i>1023</i>&nbsp;        }
+<i>1024</i>&nbsp;    }
+<i>1025</i>&nbsp;
+<i>1026</i>&nbsp;    // Called if the game frame is deactivated because the tabled the deck editor or other frames go to foreground
+<i>1027</i>&nbsp;    public void deactivated() {
+<i>1028</i>&nbsp;        // hide the non modal windows (because otherwise they are shown on top of the new active pane)
+<i>1029</i>&nbsp;        for (CardInfoWindowDialog exileDialog : exiles.values()) {
+<i>1030</i>&nbsp;            exileDialog.hideDialog();
+<i>1031</i>&nbsp;        }
+<i>1032</i>&nbsp;        for (CardInfoWindowDialog graveyardDialog : graveyardWindows.values()) {
+<i>1033</i>&nbsp;            graveyardDialog.hideDialog();
+<i>1034</i>&nbsp;        }
+<i>1035</i>&nbsp;        for (CardInfoWindowDialog revealDialog : revealed.values()) {
+<i>1036</i>&nbsp;            revealDialog.hideDialog();
+<i>1037</i>&nbsp;        }
+<i>1038</i>&nbsp;        for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
+<i>1039</i>&nbsp;            lookedAtDialog.hideDialog();
+<i>1040</i>&nbsp;        }
+<i>1041</i>&nbsp;    }
+<i>1042</i>&nbsp;
+<i>1043</i>&nbsp;    // Called if the game frame comes to front again
+<i>1044</i>&nbsp;    public void activated() {
+<i>1045</i>&nbsp;        // hide the non modal windows (because otherwise they are shown on top of the new active pane)
+<i>1046</i>&nbsp;        for (CardInfoWindowDialog exileDialog : exiles.values()) {
+<i>1047</i>&nbsp;            exileDialog.show();
+<i>1048</i>&nbsp;        }
+<i>1049</i>&nbsp;        for (CardInfoWindowDialog graveyardDialog : graveyardWindows.values()) {
+<i>1050</i>&nbsp;            graveyardDialog.show();
+<i>1051</i>&nbsp;        }
+<i>1052</i>&nbsp;        for (CardInfoWindowDialog revealDialog : revealed.values()) {
+<i>1053</i>&nbsp;            revealDialog.show();
+<i>1054</i>&nbsp;        }
+<i>1055</i>&nbsp;        for (CardInfoWindowDialog lookedAtDialog : lookedAt.values()) {
+<i>1056</i>&nbsp;            lookedAtDialog.show();
+<i>1057</i>&nbsp;        }
+<i>1058</i>&nbsp;    }
+<i>1059</i>&nbsp;
+<i>1060</i>&nbsp;    public void openGraveyardWindow(String playerName) {
+<i>1061</i>&nbsp;        if (graveyardWindows.containsKey(playerName)) {
+<i>1062</i>&nbsp;            CardInfoWindowDialog cardInfoWindowDialog = graveyardWindows.get(playerName);
+<i>1063</i>&nbsp;            if (cardInfoWindowDialog.isVisible()) {
+<i>1064</i>&nbsp;                cardInfoWindowDialog.hideDialog();
+<i>1065</i>&nbsp;            } else {
+<i>1066</i>&nbsp;                cardInfoWindowDialog.show();
+<i>1067</i>&nbsp;            }
+<i>1068</i>&nbsp;            return;
+<i>1069</i>&nbsp;        }
+<i>1070</i>&nbsp;        CardInfoWindowDialog newGraveyard = new CardInfoWindowDialog(ShowType.GRAVEYARD, playerName);
+<i>1071</i>&nbsp;        graveyardWindows.put(playerName, newGraveyard);
+<i>1072</i>&nbsp;        MageFrame.getDesktop().add(newGraveyard, JLayeredPane.MODAL_LAYER);
+<i>1073</i>&nbsp;        newGraveyard.loadCards(graveyards.get(playerName), bigCard, gameId, false);
+<i>1074</i>&nbsp;    }
+<i>1075</i>&nbsp;
+<i>1076</i>&nbsp;    public void openTopLibraryWindow(String playerName) {
+<i>1077</i>&nbsp;        String title = playerName + &quot;&#39;s top library card&quot;;
+<i>1078</i>&nbsp;        if (revealed.containsKey(title)) {
+<i>1079</i>&nbsp;            CardInfoWindowDialog cardInfoWindowDialog = revealed.get(title);
+<i>1080</i>&nbsp;            if (cardInfoWindowDialog.isVisible()) {
+<i>1081</i>&nbsp;                cardInfoWindowDialog.hideDialog();
+<i>1082</i>&nbsp;            } else {
+<i>1083</i>&nbsp;                cardInfoWindowDialog.show();
+<i>1084</i>&nbsp;            }
+<i>1085</i>&nbsp;        }
+<i>1086</i>&nbsp;    }
+<i>1087</i>&nbsp;
+<i>1088</i>&nbsp;    private void showRevealed(GameView game) {
+<i>1089</i>&nbsp;        for (RevealedView revealView : game.getRevealed()) {
+<i>1090</i>&nbsp;            handleGameInfoWindow(revealed, ShowType.REVEAL, revealView.getName(), revealView.getCards());
+<i>1091</i>&nbsp;        }
+<i>1092</i>&nbsp;        removeClosedCardInfoWindows(revealed);
+<i>1093</i>&nbsp;    }
+<i>1094</i>&nbsp;
+<i>1095</i>&nbsp;    private void showLookedAt(GameView game) {
+<i>1096</i>&nbsp;        for (LookedAtView lookedAtView : game.getLookedAt()) {
+<i>1097</i>&nbsp;            handleGameInfoWindow(lookedAt, ShowType.LOOKED_AT, lookedAtView.getName(), lookedAtView.getCards());
+<i>1098</i>&nbsp;        }
+<i>1099</i>&nbsp;        removeClosedCardInfoWindows(lookedAt);
+<i>1100</i>&nbsp;    }
+<i>1101</i>&nbsp;
+<i>1102</i>&nbsp;    private void handleGameInfoWindow(Map&lt;String, CardInfoWindowDialog&gt; windowMap, ShowType showType, String name, LinkedHashMap cardsView) {
+<i>1103</i>&nbsp;        CardInfoWindowDialog cardInfoWindowDialog;
+<i>1104</i>&nbsp;        if (!windowMap.containsKey(name)) {
+<i>1105</i>&nbsp;            cardInfoWindowDialog = new CardInfoWindowDialog(showType, name);
+<i>1106</i>&nbsp;            windowMap.put(name, cardInfoWindowDialog);
+<i>1107</i>&nbsp;            MageFrame.getDesktop().add(cardInfoWindowDialog, JLayeredPane.MODAL_LAYER);
+<i>1108</i>&nbsp;        } else {
+<i>1109</i>&nbsp;            cardInfoWindowDialog = windowMap.get(name);
+<i>1110</i>&nbsp;        }
+<i>1111</i>&nbsp;
+<i>1112</i>&nbsp;        if (cardInfoWindowDialog != null &amp;&amp; !cardInfoWindowDialog.isClosed()) {
+<i>1113</i>&nbsp;            switch (showType) {
+<i>1114</i>&nbsp;                case REVEAL:
+<i>1115</i>&nbsp;                case REVEAL_TOP_LIBRARY:
+<i>1116</i>&nbsp;                    cardInfoWindowDialog.loadCards((CardsView) cardsView, bigCard, gameId);
+<i>1117</i>&nbsp;                    break;
+<i>1118</i>&nbsp;                case LOOKED_AT:
+<i>1119</i>&nbsp;                    cardInfoWindowDialog.loadCards((SimpleCardsView) cardsView, bigCard, gameId);
+<i>1120</i>&nbsp;                    break;
+<i>1121</i>&nbsp;            }
+<i>1122</i>&nbsp;        }
+<i>1123</i>&nbsp;    }
+<i>1124</i>&nbsp;
+<i>1125</i>&nbsp;    private void removeClosedCardInfoWindows(Map&lt;String, CardInfoWindowDialog&gt; windowMap) {
+<i>1126</i>&nbsp;        // Remove closed window objects from the maps
+<i>1127</i>&nbsp;        for (Iterator&lt;Map.Entry&lt;String, CardInfoWindowDialog&gt;&gt; iterator = windowMap.entrySet().iterator(); iterator.hasNext();) {
+<i>1128</i>&nbsp;            Map.Entry&lt;String, CardInfoWindowDialog&gt; entry = iterator.next();
+<i>1129</i>&nbsp;            if (entry.getValue().isClosed()) {
+<i>1130</i>&nbsp;                iterator.remove();
+<i>1131</i>&nbsp;            }
+<i>1132</i>&nbsp;        }
+<i>1133</i>&nbsp;    }
+<i>1134</i>&nbsp;
+<i>1135</i>&nbsp;    public void ask(String question, GameView gameView, int messageId, Map&lt;String, Serializable&gt; options) {
+<i>1136</i>&nbsp;        updateGame(gameView);
+<i>1137</i>&nbsp;        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, options, messageId);
+<i>1138</i>&nbsp;    }
+<i>1139</i>&nbsp;
+<i>1140</i>&nbsp;    /**
+<i>1141</i>&nbsp;     * Shows a pick target dialog and allows the player to pick a target (e.g.
+<i>1142</i>&nbsp;     * the pick triggered ability)
+<i>1143</i>&nbsp;     *
+<i>1144</i>&nbsp;     * @param message
+<i>1145</i>&nbsp;     * @param cardView
+<i>1146</i>&nbsp;     * @param gameView
+<i>1147</i>&nbsp;     * @param targets
+<i>1148</i>&nbsp;     * @param required
+<i>1149</i>&nbsp;     * @param options
+<i>1150</i>&nbsp;     * @param messageId
+<i>1151</i>&nbsp;     */
+<i>1152</i>&nbsp;    public void pickTarget(String message, CardsView cardView, GameView gameView, Set&lt;UUID&gt; targets, boolean required, Map&lt;String, Serializable&gt; options, int messageId) {
+<i>1153</i>&nbsp;        PopUpMenuType popupMenuType = null;
+<i>1154</i>&nbsp;        if (options != null) {
+<i>1155</i>&nbsp;            if (options.containsKey(&quot;targetZone&quot;)) {
+<i>1156</i>&nbsp;                if (Zone.HAND.equals(options.get(&quot;targetZone&quot;))) { // mark selectable target cards in hand
+<i>1157</i>&nbsp;                    List&lt;UUID&gt; choosen = null;
+<i>1158</i>&nbsp;                    if (options.containsKey(&quot;chosen&quot;)) {
+<i>1159</i>&nbsp;                        choosen = (List&lt;UUID&gt;) options.get(&quot;chosen&quot;);
+<i>1160</i>&nbsp;                    }
+<i>1161</i>&nbsp;                    for (CardView card : gameView.getHand().values()) {
+<i>1162</i>&nbsp;                        if (targets == null || targets.isEmpty()) {
+<i>1163</i>&nbsp;                            card.setPlayable(false);
+<i>1164</i>&nbsp;                            card.setChoosable(true);
+<i>1165</i>&nbsp;                        } else if (targets.contains(card.getId())) {
+<i>1166</i>&nbsp;                            card.setPlayable(false);
+<i>1167</i>&nbsp;                            card.setChoosable(true);
+<i>1168</i>&nbsp;                        }
+<i>1169</i>&nbsp;                        if (choosen != null &amp;&amp; choosen.contains(card.getId())) {
+<i>1170</i>&nbsp;                            card.setSelected(true);
+<i>1171</i>&nbsp;                        }
+<i>1172</i>&nbsp;                    }
+<i>1173</i>&nbsp;                }
+<i>1174</i>&nbsp;            }
+<i>1175</i>&nbsp;            if (options.containsKey(&quot;queryType&quot;) &amp;&amp; PlayerQueryEvent.QueryType.PICK_ABILITY.equals(options.get(&quot;queryType&quot;))) {
+<i>1176</i>&nbsp;                popupMenuType = PopUpMenuType.TRIGGER_ORDER;
+<i>1177</i>&nbsp;            }
+<i>1178</i>&nbsp;        }
+<i>1179</i>&nbsp;        updateGame(gameView);
+<i>1180</i>&nbsp;        Map&lt;String, Serializable&gt; options0 = options == null ? new HashMap&lt;&gt;() : options;
+<i>1181</i>&nbsp;        ShowCardsDialog dialog = null;
+<i>1182</i>&nbsp;        if (cardView != null &amp;&amp; cardView.size() &gt; 0) {
+<i>1183</i>&nbsp;            dialog = showCards(message, cardView, required, options0, popupMenuType);
+<i>1184</i>&nbsp;            options0.put(&quot;dialog&quot;, dialog);
+<i>1185</i>&nbsp;        }
+<i>1186</i>&nbsp;        this.feedbackPanel.getFeedback(required ? FeedbackMode.INFORM : FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId);
+<i>1187</i>&nbsp;        if (dialog != null) {
+<i>1188</i>&nbsp;            this.pickTarget.add(dialog);
+<i>1189</i>&nbsp;        }
+<i>1190</i>&nbsp;    }
+<i>1191</i>&nbsp;
+<i>1192</i>&nbsp;    public void inform(String information, GameView gameView, int messageId) {
+<i>1193</i>&nbsp;        updateGame(gameView);
+<i>1194</i>&nbsp;        this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId);
+<i>1195</i>&nbsp;    }
+<i>1196</i>&nbsp;
+<i>1197</i>&nbsp;    public void endMessage(String message, int messageId) {
+<i>1198</i>&nbsp;        this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null, messageId);
+<i>1199</i>&nbsp;        ArrowBuilder.getBuilder().removeAllArrows(gameId);
+<i>1200</i>&nbsp;    }
+<i>1201</i>&nbsp;
+<i>1202</i>&nbsp;    public void select(String message, GameView gameView, int messageId, Map&lt;String, Serializable&gt; options) {
+<i>1203</i>&nbsp;        holdingPriority = false;
+<i>1204</i>&nbsp;        txtHoldPriority.setVisible(false);
+<i>1205</i>&nbsp;        setMenuStates(
+<i>1206</i>&nbsp;                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, &quot;true&quot;).equals(&quot;true&quot;),
+<i>1207</i>&nbsp;                PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, &quot;true&quot;).equals(&quot;true&quot;),
+<i>1208</i>&nbsp;                PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, &quot;false&quot;).equals(&quot;true&quot;),
+<i>1209</i>&nbsp;                false);
+<i>1210</i>&nbsp;
+<i>1211</i>&nbsp;        updateGame(gameView, options);
+<i>1212</i>&nbsp;        boolean controllingPlayer = false;
+<i>1213</i>&nbsp;        for (PlayerView playerView : gameView.getPlayers()) {
+<i>1214</i>&nbsp;            if (playerView.getPlayerId().equals(playerId)) {
+<i>1215</i>&nbsp;                // magenoxx: because of uncaught bug with saving state, rolling back and stack
+<i>1216</i>&nbsp;                // undo is allowed only for empty stack
+<i>1217</i>&nbsp;                controllingPlayer = !gameView.getPriorityPlayerName().equals(playerView.getName());
+<i>1218</i>&nbsp;                if (playerView.getStatesSavedSize() &gt; 0 &amp;&amp; gameView.getStack().isEmpty()) {
+<i>1219</i>&nbsp;                    feedbackPanel.allowUndo(playerView.getStatesSavedSize());
+<i>1220</i>&nbsp;                }
+<i>1221</i>&nbsp;                break;
+<i>1222</i>&nbsp;            }
+<i>1223</i>&nbsp;
+<i>1224</i>&nbsp;        }
+<i>1225</i>&nbsp;        Map&lt;String, Serializable&gt; panelOptions = new HashMap&lt;&gt;();
+<i>1226</i>&nbsp;        if (options != null) {
+<i>1227</i>&nbsp;            panelOptions.putAll(options);
+<i>1228</i>&nbsp;        }
+<i>1229</i>&nbsp;        panelOptions.put(&quot;your_turn&quot;, true);
+<i>1230</i>&nbsp;        String activePlayerText;
+<i>1231</i>&nbsp;        if (gameView.getActivePlayerId().equals(playerId)) {
+<i>1232</i>&nbsp;            activePlayerText = &quot;Your turn&quot;;
+<i>1233</i>&nbsp;        } else {
+<i>1234</i>&nbsp;            activePlayerText = gameView.getActivePlayerName() + &quot;&#39;s turn&quot;;
+<i>1235</i>&nbsp;        }
+<i>1236</i>&nbsp;        String priorityPlayerText = &quot;&quot;;
+<i>1237</i>&nbsp;        if (controllingPlayer) {
+<i>1238</i>&nbsp;            priorityPlayerText = &quot; / priority &quot; + gameView.getPriorityPlayerName();
+<i>1239</i>&nbsp;        }
+<i>1240</i>&nbsp;        String messageToDisplay = message + FeedbackPanel.getSmallText(activePlayerText + &quot; / &quot; + gameView.getStep().toString() + priorityPlayerText);
+<i>1241</i>&nbsp;        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), panelOptions, messageId);
+<i>1242</i>&nbsp;    }
+<i>1243</i>&nbsp;
+<i>1244</i>&nbsp;    public void playMana(String message, GameView gameView, Map&lt;String, Serializable&gt; options, int messageId) {
+<i>1245</i>&nbsp;        updateGame(gameView);
+<i>1246</i>&nbsp;        DialogManager.getManager(gameId).fadeOut();
+<i>1247</i>&nbsp;        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), options, messageId);
+<i>1248</i>&nbsp;    }
+<i>1249</i>&nbsp;
+<i>1250</i>&nbsp;    public void playXMana(String message, GameView gameView, int messageId) {
+<i>1251</i>&nbsp;        updateGame(gameView);
+<i>1252</i>&nbsp;        DialogManager.getManager(gameId).fadeOut();
+<i>1253</i>&nbsp;        this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId);
+<i>1254</i>&nbsp;    }
+<i>1255</i>&nbsp;
+<i>1256</i>&nbsp;    public void replayMessage(String message) {
+<i>1257</i>&nbsp;        //TODO: implement this
+<i>1258</i>&nbsp;    }
+<i>1259</i>&nbsp;
+<i>1260</i>&nbsp;    public void pickAbility(AbilityPickerView choices) {
+<i>1261</i>&nbsp;        hideAll();
+<i>1262</i>&nbsp;        DialogManager.getManager(gameId).fadeOut();
+<i>1263</i>&nbsp;        this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
+<i>1264</i>&nbsp;    }
+<i>1265</i>&nbsp;
+<i>1266</i>&nbsp;    private void hideAll() {
+<i>1267</i>&nbsp;        ActionCallback callback = Plugins.getInstance().getActionCallback();
+<i>1268</i>&nbsp;        ((MageActionCallback) callback).hideGameUpdate(gameId);
+<i>1269</i>&nbsp;    }
+<i>1270</i>&nbsp;
+<i>1271</i>&nbsp;    private ShowCardsDialog showCards(String title, CardsView cards, boolean required, Map&lt;String, Serializable&gt; options, PopUpMenuType popupMenuType) {
+<i>1272</i>&nbsp;        hideAll();
+<i>1273</i>&nbsp;        ShowCardsDialog showCards = new ShowCardsDialog();
+<i>1274</i>&nbsp;        JPopupMenu popupMenu = null;
+<i>1275</i>&nbsp;        if (PopUpMenuType.TRIGGER_ORDER.equals(popupMenuType)) {
+<i>1276</i>&nbsp;            popupMenu = popupMenuTriggerOrder;
+<i>1277</i>&nbsp;        }
+<i>1278</i>&nbsp;        showCards.loadCards(title, cards, bigCard, gameId, required, options, popupMenu, getShowCardsEventListener(showCards));
+<i>1279</i>&nbsp;        return showCards;
+<i>1280</i>&nbsp;    }
+<i>1281</i>&nbsp;
+<i>1282</i>&nbsp;    public void getAmount(int min, int max, String message) {
+<i>1283</i>&nbsp;        pickNumber.showDialog(min, max, message);
+<i>1284</i>&nbsp;        if (pickNumber.isCancel()) {
+<i>1285</i>&nbsp;            SessionHandler.sendPlayerBoolean(gameId, false);
+<i>1286</i>&nbsp;        } else {
+<i>1287</i>&nbsp;            SessionHandler.sendPlayerInteger(gameId, pickNumber.getAmount());
+<i>1288</i>&nbsp;        }
+<i>1289</i>&nbsp;    }
+<i>1290</i>&nbsp;
+<i>1291</i>&nbsp;    public void getChoice(Choice choice, UUID objectId) {
+<i>1292</i>&nbsp;        hideAll();
+<i>1293</i>&nbsp;        PickChoiceDialog pickChoice = new PickChoiceDialog();
+<i>1294</i>&nbsp;        pickChoice.showDialog(choice, objectId, choiceWindowState);
+<i>1295</i>&nbsp;        if (choice.isKeyChoice()) {
+<i>1296</i>&nbsp;            if (pickChoice.isAutoSelect()) {
+<i>1297</i>&nbsp;                SessionHandler.sendPlayerString(gameId, &quot;#&quot; + choice.getChoiceKey());
+<i>1298</i>&nbsp;            } else {
+<i>1299</i>&nbsp;                SessionHandler.sendPlayerString(gameId, choice.getChoiceKey());
+<i>1300</i>&nbsp;            }
+<i>1301</i>&nbsp;        } else {
+<i>1302</i>&nbsp;            SessionHandler.sendPlayerString(gameId, choice.getChoice());
+<i>1303</i>&nbsp;        }
+<i>1304</i>&nbsp;        choiceWindowState = new MageDialogState(pickChoice);
+<i>1305</i>&nbsp;        pickChoice.removeDialog();
+<i>1306</i>&nbsp;    }
+<i>1307</i>&nbsp;
+<i>1308</i>&nbsp;    public void pickPile(String message, CardsView pile1, CardsView pile2) {
+<i>1309</i>&nbsp;        hideAll();
+<i>1310</i>&nbsp;        PickPileDialog pickPileDialog = new PickPileDialog();
+<i>1311</i>&nbsp;        pickPileDialog.loadCards(message, pile1, pile2, bigCard, gameId);
+<i>1312</i>&nbsp;        SessionHandler.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
+<i>1313</i>&nbsp;        pickPileDialog.cleanUp();
+<i>1314</i>&nbsp;        pickPileDialog.removeDialog();
+<i>1315</i>&nbsp;    }
+<i>1316</i>&nbsp;
+<i>1317</i>&nbsp;    public Map&lt;UUID, PlayAreaPanel&gt; getPlayers() {
+<i>1318</i>&nbsp;        return players;
+<i>1319</i>&nbsp;    }
+<i>1320</i>&nbsp;
+<i>1321</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>1322</i>&nbsp;    private void initComponents() {
+<i>1323</i>&nbsp;
+<i>1324</i>&nbsp;        abilityPicker = new mage.client.components.ability.AbilityPicker();
+<i>1325</i>&nbsp;        jSplitPane1 = new javax.swing.JSplitPane();
+<i>1326</i>&nbsp;        jSplitPane0 = new javax.swing.JSplitPane();
+<i>1327</i>&nbsp;        jPanel2 = new javax.swing.JPanel();
+<i>1328</i>&nbsp;        pnlHelperHandButtonsStackArea = new javax.swing.JPanel();
+<i>1329</i>&nbsp;        pnlShortCuts = new javax.swing.JPanel();
+<i>1330</i>&nbsp;        lblPhase = new javax.swing.JLabel();
+<i>1331</i>&nbsp;        txtPhase = new javax.swing.JLabel();
+<i>1332</i>&nbsp;        lblStep = new javax.swing.JLabel();
+<i>1333</i>&nbsp;        txtStep = new javax.swing.JLabel();
+<i>1334</i>&nbsp;        lblTurn = new javax.swing.JLabel();
+<i>1335</i>&nbsp;        txtTurn = new javax.swing.JLabel();
+<i>1336</i>&nbsp;        txtActivePlayer = new javax.swing.JLabel();
+<i>1337</i>&nbsp;        lblActivePlayer = new javax.swing.JLabel();
+<i>1338</i>&nbsp;        txtPriority = new javax.swing.JLabel();
+<i>1339</i>&nbsp;        lblPriority = new javax.swing.JLabel();
+<i>1340</i>&nbsp;        feedbackPanel = new mage.client.game.FeedbackPanel();
+<i>1341</i>&nbsp;
+<i>1342</i>&nbsp;        txtSpellsCast = new javax.swing.JLabel();
+<i>1343</i>&nbsp;        Border paddingBorder = BorderFactory.createEmptyBorder(4, 4, 4, 4);
+<i>1344</i>&nbsp;        Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
+<i>1345</i>&nbsp;        txtSpellsCast.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
+<i>1346</i>&nbsp;        txtSpellsCast.setBackground(Color.LIGHT_GRAY);
+<i>1347</i>&nbsp;        txtSpellsCast.setOpaque(true);
+<i>1348</i>&nbsp;        txtSpellsCast.setToolTipText(&quot;spells cast during the current turn&quot;);
+<i>1349</i>&nbsp;
+<i>1350</i>&nbsp;        txtHoldPriority = new javax.swing.JLabel();
+<i>1351</i>&nbsp;        txtHoldPriority.setText(&quot;Hold&quot;);
+<i>1352</i>&nbsp;        txtHoldPriority.setBorder(BorderFactory.createCompoundBorder(border, paddingBorder));
+<i>1353</i>&nbsp;        txtHoldPriority.setBackground(Color.LIGHT_GRAY);
+<i>1354</i>&nbsp;        txtHoldPriority.setOpaque(true);
+<i>1355</i>&nbsp;        txtHoldPriority.setToolTipText(&quot;Holding priority after the next spell cast or ability activation&quot;);
+<i>1356</i>&nbsp;        txtHoldPriority.setVisible(false);
+<i>1357</i>&nbsp;
+<i>1358</i>&nbsp;        btnCancelSkip = new javax.swing.JButton(); // F3
+<i>1359</i>&nbsp;        btnSkipToNextTurn = new javax.swing.JButton(); // F4
+<i>1360</i>&nbsp;        btnSkipToEndTurn = new javax.swing.JButton(); // F5
+<i>1361</i>&nbsp;        btnSkipToNextMain = new javax.swing.JButton(); // F7
+<i>1362</i>&nbsp;        btnSkipStack = new javax.swing.JButton(); // F8
+<i>1363</i>&nbsp;        btnSkipToYourTurn = new javax.swing.JButton(); // F9
+<i>1364</i>&nbsp;        btnSkipToEndStepBeforeYourTurn = new javax.swing.JButton(); // F11
+<i>1365</i>&nbsp;
+<i>1366</i>&nbsp;        btnConcede = new javax.swing.JButton();
+<i>1367</i>&nbsp;        btnSwitchHands = new javax.swing.JButton();
+<i>1368</i>&nbsp;        btnStopWatching = new javax.swing.JButton();
+<i>1369</i>&nbsp;
+<i>1370</i>&nbsp;        bigCard = new mage.client.cards.BigCard();
+<i>1371</i>&nbsp;        pnlReplay = new javax.swing.JPanel();
+<i>1372</i>&nbsp;        btnStopReplay = new javax.swing.JButton();
+<i>1373</i>&nbsp;        btnNextPlay = new javax.swing.JButton();
+<i>1374</i>&nbsp;        btnPlay = new javax.swing.JButton();
+<i>1375</i>&nbsp;        btnSkipForward = new javax.swing.JButton();
+<i>1376</i>&nbsp;        btnPreviousPlay = new javax.swing.JButton();
+<i>1377</i>&nbsp;        pnlBattlefield = new javax.swing.JPanel();
+<i>1378</i>&nbsp;        gameChatPanel = new mage.client.chat.ChatPanelBasic();
+<i>1379</i>&nbsp;        gameChatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.GAME);
+<i>1380</i>&nbsp;        userChatPanel = new mage.client.chat.ChatPanelBasic();
+<i>1381</i>&nbsp;        userChatPanel.setParentChat(gameChatPanel);
+<i>1382</i>&nbsp;        userChatPanel.useExtendedView(ChatPanelBasic.VIEW_MODE.CHAT);
+<i>1383</i>&nbsp;        userChatPanel.setChatType(ChatPanelBasic.ChatType.GAME);
+<i>1384</i>&nbsp;        gameChatPanel.setConnectedChat(userChatPanel);
+<i>1385</i>&nbsp;        gameChatPanel.disableInput();
+<i>1386</i>&nbsp;        gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
+<i>1387</i>&nbsp;        gameChatPanel.enableHyperlinks();
+<i>1388</i>&nbsp;        jSplitPane2 = new javax.swing.JSplitPane();
+<i>1389</i>&nbsp;        handContainer = new HandPanel();
+<i>1390</i>&nbsp;        handCards = new HashMap&lt;&gt;();
+<i>1391</i>&nbsp;
+<i>1392</i>&nbsp;        pnlShortCuts.setOpaque(false);
+<i>1393</i>&nbsp;        pnlShortCuts.setPreferredSize(new Dimension(410, 72));
+<i>1394</i>&nbsp;
+<i>1395</i>&nbsp;        stackObjects = new mage.client.cards.Cards();
+<i>1396</i>&nbsp;
+<i>1397</i>&nbsp;        jSplitPane1.setBorder(null);
+<i>1398</i>&nbsp;        jSplitPane1.setDividerSize(7);
+<i>1399</i>&nbsp;        jSplitPane1.setResizeWeight(1.0);
+<i>1400</i>&nbsp;        jSplitPane1.setOneTouchExpandable(true);
+<i>1401</i>&nbsp;        jSplitPane1.setMinimumSize(new java.awt.Dimension(26, 48));
+<i>1402</i>&nbsp;
+<i>1403</i>&nbsp;        jSplitPane0.setBorder(null);
+<i>1404</i>&nbsp;        jSplitPane0.setDividerSize(7);
+<i>1405</i>&nbsp;        jSplitPane0.setResizeWeight(1.0);
+<i>1406</i>&nbsp;        jSplitPane0.setOneTouchExpandable(true);
+<i>1407</i>&nbsp;
+<i>1408</i>&nbsp;        restoreDividerLocations();
+<i>1409</i>&nbsp;
+<i>1410</i>&nbsp;        lblPhase.setLabelFor(txtPhase);
+<i>1411</i>&nbsp;        lblPhase.setText(&quot;Phase:&quot;);
+<i>1412</i>&nbsp;
+<i>1413</i>&nbsp;        txtPhase.setText(&quot;Phase&quot;);
+<i>1414</i>&nbsp;        txtPhase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+<i>1415</i>&nbsp;        txtPhase.setMinimumSize(new java.awt.Dimension(0, 16));
+<i>1416</i>&nbsp;
+<i>1417</i>&nbsp;        lblStep.setLabelFor(txtStep);
+<i>1418</i>&nbsp;        lblStep.setText(&quot;Step:&quot;);
+<i>1419</i>&nbsp;
+<i>1420</i>&nbsp;        txtStep.setText(&quot;Step&quot;);
+<i>1421</i>&nbsp;        txtStep.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+<i>1422</i>&nbsp;        txtStep.setMinimumSize(new java.awt.Dimension(0, 16));
+<i>1423</i>&nbsp;
+<i>1424</i>&nbsp;        lblTurn.setLabelFor(txtTurn);
+<i>1425</i>&nbsp;        lblTurn.setText(&quot;Turn:&quot;);
+<i>1426</i>&nbsp;
+<i>1427</i>&nbsp;        txtTurn.setText(&quot;Turn&quot;);
+<i>1428</i>&nbsp;        txtTurn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+<i>1429</i>&nbsp;        txtTurn.setMinimumSize(new java.awt.Dimension(0, 16));
+<i>1430</i>&nbsp;
+<i>1431</i>&nbsp;        txtActivePlayer.setText(&quot;Active Player&quot;);
+<i>1432</i>&nbsp;        txtActivePlayer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+<i>1433</i>&nbsp;        txtActivePlayer.setMinimumSize(new java.awt.Dimension(0, 16));
+<i>1434</i>&nbsp;
+<i>1435</i>&nbsp;        lblActivePlayer.setLabelFor(txtActivePlayer);
+<i>1436</i>&nbsp;        lblActivePlayer.setText(&quot;Active Player:&quot;);
+<i>1437</i>&nbsp;
+<i>1438</i>&nbsp;        txtPriority.setText(&quot;Priority Player&quot;);
+<i>1439</i>&nbsp;        txtPriority.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true));
+<i>1440</i>&nbsp;        txtPriority.setMinimumSize(new java.awt.Dimension(0, 16));
+<i>1441</i>&nbsp;
+<i>1442</i>&nbsp;        lblPriority.setLabelFor(txtPriority);
+<i>1443</i>&nbsp;        lblPriority.setText(&quot;Priority Player:&quot;);
+<i>1444</i>&nbsp;
+<i>1445</i>&nbsp;        bigCard.setBorder(new LineBorder(Color.black, 1, true));
+<i>1446</i>&nbsp;
+<i>1447</i>&nbsp;        int c = JComponent.WHEN_IN_FOCUSED_WINDOW;
+<i>1448</i>&nbsp;
+<i>1449</i>&nbsp;        KeyStroke ks3 = KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0);
+<i>1450</i>&nbsp;        this.getInputMap(c).put(ks3, &quot;F3_PRESS&quot;);
+<i>1451</i>&nbsp;        this.getActionMap().put(&quot;F3_PRESS&quot;, new AbstractAction() {
+<i>1452</i>&nbsp;            @Override
+<i>1453</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1454</i>&nbsp;                restorePriorityActionPerformed(actionEvent);
+<i>1455</i>&nbsp;            }
+<i>1456</i>&nbsp;        });
+<i>1457</i>&nbsp;
+<i>1458</i>&nbsp;        btnCancelSkip.setContentAreaFilled(false);
+<i>1459</i>&nbsp;        btnCancelSkip.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>1460</i>&nbsp;        btnCancelSkip.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getCancelSkipButtonImage()));
+<i>1461</i>&nbsp;        btnCancelSkip.setToolTipText(&quot;Cancel all skip actions (F3).&quot;);
+<i>1462</i>&nbsp;        btnCancelSkip.setFocusable(false);
+<i>1463</i>&nbsp;        btnCancelSkip.addMouseListener(new MouseAdapter() {
+<i>1464</i>&nbsp;            @Override
+<i>1465</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1466</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1467</i>&nbsp;                    restorePriorityActionPerformed(null);
+<i>1468</i>&nbsp;                }
+<i>1469</i>&nbsp;            }
+<i>1470</i>&nbsp;        });
+<i>1471</i>&nbsp;
+<i>1472</i>&nbsp;        btnSkipToNextTurn.setContentAreaFilled(false);
+<i>1473</i>&nbsp;        btnSkipToNextTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>1474</i>&nbsp;        btnSkipToNextTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipNextTurnButtonImage()));
+<i>1475</i>&nbsp;        btnSkipToNextTurn.setToolTipText(&quot;Skip to next turn (F4).&quot;);
+<i>1476</i>&nbsp;        btnSkipToNextTurn.setFocusable(false);
+<i>1477</i>&nbsp;        btnSkipToNextTurn.addMouseListener(new MouseAdapter() {
+<i>1478</i>&nbsp;            @Override
+<i>1479</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1480</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1481</i>&nbsp;                    btnEndTurnActionPerformed(null);
+<i>1482</i>&nbsp;                }
+<i>1483</i>&nbsp;            }
+<i>1484</i>&nbsp;        });
+<i>1485</i>&nbsp;
+<i>1486</i>&nbsp;        KeyStroke ks = KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0);
+<i>1487</i>&nbsp;        this.getInputMap(c).put(ks, &quot;F4_PRESS&quot;);
+<i>1488</i>&nbsp;        this.getActionMap().put(&quot;F4_PRESS&quot;, new AbstractAction() {
+<i>1489</i>&nbsp;            @Override
+<i>1490</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1491</i>&nbsp;                btnEndTurnActionPerformed(actionEvent);
+<i>1492</i>&nbsp;            }
+<i>1493</i>&nbsp;        });
+<i>1494</i>&nbsp;
+<i>1495</i>&nbsp;        btnSkipToEndTurn.setContentAreaFilled(false);
+<i>1496</i>&nbsp;        btnSkipToEndTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>1497</i>&nbsp;        btnSkipToEndTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipEndTurnButtonImage()));
+<i>1498</i>&nbsp;        btnSkipToEndTurn.setToolTipText(&quot;Skip to (opponents/next) end of turn step (F5) - adjust using preferences.&quot;);
+<i>1499</i>&nbsp;        btnSkipToEndTurn.setFocusable(false);
+<i>1500</i>&nbsp;        btnSkipToEndTurn.addMouseListener(new MouseAdapter() {
+<i>1501</i>&nbsp;            @Override
+<i>1502</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1503</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1504</i>&nbsp;                    btnUntilEndOfTurnActionPerformed(null);
+<i>1505</i>&nbsp;                }
+<i>1506</i>&nbsp;            }
+<i>1507</i>&nbsp;        });
+<i>1508</i>&nbsp;
+<i>1509</i>&nbsp;        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0);
+<i>1510</i>&nbsp;        this.getInputMap(c).put(ks, &quot;F5_PRESS&quot;);
+<i>1511</i>&nbsp;        this.getActionMap().put(&quot;F5_PRESS&quot;, new AbstractAction() {
+<i>1512</i>&nbsp;            @Override
+<i>1513</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1514</i>&nbsp;                btnUntilEndOfTurnActionPerformed(actionEvent);
+<i>1515</i>&nbsp;            }
+<i>1516</i>&nbsp;        });
+<i>1517</i>&nbsp;
+<i>1518</i>&nbsp;        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0);
+<i>1519</i>&nbsp;        this.getInputMap(c).put(ks, &quot;F6_PRESS&quot;);
+<i>1520</i>&nbsp;        this.getActionMap().put(&quot;F6_PRESS&quot;, new AbstractAction() {
+<i>1521</i>&nbsp;            @Override
+<i>1522</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1523</i>&nbsp;                btnEndTurnSkipStackActionPerformed(actionEvent);
+<i>1524</i>&nbsp;            }
+<i>1525</i>&nbsp;        });
+<i>1526</i>&nbsp;
+<i>1527</i>&nbsp;        btnSkipToNextMain.setContentAreaFilled(false);
+<i>1528</i>&nbsp;        btnSkipToNextMain.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>1529</i>&nbsp;        btnSkipToNextMain.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipMainButtonImage()));
+<i>1530</i>&nbsp;        btnSkipToNextMain.setToolTipText(&quot;Skip to (your) next main phase (F7) - adjust using preferences.&quot;);
+<i>1531</i>&nbsp;        btnSkipToNextMain.setFocusable(false);
+<i>1532</i>&nbsp;        btnSkipToNextMain.addMouseListener(new MouseAdapter() {
+<i>1533</i>&nbsp;            @Override
+<i>1534</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1535</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1536</i>&nbsp;                    btnUntilNextMainPhaseActionPerformed(null);
+<i>1537</i>&nbsp;                }
+<i>1538</i>&nbsp;            }
+<i>1539</i>&nbsp;        });
+<i>1540</i>&nbsp;
+<i>1541</i>&nbsp;        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0);
+<i>1542</i>&nbsp;        this.getInputMap(c).put(ks, &quot;F7_PRESS&quot;);
+<i>1543</i>&nbsp;        this.getActionMap().put(&quot;F7_PRESS&quot;, new AbstractAction() {
+<i>1544</i>&nbsp;            @Override
+<i>1545</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1546</i>&nbsp;                btnUntilNextMainPhaseActionPerformed(actionEvent);
+<i>1547</i>&nbsp;            }
+<i>1548</i>&nbsp;        });
+<i>1549</i>&nbsp;
+<i>1550</i>&nbsp;        btnSkipToYourTurn.setContentAreaFilled(false);
+<i>1551</i>&nbsp;        btnSkipToYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>1552</i>&nbsp;        btnSkipToYourTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipYourNextTurnButtonImage()));
+<i>1553</i>&nbsp;        btnSkipToYourTurn.setToolTipText(&quot;Skip to your next turn (F9).&quot;);
+<i>1554</i>&nbsp;        btnSkipToYourTurn.setFocusable(false);
+<i>1555</i>&nbsp;        btnSkipToYourTurn.addMouseListener(new MouseAdapter() {
+<i>1556</i>&nbsp;            @Override
+<i>1557</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1558</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1559</i>&nbsp;                    btnPassPriorityUntilNextYourTurnActionPerformed(null);
+<i>1560</i>&nbsp;                }
+<i>1561</i>&nbsp;            }
+<i>1562</i>&nbsp;        });
+<i>1563</i>&nbsp;
+<i>1564</i>&nbsp;        KeyStroke ks9 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
+<i>1565</i>&nbsp;        this.getInputMap(c).put(ks9, &quot;F9_PRESS&quot;);
+<i>1566</i>&nbsp;        this.getActionMap().put(&quot;F9_PRESS&quot;, new AbstractAction() {
+<i>1567</i>&nbsp;            @Override
+<i>1568</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1569</i>&nbsp;                btnPassPriorityUntilNextYourTurnActionPerformed(actionEvent);
+<i>1570</i>&nbsp;            }
+<i>1571</i>&nbsp;        });
+<i>1572</i>&nbsp;
+<i>1573</i>&nbsp;        btnSkipToEndStepBeforeYourTurn.setContentAreaFilled(false);
+<i>1574</i>&nbsp;        btnSkipToEndStepBeforeYourTurn.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>1575</i>&nbsp;        btnSkipToEndStepBeforeYourTurn.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipEndStepBeforeYourTurnButtonImage()));
+<i>1576</i>&nbsp;        btnSkipToEndStepBeforeYourTurn.setToolTipText(&quot;Skip to the end step before your turn (F11) - adjust using preferences.&quot;);
+<i>1577</i>&nbsp;        btnSkipToEndStepBeforeYourTurn.setFocusable(false);
+<i>1578</i>&nbsp;        btnSkipToEndStepBeforeYourTurn.addMouseListener(new MouseAdapter() {
+<i>1579</i>&nbsp;            @Override
+<i>1580</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1581</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1582</i>&nbsp;                    btnSkipToEndStepBeforeYourTurnActionPerformed(null);
+<i>1583</i>&nbsp;                }
+<i>1584</i>&nbsp;            }
+<i>1585</i>&nbsp;        });
+<i>1586</i>&nbsp;
+<i>1587</i>&nbsp;        KeyStroke ks11 = KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0);
+<i>1588</i>&nbsp;        this.getInputMap(c).put(ks11, &quot;F11_PRESS&quot;);
+<i>1589</i>&nbsp;        this.getActionMap().put(&quot;F11_PRESS&quot;, new AbstractAction() {
+<i>1590</i>&nbsp;            @Override
+<i>1591</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1592</i>&nbsp;                btnSkipToEndStepBeforeYourTurnActionPerformed(actionEvent);
+<i>1593</i>&nbsp;            }
+<i>1594</i>&nbsp;        });
+<i>1595</i>&nbsp;
+<i>1596</i>&nbsp;        btnSkipStack.setContentAreaFilled(false);
+<i>1597</i>&nbsp;        btnSkipStack.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>1598</i>&nbsp;        btnSkipStack.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSkipStackButtonImage()));
+<i>1599</i>&nbsp;        btnSkipStack.setToolTipText(&quot;Skip until stack is resolved (F10).&quot;);
+<i>1600</i>&nbsp;        btnSkipStack.setFocusable(false);
+<i>1601</i>&nbsp;        btnSkipStack.addMouseListener(new MouseAdapter() {
+<i>1602</i>&nbsp;            @Override
+<i>1603</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1604</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1605</i>&nbsp;                    btnPassPriorityUntilStackResolvedActionPerformed(null);
+<i>1606</i>&nbsp;                }
+<i>1607</i>&nbsp;            }
+<i>1608</i>&nbsp;        });
+<i>1609</i>&nbsp;
+<i>1610</i>&nbsp;        ks = KeyStroke.getKeyStroke(KeyEvent.VK_F10, 0);
+<i>1611</i>&nbsp;        this.getInputMap(c).put(ks, &quot;F10_PRESS&quot;);
+<i>1612</i>&nbsp;        this.getActionMap().put(&quot;F10_PRESS&quot;, new AbstractAction() {
+<i>1613</i>&nbsp;            @Override
+<i>1614</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1615</i>&nbsp;                btnPassPriorityUntilStackResolvedActionPerformed(actionEvent);
+<i>1616</i>&nbsp;            }
+<i>1617</i>&nbsp;        });
+<i>1618</i>&nbsp;
+<i>1619</i>&nbsp;        btnConcede.setContentAreaFilled(false);
+<i>1620</i>&nbsp;        btnConcede.setBorder(new EmptyBorder(BORDER_SIZE, BORDER_SIZE, BORDER_SIZE, BORDER_SIZE));
+<i>1621</i>&nbsp;        btnConcede.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getConcedeButtonImage()));
+<i>1622</i>&nbsp;        btnConcede.setToolTipText(&quot;Concede the current game.&quot;);
+<i>1623</i>&nbsp;        btnConcede.setFocusable(false);
+<i>1624</i>&nbsp;        btnConcede.addMouseListener(new MouseAdapter() {
+<i>1625</i>&nbsp;            @Override
+<i>1626</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1627</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1628</i>&nbsp;                    btnConcedeActionPerformed(null);
+<i>1629</i>&nbsp;                }
+<i>1630</i>&nbsp;            }
+<i>1631</i>&nbsp;        });
+<i>1632</i>&nbsp;
+<i>1633</i>&nbsp;        KeyStroke ks2 = KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0);
+<i>1634</i>&nbsp;        this.getInputMap(c).put(ks2, &quot;F2_PRESS&quot;);
+<i>1635</i>&nbsp;        this.getActionMap().put(&quot;F2_PRESS&quot;, new AbstractAction() {
+<i>1636</i>&nbsp;            @Override
+<i>1637</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1638</i>&nbsp;                if (feedbackPanel != null) {
+<i>1639</i>&nbsp;                    feedbackPanel.pressOKYesOrDone();
+<i>1640</i>&nbsp;                }
+<i>1641</i>&nbsp;            }
+<i>1642</i>&nbsp;        });
+<i>1643</i>&nbsp;
+<i>1644</i>&nbsp;        KeyStroke ksAltE = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK);
+<i>1645</i>&nbsp;        this.getInputMap(c).put(ksAltE, &quot;ENLARGE&quot;);
+<i>1646</i>&nbsp;        this.getActionMap().put(&quot;ENLARGE&quot;, new AbstractAction() {
+<i>1647</i>&nbsp;            @Override
+<i>1648</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1649</i>&nbsp;                ActionCallback callback = Plugins.getInstance().getActionCallback();
+<i>1650</i>&nbsp;                ((MageActionCallback) callback).enlargeCard(EnlargeMode.NORMAL);
+<i>1651</i>&nbsp;            }
+<i>1652</i>&nbsp;        });
+<i>1653</i>&nbsp;
+<i>1654</i>&nbsp;        KeyStroke ksAltS = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.ALT_MASK);
+<i>1655</i>&nbsp;        this.getInputMap(c).put(ksAltS, &quot;ENLARGE_SOURCE&quot;);
+<i>1656</i>&nbsp;        this.getActionMap().put(&quot;ENLARGE_SOURCE&quot;, new AbstractAction() {
+<i>1657</i>&nbsp;            @Override
+<i>1658</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1659</i>&nbsp;                ActionCallback callback = Plugins.getInstance().getActionCallback();
+<i>1660</i>&nbsp;                ((MageActionCallback) callback).enlargeCard(EnlargeMode.ALTERNATE);
+<i>1661</i>&nbsp;            }
+<i>1662</i>&nbsp;        });
+<i>1663</i>&nbsp;
+<i>1664</i>&nbsp;        KeyStroke ksAltD = KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.ALT_MASK);
+<i>1665</i>&nbsp;        this.getInputMap(c).put(ksAltD, &quot;BIG_IMAGE&quot;);
+<i>1666</i>&nbsp;        this.getActionMap().put(&quot;BIG_IMAGE&quot;, new AbstractAction() {
+<i>1667</i>&nbsp;            @Override
+<i>1668</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1669</i>&nbsp;                imagePanelState = !imagePanelState;
+<i>1670</i>&nbsp;                if (!imagePanelState) {
+<i>1671</i>&nbsp;                    jSplitPane0.resetToPreferredSizes();
+<i>1672</i>&nbsp;                    jSplitPane0.setDividerLocation(jSplitPane0.getSize().width - jSplitPane0.getInsets().right - jSplitPane0.getDividerSize() - 260);
+<i>1673</i>&nbsp;                } else {
+<i>1674</i>&nbsp;                    jSplitPane0.setDividerLocation(1.0);
+<i>1675</i>&nbsp;                }
+<i>1676</i>&nbsp;            }
+<i>1677</i>&nbsp;        });
+<i>1678</i>&nbsp;
+<i>1679</i>&nbsp;        KeyStroke ksAlt1 = KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.ALT_MASK);
+<i>1680</i>&nbsp;        this.getInputMap(c).put(ksAlt1, &quot;USEFIRSTMANAABILITY&quot;);
+<i>1681</i>&nbsp;        this.getActionMap().put(&quot;USEFIRSTMANAABILITY&quot;, new AbstractAction() {
+<i>1682</i>&nbsp;            @Override
+<i>1683</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1684</i>&nbsp;                SessionHandler.sendPlayerAction(PlayerAction.USE_FIRST_MANA_ABILITY_ON, gameId, null);
+<i>1685</i>&nbsp;                setMenuStates(
+<i>1686</i>&nbsp;                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, &quot;true&quot;).equals(&quot;true&quot;),
+<i>1687</i>&nbsp;                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, &quot;true&quot;).equals(&quot;true&quot;),
+<i>1688</i>&nbsp;                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, &quot;false&quot;).equals(&quot;true&quot;),
+<i>1689</i>&nbsp;                        holdingPriority);
+<i>1690</i>&nbsp;            }
+<i>1691</i>&nbsp;        });
+<i>1692</i>&nbsp;
+<i>1693</i>&nbsp;        final BasicSplitPaneUI myUi = (BasicSplitPaneUI) jSplitPane0.getUI();
+<i>1694</i>&nbsp;        final BasicSplitPaneDivider divider = myUi.getDivider();
+<i>1695</i>&nbsp;        final JButton upArrowButton = (JButton) divider.getComponent(0);
+<i>1696</i>&nbsp;        upArrowButton.addActionListener(new ActionListener() {
+<i>1697</i>&nbsp;            @Override
+<i>1698</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1699</i>&nbsp;                PreferencesDialog.saveValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, &quot;up&quot;);
+<i>1700</i>&nbsp;            }
+<i>1701</i>&nbsp;        });
+<i>1702</i>&nbsp;
+<i>1703</i>&nbsp;        final JButton downArrowButton = (JButton) divider.getComponent(1);
+<i>1704</i>&nbsp;        downArrowButton.addActionListener(new ActionListener() {
+<i>1705</i>&nbsp;            @Override
+<i>1706</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1707</i>&nbsp;                PreferencesDialog.saveValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, &quot;down&quot;);
+<i>1708</i>&nbsp;            }
+<i>1709</i>&nbsp;        });
+<i>1710</i>&nbsp;
+<i>1711</i>&nbsp;        KeyStroke ksAltEReleased = KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK, true);
+<i>1712</i>&nbsp;        this.getInputMap(c).put(ksAltEReleased, &quot;ENLARGE_RELEASE&quot;);
+<i>1713</i>&nbsp;        KeyStroke ksAltSReleased = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.ALT_MASK, true);
+<i>1714</i>&nbsp;        this.getInputMap(c).put(ksAltSReleased, &quot;ENLARGE_RELEASE&quot;);
+<i>1715</i>&nbsp;        this.getActionMap().put(&quot;ENLARGE_RELEASE&quot;, new AbstractAction() {
+<i>1716</i>&nbsp;            @Override
+<i>1717</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1718</i>&nbsp;                ActionCallback callback = Plugins.getInstance().getActionCallback();
+<i>1719</i>&nbsp;                ((MageActionCallback) callback).hideEnlargedCard();
+<i>1720</i>&nbsp;            }
+<i>1721</i>&nbsp;        });
+<i>1722</i>&nbsp;
+<i>1723</i>&nbsp;        KeyStroke ksAlt1Released = KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.ALT_MASK, true);
+<i>1724</i>&nbsp;        this.getInputMap(c).put(ksAlt1Released, &quot;USEFIRSTMANAABILITY_RELEASE&quot;);
+<i>1725</i>&nbsp;        this.getActionMap().put(&quot;USEFIRSTMANAABILITY_RELEASE&quot;, new AbstractAction() {
+<i>1726</i>&nbsp;            @Override
+<i>1727</i>&nbsp;            public void actionPerformed(ActionEvent actionEvent) {
+<i>1728</i>&nbsp;                SessionHandler.sendPlayerAction(PlayerAction.USE_FIRST_MANA_ABILITY_OFF, gameId, null);
+<i>1729</i>&nbsp;                setMenuStates(
+<i>1730</i>&nbsp;                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, &quot;true&quot;).equals(&quot;true&quot;),
+<i>1731</i>&nbsp;                        PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, &quot;true&quot;).equals(&quot;true&quot;),
+<i>1732</i>&nbsp;                        PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, &quot;false&quot;).equals(&quot;true&quot;),
+<i>1733</i>&nbsp;                        holdingPriority);
+<i>1734</i>&nbsp;            }
+<i>1735</i>&nbsp;        });
+<i>1736</i>&nbsp;
+<i>1737</i>&nbsp;        btnSwitchHands.setContentAreaFilled(false);
+<i>1738</i>&nbsp;        btnSwitchHands.setBorder(new EmptyBorder(0, 0, 0, 0));
+<i>1739</i>&nbsp;        btnSwitchHands.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getSwitchHandsButtonImage()));
+<i>1740</i>&nbsp;        btnSwitchHands.setFocusable(false);
+<i>1741</i>&nbsp;        btnSwitchHands.setToolTipText(&quot;Switch between your hand cards and hand cards of controlled players.&quot;);
+<i>1742</i>&nbsp;        btnSwitchHands.addMouseListener(new MouseAdapter() {
+<i>1743</i>&nbsp;            @Override
+<i>1744</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1745</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1746</i>&nbsp;                    btnSwitchHandActionPerformed(null);
+<i>1747</i>&nbsp;                }
+<i>1748</i>&nbsp;            }
+<i>1749</i>&nbsp;        });
+<i>1750</i>&nbsp;
+<i>1751</i>&nbsp;        btnStopWatching.setContentAreaFilled(false);
+<i>1752</i>&nbsp;        btnStopWatching.setBorder(new EmptyBorder(0, 0, 0, 0));
+<i>1753</i>&nbsp;        btnStopWatching.setIcon(new ImageIcon(ImageManagerImpl.getInstance().getStopWatchButtonImage()));
+<i>1754</i>&nbsp;        btnStopWatching.setFocusable(false);
+<i>1755</i>&nbsp;        btnStopWatching.setToolTipText(&quot;Stop watching this game.&quot;);
+<i>1756</i>&nbsp;        btnStopWatching.addMouseListener(new MouseAdapter() {
+<i>1757</i>&nbsp;            @Override
+<i>1758</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1759</i>&nbsp;                if (evt.getButton() == MouseEvent.BUTTON1) {
+<i>1760</i>&nbsp;                    btnStopWatchingActionPerformed(null);
+<i>1761</i>&nbsp;                }
+<i>1762</i>&nbsp;            }
+<i>1763</i>&nbsp;        });
+<i>1764</i>&nbsp;
+<i>1765</i>&nbsp;        stackObjects.setBackgroundColor(new Color(0, 0, 0, 40));
+<i>1766</i>&nbsp;
+<i>1767</i>&nbsp;        btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/control_stop.png&quot;)));
+<i>1768</i>&nbsp;        btnStopReplay.addActionListener(new java.awt.event.ActionListener() {
+<i>1769</i>&nbsp;            @Override
+<i>1770</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>1771</i>&nbsp;                btnStopReplayActionPerformed(evt);
+<i>1772</i>&nbsp;            }
+<i>1773</i>&nbsp;        });
+<i>1774</i>&nbsp;
+<i>1775</i>&nbsp;        btnNextPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/control_stop_right.png&quot;)));
+<i>1776</i>&nbsp;        btnNextPlay.addActionListener(new java.awt.event.ActionListener() {
+<i>1777</i>&nbsp;            @Override
+<i>1778</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>1779</i>&nbsp;                btnNextPlayActionPerformed(evt);
+<i>1780</i>&nbsp;            }
+<i>1781</i>&nbsp;        });
+<i>1782</i>&nbsp;
+<i>1783</i>&nbsp;        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/control_right.png&quot;)));
+<i>1784</i>&nbsp;        btnPlay.addActionListener(new java.awt.event.ActionListener() {
+<i>1785</i>&nbsp;            @Override
+<i>1786</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>1787</i>&nbsp;                btnPlayActionPerformed(evt);
+<i>1788</i>&nbsp;            }
+<i>1789</i>&nbsp;        });
+<i>1790</i>&nbsp;
+<i>1791</i>&nbsp;        btnSkipForward.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/control_double_stop_right.png&quot;)));
+<i>1792</i>&nbsp;        btnSkipForward.addActionListener(new java.awt.event.ActionListener() {
+<i>1793</i>&nbsp;            @Override
+<i>1794</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>1795</i>&nbsp;                btnSkipForwardActionPerformed(evt);
+<i>1796</i>&nbsp;            }
+<i>1797</i>&nbsp;        });
+<i>1798</i>&nbsp;
+<i>1799</i>&nbsp;        btnPreviousPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/control_stop_left.png&quot;)));
+<i>1800</i>&nbsp;        btnPreviousPlay.addActionListener(new java.awt.event.ActionListener() {
+<i>1801</i>&nbsp;            @Override
+<i>1802</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<i>1803</i>&nbsp;                btnPreviousPlayActionPerformed(evt);
+<i>1804</i>&nbsp;            }
+<i>1805</i>&nbsp;        });
+<i>1806</i>&nbsp;
+<i>1807</i>&nbsp;        initPopupMenuTriggerOrder();
+<i>1808</i>&nbsp;
+<i>1809</i>&nbsp;        setGUISize();
+<i>1810</i>&nbsp;
+<i>1811</i>&nbsp;        // Replay panel to control replay of games
+<i>1812</i>&nbsp;        javax.swing.GroupLayout gl_pnlReplay = new javax.swing.GroupLayout(pnlReplay);
+<i>1813</i>&nbsp;        pnlReplay.setLayout(gl_pnlReplay);
+<i>1814</i>&nbsp;        gl_pnlReplay.setHorizontalGroup(
+<i>1815</i>&nbsp;                gl_pnlReplay.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>1816</i>&nbsp;                .addGroup(gl_pnlReplay.createSequentialGroup()
+<i>1817</i>&nbsp;                        .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>1818</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>1819</i>&nbsp;                        .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>1820</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<i>1821</i>&nbsp;                        .addComponent(btnStopReplay, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>1822</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>1823</i>&nbsp;                        .addComponent(btnNextPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>1824</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>1825</i>&nbsp;                        .addComponent(btnSkipForward, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+<i>1826</i>&nbsp;        );
+<i>1827</i>&nbsp;        gl_pnlReplay.setVerticalGroup(
+<i>1828</i>&nbsp;                gl_pnlReplay.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>1829</i>&nbsp;                .addComponent(btnSkipForward, 0, 0, Short.MAX_VALUE)
+<i>1830</i>&nbsp;                .addComponent(btnNextPlay, 0, 0, Short.MAX_VALUE)
+<i>1831</i>&nbsp;                .addComponent(btnStopReplay, 0, 0, Short.MAX_VALUE)
+<i>1832</i>&nbsp;                .addComponent(btnPlay, 0, 0, Short.MAX_VALUE)
+<i>1833</i>&nbsp;                .addComponent(btnPreviousPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 31, Short.MAX_VALUE)
+<i>1834</i>&nbsp;        );
+<i>1835</i>&nbsp;
+<i>1836</i>&nbsp;        // Game info panel (buttons on the right panel)
+<i>1837</i>&nbsp;        javax.swing.GroupLayout gl_pnlShortCuts = new javax.swing.GroupLayout(pnlShortCuts);
+<i>1838</i>&nbsp;        pnlShortCuts.setLayout(gl_pnlShortCuts);
+<i>1839</i>&nbsp;        gl_pnlShortCuts.setHorizontalGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+<i>1840</i>&nbsp;                .addGroup(gl_pnlShortCuts.createSequentialGroup()
+<i>1841</i>&nbsp;                        .addComponent(btnSkipToNextTurn)
+<i>1842</i>&nbsp;                        .addComponent(btnSkipToEndTurn)
+<i>1843</i>&nbsp;                        .addComponent(btnSkipToNextMain)
+<i>1844</i>&nbsp;                        .addComponent(btnSkipToYourTurn)
+<i>1845</i>&nbsp;                        .addComponent(btnSkipStack)
+<i>1846</i>&nbsp;                        .addComponent(btnSkipToEndStepBeforeYourTurn)
+<i>1847</i>&nbsp;                )
+<i>1848</i>&nbsp;                .addGroup(gl_pnlShortCuts.createSequentialGroup()
+<i>1849</i>&nbsp;                        .addComponent(txtHoldPriority)
+<i>1850</i>&nbsp;                        .addComponent(txtSpellsCast)
+<i>1851</i>&nbsp;                        .addComponent(btnSwitchHands)
+<i>1852</i>&nbsp;                        .addComponent(btnCancelSkip)
+<i>1853</i>&nbsp;                        .addComponent(btnConcede)
+<i>1854</i>&nbsp;                        .addComponent(btnStopWatching)
+<i>1855</i>&nbsp;                )
+<i>1856</i>&nbsp;                //.addComponent(bigCard, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+<i>1857</i>&nbsp;                //.addComponent(feedbackPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+<i>1858</i>&nbsp;                //.addComponent(stack, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+<i>1859</i>&nbsp;
+<i>1860</i>&nbsp;                .addGroup(gl_pnlShortCuts.createSequentialGroup()
+<i>1861</i>&nbsp;                        .addContainerGap()
+<i>1862</i>&nbsp;                        .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>1863</i>&nbsp;                        .addContainerGap(51, Short.MAX_VALUE))
+<i>1864</i>&nbsp;        );
+<i>1865</i>&nbsp;        gl_pnlShortCuts.setVerticalGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>1866</i>&nbsp;                .addGroup(gl_pnlShortCuts.createSequentialGroup()
+<i>1867</i>&nbsp;                        //.addComponent(bigCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>1868</i>&nbsp;                        //.addGap(1, 1, 1)
+<i>1869</i>&nbsp;                        //.addComponent(feedbackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>1870</i>&nbsp;                        //.addComponent(stack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>1871</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+<i>1872</i>&nbsp;                        .addComponent(pnlReplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<i>1873</i>&nbsp;                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<i>1874</i>&nbsp;                        .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+<i>1875</i>&nbsp;                                .addComponent(btnSkipToNextTurn)
+<i>1876</i>&nbsp;                                .addComponent(btnSkipToEndTurn)
+<i>1877</i>&nbsp;                                .addComponent(btnSkipToNextMain)
+<i>1878</i>&nbsp;                                .addComponent(btnSkipToYourTurn)
+<i>1879</i>&nbsp;                                .addComponent(btnSkipStack)
+<i>1880</i>&nbsp;                                .addComponent(btnSkipToEndStepBeforeYourTurn)
+<i>1881</i>&nbsp;                        )
+<i>1882</i>&nbsp;                        .addGroup(gl_pnlShortCuts.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+<i>1883</i>&nbsp;                                .addComponent(txtHoldPriority)
+<i>1884</i>&nbsp;                                .addComponent(txtSpellsCast)
+<i>1885</i>&nbsp;                                .addComponent(btnSwitchHands)
+<i>1886</i>&nbsp;                                .addComponent(btnCancelSkip)
+<i>1887</i>&nbsp;                                .addComponent(btnConcede)
+<i>1888</i>&nbsp;                                .addComponent(btnStopWatching)
+<i>1889</i>&nbsp;                        )
+<i>1890</i>&nbsp;                )
+<i>1891</i>&nbsp;        );
+<i>1892</i>&nbsp;
+<i>1893</i>&nbsp;        pnlBattlefield.setLayout(new java.awt.GridBagLayout());
+<i>1894</i>&nbsp;
+<i>1895</i>&nbsp;        jPhases = new JPanel();
+<i>1896</i>&nbsp;        jPhases.setBackground(new Color(0, 0, 0, 0));
+<i>1897</i>&nbsp;        jPhases.setLayout(null);
+<i>1898</i>&nbsp;        jPhases.setPreferredSize(new Dimension(X_PHASE_WIDTH, 435));
+<i>1899</i>&nbsp;
+<i>1900</i>&nbsp;        MouseAdapter phasesMouseAdapter = new MouseAdapter() {
+<i>1901</i>&nbsp;            @Override
+<i>1902</i>&nbsp;            public void mouseClicked(MouseEvent evt) {
+<i>1903</i>&nbsp;                mouseClickPhaseBar(evt);
+<i>1904</i>&nbsp;            }
+<i>1905</i>&nbsp;        };
+<i>1906</i>&nbsp;        String[] phases = {&quot;Untap&quot;, &quot;Upkeep&quot;, &quot;Draw&quot;, &quot;Main1&quot;,
+<i>1907</i>&nbsp;            &quot;Combat_Start&quot;, &quot;Combat_Attack&quot;, &quot;Combat_Block&quot;, &quot;Combat_Damage&quot;, &quot;Combat_End&quot;,
+<i>1908</i>&nbsp;            &quot;Main2&quot;, &quot;Cleanup&quot;, &quot;Next_Turn&quot;};
+<i>1909</i>&nbsp;        for (String name : phases) {
+<i>1910</i>&nbsp;            createPhaseButton(name, phasesMouseAdapter);
+<i>1911</i>&nbsp;        }
+<i>1912</i>&nbsp;
+<i>1913</i>&nbsp;        int i = 0;
+<i>1914</i>&nbsp;        for (String name : hoverButtons.keySet()) {
+<i>1915</i>&nbsp;            HoverButton hoverButton = hoverButtons.get(name);
+<i>1916</i>&nbsp;            hoverButton.setAlignmentX(LEFT_ALIGNMENT);
+<i>1917</i>&nbsp;            hoverButton.setBounds(X_PHASE_WIDTH - 36, i * 36, 36, 36);
+<i>1918</i>&nbsp;            jPhases.add(hoverButton);
+<i>1919</i>&nbsp;            i++;
+<i>1920</i>&nbsp;        }
+<i>1921</i>&nbsp;        jPhases.addMouseListener(phasesMouseAdapter);
+<i>1922</i>&nbsp;
+<i>1923</i>&nbsp;        pnlReplay.setOpaque(false);
+<i>1924</i>&nbsp;
+<i>1925</i>&nbsp;        helper = new HelperPanel();
+<i>1926</i>&nbsp;        feedbackPanel.setHelperPanel(helper);
+<i>1927</i>&nbsp;
+<i>1928</i>&nbsp;        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+<i>1929</i>&nbsp;        jSplitPane2.setResizeWeight(0.5);
+<i>1930</i>&nbsp;        jSplitPane2.setLeftComponent(userChatPanel);
+<i>1931</i>&nbsp;        jSplitPane2.setBottomComponent(gameChatPanel);
+<i>1932</i>&nbsp;
+<i>1933</i>&nbsp;        phasesContainer = new JPanel();
+<i>1934</i>&nbsp;        phasesContainer.setLayout(new RelativeLayout(RelativeLayout.Y_AXIS));
+<i>1935</i>&nbsp;        phasesContainer.setBackground(new Color(0, 0, 0, 0));
+<i>1936</i>&nbsp;        Float ratio = (float) 1;
+<i>1937</i>&nbsp;        JPanel empty1 = new JPanel();
+<i>1938</i>&nbsp;        empty1.setBackground(new Color(0, 0, 0, 0));
+<i>1939</i>&nbsp;        phasesContainer.add(empty1, ratio);
+<i>1940</i>&nbsp;        phasesContainer.add(jPhases);
+<i>1941</i>&nbsp;
+<i>1942</i>&nbsp;        javax.swing.GroupLayout gl_helperHandButtonsStackArea = new javax.swing.GroupLayout(pnlHelperHandButtonsStackArea);
+<i>1943</i>&nbsp;        gl_helperHandButtonsStackArea.setHorizontalGroup(
+<i>1944</i>&nbsp;                gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+<i>1945</i>&nbsp;                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+<i>1946</i>&nbsp;                        //                        .addGap(0)
+<i>1947</i>&nbsp;                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+<i>1948</i>&nbsp;                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+<i>1949</i>&nbsp;                                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+<i>1950</i>&nbsp;                                                .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<i>1951</i>&nbsp;                                                .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<i>1952</i>&nbsp;                                        )
+<i>1953</i>&nbsp;                                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+<i>1954</i>&nbsp;                                                .addComponent(pnlShortCuts, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+<i>1955</i>&nbsp;                                                .addComponent(stackObjects, 410, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+<i>1956</i>&nbsp;                                        )
+<i>1957</i>&nbsp;                                )
+<i>1958</i>&nbsp;                                .addGap(0)
+<i>1959</i>&nbsp;                                //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+<i>1960</i>&nbsp;                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+<i>1961</i>&nbsp;                                        .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+<i>1962</i>&nbsp;                                        .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+<i>1963</i>&nbsp;                                )))
+<i>1964</i>&nbsp;        );
+<i>1965</i>&nbsp;        gl_helperHandButtonsStackArea.setVerticalGroup(
+<i>1966</i>&nbsp;                gl_helperHandButtonsStackArea.createParallelGroup(Alignment.TRAILING)
+<i>1967</i>&nbsp;                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+<i>1968</i>&nbsp;                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+<i>1969</i>&nbsp;                                .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+<i>1970</i>&nbsp;                                .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+<i>1971</i>&nbsp;                        )
+<i>1972</i>&nbsp;                        //.addPreferredGap(ComponentPlacement.RELATED)
+<i>1973</i>&nbsp;                        .addGroup(gl_helperHandButtonsStackArea.createParallelGroup(Alignment.LEADING)
+<i>1974</i>&nbsp;                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+<i>1975</i>&nbsp;                                        .addGap(2)
+<i>1976</i>&nbsp;                                        .addComponent(pnlShortCuts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+<i>1977</i>&nbsp;                                        .addComponent(stackObjects, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+<i>1978</i>&nbsp;                                )
+<i>1979</i>&nbsp;                                .addGroup(gl_helperHandButtonsStackArea.createSequentialGroup()
+<i>1980</i>&nbsp;                                        .addComponent(helper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+<i>1981</i>&nbsp;                                        .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+<i>1982</i>&nbsp;                                )
+<i>1983</i>&nbsp;                        )
+<i>1984</i>&nbsp;                )
+<i>1985</i>&nbsp;        );
+<i>1986</i>&nbsp;        pnlHelperHandButtonsStackArea.setLayout(gl_helperHandButtonsStackArea);
+<i>1987</i>&nbsp;
+<i>1988</i>&nbsp;        jSplitPane1.setLeftComponent(pnlHelperHandButtonsStackArea);
+<i>1989</i>&nbsp;        jSplitPane1.setRightComponent(jSplitPane2);
+<i>1990</i>&nbsp;
+<i>1991</i>&nbsp;        // Set individual area sizes of big card pane
+<i>1992</i>&nbsp;        GridBagLayout gbl = new GridBagLayout();
+<i>1993</i>&nbsp;        jPanel2.setLayout(gbl);
+<i>1994</i>&nbsp;
+<i>1995</i>&nbsp;        GridBagConstraints gbc = new GridBagConstraints();
+<i>1996</i>&nbsp;        gbc.fill = GridBagConstraints.BOTH;
+<i>1997</i>&nbsp;        gbc.gridx = 0;
+<i>1998</i>&nbsp;        gbc.gridy = 0;
+<i>1999</i>&nbsp;        gbc.gridwidth = 1;
+<i>2000</i>&nbsp;        gbc.gridheight = 4; // size 4/5
+<i>2001</i>&nbsp;        gbc.weightx = 1.0;
+<i>2002</i>&nbsp;        gbc.weighty = 1.0;
+<i>2003</i>&nbsp;        gbl.setConstraints(bigCard, gbc);
+<i>2004</i>&nbsp;        jPanel2.add(bigCard);
+<i>2005</i>&nbsp;
+<i>2006</i>&nbsp;        jPanel2.setOpaque(false);
+<i>2007</i>&nbsp;
+<i>2008</i>&nbsp;        // game pane and chat/log pane
+<i>2009</i>&nbsp;        jSplitPane0.setLeftComponent(jSplitPane1);
+<i>2010</i>&nbsp;        // big card and buttons
+<i>2011</i>&nbsp;        jSplitPane0.setRightComponent(jPanel2);
+<i>2012</i>&nbsp;
+<i>2013</i>&nbsp;        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+<i>2014</i>&nbsp;        this.setLayout(layout);
+<i>2015</i>&nbsp;        layout.setHorizontalGroup(
+<i>2016</i>&nbsp;                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>2017</i>&nbsp;                .addComponent(jSplitPane0, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
+<i>2018</i>&nbsp;        );
+<i>2019</i>&nbsp;        layout.setVerticalGroup(
+<i>2020</i>&nbsp;                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<i>2021</i>&nbsp;                .addComponent(jSplitPane0, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
+<i>2022</i>&nbsp;        );
+<i>2023</i>&nbsp;    }
+<i>2024</i>&nbsp;
+<i>2025</i>&nbsp;    private void removeListener() {
+<i>2026</i>&nbsp;        for (MouseListener ml : this.getMouseListeners()) {
+<i>2027</i>&nbsp;            this.removeMouseListener(ml);
+<i>2028</i>&nbsp;        }
+<i>2029</i>&nbsp;        for (MouseListener ml : this.btnCancelSkip.getMouseListeners()) {
+<i>2030</i>&nbsp;            this.btnCancelSkip.removeMouseListener(ml);
+<i>2031</i>&nbsp;        }
+<i>2032</i>&nbsp;        for (MouseListener ml : this.btnConcede.getMouseListeners()) {
+<i>2033</i>&nbsp;            this.btnConcede.removeMouseListener(ml);
+<i>2034</i>&nbsp;        }
+<i>2035</i>&nbsp;        for (MouseListener ml : this.btnSkipToYourTurn.getMouseListeners()) {
+<i>2036</i>&nbsp;            this.btnSkipToYourTurn.removeMouseListener(ml);
+<i>2037</i>&nbsp;        }
+<i>2038</i>&nbsp;        for (MouseListener ml : this.btnSkipStack.getMouseListeners()) {
+<i>2039</i>&nbsp;            this.btnSkipStack.removeMouseListener(ml);
+<i>2040</i>&nbsp;        }
+<i>2041</i>&nbsp;        for (MouseListener ml : this.btnSkipToEndStepBeforeYourTurn.getMouseListeners()) {
+<i>2042</i>&nbsp;            this.btnSkipToEndStepBeforeYourTurn.removeMouseListener(ml);
+<i>2043</i>&nbsp;        }
+<i>2044</i>&nbsp;        for (MouseListener ml : this.btnSkipToEndTurn.getMouseListeners()) {
+<i>2045</i>&nbsp;            this.btnSkipToEndTurn.removeMouseListener(ml);
+<i>2046</i>&nbsp;        }
+<i>2047</i>&nbsp;        for (MouseListener ml : this.btnSkipToNextMain.getMouseListeners()) {
+<i>2048</i>&nbsp;            this.btnSkipToNextMain.removeMouseListener(ml);
+<i>2049</i>&nbsp;        }
+<i>2050</i>&nbsp;        for (MouseListener ml : this.btnSkipToNextTurn.getMouseListeners()) {
+<i>2051</i>&nbsp;            this.btnSkipToNextTurn.removeMouseListener(ml);
+<i>2052</i>&nbsp;        }
+<i>2053</i>&nbsp;        for (MouseListener ml : this.btnSwitchHands.getMouseListeners()) {
+<i>2054</i>&nbsp;            this.btnSwitchHands.removeMouseListener(ml);
+<i>2055</i>&nbsp;        }
+<i>2056</i>&nbsp;        for (MouseListener ml : this.btnStopWatching.getMouseListeners()) {
+<i>2057</i>&nbsp;            this.btnStopWatching.removeMouseListener(ml);
+<i>2058</i>&nbsp;        }
+<i>2059</i>&nbsp;        for (MouseListener ml : this.jPhases.getMouseListeners()) {
+<i>2060</i>&nbsp;            this.jPhases.removeMouseListener(ml);
+<i>2061</i>&nbsp;        }
+<i>2062</i>&nbsp;        for (String name : hoverButtons.keySet()) {
+<i>2063</i>&nbsp;            HoverButton hoverButton = hoverButtons.get(name);
+<i>2064</i>&nbsp;            for (MouseListener ml : hoverButton.getMouseListeners()) {
+<i>2065</i>&nbsp;                hoverButton.removeMouseListener(ml);
+<i>2066</i>&nbsp;            }
+<i>2067</i>&nbsp;        }
+<i>2068</i>&nbsp;        for (ActionListener al : this.btnPlay.getActionListeners()) {
+<i>2069</i>&nbsp;            this.btnPlay.removeActionListener(al);
+<i>2070</i>&nbsp;        }
+<i>2071</i>&nbsp;        for (ActionListener al : this.btnStopReplay.getActionListeners()) {
+<i>2072</i>&nbsp;            this.btnStopReplay.removeActionListener(al);
+<i>2073</i>&nbsp;        }
+<i>2074</i>&nbsp;        for (ActionListener al : this.btnNextPlay.getActionListeners()) {
+<i>2075</i>&nbsp;            this.btnNextPlay.removeActionListener(al);
+<i>2076</i>&nbsp;        }
+<i>2077</i>&nbsp;        for (ActionListener al : this.btnNextPlay.getActionListeners()) {
+<i>2078</i>&nbsp;            this.btnNextPlay.removeActionListener(al);
+<i>2079</i>&nbsp;        }
+<i>2080</i>&nbsp;        for (ActionListener al : this.btnPreviousPlay.getActionListeners()) {
+<i>2081</i>&nbsp;            this.btnPreviousPlay.removeActionListener(al);
+<i>2082</i>&nbsp;        }
+<i>2083</i>&nbsp;        for (ActionListener al : this.btnSkipForward.getActionListeners()) {
+<i>2084</i>&nbsp;            this.btnSkipForward.removeActionListener(al);
+<i>2085</i>&nbsp;        }
+<i>2086</i>&nbsp;
+<i>2087</i>&nbsp;        final BasicSplitPaneUI myUi = (BasicSplitPaneUI) jSplitPane0.getUI();
+<i>2088</i>&nbsp;        final BasicSplitPaneDivider divider = myUi.getDivider();
+<i>2089</i>&nbsp;        final JButton upArrowButton = (JButton) divider.getComponent(0);
+<i>2090</i>&nbsp;        for (ActionListener al : upArrowButton.getActionListeners()) {
+<i>2091</i>&nbsp;            upArrowButton.removeActionListener(al);
+<i>2092</i>&nbsp;        }
+<i>2093</i>&nbsp;        final JButton downArrowButton = (JButton) divider.getComponent(1);
+<i>2094</i>&nbsp;        for (ActionListener al : downArrowButton.getActionListeners()) {
+<i>2095</i>&nbsp;            downArrowButton.removeActionListener(al);
+<i>2096</i>&nbsp;        }
+<i>2097</i>&nbsp;
+<i>2098</i>&nbsp;        for (ComponentListener cl : this.getComponentListeners()) {
+<i>2099</i>&nbsp;            this.removeComponentListener(cl);
+<i>2100</i>&nbsp;        }
+<i>2101</i>&nbsp;    }
+<i>2102</i>&nbsp;
+<i>2103</i>&nbsp;    private void btnConcedeActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2104</i>&nbsp;        UserRequestMessage message = new UserRequestMessage(&quot;Confirm concede&quot;, &quot;Are you sure you want to concede?&quot;);
+<i>2105</i>&nbsp;        message.setButton1(&quot;No&quot;, null);
+<i>2106</i>&nbsp;        message.setButton2(&quot;Yes&quot;, PlayerAction.CLIENT_CONCEDE_GAME);
+<i>2107</i>&nbsp;        message.setGameId(gameId);
+<i>2108</i>&nbsp;        MageFrame.getInstance().showUserRequestDialog(message);
+<i>2109</i>&nbsp;    }
+<i>2110</i>&nbsp;
+<i>2111</i>&nbsp;    private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2112</i>&nbsp;        SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN, gameId, null);
+<i>2113</i>&nbsp;        AudioManager.playOnSkipButton();
+<i>2114</i>&nbsp;        updateSkipButtons(true, false, false, false, false, false);
+<i>2115</i>&nbsp;    }
+<i>2116</i>&nbsp;
+<i>2117</i>&nbsp;    private void btnUntilEndOfTurnActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2118</i>&nbsp;        SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_TURN_END_STEP, gameId, null);
+<i>2119</i>&nbsp;        AudioManager.playOnSkipButton();
+<i>2120</i>&nbsp;        updateSkipButtons(false, true, false, false, false, false);
+<i>2121</i>&nbsp;    }
+<i>2122</i>&nbsp;
+<i>2123</i>&nbsp;    private void btnEndTurnSkipStackActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2124</i>&nbsp;        SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_TURN_SKIP_STACK, gameId, null);
+<i>2125</i>&nbsp;        AudioManager.playOnSkipButton();
+<i>2126</i>&nbsp;        updateSkipButtons(true, false, false, false, true, false);
+<i>2127</i>&nbsp;    }
+<i>2128</i>&nbsp;
+<i>2129</i>&nbsp;    private void btnUntilNextMainPhaseActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2130</i>&nbsp;        SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_NEXT_MAIN_PHASE, gameId, null);
+<i>2131</i>&nbsp;        AudioManager.playOnSkipButton();
+<i>2132</i>&nbsp;        updateSkipButtons(false, false, true, false, false, false);
+<i>2133</i>&nbsp;    }
+<i>2134</i>&nbsp;
+<i>2135</i>&nbsp;    private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2136</i>&nbsp;        SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_MY_NEXT_TURN, gameId, null);
+<i>2137</i>&nbsp;        AudioManager.playOnSkipButton();
+<i>2138</i>&nbsp;        updateSkipButtons(false, false, false, true, false, false);
+<i>2139</i>&nbsp;    }
+<i>2140</i>&nbsp;
+<i>2141</i>&nbsp;    private void btnPassPriorityUntilStackResolvedActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2142</i>&nbsp;        SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_STACK_RESOLVED, gameId, null);
+<i>2143</i>&nbsp;        AudioManager.playOnSkipButton();
+<i>2144</i>&nbsp;        updateSkipButtons(false, false, false, false, true, false);
+<i>2145</i>&nbsp;    }
+<i>2146</i>&nbsp;
+<i>2147</i>&nbsp;    private void btnSkipToEndStepBeforeYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2148</i>&nbsp;        SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_UNTIL_END_STEP_BEFORE_MY_NEXT_TURN, gameId, null);
+<i>2149</i>&nbsp;        AudioManager.playOnSkipButton();
+<i>2150</i>&nbsp;        updateSkipButtons(false, false, false, false, false, true);
+<i>2151</i>&nbsp;    }
+<i>2152</i>&nbsp;
+<i>2153</i>&nbsp;    private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2154</i>&nbsp;        SessionHandler.sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, gameId, null);
+<i>2155</i>&nbsp;        AudioManager.playOnSkipButtonCancel();
+<i>2156</i>&nbsp;        updateSkipButtons(false, false, false, false, false, false);
+<i>2157</i>&nbsp;    }
+<i>2158</i>&nbsp;
+<i>2159</i>&nbsp;    private void mouseClickPhaseBar(MouseEvent evt) {
+<i>2160</i>&nbsp;        if (evt.getButton() == MouseEvent.BUTTON1) { // Left button
+<i>2161</i>&nbsp;            PreferencesDialog.main(new String[]{PreferencesDialog.OPEN_PHASES_TAB});
+<i>2162</i>&nbsp;        }
+<i>2163</i>&nbsp;    }
+<i>2164</i>&nbsp;
+<i>2165</i>&nbsp;    private void btnSwitchHandActionPerformed(java.awt.event.ActionEvent evt) {
+<i>2166</i>&nbsp;        String[] choices = handCards.keySet().toArray(new String[0]);
+<i>2167</i>&nbsp;
+<i>2168</i>&nbsp;        String newChosenHandKey = (String) JOptionPane.showInputDialog(
+<i>2169</i>&nbsp;                this,
+<i>2170</i>&nbsp;                &quot;Choose hand to display:&quot;, &quot;Switch between hands&quot;,
+<i>2171</i>&nbsp;                JOptionPane.PLAIN_MESSAGE,
+<i>2172</i>&nbsp;                null,
+<i>2173</i>&nbsp;                choices,
+<i>2174</i>&nbsp;                this.chosenHandKey);
+<i>2175</i>&nbsp;
+<i>2176</i>&nbsp;        if (newChosenHandKey != null &amp;&amp; newChosenHandKey.length() &gt; 0) {
+<i>2177</i>&nbsp;            this.chosenHandKey = newChosenHandKey;
+<i>2178</i>&nbsp;            CardsView cards = handCards.get(chosenHandKey);
+<i>2179</i>&nbsp;            handContainer.loadCards(cards, bigCard, gameId);
+<i>2180</i>&nbsp;        }
+<i>2181</i>&nbsp;    }
+<i>2182</i>&nbsp;
+<i>2183</i>&nbsp;    private void btnStopWatchingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopWatchingActionPerformed
+<i>2184</i>&nbsp;        UserRequestMessage message = new UserRequestMessage(&quot;Stop watching&quot;, &quot;Are you sure you want to stop watching?&quot;);
+<i>2185</i>&nbsp;        message.setButton1(&quot;No&quot;, null);
+<i>2186</i>&nbsp;        message.setButton2(&quot;Yes&quot;, PlayerAction.CLIENT_STOP_WATCHING);
+<i>2187</i>&nbsp;        message.setGameId(gameId);
+<i>2188</i>&nbsp;        MageFrame.getInstance().showUserRequestDialog(message);
+<i>2189</i>&nbsp;    }//GEN-LAST:event_btnStopWatchingActionPerformed
+<i>2190</i>&nbsp;
+<i>2191</i>&nbsp;    private void btnStopReplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopReplayActionPerformed
+<i>2192</i>&nbsp;        if (replayTask != null &amp;&amp; !replayTask.isDone()) {
+<i>2193</i>&nbsp;            replayTask.cancel(true);
+<i>2194</i>&nbsp;        } else {
+<i>2195</i>&nbsp;            UserRequestMessage message = new UserRequestMessage(&quot;Stop replay&quot;, &quot;Are you sure you want to stop replay?&quot;);
+<i>2196</i>&nbsp;            message.setButton1(&quot;No&quot;, null);
+<i>2197</i>&nbsp;            message.setButton2(&quot;Yes&quot;, PlayerAction.CLIENT_REPLAY_ACTION);
+<i>2198</i>&nbsp;            message.setGameId(gameId);
+<i>2199</i>&nbsp;            MageFrame.getInstance().showUserRequestDialog(message);
+<i>2200</i>&nbsp;        }
+<i>2201</i>&nbsp;    }//GEN-LAST:event_btnStopReplayActionPerformed
+<i>2202</i>&nbsp;
+<i>2203</i>&nbsp;    private void btnNextPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextPlayActionPerformed
+<i>2204</i>&nbsp;        SessionHandler.nextPlay(gameId);
+<i>2205</i>&nbsp;    }//GEN-LAST:event_btnNextPlayActionPerformed
+<i>2206</i>&nbsp;
+<i>2207</i>&nbsp;    private void btnPreviousPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviousPlayActionPerformed
+<i>2208</i>&nbsp;        SessionHandler.previousPlay(gameId);
+<i>2209</i>&nbsp;    }//GEN-LAST:event_btnPreviousPlayActionPerformed
+<i>2210</i>&nbsp;
+<i>2211</i>&nbsp;    private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
+<i>2212</i>&nbsp;        if (replayTask == null || replayTask.isDone()) {
+<i>2213</i>&nbsp;            replayTask = new ReplayTask(gameId);
+<i>2214</i>&nbsp;            replayTask.execute();
+<i>2215</i>&nbsp;        }
+<i>2216</i>&nbsp;    }//GEN-LAST:event_btnPlayActionPerformed
+<i>2217</i>&nbsp;
+<i>2218</i>&nbsp;    private void btnSkipForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkipForwardActionPerformed
+<i>2219</i>&nbsp;        SessionHandler.skipForward(gameId, 10);
+<i>2220</i>&nbsp;    }//GEN-LAST:event_btnSkipForwardActionPerformed
+<i>2221</i>&nbsp;
+<i>2222</i>&nbsp;    public void setJLayeredPane(JLayeredPane jLayeredPane) {
+<i>2223</i>&nbsp;        this.jLayeredPane = jLayeredPane;
+<i>2224</i>&nbsp;    }
+<i>2225</i>&nbsp;
+<i>2226</i>&nbsp;    public void installComponents() {
+<i>2227</i>&nbsp;        jLayeredPane.setOpaque(false);
+<i>2228</i>&nbsp;        jLayeredPane.add(abilityPicker);
+<i>2229</i>&nbsp;        jLayeredPane.add(DialogManager.getManager(gameId), JLayeredPane.MODAL_LAYER, 0);
+<i>2230</i>&nbsp;        abilityPicker.setVisible(false);
+<i>2231</i>&nbsp;    }
+<i>2232</i>&nbsp;
+<i>2233</i>&nbsp;    private void createPhaseButton(String name, MouseAdapter mouseAdapter) {
+<i>2234</i>&nbsp;        if (hoverButtons == null) {
+<i>2235</i>&nbsp;            hoverButtons = new LinkedHashMap&lt;&gt;();
+<i>2236</i>&nbsp;        }
+<i>2237</i>&nbsp;        Rectangle rect = new Rectangle(36, 36);
+<i>2238</i>&nbsp;        HoverButton button = new HoverButton(&quot;&quot;, ImageManagerImpl.getInstance().getPhaseImage(name), rect);
+<i>2239</i>&nbsp;        button.setToolTipText(name.replaceAll(&quot;_&quot;, &quot; &quot;));
+<i>2240</i>&nbsp;        button.setPreferredSize(new Dimension(36, 36));
+<i>2241</i>&nbsp;        button.addMouseListener(mouseAdapter);
+<i>2242</i>&nbsp;        hoverButtons.put(name, button);
+<i>2243</i>&nbsp;    }
+<i>2244</i>&nbsp;
+<i>2245</i>&nbsp;    // Event listener for the ShowCardsDialog
+<i>2246</i>&nbsp;    private Listener&lt;Event&gt; getShowCardsEventListener(final ShowCardsDialog dialog) {
+<i>2247</i>&nbsp;        return new Listener&lt;Event&gt;() {
+<i>2248</i>&nbsp;            @Override
+<i>2249</i>&nbsp;            public void event(Event event) {
+<i>2250</i>&nbsp;                if (event.getEventName().equals(&quot;show-popup-menu&quot;)) {
+<i>2251</i>&nbsp;                    if (event.getComponent() != null &amp;&amp; event.getComponent() instanceof CardPanel) {
+<i>2252</i>&nbsp;                        JPopupMenu menu = ((CardPanel) event.getComponent()).getPopupMenu();
+<i>2253</i>&nbsp;                        if (menu != null) {
+<i>2254</i>&nbsp;                            cardViewPopupMenu = ((CardView) event.getSource());
+<i>2255</i>&nbsp;                            menu.show(event.getComponent(), event.getxPos(), event.getyPos());
+<i>2256</i>&nbsp;                        }
+<i>2257</i>&nbsp;                    }
+<i>2258</i>&nbsp;                }
+<i>2259</i>&nbsp;                if (event.getEventName().equals(&quot;action-consumed&quot;)) {
+<i>2260</i>&nbsp;                    dialog.removeDialog();
+<i>2261</i>&nbsp;                }
+<i>2262</i>&nbsp;            }
+<i>2263</i>&nbsp;        };
+<i>2264</i>&nbsp;    }
+<i>2265</i>&nbsp;
+<i>2266</i>&nbsp;    public void handleTriggerOrderPopupMenuEvent(ActionEvent e) {
+<i>2267</i>&nbsp;        UUID abilityId = null;
+<i>2268</i>&nbsp;        String abilityRuleText = null;
+<i>2269</i>&nbsp;        if (cardViewPopupMenu instanceof CardView &amp;&amp; cardViewPopupMenu.getAbility() != null) {
+<i>2270</i>&nbsp;            abilityId = cardViewPopupMenu.getAbility().getId();
+<i>2271</i>&nbsp;            if (!cardViewPopupMenu.getAbility().getRules().isEmpty()
+<i>2272</i>&nbsp;                    &amp;&amp; !cardViewPopupMenu.getAbility().getRules().get(0).isEmpty()) {
+<i>2273</i>&nbsp;                abilityRuleText = cardViewPopupMenu.getAbility().getRules().get(0);
+<i>2274</i>&nbsp;            }
+<i>2275</i>&nbsp;        }
+<i>2276</i>&nbsp;        switch (e.getActionCommand()) {
+<i>2277</i>&nbsp;            case CMD_AUTO_ORDER_FIRST:
+<i>2278</i>&nbsp;                SessionHandler.sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_FIRST, gameId, abilityId);
+<i>2279</i>&nbsp;                SessionHandler.sendPlayerUUID(gameId, abilityId);
+<i>2280</i>&nbsp;                break;
+<i>2281</i>&nbsp;            case CMD_AUTO_ORDER_LAST:
+<i>2282</i>&nbsp;                SessionHandler.sendPlayerAction(TRIGGER_AUTO_ORDER_ABILITY_LAST, gameId, abilityId);
+<i>2283</i>&nbsp;                SessionHandler.sendPlayerUUID(gameId, null); // Don&#39;t use this but refresh the displayed abilities
+<i>2284</i>&nbsp;                break;
+<i>2285</i>&nbsp;            case CMD_AUTO_ORDER_NAME_FIRST:
+<i>2286</i>&nbsp;                if (abilityRuleText != null) {
+<i>2287</i>&nbsp;                    SessionHandler.sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_FIRST, gameId, abilityRuleText);
+<i>2288</i>&nbsp;                    SessionHandler.sendPlayerUUID(gameId, abilityId);
+<i>2289</i>&nbsp;                }
+<i>2290</i>&nbsp;                break;
+<i>2291</i>&nbsp;            case CMD_AUTO_ORDER_NAME_LAST:
+<i>2292</i>&nbsp;                if (abilityRuleText != null) {
+<i>2293</i>&nbsp;                    SessionHandler.sendPlayerAction(TRIGGER_AUTO_ORDER_NAME_LAST, gameId, abilityRuleText);
+<i>2294</i>&nbsp;                    SessionHandler.sendPlayerUUID(gameId, null); // Don&#39;t use this but refresh the displayed abilities
+<i>2295</i>&nbsp;                }
+<i>2296</i>&nbsp;                break;
+<i>2297</i>&nbsp;            case CMD_AUTO_ORDER_RESET_ALL:
+<i>2298</i>&nbsp;                SessionHandler.sendPlayerAction(TRIGGER_AUTO_ORDER_RESET_ALL, gameId, null);
+<i>2299</i>&nbsp;                break;
+<i>2300</i>&nbsp;        }
+<i>2301</i>&nbsp;        for (ShowCardsDialog dialog : pickTarget) {
+<i>2302</i>&nbsp;            dialog.removeDialog();
+<i>2303</i>&nbsp;        }
+<i>2304</i>&nbsp;    }
+<i>2305</i>&nbsp;
+<i>2306</i>&nbsp;    private void initPopupMenuTriggerOrder() {
+<i>2307</i>&nbsp;
+<i>2308</i>&nbsp;        ActionListener actionListener = new ActionListener() {
+<i>2309</i>&nbsp;            @Override
+<i>2310</i>&nbsp;            public void actionPerformed(ActionEvent e) {
+<i>2311</i>&nbsp;                handleTriggerOrderPopupMenuEvent(e);
+<i>2312</i>&nbsp;            }
+<i>2313</i>&nbsp;        };
+<i>2314</i>&nbsp;
+<i>2315</i>&nbsp;        popupMenuTriggerOrder = new JPopupMenu();
+<i>2316</i>&nbsp;
+<i>2317</i>&nbsp;        // String tooltipText = &quot;&quot;;
+<i>2318</i>&nbsp;        JMenuItem menuItem;
+<i>2319</i>&nbsp;        menuItem = new JMenuItem(&quot;Put this ability always first on the stack&quot;);
+<i>2320</i>&nbsp;        menuItem.setActionCommand(CMD_AUTO_ORDER_FIRST);
+<i>2321</i>&nbsp;        menuItem.addActionListener(actionListener);
+<i>2322</i>&nbsp;        popupMenuTriggerOrder.add(menuItem);
+<i>2323</i>&nbsp;
+<i>2324</i>&nbsp;        menuItem = new JMenuItem(&quot;Put this ability always last on the stack&quot;);
+<i>2325</i>&nbsp;        menuItem.setActionCommand(CMD_AUTO_ORDER_LAST);
+<i>2326</i>&nbsp;        menuItem.addActionListener(actionListener);
+<i>2327</i>&nbsp;        popupMenuTriggerOrder.add(menuItem);
+<i>2328</i>&nbsp;
+<i>2329</i>&nbsp;        menuItem = new JMenuItem(&quot;Put all abilities with that rule text always first on the stack&quot;);
+<i>2330</i>&nbsp;        menuItem.setActionCommand(CMD_AUTO_ORDER_NAME_FIRST);
+<i>2331</i>&nbsp;        menuItem.addActionListener(actionListener);
+<i>2332</i>&nbsp;        popupMenuTriggerOrder.add(menuItem);
+<i>2333</i>&nbsp;
+<i>2334</i>&nbsp;        menuItem = new JMenuItem(&quot;Put all abilities with that rule text always last on the stack&quot;);
+<i>2335</i>&nbsp;        menuItem.setActionCommand(CMD_AUTO_ORDER_NAME_LAST);
+<i>2336</i>&nbsp;        menuItem.addActionListener(actionListener);
+<i>2337</i>&nbsp;        popupMenuTriggerOrder.add(menuItem);
+<i>2338</i>&nbsp;
+<i>2339</i>&nbsp;        menuItem = new JMenuItem(&quot;Reset all order settings for triggered abilities&quot;);
+<i>2340</i>&nbsp;        menuItem.setActionCommand(CMD_AUTO_ORDER_RESET_ALL);
+<i>2341</i>&nbsp;        menuItem.addActionListener(actionListener);
+<i>2342</i>&nbsp;        popupMenuTriggerOrder.add(menuItem);
+<i>2343</i>&nbsp;    }
+<i>2344</i>&nbsp;
+<i>2345</i>&nbsp;    public String getGameLog() {
+<i>2346</i>&nbsp;        return gameChatPanel.getText();
+<i>2347</i>&nbsp;    }
+<i>2348</i>&nbsp;
+<i>2349</i>&nbsp;    public Map&lt;String, Card&gt; getLoadedCards() {
+<i>2350</i>&nbsp;        return loadedCards;
+<i>2351</i>&nbsp;    }
+<i>2352</i>&nbsp;
+<i>2353</i>&nbsp;    public void setLoadedCards(Map&lt;String, Card&gt; loadedCards) {
+<i>2354</i>&nbsp;        this.loadedCards = loadedCards;
+<i>2355</i>&nbsp;    }
+<i>2356</i>&nbsp;
+<i>2357</i>&nbsp;    public FeedbackPanel getFeedbackPanel() {
+<i>2358</i>&nbsp;        return feedbackPanel;
+<i>2359</i>&nbsp;    }
+<i>2360</i>&nbsp;
+<i>2361</i>&nbsp;    // Use Cmd on OSX since Ctrl+click is already used to simulate right click
+<i>2362</i>&nbsp;    private static int holdPriorityMask = System.getProperty(&quot;os.name&quot;).contains(&quot;Mac OS X&quot;) ? InputEvent.META_DOWN_MASK : InputEvent.CTRL_DOWN_MASK;
+<i>2363</i>&nbsp;
+<i>2364</i>&nbsp;    public void handleEvent(AWTEvent event) {
+<i>2365</i>&nbsp;        if (event instanceof InputEvent) {
+<i>2366</i>&nbsp;            int id = event.getID();
+<i>2367</i>&nbsp;            boolean isActionEvent = false;
+<i>2368</i>&nbsp;            if (id == MouseEvent.MOUSE_PRESSED) {
+<i>2369</i>&nbsp;                isActionEvent = true;
+<i>2370</i>&nbsp;            } else if (id == KeyEvent.KEY_PRESSED) {
+<i>2371</i>&nbsp;                KeyEvent key = (KeyEvent) event;
+<i>2372</i>&nbsp;                int keyCode = key.getKeyCode();
+<i>2373</i>&nbsp;                if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
+<i>2374</i>&nbsp;                    isActionEvent = true;
+<i>2375</i>&nbsp;                }
+<i>2376</i>&nbsp;            }
+<i>2377</i>&nbsp;            if (isActionEvent) {
+<i>2378</i>&nbsp;                InputEvent input = (InputEvent) event;
+<i>2379</i>&nbsp;                if ((input.getModifiersEx() &amp; holdPriorityMask) != 0) {
+<i>2380</i>&nbsp;                    setMenuStates(
+<i>2381</i>&nbsp;                            PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT, &quot;true&quot;).equals(&quot;true&quot;),
+<i>2382</i>&nbsp;                            PreferencesDialog.getCachedValue(KEY_GAME_MANA_AUTOPAYMENT_ONLY_ONE, &quot;true&quot;).equals(&quot;true&quot;),
+<i>2383</i>&nbsp;                            PreferencesDialog.getCachedValue(KEY_USE_FIRST_MANA_ABILITY, &quot;false&quot;).equals(&quot;true&quot;),
+<i>2384</i>&nbsp;                            true);
+<i>2385</i>&nbsp;                    holdPriority(true);
+<i>2386</i>&nbsp;                }
+<i>2387</i>&nbsp;            }
+<i>2388</i>&nbsp;        }
+<i>2389</i>&nbsp;    }
+<i>2390</i>&nbsp;
+<i>2391</i>&nbsp;    public void holdPriority(boolean holdPriority) {
+<i>2392</i>&nbsp;        if (holdingPriority != holdPriority) {
+<i>2393</i>&nbsp;            holdingPriority = holdPriority;
+<i>2394</i>&nbsp;            txtHoldPriority.setVisible(holdPriority);
+<i>2395</i>&nbsp;            if (holdPriority) {
+<i>2396</i>&nbsp;                SessionHandler.sendPlayerAction(PlayerAction.HOLD_PRIORITY, gameId, null);
+<i>2397</i>&nbsp;            } else {
+<i>2398</i>&nbsp;                SessionHandler.sendPlayerAction(PlayerAction.UNHOLD_PRIORITY, gameId, null);
+<i>2399</i>&nbsp;            }
+<i>2400</i>&nbsp;        }
+<i>2401</i>&nbsp;    }
+<i>2402</i>&nbsp;
+<i>2403</i>&nbsp;    private boolean holdingPriority;
+<i>2404</i>&nbsp;    private mage.client.components.ability.AbilityPicker abilityPicker;
+<i>2405</i>&nbsp;    private mage.client.cards.BigCard bigCard;
+<i>2406</i>&nbsp;
+<i>2407</i>&nbsp;//    private JPanel cancelSkipPanel;
+<i>2408</i>&nbsp;    private javax.swing.JButton btnCancelSkip;
+<i>2409</i>&nbsp;    private javax.swing.JButton btnSkipToNextTurn; // F4
+<i>2410</i>&nbsp;    private javax.swing.JButton btnSkipToEndTurn; // F5
+<i>2411</i>&nbsp;    private javax.swing.JButton btnSkipToNextMain; // F7
+<i>2412</i>&nbsp;    private javax.swing.JButton btnSkipStack; // F8
+<i>2413</i>&nbsp;    private javax.swing.JButton btnSkipToYourTurn; // F9
+<i>2414</i>&nbsp;    private javax.swing.JButton btnSkipToEndStepBeforeYourTurn; // F11
+<i>2415</i>&nbsp;
+<i>2416</i>&nbsp;    private javax.swing.JButton btnConcede;
+<i>2417</i>&nbsp;    private javax.swing.JButton btnSwitchHands;
+<i>2418</i>&nbsp;
+<i>2419</i>&nbsp;    private javax.swing.JButton btnNextPlay;
+<i>2420</i>&nbsp;    private javax.swing.JButton btnPlay;
+<i>2421</i>&nbsp;    private javax.swing.JButton btnPreviousPlay;
+<i>2422</i>&nbsp;    private javax.swing.JButton btnSkipForward;
+<i>2423</i>&nbsp;    private javax.swing.JButton btnStopReplay;
+<i>2424</i>&nbsp;
+<i>2425</i>&nbsp;    private javax.swing.JButton btnStopWatching;
+<i>2426</i>&nbsp;
+<i>2427</i>&nbsp;    private mage.client.chat.ChatPanelBasic gameChatPanel;
+<i>2428</i>&nbsp;    private mage.client.game.FeedbackPanel feedbackPanel;
+<i>2429</i>&nbsp;    private HelperPanel helper;
+<i>2430</i>&nbsp;    private mage.client.chat.ChatPanelBasic userChatPanel;
+<i>2431</i>&nbsp;    private javax.swing.JPanel jPanel2;
+<i>2432</i>&nbsp;    private javax.swing.JPanel pnlHelperHandButtonsStackArea;
+<i>2433</i>&nbsp;    private javax.swing.JSplitPane jSplitPane0;
+<i>2434</i>&nbsp;    private javax.swing.JSplitPane jSplitPane1;
+<i>2435</i>&nbsp;    private javax.swing.JLabel lblActivePlayer;
+<i>2436</i>&nbsp;    private javax.swing.JLabel lblPhase;
+<i>2437</i>&nbsp;    private javax.swing.JLabel lblPriority;
+<i>2438</i>&nbsp;    private javax.swing.JLabel lblStep;
+<i>2439</i>&nbsp;    private javax.swing.JLabel lblTurn;
+<i>2440</i>&nbsp;    private javax.swing.JPanel pnlBattlefield;
+<i>2441</i>&nbsp;    private javax.swing.JPanel pnlShortCuts;
+<i>2442</i>&nbsp;    private javax.swing.JPanel pnlReplay;
+<i>2443</i>&nbsp;    private javax.swing.JLabel txtActivePlayer;
+<i>2444</i>&nbsp;    private javax.swing.JLabel txtPhase;
+<i>2445</i>&nbsp;    private javax.swing.JLabel txtPriority;
+<i>2446</i>&nbsp;    private javax.swing.JLabel txtStep;
+<i>2447</i>&nbsp;    private javax.swing.JLabel txtTurn;
+<i>2448</i>&nbsp;
+<i>2449</i>&nbsp;    private Map&lt;String, CardsView&gt; handCards;
+<i>2450</i>&nbsp;
+<i>2451</i>&nbsp;    private mage.client.cards.Cards stackObjects;
+<i>2452</i>&nbsp;    private HandPanel handContainer;
+<i>2453</i>&nbsp;
+<i>2454</i>&nbsp;    private javax.swing.JSplitPane jSplitPane2;
+<i>2455</i>&nbsp;    private JPanel jPhases;
+<i>2456</i>&nbsp;    private JPanel phasesContainer;
+<i>2457</i>&nbsp;    private javax.swing.JLabel txtSpellsCast;
+<i>2458</i>&nbsp;    private javax.swing.JLabel txtHoldPriority;
+<i>2459</i>&nbsp;
+<i>2460</i>&nbsp;    private HoverButton currentStep;
+<i>2461</i>&nbsp;    private Point prevPoint;
+<i>2462</i>&nbsp;
+<i>2463</i>&nbsp;    private boolean imagePanelState;
+<i>2464</i>&nbsp;
+<i>2465</i>&nbsp;}
+<i>2466</i>&nbsp;
+<i>2467</i>&nbsp;class ReplayTask extends SwingWorker&lt;Void, Collection&lt;MatchView&gt;&gt; {
+<i>2468</i>&nbsp;
+<i>2469</i>&nbsp;    private final UUID gameId;
+<i>2470</i>&nbsp;
+<b class="nc"><i>2471</i>&nbsp;    private static final Logger logger = Logger.getLogger(ReplayTask.class);</b>
+<i>2472</i>&nbsp;
+<b class="nc"><i>2473</i>&nbsp;    ReplayTask(UUID gameId) {</b>
+<b class="nc"><i>2474</i>&nbsp;        this.gameId = gameId;</b>
+<i>2475</i>&nbsp;    }
+<i>2476</i>&nbsp;
+<i>2477</i>&nbsp;    @Override
+<i>2478</i>&nbsp;    protected Void doInBackground() throws Exception {
+<b class="nc"><i>2479</i>&nbsp;        while (!isCancelled()) {</b>
+<b class="nc"><i>2480</i>&nbsp;            SessionHandler.nextPlay(gameId);</b>
+<b class="nc"><i>2481</i>&nbsp;            Thread.sleep(1000);</b>
+<i>2482</i>&nbsp;        }
+<b class="nc"><i>2483</i>&nbsp;        return null;</b>
+<i>2484</i>&nbsp;    }
+<i>2485</i>&nbsp;
+<i>2486</i>&nbsp;    @Override
+<i>2487</i>&nbsp;    protected void done() {
+<i>2488</i>&nbsp;        try {
+<b class="nc"><i>2489</i>&nbsp;            get();</b>
+<b class="nc"><i>2490</i>&nbsp;        } catch (InterruptedException ex) {</b>
+<b class="nc"><i>2491</i>&nbsp;            logger.fatal(&quot;Replay Match Task error&quot;, ex);</b>
+<b class="nc"><i>2492</i>&nbsp;        } catch (ExecutionException ex) {</b>
+<b class="nc"><i>2493</i>&nbsp;            logger.fatal(&quot;Replay Match Task error&quot;, ex);</b>
+<b class="nc"><i>2494</i>&nbsp;        } catch (CancellationException ex) {</b>
+<b class="nc"><i>2495</i>&nbsp;        }</b>
+<i>2496</i>&nbsp;    }
+<i>2497</i>&nbsp;
+<i>2498</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

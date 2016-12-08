@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LaunchParty</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.sets</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LaunchParty (mage.sets)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LaunchParty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (44/ 44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp;*
+<i>4</i>&nbsp;* Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp;* permitted provided that the following conditions are met:
+<i>6</i>&nbsp;*
+<i>7</i>&nbsp;*    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp;*       conditions and the following disclaimer.
+<i>9</i>&nbsp;*
+<i>10</i>&nbsp;*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp;*       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp;*       provided with the distribution.
+<i>13</i>&nbsp;*
+<i>14</i>&nbsp;* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp;* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp;* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp;* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp;* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp;* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp;* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp;* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp;*
+<i>24</i>&nbsp;* The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp;* authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp;* or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp;*/
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;package mage.sets;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;import java.util.GregorianCalendar;
+<i>32</i>&nbsp;import mage.constants.SetType;
+<i>33</i>&nbsp;import mage.cards.ExpansionSet;
+<i>34</i>&nbsp;import mage.constants.Rarity;
+<i>35</i>&nbsp;import java.util.List;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;/**
+<i>38</i>&nbsp; *
+<i>39</i>&nbsp; * @author fireshoes
+<i>40</i>&nbsp; */
+<i>41</i>&nbsp;public class LaunchParty extends ExpansionSet {
+<i>42</i>&nbsp;
+<b class="fc"><i>43</i>&nbsp;    private static final LaunchParty fINSTANCE = new LaunchParty();</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    public static LaunchParty getInstance() {
+<b class="fc"><i>46</i>&nbsp;        return fINSTANCE;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    private LaunchParty() {
+<b class="fc"><i>50</i>&nbsp;        super(&quot;Launch Party&quot;, &quot;MLP&quot;, &quot;mage.sets.launchparty&quot;, new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);</b>
+<b class="fc"><i>51</i>&nbsp;        this.hasBoosters = false;</b>
+<b class="fc"><i>52</i>&nbsp;        this.hasBasicLands = false;</b>
+<b class="fc"><i>53</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ajani Vengeant&quot;, 4, Rarity.MYTHIC, mage.cards.a.AjaniVengeant.class));</b>
+<b class="fc"><i>54</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ancient Hellkite&quot;, 11, Rarity.RARE, mage.cards.a.AncientHellkite.class));</b>
+<b class="fc"><i>55</i>&nbsp;        cards.add(new SetCardInfo(&quot;Angel of Deliverance&quot;, 35, Rarity.RARE, mage.cards.a.AngelOfDeliverance.class));</b>
+<b class="fc"><i>56</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ant Queen&quot;, 7, Rarity.RARE, mage.cards.a.AntQueen.class));</b>
+<b class="fc"><i>57</i>&nbsp;        cards.add(new SetCardInfo(&quot;Bident of Thassa&quot;, 24, Rarity.RARE, mage.cards.b.BidentOfThassa.class));</b>
+<b class="fc"><i>58</i>&nbsp;        cards.add(new SetCardInfo(&quot;Blight Herder&quot;, 32, Rarity.RARE, mage.cards.b.BlightHerder.class));</b>
+<b class="fc"><i>59</i>&nbsp;        cards.add(new SetCardInfo(&quot;Breaking // Entering&quot;, 22, Rarity.RARE, mage.cards.b.BreakingEntering.class));</b>
+<b class="fc"><i>60</i>&nbsp;        cards.add(new SetCardInfo(&quot;Colossal Whale&quot;, 23, Rarity.RARE, mage.cards.c.ColossalWhale.class));</b>
+<b class="fc"><i>61</i>&nbsp;        cards.add(new SetCardInfo(&quot;Deadbridge Goliath&quot;, 20, Rarity.RARE, mage.cards.d.DeadbridgeGoliath.class));</b>
+<b class="fc"><i>62</i>&nbsp;        cards.add(new SetCardInfo(&quot;Deathbringer Regent&quot;, 30, Rarity.RARE, mage.cards.d.DeathbringerRegent.class));</b>
+<b class="fc"><i>63</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dictate of the Twin Gods&quot;, 26, Rarity.RARE, mage.cards.d.DictateOfTheTwinGods.class));</b>
+<b class="fc"><i>64</i>&nbsp;        cards.add(new SetCardInfo(&quot;Dragon Throne of Tarkir&quot;, 27, Rarity.RARE, mage.cards.d.DragonThroneOfTarkir.class));</b>
+<b class="fc"><i>65</i>&nbsp;        cards.add(new SetCardInfo(&quot;Earwig Squad&quot;, 1, Rarity.RARE, mage.cards.e.EarwigSquad.class));</b>
+<b class="fc"><i>66</i>&nbsp;        cards.add(new SetCardInfo(&quot;Endbringer&quot;, 34, Rarity.RARE, mage.cards.e.Endbringer.class));</b>
+<b class="fc"><i>67</i>&nbsp;        cards.add(new SetCardInfo(&quot;Figure of Destiny&quot;, 3, Rarity.RARE, mage.cards.f.FigureOfDestiny.class));</b>
+<b class="fc"><i>68</i>&nbsp;        cards.add(new SetCardInfo(&quot;Garruk&#39;s Horde&quot;, 15, Rarity.RARE, mage.cards.g.GarruksHorde.class));</b>
+<b class="fc"><i>69</i>&nbsp;        cards.add(new SetCardInfo(&quot;Identity Thief&quot;, 33, Rarity.RARE, mage.cards.i.IdentityThief.class));</b>
+<b class="fc"><i>70</i>&nbsp;        cards.add(new SetCardInfo(&quot;In Garruk&#39;s Wake&quot;, 28, Rarity.RARE, mage.cards.i.InGarruksWake.class));</b>
+<b class="fc"><i>71</i>&nbsp;        cards.add(new SetCardInfo(&quot;Joraga Warcaller&quot;, 9, Rarity.RARE, mage.cards.j.JoragaWarcaller.class));</b>
+<b class="fc"><i>72</i>&nbsp;        cards.add(new SetCardInfo(&quot;Knight of New Alara&quot;, 6, Rarity.RARE, mage.cards.k.KnightOfNewAlara.class));</b>
+<b class="fc"><i>73</i>&nbsp;        cards.add(new SetCardInfo(&quot;Lord of Shatterskull Pass&quot;, 10, Rarity.RARE, mage.cards.l.LordOfShatterskullPass.class));</b>
+<b class="fc"><i>74</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ludevic&#39;s Abomination&quot;, 1064, Rarity.RARE, mage.cards.l.LudevicsAbomination.class));</b>
+<b class="fc"><i>75</i>&nbsp;        cards.add(new SetCardInfo(&quot;Ludevic&#39;s Test Subject&quot;, 16, Rarity.RARE, mage.cards.l.LudevicsTestSubject.class));</b>
+<b class="fc"><i>76</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mizzium Meddler&quot;, 31, Rarity.RARE, mage.cards.m.MizziumMeddler.class));</b>
+<b class="fc"><i>77</i>&nbsp;        cards.add(new SetCardInfo(&quot;Mondronen Shaman&quot;, 17, Rarity.RARE, mage.cards.m.MondronenShaman.class));</b>
+<b class="fc"><i>78</i>&nbsp;        cards.add(new SetCardInfo(&quot;Obelisk of Alara&quot;, 5, Rarity.RARE, mage.cards.o.ObeliskOfAlara.class));</b>
+<b class="fc"><i>79</i>&nbsp;        cards.add(new SetCardInfo(&quot;Phyrexian Metamorph&quot;, 14, Rarity.RARE, mage.cards.p.PhyrexianMetamorph.class));</b>
+<b class="fc"><i>80</i>&nbsp;        cards.add(new SetCardInfo(&quot;Restoration Angel&quot;, 18, Rarity.RARE, mage.cards.r.RestorationAngel.class));</b>
+<b class="fc"><i>81</i>&nbsp;        cards.add(new SetCardInfo(&quot;Saheeli&#39;s Artistry&quot;, 37, Rarity.RARE, mage.cards.s.SaheelisArtistry.class));</b>
+<b class="fc"><i>82</i>&nbsp;        cards.add(new SetCardInfo(&quot;Sandsteppe Mastodon&quot;, 29, Rarity.RARE, mage.cards.s.SandsteppeMastodon.class));</b>
+<b class="fc"><i>83</i>&nbsp;        cards.add(new SetCardInfo(&quot;Skarrg Goliath&quot;, 21, Rarity.RARE, mage.cards.s.SkarrgGoliath.class));</b>
+<b class="fc"><i>84</i>&nbsp;        cards.add(new SetCardInfo(&quot;Staff of Nin&quot;, 19, Rarity.RARE, mage.cards.s.StaffOfNin.class));</b>
+<b class="fc"><i>85</i>&nbsp;        cards.add(new SetCardInfo(&quot;Steel Hellkite&quot;, 12, Rarity.RARE, mage.cards.s.SteelHellkite.class));</b>
+<b class="fc"><i>86</i>&nbsp;        cards.add(new SetCardInfo(&quot;Thopter Assembly&quot;, 13, Rarity.RARE, mage.cards.t.ThopterAssembly.class));</b>
+<b class="fc"><i>87</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tovolar&#39;s Magehunter&quot;, 98, Rarity.RARE, mage.cards.t.TovolarsMagehunter.class));</b>
+<b class="fc"><i>88</i>&nbsp;        cards.add(new SetCardInfo(&quot;Tromokratis&quot;, 25, Rarity.RARE, mage.cards.t.Tromokratis.class));</b>
+<b class="fc"><i>89</i>&nbsp;        cards.add(new SetCardInfo(&quot;Valakut, the Molten Pinnacle&quot;, 8, Rarity.RARE, mage.cards.v.ValakutTheMoltenPinnacle.class));</b>
+<b class="fc"><i>90</i>&nbsp;        cards.add(new SetCardInfo(&quot;Vexing Shusher&quot;, 2, Rarity.RARE, mage.cards.v.VexingShusher.class));</b>
+<b class="fc"><i>91</i>&nbsp;    }</b>
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

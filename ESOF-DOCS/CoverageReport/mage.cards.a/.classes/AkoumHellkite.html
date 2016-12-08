@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AkoumHellkite</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.a</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AkoumHellkite (mage.cards.a)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AkoumHellkite</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.a;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.MageInt;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.TriggeredAbilityImpl;
+<i>34</i>&nbsp;import mage.abilities.effects.Effect;
+<i>35</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>36</i>&nbsp;import mage.abilities.keyword.FlyingAbility;
+<i>37</i>&nbsp;import mage.cards.CardImpl;
+<i>38</i>&nbsp;import mage.cards.CardSetInfo;
+<i>39</i>&nbsp;import mage.constants.CardType;
+<i>40</i>&nbsp;import mage.constants.Outcome;
+<i>41</i>&nbsp;import mage.constants.Zone;
+<i>42</i>&nbsp;import mage.game.Game;
+<i>43</i>&nbsp;import mage.game.events.GameEvent;
+<i>44</i>&nbsp;import mage.game.permanent.Permanent;
+<i>45</i>&nbsp;import mage.players.Player;
+<i>46</i>&nbsp;import mage.target.common.TargetCreatureOrPlayer;
+<i>47</i>&nbsp;import mage.target.targetpointer.FixedTarget;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;/**
+<i>50</i>&nbsp; *
+<i>51</i>&nbsp; * @author fireshoes
+<i>52</i>&nbsp; */
+<i>53</i>&nbsp;public class AkoumHellkite extends CardImpl {
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public AkoumHellkite(UUID ownerId, CardSetInfo setInfo) {
+<b class="nc"><i>56</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{4}{R}{R}&quot;);</b>
+<b class="nc"><i>57</i>&nbsp;        this.subtype.add(&quot;Dragon&quot;);</b>
+<b class="nc"><i>58</i>&nbsp;        this.power = new MageInt(4);</b>
+<b class="nc"><i>59</i>&nbsp;        this.toughness = new MageInt(4);</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;        // Flying
+<b class="nc"><i>62</i>&nbsp;        this.addAbility(FlyingAbility.getInstance());</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;        // &lt;i&gt;Landfall&lt;/i&gt;-Whenever a land enters the battlefield under you control, Akoum Hellkite deals 1 damage to target creature or player.
+<i>65</i>&nbsp;        // If that land is a Mountain, Akoum Hellkite deals 2 damage to that creature or player instead.
+<b class="nc"><i>66</i>&nbsp;        Ability ability = new AkoumHellkiteTriggeredAbility();</b>
+<b class="nc"><i>67</i>&nbsp;        ability.addTarget(new TargetCreatureOrPlayer());</b>
+<b class="nc"><i>68</i>&nbsp;        this.addAbility(ability);</b>
+<b class="nc"><i>69</i>&nbsp;    }</b>
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    public AkoumHellkite(final AkoumHellkite card) {
+<b class="nc"><i>72</i>&nbsp;        super(card);</b>
+<b class="nc"><i>73</i>&nbsp;    }</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    @Override
+<i>76</i>&nbsp;    public AkoumHellkite copy() {
+<b class="nc"><i>77</i>&nbsp;        return new AkoumHellkite(this);</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;}
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    private static final String text = &quot;&lt;i&gt;Landfall&lt;/i&gt; - Whenever a land enters the battlefield under your control, {this} deals 1 damage to target creature or player. &quot;
+<i>84</i>&nbsp;            + &quot;If that land is a Mountain, Akoum Hellkite deals 2 damage to that creature or player instead.&quot;;
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public AkoumHellkiteTriggeredAbility() {
+<i>87</i>&nbsp;        super(Zone.BATTLEFIELD, new AkoumHellkiteDamageEffect());
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    public AkoumHellkiteTriggeredAbility(final AkoumHellkiteTriggeredAbility ability) {
+<i>91</i>&nbsp;        super(ability);
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    @Override
+<i>95</i>&nbsp;    public AkoumHellkiteTriggeredAbility copy() {
+<i>96</i>&nbsp;        return new AkoumHellkiteTriggeredAbility(this);
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    @Override
+<i>100</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<i>101</i>&nbsp;        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    @Override
+<i>105</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<i>106</i>&nbsp;        Permanent permanent = game.getPermanent(event.getTargetId());
+<i>107</i>&nbsp;        if (permanent != null
+<i>108</i>&nbsp;                &amp;&amp; permanent.getCardType().contains(CardType.LAND)
+<i>109</i>&nbsp;                &amp;&amp; permanent.getControllerId().equals(getControllerId())) {
+<i>110</i>&nbsp;            Permanent sourcePermanent = game.getPermanent(getSourceId());
+<i>111</i>&nbsp;            if (sourcePermanent != null)
+<i>112</i>&nbsp;                for (Effect effect : getEffects()) {
+<i>113</i>&nbsp;                if (effect instanceof AkoumHellkiteDamageEffect) {
+<i>114</i>&nbsp;                    effect.setTargetPointer(new FixedTarget(permanent, game));
+<i>115</i>&nbsp;                }
+<i>116</i>&nbsp;                return true;
+<i>117</i>&nbsp;            }
+<i>118</i>&nbsp;        }
+<i>119</i>&nbsp;        return false;
+<i>120</i>&nbsp;    }
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    @Override
+<i>123</i>&nbsp;    public String getRule() {
+<i>124</i>&nbsp;        return text;
+<i>125</i>&nbsp;    }
+<i>126</i>&nbsp;}
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;class AkoumHellkiteDamageEffect extends OneShotEffect {
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    public AkoumHellkiteDamageEffect() {
+<i>131</i>&nbsp;        super(Outcome.Damage);
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    public AkoumHellkiteDamageEffect(final AkoumHellkiteDamageEffect effect) {
+<i>135</i>&nbsp;        super(effect);
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;    @Override
+<i>139</i>&nbsp;    public AkoumHellkiteDamageEffect copy() {
+<i>140</i>&nbsp;        return new AkoumHellkiteDamageEffect(this);
+<i>141</i>&nbsp;    }
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;    @Override
+<i>144</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>145</i>&nbsp;        Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+<i>146</i>&nbsp;        Player player = game.getPlayer(source.getFirstTarget());
+<i>147</i>&nbsp;        if (land != null &amp;&amp; player != null) {
+<i>148</i>&nbsp;            if (land.hasSubtype(&quot;Mountain&quot;, game)) {
+<i>149</i>&nbsp;                player.damage(2, source.getSourceId(), game, false, true);
+<i>150</i>&nbsp;            } else {
+<i>151</i>&nbsp;                player.damage(1, source.getSourceId(), game, false, true);
+<i>152</i>&nbsp;            }
+<i>153</i>&nbsp;            return true;
+<i>154</i>&nbsp;        }
+<i>155</i>&nbsp;        Permanent permanent = game.getPermanent(source.getFirstTarget());
+<i>156</i>&nbsp;        if (land != null &amp;&amp; permanent != null) {
+<i>157</i>&nbsp;            if (land.hasSubtype(&quot;Mountain&quot;, game)) {
+<i>158</i>&nbsp;                permanent.damage(2, source.getSourceId(), game, false, true);
+<i>159</i>&nbsp;            } else {
+<i>160</i>&nbsp;                permanent.damage(1, source.getSourceId(), game, false, true);
+<i>161</i>&nbsp;            }
+<i>162</i>&nbsp;            return true;
+<i>163</i>&nbsp;        }
+<i>164</i>&nbsp;        return false;
+<i>165</i>&nbsp;    }
+<i>166</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

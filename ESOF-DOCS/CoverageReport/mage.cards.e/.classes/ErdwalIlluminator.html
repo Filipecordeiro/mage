@@ -1,0 +1,231 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ErdwalIlluminator</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.e</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ErdwalIlluminator (mage.cards.e)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ErdwalIlluminator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/ 10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.e;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.HashMap;
+<i>31</i>&nbsp;import java.util.UUID;
+<i>32</i>&nbsp;import mage.MageInt;
+<i>33</i>&nbsp;import mage.abilities.TriggeredAbilityImpl;
+<i>34</i>&nbsp;import mage.abilities.effects.keyword.InvestigateEffect;
+<i>35</i>&nbsp;import mage.abilities.keyword.FlyingAbility;
+<i>36</i>&nbsp;import mage.cards.CardImpl;
+<i>37</i>&nbsp;import mage.cards.CardSetInfo;
+<i>38</i>&nbsp;import mage.constants.CardType;
+<i>39</i>&nbsp;import mage.constants.WatcherScope;
+<i>40</i>&nbsp;import mage.constants.Zone;
+<i>41</i>&nbsp;import mage.game.Game;
+<i>42</i>&nbsp;import mage.game.events.GameEvent;
+<i>43</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>44</i>&nbsp;import mage.watchers.Watcher;
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;/**
+<i>47</i>&nbsp; *
+<i>48</i>&nbsp; * @author LevelX2
+<i>49</i>&nbsp; */
+<i>50</i>&nbsp;public class ErdwalIlluminator extends CardImpl {
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public ErdwalIlluminator(UUID ownerId, CardSetInfo setInfo) {
+<b class="fc"><i>53</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{1}{U}&quot;);</b>
+<b class="fc"><i>54</i>&nbsp;        this.subtype.add(&quot;Spirit&quot;);</b>
+<b class="fc"><i>55</i>&nbsp;        this.power = new MageInt(1);</b>
+<b class="fc"><i>56</i>&nbsp;        this.toughness = new MageInt(3);</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;        // Flying
+<b class="fc"><i>59</i>&nbsp;        this.addAbility(FlyingAbility.getInstance());</b>
+<i>60</i>&nbsp;        // Whenever you investigate for the first time each turn, investigate an additional time.
+<b class="fc"><i>61</i>&nbsp;        this.addAbility(new ErdwalIlluminatorTriggeredAbility());</b>
+<i>62</i>&nbsp;
+<b class="fc"><i>63</i>&nbsp;    }</b>
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;    public ErdwalIlluminator(final ErdwalIlluminator card) {
+<b class="fc"><i>66</i>&nbsp;        super(card);</b>
+<b class="fc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @Override
+<i>70</i>&nbsp;    public ErdwalIlluminator copy() {
+<b class="fc"><i>71</i>&nbsp;        return new ErdwalIlluminator(this);</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;}
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;class ErdwalIlluminatorTriggeredAbility extends TriggeredAbilityImpl {
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    public ErdwalIlluminatorTriggeredAbility() {
+<i>78</i>&nbsp;        super(Zone.BATTLEFIELD, new InvestigateEffect(), false);
+<i>79</i>&nbsp;        addWatcher(new InvestigatedWatcher());
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    public ErdwalIlluminatorTriggeredAbility(final ErdwalIlluminatorTriggeredAbility ability) {
+<i>83</i>&nbsp;        super(ability);
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    @Override
+<i>87</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<i>88</i>&nbsp;        return event.getType().equals(EventType.INVESTIGATED);
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    @Override
+<i>92</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<i>93</i>&nbsp;        InvestigatedWatcher watcher = (InvestigatedWatcher) game.getState().getWatchers().get(InvestigatedWatcher.class.getName());
+<i>94</i>&nbsp;        return watcher != null &amp;&amp; watcher.getTimesInvestigated(getControllerId()) == 1;
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    @Override
+<i>98</i>&nbsp;    public ErdwalIlluminatorTriggeredAbility copy() {
+<i>99</i>&nbsp;        return new ErdwalIlluminatorTriggeredAbility(this);
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    @Override
+<i>103</i>&nbsp;    public String getRule() {
+<i>104</i>&nbsp;        return &quot;Whenever you investigate for the first time each turn, investigate an additional time.&quot;;
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;}
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;class InvestigatedWatcher extends Watcher {
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    private final HashMap&lt;UUID, Integer&gt; timesInvestigated = new HashMap&lt;&gt;();
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    public InvestigatedWatcher() {
+<i>113</i>&nbsp;        super(InvestigatedWatcher.class.getName(), WatcherScope.GAME);
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    public InvestigatedWatcher(final InvestigatedWatcher watcher) {
+<i>117</i>&nbsp;        super(watcher);
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    @Override
+<i>121</i>&nbsp;    public InvestigatedWatcher copy() {
+<i>122</i>&nbsp;        return new InvestigatedWatcher(this);
+<i>123</i>&nbsp;    }
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;    @Override
+<i>126</i>&nbsp;    public void watch(GameEvent event, Game game) {
+<i>127</i>&nbsp;        if (EventType.INVESTIGATED.equals(event.getType())) {
+<i>128</i>&nbsp;            if (!timesInvestigated.containsKey(event.getPlayerId())) {
+<i>129</i>&nbsp;                timesInvestigated.put(event.getPlayerId(), 1);
+<i>130</i>&nbsp;            } else {
+<i>131</i>&nbsp;                timesInvestigated.put(event.getPlayerId(), timesInvestigated.get(event.getPlayerId()) + 1);
+<i>132</i>&nbsp;            }
+<i>133</i>&nbsp;        }
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    @Override
+<i>137</i>&nbsp;    public void reset() {
+<i>138</i>&nbsp;        super.reset();
+<i>139</i>&nbsp;        timesInvestigated.clear();
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;    public int getTimesInvestigated(UUID playerId) {
+<i>143</i>&nbsp;        if (timesInvestigated.containsKey(playerId)) {
+<i>144</i>&nbsp;            return timesInvestigated.get(playerId);
+<i>145</i>&nbsp;        }
+<i>146</i>&nbsp;        return 0;
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

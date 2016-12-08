@@ -1,0 +1,395 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: KickerAbility</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.keyword</a> ]
+</div>
+
+<h1>Coverage Summary for Class: KickerAbility (mage.abilities.keyword)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KickerAbility</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.2%
+  </span>
+  <span class="absValue">
+    (13/ 18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (95/ 133)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.keyword;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.HashMap;
+<i>31</i>&nbsp;import java.util.Iterator;
+<i>32</i>&nbsp;import java.util.LinkedList;
+<i>33</i>&nbsp;import java.util.List;
+<i>34</i>&nbsp;import java.util.Map;
+<i>35</i>&nbsp;import mage.abilities.Ability;
+<i>36</i>&nbsp;import mage.abilities.SpellAbility;
+<i>37</i>&nbsp;import mage.abilities.StaticAbility;
+<i>38</i>&nbsp;import mage.abilities.costs.Cost;
+<i>39</i>&nbsp;import mage.abilities.costs.Costs;
+<i>40</i>&nbsp;import mage.abilities.costs.CostsImpl;
+<i>41</i>&nbsp;import mage.abilities.costs.OptionalAdditionalCost;
+<i>42</i>&nbsp;import mage.abilities.costs.OptionalAdditionalCostImpl;
+<i>43</i>&nbsp;import mage.abilities.costs.OptionalAdditionalSourceCosts;
+<i>44</i>&nbsp;import mage.abilities.costs.mana.GenericManaCost;
+<i>45</i>&nbsp;import mage.abilities.costs.mana.ManaCost;
+<i>46</i>&nbsp;import mage.abilities.costs.mana.ManaCostsImpl;
+<i>47</i>&nbsp;import mage.abilities.costs.mana.VariableManaCost;
+<i>48</i>&nbsp;import mage.constants.AbilityType;
+<i>49</i>&nbsp;import mage.constants.Outcome;
+<i>50</i>&nbsp;import mage.constants.Zone;
+<i>51</i>&nbsp;import mage.game.Game;
+<i>52</i>&nbsp;import mage.players.Player;
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;/**
+<i>55</i>&nbsp; *
+<i>56</i>&nbsp; * 20121001 702.31. Kicker 702.31a Kicker is a static ability that functions
+<i>57</i>&nbsp; * while the spell with kicker is on the stack. &quot;Kicker [cost]&quot; means &quot;You may
+<i>58</i>&nbsp; * pay an additional [cost] as you cast this spell.&quot; Paying a spell&#39;s kicker
+<i>59</i>&nbsp; * cost(s) follows the rules for paying additional costs in rules 601.2b and
+<i>60</i>&nbsp; * 601.2e-g. 702.31b The phrase &quot;Kicker [cost 1] and/or [cost 2]&quot; means the same
+<i>61</i>&nbsp; * thing as &quot;Kicker [cost 1], kicker [cost 2].&quot; 702.31c Multikicker is a variant
+<i>62</i>&nbsp; * of the kicker ability. &quot;Multikicker [cost]&quot; means &quot;You may pay an additional
+<i>63</i>&nbsp; * [cost] any number of times as you cast this spell.&quot; A multikicker cost is a
+<i>64</i>&nbsp; * kicker cost. 702.31d If a spell&#39;s controller declares the intention to pay
+<i>65</i>&nbsp; * any of that spell&#39;s kicker costs, that spell has been &quot;kicked.&quot; If a spell
+<i>66</i>&nbsp; * has two kicker costs or has multikicker, it may be kicked multiple times. See
+<i>67</i>&nbsp; * rule 601.2b. 702.31e Objects with kicker or multikicker have additional
+<i>68</i>&nbsp; * abilities that specify what happens if they are kicked. These abilities are
+<i>69</i>&nbsp; * linked to the kicker or multikicker abilities printed on that object: they
+<i>70</i>&nbsp; * can refer only to those specific kicker or multikicker abilities. See rule
+<i>71</i>&nbsp; * 607, &quot;Linked Abilities.&quot; 702.31f Objects with more than one kicker cost have
+<i>72</i>&nbsp; * abilities that each correspond to a specific kicker cost. They contain the
+<i>73</i>&nbsp; * phrases &quot;if it was kicked with its [A] kicker&quot; and &quot;if it was kicked with its
+<i>74</i>&nbsp; * [B] kicker,&quot; where A and B are the first and second kicker costs listed on
+<i>75</i>&nbsp; * the card, respectively. Each of those abilities is linked to the appropriate
+<i>76</i>&nbsp; * kicker ability. 702.31g If part of a spell&#39;s ability has its effect only if
+<i>77</i>&nbsp; * that spell was kicked, and that part of the ability includes any targets, the
+<i>78</i>&nbsp; * spell&#39;s controller chooses those targets only if that spell was kicked.
+<i>79</i>&nbsp; * Otherwise, the spell is cast as if it did not have those targets. See rule
+<i>80</i>&nbsp; * 601.2c.
+<i>81</i>&nbsp; *
+<i>82</i>&nbsp; * @author LevelX2
+<i>83</i>&nbsp; *
+<i>84</i>&nbsp; */
+<i>85</i>&nbsp;public class KickerAbility extends StaticAbility implements OptionalAdditionalSourceCosts {
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    protected static final String KICKER_KEYWORD = &quot;Kicker&quot;;
+<i>88</i>&nbsp;    protected static final String KICKER_REMINDER_MANA = &quot;You may pay an additional {cost} as you cast this spell.&quot;;
+<i>89</i>&nbsp;    protected static final String KICKER_REMINDER_COST = &quot;You may {cost} in addition to any other costs as you cast this spell.&quot;;
+<i>90</i>&nbsp;
+<b class="fc"><i>91</i>&nbsp;    protected Map&lt;String, Integer&gt; activations = new HashMap&lt;&gt;(); // zoneChangeCounter, activations</b>
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    protected String keywordText;
+<i>94</i>&nbsp;    protected String reminderText;
+<b class="fc"><i>95</i>&nbsp;    protected List&lt;OptionalAdditionalCost&gt; kickerCosts = new LinkedList&lt;&gt;();</b>
+<b class="fc"><i>96</i>&nbsp;    private int xManaValue = 0;</b>
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    public KickerAbility(String manaString) {
+<b class="fc"><i>99</i>&nbsp;        this(KICKER_KEYWORD, KICKER_REMINDER_MANA);</b>
+<b class="fc"><i>100</i>&nbsp;        this.addKickerCost(manaString);</b>
+<b class="fc"><i>101</i>&nbsp;    }</b>
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    public KickerAbility(Cost cost) {
+<b class="nc"><i>104</i>&nbsp;        this(KICKER_KEYWORD, KICKER_REMINDER_COST);</b>
+<b class="nc"><i>105</i>&nbsp;        this.addKickerCost(cost);</b>
+<b class="nc"><i>106</i>&nbsp;    }</b>
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    public KickerAbility(String keywordText, String reminderText) {
+<b class="fc"><i>109</i>&nbsp;        super(Zone.STACK, null);</b>
+<b class="fc"><i>110</i>&nbsp;        name = keywordText;</b>
+<b class="fc"><i>111</i>&nbsp;        this.keywordText = keywordText;</b>
+<b class="fc"><i>112</i>&nbsp;        this.reminderText = reminderText;</b>
+<b class="fc"><i>113</i>&nbsp;        setRuleAtTheTop(true);</b>
+<b class="fc"><i>114</i>&nbsp;    }</b>
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    public KickerAbility(final KickerAbility ability) {
+<b class="fc"><i>117</i>&nbsp;        super(ability);</b>
+<b class="fc"><i>118</i>&nbsp;        this.kickerCosts.addAll(ability.kickerCosts);</b>
+<b class="fc"><i>119</i>&nbsp;        this.keywordText = ability.keywordText;</b>
+<b class="fc"><i>120</i>&nbsp;        this.reminderText = ability.reminderText;</b>
+<b class="fc"><i>121</i>&nbsp;        this.xManaValue = ability.xManaValue;</b>
+<b class="fc"><i>122</i>&nbsp;        this.activations.putAll(ability.activations);</b>
+<i>123</i>&nbsp;
+<b class="fc"><i>124</i>&nbsp;    }</b>
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    @Override
+<i>127</i>&nbsp;    public KickerAbility copy() {
+<b class="fc"><i>128</i>&nbsp;        return new KickerAbility(this);</b>
+<i>129</i>&nbsp;    }
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;    public final OptionalAdditionalCost addKickerCost(String manaString) {
+<b class="fc"><i>132</i>&nbsp;        OptionalAdditionalCost kickerCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new ManaCostsImpl(manaString));</b>
+<b class="fc"><i>133</i>&nbsp;        kickerCosts.add(kickerCost);</b>
+<b class="fc"><i>134</i>&nbsp;        return kickerCost;</b>
+<i>135</i>&nbsp;    }
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;    public final OptionalAdditionalCost addKickerCost(Cost cost) {
+<b class="nc"><i>138</i>&nbsp;        OptionalAdditionalCost kickerCost = new OptionalAdditionalCostImpl(keywordText, &quot;-&quot;, reminderText, cost);</b>
+<b class="nc"><i>139</i>&nbsp;        kickerCosts.add(kickerCost);</b>
+<b class="nc"><i>140</i>&nbsp;        return kickerCost;</b>
+<i>141</i>&nbsp;    }
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;    public void resetKicker(Game game, Ability source) {
+<b class="fc"><i>144</i>&nbsp;        for (OptionalAdditionalCost cost : kickerCosts) {</b>
+<b class="fc"><i>145</i>&nbsp;            cost.reset();</b>
+<b class="fc"><i>146</i>&nbsp;        }</b>
+<b class="fc"><i>147</i>&nbsp;        String key = getActivationKey(source, &quot;&quot;, game);</b>
+<b class="fc"><i>148</i>&nbsp;        for (String activationKey : activations.keySet()) {</b>
+<b class="fc"><i>149</i>&nbsp;            if (activationKey.startsWith(key) &amp;&amp; activations.get(activationKey) &gt; 0) {</b>
+<b class="nc"><i>150</i>&nbsp;                activations.put(key, 0);</b>
+<i>151</i>&nbsp;            }
+<b class="fc"><i>152</i>&nbsp;        }</b>
+<i>153</i>&nbsp;
+<b class="fc"><i>154</i>&nbsp;    }</b>
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;    public int getXManaValue() {
+<b class="nc"><i>157</i>&nbsp;        return xManaValue;</b>
+<i>158</i>&nbsp;    }
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;    public int getKickedCounter(Game game, Ability source) {
+<b class="fc"><i>161</i>&nbsp;        String key = getActivationKey(source, &quot;&quot;, game);</b>
+<b class="fc"><i>162</i>&nbsp;        if (activations.containsKey(key)) {</b>
+<b class="fc"><i>163</i>&nbsp;            return activations.get(key);</b>
+<i>164</i>&nbsp;        }
+<b class="fc"><i>165</i>&nbsp;        return 0;</b>
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;    public boolean isKicked(Game game, Ability source, String costText) {
+<b class="fc"><i>169</i>&nbsp;        String key = getActivationKey(source, costText, game);</b>
+<b class="fc"><i>170</i>&nbsp;        if (kickerCosts.size() &gt; 1) {</b>
+<b class="fc"><i>171</i>&nbsp;            for (String activationKey : activations.keySet()) {</b>
+<b class="fc"><i>172</i>&nbsp;                if (activationKey.startsWith(key) &amp;&amp; activations.get(activationKey) &gt; 0) {</b>
+<b class="fc"><i>173</i>&nbsp;                    return true;</b>
+<i>174</i>&nbsp;                }
+<b class="fc"><i>175</i>&nbsp;            }</b>
+<i>176</i>&nbsp;        } else {
+<b class="fc"><i>177</i>&nbsp;            if (activations.containsKey(key)) {</b>
+<b class="fc"><i>178</i>&nbsp;                return activations.get(key) &gt; 0;</b>
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;            }
+<i>181</i>&nbsp;        }
+<b class="fc"><i>182</i>&nbsp;        return false;</b>
+<i>183</i>&nbsp;    }
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;    public List&lt;OptionalAdditionalCost&gt; getKickerCosts() {
+<b class="nc"><i>186</i>&nbsp;        return kickerCosts;</b>
+<i>187</i>&nbsp;    }
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;    private void activateKicker(OptionalAdditionalCost kickerCost, Ability source, Game game) {
+<b class="fc"><i>190</i>&nbsp;        int amount = 1;</b>
+<b class="fc"><i>191</i>&nbsp;        String key = getActivationKey(source, kickerCost.getText(true), game);</b>
+<b class="fc"><i>192</i>&nbsp;        if (activations.containsKey(key)) {</b>
+<b class="fc"><i>193</i>&nbsp;            amount += activations.get(key);</b>
+<i>194</i>&nbsp;        }
+<b class="fc"><i>195</i>&nbsp;        activations.put(key, amount);</b>
+<b class="fc"><i>196</i>&nbsp;    }</b>
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    private String getActivationKey(Ability source, String costText, Game game) {
+<b class="fc"><i>199</i>&nbsp;        int zcc = 0;</b>
+<b class="fc"><i>200</i>&nbsp;        if (source.getAbilityType().equals(AbilityType.TRIGGERED)) {</b>
+<b class="fc"><i>201</i>&nbsp;            zcc = source.getSourceObjectZoneChangeCounter();</b>
+<i>202</i>&nbsp;        }
+<b class="fc"><i>203</i>&nbsp;        if (zcc == 0) {</b>
+<b class="fc"><i>204</i>&nbsp;            zcc = game.getState().getZoneChangeCounter(source.getSourceId());</b>
+<i>205</i>&nbsp;        }
+<b class="fc"><i>206</i>&nbsp;        if (zcc &gt; 0 &amp;&amp; (source.getAbilityType().equals(AbilityType.TRIGGERED))) {</b>
+<b class="fc"><i>207</i>&nbsp;            --zcc;</b>
+<i>208</i>&nbsp;        }
+<b class="fc"><i>209</i>&nbsp;        return String.valueOf(zcc) + ((kickerCosts.size() &gt; 1) ? costText : &quot;&quot;);</b>
+<i>210</i>&nbsp;    }
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;    @Override
+<i>213</i>&nbsp;    public void addOptionalAdditionalCosts(Ability ability, Game game) {
+<b class="fc"><i>214</i>&nbsp;        if (ability instanceof SpellAbility) {</b>
+<b class="fc"><i>215</i>&nbsp;            Player player = game.getPlayer(controllerId);</b>
+<b class="fc"><i>216</i>&nbsp;            if (player != null) {</b>
+<b class="fc"><i>217</i>&nbsp;                this.resetKicker(game, ability);</b>
+<b class="fc"><i>218</i>&nbsp;                for (OptionalAdditionalCost kickerCost : kickerCosts) {</b>
+<b class="fc"><i>219</i>&nbsp;                    boolean again = true;</b>
+<b class="fc"><i>220</i>&nbsp;                    while (player.canRespond() &amp;&amp; again) {</b>
+<b class="fc"><i>221</i>&nbsp;                        String times = &quot;&quot;;</b>
+<b class="fc"><i>222</i>&nbsp;                        if (kickerCost.isRepeatable()) {</b>
+<b class="fc"><i>223</i>&nbsp;                            int activatedCount = getKickedCounter(game, ability);</b>
+<b class="fc"><i>224</i>&nbsp;                            times = Integer.toString(activatedCount + 1) + (activatedCount == 0 ? &quot; time &quot; : &quot; times &quot;);</b>
+<i>225</i>&nbsp;                        }
+<b class="fc"><i>226</i>&nbsp;                        if (kickerCost.canPay(ability, sourceId, controllerId, game)</b>
+<b class="fc"><i>227</i>&nbsp;                                &amp;&amp; player.chooseUse(Outcome.Benefit, &quot;Pay &quot; + times + kickerCost.getText(false) + &quot; ?&quot;, ability, game)) {</b>
+<b class="fc"><i>228</i>&nbsp;                            this.activateKicker(kickerCost, ability, game);</b>
+<b class="fc"><i>229</i>&nbsp;                            if (kickerCost instanceof Costs) {</b>
+<b class="fc"><i>230</i>&nbsp;                                for (Iterator itKickerCost = ((Costs) kickerCost).iterator(); itKickerCost.hasNext();) {</b>
+<b class="fc"><i>231</i>&nbsp;                                    Object kickerCostObject = itKickerCost.next();</b>
+<b class="fc"><i>232</i>&nbsp;                                    if ((kickerCostObject instanceof Costs) || (kickerCostObject instanceof CostsImpl)) {</b>
+<b class="nc"><i>233</i>&nbsp;                                        for (@SuppressWarnings(&quot;unchecked&quot;) Iterator&lt;Cost&gt; itDetails = ((Costs) kickerCostObject).iterator(); itDetails.hasNext();) {</b>
+<b class="nc"><i>234</i>&nbsp;                                            addKickerCostsToAbility(itDetails.next(), ability, game);</b>
+<i>235</i>&nbsp;                                        }
+<i>236</i>&nbsp;                                    } else {
+<b class="fc"><i>237</i>&nbsp;                                        addKickerCostsToAbility((Cost) kickerCostObject, ability, game);</b>
+<i>238</i>&nbsp;                                    }
+<b class="fc"><i>239</i>&nbsp;                                }</b>
+<i>240</i>&nbsp;                            } else {
+<b class="nc"><i>241</i>&nbsp;                                addKickerCostsToAbility((Cost) kickerCost, ability, game);</b>
+<i>242</i>&nbsp;                            }
+<b class="fc"><i>243</i>&nbsp;                            again = kickerCost.isRepeatable();</b>
+<i>244</i>&nbsp;                        } else {
+<b class="fc"><i>245</i>&nbsp;                            again = false;</b>
+<i>246</i>&nbsp;                        }
+<b class="fc"><i>247</i>&nbsp;                    }</b>
+<b class="fc"><i>248</i>&nbsp;                }</b>
+<i>249</i>&nbsp;            }
+<i>250</i>&nbsp;        }
+<b class="fc"><i>251</i>&nbsp;    }</b>
+<i>252</i>&nbsp;
+<i>253</i>&nbsp;    private void addKickerCostsToAbility(Cost cost, Ability ability, Game game) {
+<b class="fc"><i>254</i>&nbsp;        if (cost instanceof ManaCostsImpl) {</b>
+<i>255</i>&nbsp;            @SuppressWarnings(&quot;unchecked&quot;)
+<b class="fc"><i>256</i>&nbsp;            List&lt;VariableManaCost&gt; varCosts = ((ManaCostsImpl) cost).getVariableCosts();</b>
+<b class="fc"><i>257</i>&nbsp;            if (!varCosts.isEmpty()) {</b>
+<i>258</i>&nbsp;                // use only first variable cost
+<b class="nc"><i>259</i>&nbsp;                xManaValue = game.getPlayer(this.controllerId).announceXMana(varCosts.get(0).getMinX(), Integer.MAX_VALUE, &quot;Announce kicker value for &quot; + varCosts.get(0).getText(), game, this);</b>
+<i>260</i>&nbsp;                // kicker variable X costs handled internally as multikicker with {1} cost (no multikicker on card)
+<b class="nc"><i>261</i>&nbsp;                if (!game.isSimulation()) {</b>
+<b class="nc"><i>262</i>&nbsp;                    game.informPlayers(game.getPlayer(this.controllerId).getLogName() + &quot; announced a value of &quot; + xManaValue + &quot; for &quot; + &quot; kicker X &quot;);</b>
+<i>263</i>&nbsp;                }
+<b class="nc"><i>264</i>&nbsp;                ability.getManaCostsToPay().add(new GenericManaCost(xManaValue));</b>
+<b class="nc"><i>265</i>&nbsp;                ManaCostsImpl&lt;ManaCost&gt; kickerManaCosts = (ManaCostsImpl) cost;</b>
+<b class="nc"><i>266</i>&nbsp;                for (ManaCost manaCost : kickerManaCosts) {</b>
+<b class="nc"><i>267</i>&nbsp;                    if (!(manaCost instanceof VariableManaCost)) {</b>
+<b class="nc"><i>268</i>&nbsp;                        ability.getManaCostsToPay().add(manaCost.copy());</b>
+<i>269</i>&nbsp;                    }
+<b class="nc"><i>270</i>&nbsp;                }</b>
+<b class="nc"><i>271</i>&nbsp;            } else {</b>
+<b class="fc"><i>272</i>&nbsp;                ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());</b>
+<i>273</i>&nbsp;            }
+<b class="fc"><i>274</i>&nbsp;        } else {</b>
+<b class="nc"><i>275</i>&nbsp;            ability.getCosts().add(cost.copy());</b>
+<i>276</i>&nbsp;        }
+<b class="fc"><i>277</i>&nbsp;    }</b>
+<i>278</i>&nbsp;
+<i>279</i>&nbsp;    @Override
+<i>280</i>&nbsp;    public String getRule() {
+<b class="nc"><i>281</i>&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="nc"><i>282</i>&nbsp;        int numberKicker = 0;</b>
+<b class="nc"><i>283</i>&nbsp;        String remarkText = &quot;&quot;;</b>
+<b class="nc"><i>284</i>&nbsp;        for (OptionalAdditionalCost kickerCost : kickerCosts) {</b>
+<b class="nc"><i>285</i>&nbsp;            if (numberKicker == 0) {</b>
+<b class="nc"><i>286</i>&nbsp;                sb.append(kickerCost.getText(false));</b>
+<b class="nc"><i>287</i>&nbsp;                remarkText = kickerCost.getReminderText();</b>
+<i>288</i>&nbsp;            } else {
+<b class="nc"><i>289</i>&nbsp;                sb.append(&quot; and/or &quot;).append(kickerCost.getText(true));</b>
+<i>290</i>&nbsp;            }
+<b class="nc"><i>291</i>&nbsp;            ++numberKicker;</b>
+<b class="nc"><i>292</i>&nbsp;        }</b>
+<b class="nc"><i>293</i>&nbsp;        if (numberKicker == 1) {</b>
+<b class="nc"><i>294</i>&nbsp;            sb.append(&quot; &quot;).append(remarkText);</b>
+<i>295</i>&nbsp;        }
+<i>296</i>&nbsp;
+<b class="nc"><i>297</i>&nbsp;        return sb.toString();</b>
+<i>298</i>&nbsp;    }
+<i>299</i>&nbsp;
+<i>300</i>&nbsp;    @Override
+<i>301</i>&nbsp;    public String getCastMessageSuffix() {
+<b class="fc"><i>302</i>&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc"><i>303</i>&nbsp;        int position = 0;</b>
+<b class="fc"><i>304</i>&nbsp;        for (OptionalAdditionalCost cost : kickerCosts) {</b>
+<b class="fc"><i>305</i>&nbsp;            if (cost.isActivated()) {</b>
+<b class="nc"><i>306</i>&nbsp;                sb.append(cost.getCastSuffixMessage(position));</b>
+<b class="nc"><i>307</i>&nbsp;                ++position;</b>
+<i>308</i>&nbsp;            }
+<b class="fc"><i>309</i>&nbsp;        }</b>
+<b class="fc"><i>310</i>&nbsp;        return sb.toString();</b>
+<i>311</i>&nbsp;    }
+<i>312</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

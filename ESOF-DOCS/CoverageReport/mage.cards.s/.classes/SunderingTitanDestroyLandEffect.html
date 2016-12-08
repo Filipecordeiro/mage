@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SunderingTitanDestroyLandEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.s</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SunderingTitanDestroyLandEffect (mage.cards.s)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SunderingTitanDestroyLandEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.4%
+  </span>
+  <span class="absValue">
+    (27/ 28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.s;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.HashSet;
+<i>31</i>&nbsp;import java.util.Set;
+<i>32</i>&nbsp;import java.util.UUID;
+<i>33</i>&nbsp;import mage.MageInt;
+<i>34</i>&nbsp;import mage.abilities.Ability;
+<i>35</i>&nbsp;import mage.abilities.common.EntersOrLeavesTheBattlefieldSourceTriggeredAbility;
+<i>36</i>&nbsp;import mage.abilities.effects.OneShotEffect;
+<i>37</i>&nbsp;import mage.cards.CardImpl;
+<i>38</i>&nbsp;import mage.cards.CardSetInfo;
+<i>39</i>&nbsp;import mage.constants.CardType;
+<i>40</i>&nbsp;import mage.constants.Outcome;
+<i>41</i>&nbsp;import mage.filter.common.FilterLandPermanent;
+<i>42</i>&nbsp;import mage.filter.predicate.mageobject.SubtypePredicate;
+<i>43</i>&nbsp;import mage.game.Game;
+<i>44</i>&nbsp;import mage.game.permanent.Permanent;
+<i>45</i>&nbsp;import mage.players.Player;
+<i>46</i>&nbsp;import mage.target.Target;
+<i>47</i>&nbsp;import mage.target.common.TargetLandPermanent;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;/**
+<i>50</i>&nbsp; *
+<i>51</i>&nbsp; * @author LevelX2
+<i>52</i>&nbsp; */
+<i>53</i>&nbsp;public class SunderingTitan extends CardImpl {
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public SunderingTitan(UUID ownerId, CardSetInfo setInfo) {
+<i>56</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},&quot;{8}&quot;);
+<i>57</i>&nbsp;        this.subtype.add(&quot;Golem&quot;);
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;        this.power = new MageInt(7);
+<i>60</i>&nbsp;        this.toughness = new MageInt(10);
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;        // When Sundering Titan enters the battlefield or leaves the battlefield, choose a land of each basic land type, then destroy those lands.
+<i>63</i>&nbsp;        this.addAbility(new EntersOrLeavesTheBattlefieldSourceTriggeredAbility(new SunderingTitanDestroyLandEffect(), false));
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public SunderingTitan(final SunderingTitan card) {
+<i>67</i>&nbsp;        super(card);
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    @Override
+<i>71</i>&nbsp;    public SunderingTitan copy() {
+<i>72</i>&nbsp;        return new SunderingTitan(this);
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;}
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;class SunderingTitanDestroyLandEffect extends OneShotEffect {
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    public SunderingTitanDestroyLandEffect() {
+<b class="fc"><i>79</i>&nbsp;        super(Outcome.DestroyPermanent);</b>
+<b class="fc"><i>80</i>&nbsp;        this.staticText = &quot;choose a land of each basic land type, then destroy those lands&quot;;</b>
+<b class="fc"><i>81</i>&nbsp;    }</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public SunderingTitanDestroyLandEffect(final SunderingTitanDestroyLandEffect effect) {
+<b class="fc"><i>84</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>85</i>&nbsp;    }</b>
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    @Override
+<i>88</i>&nbsp;    public SunderingTitanDestroyLandEffect copy() {
+<b class="fc"><i>89</i>&nbsp;        return new SunderingTitanDestroyLandEffect(this);</b>
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    @Override
+<i>93</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="fc"><i>94</i>&nbsp;        Player controller = game.getPlayer(source.getControllerId());</b>
+<b class="fc"><i>95</i>&nbsp;        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());</b>
+<b class="fc"><i>96</i>&nbsp;        Set&lt;UUID&gt; lands = new HashSet&lt;&gt;();</b>
+<b class="fc"><i>97</i>&nbsp;        if (controller != null &amp;&amp; sourcePermanent != null) {</b>
+<b class="fc"><i>98</i>&nbsp;            for (String landName : new String[]{&quot;Forest&quot;, &quot;Island&quot;, &quot;Mountain&quot;, &quot;Plains&quot;, &quot;Swamp&quot;}) {</b>
+<b class="fc"><i>99</i>&nbsp;                FilterLandPermanent filter = new FilterLandPermanent(landName + &quot; to destroy&quot;);</b>
+<b class="fc"><i>100</i>&nbsp;                filter.add(new SubtypePredicate(landName));</b>
+<b class="fc"><i>101</i>&nbsp;                Target target = new TargetLandPermanent(1, 1, filter, true);</b>
+<b class="fc"><i>102</i>&nbsp;                if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {</b>
+<b class="fc"><i>103</i>&nbsp;                    controller.chooseTarget(outcome, target, source, game);</b>
+<b class="fc"><i>104</i>&nbsp;                    lands.add(target.getFirstTarget());</b>
+<i>105</i>&nbsp;                }
+<i>106</i>&nbsp;            }
+<b class="fc"><i>107</i>&nbsp;            if (!lands.isEmpty()) {</b>
+<b class="fc"><i>108</i>&nbsp;                int destroyedLands = 0;</b>
+<b class="fc"><i>109</i>&nbsp;                for (UUID landId : lands) {</b>
+<b class="fc"><i>110</i>&nbsp;                    Permanent land = game.getPermanent(landId);</b>
+<b class="fc"><i>111</i>&nbsp;                    if (land != null) {</b>
+<b class="fc"><i>112</i>&nbsp;                        if (land.destroy(source.getSourceId(), game, false)) {</b>
+<b class="fc"><i>113</i>&nbsp;                            destroyedLands++;</b>
+<i>114</i>&nbsp;                        }
+<i>115</i>&nbsp;                    }
+<b class="fc"><i>116</i>&nbsp;                }</b>
+<b class="fc"><i>117</i>&nbsp;                game.informPlayers(sourcePermanent.getLogName() + &quot;: &quot; + destroyedLands + (destroyedLands &gt; 1 ? &quot; lands were&quot; : &quot;land was&quot;) + &quot; destroyed&quot;);</b>
+<i>118</i>&nbsp;            }
+<b class="fc"><i>119</i>&nbsp;            return true;</b>
+<i>120</i>&nbsp;        }
+<b class="nc"><i>121</i>&nbsp;        return false;</b>
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:36</div>
+</div>
+</body>
+</html>

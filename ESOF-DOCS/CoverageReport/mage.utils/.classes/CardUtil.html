@@ -1,0 +1,172 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CardUtil</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.utils</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CardUtil (mage.utils)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CardUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.utils;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.List;
+<i>4</i>&nbsp;import mage.ObjectColor;
+<i>5</i>&nbsp;import mage.cards.Card;
+<i>6</i>&nbsp;import mage.cards.MagePermanent;
+<i>7</i>&nbsp;import mage.constants.CardType;
+<i>8</i>&nbsp;import mage.view.CardView;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * Utility class for {@link CardView}
+<i>12</i>&nbsp; *
+<i>13</i>&nbsp; * @version 0.1 02.11.2010
+<i>14</i>&nbsp; * @author nantuko
+<i>15</i>&nbsp; */
+<b class="nc"><i>16</i>&nbsp;public class CardUtil {</b>
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    private static final String regexBlack = &quot;.*\\x7b.{0,2}B.{0,2}\\x7d.*&quot;;
+<i>19</i>&nbsp;    private static final String regexBlue = &quot;.*\\x7b.{0,2}U.{0,2}\\x7d.*&quot;;
+<i>20</i>&nbsp;    private static final String regexRed = &quot;.*\\x7b.{0,2}R.{0,2}\\x7d.*&quot;;
+<i>21</i>&nbsp;    private static final String regexGreen = &quot;.*\\x7b.{0,2}G.{0,2}\\x7d.*&quot;;
+<i>22</i>&nbsp;    private static final String regexWhite = &quot;.*\\x7b.{0,2}W.{0,2}\\x7d.*&quot;;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    public static boolean isCreature(CardView card) {
+<b class="nc"><i>25</i>&nbsp;        return is(card, CardType.CREATURE);</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public static boolean isPlaneswalker(CardView card) {
+<b class="nc"><i>29</i>&nbsp;        return is(card, CardType.PLANESWALKER);</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public static boolean isLand(CardView card) {
+<b class="nc"><i>33</i>&nbsp;        return is(card, CardType.LAND);</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    public static boolean isCreature(MagePermanent card) {
+<b class="nc"><i>37</i>&nbsp;        return is(card.getOriginal(), CardType.CREATURE);</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    public static boolean isPlaneswalker(MagePermanent card) {
+<b class="nc"><i>41</i>&nbsp;        return is(card.getOriginal(), CardType.PLANESWALKER);</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public static boolean isLand(MagePermanent card) {
+<b class="nc"><i>45</i>&nbsp;        return is(card.getOriginal(), CardType.LAND);</b>
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    public static boolean is(CardView card, CardType type) {
+<b class="nc"><i>49</i>&nbsp;        return card.getCardTypes().contains(type);</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public static boolean isBasicLand(Card card) {
+<b class="nc"><i>53</i>&nbsp;        return card.getSupertype().contains(&quot;Basic&quot;);</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public static boolean isLand(Card card) {
+<b class="nc"><i>57</i>&nbsp;        return card.getCardType().contains(CardType.LAND);</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public static int getColorIdentitySortValue(List&lt;String&gt; manaCost, ObjectColor originalColor, List&lt;String&gt; rules) {
+<b class="nc"><i>61</i>&nbsp;        ObjectColor color = new ObjectColor(originalColor);</b>
+<b class="nc"><i>62</i>&nbsp;        for (String rule : rules) {</b>
+<b class="nc"><i>63</i>&nbsp;            rule = rule.replaceAll(&quot;(?i)&lt;i.*?&lt;/i&gt;&quot;, &quot;&quot;); // Ignoring reminder text in italic</b>
+<b class="nc"><i>64</i>&nbsp;            if (rule.matches(regexBlack)) {</b>
+<b class="nc"><i>65</i>&nbsp;                color.setBlack(true);</b>
+<i>66</i>&nbsp;            }
+<b class="nc"><i>67</i>&nbsp;            if (rule.matches(regexBlue)) {</b>
+<b class="nc"><i>68</i>&nbsp;                color.setBlue(true);</b>
+<i>69</i>&nbsp;            }
+<b class="nc"><i>70</i>&nbsp;            if (rule.matches(regexGreen)) {</b>
+<b class="nc"><i>71</i>&nbsp;                color.setGreen(true);</b>
+<i>72</i>&nbsp;            }
+<b class="nc"><i>73</i>&nbsp;            if (rule.matches(regexRed)) {</b>
+<b class="nc"><i>74</i>&nbsp;                color.setRed(true);</b>
+<i>75</i>&nbsp;            }
+<b class="nc"><i>76</i>&nbsp;            if (rule.matches(regexWhite)) {</b>
+<b class="nc"><i>77</i>&nbsp;                color.setWhite(true);</b>
+<i>78</i>&nbsp;            }
+<b class="nc"><i>79</i>&nbsp;        }</b>
+<i>80</i>&nbsp;
+<b class="nc"><i>81</i>&nbsp;        int hash = 3;</b>
+<b class="nc"><i>82</i>&nbsp;        hash = 23 * hash + (color.isWhite() || manaCost.contains(&quot;{W}&quot;) ? 1 : 0);</b>
+<b class="nc"><i>83</i>&nbsp;        hash = 23 * hash + (color.isBlue() || manaCost.contains(&quot;{U}&quot;) ? 1 : 0);</b>
+<b class="nc"><i>84</i>&nbsp;        hash = 23 * hash + (color.isBlack() || manaCost.contains(&quot;{B}&quot;) ? 1 : 0);</b>
+<b class="nc"><i>85</i>&nbsp;        hash = 23 * hash + (color.isRed() || manaCost.contains(&quot;{R}&quot;) ? 1 : 0);</b>
+<b class="nc"><i>86</i>&nbsp;        hash = 23 * hash + (color.isGreen() || manaCost.contains(&quot;{G}&quot;) ? 1 : 0);</b>
+<b class="nc"><i>87</i>&nbsp;        return hash;</b>
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

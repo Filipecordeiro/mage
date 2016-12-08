@@ -1,0 +1,320 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GauntletOfPower</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.g</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GauntletOfPower (mage.cards.g)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GauntletOfPower</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.g;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.Mana;
+<i>32</i>&nbsp;import mage.ObjectColor;
+<i>33</i>&nbsp;import mage.abilities.Ability;
+<i>34</i>&nbsp;import mage.abilities.common.EntersBattlefieldAbility;
+<i>35</i>&nbsp;import mage.abilities.common.SimpleStaticAbility;
+<i>36</i>&nbsp;import mage.abilities.effects.ContinuousEffectImpl;
+<i>37</i>&nbsp;import mage.abilities.effects.Effect;
+<i>38</i>&nbsp;import mage.abilities.effects.common.ChooseColorEffect;
+<i>39</i>&nbsp;import mage.abilities.effects.common.ManaEffect;
+<i>40</i>&nbsp;import mage.abilities.mana.TriggeredManaAbility;
+<i>41</i>&nbsp;import mage.cards.CardImpl;
+<i>42</i>&nbsp;import mage.cards.CardSetInfo;
+<i>43</i>&nbsp;import mage.constants.CardType;
+<i>44</i>&nbsp;import mage.constants.Duration;
+<i>45</i>&nbsp;import mage.constants.Layer;
+<i>46</i>&nbsp;import mage.constants.Outcome;
+<i>47</i>&nbsp;import mage.constants.SetTargetPointer;
+<i>48</i>&nbsp;import mage.constants.SubLayer;
+<i>49</i>&nbsp;import mage.constants.Zone;
+<i>50</i>&nbsp;import mage.filter.FilterPermanent;
+<i>51</i>&nbsp;import mage.filter.common.FilterCreaturePermanent;
+<i>52</i>&nbsp;import mage.filter.common.FilterLandPermanent;
+<i>53</i>&nbsp;import mage.filter.predicate.mageobject.SupertypePredicate;
+<i>54</i>&nbsp;import mage.game.Game;
+<i>55</i>&nbsp;import mage.game.events.GameEvent;
+<i>56</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>57</i>&nbsp;import mage.game.events.ManaEvent;
+<i>58</i>&nbsp;import mage.game.permanent.Permanent;
+<i>59</i>&nbsp;import mage.players.Player;
+<i>60</i>&nbsp;import mage.target.targetpointer.FixedTarget;
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;/**
+<i>63</i>&nbsp; *
+<i>64</i>&nbsp; * @author LevelX2
+<i>65</i>&nbsp; */
+<i>66</i>&nbsp;public class GauntletOfPower extends CardImpl {
+<i>67</i>&nbsp;
+<b class="nc"><i>68</i>&nbsp;    private static final FilterLandPermanent filter = new FilterLandPermanent(&quot;a basic land&quot;);</b>
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    static {
+<b class="nc"><i>71</i>&nbsp;        filter.add(new SupertypePredicate(&quot;Basic&quot;));</b>
+<b class="nc"><i>72</i>&nbsp;    }</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    public GauntletOfPower(UUID ownerId, CardSetInfo setInfo) {
+<b class="nc"><i>75</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},&quot;{5}&quot;);</b>
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;        // As Gauntlet of Power enters the battlefield, choose a color.
+<b class="nc"><i>78</i>&nbsp;        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));</b>
+<i>79</i>&nbsp;        // Creatures of the chosen color get +1/+1.
+<b class="nc"><i>80</i>&nbsp;        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GauntletOfPowerEffect1()));</b>
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;        // Whenever a basic land is tapped for mana of the chosen color, its controller adds one mana of that color to his or her mana pool.
+<b class="nc"><i>83</i>&nbsp;        this.addAbility(new TapForManaAllTriggeredAbility(new GauntletOfPowerEffectEffect2(), filter, SetTargetPointer.PERMANENT));</b>
+<b class="nc"><i>84</i>&nbsp;    }</b>
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public GauntletOfPower(final GauntletOfPower card) {
+<b class="nc"><i>87</i>&nbsp;        super(card);</b>
+<b class="nc"><i>88</i>&nbsp;    }</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    @Override
+<i>91</i>&nbsp;    public GauntletOfPower copy() {
+<b class="nc"><i>92</i>&nbsp;        return new GauntletOfPower(this);</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;}
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;class GauntletOfPowerEffect1 extends ContinuousEffectImpl {
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    public GauntletOfPowerEffect1() {
+<i>101</i>&nbsp;        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+<i>102</i>&nbsp;        staticText = &quot;Creatures of the chosen color get +1/+1&quot;;
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    public GauntletOfPowerEffect1(final GauntletOfPowerEffect1 effect) {
+<i>106</i>&nbsp;        super(effect);
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    @Override
+<i>110</i>&nbsp;    public GauntletOfPowerEffect1 copy() {
+<i>111</i>&nbsp;        return new GauntletOfPowerEffect1(this);
+<i>112</i>&nbsp;    }
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    @Override
+<i>115</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>116</i>&nbsp;        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + &quot;_color&quot;);
+<i>117</i>&nbsp;        if (color != null) {
+<i>118</i>&nbsp;            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+<i>119</i>&nbsp;                if (perm.getColor(game).contains(color)) {
+<i>120</i>&nbsp;                    perm.addPower(1);
+<i>121</i>&nbsp;                    perm.addToughness(1);
+<i>122</i>&nbsp;                }
+<i>123</i>&nbsp;            }
+<i>124</i>&nbsp;        }
+<i>125</i>&nbsp;        return true;
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;}
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;class TapForManaAllTriggeredAbility extends TriggeredManaAbility {
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    private final FilterPermanent filter;
+<i>133</i>&nbsp;    private final SetTargetPointer setTargetPointer;
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    public TapForManaAllTriggeredAbility(ManaEffect effect, FilterPermanent filter, SetTargetPointer setTargetPointer) {
+<i>136</i>&nbsp;        super(Zone.BATTLEFIELD, effect, false);
+<i>137</i>&nbsp;        this.filter = filter;
+<i>138</i>&nbsp;        this.setTargetPointer = setTargetPointer;
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    public TapForManaAllTriggeredAbility(TapForManaAllTriggeredAbility ability) {
+<i>142</i>&nbsp;        super(ability);
+<i>143</i>&nbsp;        this.filter = ability.filter.copy();
+<i>144</i>&nbsp;        this.setTargetPointer = ability.setTargetPointer;
+<i>145</i>&nbsp;    }
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;    @Override
+<i>148</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<i>149</i>&nbsp;        return event.getType() == EventType.TAPPED_FOR_MANA;
+<i>150</i>&nbsp;    }
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;    @Override
+<i>153</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<i>154</i>&nbsp;        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+<i>155</i>&nbsp;        if (permanent != null &amp;&amp; filter.match(permanent, getSourceId(), getControllerId(), game)) {
+<i>156</i>&nbsp;            ManaEvent mEvent = (ManaEvent) event;
+<i>157</i>&nbsp;            ObjectColor color = (ObjectColor) game.getState().getValue(getSourceId() + &quot;_color&quot;);
+<i>158</i>&nbsp;            if (color != null) {
+<i>159</i>&nbsp;                Mana mana = mEvent.getMana();
+<i>160</i>&nbsp;                boolean colorFits = false;
+<i>161</i>&nbsp;                if (color.isBlack() &amp;&amp; mana.getBlack() &gt; 0) {
+<i>162</i>&nbsp;                    colorFits = true;
+<i>163</i>&nbsp;                } else if (color.isBlue() &amp;&amp; mana.getBlue() &gt; 0) {
+<i>164</i>&nbsp;                    colorFits = true;
+<i>165</i>&nbsp;                } else if (color.isGreen() &amp;&amp; mana.getGreen() &gt; 0) {
+<i>166</i>&nbsp;                    colorFits = true;
+<i>167</i>&nbsp;                } else if (color.isWhite() &amp;&amp; mana.getWhite() &gt; 0) {
+<i>168</i>&nbsp;                    colorFits = true;
+<i>169</i>&nbsp;                } else if (color.isRed() &amp;&amp; mana.getRed() &gt; 0) {
+<i>170</i>&nbsp;                    colorFits = true;
+<i>171</i>&nbsp;                }
+<i>172</i>&nbsp;                if (colorFits) {
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;                    for (Effect effect : getEffects()) {
+<i>175</i>&nbsp;                        effect.setValue(&quot;mana&quot;, mEvent.getMana());
+<i>176</i>&nbsp;                    }
+<i>177</i>&nbsp;                    switch (setTargetPointer) {
+<i>178</i>&nbsp;                        case PERMANENT:
+<i>179</i>&nbsp;                            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+<i>180</i>&nbsp;                            break;
+<i>181</i>&nbsp;                        case PLAYER:
+<i>182</i>&nbsp;                            getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
+<i>183</i>&nbsp;                            break;
+<i>184</i>&nbsp;                    }
+<i>185</i>&nbsp;                    return true;
+<i>186</i>&nbsp;                }
+<i>187</i>&nbsp;            }
+<i>188</i>&nbsp;        }
+<i>189</i>&nbsp;        return false;
+<i>190</i>&nbsp;    }
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;    @Override
+<i>193</i>&nbsp;    public TapForManaAllTriggeredAbility copy() {
+<i>194</i>&nbsp;        return new TapForManaAllTriggeredAbility(this);
+<i>195</i>&nbsp;    }
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;    @Override
+<i>198</i>&nbsp;    public String getRule() {
+<i>199</i>&nbsp;        return &quot;Whenever &quot; + filter.getMessage() + &quot; for mana, &quot; + super.getRule();
+<i>200</i>&nbsp;    }
+<i>201</i>&nbsp;}
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;class GauntletOfPowerEffectEffect2 extends ManaEffect {
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;    public GauntletOfPowerEffectEffect2() {
+<i>206</i>&nbsp;        super();
+<i>207</i>&nbsp;        staticText = &quot;its controller adds one mana of that color to his or her mana pool&quot;;
+<i>208</i>&nbsp;    }
+<i>209</i>&nbsp;
+<i>210</i>&nbsp;    public GauntletOfPowerEffectEffect2(final GauntletOfPowerEffectEffect2 effect) {
+<i>211</i>&nbsp;        super(effect);
+<i>212</i>&nbsp;    }
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;    @Override
+<i>215</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>216</i>&nbsp;        Permanent land = game.getPermanentOrLKIBattlefield(getTargetPointer().getFirst(game, source));
+<i>217</i>&nbsp;        if(land != null){
+<i>218</i>&nbsp;            Player player = game.getPlayer(land.getControllerId());
+<i>219</i>&nbsp;            Mana mana = (Mana) getValue(&quot;mana&quot;);
+<i>220</i>&nbsp;            if (player != null &amp;&amp; mana != null) {
+<i>221</i>&nbsp;                player.getManaPool().addMana(mana, game, source);
+<i>222</i>&nbsp;                return true;
+<i>223</i>&nbsp;            }
+<i>224</i>&nbsp;        }
+<i>225</i>&nbsp;        return false;
+<i>226</i>&nbsp;    }
+<i>227</i>&nbsp;
+<i>228</i>&nbsp;    @Override
+<i>229</i>&nbsp;    public Mana getMana(Game game, Ability source) {
+<i>230</i>&nbsp;        return null;
+<i>231</i>&nbsp;    }
+<i>232</i>&nbsp;
+<i>233</i>&nbsp;    @Override
+<i>234</i>&nbsp;    public GauntletOfPowerEffectEffect2 copy() {
+<i>235</i>&nbsp;        return new GauntletOfPowerEffectEffect2(this);
+<i>236</i>&nbsp;    }
+<i>237</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:35</div>
+</div>
+</body>
+</html>

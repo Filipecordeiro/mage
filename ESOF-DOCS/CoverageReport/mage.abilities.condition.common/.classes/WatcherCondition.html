@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WatcherCondition</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.condition.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WatcherCondition (mage.abilities.condition.common)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WatcherCondition</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 14)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">WatcherCondition$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.abilities.condition.common;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import mage.abilities.Ability;
+<i>4</i>&nbsp;import mage.abilities.condition.Condition;
+<i>5</i>&nbsp;import mage.constants.WatcherScope;
+<i>6</i>&nbsp;import mage.game.Game;
+<i>7</i>&nbsp;import mage.watchers.Watcher;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; *
+<i>11</i>&nbsp; * @author Quercitron
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public class WatcherCondition implements Condition {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    private final String watcherKey;
+<i>16</i>&nbsp;    private final WatcherScope watcherScope;
+<i>17</i>&nbsp;    private final String text;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public WatcherCondition(String watcherKey, WatcherScope watcherScope) {
+<b class="nc"><i>20</i>&nbsp;        this(watcherKey, watcherScope, &quot;&quot;);</b>
+<i>21</i>&nbsp;    }
+<i>22</i>&nbsp;
+<b class="nc"><i>23</i>&nbsp;    public WatcherCondition(String watcherKey, WatcherScope watcherScope, String text) {</b>
+<b class="nc"><i>24</i>&nbsp;        this.watcherKey = watcherKey;</b>
+<b class="nc"><i>25</i>&nbsp;        this.watcherScope = watcherScope;</b>
+<b class="nc"><i>26</i>&nbsp;        this.text = text;</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    @Override
+<i>30</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<b class="nc"><i>31</i>&nbsp;        Watcher watcher = null;</b>
+<b class="nc"><i>32</i>&nbsp;        switch (watcherScope) {</b>
+<i>33</i>&nbsp;            case GAME:
+<b class="nc"><i>34</i>&nbsp;                watcher = game.getState().getWatchers().get(watcherKey);</b>
+<b class="nc"><i>35</i>&nbsp;                break;</b>
+<i>36</i>&nbsp;            case PLAYER:
+<b class="nc"><i>37</i>&nbsp;                watcher = game.getState().getWatchers().get(watcherKey, source.getControllerId());</b>
+<b class="nc"><i>38</i>&nbsp;                break;</b>
+<i>39</i>&nbsp;            case CARD:
+<b class="nc"><i>40</i>&nbsp;                watcher = game.getState().getWatchers().get(watcherKey, source.getSourceId());</b>
+<i>41</i>&nbsp;                break;
+<i>42</i>&nbsp;        }
+<b class="nc"><i>43</i>&nbsp;        return watcher != null &amp;&amp; watcher.conditionMet();</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    @Override
+<i>47</i>&nbsp;    public String toString() {
+<b class="nc"><i>48</i>&nbsp;        return text;</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

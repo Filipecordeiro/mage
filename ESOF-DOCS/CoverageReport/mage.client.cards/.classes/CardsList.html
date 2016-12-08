@@ -1,0 +1,961 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CardsList</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.cards</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CardsList (mage.client.cards)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CardsList</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 391)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CardsList$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CardsList$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CardsList$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CardsList$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CardsList$5</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CardsList$6</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 47)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 406)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;
+<i>29</i>&nbsp; /*
+<i>30</i>&nbsp; * CardsList.java
+<i>31</i>&nbsp; *
+<i>32</i>&nbsp; * Created on Dec 18, 2009, 10:40:12 AM
+<i>33</i>&nbsp; */
+<i>34</i>&nbsp;package mage.client.cards;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;import java.awt.Color;
+<i>37</i>&nbsp;import java.awt.Component;
+<i>38</i>&nbsp;import java.awt.Dimension;
+<i>39</i>&nbsp;import java.awt.Rectangle;
+<i>40</i>&nbsp;import java.awt.event.MouseAdapter;
+<i>41</i>&nbsp;import java.awt.event.MouseEvent;
+<i>42</i>&nbsp;import java.awt.event.MouseListener;
+<i>43</i>&nbsp;import java.beans.Beans;
+<i>44</i>&nbsp;import java.util.ArrayList;
+<i>45</i>&nbsp;import java.util.Collections;
+<i>46</i>&nbsp;import java.util.Comparator;
+<i>47</i>&nbsp;import java.util.LinkedHashMap;
+<i>48</i>&nbsp;import java.util.List;
+<i>49</i>&nbsp;import java.util.Map;
+<i>50</i>&nbsp;import java.util.UUID;
+<i>51</i>&nbsp;import javax.swing.DefaultComboBoxModel;
+<i>52</i>&nbsp;import javax.swing.JTable;
+<i>53</i>&nbsp;import javax.swing.table.DefaultTableCellRenderer;
+<i>54</i>&nbsp;import javax.swing.table.TableColumn;
+<i>55</i>&nbsp;import javax.swing.table.TableColumnModel;
+<i>56</i>&nbsp;import mage.cards.MageCard;
+<i>57</i>&nbsp;import mage.client.constants.Constants.DeckEditorMode;
+<i>58</i>&nbsp;import mage.client.constants.Constants.SortBy;
+<i>59</i>&nbsp;import mage.client.deckeditor.SortSetting;
+<i>60</i>&nbsp;import mage.client.deckeditor.table.TableModel;
+<i>61</i>&nbsp;import mage.client.deckeditor.table.UpdateCountsCallback;
+<i>62</i>&nbsp;import mage.client.dialog.PreferencesDialog;
+<i>63</i>&nbsp;import mage.client.plugins.impl.Plugins;
+<i>64</i>&nbsp;import mage.client.util.CardViewColorComparator;
+<i>65</i>&nbsp;import mage.client.util.CardViewColorIdentityComparator;
+<i>66</i>&nbsp;import mage.client.util.CardViewCostComparator;
+<i>67</i>&nbsp;import mage.client.util.CardViewNameComparator;
+<i>68</i>&nbsp;import mage.client.util.CardViewRarityComparator;
+<i>69</i>&nbsp;import mage.client.util.Event;
+<i>70</i>&nbsp;import mage.client.util.GUISizeHelper;
+<i>71</i>&nbsp;import mage.client.util.Listener;
+<i>72</i>&nbsp;import mage.client.util.gui.TableSpinnerEditor;
+<i>73</i>&nbsp;import mage.constants.CardType;
+<i>74</i>&nbsp;import mage.view.CardView;
+<i>75</i>&nbsp;import mage.view.CardsView;
+<i>76</i>&nbsp;import mage.view.SimpleCardView;
+<i>77</i>&nbsp;import org.mage.card.arcane.CardPanel;
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;/**
+<i>80</i>&nbsp; *
+<i>81</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>82</i>&nbsp; */
+<b class="nc"><i>83</i>&nbsp;public class CardsList extends javax.swing.JPanel implements MouseListener, ICardGrid {</b>
+<i>84</i>&nbsp;
+<b class="nc"><i>85</i>&nbsp;    protected CardEventSource cardEventSource = new CardEventSource();</b>
+<i>86</i>&nbsp;    private Dimension cardDimension;
+<i>87</i>&nbsp;    private int rowHeight;
+<i>88</i>&nbsp;    private CardsView cards;
+<b class="nc"><i>89</i>&nbsp;    private Map&lt;UUID, MageCard&gt; mageCards = new LinkedHashMap&lt;&gt;();</b>
+<i>90</i>&nbsp;    protected BigCard bigCard;
+<i>91</i>&nbsp;    protected UUID gameId;
+<i>92</i>&nbsp;    private SortSetting sortSetting;
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    private TableModel mainModel;
+<i>95</i>&nbsp;    private JTable mainTable;
+<i>96</i>&nbsp;    private ICardGrid currentView;
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    /**
+<i>99</i>&nbsp;     * Creates new form Cards
+<i>100</i>&nbsp;     */
+<b class="nc"><i>101</i>&nbsp;    public CardsList() {</b>
+<b class="nc"><i>102</i>&nbsp;        initComponents();</b>
+<b class="nc"><i>103</i>&nbsp;        makeTransparent();</b>
+<b class="nc"><i>104</i>&nbsp;        initListViewComponents();</b>
+<b class="nc"><i>105</i>&nbsp;        setGUISize();</b>
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    public void cleanUp() {
+<b class="nc"><i>109</i>&nbsp;        this.clearCardEventListeners();</b>
+<b class="nc"><i>110</i>&nbsp;        if (cards != null) {</b>
+<b class="nc"><i>111</i>&nbsp;            cards.clear();</b>
+<i>112</i>&nbsp;        }
+<b class="nc"><i>113</i>&nbsp;        if (mainModel != null) {</b>
+<b class="nc"><i>114</i>&nbsp;            mainModel.removeTableModelListener(mainTable);</b>
+<b class="nc"><i>115</i>&nbsp;            mainModel.clear();</b>
+<i>116</i>&nbsp;        }
+<b class="nc"><i>117</i>&nbsp;        if (cardArea != null) {</b>
+<b class="nc"><i>118</i>&nbsp;            for (MouseListener ml : cardArea.getMouseListeners()) {</b>
+<b class="nc"><i>119</i>&nbsp;                cardArea.removeMouseListener(ml);</b>
+<i>120</i>&nbsp;            }
+<i>121</i>&nbsp;        }
+<b class="nc"><i>122</i>&nbsp;        if (mainTable != null) {</b>
+<b class="nc"><i>123</i>&nbsp;            for (MouseListener ml : mainTable.getMouseListeners()) {</b>
+<b class="nc"><i>124</i>&nbsp;                mainTable.removeMouseListener(ml);</b>
+<i>125</i>&nbsp;            }
+<i>126</i>&nbsp;        }
+<b class="nc"><i>127</i>&nbsp;        if (currentView != null) {</b>
+<b class="nc"><i>128</i>&nbsp;            currentView.clearCardEventListeners();</b>
+<i>129</i>&nbsp;        }
+<b class="nc"><i>130</i>&nbsp;        for (Component comp : cardArea.getComponents()) {</b>
+<b class="nc"><i>131</i>&nbsp;            if (comp instanceof CardPanel) {</b>
+<b class="nc"><i>132</i>&nbsp;                ((CardPanel) comp).cleanUp();</b>
+<i>133</i>&nbsp;            }
+<i>134</i>&nbsp;        }
+<b class="nc"><i>135</i>&nbsp;        mageCards.clear();</b>
+<b class="nc"><i>136</i>&nbsp;        cardArea.removeAll();</b>
+<b class="nc"><i>137</i>&nbsp;        this.bigCard = null;</b>
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    }
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;    public void changeGUISize() {
+<b class="nc"><i>142</i>&nbsp;        setGUISize();</b>
+<b class="nc"><i>143</i>&nbsp;        redrawCards();</b>
+<i>144</i>&nbsp;    }
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;    private void setGUISize() {
+<b class="nc"><i>147</i>&nbsp;        mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);</b>
+<b class="nc"><i>148</i>&nbsp;        mainTable.setFont(GUISizeHelper.tableFont);</b>
+<b class="nc"><i>149</i>&nbsp;        mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());</b>
+<b class="nc"><i>150</i>&nbsp;        cardDimension = GUISizeHelper.editorCardDimension;</b>
+<b class="nc"><i>151</i>&nbsp;        rowHeight = GUISizeHelper.editorCardOffsetSize;</b>
+<i>152</i>&nbsp;    }
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    private void makeTransparent() {
+<b class="nc"><i>155</i>&nbsp;        panelCardArea.setOpaque(false);</b>
+<b class="nc"><i>156</i>&nbsp;        cardArea.setOpaque(false);</b>
+<b class="nc"><i>157</i>&nbsp;        panelCardArea.getViewport().setOpaque(false);</b>
+<b class="nc"><i>158</i>&nbsp;        panelControl.setBackground(new Color(250, 250, 250, 150));</b>
+<b class="nc"><i>159</i>&nbsp;        panelControl.setOpaque(true);</b>
+<b class="nc"><i>160</i>&nbsp;        cbSortBy.setModel(new DefaultComboBoxModel&lt;&gt;(SortBy.values()));</b>
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    private void initListViewComponents() {
+<b class="nc"><i>164</i>&nbsp;        mainTable = new JTable();</b>
+<i>165</i>&nbsp;
+<b class="nc"><i>166</i>&nbsp;        mainModel = new TableModel();</b>
+<b class="nc"><i>167</i>&nbsp;        mainModel.addListeners(mainTable);</b>
+<i>168</i>&nbsp;
+<b class="nc"><i>169</i>&nbsp;        mainTable.setModel(mainModel);</b>
+<b class="nc"><i>170</i>&nbsp;        mainTable.setForeground(Color.white);</b>
+<b class="nc"><i>171</i>&nbsp;        DefaultTableCellRenderer myRenderer = (DefaultTableCellRenderer) mainTable.getDefaultRenderer(String.class);</b>
+<b class="nc"><i>172</i>&nbsp;        myRenderer.setBackground(new Color(0, 0, 0, 100));</b>
+<b class="nc"><i>173</i>&nbsp;        mainTable.getColumnModel().getColumn(0).setMaxWidth(25);</b>
+<b class="nc"><i>174</i>&nbsp;        mainTable.getColumnModel().getColumn(0).setPreferredWidth(25);</b>
+<b class="nc"><i>175</i>&nbsp;        mainTable.getColumnModel().getColumn(1).setPreferredWidth(110);</b>
+<b class="nc"><i>176</i>&nbsp;        mainTable.getColumnModel().getColumn(2).setPreferredWidth(90);</b>
+<b class="nc"><i>177</i>&nbsp;        mainTable.getColumnModel().getColumn(3).setPreferredWidth(50);</b>
+<b class="nc"><i>178</i>&nbsp;        mainTable.getColumnModel().getColumn(4).setPreferredWidth(170);</b>
+<b class="nc"><i>179</i>&nbsp;        mainTable.getColumnModel().getColumn(5).setPreferredWidth(30);</b>
+<b class="nc"><i>180</i>&nbsp;        mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);</b>
+<b class="nc"><i>181</i>&nbsp;        mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);</b>
+<i>182</i>&nbsp;
+<b class="nc"><i>183</i>&nbsp;        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_VIEW, &quot;cardView&quot;).equals(&quot;listView&quot;)) {</b>
+<b class="nc"><i>184</i>&nbsp;            jToggleListView.setSelected(true);</b>
+<b class="nc"><i>185</i>&nbsp;            panelCardArea.setViewportView(mainTable);</b>
+<b class="nc"><i>186</i>&nbsp;            currentView = mainModel;</b>
+<b class="nc"><i>187</i>&nbsp;            cbSortBy.setEnabled(false);</b>
+<b class="nc"><i>188</i>&nbsp;            chkPiles.setEnabled(false);</b>
+<i>189</i>&nbsp;        } else {
+<b class="nc"><i>190</i>&nbsp;            jToggleCardView.setSelected(true);</b>
+<b class="nc"><i>191</i>&nbsp;            currentView = this;</b>
+<b class="nc"><i>192</i>&nbsp;            panelCardArea.setViewportView(cardArea);</b>
+<b class="nc"><i>193</i>&nbsp;            cbSortBy.setEnabled(true);</b>
+<b class="nc"><i>194</i>&nbsp;            chkPiles.setEnabled(true);</b>
+<i>195</i>&nbsp;        }
+<i>196</i>&nbsp;
+<b class="nc"><i>197</i>&nbsp;        cardArea.addMouseListener(this);</b>
+<i>198</i>&nbsp;
+<b class="nc"><i>199</i>&nbsp;        mainTable.setOpaque(false);</b>
+<b class="nc"><i>200</i>&nbsp;        mainTable.addMouseListener(new MouseAdapter() {</b>
+<i>201</i>&nbsp;            @Override
+<i>202</i>&nbsp;            public void mousePressed(MouseEvent e) {
+<b class="nc"><i>203</i>&nbsp;                if ((e.getClickCount() &amp; 1) == 0 &amp;&amp; (e.getClickCount() &gt; 0) &amp;&amp; !e.isConsumed()) { // double clicks and repeated double clicks</b>
+<b class="nc"><i>204</i>&nbsp;                    e.consume();</b>
+<b class="nc"><i>205</i>&nbsp;                    if (e.isAltDown()) {</b>
+<b class="nc"><i>206</i>&nbsp;                        handleAltDoubleClick();</b>
+<i>207</i>&nbsp;                    } else {
+<b class="nc"><i>208</i>&nbsp;                        handleDoubleClick();</b>
+<i>209</i>&nbsp;                    }
+<i>210</i>&nbsp;                }
+<i>211</i>&nbsp;            }
+<i>212</i>&nbsp;        });
+<i>213</i>&nbsp;
+<b class="nc"><i>214</i>&nbsp;        mainModel.setUpdateCountsCallback(new UpdateCountsCallback(lblCount, lblCreatureCount, lblLandCount, null, null, null, null));</b>
+<i>215</i>&nbsp;    }
+<i>216</i>&nbsp;
+<i>217</i>&nbsp;    // if you use the deck ediot to build a free deck, numbers can be set directly in deck and sideboard
+<i>218</i>&nbsp;    public void setDeckEditorMode(DeckEditorMode mode) {
+<b class="nc"><i>219</i>&nbsp;        if (mode.equals(DeckEditorMode.FREE_BUILDING)) {</b>
+<i>220</i>&nbsp;            // activate spinner for card number change
+<b class="nc"><i>221</i>&nbsp;            mainModel.setNumberEditable(true);</b>
+<b class="nc"><i>222</i>&nbsp;            TableColumnModel tcm = mainTable.getColumnModel();</b>
+<b class="nc"><i>223</i>&nbsp;            TableColumn tc = tcm.getColumn(0);</b>
+<b class="nc"><i>224</i>&nbsp;            tc.setMaxWidth(55);</b>
+<b class="nc"><i>225</i>&nbsp;            tc.setMinWidth(55);</b>
+<b class="nc"><i>226</i>&nbsp;            tc.setPreferredWidth(55);</b>
+<b class="nc"><i>227</i>&nbsp;            tc.setCellEditor(new TableSpinnerEditor(this));</b>
+<i>228</i>&nbsp;        }
+<i>229</i>&nbsp;    }
+<i>230</i>&nbsp;
+<i>231</i>&nbsp;    public void handleSetNumber(int number) {
+<b class="nc"><i>232</i>&nbsp;        if (mainTable.getSelectedRowCount() == 1) {</b>
+<b class="nc"><i>233</i>&nbsp;            mainModel.setNumber(mainTable.getSelectedRow(), number);</b>
+<i>234</i>&nbsp;        }
+<i>235</i>&nbsp;    }
+<i>236</i>&nbsp;
+<i>237</i>&nbsp;    public void handleDoubleClick() {
+<b class="nc"><i>238</i>&nbsp;        if (mainTable.getSelectedRowCount() &gt; 0) {</b>
+<b class="nc"><i>239</i>&nbsp;            int[] n = mainTable.getSelectedRows();</b>
+<b class="nc"><i>240</i>&nbsp;            List&lt;Integer&gt; indexes = asList(n);</b>
+<b class="nc"><i>241</i>&nbsp;            Collections.reverse(indexes);</b>
+<b class="nc"><i>242</i>&nbsp;            for (Integer index : indexes) {</b>
+<b class="nc"><i>243</i>&nbsp;                mainModel.doubleClick(index);</b>
+<b class="nc"><i>244</i>&nbsp;            }</b>
+<i>245</i>&nbsp;        }
+<i>246</i>&nbsp;    }
+<i>247</i>&nbsp;
+<i>248</i>&nbsp;    public void handleAltDoubleClick() {
+<b class="nc"><i>249</i>&nbsp;        if (mainTable.getSelectedRowCount() &gt; 0) {</b>
+<b class="nc"><i>250</i>&nbsp;            int[] n = mainTable.getSelectedRows();</b>
+<b class="nc"><i>251</i>&nbsp;            List&lt;Integer&gt; indexes = asList(n);</b>
+<b class="nc"><i>252</i>&nbsp;            Collections.reverse(indexes);</b>
+<b class="nc"><i>253</i>&nbsp;            for (Integer index : indexes) {</b>
+<b class="nc"><i>254</i>&nbsp;                mainModel.altDoubleClick(index);</b>
+<b class="nc"><i>255</i>&nbsp;            }</b>
+<i>256</i>&nbsp;        }
+<i>257</i>&nbsp;    }
+<i>258</i>&nbsp;
+<i>259</i>&nbsp;    public ICardGrid getMainModel() {
+<b class="nc"><i>260</i>&nbsp;        return mainModel;</b>
+<i>261</i>&nbsp;    }
+<i>262</i>&nbsp;
+<i>263</i>&nbsp;    public List&lt;Integer&gt; asList(final int[] is) {
+<b class="nc"><i>264</i>&nbsp;        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>265</i>&nbsp;        for (int i : is) {</b>
+<b class="nc"><i>266</i>&nbsp;            list.add(i);</b>
+<i>267</i>&nbsp;        }
+<b class="nc"><i>268</i>&nbsp;        return list;</b>
+<i>269</i>&nbsp;    }
+<i>270</i>&nbsp;
+<i>271</i>&nbsp;    public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
+<b class="nc"><i>272</i>&nbsp;        int selectedRow = -1;</b>
+<b class="nc"><i>273</i>&nbsp;        if (currentView.equals(mainModel)) {</b>
+<b class="nc"><i>274</i>&nbsp;            selectedRow = mainTable.getSelectedRow();</b>
+<i>275</i>&nbsp;        }
+<b class="nc"><i>276</i>&nbsp;        this.cards = showCards;</b>
+<b class="nc"><i>277</i>&nbsp;        this.bigCard = bigCard;</b>
+<b class="nc"><i>278</i>&nbsp;        this.gameId = gameId;</b>
+<i>279</i>&nbsp;
+<b class="nc"><i>280</i>&nbsp;        cbSortBy.setSelectedItem(sortSetting.getSortBy());</b>
+<b class="nc"><i>281</i>&nbsp;        chkPiles.setSelected(sortSetting.isPilesToggle());</b>
+<b class="nc"><i>282</i>&nbsp;        currentView.loadCards(showCards, sortSetting, bigCard, gameId);</b>
+<b class="nc"><i>283</i>&nbsp;        if (selectedRow &gt;= 0) {</b>
+<b class="nc"><i>284</i>&nbsp;            selectedRow = Math.min(selectedRow, mainTable.getRowCount() - 1);</b>
+<b class="nc"><i>285</i>&nbsp;            if (selectedRow &gt;= 0) {</b>
+<b class="nc"><i>286</i>&nbsp;                mainTable.setRowSelectionInterval(selectedRow, selectedRow);</b>
+<i>287</i>&nbsp;            }
+<i>288</i>&nbsp;        }
+<i>289</i>&nbsp;    }
+<i>290</i>&nbsp;
+<i>291</i>&nbsp;    private void redrawCards() {
+<b class="nc"><i>292</i>&nbsp;        if (cards == null) {</b>
+<b class="nc"><i>293</i>&nbsp;            cards = new CardsView();</b>
+<i>294</i>&nbsp;        }
+<b class="nc"><i>295</i>&nbsp;        currentView.loadCards(cards, sortSetting, bigCard, gameId);</b>
+<i>296</i>&nbsp;    }
+<i>297</i>&nbsp;
+<i>298</i>&nbsp;    @Override
+<i>299</i>&nbsp;    public void drawCards(SortSetting sortSetting) {
+<b class="nc"><i>300</i>&nbsp;        int maxWidth = this.getParent().getWidth();</b>
+<b class="nc"><i>301</i>&nbsp;        int numColumns = maxWidth / cardDimension.width;</b>
+<b class="nc"><i>302</i>&nbsp;        int curColumn = 0;</b>
+<b class="nc"><i>303</i>&nbsp;        int curRow = 0;</b>
+<b class="nc"><i>304</i>&nbsp;        int maxRow = 0;</b>
+<b class="nc"><i>305</i>&nbsp;        int maxColumn = 0;</b>
+<b class="nc"><i>306</i>&nbsp;        Comparator&lt;CardView&gt; comparator = null;</b>
+<b class="nc"><i>307</i>&nbsp;        Map&lt;UUID, MageCard&gt; oldMageCards = mageCards;</b>
+<b class="nc"><i>308</i>&nbsp;        mageCards = new LinkedHashMap&lt;&gt;();</b>
+<i>309</i>&nbsp;
+<i>310</i>&nbsp;        //Find card view
+<b class="nc"><i>311</i>&nbsp;        for (UUID uuid : cards.keySet()) {</b>
+<b class="nc"><i>312</i>&nbsp;            if (oldMageCards.containsKey(uuid)) {</b>
+<b class="nc"><i>313</i>&nbsp;                mageCards.put(uuid, oldMageCards.get(uuid));</b>
+<b class="nc"><i>314</i>&nbsp;                oldMageCards.remove(uuid);</b>
+<i>315</i>&nbsp;            } else {
+<b class="nc"><i>316</i>&nbsp;                mageCards.put(uuid, addCard(cards.get(uuid), bigCard, gameId));</b>
+<i>317</i>&nbsp;            }
+<b class="nc"><i>318</i>&nbsp;        }</b>
+<i>319</i>&nbsp;        //Remove unused cards
+<b class="nc"><i>320</i>&nbsp;        for (MageCard card : oldMageCards.values()) {</b>
+<b class="nc"><i>321</i>&nbsp;            cardArea.remove(card);</b>
+<b class="nc"><i>322</i>&nbsp;        }</b>
+<i>323</i>&nbsp;
+<b class="nc"><i>324</i>&nbsp;        if (cards != null &amp;&amp; cards.size() &gt; 0) {</b>
+<b class="nc"><i>325</i>&nbsp;            Rectangle rectangle = new Rectangle(cardDimension.width, cardDimension.height);</b>
+<b class="nc"><i>326</i>&nbsp;            List&lt;CardView&gt; sortedCards = new ArrayList&lt;&gt;(cards.values());</b>
+<b class="nc"><i>327</i>&nbsp;            switch (sortSetting.getSortBy()) {</b>
+<i>328</i>&nbsp;                case NAME:
+<b class="nc"><i>329</i>&nbsp;                    comparator = new CardViewNameComparator();</b>
+<b class="nc"><i>330</i>&nbsp;                    break;</b>
+<i>331</i>&nbsp;                case RARITY:
+<b class="nc"><i>332</i>&nbsp;                    comparator = new CardViewRarityComparator();</b>
+<b class="nc"><i>333</i>&nbsp;                    break;</b>
+<i>334</i>&nbsp;                case COLOR:
+<b class="nc"><i>335</i>&nbsp;                    comparator = new CardViewColorComparator();</b>
+<b class="nc"><i>336</i>&nbsp;                    break;</b>
+<i>337</i>&nbsp;                case COLOR_IDENTITY:
+<b class="nc"><i>338</i>&nbsp;                    comparator = new CardViewColorIdentityComparator();</b>
+<b class="nc"><i>339</i>&nbsp;                    break;</b>
+<i>340</i>&nbsp;                case CASTING_COST:
+<b class="nc"><i>341</i>&nbsp;                    comparator = new CardViewCostComparator();</b>
+<i>342</i>&nbsp;                    break;
+<i>343</i>&nbsp;            }
+<b class="nc"><i>344</i>&nbsp;            if (comparator != null) {</b>
+<b class="nc"><i>345</i>&nbsp;                Collections.sort(sortedCards, new CardViewNameComparator());</b>
+<b class="nc"><i>346</i>&nbsp;                Collections.sort(sortedCards, comparator);</b>
+<i>347</i>&nbsp;            }
+<b class="nc"><i>348</i>&nbsp;            CardView lastCard = null;</b>
+<b class="nc"><i>349</i>&nbsp;            for (CardView card : sortedCards) {</b>
+<b class="nc"><i>350</i>&nbsp;                if (sortSetting.isPilesToggle()) {</b>
+<b class="nc"><i>351</i>&nbsp;                    if (lastCard == null) {</b>
+<b class="nc"><i>352</i>&nbsp;                        lastCard = card;</b>
+<i>353</i>&nbsp;                    }
+<b class="nc"><i>354</i>&nbsp;                    if (comparator != null) {</b>
+<b class="nc"><i>355</i>&nbsp;                        if (comparator.compare(card, lastCard) &gt; 0) {</b>
+<b class="nc"><i>356</i>&nbsp;                            curColumn++;</b>
+<b class="nc"><i>357</i>&nbsp;                            maxRow = Math.max(maxRow, curRow);</b>
+<b class="nc"><i>358</i>&nbsp;                            curRow = 0;</b>
+<i>359</i>&nbsp;                        }
+<i>360</i>&nbsp;                    }
+<b class="nc"><i>361</i>&nbsp;                    rectangle.setLocation(curColumn * cardDimension.width, curRow * rowHeight);</b>
+<b class="nc"><i>362</i>&nbsp;                    setCardBounds(mageCards.get(card.getId()), rectangle);</b>
+<i>363</i>&nbsp;
+<b class="nc"><i>364</i>&nbsp;                    curRow++;</b>
+<b class="nc"><i>365</i>&nbsp;                    lastCard = card;</b>
+<i>366</i>&nbsp;                } else {
+<b class="nc"><i>367</i>&nbsp;                    rectangle.setLocation(curColumn * cardDimension.width, curRow * rowHeight);</b>
+<b class="nc"><i>368</i>&nbsp;                    setCardBounds(mageCards.get(card.getId()), rectangle);</b>
+<b class="nc"><i>369</i>&nbsp;                    curColumn++;</b>
+<b class="nc"><i>370</i>&nbsp;                    if (curColumn == numColumns) {</b>
+<b class="nc"><i>371</i>&nbsp;                        maxColumn = Math.max(maxColumn, curColumn);</b>
+<b class="nc"><i>372</i>&nbsp;                        curColumn = 0;</b>
+<b class="nc"><i>373</i>&nbsp;                        curRow++;</b>
+<i>374</i>&nbsp;                    }
+<i>375</i>&nbsp;                }
+<b class="nc"><i>376</i>&nbsp;            }</b>
+<i>377</i>&nbsp;        }
+<b class="nc"><i>378</i>&nbsp;        maxRow = Math.max(maxRow, curRow);</b>
+<b class="nc"><i>379</i>&nbsp;        maxColumn = Math.max(maxColumn, curColumn);</b>
+<b class="nc"><i>380</i>&nbsp;        updateCounts();</b>
+<b class="nc"><i>381</i>&nbsp;        cardArea.setPreferredSize(new Dimension((maxColumn + 1) * cardDimension.width, cardDimension.height + maxRow * rowHeight));</b>
+<b class="nc"><i>382</i>&nbsp;        cardArea.revalidate();</b>
+<b class="nc"><i>383</i>&nbsp;        this.revalidate();</b>
+<b class="nc"><i>384</i>&nbsp;        this.repaint();</b>
+<b class="nc"><i>385</i>&nbsp;        this.setVisible(true);</b>
+<i>386</i>&nbsp;    }
+<i>387</i>&nbsp;
+<i>388</i>&nbsp;    private void updateCounts() {
+<b class="nc"><i>389</i>&nbsp;        int landCount = 0;</b>
+<b class="nc"><i>390</i>&nbsp;        int creatureCount = 0;</b>
+<b class="nc"><i>391</i>&nbsp;        int sorceryCount = 0;</b>
+<b class="nc"><i>392</i>&nbsp;        int instantCount = 0;</b>
+<b class="nc"><i>393</i>&nbsp;        int enchantmentCount = 0;</b>
+<b class="nc"><i>394</i>&nbsp;        int artifactCount = 0;</b>
+<i>395</i>&nbsp;       
+<b class="nc"><i>396</i>&nbsp;        for (CardView card : cards.values()) {</b>
+<b class="nc"><i>397</i>&nbsp;            if (card.getCardTypes().contains(CardType.LAND)) {</b>
+<b class="nc"><i>398</i>&nbsp;                landCount++;</b>
+<i>399</i>&nbsp;            }
+<b class="nc"><i>400</i>&nbsp;            if (card.getCardTypes().contains(CardType.CREATURE)) {</b>
+<b class="nc"><i>401</i>&nbsp;                creatureCount++;</b>
+<i>402</i>&nbsp;            }
+<b class="nc"><i>403</i>&nbsp;            if (card.getCardTypes().contains(CardType.SORCERY)) {</b>
+<b class="nc"><i>404</i>&nbsp;                sorceryCount++;</b>
+<i>405</i>&nbsp;            }
+<b class="nc"><i>406</i>&nbsp;            if (card.getCardTypes().contains(CardType.INSTANT)) {</b>
+<b class="nc"><i>407</i>&nbsp;                instantCount++;</b>
+<i>408</i>&nbsp;            }
+<b class="nc"><i>409</i>&nbsp;            if (card.getCardTypes().contains(CardType.ENCHANTMENT)) {</b>
+<b class="nc"><i>410</i>&nbsp;                enchantmentCount++;</b>
+<i>411</i>&nbsp;            }
+<b class="nc"><i>412</i>&nbsp;            if (card.getCardTypes().contains(CardType.ARTIFACT)) {</b>
+<b class="nc"><i>413</i>&nbsp;                artifactCount++;</b>
+<i>414</i>&nbsp;            }
+<b class="nc"><i>415</i>&nbsp;        }</b>
+<i>416</i>&nbsp;
+<b class="nc"><i>417</i>&nbsp;        int count = cards != null ? cards.size() : 0;</b>
+<b class="nc"><i>418</i>&nbsp;        this.lblCount.setText(Integer.toString(count));</b>
+<b class="nc"><i>419</i>&nbsp;        this.lblCreatureCount.setText(Integer.toString(creatureCount));</b>
+<b class="nc"><i>420</i>&nbsp;        this.lblLandCount.setText(Integer.toString(landCount));</b>
+<i>421</i>&nbsp;    }
+<i>422</i>&nbsp;
+<i>423</i>&nbsp;    private MageCard addCard(CardView card, BigCard bigCard, UUID gameId) {
+<b class="nc"><i>424</i>&nbsp;        MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, cardDimension, gameId, true, true);</b>
+<b class="nc"><i>425</i>&nbsp;        cardArea.add(cardImg);</b>
+<b class="nc"><i>426</i>&nbsp;        cardImg.update(card);</b>
+<b class="nc"><i>427</i>&nbsp;        cardImg.addMouseListener(this);</b>
+<b class="nc"><i>428</i>&nbsp;        return cardImg;</b>
+<i>429</i>&nbsp;    }
+<i>430</i>&nbsp;
+<i>431</i>&nbsp;    private void setCardBounds(MageCard card, Rectangle rectangle) {
+<b class="nc"><i>432</i>&nbsp;        card.setBounds(rectangle);</b>
+<b class="nc"><i>433</i>&nbsp;        card.setCardBounds(rectangle.x, rectangle.y, cardDimension.width, cardDimension.height);</b>
+<b class="nc"><i>434</i>&nbsp;        cardArea.moveToFront(card);</b>
+<i>435</i>&nbsp;    }
+<i>436</i>&nbsp;
+<i>437</i>&nbsp;    @Override
+<i>438</i>&nbsp;    public void addCardEventListener(Listener&lt;Event&gt; listener) {
+<b class="nc"><i>439</i>&nbsp;        cardEventSource.addListener(listener);</b>
+<b class="nc"><i>440</i>&nbsp;        mainModel.addCardEventListener(listener);</b>
+<i>441</i>&nbsp;    }
+<i>442</i>&nbsp;
+<i>443</i>&nbsp;    @Override
+<i>444</i>&nbsp;    public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId) {
+<b class="nc"><i>445</i>&nbsp;        this.loadCards(showCards, sortSetting, bigCard, gameId, true);</b>
+<i>446</i>&nbsp;    }
+<i>447</i>&nbsp;
+<i>448</i>&nbsp;    @Override
+<i>449</i>&nbsp;    public void loadCards(CardsView showCards, SortSetting sortSetting, BigCard bigCard, UUID gameId, boolean merge) {
+<b class="nc"><i>450</i>&nbsp;        cards = showCards;</b>
+<b class="nc"><i>451</i>&nbsp;        this.bigCard = bigCard;</b>
+<b class="nc"><i>452</i>&nbsp;        this.gameId = gameId;</b>
+<b class="nc"><i>453</i>&nbsp;        drawCards(sortSetting);</b>
+<i>454</i>&nbsp;    }
+<i>455</i>&nbsp;
+<i>456</i>&nbsp;    @Override
+<i>457</i>&nbsp;    public void refresh() {
+<b class="nc"><i>458</i>&nbsp;        redrawCards();</b>
+<i>459</i>&nbsp;    }
+<i>460</i>&nbsp;
+<i>461</i>&nbsp;    @Override
+<i>462</i>&nbsp;    public void clearCardEventListeners() {
+<b class="nc"><i>463</i>&nbsp;        cardEventSource.clearListeners();</b>
+<b class="nc"><i>464</i>&nbsp;        mainModel.clearCardEventListeners();</b>
+<i>465</i>&nbsp;    }
+<i>466</i>&nbsp;
+<i>467</i>&nbsp;    /**
+<i>468</i>&nbsp;     * This method is called from within the constructor to initialize the form.
+<i>469</i>&nbsp;     * WARNING: Do NOT modify this code. The content of this method is always
+<i>470</i>&nbsp;     * regenerated by the Form Editor.
+<i>471</i>&nbsp;     */
+<i>472</i>&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+<i>473</i>&nbsp;    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+<i>474</i>&nbsp;    private void initComponents() {
+<i>475</i>&nbsp;
+<b class="nc"><i>476</i>&nbsp;        bgView = new javax.swing.ButtonGroup();</b>
+<b class="nc"><i>477</i>&nbsp;        panelControl = new javax.swing.JPanel();</b>
+<b class="nc"><i>478</i>&nbsp;        lblCount = new javax.swing.JLabel();</b>
+<b class="nc"><i>479</i>&nbsp;        lblLandCount = new javax.swing.JLabel();</b>
+<b class="nc"><i>480</i>&nbsp;        lblCreatureCount = new javax.swing.JLabel();</b>
+<b class="nc"><i>481</i>&nbsp;        chkPiles = new javax.swing.JCheckBox();</b>
+<b class="nc"><i>482</i>&nbsp;        cbSortBy = new javax.swing.JComboBox();</b>
+<b class="nc"><i>483</i>&nbsp;        jToggleListView = new javax.swing.JToggleButton();</b>
+<b class="nc"><i>484</i>&nbsp;        jToggleCardView = new javax.swing.JToggleButton();</b>
+<b class="nc"><i>485</i>&nbsp;        panelCardArea = new javax.swing.JScrollPane();</b>
+<b class="nc"><i>486</i>&nbsp;        cardArea = new javax.swing.JLayeredPane();</b>
+<i>487</i>&nbsp;
+<b class="nc"><i>488</i>&nbsp;        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));</b>
+<b class="nc"><i>489</i>&nbsp;        setMinimumSize(new java.awt.Dimension(30, 30));</b>
+<b class="nc"><i>490</i>&nbsp;        setPreferredSize((!Beans.isDesignTime())?</b>
+<i>491</i>&nbsp;            (GUISizeHelper.editorCardDimension)
+<i>492</i>&nbsp;            :(new Dimension(600, 600)));
+<b class="nc"><i>493</i>&nbsp;        setRequestFocusEnabled(false);</b>
+<i>494</i>&nbsp;
+<b class="nc"><i>495</i>&nbsp;        panelControl.setMaximumSize(new java.awt.Dimension(32767, 23));</b>
+<b class="nc"><i>496</i>&nbsp;        panelControl.setMinimumSize(new java.awt.Dimension(616, 23));</b>
+<b class="nc"><i>497</i>&nbsp;        panelControl.setName(&quot;&quot;); // NOI18N</b>
+<b class="nc"><i>498</i>&nbsp;        panelControl.setPreferredSize(new java.awt.Dimension(616, 23));</b>
+<b class="nc"><i>499</i>&nbsp;        panelControl.setRequestFocusEnabled(false);</b>
+<i>500</i>&nbsp;
+<b class="nc"><i>501</i>&nbsp;        lblCount.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/deck_pack.png&quot;))); // NOI18N</b>
+<b class="nc"><i>502</i>&nbsp;        lblCount.setText(&quot;999&quot;);</b>
+<b class="nc"><i>503</i>&nbsp;        lblCount.setToolTipText(&quot;Number of all cards in this area.&quot;);</b>
+<b class="nc"><i>504</i>&nbsp;        lblCount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</b>
+<b class="nc"><i>505</i>&nbsp;        lblCount.setFocusable(false);</b>
+<b class="nc"><i>506</i>&nbsp;        lblCount.setInheritsPopupMenu(false);</b>
+<b class="nc"><i>507</i>&nbsp;        lblCount.setRequestFocusEnabled(false);</b>
+<b class="nc"><i>508</i>&nbsp;        lblCount.setVerifyInputWhenFocusTarget(false);</b>
+<i>509</i>&nbsp;
+<b class="nc"><i>510</i>&nbsp;        lblLandCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);</b>
+<b class="nc"><i>511</i>&nbsp;        lblLandCount.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/type_land.png&quot;))); // NOI18N</b>
+<b class="nc"><i>512</i>&nbsp;        lblLandCount.setText(&quot;999&quot;);</b>
+<b class="nc"><i>513</i>&nbsp;        lblLandCount.setToolTipText(&quot;Number of lands.&quot;);</b>
+<b class="nc"><i>514</i>&nbsp;        lblLandCount.setVerticalAlignment(javax.swing.SwingConstants.TOP);</b>
+<b class="nc"><i>515</i>&nbsp;        lblLandCount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</b>
+<b class="nc"><i>516</i>&nbsp;        lblLandCount.setFocusable(false);</b>
+<b class="nc"><i>517</i>&nbsp;        lblLandCount.setInheritsPopupMenu(false);</b>
+<b class="nc"><i>518</i>&nbsp;        lblLandCount.setRequestFocusEnabled(false);</b>
+<b class="nc"><i>519</i>&nbsp;        lblLandCount.setVerifyInputWhenFocusTarget(false);</b>
+<i>520</i>&nbsp;
+<b class="nc"><i>521</i>&nbsp;        lblCreatureCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);</b>
+<b class="nc"><i>522</i>&nbsp;        lblCreatureCount.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/type_creatures.png&quot;))); // NOI18N</b>
+<b class="nc"><i>523</i>&nbsp;        lblCreatureCount.setText(&quot;999&quot;);</b>
+<b class="nc"><i>524</i>&nbsp;        lblCreatureCount.setToolTipText(&quot;Number of creatures.&quot;);</b>
+<b class="nc"><i>525</i>&nbsp;        lblCreatureCount.setVerticalAlignment(javax.swing.SwingConstants.TOP);</b>
+<b class="nc"><i>526</i>&nbsp;        lblCreatureCount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</b>
+<b class="nc"><i>527</i>&nbsp;        lblCreatureCount.setFocusable(false);</b>
+<b class="nc"><i>528</i>&nbsp;        lblCreatureCount.setInheritsPopupMenu(false);</b>
+<b class="nc"><i>529</i>&nbsp;        lblCreatureCount.setRequestFocusEnabled(false);</b>
+<b class="nc"><i>530</i>&nbsp;        lblCreatureCount.setVerifyInputWhenFocusTarget(false);</b>
+<i>531</i>&nbsp;
+<b class="nc"><i>532</i>&nbsp;        chkPiles.setText(&quot;Piles&quot;);</b>
+<b class="nc"><i>533</i>&nbsp;        chkPiles.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);</b>
+<b class="nc"><i>534</i>&nbsp;        chkPiles.setMargin(new java.awt.Insets(3, 2, 2, 2));</b>
+<b class="nc"><i>535</i>&nbsp;        chkPiles.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>536</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>537</i>&nbsp;                chkPilesActionPerformed(evt);</b>
+<i>538</i>&nbsp;            }
+<i>539</i>&nbsp;        });
+<i>540</i>&nbsp;
+<b class="nc"><i>541</i>&nbsp;        cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { &quot;SortBy&quot; }));</b>
+<b class="nc"><i>542</i>&nbsp;        cbSortBy.setToolTipText(&quot;Sort the cards if card view is active.&quot;);</b>
+<b class="nc"><i>543</i>&nbsp;        cbSortBy.setMaximumSize(new java.awt.Dimension(120, 20));</b>
+<b class="nc"><i>544</i>&nbsp;        cbSortBy.setMinimumSize(new java.awt.Dimension(120, 20));</b>
+<b class="nc"><i>545</i>&nbsp;        cbSortBy.setName(&quot;SortBy&quot;); // NOI18N</b>
+<b class="nc"><i>546</i>&nbsp;        cbSortBy.setOpaque(false);</b>
+<b class="nc"><i>547</i>&nbsp;        cbSortBy.setPreferredSize(new java.awt.Dimension(120, 20));</b>
+<b class="nc"><i>548</i>&nbsp;        cbSortBy.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>549</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>550</i>&nbsp;                cbSortByActionPerformed(evt);</b>
+<i>551</i>&nbsp;            }
+<i>552</i>&nbsp;        });
+<i>553</i>&nbsp;
+<b class="nc"><i>554</i>&nbsp;        bgView.add(jToggleListView);</b>
+<b class="nc"><i>555</i>&nbsp;        jToggleListView.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/list_panel.png&quot;))); // NOI18N</b>
+<b class="nc"><i>556</i>&nbsp;        jToggleListView.setToolTipText(&quot;Shows the cards as a list.&quot;);</b>
+<b class="nc"><i>557</i>&nbsp;        jToggleListView.setBorder(null);</b>
+<b class="nc"><i>558</i>&nbsp;        jToggleListView.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);</b>
+<b class="nc"><i>559</i>&nbsp;        jToggleListView.setMargin(new java.awt.Insets(2, 6, 2, 6));</b>
+<b class="nc"><i>560</i>&nbsp;        jToggleListView.setMaximumSize(new java.awt.Dimension(37, 25));</b>
+<b class="nc"><i>561</i>&nbsp;        jToggleListView.setMinimumSize(new java.awt.Dimension(37, 25));</b>
+<b class="nc"><i>562</i>&nbsp;        jToggleListView.setPreferredSize(new java.awt.Dimension(44, 22));</b>
+<b class="nc"><i>563</i>&nbsp;        jToggleListView.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>564</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>565</i>&nbsp;                jToggleListViewActionPerformed(evt);</b>
+<i>566</i>&nbsp;            }
+<i>567</i>&nbsp;        });
+<i>568</i>&nbsp;
+<b class="nc"><i>569</i>&nbsp;        bgView.add(jToggleCardView);</b>
+<b class="nc"><i>570</i>&nbsp;        jToggleCardView.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/buttons/card_panel.png&quot;))); // NOI18N</b>
+<b class="nc"><i>571</i>&nbsp;        jToggleCardView.setToolTipText(&quot;Shows the card as images.&quot;);</b>
+<b class="nc"><i>572</i>&nbsp;        jToggleCardView.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);</b>
+<b class="nc"><i>573</i>&nbsp;        jToggleCardView.setMargin(new java.awt.Insets(2, 6, 2, 6));</b>
+<b class="nc"><i>574</i>&nbsp;        jToggleCardView.setPreferredSize(new java.awt.Dimension(40, 22));</b>
+<b class="nc"><i>575</i>&nbsp;        jToggleCardView.addActionListener(new java.awt.event.ActionListener() {</b>
+<i>576</i>&nbsp;            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<b class="nc"><i>577</i>&nbsp;                jToggleCardViewActionPerformed(evt);</b>
+<i>578</i>&nbsp;            }
+<i>579</i>&nbsp;        });
+<i>580</i>&nbsp;
+<b class="nc"><i>581</i>&nbsp;        javax.swing.GroupLayout panelControlLayout = new javax.swing.GroupLayout(panelControl);</b>
+<b class="nc"><i>582</i>&nbsp;        panelControl.setLayout(panelControlLayout);</b>
+<b class="nc"><i>583</i>&nbsp;        panelControlLayout.setHorizontalGroup(</b>
+<b class="nc"><i>584</i>&nbsp;            panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>585</i>&nbsp;            .addGroup(panelControlLayout.createSequentialGroup()</b>
+<b class="nc"><i>586</i>&nbsp;                .addComponent(lblCount)</b>
+<b class="nc"><i>587</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>588</i>&nbsp;                .addComponent(lblLandCount)</b>
+<b class="nc"><i>589</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>590</i>&nbsp;                .addComponent(lblCreatureCount)</b>
+<b class="nc"><i>591</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>592</i>&nbsp;                .addComponent(chkPiles)</b>
+<b class="nc"><i>593</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</b>
+<b class="nc"><i>594</i>&nbsp;                .addComponent(cbSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>595</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</b>
+<b class="nc"><i>596</i>&nbsp;                .addComponent(jToggleListView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>597</i>&nbsp;                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</b>
+<b class="nc"><i>598</i>&nbsp;                .addComponent(jToggleCardView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>599</i>&nbsp;                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</b>
+<i>600</i>&nbsp;        );
+<b class="nc"><i>601</i>&nbsp;        panelControlLayout.setVerticalGroup(</b>
+<b class="nc"><i>602</i>&nbsp;            panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>603</i>&nbsp;            .addGroup(panelControlLayout.createSequentialGroup()</b>
+<b class="nc"><i>604</i>&nbsp;                .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>605</i>&nbsp;                    .addGroup(panelControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</b>
+<b class="nc"><i>606</i>&nbsp;                        .addComponent(lblCount)</b>
+<b class="nc"><i>607</i>&nbsp;                        .addComponent(lblLandCount)</b>
+<b class="nc"><i>608</i>&nbsp;                        .addComponent(lblCreatureCount)</b>
+<b class="nc"><i>609</i>&nbsp;                        .addComponent(chkPiles))</b>
+<b class="nc"><i>610</i>&nbsp;                    .addComponent(cbSortBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>611</i>&nbsp;                    .addComponent(jToggleListView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>612</i>&nbsp;                    .addComponent(jToggleCardView, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</b>
+<b class="nc"><i>613</i>&nbsp;                .addGap(0, 0, 0))</b>
+<i>614</i>&nbsp;        );
+<i>615</i>&nbsp;
+<b class="nc"><i>616</i>&nbsp;        jToggleListView.getAccessibleContext().setAccessibleDescription(&quot;Switch between image and table view.&quot;);</b>
+<i>617</i>&nbsp;
+<b class="nc"><i>618</i>&nbsp;        panelCardArea.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));</b>
+<b class="nc"><i>619</i>&nbsp;        panelCardArea.setViewportView(cardArea);</b>
+<i>620</i>&nbsp;
+<b class="nc"><i>621</i>&nbsp;        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);</b>
+<b class="nc"><i>622</i>&nbsp;        this.setLayout(layout);</b>
+<b class="nc"><i>623</i>&nbsp;        layout.setHorizontalGroup(</b>
+<b class="nc"><i>624</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>625</i>&nbsp;            .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, 467, Short.MAX_VALUE)</b>
+<b class="nc"><i>626</i>&nbsp;            .addComponent(panelCardArea)</b>
+<i>627</i>&nbsp;        );
+<b class="nc"><i>628</i>&nbsp;        layout.setVerticalGroup(</b>
+<b class="nc"><i>629</i>&nbsp;            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</b>
+<b class="nc"><i>630</i>&nbsp;            .addGroup(layout.createSequentialGroup()</b>
+<b class="nc"><i>631</i>&nbsp;                .addComponent(panelControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</b>
+<b class="nc"><i>632</i>&nbsp;                .addGap(2, 2, 2)</b>
+<b class="nc"><i>633</i>&nbsp;                .addComponent(panelCardArea, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))</b>
+<i>634</i>&nbsp;        );
+<i>635</i>&nbsp;    }// &lt;/editor-fold&gt;//GEN-END:initComponents
+<i>636</i>&nbsp;
+<i>637</i>&nbsp;    private void jToggleCardViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCardViewActionPerformed
+<b class="nc"><i>638</i>&nbsp;        currentView = this;</b>
+<b class="nc"><i>639</i>&nbsp;        panelCardArea.setViewportView(cardArea);</b>
+<b class="nc"><i>640</i>&nbsp;        cbSortBy.setEnabled(true);</b>
+<b class="nc"><i>641</i>&nbsp;        chkPiles.setEnabled(true);</b>
+<b class="nc"><i>642</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_VIEW, &quot;cardView&quot;);</b>
+<b class="nc"><i>643</i>&nbsp;        redrawCards();</b>
+<i>644</i>&nbsp;    }//GEN-LAST:event_jToggleCardViewActionPerformed
+<i>645</i>&nbsp;
+<i>646</i>&nbsp;    private void jToggleListViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleListViewActionPerformed
+<b class="nc"><i>647</i>&nbsp;        currentView = mainModel;</b>
+<b class="nc"><i>648</i>&nbsp;        panelCardArea.setViewportView(mainTable);</b>
+<b class="nc"><i>649</i>&nbsp;        cbSortBy.setEnabled(false);</b>
+<b class="nc"><i>650</i>&nbsp;        chkPiles.setEnabled(false);</b>
+<b class="nc"><i>651</i>&nbsp;        PreferencesDialog.saveValue(PreferencesDialog.KEY_DRAFT_VIEW, &quot;listView&quot;);</b>
+<b class="nc"><i>652</i>&nbsp;        redrawCards();</b>
+<i>653</i>&nbsp;    }//GEN-LAST:event_jToggleListViewActionPerformed
+<i>654</i>&nbsp;
+<i>655</i>&nbsp;    private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
+<b class="nc"><i>656</i>&nbsp;        sortSetting.setSortBy((SortBy) cbSortBy.getSelectedItem());</b>
+<b class="nc"><i>657</i>&nbsp;        drawCards(sortSetting);</b>
+<i>658</i>&nbsp;    }//GEN-LAST:event_cbSortByActionPerformed
+<i>659</i>&nbsp;
+<i>660</i>&nbsp;    private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
+<b class="nc"><i>661</i>&nbsp;        sortSetting.setPilesToggle(chkPiles.isSelected());</b>
+<b class="nc"><i>662</i>&nbsp;        drawCards(sortSetting);</b>
+<i>663</i>&nbsp;    }//GEN-LAST:event_chkPilesActionPerformed
+<i>664</i>&nbsp;
+<i>665</i>&nbsp;    // Variables declaration - do not modify//GEN-BEGIN:variables
+<i>666</i>&nbsp;    private javax.swing.ButtonGroup bgView;
+<i>667</i>&nbsp;    private javax.swing.JLayeredPane cardArea;
+<i>668</i>&nbsp;    private javax.swing.JComboBox cbSortBy;
+<i>669</i>&nbsp;    private javax.swing.JCheckBox chkPiles;
+<i>670</i>&nbsp;    private javax.swing.JToggleButton jToggleCardView;
+<i>671</i>&nbsp;    private javax.swing.JToggleButton jToggleListView;
+<i>672</i>&nbsp;    private javax.swing.JLabel lblCount;
+<i>673</i>&nbsp;    private javax.swing.JLabel lblCreatureCount;
+<i>674</i>&nbsp;    private javax.swing.JLabel lblLandCount;
+<i>675</i>&nbsp;    private javax.swing.JScrollPane panelCardArea;
+<i>676</i>&nbsp;    private javax.swing.JPanel panelControl;
+<i>677</i>&nbsp;    // End of variables declaration//GEN-END:variables
+<i>678</i>&nbsp;
+<i>679</i>&nbsp;    @Override
+<i>680</i>&nbsp;    public void mouseClicked(MouseEvent e) {
+<i>681</i>&nbsp;    }
+<i>682</i>&nbsp;
+<i>683</i>&nbsp;    @Override
+<i>684</i>&nbsp;    public void mousePressed(MouseEvent e) {
+<b class="nc"><i>685</i>&nbsp;        if (e.getClickCount() &gt;= 1 &amp;&amp; !e.isConsumed()) {</b>
+<b class="nc"><i>686</i>&nbsp;            Object obj = e.getSource();</b>
+<b class="nc"><i>687</i>&nbsp;            if ((e.getClickCount() &amp; 1) == 0 &amp;&amp; (e.getClickCount() &gt; 0)) { // double clicks and repeated double clicks</b>
+<b class="nc"><i>688</i>&nbsp;                e.consume();</b>
+<b class="nc"><i>689</i>&nbsp;                if (obj instanceof Card) {</b>
+<b class="nc"><i>690</i>&nbsp;                    if (e.isAltDown()) {</b>
+<b class="nc"><i>691</i>&nbsp;                        cardEventSource.altDoubleClick(((Card) obj).getOriginal(), &quot;alt-double-click&quot;);</b>
+<i>692</i>&nbsp;                    } else {
+<b class="nc"><i>693</i>&nbsp;                        cardEventSource.doubleClick(((Card) obj).getOriginal(), &quot;double-click&quot;);</b>
+<i>694</i>&nbsp;                    }
+<b class="nc"><i>695</i>&nbsp;                } else if (obj instanceof MageCard) {</b>
+<b class="nc"><i>696</i>&nbsp;                    if (e.isAltDown()) {</b>
+<b class="nc"><i>697</i>&nbsp;                        cardEventSource.altDoubleClick(((MageCard) obj).getOriginal(), &quot;alt-double-click&quot;);</b>
+<i>698</i>&nbsp;                    } else {
+<b class="nc"><i>699</i>&nbsp;                        cardEventSource.doubleClick(((MageCard) obj).getOriginal(), &quot;double-click&quot;);</b>
+<i>700</i>&nbsp;                    }
+<i>701</i>&nbsp;                }
+<i>702</i>&nbsp;            }
+<b class="nc"><i>703</i>&nbsp;            if (obj instanceof MageCard) {</b>
+<b class="nc"><i>704</i>&nbsp;                checkMenu(e, ((MageCard) obj).getOriginal());</b>
+<i>705</i>&nbsp;            } else {
+<b class="nc"><i>706</i>&nbsp;                checkMenu(e, null);</b>
+<i>707</i>&nbsp;            }
+<i>708</i>&nbsp;        }
+<i>709</i>&nbsp;    }
+<i>710</i>&nbsp;
+<i>711</i>&nbsp;    @Override
+<i>712</i>&nbsp;    public void mouseReleased(MouseEvent e) {
+<b class="nc"><i>713</i>&nbsp;        if (!e.isConsumed()) {</b>
+<b class="nc"><i>714</i>&nbsp;            Object obj = e.getSource();</b>
+<b class="nc"><i>715</i>&nbsp;            if (obj instanceof MageCard) {</b>
+<b class="nc"><i>716</i>&nbsp;                checkMenu(e, ((MageCard) obj).getOriginal());</b>
+<i>717</i>&nbsp;            } else {
+<b class="nc"><i>718</i>&nbsp;                checkMenu(e, null);</b>
+<i>719</i>&nbsp;            }
+<i>720</i>&nbsp;        }
+<i>721</i>&nbsp;    }
+<i>722</i>&nbsp;
+<i>723</i>&nbsp;    private void checkMenu(MouseEvent Me, SimpleCardView card) {
+<b class="nc"><i>724</i>&nbsp;        if (Me.isPopupTrigger()) {</b>
+<b class="nc"><i>725</i>&nbsp;            Me.consume();</b>
+<b class="nc"><i>726</i>&nbsp;            cardEventSource.showPopupMenuEvent(card, Me.getComponent(), Me.getX(), Me.getY(), &quot;show-popup-menu&quot;);</b>
+<i>727</i>&nbsp;        }
+<i>728</i>&nbsp;    }
+<i>729</i>&nbsp;
+<i>730</i>&nbsp;    @Override
+<i>731</i>&nbsp;    public void mouseEntered(MouseEvent e) {
+<i>732</i>&nbsp;    }
+<i>733</i>&nbsp;
+<i>734</i>&nbsp;    @Override
+<i>735</i>&nbsp;    public void mouseExited(MouseEvent e) {
+<i>736</i>&nbsp;    }
+<i>737</i>&nbsp;
+<i>738</i>&nbsp;    public void setDisplayNoCopies(boolean value) {
+<b class="nc"><i>739</i>&nbsp;        mainModel.setDisplayNoCopies(value);</b>
+<i>740</i>&nbsp;    }
+<i>741</i>&nbsp;
+<i>742</i>&nbsp;    @Override
+<i>743</i>&nbsp;    public int cardsSize() {
+<b class="nc"><i>744</i>&nbsp;        return cards.size();</b>
+<i>745</i>&nbsp;    }
+<i>746</i>&nbsp;
+<i>747</i>&nbsp;    public void setSortBy(SortBy sortBy) {
+<b class="nc"><i>748</i>&nbsp;        if (sortBy != null) {</b>
+<b class="nc"><i>749</i>&nbsp;            cbSortBy.setSelectedIndex(sortBy.ordinal());</b>
+<i>750</i>&nbsp;        }
+<i>751</i>&nbsp;    }
+<i>752</i>&nbsp;
+<i>753</i>&nbsp;    public void setSortSetting(SortSetting sortSetting) {
+<b class="nc"><i>754</i>&nbsp;        this.sortSetting = sortSetting;</b>
+<i>755</i>&nbsp;    }
+<i>756</i>&nbsp;
+<i>757</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

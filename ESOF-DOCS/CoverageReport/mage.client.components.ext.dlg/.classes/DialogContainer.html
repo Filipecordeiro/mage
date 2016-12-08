@@ -1,0 +1,339 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DialogContainer</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.client.components.ext.dlg</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DialogContainer (mage.client.components.ext.dlg)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DialogContainer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 81)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.client.components.ext.dlg;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import mage.client.components.ext.MessageDlg;
+<i>4</i>&nbsp;import mage.client.components.ext.dlg.impl.ChoiceDialog;
+<i>5</i>&nbsp;import mage.client.components.ext.dlg.impl.StackDialog;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import javax.swing.*;
+<i>8</i>&nbsp;import java.awt.*;
+<i>9</i>&nbsp;import java.awt.geom.RoundRectangle2D;
+<i>10</i>&nbsp;import java.awt.image.BufferedImage;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/**
+<i>13</i>&nbsp; * @author mw, noxx
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;public class DialogContainer extends JPanel {
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    private static final int X_OFFSET = 30;
+<i>18</i>&nbsp;    private static final int Y_OFFSET = 30;
+<b class="nc"><i>19</i>&nbsp;    private final BufferedImage shadow = null;</b>
+<i>20</i>&nbsp;    //private DialogManager.MTGDialogs dialogType;
+<i>21</i>&nbsp;    //private DlgParams params;
+<b class="nc"><i>22</i>&nbsp;    private Color backgroundColor = new Color(0, 255, 255, 60);</b>
+<b class="nc"><i>23</i>&nbsp;    private int alpha = 50;</b>
+<i>24</i>&nbsp;
+<b class="nc"><i>25</i>&nbsp;    private final boolean isGradient = false;</b>
+<b class="nc"><i>26</i>&nbsp;    private final TexturePaint tp = null;</b>
+<b class="nc"><i>27</i>&nbsp;    private final Image gradient = null;</b>
+<i>28</i>&nbsp;    private BufferedImage b;
+<i>29</i>&nbsp;
+<b class="nc"><i>30</i>&nbsp;    private boolean drawContainer = true;</b>
+<i>31</i>&nbsp;    private final DialogManager.MTGDialogs dialogType;
+<i>32</i>&nbsp;
+<b class="nc"><i>33</i>&nbsp;    public DialogContainer(DialogManager.MTGDialogs dialogType, DlgParams params) {</b>
+<b class="nc"><i>34</i>&nbsp;        setOpaque(false);</b>
+<b class="nc"><i>35</i>&nbsp;        this.dialogType = dialogType;</b>
+<i>36</i>&nbsp;
+<b class="nc"><i>37</i>&nbsp;        setLayout(null);</b>
+<b class="nc"><i>38</i>&nbsp;        drawContainer = true;</b>
+<i>39</i>&nbsp;
+<b class="nc"><i>40</i>&nbsp;        if (dialogType == DialogManager.MTGDialogs.MessageDialog) {</b>
+<i>41</i>&nbsp;            //backgroundColor = new Color(0, 255, 255, 60);
+<b class="nc"><i>42</i>&nbsp;            if (params.type.equals(MessageDlg.Types.Warning)) {</b>
+<b class="nc"><i>43</i>&nbsp;                backgroundColor = new Color(255, 0, 0, 90);</b>
+<i>44</i>&nbsp;            } else {
+<b class="nc"><i>45</i>&nbsp;                backgroundColor = new Color(0, 0, 0, 90);</b>
+<i>46</i>&nbsp;            }
+<b class="nc"><i>47</i>&nbsp;            alpha = 0;</b>
+<i>48</i>&nbsp;            //MessageDlg dlg = new MessageDlg(params);
+<i>49</i>&nbsp;            //add(dlg);
+<i>50</i>&nbsp;            //dlg.setLocation(X_OFFSET + 10, Y_OFFSET);
+<i>51</i>&nbsp;            //dlg.updateSize(params.rect.width, params.rect.height);
+<b class="nc"><i>52</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.StackDialog) {</b>
+<i>53</i>&nbsp;            //backgroundColor = new Color(0, 255, 255, 60);
+<b class="nc"><i>54</i>&nbsp;            backgroundColor = new Color(0, 0, 0, 50);</b>
+<b class="nc"><i>55</i>&nbsp;            alpha = 0;</b>
+<b class="nc"><i>56</i>&nbsp;            StackDialog dlg = new StackDialog(params);</b>
+<b class="nc"><i>57</i>&nbsp;            add(dlg);</b>
+<b class="nc"><i>58</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);</b>
+<i>59</i>&nbsp;            //int width = Math.min(params.rect.width - 80, 600);
+<b class="nc"><i>60</i>&nbsp;            int width = params.rect.width;</b>
+<b class="nc"><i>61</i>&nbsp;            int height = params.rect.height - 80;</b>
+<b class="nc"><i>62</i>&nbsp;            dlg.updateSize(width, height);</b>
+<b class="nc"><i>63</i>&nbsp;        }</b>
+<i>64</i>&nbsp;        /*
+<i>65</i>&nbsp;        else if (dialogType == DialogManager.MTGDialogs.CombatDialog) {
+<i>66</i>&nbsp;            backgroundColor = new Color(0, 0, 0, 60);
+<i>67</i>&nbsp;            alpha = 0;
+<i>68</i>&nbsp;            CombatDialog dlg = new CombatDialog(params);
+<i>69</i>&nbsp;            add(dlg);
+<i>70</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+<i>71</i>&nbsp;            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+<i>72</i>&nbsp;
+<b class="nc"><i>73</i>&nbsp;        }*/ else if (dialogType == DialogManager.MTGDialogs.ChoiceDialog) {</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;            //backgroundColor = new Color(200, 200, 172, 120);
+<i>76</i>&nbsp;            //backgroundColor = new Color(180, 150, 200, 120);
+<i>77</i>&nbsp;            //backgroundColor = new Color(0, 255, 0, 60);
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;            //backgroundColor = new Color(139, 46, 173, 20);
+<b class="nc"><i>80</i>&nbsp;            backgroundColor = new Color(0, 0, 0, 110);</b>
+<i>81</i>&nbsp;            //backgroundColor = new Color(139, 46, 173, 0);
+<i>82</i>&nbsp;
+<b class="nc"><i>83</i>&nbsp;            alpha = 0;</b>
+<b class="nc"><i>84</i>&nbsp;            ChoiceDialog dlg = new ChoiceDialog(params, &quot;Choose&quot;);</b>
+<b class="nc"><i>85</i>&nbsp;            add(dlg);</b>
+<i>86</i>&nbsp;            //GameManager.getManager().setCurrentChoiceDlg(dlg);
+<b class="nc"><i>87</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);</b>
+<b class="nc"><i>88</i>&nbsp;            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);</b>
+<i>89</i>&nbsp;
+<b class="nc"><i>90</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.GraveDialog) {</b>
+<i>91</i>&nbsp;
+<b class="nc"><i>92</i>&nbsp;            backgroundColor = new Color(0, 0, 0, 110);</b>
+<i>93</i>&nbsp;
+<b class="nc"><i>94</i>&nbsp;            alpha = 0;</b>
+<b class="nc"><i>95</i>&nbsp;            ChoiceDialog dlg = new ChoiceDialog(params, &quot;Graveyard&quot;);</b>
+<b class="nc"><i>96</i>&nbsp;            add(dlg);</b>
+<b class="nc"><i>97</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);</b>
+<b class="nc"><i>98</i>&nbsp;            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);</b>
+<i>99</i>&nbsp;
+<b class="nc"><i>100</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.ExileDialog) {</b>
+<i>101</i>&nbsp;
+<b class="nc"><i>102</i>&nbsp;            backgroundColor = new Color(250, 250, 250, 50);</b>
+<i>103</i>&nbsp;
+<b class="nc"><i>104</i>&nbsp;            alpha = 0;</b>
+<b class="nc"><i>105</i>&nbsp;            ChoiceDialog dlg = new ChoiceDialog(params, &quot;Exile&quot;);</b>
+<b class="nc"><i>106</i>&nbsp;            add(dlg);</b>
+<b class="nc"><i>107</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);</b>
+<b class="nc"><i>108</i>&nbsp;            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);</b>
+<i>109</i>&nbsp;
+<b class="nc"><i>110</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.EmblemsDialog) {</b>
+<i>111</i>&nbsp;
+<b class="nc"><i>112</i>&nbsp;            backgroundColor = new Color(0, 0, 50, 110);</b>
+<i>113</i>&nbsp;
+<b class="nc"><i>114</i>&nbsp;            alpha = 0;</b>
+<b class="nc"><i>115</i>&nbsp;            ChoiceDialog dlg = new ChoiceDialog(params, &quot;Command Zone (Commander and Emblems)&quot;);</b>
+<b class="nc"><i>116</i>&nbsp;            add(dlg);</b>
+<b class="nc"><i>117</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);</b>
+<b class="nc"><i>118</i>&nbsp;            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);</b>
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;        } /*else if (dialogType == DialogManager.MTGDialogs.GraveDialog) {
+<i>121</i>&nbsp;            backgroundColor = new Color(20, 20, 20, 120);
+<i>122</i>&nbsp;            alpha = 0;
+<i>123</i>&nbsp;            GraveDialog dlg = new GraveDialog(params);
+<i>124</i>&nbsp;            add(dlg);
+<i>125</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+<i>126</i>&nbsp;            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.RevealDialog) {
+<i>129</i>&nbsp;            backgroundColor = new Color(90, 135, 190, 80);
+<i>130</i>&nbsp;            alpha = 0;
+<i>131</i>&nbsp;            RevealDialog dlg = new RevealDialog(params);
+<i>132</i>&nbsp;            add(dlg);
+<i>133</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+<i>134</i>&nbsp;            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.AssignDamageDialog) {
+<i>137</i>&nbsp;            backgroundColor = new Color(255, 255, 255, 130);
+<i>138</i>&nbsp;            alpha = 0;
+<i>139</i>&nbsp;            AssignDamageDialog dlg = new AssignDamageDialog(params);
+<i>140</i>&nbsp;            add(dlg);
+<i>141</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+<i>142</i>&nbsp;            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+<i>143</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.ManaChoiceDialog) {
+<i>144</i>&nbsp;            backgroundColor = new Color(0, 255, 255, 60);
+<i>145</i>&nbsp;            alpha = 20;
+<i>146</i>&nbsp;            ManaChoiceDialog dlg = new ManaChoiceDialog(params);
+<i>147</i>&nbsp;            add(dlg);
+<i>148</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+<i>149</i>&nbsp;            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+<i>150</i>&nbsp;
+<i>151</i>&nbsp;            //isGradient = true;
+<i>152</i>&nbsp;            gradient = ImageManager.getGradientImage();
+<i>153</i>&nbsp;            if (gradient != null) {
+<i>154</i>&nbsp;                b = ImageToBufferedImage.toBufferedImage(gradient);
+<i>155</i>&nbsp;                b = Transparency.makeImageTranslucent(b, 0.35);
+<i>156</i>&nbsp;                Rectangle2D tr = new Rectangle2D.Double(0, 0, params.rect.width, params.rect.height);
+<i>157</i>&nbsp;                //gradient = gradient.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+<i>158</i>&nbsp;                tp = new TexturePaint(b, tr);
+<i>159</i>&nbsp;            }
+<i>160</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.ChooseDeckDialog) {
+<i>161</i>&nbsp;            MWDeckPanel deckPanel = new MWDeckPanel(params.getDeckList(), params.isAI);
+<i>162</i>&nbsp;            deckPanel.setVisible(true);
+<i>163</i>&nbsp;            deckPanel.setBounds(0,0,480,320);
+<i>164</i>&nbsp;            add(deckPanel);
+<i>165</i>&nbsp;            drawContainer = false;
+<i>166</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.ChooseCommonDialog) {
+<i>167</i>&nbsp;            MWChoosePanel choosePanel = new MWChoosePanel(params.getObjectList(), params.getTitle());
+<i>168</i>&nbsp;            choosePanel.setVisible(true);
+<i>169</i>&nbsp;            choosePanel.setBounds(0,0,440,240);
+<i>170</i>&nbsp;            add(choosePanel);
+<i>171</i>&nbsp;            drawContainer = false;
+<i>172</i>&nbsp;        } else if (dialogType == DialogManager.MTGDialogs.AboutDialog) {
+<i>173</i>&nbsp;            backgroundColor = new Color(255, 255, 255, 120);
+<i>174</i>&nbsp;            alpha = 0;
+<i>175</i>&nbsp;            AboutDialog dlg = new AboutDialog();
+<i>176</i>&nbsp;            add(dlg);
+<i>177</i>&nbsp;            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+<i>178</i>&nbsp;        }
+<i>179</i>&nbsp;        */
+<i>180</i>&nbsp;    }
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;    public void cleanUp() {
+<b class="nc"><i>183</i>&nbsp;        for (Component component:this.getComponents()) {</b>
+<b class="nc"><i>184</i>&nbsp;            if (component instanceof ChoiceDialog) {</b>
+<b class="nc"><i>185</i>&nbsp;                ((ChoiceDialog) component).cleanUp();</b>
+<i>186</i>&nbsp;            }
+<i>187</i>&nbsp;        }
+<i>188</i>&nbsp;    }
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;    @Override
+<i>191</i>&nbsp;    protected void paintComponent(Graphics g) {
+<i>192</i>&nbsp;
+<b class="nc"><i>193</i>&nbsp;        if (!drawContainer) {</b>
+<i>194</i>&nbsp;            return;
+<i>195</i>&nbsp;        }
+<i>196</i>&nbsp;
+<b class="nc"><i>197</i>&nbsp;        int x = X_OFFSET;</b>
+<b class="nc"><i>198</i>&nbsp;        int y = Y_OFFSET;</b>
+<b class="nc"><i>199</i>&nbsp;        int w = getWidth() - 2 * X_OFFSET;</b>
+<b class="nc"><i>200</i>&nbsp;        int h = getHeight() - 2 * Y_OFFSET;</b>
+<b class="nc"><i>201</i>&nbsp;        int arc = 30;</b>
+<i>202</i>&nbsp;
+<b class="nc"><i>203</i>&nbsp;        Graphics2D g2 = (Graphics2D) g.create();</b>
+<b class="nc"><i>204</i>&nbsp;        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</b>
+<i>205</i>&nbsp;
+<b class="nc"><i>206</i>&nbsp;        if (shadow != null) {</b>
+<b class="nc"><i>207</i>&nbsp;            int xOffset = (shadow.getWidth() - w) / 2;</b>
+<b class="nc"><i>208</i>&nbsp;            int yOffset = (shadow.getHeight() - h) / 2;</b>
+<b class="nc"><i>209</i>&nbsp;            g2.drawImage(shadow, x - xOffset, y - yOffset, null);</b>
+<i>210</i>&nbsp;        }
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;        // ////////////////////////////////////////////////////////////////
+<i>213</i>&nbsp;        // fill content
+<i>214</i>&nbsp;
+<i>215</i>&nbsp;        /**
+<i>216</i>&nbsp;         * Add white translucent substrate
+<i>217</i>&nbsp;         */
+<b class="nc"><i>218</i>&nbsp;        if (alpha != 0) {</b>
+<b class="nc"><i>219</i>&nbsp;            g2.setColor(new Color(255, 255, 255, alpha));</b>
+<b class="nc"><i>220</i>&nbsp;            g2.fillRoundRect(x, y, w, h, arc, arc);</b>
+<i>221</i>&nbsp;        }
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;        if (!isGradient) {
+<b class="nc"><i>224</i>&nbsp;            g2.setColor(backgroundColor);</b>
+<b class="nc"><i>225</i>&nbsp;            g2.fillRoundRect(x, y, w, h, arc, arc);</b>
+<i>226</i>&nbsp;        } else {
+<i>227</i>&nbsp;            RoundRectangle2D r = new RoundRectangle2D.Float(x, y, w, h, arc, arc);
+<i>228</i>&nbsp;            g2.setPaint(tp);
+<i>229</i>&nbsp;            g2.fill(r);
+<i>230</i>&nbsp;        }
+<i>231</i>&nbsp;        // ////////////////////////////////////////////////////////////////
+<i>232</i>&nbsp;
+<i>233</i>&nbsp;        // ////////////////////////////////////////////////////////////////
+<i>234</i>&nbsp;        // draw border
+<b class="nc"><i>235</i>&nbsp;        g2.setStroke(new BasicStroke(3f));</b>
+<b class="nc"><i>236</i>&nbsp;        g2.setColor(Color.BLACK);</b>
+<i>237</i>&nbsp;        //g2.setColor(Color.GRAY);
+<b class="nc"><i>238</i>&nbsp;        g2.drawRoundRect(x, y, w, h, arc, arc);</b>
+<i>239</i>&nbsp;        // ////////////////////////////////////////////////////////////////
+<i>240</i>&nbsp;
+<b class="nc"><i>241</i>&nbsp;        g2.dispose();</b>
+<i>242</i>&nbsp;    }
+<i>243</i>&nbsp;
+<i>244</i>&nbsp;    public void showDialog(boolean bShow) {
+<b class="nc"><i>245</i>&nbsp;        setVisible(bShow);</b>
+<i>246</i>&nbsp;    }
+<i>247</i>&nbsp;
+<i>248</i>&nbsp;    public DialogManager.MTGDialogs getType() {
+<b class="nc"><i>249</i>&nbsp;        return this.dialogType;</b>
+<i>250</i>&nbsp;    }
+<i>251</i>&nbsp;
+<i>252</i>&nbsp;    /**
+<i>253</i>&nbsp;     * Default UID.
+<i>254</i>&nbsp;     */
+<i>255</i>&nbsp;    private static final long serialVersionUID = 1L;
+<i>256</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

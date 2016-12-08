@@ -1,0 +1,323 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TinyLeaders</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.deck</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TinyLeaders (mage.deck)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TinyLeaders</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 118)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.deck;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.ArrayList;
+<i>31</i>&nbsp;import java.util.Arrays;
+<i>32</i>&nbsp;import java.util.HashMap;
+<i>33</i>&nbsp;import java.util.List;
+<i>34</i>&nbsp;import java.util.Map;
+<i>35</i>&nbsp;import mage.abilities.common.CanBeYourCommanderAbility;
+<i>36</i>&nbsp;import mage.cards.Card;
+<i>37</i>&nbsp;import mage.cards.SplitCard;
+<i>38</i>&nbsp;import mage.cards.decks.Deck;
+<i>39</i>&nbsp;import mage.cards.decks.DeckValidator;
+<i>40</i>&nbsp;import mage.constants.CardType;
+<i>41</i>&nbsp;import mage.filter.FilterMana;
+<i>42</i>&nbsp;import mage.game.GameTinyLeadersImpl;
+<i>43</i>&nbsp;import mage.util.CardUtil;
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;/**
+<i>46</i>&nbsp; *
+<i>47</i>&nbsp; * @author JRHerlehy
+<i>48</i>&nbsp; */
+<i>49</i>&nbsp;public class TinyLeaders extends DeckValidator {
+<i>50</i>&nbsp;
+<b class="nc"><i>51</i>&nbsp;    protected List&lt;String&gt; banned = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>52</i>&nbsp;    protected List&lt;String&gt; bannedCommander = new ArrayList&lt;&gt;();</b>
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    public TinyLeaders() {
+<b class="nc"><i>55</i>&nbsp;        this(&quot;Tiny Leaders&quot;);</b>
+<i>56</i>&nbsp;        //Banned list from tinyleaders.blodspot.ca/p/ban-list.html
+<i>57</i>&nbsp;        //Ban list updated as of 11/08/14
+<b class="nc"><i>58</i>&nbsp;        banned.add(&quot;Ancestral Recall&quot;);</b>
+<b class="nc"><i>59</i>&nbsp;        banned.add(&quot;Balance&quot;);</b>
+<b class="nc"><i>60</i>&nbsp;        banned.add(&quot;Black Lotus&quot;);</b>
+<b class="nc"><i>61</i>&nbsp;        banned.add(&quot;Channel&quot;);</b>
+<b class="nc"><i>62</i>&nbsp;        banned.add(&quot;Counterbalance&quot;);</b>
+<b class="nc"><i>63</i>&nbsp;        banned.add(&quot;Demonic Tutor&quot;);</b>
+<b class="nc"><i>64</i>&nbsp;        banned.add(&quot;Earthcraft&quot;);</b>
+<b class="nc"><i>65</i>&nbsp;        banned.add(&quot;Edric, Spymaster of Trest&quot;);</b>
+<b class="nc"><i>66</i>&nbsp;        banned.add(&quot;Fastbond&quot;);</b>
+<b class="nc"><i>67</i>&nbsp;        banned.add(&quot;Goblin Recruiter&quot;);</b>
+<b class="nc"><i>68</i>&nbsp;        banned.add(&quot;Grindstone&quot;); // banned effective July 13, 2015</b>
+<b class="nc"><i>69</i>&nbsp;        banned.add(&quot;Hermit Druid&quot;);</b>
+<b class="nc"><i>70</i>&nbsp;        banned.add(&quot;Imperial Seal&quot;);</b>
+<b class="nc"><i>71</i>&nbsp;        banned.add(&quot;Library of Alexandria&quot;);</b>
+<b class="nc"><i>72</i>&nbsp;        banned.add(&quot;Karakas&quot;);</b>
+<b class="nc"><i>73</i>&nbsp;        banned.add(&quot;Mana Crypt&quot;);</b>
+<b class="nc"><i>74</i>&nbsp;        banned.add(&quot;Mana Drain&quot;);</b>
+<b class="nc"><i>75</i>&nbsp;        banned.add(&quot;Mana Vault&quot;);</b>
+<b class="nc"><i>76</i>&nbsp;        banned.add(&quot;metalworker&quot;);</b>
+<b class="nc"><i>77</i>&nbsp;        banned.add(&quot;Mind Twist&quot;);</b>
+<b class="nc"><i>78</i>&nbsp;        banned.add(&quot;Mishra&#39;s Workshop&quot;);</b>
+<b class="nc"><i>79</i>&nbsp;        banned.add(&quot;Mox Emerald&quot;);</b>
+<b class="nc"><i>80</i>&nbsp;        banned.add(&quot;Mox Jet&quot;);</b>
+<b class="nc"><i>81</i>&nbsp;        banned.add(&quot;Mox Pearl&quot;);</b>
+<b class="nc"><i>82</i>&nbsp;        banned.add(&quot;Mox Ruby&quot;);</b>
+<b class="nc"><i>83</i>&nbsp;        banned.add(&quot;Mox Sapphire&quot;);</b>
+<b class="nc"><i>84</i>&nbsp;        banned.add(&quot;Necropotence&quot;);</b>
+<b class="nc"><i>85</i>&nbsp;        banned.add(&quot;Shahrazad&quot;);</b>
+<b class="nc"><i>86</i>&nbsp;        banned.add(&quot;Skullclamp&quot;);</b>
+<b class="nc"><i>87</i>&nbsp;        banned.add(&quot;Sol Ring&quot;);</b>
+<b class="nc"><i>88</i>&nbsp;        banned.add(&quot;Strip Mine&quot;);</b>
+<b class="nc"><i>89</i>&nbsp;        banned.add(&quot;Survival of the Fittest&quot;);</b>
+<b class="nc"><i>90</i>&nbsp;        banned.add(&quot;Sword of Body and Mind&quot;);</b>
+<b class="nc"><i>91</i>&nbsp;        banned.add(&quot;Time Vault&quot;);</b>
+<b class="nc"><i>92</i>&nbsp;        banned.add(&quot;Time Walk&quot;);</b>
+<b class="nc"><i>93</i>&nbsp;        banned.add(&quot;Timetwister&quot;);</b>
+<b class="nc"><i>94</i>&nbsp;        banned.add(&quot;Tolarian Academy&quot;);</b>
+<b class="nc"><i>95</i>&nbsp;        banned.add(&quot;Umezawa&#39;s Jitte&quot;);</b>
+<b class="nc"><i>96</i>&nbsp;        banned.add(&quot;Vampiric Tutor&quot;);</b>
+<b class="nc"><i>97</i>&nbsp;        banned.add(&quot;Yawgmoth&#39;s Will&quot;);</b>
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;        //Additionally, these Legendary creatures cannot be used as Commanders
+<b class="nc"><i>100</i>&nbsp;        bannedCommander.add(&quot;Erayo, Soratami Ascendant&quot;);</b>
+<b class="nc"><i>101</i>&nbsp;        bannedCommander.add(&quot;Rofellos, Llanowar Emissary&quot;);</b>
+<b class="nc"><i>102</i>&nbsp;        bannedCommander.add(&quot;Derevi, Empyrical Tactician&quot;);</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    public TinyLeaders(String name) {
+<b class="nc"><i>106</i>&nbsp;        super(name);</b>
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    /**
+<i>110</i>&nbsp;     *
+<i>111</i>&nbsp;     * @param deck
+<i>112</i>&nbsp;     * @return - True if deck is valid
+<i>113</i>&nbsp;     */
+<i>114</i>&nbsp;    @Override
+<i>115</i>&nbsp;    public boolean validate(Deck deck) {
+<b class="nc"><i>116</i>&nbsp;        boolean valid = true;</b>
+<i>117</i>&nbsp;
+<b class="nc"><i>118</i>&nbsp;        if (deck.getCards().size() != 49) {</b>
+<b class="nc"><i>119</i>&nbsp;            invalid.put(&quot;Deck&quot;, &quot;Must contain 49 cards: has &quot; + deck.getCards().size() + &quot; cards&quot;);</b>
+<b class="nc"><i>120</i>&nbsp;            valid = false;</b>
+<i>121</i>&nbsp;        }
+<i>122</i>&nbsp;
+<b class="nc"><i>123</i>&nbsp;        List&lt;String&gt; basicLandNames = new ArrayList&lt;&gt;(Arrays.asList(&quot;Forest&quot;, &quot;Island&quot;, &quot;Mountain&quot;, &quot;Swamp&quot;, &quot;Plains&quot;, &quot;Wastes&quot;,</b>
+<i>124</i>&nbsp;                &quot;Snow-Covered Forest&quot;, &quot;Snow-Covered Island&quot;, &quot;Snow-Covered Mountain&quot;, &quot;Snow-Covered Swamp&quot;, &quot;Snow-Covered Plains&quot;));
+<b class="nc"><i>125</i>&nbsp;        Map&lt;String, Integer&gt; counts = new HashMap&lt;&gt;();</b>
+<b class="nc"><i>126</i>&nbsp;        counts.put(deck.getName(), 1); // add the commander to the counts, so it can&#39;t be in the deck or sideboard again</b>
+<b class="nc"><i>127</i>&nbsp;        countCards(counts, deck.getCards());</b>
+<b class="nc"><i>128</i>&nbsp;        countCards(counts, deck.getSideboard());</b>
+<b class="nc"><i>129</i>&nbsp;        for (Map.Entry&lt;String, Integer&gt; entry : counts.entrySet()) {</b>
+<b class="nc"><i>130</i>&nbsp;            if (entry.getValue() &gt; 1) {</b>
+<b class="nc"><i>131</i>&nbsp;                if (!basicLandNames.contains(entry.getKey()) &amp;&amp; !entry.getKey().equals(&quot;Relentless Rats&quot;) &amp;&amp; !entry.getKey().equals(&quot;Shadowborn Apostle&quot;)) {</b>
+<b class="nc"><i>132</i>&nbsp;                    invalid.put(entry.getKey(), &quot;Too many: &quot; + entry.getValue());</b>
+<b class="nc"><i>133</i>&nbsp;                    valid = false;</b>
+<i>134</i>&nbsp;                }
+<i>135</i>&nbsp;            }
+<b class="nc"><i>136</i>&nbsp;        }</b>
+<i>137</i>&nbsp;
+<b class="nc"><i>138</i>&nbsp;        for (String bannedCard : banned) {</b>
+<b class="nc"><i>139</i>&nbsp;            if (counts.containsKey(bannedCard)) {</b>
+<b class="nc"><i>140</i>&nbsp;                invalid.put(bannedCard, &quot;Banned&quot;);</b>
+<b class="nc"><i>141</i>&nbsp;                valid = false;</b>
+<i>142</i>&nbsp;            }
+<b class="nc"><i>143</i>&nbsp;        }</b>
+<i>144</i>&nbsp;
+<b class="nc"><i>145</i>&nbsp;        if (deck.getSideboard().size() &lt;= 10) {</b>
+<b class="nc"><i>146</i>&nbsp;            Card commander = GameTinyLeadersImpl.getCommanderCard(deck.getName(), null);</b>
+<i>147</i>&nbsp;            /**
+<i>148</i>&nbsp;             * 905.5b - Each card must have a converted mana cost of three of
+<i>149</i>&nbsp;             * less. Cards with {X} in their mana cost count X as zero. Split
+<i>150</i>&nbsp;             * and double-face cards are legal only if both of their halves
+<i>151</i>&nbsp;             * would be legal independently.
+<i>152</i>&nbsp;             */
+<i>153</i>&nbsp;
+<b class="nc"><i>154</i>&nbsp;            if (commander == null || commander.getManaCost().convertedManaCost() &gt; 3) {</b>
+<b class="nc"><i>155</i>&nbsp;                if (commander == null) {</b>
+<b class="nc"><i>156</i>&nbsp;                    if (deck.getName() == null) {</b>
+<b class="nc"><i>157</i>&nbsp;                        invalid.put(&quot;Leader&quot;, &quot;You have to save your deck with the leader card name entered to the DECK NAME field of the DECK EDITOR (top left) so that XMage knows your leader.&quot;</b>
+<i>158</i>&nbsp;                                + &quot;(You can use the \&quot;Sultai\&quot; for a UBG (3/3) default Commander or \&quot;Glass\&quot; for a colorless 3/3 default Commander.)&quot;);
+<i>159</i>&nbsp;                    } else {
+<b class="nc"><i>160</i>&nbsp;                        invalid.put(&quot;Leader&quot;, &quot;Leader [&quot; + deck.getName() + &quot;] not found. You have to enter the name of the leader card into the DECK NAME field of the DECK EDITOR (top left). Check your spelling &quot;</b>
+<i>161</i>&nbsp;                                + &quot;(use the \&quot;Sultai\&quot; for a UBG (3/3) default Commander or \&quot;Glass\&quot; for a colorless (3/3) default Commander)&quot;);
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;                    }
+<i>164</i>&nbsp;                }
+<b class="nc"><i>165</i>&nbsp;                if (commander != null &amp;&amp; commander.getManaCost().convertedManaCost() &gt; 3) {</b>
+<b class="nc"><i>166</i>&nbsp;                    invalid.put(&quot;Leader&quot;, &quot;Commanders converted mana cost is greater than 3&quot;);</b>
+<i>167</i>&nbsp;                }
+<b class="nc"><i>168</i>&nbsp;                return false;</b>
+<i>169</i>&nbsp;            }
+<b class="nc"><i>170</i>&nbsp;            if ((commander.getCardType().contains(CardType.CREATURE) &amp;&amp; commander.getSupertype().contains(&quot;Legendary&quot;))</b>
+<b class="nc"><i>171</i>&nbsp;                    || (commander.getCardType().contains(CardType.PLANESWALKER) &amp;&amp; commander.getAbilities().contains(CanBeYourCommanderAbility.getInstance()))) {</b>
+<b class="nc"><i>172</i>&nbsp;                if (!bannedCommander.contains(commander.getName())) {</b>
+<b class="nc"><i>173</i>&nbsp;                    FilterMana color = CardUtil.getColorIdentity(commander);</b>
+<b class="nc"><i>174</i>&nbsp;                    for (Card card : deck.getCards()) {</b>
+<b class="nc"><i>175</i>&nbsp;                        if (!isCardFormatValid(card, commander, color)) {</b>
+<b class="nc"><i>176</i>&nbsp;                            valid = false;</b>
+<i>177</i>&nbsp;                        }
+<b class="nc"><i>178</i>&nbsp;                    }</b>
+<b class="nc"><i>179</i>&nbsp;                    for (Card card : deck.getSideboard()) {</b>
+<b class="nc"><i>180</i>&nbsp;                        if (!isCardFormatValid(card, commander, color)) {</b>
+<b class="nc"><i>181</i>&nbsp;                            valid = false;</b>
+<i>182</i>&nbsp;                        }
+<b class="nc"><i>183</i>&nbsp;                    }</b>
+<b class="nc"><i>184</i>&nbsp;                } else {</b>
+<b class="nc"><i>185</i>&nbsp;                    invalid.put(&quot;Commander&quot;, &quot;Commander banned (&quot; + commander.getName() + &quot;)&quot;);</b>
+<b class="nc"><i>186</i>&nbsp;                    valid = false;</b>
+<i>187</i>&nbsp;                }
+<i>188</i>&nbsp;            } else {
+<b class="nc"><i>189</i>&nbsp;                invalid.put(&quot;Commander&quot;, &quot;Commander invalide (&quot; + commander.getName() + &quot;)&quot;);</b>
+<b class="nc"><i>190</i>&nbsp;                valid = false;</b>
+<i>191</i>&nbsp;            }
+<b class="nc"><i>192</i>&nbsp;        } else {</b>
+<b class="nc"><i>193</i>&nbsp;            invalid.put(&quot;Commander&quot;, &quot;Sideboard must contain only a maximum of 10 sideboard cards (the Tiny Leader name must be written to the deck name)&quot;);</b>
+<b class="nc"><i>194</i>&nbsp;            valid = false;</b>
+<i>195</i>&nbsp;        }
+<i>196</i>&nbsp;
+<b class="nc"><i>197</i>&nbsp;        return valid;</b>
+<i>198</i>&nbsp;    }
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;    private boolean isCardFormatValid(Card card, Card commander, FilterMana color) {
+<b class="nc"><i>201</i>&nbsp;        if (!cardHasValideColor(color, card)) {</b>
+<b class="nc"><i>202</i>&nbsp;            invalid.put(card.getName(), &quot;Invalid color (&quot; + commander.getName() + &quot;)&quot;);</b>
+<b class="nc"><i>203</i>&nbsp;            return false;</b>
+<i>204</i>&nbsp;        }
+<i>205</i>&nbsp;
+<i>206</i>&nbsp;        //905.5b - Converted mana cost must be 3 or less
+<b class="nc"><i>207</i>&nbsp;        if (card instanceof SplitCard) {</b>
+<b class="nc"><i>208</i>&nbsp;            if (((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() &gt; 3) {</b>
+<b class="nc"><i>209</i>&nbsp;                invalid.put(card.getName(), &quot;Invalid cost (&quot; + ((SplitCard) card).getLeftHalfCard().getManaCost().convertedManaCost() + &quot;)&quot;);</b>
+<b class="nc"><i>210</i>&nbsp;                return false;</b>
+<i>211</i>&nbsp;            }
+<b class="nc"><i>212</i>&nbsp;            if (((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() &gt; 3) {</b>
+<b class="nc"><i>213</i>&nbsp;                invalid.put(card.getName(), &quot;Invalid cost (&quot; + ((SplitCard) card).getRightHalfCard().getManaCost().convertedManaCost() + &quot;)&quot;);</b>
+<b class="nc"><i>214</i>&nbsp;                return false;</b>
+<i>215</i>&nbsp;            }
+<i>216</i>&nbsp;        } else {
+<b class="nc"><i>217</i>&nbsp;            if (card.getManaCost().convertedManaCost() &gt; 3) {</b>
+<b class="nc"><i>218</i>&nbsp;                invalid.put(card.getName(), &quot;Invalid cost (&quot; + card.getManaCost().convertedManaCost() + &quot;)&quot;);</b>
+<b class="nc"><i>219</i>&nbsp;                return false;</b>
+<i>220</i>&nbsp;            }
+<i>221</i>&nbsp;        }
+<b class="nc"><i>222</i>&nbsp;        return true;</b>
+<i>223</i>&nbsp;    }
+<i>224</i>&nbsp;
+<i>225</i>&nbsp;    /**
+<i>226</i>&nbsp;     *
+<i>227</i>&nbsp;     * @param commander FilterMana object with Color Identity of Commander set
+<i>228</i>&nbsp;     * @param card Card to validate
+<i>229</i>&nbsp;     * @return True if card has a valid color identity
+<i>230</i>&nbsp;     */
+<i>231</i>&nbsp;    public boolean cardHasValideColor(FilterMana commander, Card card) {
+<b class="nc"><i>232</i>&nbsp;        FilterMana cardColor = CardUtil.getColorIdentity(card);</b>
+<b class="nc"><i>233</i>&nbsp;        return !(cardColor.isBlack() &amp;&amp; !commander.isBlack()</b>
+<b class="nc"><i>234</i>&nbsp;                || cardColor.isBlue() &amp;&amp; !commander.isBlue()</b>
+<b class="nc"><i>235</i>&nbsp;                || cardColor.isGreen() &amp;&amp; !commander.isGreen()</b>
+<b class="nc"><i>236</i>&nbsp;                || cardColor.isRed() &amp;&amp; !commander.isRed()</b>
+<b class="nc"><i>237</i>&nbsp;                || cardColor.isWhite() &amp;&amp; !commander.isWhite());</b>
+<i>238</i>&nbsp;    }
+<i>239</i>&nbsp;
+<i>240</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

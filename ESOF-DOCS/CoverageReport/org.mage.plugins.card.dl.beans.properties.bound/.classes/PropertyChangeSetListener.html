@@ -1,0 +1,243 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PropertyChangeSetListener</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.mage.plugins.card.dl.beans.properties.bound</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PropertyChangeSetListener (org.mage.plugins.card.dl.beans.properties.bound)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyChangeSetListener</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PropertyChangeSetListener$SetAddEvent</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyChangeSetListener$SetEvent</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PropertyChangeSetListener$SetRemoveEvent</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 16)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/**
+<i>2</i>&nbsp; * PropertyChangeSetListener.java
+<i>3</i>&nbsp; * 
+<i>4</i>&nbsp; * Created on 16.07.2010
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;package org.mage.plugins.card.dl.beans.properties.bound;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.beans.PropertyChangeEvent;
+<i>11</i>&nbsp;import java.util.Set;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import org.mage.plugins.card.dl.beans.PropertyChangeSupport;
+<i>14</i>&nbsp;import org.mage.plugins.card.dl.beans.collections.ListenableCollections.SetListener;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;/**
+<i>18</i>&nbsp; * The class PropertyChangeSetListener. This listener always fires events with {@link Set} -&gt; {@link Set} as the
+<i>19</i>&nbsp; * value parameters, as nonindexed collection properties. The events will be {@link SetEvent} instances.
+<i>20</i>&nbsp; * 
+<i>21</i>&nbsp; * @version V0.0 16.07.2010
+<i>22</i>&nbsp; * @author Clemens Koza
+<i>23</i>&nbsp; */
+<i>24</i>&nbsp;public class PropertyChangeSetListener&lt;E&gt; implements SetListener&lt;E&gt; {
+<i>25</i>&nbsp;    private static final long     serialVersionUID = 625853864429729560L;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    private PropertyChangeSupport s;
+<i>28</i>&nbsp;    private Set&lt;E&gt;                set;
+<i>29</i>&nbsp;    private String                propertyName;
+<i>30</i>&nbsp;
+<b class="nc"><i>31</i>&nbsp;    public PropertyChangeSetListener(PropertyChangeSupport s, Set&lt;E&gt; set, String propertyName) {</b>
+<b class="nc"><i>32</i>&nbsp;        this.s = s;</b>
+<b class="nc"><i>33</i>&nbsp;        this.set = set;</b>
+<b class="nc"><i>34</i>&nbsp;        this.propertyName = propertyName;</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public void add(E newValue) {
+<b class="nc"><i>38</i>&nbsp;        s.firePropertyChange(new SetAddEvent&lt;E&gt;(s.getSourceBean(), propertyName, set, newValue));</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public void remove(E oldValue) {
+<b class="nc"><i>42</i>&nbsp;        s.firePropertyChange(new SetRemoveEvent&lt;E&gt;(s.getSourceBean(), propertyName, set, oldValue));</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    public static abstract class SetEvent&lt;E&gt; extends PropertyChangeEvent {
+<i>46</i>&nbsp;        private static final long serialVersionUID = -651568020675693544L;
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;        private Set&lt;E&gt;            set;
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;        public SetEvent(Object source, String propertyName, Set&lt;E&gt; set) {
+<b class="nc"><i>51</i>&nbsp;            super(source, propertyName, null, null);</b>
+<b class="nc"><i>52</i>&nbsp;            this.set = set;</b>
+<i>53</i>&nbsp;        }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;        @Override
+<i>56</i>&nbsp;        public Set&lt;E&gt; getOldValue() {
+<i>57</i>&nbsp;            //old and new value must not be equal
+<b class="nc"><i>58</i>&nbsp;            return null;</b>
+<i>59</i>&nbsp;        }
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;        @Override
+<i>62</i>&nbsp;        public Set&lt;E&gt; getNewValue() {
+<b class="nc"><i>63</i>&nbsp;            return set;</b>
+<i>64</i>&nbsp;        }
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public static class SetAddEvent&lt;E&gt; extends SetEvent&lt;E&gt; {
+<i>68</i>&nbsp;        private static final long serialVersionUID = 9041766866796759871L;
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;        private E                 newElement;
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;        public SetAddEvent(Object source, String propertyName, Set&lt;E&gt; set, E newElement) {
+<b class="nc"><i>73</i>&nbsp;            super(source, propertyName, set);</b>
+<b class="nc"><i>74</i>&nbsp;            this.newElement = newElement;</b>
+<i>75</i>&nbsp;        }
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;        public E getNewElement() {
+<b class="nc"><i>78</i>&nbsp;            return newElement;</b>
+<i>79</i>&nbsp;        }
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    public static class SetRemoveEvent&lt;E&gt; extends SetEvent&lt;E&gt; {
+<i>83</i>&nbsp;        private static final long serialVersionUID = -1315342339926392385L;
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;        private E                 oldElement;
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;        public SetRemoveEvent(Object source, String propertyName, Set&lt;E&gt; set, E oldElement) {
+<b class="nc"><i>88</i>&nbsp;            super(source, propertyName, set);</b>
+<b class="nc"><i>89</i>&nbsp;            this.oldElement = oldElement;</b>
+<i>90</i>&nbsp;        }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;        public E getOldElement() {
+<b class="nc"><i>93</i>&nbsp;            return oldElement;</b>
+<i>94</i>&nbsp;        }
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: InvokePrejudice</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.i</a> ]
+</div>
+
+<h1>Coverage Summary for Class: InvokePrejudice (mage.cards.i)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InvokePrejudice</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.cards.i;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.ObjectColor;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.TriggeredAbilityImpl;
+<i>34</i>&nbsp;import mage.abilities.costs.mana.GenericManaCost;
+<i>35</i>&nbsp;import mage.abilities.effects.Effect;
+<i>36</i>&nbsp;import mage.abilities.effects.common.CounterUnlessPaysEffect;
+<i>37</i>&nbsp;import mage.cards.CardImpl;
+<i>38</i>&nbsp;import mage.cards.CardSetInfo;
+<i>39</i>&nbsp;import mage.constants.CardType;
+<i>40</i>&nbsp;import mage.constants.Zone;
+<i>41</i>&nbsp;import mage.filter.common.FilterControlledCreaturePermanent;
+<i>42</i>&nbsp;import mage.game.Game;
+<i>43</i>&nbsp;import mage.game.events.GameEvent;
+<i>44</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>45</i>&nbsp;import mage.game.permanent.Permanent;
+<i>46</i>&nbsp;import mage.game.stack.Spell;
+<i>47</i>&nbsp;import mage.target.targetpointer.FixedTarget;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;/**
+<i>50</i>&nbsp; *
+<i>51</i>&nbsp; * @author spjspj
+<i>52</i>&nbsp; */
+<i>53</i>&nbsp;public class InvokePrejudice extends CardImpl {
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public InvokePrejudice(UUID ownerId, CardSetInfo setInfo) {
+<b class="nc"><i>56</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},&quot;{U}{U}{U}{U}&quot;);</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;        // Whenever an opponent casts a creature spell that doesn&#39;t share a color with a creature you control, counter that spell unless that player pays {X}, where X is its converted mana cost.
+<b class="nc"><i>59</i>&nbsp;        this.addAbility(new InvokePrejudiceTriggeredAbility());</b>
+<b class="nc"><i>60</i>&nbsp;    }</b>
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public InvokePrejudice(final InvokePrejudice card) {
+<b class="nc"><i>63</i>&nbsp;        super(card);</b>
+<b class="nc"><i>64</i>&nbsp;    }</b>
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    @Override
+<i>67</i>&nbsp;    public InvokePrejudice copy() {
+<b class="nc"><i>68</i>&nbsp;        return new InvokePrejudice(this);</b>
+<i>69</i>&nbsp;    }
+<i>70</i>&nbsp;}
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;class InvokePrejudiceTriggeredAbility extends TriggeredAbilityImpl {
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    public InvokePrejudiceTriggeredAbility() {
+<i>75</i>&nbsp;        super(Zone.BATTLEFIELD, new InvokePrejudiceEffect(), false);
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    public InvokePrejudiceTriggeredAbility(final InvokePrejudiceTriggeredAbility ability) {
+<i>79</i>&nbsp;        super(ability);
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    @Override
+<i>83</i>&nbsp;    public InvokePrejudiceTriggeredAbility copy() {
+<i>84</i>&nbsp;        return new InvokePrejudiceTriggeredAbility(this);
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    @Override
+<i>88</i>&nbsp;    public boolean checkEventType(GameEvent event, Game game) {
+<i>89</i>&nbsp;        return event.getType() == EventType.SPELL_CAST;
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    @Override
+<i>93</i>&nbsp;    public boolean checkTrigger(GameEvent event, Game game) {
+<i>94</i>&nbsp;        if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
+<i>95</i>&nbsp;            Spell spell = (Spell) game.getObject(event.getTargetId());
+<i>96</i>&nbsp;            if (spell != null &amp;&amp; spell.getCardType().contains(CardType.CREATURE)) {
+<i>97</i>&nbsp;                boolean creatureSharesAColor = false;
+<i>98</i>&nbsp;                ObjectColor spellColor = spell.getColor(game);
+<i>99</i>&nbsp;                for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterControlledCreaturePermanent(), getControllerId(), game)) {
+<i>100</i>&nbsp;                    if (spellColor.shares(permanent.getColor(game))) {
+<i>101</i>&nbsp;                        creatureSharesAColor = true;
+<i>102</i>&nbsp;                        break;
+<i>103</i>&nbsp;                    }
+<i>104</i>&nbsp;                }
+<i>105</i>&nbsp;                if (!creatureSharesAColor) {
+<i>106</i>&nbsp;                    for (Effect effect : getEffects()) {
+<i>107</i>&nbsp;                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
+<i>108</i>&nbsp;                    }
+<i>109</i>&nbsp;                    return true;
+<i>110</i>&nbsp;                }
+<i>111</i>&nbsp;            }
+<i>112</i>&nbsp;        }
+<i>113</i>&nbsp;        return false;
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;    @Override
+<i>117</i>&nbsp;    public String getRule() {
+<i>118</i>&nbsp;        return &quot;Whenever an opponent casts a creature spell that doesn&#39;t share a color with a creature you control, &quot; + super.getRule();
+<i>119</i>&nbsp;    }
+<i>120</i>&nbsp;}
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;class InvokePrejudiceEffect extends CounterUnlessPaysEffect {
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    public InvokePrejudiceEffect() {
+<i>125</i>&nbsp;        super(new GenericManaCost(1));
+<i>126</i>&nbsp;        this.staticText = &quot;counter that spell unless that player pays {X}, where X is its converted mana cost&quot;;
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    public InvokePrejudiceEffect(final InvokePrejudiceEffect effect) {
+<i>130</i>&nbsp;        super(effect);
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    @Override
+<i>134</i>&nbsp;    public InvokePrejudiceEffect copy() {
+<i>135</i>&nbsp;        return new InvokePrejudiceEffect(this);
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;    @Override
+<i>139</i>&nbsp;    public boolean apply(Game game, Ability source) {
+<i>140</i>&nbsp;        boolean result = true;
+<i>141</i>&nbsp;        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+<i>142</i>&nbsp;        if (spell != null) {
+<i>143</i>&nbsp;            CounterUnlessPaysEffect effect = new CounterUnlessPaysEffect(new GenericManaCost(spell.getConvertedManaCost()));
+<i>144</i>&nbsp;            effect.setTargetPointer(getTargetPointer());
+<i>145</i>&nbsp;            result = effect.apply(game, source);
+<i>146</i>&nbsp;        }
+<i>147</i>&nbsp;        return result;
+<i>148</i>&nbsp;    }
+<i>149</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

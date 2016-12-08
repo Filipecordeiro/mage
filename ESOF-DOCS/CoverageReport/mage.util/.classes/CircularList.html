@@ -1,0 +1,625 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CircularList</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CircularList (mage.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CircularList</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.5%
+  </span>
+  <span class="absValue">
+    (15/ 39)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    38.1%
+  </span>
+  <span class="absValue">
+    (40/ 105)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CircularList$1</td>
+  </tr>
+  <tr>
+    <td class="name">CircularList$CircularIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.2%
+  </span>
+  <span class="absValue">
+    (16/ 19)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">CircularList$CircularListIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 38)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    33.9%
+  </span>
+  <span class="absValue">
+    (19/ 56)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    34.6%
+  </span>
+  <span class="absValue">
+    (56/ 162)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp;*
+<i>4</i>&nbsp;* Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp;* permitted provided that the following conditions are met:
+<i>6</i>&nbsp;*
+<i>7</i>&nbsp;*    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp;*       conditions and the following disclaimer.
+<i>9</i>&nbsp;*
+<i>10</i>&nbsp;*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp;*       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp;*       provided with the distribution.
+<i>13</i>&nbsp;*
+<i>14</i>&nbsp;* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp;* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp;* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp;* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp;* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp;* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp;* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp;* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp;*
+<i>24</i>&nbsp;* The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp;* authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp;* or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.util;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.io.Serializable;
+<i>31</i>&nbsp;import java.util.ArrayList;
+<i>32</i>&nbsp;import java.util.Collection;
+<i>33</i>&nbsp;import java.util.ConcurrentModificationException;
+<i>34</i>&nbsp;import java.util.Iterator;
+<i>35</i>&nbsp;import java.util.List;
+<i>36</i>&nbsp;import java.util.ListIterator;
+<i>37</i>&nbsp;import java.util.concurrent.locks.ReentrantLock;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;/**
+<i>40</i>&nbsp; * a thread-safe circular list
+<i>41</i>&nbsp; *
+<i>42</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>43</i>&nbsp; * @param &lt;E&gt;
+<i>44</i>&nbsp; */
+<b class="fc"><i>45</i>&nbsp;public class CircularList&lt;E&gt; implements List&lt;E&gt;, Iterable&lt;E&gt;, Serializable {</b>
+<i>46</i>&nbsp;    //TODO: might have to make E extend Copyable
+<i>47</i>&nbsp;
+<b class="fc"><i>48</i>&nbsp;    protected List&lt;E&gt; list = new ArrayList&lt;&gt;();</b>
+<i>49</i>&nbsp;
+<b class="fc"><i>50</i>&nbsp;    protected final ReentrantLock lock = new ReentrantLock();</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    protected int modCount;
+<i>53</i>&nbsp;    protected int index;
+<i>54</i>&nbsp;
+<b class="fc"><i>55</i>&nbsp;    public CircularList() {</b>
+<b class="fc"><i>56</i>&nbsp;    }</b>
+<i>57</i>&nbsp;
+<b class="fc"><i>58</i>&nbsp;    public CircularList(final CircularList&lt;E&gt; cList) {</b>
+<b class="fc"><i>59</i>&nbsp;        this.modCount = cList.modCount;</b>
+<b class="fc"><i>60</i>&nbsp;        for (E entry : cList.list) {</b>
+<b class="fc"><i>61</i>&nbsp;            this.list.add((E) entry);</b>
+<b class="fc"><i>62</i>&nbsp;        }</b>
+<b class="fc"><i>63</i>&nbsp;        this.index = cList.index;</b>
+<b class="fc"><i>64</i>&nbsp;    }</b>
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public CircularList&lt;E&gt; copy() {
+<b class="nc"><i>67</i>&nbsp;        return new CircularList&lt;&gt;(this);</b>
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    /**
+<i>71</i>&nbsp;     * Inserts an element into the current position
+<i>72</i>&nbsp;     *
+<i>73</i>&nbsp;     * @param e
+<i>74</i>&nbsp;     * @return
+<i>75</i>&nbsp;     */
+<i>76</i>&nbsp;    @Override
+<i>77</i>&nbsp;    public boolean add(E e) {
+<b class="fc"><i>78</i>&nbsp;        list.add(this.index, e);</b>
+<b class="fc"><i>79</i>&nbsp;        return true;</b>
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    @Override
+<i>83</i>&nbsp;    public void add(int index, E element) {
+<b class="nc"><i>84</i>&nbsp;        lock.lock();</b>
+<i>85</i>&nbsp;        try {
+<b class="nc"><i>86</i>&nbsp;            list.add(index, element);</b>
+<b class="nc"><i>87</i>&nbsp;            modCount++;</b>
+<i>88</i>&nbsp;        } finally {
+<b class="nc"><i>89</i>&nbsp;            lock.unlock();</b>
+<b class="nc"><i>90</i>&nbsp;        }</b>
+<b class="nc"><i>91</i>&nbsp;    }</b>
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;    /**
+<i>94</i>&nbsp;     *
+<i>95</i>&nbsp;     * @param e the element to set as current
+<i>96</i>&nbsp;     * @return true if element e exists and index was set
+<i>97</i>&nbsp;     */
+<i>98</i>&nbsp;    public boolean setCurrent(E e) {
+<b class="fc"><i>99</i>&nbsp;        if (list.contains(e)) {</b>
+<b class="fc"><i>100</i>&nbsp;            this.index = list.indexOf(e);</b>
+<b class="fc"><i>101</i>&nbsp;            return true;</b>
+<i>102</i>&nbsp;        }
+<b class="fc"><i>103</i>&nbsp;        return false;</b>
+<i>104</i>&nbsp;    }
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    /**
+<i>107</i>&nbsp;     * Retrieves the element at the current position
+<i>108</i>&nbsp;     *
+<i>109</i>&nbsp;     * @return
+<i>110</i>&nbsp;     */
+<i>111</i>&nbsp;    public E get() {
+<b class="fc"><i>112</i>&nbsp;        return list.get(this.index);</b>
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;    @Override
+<i>116</i>&nbsp;    public E get(int index) {
+<b class="nc"><i>117</i>&nbsp;        return list.get(index);</b>
+<i>118</i>&nbsp;    }
+<i>119</i>&nbsp;
+<i>120</i>&nbsp;    /**
+<i>121</i>&nbsp;     * Returns the next element in the list. Will loop around to the beginning
+<i>122</i>&nbsp;     * of the list if the current element is the last.
+<i>123</i>&nbsp;     *
+<i>124</i>&nbsp;     * @return the next element in the list
+<i>125</i>&nbsp;     */
+<i>126</i>&nbsp;    public E getNext() {
+<b class="fc"><i>127</i>&nbsp;        return list.get(incrementPointer());</b>
+<i>128</i>&nbsp;    }
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    /**
+<i>131</i>&nbsp;     * Returns the previous element in the list. Will loop around to the end of
+<i>132</i>&nbsp;     * the list if the current element is the first.
+<i>133</i>&nbsp;     *
+<i>134</i>&nbsp;     * @return the previous element in the list
+<i>135</i>&nbsp;     */
+<i>136</i>&nbsp;    public E getPrevious() {
+<b class="fc"><i>137</i>&nbsp;        return list.get(decrementPointer());</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    /**
+<i>141</i>&nbsp;     * Removes the current element from the list
+<i>142</i>&nbsp;     *
+<i>143</i>&nbsp;     * @return &lt;tt&gt;true&lt;/tt&gt; is the item was successfully removed
+<i>144</i>&nbsp;     */
+<i>145</i>&nbsp;    public boolean remove() {
+<b class="nc"><i>146</i>&nbsp;        return this.remove(get());</b>
+<i>147</i>&nbsp;    }
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    @Override
+<i>150</i>&nbsp;    public E remove(int index) {
+<b class="nc"><i>151</i>&nbsp;        lock.lock();</b>
+<i>152</i>&nbsp;        try {
+<b class="nc"><i>153</i>&nbsp;            E ret = list.remove(index);</b>
+<b class="nc"><i>154</i>&nbsp;            checkPointer();</b>
+<b class="nc"><i>155</i>&nbsp;            modCount++;</b>
+<b class="nc"><i>156</i>&nbsp;            return ret;</b>
+<i>157</i>&nbsp;        } finally {
+<b class="nc"><i>158</i>&nbsp;            lock.unlock();</b>
+<i>159</i>&nbsp;        }
+<i>160</i>&nbsp;    }
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;    @Override
+<i>163</i>&nbsp;    public boolean remove(Object o) {
+<b class="nc"><i>164</i>&nbsp;        lock.lock();</b>
+<i>165</i>&nbsp;        try {
+<b class="nc"><i>166</i>&nbsp;            boolean ret = list.remove(o);</b>
+<b class="nc"><i>167</i>&nbsp;            checkPointer();</b>
+<b class="nc"><i>168</i>&nbsp;            modCount++;</b>
+<b class="nc"><i>169</i>&nbsp;            return ret;</b>
+<i>170</i>&nbsp;        } finally {
+<b class="nc"><i>171</i>&nbsp;            lock.unlock();</b>
+<i>172</i>&nbsp;        }
+<i>173</i>&nbsp;    }
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;    private int incrementPointer() {
+<b class="fc"><i>176</i>&nbsp;        lock.lock();</b>
+<i>177</i>&nbsp;        try {
+<b class="fc"><i>178</i>&nbsp;            index = incrementListPointer(index);</b>
+<b class="fc"><i>179</i>&nbsp;            return index;</b>
+<i>180</i>&nbsp;        } finally {
+<b class="fc"><i>181</i>&nbsp;            lock.unlock();</b>
+<i>182</i>&nbsp;        }
+<i>183</i>&nbsp;    }
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;    private int incrementListPointer(int index) {
+<b class="fc"><i>186</i>&nbsp;        index++;</b>
+<b class="fc"><i>187</i>&nbsp;        if (index &gt;= list.size()) {</b>
+<b class="fc"><i>188</i>&nbsp;            index = 0;</b>
+<i>189</i>&nbsp;        }
+<b class="fc"><i>190</i>&nbsp;        return index;</b>
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    private int decrementPointer() {
+<b class="fc"><i>194</i>&nbsp;        lock.lock();</b>
+<i>195</i>&nbsp;        try {
+<b class="fc"><i>196</i>&nbsp;            index = decrementListPointer(index);</b>
+<b class="fc"><i>197</i>&nbsp;            return index;</b>
+<i>198</i>&nbsp;        } finally {
+<b class="fc"><i>199</i>&nbsp;            lock.unlock();</b>
+<i>200</i>&nbsp;        }
+<i>201</i>&nbsp;    }
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;    private int decrementListPointer(int index) {
+<b class="fc"><i>204</i>&nbsp;        index--;</b>
+<b class="fc"><i>205</i>&nbsp;        if (index &lt; 0) {</b>
+<b class="fc"><i>206</i>&nbsp;            index = list.size() - 1;</b>
+<i>207</i>&nbsp;        }
+<b class="fc"><i>208</i>&nbsp;        return index;</b>
+<i>209</i>&nbsp;    }
+<i>210</i>&nbsp;
+<i>211</i>&nbsp;    /**
+<i>212</i>&nbsp;     * This method should only be called from a locked method thus it is not
+<i>213</i>&nbsp;     * necessary to lock from this method
+<i>214</i>&nbsp;     */
+<i>215</i>&nbsp;    private int checkPointer() {
+<b class="nc"><i>216</i>&nbsp;        if (index &gt; list.size()) {</b>
+<b class="nc"><i>217</i>&nbsp;            index = list.size() - 1;</b>
+<b class="nc"><i>218</i>&nbsp;        } else if (index &lt; 0) {</b>
+<b class="nc"><i>219</i>&nbsp;            index = 0;</b>
+<i>220</i>&nbsp;        }
+<b class="nc"><i>221</i>&nbsp;        return index;</b>
+<i>222</i>&nbsp;    }
+<i>223</i>&nbsp;
+<i>224</i>&nbsp;    @Override
+<i>225</i>&nbsp;    public int size() {
+<b class="fc"><i>226</i>&nbsp;        return list.size();</b>
+<i>227</i>&nbsp;    }
+<i>228</i>&nbsp;
+<i>229</i>&nbsp;    @Override
+<i>230</i>&nbsp;    public boolean isEmpty() {
+<b class="nc"><i>231</i>&nbsp;        return list.isEmpty();</b>
+<i>232</i>&nbsp;    }
+<i>233</i>&nbsp;
+<i>234</i>&nbsp;    @Override
+<i>235</i>&nbsp;    public boolean contains(Object o) {
+<b class="fc"><i>236</i>&nbsp;        return list.contains(o);</b>
+<i>237</i>&nbsp;    }
+<i>238</i>&nbsp;
+<i>239</i>&nbsp;    @Override
+<i>240</i>&nbsp;    public Object[] toArray() {
+<b class="nc"><i>241</i>&nbsp;        return list.toArray();</b>
+<i>242</i>&nbsp;    }
+<i>243</i>&nbsp;
+<i>244</i>&nbsp;    @Override
+<i>245</i>&nbsp;    public &lt;T&gt; T[] toArray(T[] a) {
+<b class="nc"><i>246</i>&nbsp;        return list.toArray(a);</b>
+<i>247</i>&nbsp;    }
+<i>248</i>&nbsp;
+<i>249</i>&nbsp;    public List&lt;E&gt; toList() {
+<b class="nc"><i>250</i>&nbsp;        return list;</b>
+<i>251</i>&nbsp;    }
+<i>252</i>&nbsp;
+<i>253</i>&nbsp;    @Override
+<i>254</i>&nbsp;    public boolean containsAll(Collection&lt;?&gt; c) {
+<b class="nc"><i>255</i>&nbsp;        return list.containsAll(c);</b>
+<i>256</i>&nbsp;    }
+<i>257</i>&nbsp;
+<i>258</i>&nbsp;    @Override
+<i>259</i>&nbsp;    public boolean addAll(Collection&lt;? extends E&gt; c) {
+<b class="nc"><i>260</i>&nbsp;        return this.addAll(this.index, c);</b>
+<i>261</i>&nbsp;    }
+<i>262</i>&nbsp;
+<i>263</i>&nbsp;    @Override
+<i>264</i>&nbsp;    public boolean addAll(int index, Collection&lt;? extends E&gt; c) {
+<b class="nc"><i>265</i>&nbsp;        lock.lock();</b>
+<i>266</i>&nbsp;        try {
+<b class="nc"><i>267</i>&nbsp;            modCount++;</b>
+<b class="nc"><i>268</i>&nbsp;            return list.addAll(index, c);</b>
+<i>269</i>&nbsp;        } finally {
+<b class="nc"><i>270</i>&nbsp;            lock.unlock();</b>
+<i>271</i>&nbsp;        }
+<i>272</i>&nbsp;    }
+<i>273</i>&nbsp;
+<i>274</i>&nbsp;    @Override
+<i>275</i>&nbsp;    public boolean removeAll(Collection&lt;?&gt; c) {
+<b class="nc"><i>276</i>&nbsp;        lock.lock();</b>
+<i>277</i>&nbsp;        try {
+<b class="nc"><i>278</i>&nbsp;            boolean ret = list.removeAll(c);</b>
+<b class="nc"><i>279</i>&nbsp;            modCount++;</b>
+<b class="nc"><i>280</i>&nbsp;            checkPointer();</b>
+<b class="nc"><i>281</i>&nbsp;            return ret;</b>
+<i>282</i>&nbsp;        } finally {
+<b class="nc"><i>283</i>&nbsp;            lock.unlock();</b>
+<i>284</i>&nbsp;        }
+<i>285</i>&nbsp;    }
+<i>286</i>&nbsp;
+<i>287</i>&nbsp;    @Override
+<i>288</i>&nbsp;    public boolean retainAll(Collection&lt;?&gt; c) {
+<b class="nc"><i>289</i>&nbsp;        lock.lock();</b>
+<i>290</i>&nbsp;        try {
+<b class="nc"><i>291</i>&nbsp;            boolean ret = list.retainAll(c);</b>
+<b class="nc"><i>292</i>&nbsp;            modCount++;</b>
+<b class="nc"><i>293</i>&nbsp;            checkPointer();</b>
+<b class="nc"><i>294</i>&nbsp;            return ret;</b>
+<i>295</i>&nbsp;        } finally {
+<b class="nc"><i>296</i>&nbsp;            lock.unlock();</b>
+<i>297</i>&nbsp;        }
+<i>298</i>&nbsp;    }
+<i>299</i>&nbsp;
+<i>300</i>&nbsp;    @Override
+<i>301</i>&nbsp;    public void clear() {
+<b class="nc"><i>302</i>&nbsp;        lock.lock();</b>
+<i>303</i>&nbsp;        try {
+<b class="nc"><i>304</i>&nbsp;            list.clear();</b>
+<b class="nc"><i>305</i>&nbsp;            modCount++;</b>
+<b class="nc"><i>306</i>&nbsp;            index = 0;</b>
+<i>307</i>&nbsp;        } finally {
+<b class="nc"><i>308</i>&nbsp;            lock.unlock();</b>
+<b class="nc"><i>309</i>&nbsp;        }</b>
+<b class="nc"><i>310</i>&nbsp;    }</b>
+<i>311</i>&nbsp;
+<i>312</i>&nbsp;    @Override
+<i>313</i>&nbsp;    public E set(int index, E element) {
+<b class="nc"><i>314</i>&nbsp;        lock.lock();</b>
+<i>315</i>&nbsp;        try {
+<b class="nc"><i>316</i>&nbsp;            modCount++;</b>
+<b class="nc"><i>317</i>&nbsp;            return list.set(index, element);</b>
+<i>318</i>&nbsp;        } finally {
+<b class="nc"><i>319</i>&nbsp;            lock.unlock();</b>
+<i>320</i>&nbsp;        }
+<i>321</i>&nbsp;    }
+<i>322</i>&nbsp;
+<i>323</i>&nbsp;    public E set(E element) {
+<b class="nc"><i>324</i>&nbsp;        return this.set(this.index, element);</b>
+<i>325</i>&nbsp;    }
+<i>326</i>&nbsp;
+<i>327</i>&nbsp;    @Override
+<i>328</i>&nbsp;    public int indexOf(Object o) {
+<b class="nc"><i>329</i>&nbsp;        return list.indexOf(o);</b>
+<i>330</i>&nbsp;    }
+<i>331</i>&nbsp;
+<i>332</i>&nbsp;    @Override
+<i>333</i>&nbsp;    public int lastIndexOf(Object o) {
+<b class="nc"><i>334</i>&nbsp;        return list.lastIndexOf(o);</b>
+<i>335</i>&nbsp;    }
+<i>336</i>&nbsp;
+<i>337</i>&nbsp;    @Override
+<i>338</i>&nbsp;    public List&lt;E&gt; subList(int fromIndex, int toIndex) {
+<b class="nc"><i>339</i>&nbsp;        return list.subList(fromIndex, toIndex);</b>
+<i>340</i>&nbsp;    }
+<i>341</i>&nbsp;
+<i>342</i>&nbsp;    @Override
+<i>343</i>&nbsp;    public Iterator&lt;E&gt; iterator() {
+<b class="fc"><i>344</i>&nbsp;        return new CircularIterator&lt;&gt;();</b>
+<i>345</i>&nbsp;    }
+<i>346</i>&nbsp;
+<i>347</i>&nbsp;    @Override
+<i>348</i>&nbsp;    public ListIterator&lt;E&gt; listIterator() {
+<b class="nc"><i>349</i>&nbsp;        return new CircularListIterator&lt;&gt;();</b>
+<i>350</i>&nbsp;    }
+<i>351</i>&nbsp;
+<i>352</i>&nbsp;    @Override
+<i>353</i>&nbsp;    public ListIterator&lt;E&gt; listIterator(int index) {
+<b class="nc"><i>354</i>&nbsp;        return new CircularListIterator&lt;&gt;(index);</b>
+<i>355</i>&nbsp;    }
+<i>356</i>&nbsp;
+<b class="fc"><i>357</i>&nbsp;    private class CircularIterator&lt;E&gt; implements Iterator&lt;E&gt; {</b>
+<i>358</i>&nbsp;
+<i>359</i>&nbsp;        int cursor;
+<i>360</i>&nbsp;        int lastIndex;
+<i>361</i>&nbsp;        int curModCount;
+<b class="fc"><i>362</i>&nbsp;        boolean hasMoved = false;</b>
+<i>363</i>&nbsp;
+<b class="fc"><i>364</i>&nbsp;        private CircularIterator() {</b>
+<b class="fc"><i>365</i>&nbsp;            curModCount = modCount;</b>
+<b class="fc"><i>366</i>&nbsp;            cursor = index;</b>
+<b class="fc"><i>367</i>&nbsp;            lastIndex = cursor;</b>
+<b class="fc"><i>368</i>&nbsp;        }</b>
+<i>369</i>&nbsp;
+<i>370</i>&nbsp;        @Override
+<i>371</i>&nbsp;        public boolean hasNext() {
+<b class="fc"><i>372</i>&nbsp;            if (!hasMoved &amp;&amp; size() &gt; 0) {</b>
+<b class="fc"><i>373</i>&nbsp;                return true;</b>
+<i>374</i>&nbsp;            }
+<b class="fc"><i>375</i>&nbsp;            return cursor != lastIndex;</b>
+<i>376</i>&nbsp;        }
+<i>377</i>&nbsp;
+<i>378</i>&nbsp;        @Override
+<i>379</i>&nbsp;        public E next() {
+<b class="fc"><i>380</i>&nbsp;            if (!this.hasNext()) {</b>
+<b class="nc"><i>381</i>&nbsp;                throw new IllegalStateException();</b>
+<i>382</i>&nbsp;            }
+<b class="fc"><i>383</i>&nbsp;            if (curModCount != modCount) {</b>
+<b class="nc"><i>384</i>&nbsp;                throw new ConcurrentModificationException();</b>
+<i>385</i>&nbsp;            }
+<b class="fc"><i>386</i>&nbsp;            E data = (E) list.get(cursor);</b>
+<b class="fc"><i>387</i>&nbsp;            cursor = incrementListPointer(cursor);</b>
+<b class="fc"><i>388</i>&nbsp;            hasMoved = true;</b>
+<b class="fc"><i>389</i>&nbsp;            return data;</b>
+<i>390</i>&nbsp;        }
+<i>391</i>&nbsp;
+<i>392</i>&nbsp;        @Override
+<i>393</i>&nbsp;        public void remove() {
+<b class="nc"><i>394</i>&nbsp;            throw new UnsupportedOperationException(&quot;Not supported yet.&quot;);</b>
+<i>395</i>&nbsp;        }
+<i>396</i>&nbsp;
+<i>397</i>&nbsp;    }
+<i>398</i>&nbsp;
+<b class="nc"><i>399</i>&nbsp;    private class CircularListIterator&lt;E&gt; implements ListIterator&lt;E&gt; {</b>
+<i>400</i>&nbsp;
+<i>401</i>&nbsp;        int cursor;
+<i>402</i>&nbsp;        int lastIndex;
+<i>403</i>&nbsp;        int firstIndex;
+<i>404</i>&nbsp;        int curModCount;
+<b class="nc"><i>405</i>&nbsp;        boolean hasMoved = false;</b>
+<i>406</i>&nbsp;
+<i>407</i>&nbsp;        private CircularListIterator() {
+<b class="nc"><i>408</i>&nbsp;            this(index);</b>
+<i>409</i>&nbsp;        }
+<i>410</i>&nbsp;
+<b class="nc"><i>411</i>&nbsp;        private CircularListIterator(int index) {</b>
+<b class="nc"><i>412</i>&nbsp;            curModCount = modCount;</b>
+<b class="nc"><i>413</i>&nbsp;            cursor = index;</b>
+<b class="nc"><i>414</i>&nbsp;            firstIndex = index;</b>
+<b class="nc"><i>415</i>&nbsp;            lastIndex = index;</b>
+<i>416</i>&nbsp;        }
+<i>417</i>&nbsp;
+<i>418</i>&nbsp;        @Override
+<i>419</i>&nbsp;        public boolean hasNext() {
+<b class="nc"><i>420</i>&nbsp;            if (!hasMoved &amp;&amp; size() &gt; 0) {</b>
+<b class="nc"><i>421</i>&nbsp;                return true;</b>
+<i>422</i>&nbsp;            }
+<b class="nc"><i>423</i>&nbsp;            return cursor != lastIndex;</b>
+<i>424</i>&nbsp;        }
+<i>425</i>&nbsp;
+<i>426</i>&nbsp;        @Override
+<i>427</i>&nbsp;        public E next() {
+<b class="nc"><i>428</i>&nbsp;            if (!this.hasNext()) {</b>
+<b class="nc"><i>429</i>&nbsp;                throw new IllegalStateException();</b>
+<i>430</i>&nbsp;            }
+<b class="nc"><i>431</i>&nbsp;            if (curModCount != modCount) {</b>
+<b class="nc"><i>432</i>&nbsp;                throw new ConcurrentModificationException();</b>
+<i>433</i>&nbsp;            }
+<b class="nc"><i>434</i>&nbsp;            E data = (E) list.get(cursor);</b>
+<b class="nc"><i>435</i>&nbsp;            cursor = incrementListPointer(cursor);</b>
+<b class="nc"><i>436</i>&nbsp;            hasMoved = true;</b>
+<b class="nc"><i>437</i>&nbsp;            return data;</b>
+<i>438</i>&nbsp;        }
+<i>439</i>&nbsp;
+<i>440</i>&nbsp;        @Override
+<i>441</i>&nbsp;        public boolean hasPrevious() {
+<b class="nc"><i>442</i>&nbsp;            if (!hasMoved &amp;&amp; size() &gt; 0) {</b>
+<b class="nc"><i>443</i>&nbsp;                return true;</b>
+<i>444</i>&nbsp;            }
+<b class="nc"><i>445</i>&nbsp;            return cursor != firstIndex;</b>
+<i>446</i>&nbsp;        }
+<i>447</i>&nbsp;
+<i>448</i>&nbsp;        @Override
+<i>449</i>&nbsp;        public E previous() {
+<b class="nc"><i>450</i>&nbsp;            if (!this.hasPrevious()) {</b>
+<b class="nc"><i>451</i>&nbsp;                throw new IllegalStateException();</b>
+<i>452</i>&nbsp;            }
+<b class="nc"><i>453</i>&nbsp;            if (curModCount != modCount) {</b>
+<b class="nc"><i>454</i>&nbsp;                throw new ConcurrentModificationException();</b>
+<i>455</i>&nbsp;            }
+<b class="nc"><i>456</i>&nbsp;            cursor = decrementListPointer(cursor);</b>
+<b class="nc"><i>457</i>&nbsp;            hasMoved = true;</b>
+<b class="nc"><i>458</i>&nbsp;            return (E) list.get(cursor);</b>
+<i>459</i>&nbsp;        }
+<i>460</i>&nbsp;
+<i>461</i>&nbsp;        @Override
+<i>462</i>&nbsp;        public int nextIndex() {
+<b class="nc"><i>463</i>&nbsp;            if (this.hasNext()) {</b>
+<b class="nc"><i>464</i>&nbsp;                return incrementListPointer(cursor);</b>
+<i>465</i>&nbsp;            }
+<b class="nc"><i>466</i>&nbsp;            return list.size();</b>
+<i>467</i>&nbsp;        }
+<i>468</i>&nbsp;
+<i>469</i>&nbsp;        @Override
+<i>470</i>&nbsp;        public int previousIndex() {
+<b class="nc"><i>471</i>&nbsp;            if (this.hasPrevious()) {</b>
+<b class="nc"><i>472</i>&nbsp;                return decrementListPointer(cursor);</b>
+<i>473</i>&nbsp;            }
+<b class="nc"><i>474</i>&nbsp;            return -1;</b>
+<i>475</i>&nbsp;        }
+<i>476</i>&nbsp;
+<i>477</i>&nbsp;        @Override
+<i>478</i>&nbsp;        public void remove() {
+<b class="nc"><i>479</i>&nbsp;            throw new UnsupportedOperationException(&quot;Not supported yet.&quot;);</b>
+<i>480</i>&nbsp;        }
+<i>481</i>&nbsp;
+<i>482</i>&nbsp;        @Override
+<i>483</i>&nbsp;        public void set(E arg0) {
+<b class="nc"><i>484</i>&nbsp;            throw new UnsupportedOperationException(&quot;Not supported yet.&quot;);</b>
+<i>485</i>&nbsp;        }
+<i>486</i>&nbsp;
+<i>487</i>&nbsp;        @Override
+<i>488</i>&nbsp;        public void add(E arg0) {
+<b class="nc"><i>489</i>&nbsp;            throw new UnsupportedOperationException(&quot;Not supported yet.&quot;);</b>
+<i>490</i>&nbsp;        }
+<i>491</i>&nbsp;
+<i>492</i>&nbsp;    }
+<i>493</i>&nbsp;
+<i>494</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

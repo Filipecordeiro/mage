@@ -1,0 +1,486 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UserStatsRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.server.record</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UserStatsRepository (mage.server.record)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserStatsRepository</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 186)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UserStatsRepository$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 188)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package mage.server.record;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.j256.ormlite.dao.Dao;
+<i>4</i>&nbsp;import com.j256.ormlite.dao.DaoManager;
+<i>5</i>&nbsp;import com.j256.ormlite.jdbc.JdbcConnectionSource;
+<i>6</i>&nbsp;import com.j256.ormlite.stmt.QueryBuilder;
+<i>7</i>&nbsp;import com.j256.ormlite.support.ConnectionSource;
+<i>8</i>&nbsp;import com.j256.ormlite.support.DatabaseConnection;
+<i>9</i>&nbsp;import com.j256.ormlite.table.TableUtils;
+<i>10</i>&nbsp;import java.io.File;
+<i>11</i>&nbsp;import java.sql.SQLException;
+<i>12</i>&nbsp;import java.util.ArrayList;
+<i>13</i>&nbsp;import java.util.HashSet;
+<i>14</i>&nbsp;import java.util.List;
+<i>15</i>&nbsp;import mage.cards.repository.RepositoryUtil;
+<i>16</i>&nbsp;import mage.game.result.ResultProtos;
+<i>17</i>&nbsp;import mage.server.rating.GlickoRating;
+<i>18</i>&nbsp;import mage.server.rating.GlickoRatingSystem;
+<i>19</i>&nbsp;import org.apache.log4j.Logger;
+<i>20</i>&nbsp;
+<b class="nc"><i>21</i>&nbsp;public enum UserStatsRepository {</b>
+<i>22</i>&nbsp;
+<b class="nc"><i>23</i>&nbsp;    instance;</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    private static final String JDBC_URL = &quot;jdbc:sqlite:./db/user_stats.db&quot;;
+<i>26</i>&nbsp;    private static final String VERSION_ENTITY_NAME = &quot;user_stats&quot;;
+<i>27</i>&nbsp;    // raise this if db structure was changed
+<i>28</i>&nbsp;    private static final long DB_VERSION = 0;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    private Dao&lt;UserStats, Object&gt; dao;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    private UserStatsRepository() {
+<i>33</i>&nbsp;        File file = new File(&quot;db&quot;);
+<i>34</i>&nbsp;        if (!file.exists()) {
+<i>35</i>&nbsp;            file.mkdirs();
+<i>36</i>&nbsp;        }
+<i>37</i>&nbsp;        try {
+<i>38</i>&nbsp;            ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+<i>39</i>&nbsp;            boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, DB_VERSION);
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;            if (obsolete) {
+<i>42</i>&nbsp;                TableUtils.dropTable(connectionSource, UserStats.class, true);
+<i>43</i>&nbsp;            }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;            TableUtils.createTableIfNotExists(connectionSource, UserStats.class);
+<i>46</i>&nbsp;            dao = DaoManager.createDao(connectionSource, UserStats.class);
+<i>47</i>&nbsp;        } catch (SQLException ex) {
+<i>48</i>&nbsp;            Logger.getLogger(UserStatsRepository.class).error(&quot;Error creating user_stats repository - &quot;, ex);
+<i>49</i>&nbsp;        }
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public void add(UserStats userStats) {
+<i>53</i>&nbsp;        try {
+<b class="nc"><i>54</i>&nbsp;            dao.create(userStats);</b>
+<b class="nc"><i>55</i>&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc"><i>56</i>&nbsp;            Logger.getLogger(UserStatsRepository.class).error(&quot;Error adding a user_stats to DB - &quot;, ex);</b>
+<b class="nc"><i>57</i>&nbsp;        }</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public void update(UserStats userStats) {
+<i>61</i>&nbsp;        try {
+<b class="nc"><i>62</i>&nbsp;            dao.update(userStats);</b>
+<b class="nc"><i>63</i>&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc"><i>64</i>&nbsp;            Logger.getLogger(UserStatsRepository.class).error(&quot;Error updating a user_stats in DB - &quot;, ex);</b>
+<b class="nc"><i>65</i>&nbsp;        }</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public UserStats getUser(String userName) {
+<i>69</i>&nbsp;        try {
+<b class="nc"><i>70</i>&nbsp;            QueryBuilder&lt;UserStats, Object&gt; qb = dao.queryBuilder();</b>
+<b class="nc"><i>71</i>&nbsp;            qb.where().eq(&quot;userName&quot;, userName);</b>
+<b class="nc"><i>72</i>&nbsp;            List&lt;UserStats&gt; users = dao.query(qb.prepare());</b>
+<b class="nc"><i>73</i>&nbsp;            if (users.size() == 1) {</b>
+<b class="nc"><i>74</i>&nbsp;                return users.get(0);</b>
+<i>75</i>&nbsp;            }
+<b class="nc"><i>76</i>&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc"><i>77</i>&nbsp;            Logger.getLogger(UserStatsRepository.class).error(&quot;Error getting a user from DB - &quot;, ex);</b>
+<b class="nc"><i>78</i>&nbsp;        }</b>
+<b class="nc"><i>79</i>&nbsp;        return null;</b>
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    public List&lt;UserStats&gt; getAllUsers() {
+<i>83</i>&nbsp;        try {
+<b class="nc"><i>84</i>&nbsp;            QueryBuilder&lt;UserStats, Object&gt; qb = dao.queryBuilder();</b>
+<b class="nc"><i>85</i>&nbsp;            return dao.query(qb.prepare());</b>
+<b class="nc"><i>86</i>&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc"><i>87</i>&nbsp;            Logger.getLogger(UserStatsRepository.class).error(&quot;Error getting all users from DB - &quot;, ex);</b>
+<i>88</i>&nbsp;        }
+<b class="nc"><i>89</i>&nbsp;        return null;</b>
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    public long getLatestEndTimeMs() {
+<i>93</i>&nbsp;        try {
+<b class="nc"><i>94</i>&nbsp;          QueryBuilder&lt;UserStats, Object&gt; qb = dao.queryBuilder();</b>
+<b class="nc"><i>95</i>&nbsp;          qb.orderBy(&quot;endTimeMs&quot;, false).limit(1);</b>
+<b class="nc"><i>96</i>&nbsp;          List&lt;UserStats&gt; users = dao.query(qb.prepare());</b>
+<b class="nc"><i>97</i>&nbsp;          if (users.size() == 1) {</b>
+<b class="nc"><i>98</i>&nbsp;              return users.get(0).getEndTimeMs();</b>
+<i>99</i>&nbsp;          }
+<b class="nc"><i>100</i>&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc"><i>101</i>&nbsp;            Logger.getLogger(UserStatsRepository.class).error(&quot;Error getting the latest end time from DB - &quot;, ex);</b>
+<b class="nc"><i>102</i>&nbsp;        }</b>
+<b class="nc"><i>103</i>&nbsp;        return 0;</b>
+<i>104</i>&nbsp;    }
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    // updateUserStats reads tables finished after the last DB update and reflects it to the DB.
+<i>107</i>&nbsp;    // It returns the list of user names that are upated.
+<i>108</i>&nbsp;    public List&lt;String&gt; updateUserStats() {
+<b class="nc"><i>109</i>&nbsp;        HashSet&lt;String&gt; updatedUsers = new HashSet();</b>
+<i>110</i>&nbsp;        // Lock the DB so that no other updateUserStats runs at the same time.
+<b class="nc"><i>111</i>&nbsp;        synchronized(this) {</b>
+<b class="nc"><i>112</i>&nbsp;            long latestEndTimeMs = this.getLatestEndTimeMs();</b>
+<b class="nc"><i>113</i>&nbsp;            List&lt;TableRecord&gt; records = TableRecordRepository.instance.getAfter(latestEndTimeMs);</b>
+<b class="nc"><i>114</i>&nbsp;            for (TableRecord record : records) {</b>
+<b class="nc"><i>115</i>&nbsp;                ResultProtos.TableProto table = record.getProto();</b>
+<b class="nc"><i>116</i>&nbsp;                if (table.getControllerName().equals(&quot;System&quot;)) {</b>
+<i>117</i>&nbsp;                    // This is a sub table within a tournament, so it&#39;s already handled by the main
+<i>118</i>&nbsp;                    // tournament table.
+<b class="nc"><i>119</i>&nbsp;                    continue;</b>
+<i>120</i>&nbsp;                }
+<b class="nc"><i>121</i>&nbsp;                if (table.hasMatch()) {</b>
+<b class="nc"><i>122</i>&nbsp;                    ResultProtos.MatchProto match = table.getMatch();</b>
+<b class="nc"><i>123</i>&nbsp;                    for (ResultProtos.MatchPlayerProto player : match.getPlayersList()) {</b>
+<b class="nc"><i>124</i>&nbsp;                        UserStats userStats = this.getUser(player.getName());</b>
+<b class="nc"><i>125</i>&nbsp;                        ResultProtos.UserStatsProto proto =</b>
+<i>126</i>&nbsp;                            userStats != null
+<b class="nc"><i>127</i>&nbsp;                                ? userStats.getProto()</b>
+<b class="nc"><i>128</i>&nbsp;                                : ResultProtos.UserStatsProto.newBuilder().setName(player.getName()).build();</b>
+<b class="nc"><i>129</i>&nbsp;                        ResultProtos.UserStatsProto.Builder builder = ResultProtos.UserStatsProto.newBuilder(proto)</b>
+<b class="nc"><i>130</i>&nbsp;                                .setMatches(proto.getMatches() + 1);</b>
+<b class="nc"><i>131</i>&nbsp;                        switch (player.getQuit()) {</b>
+<i>132</i>&nbsp;                            case IDLE_TIMEOUT:
+<b class="nc"><i>133</i>&nbsp;                                builder.setMatchesIdleTimeout(proto.getMatchesIdleTimeout() + 1);</b>
+<b class="nc"><i>134</i>&nbsp;                                break;</b>
+<i>135</i>&nbsp;                            case TIMER_TIMEOUT:
+<b class="nc"><i>136</i>&nbsp;                                builder.setMatchesTimerTimeout(proto.getMatchesTimerTimeout() + 1);</b>
+<b class="nc"><i>137</i>&nbsp;                                break;</b>
+<i>138</i>&nbsp;                            case QUIT:
+<b class="nc"><i>139</i>&nbsp;                                builder.setMatchesQuit(proto.getMatchesQuit() + 1);</b>
+<i>140</i>&nbsp;                                break;
+<i>141</i>&nbsp;                        }
+<b class="nc"><i>142</i>&nbsp;                        if (userStats == null) {</b>
+<b class="nc"><i>143</i>&nbsp;                            this.add(new UserStats(builder.build(), table.getEndTimeMs()));</b>
+<i>144</i>&nbsp;                        } else {
+<b class="nc"><i>145</i>&nbsp;                            this.update(new UserStats(builder.build(), table.getEndTimeMs()));</b>
+<i>146</i>&nbsp;                        }
+<b class="nc"><i>147</i>&nbsp;                        updatedUsers.add(player.getName());</b>
+<b class="nc"><i>148</i>&nbsp;                    }</b>
+<b class="nc"><i>149</i>&nbsp;                    updateRating(match, table.getEndTimeMs());</b>
+<b class="nc"><i>150</i>&nbsp;                } else if (table.hasTourney()) {</b>
+<b class="nc"><i>151</i>&nbsp;                    ResultProtos.TourneyProto tourney = table.getTourney();</b>
+<b class="nc"><i>152</i>&nbsp;                    for (ResultProtos.TourneyPlayerProto player : tourney.getPlayersList()) {</b>
+<b class="nc"><i>153</i>&nbsp;                        UserStats userStats = this.getUser(player.getName());</b>
+<b class="nc"><i>154</i>&nbsp;                        ResultProtos.UserStatsProto proto = userStats != null ? userStats.getProto()</b>
+<b class="nc"><i>155</i>&nbsp;                                : ResultProtos.UserStatsProto.newBuilder().setName(player.getName()).build();</b>
+<b class="nc"><i>156</i>&nbsp;                        ResultProtos.UserStatsProto.Builder builder = ResultProtos.UserStatsProto.newBuilder(proto)</b>
+<b class="nc"><i>157</i>&nbsp;                                .setTourneys(proto.getTourneys() + 1);</b>
+<b class="nc"><i>158</i>&nbsp;                        switch (player.getQuit()) {</b>
+<i>159</i>&nbsp;                            case DURING_ROUND:
+<b class="nc"><i>160</i>&nbsp;                                builder.setTourneysQuitDuringRound(proto.getTourneysQuitDuringRound() + 1);</b>
+<b class="nc"><i>161</i>&nbsp;                                break;</b>
+<i>162</i>&nbsp;                            case DURING_DRAFTING:
+<b class="nc"><i>163</i>&nbsp;                                builder.setTourneysQuitDuringDrafting(proto.getTourneysQuitDuringDrafting() + 1);</b>
+<b class="nc"><i>164</i>&nbsp;                                break;</b>
+<i>165</i>&nbsp;                            case DURING_CONSTRUCTION:
+<b class="nc"><i>166</i>&nbsp;                                builder.setTourneysQuitDuringConstruction(proto.getTourneysQuitDuringConstruction() + 1);</b>
+<i>167</i>&nbsp;                                break;
+<i>168</i>&nbsp;                        }
+<b class="nc"><i>169</i>&nbsp;                        if (userStats == null) {</b>
+<b class="nc"><i>170</i>&nbsp;                            this.add(new UserStats(builder.build(), table.getEndTimeMs()));</b>
+<i>171</i>&nbsp;                        } else {
+<b class="nc"><i>172</i>&nbsp;                            this.update(new UserStats(builder.build(), table.getEndTimeMs()));</b>
+<i>173</i>&nbsp;                        }
+<b class="nc"><i>174</i>&nbsp;                        updatedUsers.add(player.getName());</b>
+<b class="nc"><i>175</i>&nbsp;                    }</b>
+<i>176</i>&nbsp;
+<b class="nc"><i>177</i>&nbsp;                    for (ResultProtos.TourneyRoundProto round : tourney.getRoundsList()) {</b>
+<b class="nc"><i>178</i>&nbsp;                        for (ResultProtos.MatchProto match : round.getMatchesList()) {</b>
+<b class="nc"><i>179</i>&nbsp;                            updateRating(match, table.getEndTimeMs());</b>
+<b class="nc"><i>180</i>&nbsp;                        }</b>
+<b class="nc"><i>181</i>&nbsp;                    }</b>
+<i>182</i>&nbsp;                }
+<b class="nc"><i>183</i>&nbsp;            }</b>
+<b class="nc"><i>184</i>&nbsp;        }</b>
+<b class="nc"><i>185</i>&nbsp;        return new ArrayList&lt;&gt;(updatedUsers);</b>
+<i>186</i>&nbsp;    }
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;    private void updateRating(ResultProtos.MatchProto match, long tableEndTimeMs) {
+<i>189</i>&nbsp;        long matchEndTimeMs;
+<b class="nc"><i>190</i>&nbsp;        if (match.hasEndTimeMs()) {</b>
+<b class="nc"><i>191</i>&nbsp;            matchEndTimeMs = match.getEndTimeMs();</b>
+<i>192</i>&nbsp;        } else {
+<b class="nc"><i>193</i>&nbsp;            matchEndTimeMs = tableEndTimeMs;</b>
+<i>194</i>&nbsp;        }
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;        // process only match with options
+<b class="nc"><i>197</i>&nbsp;        if (!match.hasMatchOptions()) {</b>
+<i>198</i>&nbsp;            return;
+<i>199</i>&nbsp;        }
+<b class="nc"><i>200</i>&nbsp;        ResultProtos.MatchOptionsProto matchOptions = match.getMatchOptions();</b>
+<i>201</i>&nbsp;
+<i>202</i>&nbsp;        // process only rated matches
+<b class="nc"><i>203</i>&nbsp;        if (!matchOptions.getRated()) {</b>
+<i>204</i>&nbsp;            return;
+<i>205</i>&nbsp;        }
+<i>206</i>&nbsp;
+<i>207</i>&nbsp;        // rating only for duels
+<b class="nc"><i>208</i>&nbsp;        if (match.getPlayersCount() != 2) {</b>
+<i>209</i>&nbsp;            return;
+<i>210</i>&nbsp;        }
+<i>211</i>&nbsp;
+<b class="nc"><i>212</i>&nbsp;        ResultProtos.MatchPlayerProto player1 = match.getPlayers(0);</b>
+<b class="nc"><i>213</i>&nbsp;        ResultProtos.MatchPlayerProto player2 = match.getPlayers(1);</b>
+<i>214</i>&nbsp;
+<i>215</i>&nbsp;        // rate only games between human players
+<b class="nc"><i>216</i>&nbsp;        if (!player1.getHuman() || !player2.getHuman()) {</b>
+<i>217</i>&nbsp;            return;
+<i>218</i>&nbsp;        }
+<i>219</i>&nbsp;
+<i>220</i>&nbsp;        double outcome;
+<b class="nc"><i>221</i>&nbsp;        if ((player1.getQuit() == ResultProtos.MatchQuitStatus.NO_MATCH_QUIT &amp;&amp; player1.getWins() &gt; player2.getWins())</b>
+<b class="nc"><i>222</i>&nbsp;                || player2.getQuit() != ResultProtos.MatchQuitStatus.NO_MATCH_QUIT) {</b>
+<i>223</i>&nbsp;            // player1 won
+<b class="nc"><i>224</i>&nbsp;            outcome = 1;</b>
+<b class="nc"><i>225</i>&nbsp;        } else if ((player2.getQuit() == ResultProtos.MatchQuitStatus.NO_MATCH_QUIT &amp;&amp; player1.getWins() &lt; player2.getWins())</b>
+<b class="nc"><i>226</i>&nbsp;                || player1.getQuit() != ResultProtos.MatchQuitStatus.NO_MATCH_QUIT) {</b>
+<i>227</i>&nbsp;            // player2 won
+<b class="nc"><i>228</i>&nbsp;            outcome = 0;</b>
+<i>229</i>&nbsp;        } else {
+<i>230</i>&nbsp;            // draw
+<b class="nc"><i>231</i>&nbsp;            outcome = 0.5;</b>
+<i>232</i>&nbsp;        }
+<i>233</i>&nbsp;
+<i>234</i>&nbsp;        // get players stats
+<b class="nc"><i>235</i>&nbsp;        UserStats player1Stats = getOrCreateUserStats(player1.getName(), tableEndTimeMs);</b>
+<b class="nc"><i>236</i>&nbsp;        ResultProtos.UserStatsProto player1StatsProto = player1Stats.getProto();</b>
+<b class="nc"><i>237</i>&nbsp;        UserStats player2Stats = getOrCreateUserStats(player2.getName(), tableEndTimeMs);</b>
+<b class="nc"><i>238</i>&nbsp;        ResultProtos.UserStatsProto player2StatsProto = player2Stats.getProto();</b>
+<i>239</i>&nbsp;
+<b class="nc"><i>240</i>&nbsp;        ResultProtos.UserStatsProto.Builder player1StatsBuilder =</b>
+<b class="nc"><i>241</i>&nbsp;                ResultProtos.UserStatsProto.newBuilder(player1StatsProto);</b>
+<b class="nc"><i>242</i>&nbsp;        ResultProtos.UserStatsProto.Builder player2StatsBuilder =</b>
+<b class="nc"><i>243</i>&nbsp;                ResultProtos.UserStatsProto.newBuilder(player2StatsProto);</b>
+<i>244</i>&nbsp;
+<i>245</i>&nbsp;        // update general rating
+<b class="nc"><i>246</i>&nbsp;        ResultProtos.GlickoRatingProto player1GeneralRatingProto = null;</b>
+<b class="nc"><i>247</i>&nbsp;        if (player1StatsProto.hasGeneralGlickoRating()) {</b>
+<b class="nc"><i>248</i>&nbsp;            player1GeneralRatingProto = player1StatsProto.getGeneralGlickoRating();</b>
+<i>249</i>&nbsp;        }
+<i>250</i>&nbsp;
+<b class="nc"><i>251</i>&nbsp;        ResultProtos.GlickoRatingProto player2GeneralRatingProto = null;</b>
+<b class="nc"><i>252</i>&nbsp;        if (player2StatsProto.hasGeneralGlickoRating()) {</b>
+<b class="nc"><i>253</i>&nbsp;            player2GeneralRatingProto = player2StatsProto.getGeneralGlickoRating();</b>
+<i>254</i>&nbsp;        }
+<i>255</i>&nbsp;
+<b class="nc"><i>256</i>&nbsp;        ResultProtos.GlickoRatingProto.Builder player1GeneralGlickoRatingBuilder =</b>
+<b class="nc"><i>257</i>&nbsp;                player1StatsBuilder.getGeneralGlickoRatingBuilder();</b>
+<i>258</i>&nbsp;
+<b class="nc"><i>259</i>&nbsp;        ResultProtos.GlickoRatingProto.Builder player2GeneralGlickoRatingBuilder =</b>
+<b class="nc"><i>260</i>&nbsp;                player2StatsBuilder.getGeneralGlickoRatingBuilder();</b>
+<i>261</i>&nbsp;
+<b class="nc"><i>262</i>&nbsp;        updateRating(player1GeneralRatingProto, player2GeneralRatingProto, outcome, matchEndTimeMs,</b>
+<i>263</i>&nbsp;                player1GeneralGlickoRatingBuilder, player2GeneralGlickoRatingBuilder);
+<i>264</i>&nbsp;
+<b class="nc"><i>265</i>&nbsp;        if (matchOptions.hasLimited()) {</b>
+<b class="nc"><i>266</i>&nbsp;            if (matchOptions.getLimited()) {</b>
+<i>267</i>&nbsp;                // update limited rating
+<b class="nc"><i>268</i>&nbsp;                ResultProtos.GlickoRatingProto player1LimitedRatingProto = null;</b>
+<b class="nc"><i>269</i>&nbsp;                if (player1StatsProto.hasLimitedGlickoRating()) {</b>
+<b class="nc"><i>270</i>&nbsp;                    player1LimitedRatingProto = player1StatsProto.getLimitedGlickoRating();</b>
+<i>271</i>&nbsp;                }
+<i>272</i>&nbsp;
+<b class="nc"><i>273</i>&nbsp;                ResultProtos.GlickoRatingProto player2LimitedRatingProto = null;</b>
+<b class="nc"><i>274</i>&nbsp;                if (player2StatsProto.hasLimitedGlickoRating()) {</b>
+<b class="nc"><i>275</i>&nbsp;                    player2LimitedRatingProto = player2StatsProto.getLimitedGlickoRating();</b>
+<i>276</i>&nbsp;                }
+<i>277</i>&nbsp;
+<b class="nc"><i>278</i>&nbsp;                ResultProtos.GlickoRatingProto.Builder player1LimitedGlickoRatingBuilder =</b>
+<b class="nc"><i>279</i>&nbsp;                        player1StatsBuilder.getLimitedGlickoRatingBuilder();</b>
+<i>280</i>&nbsp;
+<b class="nc"><i>281</i>&nbsp;                ResultProtos.GlickoRatingProto.Builder player2LimitedGlickoRatingBuilder =</b>
+<b class="nc"><i>282</i>&nbsp;                        player2StatsBuilder.getLimitedGlickoRatingBuilder();</b>
+<i>283</i>&nbsp;
+<b class="nc"><i>284</i>&nbsp;                updateRating(player1LimitedRatingProto, player2LimitedRatingProto, outcome, matchEndTimeMs,</b>
+<i>285</i>&nbsp;                        player1LimitedGlickoRatingBuilder, player2LimitedGlickoRatingBuilder);
+<b class="nc"><i>286</i>&nbsp;            } else {</b>
+<i>287</i>&nbsp;                // update constructed rating
+<i>288</i>&nbsp;
+<b class="nc"><i>289</i>&nbsp;                ResultProtos.GlickoRatingProto player1ConstructedRatingProto = null;</b>
+<b class="nc"><i>290</i>&nbsp;                if (player1StatsProto.hasConstructedGlickoRating()) {</b>
+<b class="nc"><i>291</i>&nbsp;                    player1ConstructedRatingProto = player1StatsProto.getConstructedGlickoRating();</b>
+<i>292</i>&nbsp;                }
+<i>293</i>&nbsp;
+<b class="nc"><i>294</i>&nbsp;                ResultProtos.GlickoRatingProto player2ConstructedRatingProto = null;</b>
+<b class="nc"><i>295</i>&nbsp;                if (player2StatsProto.hasConstructedGlickoRating()) {</b>
+<b class="nc"><i>296</i>&nbsp;                    player2ConstructedRatingProto = player2StatsProto.getConstructedGlickoRating();</b>
+<i>297</i>&nbsp;                }
+<i>298</i>&nbsp;
+<b class="nc"><i>299</i>&nbsp;                ResultProtos.GlickoRatingProto.Builder player1ConstructedGlickoRatingBuilder =</b>
+<b class="nc"><i>300</i>&nbsp;                        player1StatsBuilder.getConstructedGlickoRatingBuilder();</b>
+<i>301</i>&nbsp;
+<b class="nc"><i>302</i>&nbsp;                ResultProtos.GlickoRatingProto.Builder player2ConstructedGlickoRatingBuilder =</b>
+<b class="nc"><i>303</i>&nbsp;                        player2StatsBuilder.getConstructedGlickoRatingBuilder();</b>
+<i>304</i>&nbsp;
+<b class="nc"><i>305</i>&nbsp;                updateRating(player1ConstructedRatingProto, player2ConstructedRatingProto, outcome, matchEndTimeMs,</b>
+<i>306</i>&nbsp;                        player1ConstructedGlickoRatingBuilder, player2ConstructedGlickoRatingBuilder);
+<i>307</i>&nbsp;            }
+<i>308</i>&nbsp;        }
+<i>309</i>&nbsp;
+<i>310</i>&nbsp;
+<b class="nc"><i>311</i>&nbsp;        this.update(new UserStats(player1StatsBuilder.build(), player1Stats.getEndTimeMs()));</b>
+<b class="nc"><i>312</i>&nbsp;        this.update(new UserStats(player2StatsBuilder.build(), player2Stats.getEndTimeMs()));</b>
+<i>313</i>&nbsp;    }
+<i>314</i>&nbsp;
+<i>315</i>&nbsp;    private void updateRating(
+<i>316</i>&nbsp;            ResultProtos.GlickoRatingProto player1RatingProto,
+<i>317</i>&nbsp;            ResultProtos.GlickoRatingProto player2RatingProto,
+<i>318</i>&nbsp;            double outcome,
+<i>319</i>&nbsp;            long tableEndTimeMs,
+<i>320</i>&nbsp;            ResultProtos.GlickoRatingProto.Builder player1GlickoRatingBuilder,
+<i>321</i>&nbsp;            ResultProtos.GlickoRatingProto.Builder player2GlickoRatingBuilder) {
+<i>322</i>&nbsp;
+<i>323</i>&nbsp;        GlickoRating player1GlickoRating;
+<b class="nc"><i>324</i>&nbsp;        if (player1RatingProto != null) {</b>
+<b class="nc"><i>325</i>&nbsp;            player1GlickoRating = new GlickoRating(</b>
+<b class="nc"><i>326</i>&nbsp;                    player1RatingProto.getRating(),</b>
+<b class="nc"><i>327</i>&nbsp;                    player1RatingProto.getRatingDeviation(),</b>
+<b class="nc"><i>328</i>&nbsp;                    player1RatingProto.getLastGameTimeMs());</b>
+<i>329</i>&nbsp;        } else {
+<b class="nc"><i>330</i>&nbsp;            player1GlickoRating = GlickoRatingSystem.getInitialRating();</b>
+<i>331</i>&nbsp;        }
+<i>332</i>&nbsp;
+<i>333</i>&nbsp;        GlickoRating player2GlickoRating;
+<b class="nc"><i>334</i>&nbsp;        if (player2RatingProto != null) {</b>
+<b class="nc"><i>335</i>&nbsp;            player2GlickoRating = new GlickoRating(</b>
+<b class="nc"><i>336</i>&nbsp;                    player2RatingProto.getRating(),</b>
+<b class="nc"><i>337</i>&nbsp;                    player2RatingProto.getRatingDeviation(),</b>
+<b class="nc"><i>338</i>&nbsp;                    player2RatingProto.getLastGameTimeMs());</b>
+<i>339</i>&nbsp;        } else {
+<b class="nc"><i>340</i>&nbsp;            player2GlickoRating = GlickoRatingSystem.getInitialRating();</b>
+<i>341</i>&nbsp;        }
+<i>342</i>&nbsp;
+<b class="nc"><i>343</i>&nbsp;        GlickoRatingSystem glickoRatingSystem = new GlickoRatingSystem();</b>
+<b class="nc"><i>344</i>&nbsp;        glickoRatingSystem.updateRating(player1GlickoRating, player2GlickoRating, outcome, tableEndTimeMs);</b>
+<i>345</i>&nbsp;
+<b class="nc"><i>346</i>&nbsp;        player1GlickoRatingBuilder</b>
+<b class="nc"><i>347</i>&nbsp;                .setRating(player1GlickoRating.getRating())</b>
+<b class="nc"><i>348</i>&nbsp;                .setRatingDeviation(player1GlickoRating.getRatingDeviation())</b>
+<b class="nc"><i>349</i>&nbsp;                .setLastGameTimeMs(tableEndTimeMs);</b>
+<i>350</i>&nbsp;
+<b class="nc"><i>351</i>&nbsp;        player2GlickoRatingBuilder</b>
+<b class="nc"><i>352</i>&nbsp;                .setRating(player2GlickoRating.getRating())</b>
+<b class="nc"><i>353</i>&nbsp;                .setRatingDeviation(player2GlickoRating.getRatingDeviation())</b>
+<b class="nc"><i>354</i>&nbsp;                .setLastGameTimeMs(tableEndTimeMs);</b>
+<i>355</i>&nbsp;    }
+<i>356</i>&nbsp;
+<i>357</i>&nbsp;    private UserStats getOrCreateUserStats(String playerName, long endTimeMs) {
+<b class="nc"><i>358</i>&nbsp;        UserStats userStats = this.getUser(playerName);</b>
+<b class="nc"><i>359</i>&nbsp;        if (userStats == null) {</b>
+<b class="nc"><i>360</i>&nbsp;            ResultProtos.UserStatsProto userStatsProto = ResultProtos.UserStatsProto.newBuilder().setName(playerName).build();</b>
+<b class="nc"><i>361</i>&nbsp;            userStats = new UserStats(userStatsProto, endTimeMs);</b>
+<b class="nc"><i>362</i>&nbsp;            this.add(userStats);</b>
+<i>363</i>&nbsp;        }
+<b class="nc"><i>364</i>&nbsp;        return userStats;</b>
+<i>365</i>&nbsp;    }
+<i>366</i>&nbsp;
+<i>367</i>&nbsp;    public void closeDB() {
+<i>368</i>&nbsp;        try {
+<b class="nc"><i>369</i>&nbsp;            if (dao != null &amp;&amp; dao.getConnectionSource() != null) {</b>
+<b class="nc"><i>370</i>&nbsp;                DatabaseConnection conn = dao.getConnectionSource().getReadWriteConnection();</b>
+<b class="nc"><i>371</i>&nbsp;                conn.executeStatement(&quot;shutdown compact&quot;, 0);</b>
+<i>372</i>&nbsp;            }
+<b class="nc"><i>373</i>&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc"><i>374</i>&nbsp;            Logger.getLogger(UserStatsRepository.class).error(&quot;Error closing user_stats repository - &quot;, ex);</b>
+<b class="nc"><i>375</i>&nbsp;        }</b>
+<i>376</i>&nbsp;    }
+<i>377</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

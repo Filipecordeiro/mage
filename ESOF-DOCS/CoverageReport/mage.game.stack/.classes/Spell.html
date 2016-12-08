@@ -1,0 +1,998 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Spell</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.game.stack</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Spell (mage.game.stack)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Spell</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55%
+  </span>
+  <span class="absValue">
+    (55/ 100)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75.6%
+  </span>
+  <span class="absValue">
+    (267/ 353)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; * permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *       conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *       provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; * THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; * ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; * The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; * authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; * or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.game.stack;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.ArrayList;
+<i>31</i>&nbsp;import java.util.List;
+<i>32</i>&nbsp;import java.util.UUID;
+<i>33</i>&nbsp;import mage.MageInt;
+<i>34</i>&nbsp;import mage.MageObject;
+<i>35</i>&nbsp;import mage.Mana;
+<i>36</i>&nbsp;import mage.ObjectColor;
+<i>37</i>&nbsp;import mage.abilities.Abilities;
+<i>38</i>&nbsp;import mage.abilities.Ability;
+<i>39</i>&nbsp;import mage.abilities.Mode;
+<i>40</i>&nbsp;import mage.abilities.SpellAbility;
+<i>41</i>&nbsp;import mage.abilities.costs.AlternativeSourceCosts;
+<i>42</i>&nbsp;import mage.abilities.costs.Cost;
+<i>43</i>&nbsp;import mage.abilities.costs.mana.ManaCost;
+<i>44</i>&nbsp;import mage.abilities.costs.mana.ManaCosts;
+<i>45</i>&nbsp;import mage.abilities.keyword.BestowAbility;
+<i>46</i>&nbsp;import mage.abilities.keyword.MorphAbility;
+<i>47</i>&nbsp;import mage.cards.Card;
+<i>48</i>&nbsp;import mage.cards.CardsImpl;
+<i>49</i>&nbsp;import mage.cards.FrameStyle;
+<i>50</i>&nbsp;import mage.cards.SplitCard;
+<i>51</i>&nbsp;import mage.constants.CardType;
+<i>52</i>&nbsp;import mage.constants.Outcome;
+<i>53</i>&nbsp;import mage.constants.Rarity;
+<i>54</i>&nbsp;import mage.constants.SpellAbilityType;
+<i>55</i>&nbsp;import mage.constants.Zone;
+<i>56</i>&nbsp;import mage.constants.ZoneDetail;
+<i>57</i>&nbsp;import mage.counters.Counter;
+<i>58</i>&nbsp;import mage.counters.Counters;
+<i>59</i>&nbsp;import mage.game.Game;
+<i>60</i>&nbsp;import mage.game.GameState;
+<i>61</i>&nbsp;import mage.game.events.GameEvent;
+<i>62</i>&nbsp;import mage.game.events.GameEvent.EventType;
+<i>63</i>&nbsp;import mage.game.events.ZoneChangeEvent;
+<i>64</i>&nbsp;import mage.game.permanent.Permanent;
+<i>65</i>&nbsp;import mage.game.permanent.PermanentCard;
+<i>66</i>&nbsp;import mage.players.Player;
+<i>67</i>&nbsp;import mage.util.GameLog;
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;/**
+<i>70</i>&nbsp; *
+<i>71</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>72</i>&nbsp; */
+<i>73</i>&nbsp;public class Spell extends StackObjImpl implements Card {
+<i>74</i>&nbsp;
+<b class="fc"><i>75</i>&nbsp;    private final List&lt;Card&gt; spellCards = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>76</i>&nbsp;    private final List&lt;SpellAbility&gt; spellAbilities = new ArrayList&lt;&gt;();</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    private final Card card;
+<i>79</i>&nbsp;    private final ObjectColor color;
+<i>80</i>&nbsp;    private final ObjectColor frameColor;
+<i>81</i>&nbsp;    private final FrameStyle frameStyle;
+<i>82</i>&nbsp;    private final SpellAbility ability;
+<i>83</i>&nbsp;    private final Zone fromZone;
+<i>84</i>&nbsp;    private final UUID id;
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    private UUID controllerId;
+<i>87</i>&nbsp;    private boolean copiedSpell;
+<i>88</i>&nbsp;    private boolean faceDown;
+<i>89</i>&nbsp;    private boolean countered;
+<i>90</i>&nbsp;
+<b class="fc"><i>91</i>&nbsp;    public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {</b>
+<b class="fc"><i>92</i>&nbsp;        this.card = card;</b>
+<b class="fc"><i>93</i>&nbsp;        this.color = card.getColor(null).copy();</b>
+<b class="fc"><i>94</i>&nbsp;        this.frameColor = card.getFrameColor(null).copy();</b>
+<b class="fc"><i>95</i>&nbsp;        this.frameStyle = card.getFrameStyle();</b>
+<b class="fc"><i>96</i>&nbsp;        id = ability.getId();</b>
+<b class="fc"><i>97</i>&nbsp;        this.ability = ability;</b>
+<b class="fc"><i>98</i>&nbsp;        this.ability.setControllerId(controllerId);</b>
+<b class="fc"><i>99</i>&nbsp;        if (ability.getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {</b>
+<b class="nc"><i>100</i>&nbsp;            spellCards.add(((SplitCard) card).getLeftHalfCard());</b>
+<b class="nc"><i>101</i>&nbsp;            spellAbilities.add(((SplitCard) card).getLeftHalfCard().getSpellAbility().copy());</b>
+<b class="nc"><i>102</i>&nbsp;            spellCards.add(((SplitCard) card).getRightHalfCard());</b>
+<b class="nc"><i>103</i>&nbsp;            spellAbilities.add(((SplitCard) card).getRightHalfCard().getSpellAbility().copy());</b>
+<i>104</i>&nbsp;        } else {
+<b class="fc"><i>105</i>&nbsp;            spellCards.add(card);</b>
+<b class="fc"><i>106</i>&nbsp;            spellAbilities.add(ability);</b>
+<i>107</i>&nbsp;        }
+<b class="fc"><i>108</i>&nbsp;        this.controllerId = controllerId;</b>
+<b class="fc"><i>109</i>&nbsp;        this.fromZone = fromZone;</b>
+<b class="fc"><i>110</i>&nbsp;        this.countered = false;</b>
+<b class="fc"><i>111</i>&nbsp;    }</b>
+<i>112</i>&nbsp;
+<b class="fc"><i>113</i>&nbsp;    public Spell(final Spell spell) {</b>
+<b class="fc"><i>114</i>&nbsp;        this.id = spell.id;</b>
+<b class="fc"><i>115</i>&nbsp;        for (SpellAbility spellAbility : spell.spellAbilities) {</b>
+<b class="fc"><i>116</i>&nbsp;            this.spellAbilities.add(spellAbility.copy());</b>
+<b class="fc"><i>117</i>&nbsp;        }</b>
+<b class="fc"><i>118</i>&nbsp;        for (Card spellCard : spell.spellCards) {</b>
+<b class="fc"><i>119</i>&nbsp;            this.spellCards.add(spellCard.copy());</b>
+<b class="fc"><i>120</i>&nbsp;        }</b>
+<b class="fc"><i>121</i>&nbsp;        if (spell.spellAbilities.get(0).equals(spell.ability)) {</b>
+<b class="fc"><i>122</i>&nbsp;            this.ability = this.spellAbilities.get(0);</b>
+<i>123</i>&nbsp;        } else {
+<b class="nc"><i>124</i>&nbsp;            this.ability = spell.ability.copy();</b>
+<i>125</i>&nbsp;        }
+<b class="fc"><i>126</i>&nbsp;        if (spell.spellCards.get(0).equals(spell.card)) {</b>
+<b class="fc"><i>127</i>&nbsp;            this.card = spellCards.get(0);</b>
+<i>128</i>&nbsp;        } else {
+<b class="nc"><i>129</i>&nbsp;            this.card = spell.card.copy();</b>
+<i>130</i>&nbsp;        }
+<b class="fc"><i>131</i>&nbsp;        this.controllerId = spell.controllerId;</b>
+<b class="fc"><i>132</i>&nbsp;        this.fromZone = spell.fromZone;</b>
+<b class="fc"><i>133</i>&nbsp;        this.copiedSpell = spell.copiedSpell;</b>
+<b class="fc"><i>134</i>&nbsp;        this.faceDown = spell.faceDown;</b>
+<b class="fc"><i>135</i>&nbsp;        this.color = spell.color.copy();</b>
+<b class="fc"><i>136</i>&nbsp;        this.frameColor = spell.color.copy();</b>
+<b class="fc"><i>137</i>&nbsp;        this.frameStyle = spell.frameStyle;</b>
+<b class="fc"><i>138</i>&nbsp;    }</b>
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    public boolean activate(Game game, boolean noMana) {
+<b class="fc"><i>141</i>&nbsp;        if (!spellAbilities.get(0).activate(game, noMana)) {</b>
+<b class="fc"><i>142</i>&nbsp;            return false;</b>
+<i>143</i>&nbsp;        }
+<b class="fc"><i>144</i>&nbsp;        if (spellAbilities.size() &gt; 1) {</b>
+<i>145</i>&nbsp;            // if there are more abilities (fused split spell) or first ability added new abilities (splice), activate the additional abilities
+<b class="fc"><i>146</i>&nbsp;            boolean ignoreAbility = true;</b>
+<b class="fc"><i>147</i>&nbsp;            boolean payNoMana = noMana;</b>
+<b class="fc"><i>148</i>&nbsp;            for (SpellAbility spellAbility : spellAbilities) {</b>
+<b class="fc"><i>149</i>&nbsp;                if (ignoreAbility) {</b>
+<b class="fc"><i>150</i>&nbsp;                    ignoreAbility = false;</b>
+<i>151</i>&nbsp;                } else {
+<i>152</i>&nbsp;                    // costs for spliced abilities were added to main spellAbility, so pay no mana for spliced abilities
+<b class="fc"><i>153</i>&nbsp;                    payNoMana |= spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE);</b>
+<b class="fc"><i>154</i>&nbsp;                    if (!spellAbility.activate(game, payNoMana)) {</b>
+<b class="nc"><i>155</i>&nbsp;                        return false;</b>
+<i>156</i>&nbsp;                    }
+<i>157</i>&nbsp;                }
+<b class="fc"><i>158</i>&nbsp;            }</b>
+<i>159</i>&nbsp;        }
+<b class="fc"><i>160</i>&nbsp;        return true;</b>
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    public String getActivatedMessage(Game game) {
+<b class="fc"><i>164</i>&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc"><i>165</i>&nbsp;        if (isCopiedSpell()) {</b>
+<b class="fc"><i>166</i>&nbsp;            sb.append(&quot; copies &quot;);</b>
+<i>167</i>&nbsp;        } else {
+<b class="fc"><i>168</i>&nbsp;            sb.append(&quot; casts &quot;);</b>
+<i>169</i>&nbsp;        }
+<b class="fc"><i>170</i>&nbsp;        return sb.append(ability.getGameLogMessage(game)).toString();</b>
+<i>171</i>&nbsp;    }
+<i>172</i>&nbsp;
+<i>173</i>&nbsp;    public String getSpellCastText(Game game) {
+<b class="fc"><i>174</i>&nbsp;        for (Ability spellAbility : getAbilities()) {</b>
+<b class="fc"><i>175</i>&nbsp;            if (spellAbility instanceof MorphAbility</b>
+<b class="fc"><i>176</i>&nbsp;                    &amp;&amp; ((AlternativeSourceCosts) spellAbility).isActivated(getSpellAbility(), game)) {</b>
+<b class="fc"><i>177</i>&nbsp;                return &quot;a card face down&quot;;</b>
+<i>178</i>&nbsp;            }
+<b class="fc"><i>179</i>&nbsp;        }</b>
+<b class="fc"><i>180</i>&nbsp;        return GameLog.replaceNameByColoredName(card, getSpellAbility().toString());</b>
+<i>181</i>&nbsp;    }
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;    @Override
+<i>184</i>&nbsp;    public boolean resolve(Game game) {
+<i>185</i>&nbsp;        boolean result;
+<b class="fc"><i>186</i>&nbsp;        Player controller = game.getPlayer(getControllerId());</b>
+<b class="fc"><i>187</i>&nbsp;        if (controller == null) {</b>
+<b class="nc"><i>188</i>&nbsp;            return false;</b>
+<i>189</i>&nbsp;        }
+<b class="fc"><i>190</i>&nbsp;        if (this.getCardType().contains(CardType.INSTANT) || this.getCardType().contains(CardType.SORCERY)) {</b>
+<b class="fc"><i>191</i>&nbsp;            int index = 0;</b>
+<b class="fc"><i>192</i>&nbsp;            result = false;</b>
+<b class="fc"><i>193</i>&nbsp;            boolean legalParts = false;</b>
+<b class="fc"><i>194</i>&nbsp;            boolean notTargeted = true;</b>
+<i>195</i>&nbsp;            // check for legal parts
+<b class="fc"><i>196</i>&nbsp;            for (SpellAbility spellAbility : this.spellAbilities) {</b>
+<i>197</i>&nbsp;                // if muliple modes are selected, and there are modes with targets, then at least one mode has to have a legal target or
+<i>198</i>&nbsp;                // When resolving a fused split spell with multiple targets, treat it as you would any spell with multiple targets.
+<i>199</i>&nbsp;                // If all targets are illegal when the spell tries to resolve, the spell is countered and none of its effects happen.
+<i>200</i>&nbsp;                // If at least one target is still legal at that time, the spell resolves, but an illegal target can&#39;t perform any actions
+<i>201</i>&nbsp;                // or have any actions performed on it.
+<i>202</i>&nbsp;                // if only a spliced spell has targets and all targets ar illegal, the complete spell is countered
+<b class="fc"><i>203</i>&nbsp;                if (hasTargets(spellAbility, game)) {</b>
+<b class="fc"><i>204</i>&nbsp;                    notTargeted = false;</b>
+<b class="fc"><i>205</i>&nbsp;                    legalParts |= spellAbilityHasLegalParts(spellAbility, game);</b>
+<i>206</i>&nbsp;                }
+<i>207</i>&nbsp;
+<b class="fc"><i>208</i>&nbsp;            }</b>
+<i>209</i>&nbsp;            // resolve if legal parts
+<b class="fc"><i>210</i>&nbsp;            if (notTargeted || legalParts) {</b>
+<b class="fc"><i>211</i>&nbsp;                for (SpellAbility spellAbility : this.spellAbilities) {</b>
+<b class="fc"><i>212</i>&nbsp;                    if (spellAbilityHasLegalParts(spellAbility, game)) {</b>
+<b class="fc"><i>213</i>&nbsp;                        for (UUID modeId : spellAbility.getModes().getSelectedModes()) {</b>
+<b class="fc"><i>214</i>&nbsp;                            spellAbility.getModes().setActiveMode(modeId);</b>
+<b class="fc"><i>215</i>&nbsp;                            if (spellAbility.getTargets().stillLegal(spellAbility, game)) {</b>
+<b class="fc"><i>216</i>&nbsp;                                if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {</b>
+<b class="fc"><i>217</i>&nbsp;                                    updateOptionalCosts(index);</b>
+<i>218</i>&nbsp;                                }
+<b class="fc"><i>219</i>&nbsp;                                result |= spellAbility.resolve(game);</b>
+<i>220</i>&nbsp;                            }
+<b class="fc"><i>221</i>&nbsp;                        }</b>
+<b class="fc"><i>222</i>&nbsp;                        index++;</b>
+<i>223</i>&nbsp;                    }
+<b class="fc"><i>224</i>&nbsp;                }</b>
+<b class="fc"><i>225</i>&nbsp;                if (game.getState().getZone(card.getMainCard().getId()) == Zone.STACK) {</b>
+<b class="fc"><i>226</i>&nbsp;                    if (!isCopy()) {</b>
+<b class="fc"><i>227</i>&nbsp;                        controller.moveCards(card, Zone.GRAVEYARD, ability, game);</b>
+<i>228</i>&nbsp;                    }
+<i>229</i>&nbsp;                }
+<b class="fc"><i>230</i>&nbsp;                return result;</b>
+<i>231</i>&nbsp;            }
+<i>232</i>&nbsp;            //20091005 - 608.2b
+<b class="fc"><i>233</i>&nbsp;            if (!game.isSimulation()) {</b>
+<b class="fc"><i>234</i>&nbsp;                game.informPlayers(getName() + &quot; has been fizzled.&quot;);</b>
+<i>235</i>&nbsp;            }
+<b class="fc"><i>236</i>&nbsp;            counter(null, game);</b>
+<b class="fc"><i>237</i>&nbsp;            return false;</b>
+<b class="fc"><i>238</i>&nbsp;        } else if (this.getCardType().contains(CardType.ENCHANTMENT) &amp;&amp; this.getSubtype(game).contains(&quot;Aura&quot;)) {</b>
+<b class="fc"><i>239</i>&nbsp;            if (ability.getTargets().stillLegal(ability, game)) {</b>
+<b class="fc"><i>240</i>&nbsp;                updateOptionalCosts(0);</b>
+<b class="fc"><i>241</i>&nbsp;                boolean bestow = ability instanceof BestowAbility;</b>
+<b class="fc"><i>242</i>&nbsp;                if (bestow) {</b>
+<i>243</i>&nbsp;                    // Must be removed first time, after that will be removed by continous effect
+<i>244</i>&nbsp;                    // Otherwise effects like evolve trigger from creature comes into play event
+<b class="fc"><i>245</i>&nbsp;                    card.getCardType().remove(CardType.CREATURE);</b>
+<b class="fc"><i>246</i>&nbsp;                    card.getSubtype(game).add(&quot;Aura&quot;);</b>
+<i>247</i>&nbsp;                }
+<b class="fc"><i>248</i>&nbsp;                if (controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null)) {</b>
+<b class="fc"><i>249</i>&nbsp;                    if (bestow) {</b>
+<i>250</i>&nbsp;                        // card will be copied during putOntoBattlefield, so the card of CardPermanent has to be changed
+<i>251</i>&nbsp;                        // TODO: Find a better way to prevent bestow creatures from being effected by creature affecting abilities
+<b class="fc"><i>252</i>&nbsp;                        Permanent permanent = game.getPermanent(card.getId());</b>
+<b class="fc"><i>253</i>&nbsp;                        if (permanent != null &amp;&amp; permanent instanceof PermanentCard) {</b>
+<b class="fc"><i>254</i>&nbsp;                            permanent.setSpellAbility(ability); // otherwise spell ability without bestow will be set</b>
+<b class="fc"><i>255</i>&nbsp;                            ((PermanentCard) permanent).getCard().getCardType().add(CardType.CREATURE);</b>
+<b class="fc"><i>256</i>&nbsp;                            ((PermanentCard) permanent).getCard().getSubtype(game).remove(&quot;Aura&quot;);</b>
+<i>257</i>&nbsp;                        }
+<i>258</i>&nbsp;                    }
+<b class="fc"><i>259</i>&nbsp;                    return ability.resolve(game);</b>
+<i>260</i>&nbsp;                }
+<b class="nc"><i>261</i>&nbsp;                if (bestow) {</b>
+<b class="nc"><i>262</i>&nbsp;                    card.getCardType().add(CardType.CREATURE);</b>
+<i>263</i>&nbsp;                }
+<b class="nc"><i>264</i>&nbsp;                return false;</b>
+<i>265</i>&nbsp;            }
+<i>266</i>&nbsp;            // Aura has no legal target and its a bestow enchantment -&gt; Add it to battlefield as creature
+<b class="fc"><i>267</i>&nbsp;            if (this.getSpellAbility() instanceof BestowAbility) {</b>
+<b class="nc"><i>268</i>&nbsp;                updateOptionalCosts(0);</b>
+<b class="nc"><i>269</i>&nbsp;                return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);</b>
+<i>270</i>&nbsp;            } else {
+<i>271</i>&nbsp;                //20091005 - 608.2b
+<b class="fc"><i>272</i>&nbsp;                if (!game.isSimulation()) {</b>
+<b class="fc"><i>273</i>&nbsp;                    game.informPlayers(getName() + &quot; has been fizzled.&quot;);</b>
+<i>274</i>&nbsp;                }
+<b class="fc"><i>275</i>&nbsp;                counter(null, game);</b>
+<b class="fc"><i>276</i>&nbsp;                return false;</b>
+<i>277</i>&nbsp;            }
+<i>278</i>&nbsp;        } else {
+<b class="fc"><i>279</i>&nbsp;            updateOptionalCosts(0);</b>
+<b class="fc"><i>280</i>&nbsp;            return controller.moveCards(card, Zone.BATTLEFIELD, ability, game, false, faceDown, false, null);</b>
+<i>281</i>&nbsp;        }
+<i>282</i>&nbsp;    }
+<i>283</i>&nbsp;
+<i>284</i>&nbsp;    private boolean hasTargets(SpellAbility spellAbility, Game game) {
+<b class="fc"><i>285</i>&nbsp;        if (spellAbility.getModes().getSelectedModes().size() &gt; 1) {</b>
+<b class="fc"><i>286</i>&nbsp;            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {</b>
+<b class="fc"><i>287</i>&nbsp;                Mode mode = spellAbility.getModes().get(modeId);</b>
+<b class="fc"><i>288</i>&nbsp;                if (!mode.getTargets().isEmpty()) {</b>
+<b class="fc"><i>289</i>&nbsp;                    return true;</b>
+<i>290</i>&nbsp;                }
+<i>291</i>&nbsp;
+<b class="fc"><i>292</i>&nbsp;            }</b>
+<b class="fc"><i>293</i>&nbsp;            return false;</b>
+<i>294</i>&nbsp;        } else {
+<b class="fc"><i>295</i>&nbsp;            return !spellAbility.getTargets().isEmpty();</b>
+<i>296</i>&nbsp;        }
+<i>297</i>&nbsp;    }
+<i>298</i>&nbsp;
+<i>299</i>&nbsp;    private boolean spellAbilityHasLegalParts(SpellAbility spellAbility, Game game) {
+<b class="fc"><i>300</i>&nbsp;        if (spellAbility.getModes().getSelectedModes().size() &gt; 1) {</b>
+<b class="fc"><i>301</i>&nbsp;            boolean targetedMode = false;</b>
+<b class="fc"><i>302</i>&nbsp;            boolean legalTargetedMode = false;</b>
+<b class="fc"><i>303</i>&nbsp;            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {</b>
+<b class="fc"><i>304</i>&nbsp;                Mode mode = spellAbility.getModes().get(modeId);</b>
+<b class="fc"><i>305</i>&nbsp;                if (mode.getTargets().size() &gt; 0) {</b>
+<b class="fc"><i>306</i>&nbsp;                    targetedMode = true;</b>
+<b class="fc"><i>307</i>&nbsp;                    if (mode.getTargets().stillLegal(spellAbility, game)) {</b>
+<b class="fc"><i>308</i>&nbsp;                        legalTargetedMode = true;</b>
+<i>309</i>&nbsp;                    }
+<i>310</i>&nbsp;                }
+<b class="fc"><i>311</i>&nbsp;            }</b>
+<b class="fc"><i>312</i>&nbsp;            if (targetedMode) {</b>
+<b class="fc"><i>313</i>&nbsp;                return legalTargetedMode;</b>
+<i>314</i>&nbsp;            }
+<b class="fc"><i>315</i>&nbsp;            return true;</b>
+<i>316</i>&nbsp;        } else {
+<b class="fc"><i>317</i>&nbsp;            return spellAbility.getTargets().stillLegal(spellAbility, game);</b>
+<i>318</i>&nbsp;        }
+<i>319</i>&nbsp;    }
+<i>320</i>&nbsp;
+<i>321</i>&nbsp;    /**
+<i>322</i>&nbsp;     * As we have ability in the stack, we need to update optional costs in
+<i>323</i>&nbsp;     * original card. This information will be used later by effects, e.g. to
+<i>324</i>&nbsp;     * determine whether card was kicked or not. E.g. Desolation Angel
+<i>325</i>&nbsp;     */
+<i>326</i>&nbsp;    private void updateOptionalCosts(int index) {
+<b class="fc"><i>327</i>&nbsp;        Ability abilityOrig = spellCards.get(index).getAbilities().get(spellAbilities.get(index).getId());</b>
+<b class="fc"><i>328</i>&nbsp;        if (abilityOrig != null) {</b>
+<b class="fc"><i>329</i>&nbsp;            for (Object object : spellAbilities.get(index).getOptionalCosts()) {</b>
+<b class="nc"><i>330</i>&nbsp;                Cost cost = (Cost) object;</b>
+<b class="nc"><i>331</i>&nbsp;                for (Cost costOrig : abilityOrig.getOptionalCosts()) {</b>
+<b class="nc"><i>332</i>&nbsp;                    if (cost.getId().equals(costOrig.getId())) {</b>
+<b class="nc"><i>333</i>&nbsp;                        if (cost.isPaid()) {</b>
+<b class="nc"><i>334</i>&nbsp;                            costOrig.setPaid();</b>
+<i>335</i>&nbsp;                        } else {
+<b class="nc"><i>336</i>&nbsp;                            costOrig.clearPaid();</b>
+<i>337</i>&nbsp;                        }
+<b class="nc"><i>338</i>&nbsp;                        break;</b>
+<i>339</i>&nbsp;                    }
+<b class="nc"><i>340</i>&nbsp;                }</b>
+<b class="nc"><i>341</i>&nbsp;            }</b>
+<i>342</i>&nbsp;        }
+<b class="fc"><i>343</i>&nbsp;    }</b>
+<i>344</i>&nbsp;
+<i>345</i>&nbsp;    @Override
+<i>346</i>&nbsp;    public void counter(UUID sourceId, Game game) {
+<b class="fc"><i>347</i>&nbsp;        this.counter(sourceId, game, Zone.GRAVEYARD, false, ZoneDetail.NONE);</b>
+<b class="fc"><i>348</i>&nbsp;    }</b>
+<i>349</i>&nbsp;
+<i>350</i>&nbsp;    @Override
+<i>351</i>&nbsp;    public void counter(UUID sourceId, Game game, Zone zone, boolean owner, ZoneDetail zoneDetail) {
+<b class="fc"><i>352</i>&nbsp;        this.countered = true;</b>
+<b class="fc"><i>353</i>&nbsp;        if (!isCopiedSpell()) {</b>
+<b class="fc"><i>354</i>&nbsp;            Player player = game.getPlayer(game.getControllerId(sourceId));</b>
+<b class="fc"><i>355</i>&nbsp;            if (player == null) {</b>
+<b class="fc"><i>356</i>&nbsp;                player = game.getPlayer(getControllerId());</b>
+<i>357</i>&nbsp;            }
+<b class="fc"><i>358</i>&nbsp;            if (player != null) {</b>
+<b class="fc"><i>359</i>&nbsp;                Ability counteringAbility = null;</b>
+<b class="fc"><i>360</i>&nbsp;                MageObject counteringObject = game.getObject(sourceId);</b>
+<b class="fc"><i>361</i>&nbsp;                if (counteringObject instanceof StackObject) {</b>
+<b class="fc"><i>362</i>&nbsp;                    counteringAbility = ((StackObject) counteringObject).getStackAbility();</b>
+<i>363</i>&nbsp;                }
+<b class="fc"><i>364</i>&nbsp;                if (zone.equals(Zone.LIBRARY)) {</b>
+<b class="nc"><i>365</i>&nbsp;                    if (zoneDetail.equals(ZoneDetail.CHOOSE)) {</b>
+<b class="nc"><i>366</i>&nbsp;                        if (player.chooseUse(Outcome.Detriment, &quot;Move countered spell to the top of the library? (otherwise it goes to the bottom)&quot;, counteringAbility, game)) {</b>
+<b class="nc"><i>367</i>&nbsp;                            zoneDetail = ZoneDetail.TOP;</b>
+<i>368</i>&nbsp;                        } else {
+<b class="nc"><i>369</i>&nbsp;                            zoneDetail = ZoneDetail.BOTTOM;</b>
+<i>370</i>&nbsp;                        }
+<i>371</i>&nbsp;                    }
+<b class="nc"><i>372</i>&nbsp;                    if (zoneDetail.equals(ZoneDetail.TOP)) {</b>
+<b class="nc"><i>373</i>&nbsp;                        player.putCardsOnTopOfLibrary(new CardsImpl(card), game, counteringAbility, false);</b>
+<i>374</i>&nbsp;                    } else {
+<b class="nc"><i>375</i>&nbsp;                        player.putCardsOnBottomOfLibrary(new CardsImpl(card), game, counteringAbility, false);</b>
+<i>376</i>&nbsp;                    }
+<i>377</i>&nbsp;                } else {
+<b class="fc"><i>378</i>&nbsp;                    player.moveCards(card, zone, counteringAbility, game, false, false, owner, null);</b>
+<i>379</i>&nbsp;                }
+<i>380</i>&nbsp;            }
+<b class="fc"><i>381</i>&nbsp;        } else {</b>
+<b class="fc"><i>382</i>&nbsp;            card.removeFromZone(game, Zone.STACK, sourceId);</b>
+<i>383</i>&nbsp;        }
+<b class="fc"><i>384</i>&nbsp;    }</b>
+<i>385</i>&nbsp;
+<i>386</i>&nbsp;    @Override
+<i>387</i>&nbsp;    public UUID getSourceId() {
+<b class="fc"><i>388</i>&nbsp;        return card.getId();</b>
+<i>389</i>&nbsp;    }
+<i>390</i>&nbsp;
+<i>391</i>&nbsp;    @Override
+<i>392</i>&nbsp;    public UUID getControllerId() {
+<b class="fc"><i>393</i>&nbsp;        return this.controllerId;</b>
+<i>394</i>&nbsp;    }
+<i>395</i>&nbsp;
+<i>396</i>&nbsp;    @Override
+<i>397</i>&nbsp;    public String getName() {
+<b class="fc"><i>398</i>&nbsp;        return card.getName();</b>
+<i>399</i>&nbsp;    }
+<i>400</i>&nbsp;
+<i>401</i>&nbsp;    @Override
+<i>402</i>&nbsp;    public String getIdName() {
+<i>403</i>&nbsp;        String idName;
+<b class="fc"><i>404</i>&nbsp;        if (card != null) {</b>
+<b class="fc"><i>405</i>&nbsp;            idName = card.getId().toString().substring(0, 3);</b>
+<i>406</i>&nbsp;        } else {
+<b class="nc"><i>407</i>&nbsp;            idName = getId().toString().substring(0, 3);</b>
+<i>408</i>&nbsp;        }
+<b class="fc"><i>409</i>&nbsp;        return getName() + &quot; [&quot; + idName + &quot;]&quot;;</b>
+<i>410</i>&nbsp;    }
+<i>411</i>&nbsp;
+<i>412</i>&nbsp;    @Override
+<i>413</i>&nbsp;    public String getLogName() {
+<b class="fc"><i>414</i>&nbsp;        return GameLog.getColoredObjectIdName(card);</b>
+<i>415</i>&nbsp;    }
+<i>416</i>&nbsp;
+<i>417</i>&nbsp;    @Override
+<i>418</i>&nbsp;    public String getImageName() {
+<b class="nc"><i>419</i>&nbsp;        return card.getImageName();</b>
+<i>420</i>&nbsp;    }
+<i>421</i>&nbsp;
+<i>422</i>&nbsp;    @Override
+<i>423</i>&nbsp;    public void setName(String name) {
+<b class="nc"><i>424</i>&nbsp;    }</b>
+<i>425</i>&nbsp;
+<i>426</i>&nbsp;    @Override
+<i>427</i>&nbsp;    public Rarity getRarity() {
+<b class="nc"><i>428</i>&nbsp;        return card.getRarity();</b>
+<i>429</i>&nbsp;    }
+<i>430</i>&nbsp;
+<i>431</i>&nbsp;    @Override
+<i>432</i>&nbsp;    public List&lt;CardType&gt; getCardType() {
+<b class="fc"><i>433</i>&nbsp;        if (this.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.FACE_DOWN_CREATURE)) {</b>
+<b class="fc"><i>434</i>&nbsp;            List&lt;CardType&gt; cardTypes = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>435</i>&nbsp;            cardTypes.add(CardType.CREATURE);</b>
+<b class="fc"><i>436</i>&nbsp;            return cardTypes;</b>
+<i>437</i>&nbsp;        }
+<b class="fc"><i>438</i>&nbsp;        if (this.getSpellAbility() instanceof BestowAbility) {</b>
+<b class="fc"><i>439</i>&nbsp;            List&lt;CardType&gt; cardTypes = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>440</i>&nbsp;            cardTypes.addAll(card.getCardType());</b>
+<b class="fc"><i>441</i>&nbsp;            cardTypes.remove(CardType.CREATURE);</b>
+<b class="fc"><i>442</i>&nbsp;            return cardTypes;</b>
+<i>443</i>&nbsp;        }
+<b class="fc"><i>444</i>&nbsp;        return card.getCardType();</b>
+<i>445</i>&nbsp;    }
+<i>446</i>&nbsp;
+<i>447</i>&nbsp;    @Override
+<i>448</i>&nbsp;    public List&lt;String&gt; getSubtype(Game game) {
+<b class="fc"><i>449</i>&nbsp;        if (this.getSpellAbility() instanceof BestowAbility) {</b>
+<b class="fc"><i>450</i>&nbsp;            List&lt;String&gt; subtypes = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>451</i>&nbsp;            subtypes.addAll(card.getSubtype(game));</b>
+<b class="fc"><i>452</i>&nbsp;            subtypes.add(&quot;Aura&quot;);</b>
+<b class="fc"><i>453</i>&nbsp;            return subtypes;</b>
+<i>454</i>&nbsp;        }
+<b class="fc"><i>455</i>&nbsp;        return card.getSubtype(game);</b>
+<i>456</i>&nbsp;    }
+<i>457</i>&nbsp;
+<i>458</i>&nbsp;    @Override
+<i>459</i>&nbsp;    public boolean hasSubtype(String subtype, Game game) {
+<b class="fc"><i>460</i>&nbsp;        if (this.getSpellAbility() instanceof BestowAbility) { // workaround for Bestow (don&#39;t like it)</b>
+<b class="nc"><i>461</i>&nbsp;            List&lt;String&gt; subtypes = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>462</i>&nbsp;            subtypes.addAll(card.getSubtype(game));</b>
+<b class="nc"><i>463</i>&nbsp;            subtypes.add(&quot;Aura&quot;);</b>
+<b class="nc"><i>464</i>&nbsp;            if (subtypes.contains(subtype)) {</b>
+<b class="nc"><i>465</i>&nbsp;                return true;</b>
+<i>466</i>&nbsp;            }
+<i>467</i>&nbsp;        }
+<b class="fc"><i>468</i>&nbsp;        return card.hasSubtype(subtype, game);</b>
+<i>469</i>&nbsp;    }
+<i>470</i>&nbsp;
+<i>471</i>&nbsp;    @Override
+<i>472</i>&nbsp;    public List&lt;String&gt; getSupertype() {
+<b class="nc"><i>473</i>&nbsp;        return card.getSupertype();</b>
+<i>474</i>&nbsp;    }
+<i>475</i>&nbsp;
+<i>476</i>&nbsp;    public List&lt;SpellAbility&gt; getSpellAbilities() {
+<b class="fc"><i>477</i>&nbsp;        return spellAbilities;</b>
+<i>478</i>&nbsp;    }
+<i>479</i>&nbsp;
+<i>480</i>&nbsp;    @Override
+<i>481</i>&nbsp;    public Abilities&lt;Ability&gt; getAbilities() {
+<b class="fc"><i>482</i>&nbsp;        return card.getAbilities();</b>
+<i>483</i>&nbsp;    }
+<i>484</i>&nbsp;
+<i>485</i>&nbsp;    @Override
+<i>486</i>&nbsp;    public Abilities&lt;Ability&gt; getAbilities(Game game) {
+<b class="fc"><i>487</i>&nbsp;        return card.getAbilities(game);</b>
+<i>488</i>&nbsp;    }
+<i>489</i>&nbsp;
+<i>490</i>&nbsp;    @Override
+<i>491</i>&nbsp;    public boolean hasAbility(UUID abilityId, Game game) {
+<b class="nc"><i>492</i>&nbsp;        return card.hasAbility(abilityId, game);</b>
+<i>493</i>&nbsp;    }
+<i>494</i>&nbsp;
+<i>495</i>&nbsp;    @Override
+<i>496</i>&nbsp;    public ObjectColor getColor(Game game) {
+<b class="fc"><i>497</i>&nbsp;        return color;</b>
+<i>498</i>&nbsp;    }
+<i>499</i>&nbsp;
+<i>500</i>&nbsp;    @Override
+<i>501</i>&nbsp;    public ObjectColor getFrameColor(Game game) {
+<b class="nc"><i>502</i>&nbsp;        return frameColor;</b>
+<i>503</i>&nbsp;    }
+<i>504</i>&nbsp;
+<i>505</i>&nbsp;    @Override
+<i>506</i>&nbsp;    public FrameStyle getFrameStyle() {
+<b class="nc"><i>507</i>&nbsp;        return frameStyle;</b>
+<i>508</i>&nbsp;    }
+<i>509</i>&nbsp;
+<i>510</i>&nbsp;    @Override
+<i>511</i>&nbsp;    public ManaCosts&lt;ManaCost&gt; getManaCost() {
+<b class="fc"><i>512</i>&nbsp;        return card.getManaCost();</b>
+<i>513</i>&nbsp;    }
+<i>514</i>&nbsp;
+<i>515</i>&nbsp;    /**
+<i>516</i>&nbsp;     * 202.3b When calculating the converted mana cost of an object with an {X}
+<i>517</i>&nbsp;     * in its mana cost, X is treated as 0 while the object is not on the stack,
+<i>518</i>&nbsp;     * and X is treated as the number chosen for it while the object is on the
+<i>519</i>&nbsp;     * stack.
+<i>520</i>&nbsp;     *
+<i>521</i>&nbsp;     * @return
+<i>522</i>&nbsp;     */
+<i>523</i>&nbsp;    @Override
+<i>524</i>&nbsp;    public int getConvertedManaCost() {
+<b class="fc"><i>525</i>&nbsp;        int cmc = 0;</b>
+<b class="fc"><i>526</i>&nbsp;        if (faceDown) {</b>
+<b class="fc"><i>527</i>&nbsp;            return 0;</b>
+<i>528</i>&nbsp;        }
+<b class="fc"><i>529</i>&nbsp;        for (SpellAbility spellAbility : spellAbilities) {</b>
+<b class="fc"><i>530</i>&nbsp;            cmc += spellAbility.getConvertedXManaCost();</b>
+<b class="fc"><i>531</i>&nbsp;        }</b>
+<b class="fc"><i>532</i>&nbsp;        cmc += getCard().getManaCost().convertedManaCost();</b>
+<b class="fc"><i>533</i>&nbsp;        return cmc;</b>
+<i>534</i>&nbsp;    }
+<i>535</i>&nbsp;
+<i>536</i>&nbsp;    @Override
+<i>537</i>&nbsp;    public MageInt getPower() {
+<b class="fc"><i>538</i>&nbsp;        return card.getPower();</b>
+<i>539</i>&nbsp;    }
+<i>540</i>&nbsp;
+<i>541</i>&nbsp;    @Override
+<i>542</i>&nbsp;    public MageInt getToughness() {
+<b class="fc"><i>543</i>&nbsp;        return card.getToughness();</b>
+<i>544</i>&nbsp;    }
+<i>545</i>&nbsp;
+<i>546</i>&nbsp;    @Override
+<i>547</i>&nbsp;    public int getStartingLoyalty() {
+<b class="nc"><i>548</i>&nbsp;        return card.getStartingLoyalty();</b>
+<i>549</i>&nbsp;    }
+<i>550</i>&nbsp;
+<i>551</i>&nbsp;    @Override
+<i>552</i>&nbsp;    public UUID getId() {
+<b class="fc"><i>553</i>&nbsp;        return id;</b>
+<i>554</i>&nbsp;    }
+<i>555</i>&nbsp;
+<i>556</i>&nbsp;    @Override
+<i>557</i>&nbsp;    public UUID getOwnerId() {
+<b class="fc"><i>558</i>&nbsp;        return card.getOwnerId();</b>
+<i>559</i>&nbsp;    }
+<i>560</i>&nbsp;
+<i>561</i>&nbsp;    public void addSpellAbility(SpellAbility spellAbility) {
+<b class="fc"><i>562</i>&nbsp;        spellAbilities.add(spellAbility);</b>
+<b class="fc"><i>563</i>&nbsp;    }</b>
+<i>564</i>&nbsp;
+<i>565</i>&nbsp;    public void addAbility(Ability ability) {
+<b class="nc"><i>566</i>&nbsp;    }</b>
+<i>567</i>&nbsp;
+<i>568</i>&nbsp;    @Override
+<i>569</i>&nbsp;    public SpellAbility getSpellAbility() {
+<b class="fc"><i>570</i>&nbsp;        return ability;</b>
+<i>571</i>&nbsp;    }
+<i>572</i>&nbsp;
+<i>573</i>&nbsp;    public void setControllerId(UUID controllerId) {
+<b class="fc"><i>574</i>&nbsp;        this.ability.setControllerId(controllerId);</b>
+<b class="fc"><i>575</i>&nbsp;        for (SpellAbility spellAbility : spellAbilities) {</b>
+<b class="fc"><i>576</i>&nbsp;            spellAbility.setControllerId(controllerId);</b>
+<b class="fc"><i>577</i>&nbsp;        }</b>
+<b class="fc"><i>578</i>&nbsp;        this.controllerId = controllerId;</b>
+<b class="fc"><i>579</i>&nbsp;    }</b>
+<i>580</i>&nbsp;
+<i>581</i>&nbsp;    @Override
+<i>582</i>&nbsp;    public void setOwnerId(UUID controllerId) {
+<b class="nc"><i>583</i>&nbsp;    }</b>
+<i>584</i>&nbsp;
+<i>585</i>&nbsp;    @Override
+<i>586</i>&nbsp;    public List&lt;String&gt; getRules() {
+<b class="nc"><i>587</i>&nbsp;        return card.getRules();</b>
+<i>588</i>&nbsp;    }
+<i>589</i>&nbsp;
+<i>590</i>&nbsp;    @Override
+<i>591</i>&nbsp;    public List&lt;String&gt; getRules(Game game) {
+<b class="nc"><i>592</i>&nbsp;        return card.getRules(game);</b>
+<i>593</i>&nbsp;    }
+<i>594</i>&nbsp;
+<i>595</i>&nbsp;    @Override
+<i>596</i>&nbsp;    public String getExpansionSetCode() {
+<b class="nc"><i>597</i>&nbsp;        return card.getExpansionSetCode();</b>
+<i>598</i>&nbsp;    }
+<i>599</i>&nbsp;
+<i>600</i>&nbsp;    @Override
+<i>601</i>&nbsp;    public String getTokenSetCode() {
+<b class="nc"><i>602</i>&nbsp;        return card.getTokenSetCode();</b>
+<i>603</i>&nbsp;    }
+<i>604</i>&nbsp;
+<i>605</i>&nbsp;    @Override
+<i>606</i>&nbsp;    public String getTokenDescriptor() {
+<b class="nc"><i>607</i>&nbsp;        return card.getTokenDescriptor();</b>
+<i>608</i>&nbsp;    }
+<i>609</i>&nbsp;
+<i>610</i>&nbsp;    @Override
+<i>611</i>&nbsp;    public void setFaceDown(boolean value, Game game) {
+<b class="fc"><i>612</i>&nbsp;        faceDown = value;</b>
+<b class="fc"><i>613</i>&nbsp;    }</b>
+<i>614</i>&nbsp;
+<i>615</i>&nbsp;    @Override
+<i>616</i>&nbsp;    public boolean turnFaceUp(Game game, UUID playerId) {
+<b class="nc"><i>617</i>&nbsp;        setFaceDown(false, game);</b>
+<b class="nc"><i>618</i>&nbsp;        return true;</b>
+<i>619</i>&nbsp;    }
+<i>620</i>&nbsp;
+<i>621</i>&nbsp;    @Override
+<i>622</i>&nbsp;    public boolean turnFaceDown(Game game, UUID playerId) {
+<b class="nc"><i>623</i>&nbsp;        setFaceDown(true, game);</b>
+<b class="nc"><i>624</i>&nbsp;        return true;</b>
+<i>625</i>&nbsp;    }
+<i>626</i>&nbsp;
+<i>627</i>&nbsp;    @Override
+<i>628</i>&nbsp;    public boolean isFaceDown(Game game) {
+<b class="fc"><i>629</i>&nbsp;        return faceDown;</b>
+<i>630</i>&nbsp;    }
+<i>631</i>&nbsp;
+<i>632</i>&nbsp;    @Override
+<i>633</i>&nbsp;    public boolean isFlipCard() {
+<b class="nc"><i>634</i>&nbsp;        return false;</b>
+<i>635</i>&nbsp;    }
+<i>636</i>&nbsp;
+<i>637</i>&nbsp;    @Override
+<i>638</i>&nbsp;    public String getFlipCardName() {
+<b class="nc"><i>639</i>&nbsp;        return null;</b>
+<i>640</i>&nbsp;    }
+<i>641</i>&nbsp;
+<i>642</i>&nbsp;    @Override
+<i>643</i>&nbsp;    public boolean isSplitCard() {
+<b class="fc"><i>644</i>&nbsp;        return false;</b>
+<i>645</i>&nbsp;    }
+<i>646</i>&nbsp;
+<i>647</i>&nbsp;    @Override
+<i>648</i>&nbsp;    public boolean isTransformable() {
+<b class="nc"><i>649</i>&nbsp;        return false;</b>
+<i>650</i>&nbsp;    }
+<i>651</i>&nbsp;
+<i>652</i>&nbsp;    @Override
+<i>653</i>&nbsp;    public Card getSecondCardFace() {
+<b class="nc"><i>654</i>&nbsp;        return null;</b>
+<i>655</i>&nbsp;    }
+<i>656</i>&nbsp;
+<i>657</i>&nbsp;    @Override
+<i>658</i>&nbsp;    public boolean isNightCard() {
+<b class="nc"><i>659</i>&nbsp;        return false;</b>
+<i>660</i>&nbsp;    }
+<i>661</i>&nbsp;
+<i>662</i>&nbsp;    @Override
+<i>663</i>&nbsp;    public Spell copy() {
+<b class="fc"><i>664</i>&nbsp;        return new Spell(this);</b>
+<i>665</i>&nbsp;    }
+<i>666</i>&nbsp;
+<i>667</i>&nbsp;    public Spell copySpell(UUID newController) {
+<b class="fc"><i>668</i>&nbsp;        Spell copy = new Spell(this.card, this.ability.copySpell(), this.controllerId, this.fromZone);</b>
+<b class="fc"><i>669</i>&nbsp;        boolean firstDone = false;</b>
+<b class="fc"><i>670</i>&nbsp;        for (SpellAbility spellAbility : this.getSpellAbilities()) {</b>
+<b class="fc"><i>671</i>&nbsp;            if (!firstDone) {</b>
+<b class="fc"><i>672</i>&nbsp;                firstDone = true;</b>
+<b class="fc"><i>673</i>&nbsp;                continue;</b>
+<i>674</i>&nbsp;            }
+<b class="fc"><i>675</i>&nbsp;            SpellAbility newAbility = spellAbility.copy(); // e.g. spliced spell</b>
+<b class="fc"><i>676</i>&nbsp;            newAbility.newId();</b>
+<b class="fc"><i>677</i>&nbsp;            copy.addSpellAbility(newAbility);</b>
+<b class="fc"><i>678</i>&nbsp;        }</b>
+<b class="fc"><i>679</i>&nbsp;        copy.setCopy(true);</b>
+<b class="fc"><i>680</i>&nbsp;        copy.setControllerId(newController);</b>
+<b class="fc"><i>681</i>&nbsp;        return copy;</b>
+<i>682</i>&nbsp;    }
+<i>683</i>&nbsp;
+<i>684</i>&nbsp;    @Override
+<i>685</i>&nbsp;    public void adjustCosts(Ability ability, Game game) {
+<b class="fc"><i>686</i>&nbsp;        if (card != null) {</b>
+<b class="fc"><i>687</i>&nbsp;            card.adjustCosts(ability, game);</b>
+<i>688</i>&nbsp;        }
+<b class="fc"><i>689</i>&nbsp;    }</b>
+<i>690</i>&nbsp;
+<i>691</i>&nbsp;    @Override
+<i>692</i>&nbsp;    public void adjustTargets(Ability ability, Game game) {
+<b class="fc"><i>693</i>&nbsp;        if (card != null) {</b>
+<b class="fc"><i>694</i>&nbsp;            card.adjustTargets(ability, game);</b>
+<i>695</i>&nbsp;        }
+<b class="fc"><i>696</i>&nbsp;    }</b>
+<i>697</i>&nbsp;
+<i>698</i>&nbsp;    @Override
+<i>699</i>&nbsp;    public boolean removeFromZone(Game game, Zone fromZone, UUID sourceId) {
+<b class="nc"><i>700</i>&nbsp;        return card.removeFromZone(game, fromZone, sourceId);</b>
+<i>701</i>&nbsp;    }
+<i>702</i>&nbsp;
+<i>703</i>&nbsp;    @Override
+<i>704</i>&nbsp;    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
+<b class="fc"><i>705</i>&nbsp;        return moveToZone(zone, sourceId, game, flag, null);</b>
+<i>706</i>&nbsp;    }
+<i>707</i>&nbsp;
+<i>708</i>&nbsp;    @Override
+<i>709</i>&nbsp;    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, ArrayList&lt;UUID&gt; appliedEffects) {
+<i>710</i>&nbsp;        // 706.10a If a copy of a spell is in a zone other than the stack, it ceases to exist.
+<i>711</i>&nbsp;        // If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
+<i>712</i>&nbsp;        // These are state-based actions. See rule 704.
+<b class="fc"><i>713</i>&nbsp;        if (this.isCopiedSpell() &amp;&amp; !zone.equals(Zone.STACK)) {</b>
+<b class="fc"><i>714</i>&nbsp;            return true;</b>
+<i>715</i>&nbsp;        }
+<b class="fc"><i>716</i>&nbsp;        return card.moveToZone(zone, sourceId, game, flag, appliedEffects);</b>
+<i>717</i>&nbsp;    }
+<i>718</i>&nbsp;
+<i>719</i>&nbsp;    @Override
+<i>720</i>&nbsp;    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+<b class="fc"><i>721</i>&nbsp;        return moveToExile(exileId, name, sourceId, game, null);</b>
+<i>722</i>&nbsp;    }
+<i>723</i>&nbsp;
+<i>724</i>&nbsp;    @Override
+<i>725</i>&nbsp;    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList&lt;UUID&gt; appliedEffects) {
+<b class="fc"><i>726</i>&nbsp;        ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.STACK, Zone.EXILED, appliedEffects);</b>
+<b class="fc"><i>727</i>&nbsp;        if (!game.replaceEvent(event)) {</b>
+<b class="fc"><i>728</i>&nbsp;            game.getStack().remove(this);</b>
+<b class="fc"><i>729</i>&nbsp;            game.rememberLKI(this.getId(), event.getFromZone(), this);</b>
+<i>730</i>&nbsp;
+<b class="fc"><i>731</i>&nbsp;            if (!this.isCopiedSpell()) {</b>
+<b class="fc"><i>732</i>&nbsp;                if (exileId == null) {</b>
+<b class="fc"><i>733</i>&nbsp;                    game.getExile().getPermanentExile().add(this.card);</b>
+<i>734</i>&nbsp;                } else {
+<b class="fc"><i>735</i>&nbsp;                    game.getExile().createZone(exileId, name).add(this.card);</b>
+<i>736</i>&nbsp;                }
+<i>737</i>&nbsp;
+<b class="fc"><i>738</i>&nbsp;                game.setZone(this.card.getId(), event.getToZone());</b>
+<i>739</i>&nbsp;            }
+<b class="fc"><i>740</i>&nbsp;            game.fireEvent(event);</b>
+<b class="fc"><i>741</i>&nbsp;            return event.getToZone() == Zone.EXILED;</b>
+<i>742</i>&nbsp;        }
+<b class="nc"><i>743</i>&nbsp;        return false;</b>
+<i>744</i>&nbsp;    }
+<i>745</i>&nbsp;
+<i>746</i>&nbsp;    @Override
+<i>747</i>&nbsp;    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
+<b class="nc"><i>748</i>&nbsp;        throw new UnsupportedOperationException(&quot;Unsupported operation&quot;);</b>
+<i>749</i>&nbsp;    }
+<i>750</i>&nbsp;
+<i>751</i>&nbsp;    @Override
+<i>752</i>&nbsp;    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped) {
+<b class="nc"><i>753</i>&nbsp;        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;);</b>
+<i>754</i>&nbsp;    }
+<i>755</i>&nbsp;
+<i>756</i>&nbsp;    @Override
+<i>757</i>&nbsp;    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown) {
+<b class="nc"><i>758</i>&nbsp;        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;);</b>
+<i>759</i>&nbsp;    }
+<i>760</i>&nbsp;
+<i>761</i>&nbsp;    @Override
+<i>762</i>&nbsp;    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, boolean facedown, ArrayList&lt;UUID&gt; appliedEffects) {
+<b class="nc"><i>763</i>&nbsp;        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;);</b>
+<i>764</i>&nbsp;    }
+<i>765</i>&nbsp;
+<i>766</i>&nbsp;    @Override
+<i>767</i>&nbsp;    public String getCardNumber() {
+<b class="nc"><i>768</i>&nbsp;        return card.getCardNumber();</b>
+<i>769</i>&nbsp;    }
+<i>770</i>&nbsp;
+<i>771</i>&nbsp;    @Override
+<i>772</i>&nbsp;    public boolean getUsesVariousArt() {
+<b class="nc"><i>773</i>&nbsp;        return card.getUsesVariousArt();</b>
+<i>774</i>&nbsp;    }
+<i>775</i>&nbsp;
+<i>776</i>&nbsp;    @Override
+<i>777</i>&nbsp;    public List&lt;Mana&gt; getMana() {
+<b class="nc"><i>778</i>&nbsp;        return card.getMana();</b>
+<i>779</i>&nbsp;    }
+<i>780</i>&nbsp;
+<i>781</i>&nbsp;    @Override
+<i>782</i>&nbsp;    public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
+<b class="nc"><i>783</i>&nbsp;        throw new UnsupportedOperationException(&quot;Unsupported operation&quot;);</b>
+<i>784</i>&nbsp;    }
+<i>785</i>&nbsp;
+<i>786</i>&nbsp;    @Override
+<i>787</i>&nbsp;    public void updateZoneChangeCounter(Game game, ZoneChangeEvent event) {
+<b class="nc"><i>788</i>&nbsp;        throw new UnsupportedOperationException(&quot;Unsupported operation&quot;);</b>
+<i>789</i>&nbsp;    }
+<i>790</i>&nbsp;
+<i>791</i>&nbsp;    @Override
+<i>792</i>&nbsp;    public void setZoneChangeCounter(int value, Game game) {
+<b class="nc"><i>793</i>&nbsp;        throw new UnsupportedOperationException(&quot;Unsupported operation&quot;);</b>
+<i>794</i>&nbsp;    }
+<i>795</i>&nbsp;
+<i>796</i>&nbsp;    @Override
+<i>797</i>&nbsp;    public Ability getStackAbility() {
+<b class="fc"><i>798</i>&nbsp;        return this.ability;</b>
+<i>799</i>&nbsp;    }
+<i>800</i>&nbsp;
+<i>801</i>&nbsp;    @Override
+<i>802</i>&nbsp;    public void assignNewId() {
+<b class="nc"><i>803</i>&nbsp;        throw new UnsupportedOperationException(&quot;Unsupported operation&quot;);</b>
+<i>804</i>&nbsp;    }
+<i>805</i>&nbsp;
+<i>806</i>&nbsp;    @Override
+<i>807</i>&nbsp;    public void setTransformable(boolean value) {
+<b class="nc"><i>808</i>&nbsp;        throw new UnsupportedOperationException(&quot;Unsupported operation&quot;);</b>
+<i>809</i>&nbsp;    }
+<i>810</i>&nbsp;
+<i>811</i>&nbsp;    @Override
+<i>812</i>&nbsp;    public int getZoneChangeCounter(Game game) {
+<b class="fc"><i>813</i>&nbsp;        return card.getZoneChangeCounter(game);</b>
+<i>814</i>&nbsp;    }
+<i>815</i>&nbsp;
+<i>816</i>&nbsp;    @Override
+<i>817</i>&nbsp;    public void addInfo(String key, String value, Game game) {
+<i>818</i>&nbsp;        // do nothing
+<b class="nc"><i>819</i>&nbsp;    }</b>
+<i>820</i>&nbsp;
+<i>821</i>&nbsp;    public void setCopiedSpell(boolean isCopied) {
+<b class="fc"><i>822</i>&nbsp;        this.copiedSpell = isCopied;</b>
+<b class="fc"><i>823</i>&nbsp;    }</b>
+<i>824</i>&nbsp;
+<i>825</i>&nbsp;    public boolean isCopiedSpell() {
+<b class="fc"><i>826</i>&nbsp;        return this.copiedSpell;</b>
+<i>827</i>&nbsp;    }
+<i>828</i>&nbsp;
+<i>829</i>&nbsp;    public Zone getFromZone() {
+<b class="fc"><i>830</i>&nbsp;        return this.fromZone;</b>
+<i>831</i>&nbsp;    }
+<i>832</i>&nbsp;
+<i>833</i>&nbsp;    @Override
+<i>834</i>&nbsp;    public void setCopy(boolean isCopy) {
+<b class="fc"><i>835</i>&nbsp;        setCopiedSpell(isCopy);</b>
+<b class="fc"><i>836</i>&nbsp;    }</b>
+<i>837</i>&nbsp;
+<i>838</i>&nbsp;    @Override
+<i>839</i>&nbsp;    public boolean isCopy() {
+<b class="fc"><i>840</i>&nbsp;        return isCopiedSpell();</b>
+<i>841</i>&nbsp;    }
+<i>842</i>&nbsp;
+<i>843</i>&nbsp;    @Override
+<i>844</i>&nbsp;    public void build() {
+<b class="nc"><i>845</i>&nbsp;    }</b>
+<i>846</i>&nbsp;
+<i>847</i>&nbsp;    @Override
+<i>848</i>&nbsp;    public Counters getCounters(Game game) {
+<b class="fc"><i>849</i>&nbsp;        return card.getCounters(game);</b>
+<i>850</i>&nbsp;    }
+<i>851</i>&nbsp;
+<i>852</i>&nbsp;    @Override
+<i>853</i>&nbsp;    public Counters getCounters(GameState state) {
+<b class="nc"><i>854</i>&nbsp;        return card.getCounters(state);</b>
+<i>855</i>&nbsp;    }
+<i>856</i>&nbsp;
+<i>857</i>&nbsp;    @Override
+<i>858</i>&nbsp;    public boolean addCounters(Counter counter, Game game) {
+<b class="fc"><i>859</i>&nbsp;        return card.addCounters(counter, game);</b>
+<i>860</i>&nbsp;    }
+<i>861</i>&nbsp;
+<i>862</i>&nbsp;    @Override
+<i>863</i>&nbsp;    public boolean addCounters(Counter counter, Game game, ArrayList&lt;UUID&gt; appliedEffects) {
+<b class="nc"><i>864</i>&nbsp;        return card.addCounters(counter, game, appliedEffects);</b>
+<i>865</i>&nbsp;    }
+<i>866</i>&nbsp;
+<i>867</i>&nbsp;    @Override
+<i>868</i>&nbsp;    public void removeCounters(String name, int amount, Game game) {
+<b class="nc"><i>869</i>&nbsp;        card.removeCounters(name, amount, game);</b>
+<b class="nc"><i>870</i>&nbsp;    }</b>
+<i>871</i>&nbsp;
+<i>872</i>&nbsp;    @Override
+<i>873</i>&nbsp;    public void removeCounters(Counter counter, Game game) {
+<b class="nc"><i>874</i>&nbsp;        card.removeCounters(counter, game);</b>
+<b class="nc"><i>875</i>&nbsp;    }</b>
+<i>876</i>&nbsp;
+<i>877</i>&nbsp;    public Card getCard() {
+<b class="fc"><i>878</i>&nbsp;        return card;</b>
+<i>879</i>&nbsp;    }
+<i>880</i>&nbsp;
+<i>881</i>&nbsp;    @Override
+<i>882</i>&nbsp;    public Card getMainCard() {
+<b class="nc"><i>883</i>&nbsp;        return card.getMainCard();</b>
+<i>884</i>&nbsp;    }
+<i>885</i>&nbsp;
+<i>886</i>&nbsp;    @Override
+<i>887</i>&nbsp;    public void setZone(Zone zone, Game game) {
+<b class="nc"><i>888</i>&nbsp;        card.setZone(zone, game);</b>
+<b class="nc"><i>889</i>&nbsp;    }</b>
+<i>890</i>&nbsp;
+<i>891</i>&nbsp;    @Override
+<i>892</i>&nbsp;    public void setSpellAbility(SpellAbility ability) {
+<b class="nc"><i>893</i>&nbsp;        throw new UnsupportedOperationException(&quot;Not supported.&quot;);</b>
+<i>894</i>&nbsp;    }
+<i>895</i>&nbsp;
+<i>896</i>&nbsp;    public boolean isCountered() {
+<b class="fc"><i>897</i>&nbsp;        return countered;</b>
+<i>898</i>&nbsp;    }
+<i>899</i>&nbsp;
+<i>900</i>&nbsp;    @Override
+<i>901</i>&nbsp;    public void checkForCountersToAdd(Permanent permanent, Game game) {
+<b class="nc"><i>902</i>&nbsp;        throw new UnsupportedOperationException(&quot;Not supported for Spell&quot;);</b>
+<i>903</i>&nbsp;    }
+<i>904</i>&nbsp;
+<i>905</i>&nbsp;    @Override
+<i>906</i>&nbsp;    public StackObject createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
+<b class="fc"><i>907</i>&nbsp;        Spell copy = this.copySpell(newControllerId);</b>
+<b class="fc"><i>908</i>&nbsp;        game.getStack().push(copy);</b>
+<b class="fc"><i>909</i>&nbsp;        if (chooseNewTargets) {</b>
+<b class="fc"><i>910</i>&nbsp;            copy.chooseNewTargets(game, newControllerId);</b>
+<i>911</i>&nbsp;        }
+<b class="fc"><i>912</i>&nbsp;        game.fireEvent(new GameEvent(EventType.COPIED_STACKOBJECT, copy.getId(), this.getId(), newControllerId));</b>
+<b class="fc"><i>913</i>&nbsp;        return copy;</b>
+<i>914</i>&nbsp;    }
+<i>915</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

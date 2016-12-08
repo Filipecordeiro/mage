@@ -1,0 +1,267 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LimitedTimesPerTurnActivatedAbility</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.common</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LimitedTimesPerTurnActivatedAbility (mage.abilities.common)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LimitedTimesPerTurnActivatedAbility</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (40/ 52)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LimitedTimesPerTurnActivatedAbility$ActivationInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (44/ 56)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp;*
+<i>4</i>&nbsp;* Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp;* permitted provided that the following conditions are met:
+<i>6</i>&nbsp;*
+<i>7</i>&nbsp;*    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp;*       conditions and the following disclaimer.
+<i>9</i>&nbsp;*
+<i>10</i>&nbsp;*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp;*       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp;*       provided with the distribution.
+<i>13</i>&nbsp;*
+<i>14</i>&nbsp;* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp;* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp;* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp;* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp;* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp;* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp;* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp;* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp;*
+<i>24</i>&nbsp;* The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp;* authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp;* or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.common;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.UUID;
+<i>31</i>&nbsp;import mage.abilities.ActivatedAbilityImpl;
+<i>32</i>&nbsp;import mage.abilities.condition.Condition;
+<i>33</i>&nbsp;import mage.abilities.costs.Cost;
+<i>34</i>&nbsp;import mage.abilities.effects.Effect;
+<i>35</i>&nbsp;import mage.constants.TimingRule;
+<i>36</i>&nbsp;import mage.constants.Zone;
+<i>37</i>&nbsp;import mage.game.Game;
+<i>38</i>&nbsp;import mage.util.CardUtil;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;/**
+<i>41</i>&nbsp; *
+<i>42</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>43</i>&nbsp; */
+<i>44</i>&nbsp;public class LimitedTimesPerTurnActivatedAbility extends ActivatedAbilityImpl {
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    class ActivationInfo {
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;        public int turnNum;
+<i>49</i>&nbsp;        public int activationCounter;
+<i>50</i>&nbsp;
+<b class="fc"><i>51</i>&nbsp;        public ActivationInfo(int turnNum, int activationCounter) {</b>
+<b class="fc"><i>52</i>&nbsp;            this.turnNum = turnNum;</b>
+<b class="fc"><i>53</i>&nbsp;            this.activationCounter = activationCounter;</b>
+<b class="fc"><i>54</i>&nbsp;        }</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    private int maxActivationsPerTurn;
+<i>58</i>&nbsp;    private Condition condition;
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost) {
+<b class="fc"><i>61</i>&nbsp;        this(zone, effect, cost, 1);</b>
+<b class="fc"><i>62</i>&nbsp;    }</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost, int maxActivationsPerTurn) {
+<b class="fc"><i>65</i>&nbsp;        this(zone, effect, cost, maxActivationsPerTurn, null);</b>
+<b class="fc"><i>66</i>&nbsp;    }</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public LimitedTimesPerTurnActivatedAbility(Zone zone, Effect effect, Cost cost, int maxActivationsPerTurn, Condition condition) {
+<b class="fc"><i>69</i>&nbsp;        super(zone, effect, cost);</b>
+<b class="fc"><i>70</i>&nbsp;        this.maxActivationsPerTurn = maxActivationsPerTurn;</b>
+<b class="fc"><i>71</i>&nbsp;        this.condition = condition;</b>
+<b class="fc"><i>72</i>&nbsp;    }</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    public LimitedTimesPerTurnActivatedAbility(final LimitedTimesPerTurnActivatedAbility ability) {
+<b class="fc"><i>75</i>&nbsp;        super(ability);</b>
+<b class="fc"><i>76</i>&nbsp;        this.maxActivationsPerTurn = ability.maxActivationsPerTurn;</b>
+<b class="fc"><i>77</i>&nbsp;        this.condition = ability.condition;</b>
+<b class="fc"><i>78</i>&nbsp;    }</b>
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    @Override
+<i>81</i>&nbsp;    public boolean canActivate(UUID playerId, Game game) {
+<b class="fc"><i>82</i>&nbsp;        return super.canActivate(playerId, game)</b>
+<b class="fc"><i>83</i>&nbsp;                &amp;&amp; hasMoreActivationsThisTurn(game)</b>
+<b class="nc"><i>84</i>&nbsp;                &amp;&amp; (condition == null || condition.apply(game, this));</b>
+<i>85</i>&nbsp;    }
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    private boolean hasMoreActivationsThisTurn(Game game) {
+<b class="fc"><i>88</i>&nbsp;        ActivationInfo activationInfo = getActivationInfo(game);</b>
+<b class="fc"><i>89</i>&nbsp;        return activationInfo == null || activationInfo.turnNum != game.getTurnNum() || activationInfo.activationCounter &lt; maxActivationsPerTurn;</b>
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    @Override
+<i>93</i>&nbsp;    public boolean activate(Game game, boolean noMana) {
+<b class="fc"><i>94</i>&nbsp;        if (hasMoreActivationsThisTurn(game)) {</b>
+<b class="fc"><i>95</i>&nbsp;            if (super.activate(game, noMana)) {</b>
+<b class="fc"><i>96</i>&nbsp;                ActivationInfo activationInfo = getActivationInfo(game);</b>
+<b class="fc"><i>97</i>&nbsp;                if (activationInfo == null) {</b>
+<b class="fc"><i>98</i>&nbsp;                    activationInfo = new ActivationInfo(game.getTurnNum(), 1);</b>
+<b class="nc"><i>99</i>&nbsp;                } else if (activationInfo.turnNum != game.getTurnNum()) {</b>
+<b class="nc"><i>100</i>&nbsp;                    activationInfo.turnNum = game.getTurnNum();</b>
+<b class="nc"><i>101</i>&nbsp;                    activationInfo.activationCounter = 1;</b>
+<i>102</i>&nbsp;                } else {
+<b class="nc"><i>103</i>&nbsp;                    activationInfo.activationCounter++;</b>
+<i>104</i>&nbsp;                }
+<b class="fc"><i>105</i>&nbsp;                setActivationInfo(activationInfo, game);</b>
+<b class="fc"><i>106</i>&nbsp;                return true;</b>
+<i>107</i>&nbsp;            }
+<i>108</i>&nbsp;        }
+<b class="nc"><i>109</i>&nbsp;        return false;</b>
+<i>110</i>&nbsp;    }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    @Override
+<i>113</i>&nbsp;    public boolean resolve(Game game) {
+<b class="fc"><i>114</i>&nbsp;        return super.resolve(game);</b>
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    @Override
+<i>118</i>&nbsp;    public String getRule() {
+<b class="fc"><i>119</i>&nbsp;        StringBuilder sb = new StringBuilder(super.getRule()).append(&quot; Activate this ability &quot;);</b>
+<b class="fc"><i>120</i>&nbsp;        if (condition != null) {</b>
+<b class="nc"><i>121</i>&nbsp;            sb.append(&quot;only &quot;).append(condition.toString()).append(&quot; and &quot;);</b>
+<i>122</i>&nbsp;        }
+<b class="fc"><i>123</i>&nbsp;        if (getTiming().equals(TimingRule.SORCERY)) {</b>
+<b class="nc"><i>124</i>&nbsp;            sb.append(&quot;only any time you could cast a sorcery and &quot;);</b>
+<i>125</i>&nbsp;        }
+<b class="fc"><i>126</i>&nbsp;        switch (maxActivationsPerTurn) {</b>
+<i>127</i>&nbsp;            case 1:
+<b class="fc"><i>128</i>&nbsp;                sb.append(&quot;only once&quot;);</b>
+<b class="fc"><i>129</i>&nbsp;                break;</b>
+<i>130</i>&nbsp;            case 2:
+<b class="nc"><i>131</i>&nbsp;                sb.append(&quot;no more than twice&quot;);</b>
+<b class="nc"><i>132</i>&nbsp;                break;</b>
+<i>133</i>&nbsp;            default:
+<b class="nc"><i>134</i>&nbsp;                sb.append(&quot;no more than &quot;).append(CardUtil.numberToText(maxActivationsPerTurn)).append(&quot; times&quot;);</b>
+<i>135</i>&nbsp;        }
+<b class="fc"><i>136</i>&nbsp;        sb.append(&quot; each turn.&quot;);</b>
+<b class="fc"><i>137</i>&nbsp;        return sb.toString();</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    @Override
+<i>141</i>&nbsp;    public LimitedTimesPerTurnActivatedAbility copy() {
+<b class="fc"><i>142</i>&nbsp;        return new LimitedTimesPerTurnActivatedAbility(this);</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    private ActivationInfo getActivationInfo(Game game) {
+<b class="fc"><i>146</i>&nbsp;        Integer turnNum = (Integer) game.getState().getValue(CardUtil.getCardZoneString(&quot;activationsTurn&quot;, sourceId, game));</b>
+<b class="fc"><i>147</i>&nbsp;        Integer activationCount = (Integer) game.getState().getValue(CardUtil.getCardZoneString(&quot;activationsCount&quot;, sourceId, game));</b>
+<b class="fc"><i>148</i>&nbsp;        if (turnNum == null || activationCount == null) {</b>
+<b class="fc"><i>149</i>&nbsp;            return null;</b>
+<i>150</i>&nbsp;        }
+<b class="nc"><i>151</i>&nbsp;        return new ActivationInfo(turnNum, activationCount);</b>
+<i>152</i>&nbsp;    }
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    private void setActivationInfo(ActivationInfo activationInfo, Game game) {
+<b class="fc"><i>155</i>&nbsp;        game.getState().setValue(CardUtil.getCardZoneString(&quot;activationsTurn&quot;, sourceId, game), activationInfo.turnNum);</b>
+<b class="fc"><i>156</i>&nbsp;        game.getState().setValue(CardUtil.getCardZoneString(&quot;activationsCount&quot;, sourceId, game), activationInfo.activationCounter);</b>
+<b class="fc"><i>157</i>&nbsp;    }</b>
+<i>158</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:37</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EventListenerList</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.mage.plugins.card.dl.beans</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EventListenerList (org.mage.plugins.card.dl.beans)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventListenerList</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EventListenerList$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EventListenerList$ClassToIterableFunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EventListenerList$ClassToIterableFunction$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EventListenerList$ListenerIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">EventListenerList$SingletonIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 27)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/**
+<i>2</i>&nbsp; * EventListenerList.java
+<i>3</i>&nbsp; * 
+<i>4</i>&nbsp; * Created on 08.04.2010
+<i>5</i>&nbsp; */
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;package org.mage.plugins.card.dl.beans;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import static java.util.Arrays.*;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import java.util.ArrayList;
+<i>13</i>&nbsp;import java.util.EventListener;
+<i>14</i>&nbsp;import java.util.HashSet;
+<i>15</i>&nbsp;import java.util.Iterator;
+<i>16</i>&nbsp;import java.util.List;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;import com.google.common.base.Function;
+<i>19</i>&nbsp;import com.google.common.collect.AbstractIterator;
+<i>20</i>&nbsp;import com.google.common.collect.Iterables;
+<i>21</i>&nbsp;import com.google.common.collect.Lists;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;/**
+<i>25</i>&nbsp; * The class EventListenerList.
+<i>26</i>&nbsp; * 
+<i>27</i>&nbsp; * @version V0.0 08.04.2010
+<i>28</i>&nbsp; * @author Clemens Koza
+<i>29</i>&nbsp; */
+<b class="nc"><i>30</i>&nbsp;public class EventListenerList extends javax.swing.event.EventListenerList {</b>
+<i>31</i>&nbsp;    private static final long serialVersionUID = -7545754245081842909L;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     * Returns an iterable over all listeners for the specified classes. the listener classes are in the specified
+<i>35</i>&nbsp;     * order. for every class, listeners are in the reverse order of registering. A listener contained multiple
+<i>36</i>&nbsp;     * times (for a single or multiple classes) is only returned the first time it occurs.
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    public &lt;T extends EventListener&gt; Iterable&lt;T&gt; getIterable(final Class&lt;? extends T&gt;... listenerClass) {
+<i>39</i>&nbsp;        //transform class -&gt; iterable
+<b class="nc"><i>40</i>&nbsp;        List&lt;Iterable&lt;T&gt;&gt; l = Lists.transform(asList(listenerClass), new ClassToIterableFunction&lt;T&gt;());</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;        //compose iterable (use an arraylist to memoize the function&#39;s results)
+<b class="nc"><i>43</i>&nbsp;        final Iterable&lt;T&gt; it = Iterables.concat(new ArrayList&lt;Iterable&lt;T&gt;&gt;(l));</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;        //transform to singleton iterators
+<b class="nc"><i>46</i>&nbsp;        return new Iterable&lt;T&gt;() {</b>
+<i>47</i>&nbsp;            public Iterator&lt;T&gt; iterator() {
+<b class="nc"><i>48</i>&nbsp;                return new SingletonIterator&lt;T&gt;(it.iterator());</b>
+<i>49</i>&nbsp;            }
+<i>50</i>&nbsp;        };
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * Returns an iterator over all listeners for the specified classes. the listener classes are in the specified
+<i>55</i>&nbsp;     * order. for every class, listeners are in the reverse order of registering. A listener contained multiple
+<i>56</i>&nbsp;     * times (for a single or multiple classes) is only returned the first time it occurs.
+<i>57</i>&nbsp;     */
+<i>58</i>&nbsp;    public &lt;T extends EventListener&gt; Iterator&lt;T&gt; getIterator(Class&lt;? extends T&gt;... listenerClass) {
+<b class="nc"><i>59</i>&nbsp;        return getIterable(listenerClass).iterator();</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    /**
+<i>63</i>&nbsp;     * Iterates backwards over the listeners registered for a class by using the original array. The Listener runs
+<i>64</i>&nbsp;     * backwards, just as listener notification usually works.
+<i>65</i>&nbsp;     */
+<b class="nc"><i>66</i>&nbsp;    private class ListenerIterator&lt;T&gt; extends AbstractIterator&lt;T&gt; {</b>
+<i>67</i>&nbsp;        private final Class&lt;? extends T&gt; listenerClass;
+<b class="nc"><i>68</i>&nbsp;        private Object[]                 listeners = listenerList;</b>
+<b class="nc"><i>69</i>&nbsp;        private int                      index     = listeners.length;</b>
+<i>70</i>&nbsp;
+<b class="nc"><i>71</i>&nbsp;        private ListenerIterator(Class&lt;? extends T&gt; listenerClass) {</b>
+<b class="nc"><i>72</i>&nbsp;            this.listenerClass = listenerClass;</b>
+<i>73</i>&nbsp;        }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;        @Override
+<i>76</i>&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)
+<i>77</i>&nbsp;        protected T computeNext() {
+<b class="nc"><i>78</i>&nbsp;            for(index -= 2; index &gt;= 0; index -= 2) {</b>
+<b class="nc"><i>79</i>&nbsp;                if(listenerClass == listeners[index]) return (T) listeners[index + 1];</b>
+<i>80</i>&nbsp;            }
+<b class="nc"><i>81</i>&nbsp;            return endOfData();</b>
+<i>82</i>&nbsp;        }
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    /**
+<i>86</i>&nbsp;     * Transforms a class to the associated listener iterator
+<i>87</i>&nbsp;     */
+<b class="nc"><i>88</i>&nbsp;    private class ClassToIterableFunction&lt;T&gt; implements Function&lt;Class&lt;? extends T&gt;, Iterable&lt;T&gt;&gt; {</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;        public Iterable&lt;T&gt; apply(final Class&lt;? extends T&gt; from) {
+<b class="nc"><i>91</i>&nbsp;            return new Iterable&lt;T&gt;() {</b>
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;                public Iterator&lt;T&gt; iterator() {
+<b class="nc"><i>94</i>&nbsp;                    return new ListenerIterator&lt;T&gt;(from);</b>
+<i>95</i>&nbsp;                }
+<i>96</i>&nbsp;            };
+<i>97</i>&nbsp;        }
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    /**
+<i>101</i>&nbsp;     * Filters the delegate iterator so that every but the first occurrence of every element is ignored.
+<i>102</i>&nbsp;     */
+<i>103</i>&nbsp;    private static class SingletonIterator&lt;T&gt; extends AbstractIterator&lt;T&gt; {
+<i>104</i>&nbsp;        private Iterator&lt;T&gt; it;
+<b class="nc"><i>105</i>&nbsp;        private HashSet&lt;T&gt;  previous = new HashSet&lt;T&gt;();</b>
+<i>106</i>&nbsp;
+<b class="nc"><i>107</i>&nbsp;        public SingletonIterator(Iterator&lt;T&gt; it) {</b>
+<b class="nc"><i>108</i>&nbsp;            this.it = it;</b>
+<i>109</i>&nbsp;        }
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;        @Override
+<i>113</i>&nbsp;        protected T computeNext() {
+<b class="nc"><i>114</i>&nbsp;            while(it.hasNext()) {</b>
+<b class="nc"><i>115</i>&nbsp;                T next = it.next();</b>
+<b class="nc"><i>116</i>&nbsp;                if(previous.add(next)) return next;</b>
+<b class="nc"><i>117</i>&nbsp;            }</b>
+<b class="nc"><i>118</i>&nbsp;            return endOfData();</b>
+<i>119</i>&nbsp;        }
+<i>120</i>&nbsp;    }
+<i>121</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

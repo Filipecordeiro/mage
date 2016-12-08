@@ -1,0 +1,199 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FaithfulSquire</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.cards.f</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FaithfulSquire (mage.cards.f)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FaithfulSquire</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *
+<i>3</i>&nbsp; * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>4</i>&nbsp; *
+<i>5</i>&nbsp; * Redistribution and use in source and binary forms, with or without modification, are
+<i>6</i>&nbsp; * permitted provided that the following conditions are met:
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>9</i>&nbsp; *        conditions and the following disclaimer.
+<i>10</i>&nbsp; *
+<i>11</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>12</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>13</i>&nbsp; *        provided with the distribution.
+<i>14</i>&nbsp; *
+<i>15</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>16</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>17</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>18</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>19</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>20</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>21</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>22</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>23</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>24</i>&nbsp; *
+<i>25</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>26</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>27</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>28</i>&nbsp; *
+<i>29</i>&nbsp; */
+<i>30</i>&nbsp;package mage.cards.f;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;import java.util.UUID;
+<i>33</i>&nbsp;import mage.MageInt;
+<i>34</i>&nbsp;import mage.abilities.Ability;
+<i>35</i>&nbsp;import mage.abilities.common.OnEventTriggeredAbility;
+<i>36</i>&nbsp;import mage.abilities.common.SimpleActivatedAbility;
+<i>37</i>&nbsp;import mage.abilities.common.SpellCastControllerTriggeredAbility;
+<i>38</i>&nbsp;import mage.abilities.condition.common.SourceHasCounterCondition;
+<i>39</i>&nbsp;import mage.abilities.costs.common.RemoveCountersSourceCost;
+<i>40</i>&nbsp;import mage.abilities.decorator.ConditionalTriggeredAbility;
+<i>41</i>&nbsp;import mage.abilities.effects.common.FlipSourceEffect;
+<i>42</i>&nbsp;import mage.abilities.effects.common.PreventDamageToTargetEffect;
+<i>43</i>&nbsp;import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+<i>44</i>&nbsp;import mage.abilities.keyword.FlyingAbility;
+<i>45</i>&nbsp;import mage.cards.CardImpl;
+<i>46</i>&nbsp;import mage.cards.CardSetInfo;
+<i>47</i>&nbsp;import mage.constants.CardType;
+<i>48</i>&nbsp;import mage.constants.Duration;
+<i>49</i>&nbsp;import mage.constants.Zone;
+<i>50</i>&nbsp;import mage.counters.CounterType;
+<i>51</i>&nbsp;import mage.filter.common.FilterSpiritOrArcaneCard;
+<i>52</i>&nbsp;import mage.game.events.GameEvent;
+<i>53</i>&nbsp;import mage.game.permanent.token.Token;
+<i>54</i>&nbsp;import mage.target.common.TargetCreaturePermanent;
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;/**
+<i>57</i>&nbsp; * @author LevelX2
+<i>58</i>&nbsp; */
+<i>59</i>&nbsp;public class FaithfulSquire extends CardImpl {
+<i>60</i>&nbsp;
+<b class="nc"><i>61</i>&nbsp;    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    public FaithfulSquire(UUID ownerId, CardSetInfo setInfo) {
+<b class="nc"><i>64</i>&nbsp;        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},&quot;{1}{W}{W}&quot;);</b>
+<b class="nc"><i>65</i>&nbsp;        this.subtype.add(&quot;Human&quot;);</b>
+<b class="nc"><i>66</i>&nbsp;        this.subtype.add(&quot;Soldier&quot;);</b>
+<i>67</i>&nbsp;
+<b class="nc"><i>68</i>&nbsp;        this.power = new MageInt(2);</b>
+<b class="nc"><i>69</i>&nbsp;        this.toughness = new MageInt(2);</b>
+<b class="nc"><i>70</i>&nbsp;        this.flipCard = true;</b>
+<b class="nc"><i>71</i>&nbsp;        this.flipCardName = &quot;Kaiso, Memory of Loyalty&quot;;</b>
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;        // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Faithful Squire.
+<b class="nc"><i>74</i>&nbsp;        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));</b>
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;        // At the beginning of the end step, if there are two or more ki counters on Faithful Squire, you may flip it
+<b class="nc"><i>77</i>&nbsp;        this.addAbility(new ConditionalTriggeredAbility(</b>
+<i>78</i>&nbsp;                new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, &quot;beginning of the end step&quot;, true, new FlipSourceEffect(new KaisoMemoryOfLoyalty())),
+<i>79</i>&nbsp;                new SourceHasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
+<i>80</i>&nbsp;                &quot;At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it.&quot;));
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;    }</b>
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    public FaithfulSquire(final FaithfulSquire card) {
+<b class="nc"><i>85</i>&nbsp;        super(card);</b>
+<b class="nc"><i>86</i>&nbsp;    }</b>
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    @Override
+<i>89</i>&nbsp;    public FaithfulSquire copy() {
+<b class="nc"><i>90</i>&nbsp;        return new FaithfulSquire(this);</b>
+<i>91</i>&nbsp;    }
+<i>92</i>&nbsp;}
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;class KaisoMemoryOfLoyalty extends Token {
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    KaisoMemoryOfLoyalty() {
+<i>97</i>&nbsp;        super(&quot;Kaiso, Memory of Loyalty&quot;, &quot;&quot;);
+<i>98</i>&nbsp;        supertype.add(&quot;Legendary&quot;);
+<i>99</i>&nbsp;        cardType.add(CardType.CREATURE);
+<i>100</i>&nbsp;        color.setWhite(true);
+<i>101</i>&nbsp;        subtype.add(&quot;Spirit&quot;);
+<i>102</i>&nbsp;        power = new MageInt(3);
+<i>103</i>&nbsp;        toughness = new MageInt(4);
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;        // Flying
+<i>106</i>&nbsp;        this.addAbility(FlyingAbility.getInstance());
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;        // Remove a ki counter from Kaiso, Memory of Loyalty: Prevent all damage that would be dealt to target creature this turn.
+<i>109</i>&nbsp;        Ability ability = new SimpleActivatedAbility(
+<i>110</i>&nbsp;                Zone.BATTLEFIELD,
+<i>111</i>&nbsp;                new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE),
+<i>112</i>&nbsp;                new RemoveCountersSourceCost(CounterType.KI.createInstance()));
+<i>113</i>&nbsp;        ability.addTarget(new TargetCreaturePermanent());
+<i>114</i>&nbsp;        this.addAbility(ability);
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>

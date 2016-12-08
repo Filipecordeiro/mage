@@ -1,0 +1,363 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: AlternativeCostSourceAbility</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.costs</a> ]
+</div>
+
+<h1>Coverage Summary for Class: AlternativeCostSourceAbility (mage.abilities.costs)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AlternativeCostSourceAbility</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (14/ 16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    77.8%
+  </span>
+  <span class="absValue">
+    (98/ 126)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;package mage.abilities.costs;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;import java.util.Iterator;
+<i>31</i>&nbsp;import mage.abilities.Ability;
+<i>32</i>&nbsp;import mage.abilities.SpellAbility;
+<i>33</i>&nbsp;import mage.abilities.StaticAbility;
+<i>34</i>&nbsp;import mage.abilities.condition.Condition;
+<i>35</i>&nbsp;import mage.abilities.costs.mana.ManaCost;
+<i>36</i>&nbsp;import mage.cards.Card;
+<i>37</i>&nbsp;import mage.constants.AbilityType;
+<i>38</i>&nbsp;import mage.constants.Outcome;
+<i>39</i>&nbsp;import mage.constants.Zone;
+<i>40</i>&nbsp;import mage.filter.FilterCard;
+<i>41</i>&nbsp;import mage.game.Game;
+<i>42</i>&nbsp;import mage.players.Player;
+<i>43</i>&nbsp;import mage.util.CardUtil;
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;/**
+<i>46</i>&nbsp; *
+<i>47</i>&nbsp; * @author LevelX2
+<i>48</i>&nbsp; */
+<i>49</i>&nbsp;public class AlternativeCostSourceAbility extends StaticAbility implements AlternativeSourceCosts {
+<i>50</i>&nbsp;
+<b class="fc"><i>51</i>&nbsp;    Costs&lt;AlternativeCost2&gt; alternateCosts = new CostsImpl&lt;&gt;();</b>
+<i>52</i>&nbsp;    protected Condition condition;
+<i>53</i>&nbsp;    protected String rule;
+<i>54</i>&nbsp;    protected FilterCard filter;
+<i>55</i>&nbsp;    protected boolean onlyMana;
+<i>56</i>&nbsp;    protected DynamicCost dynamicCost;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public AlternativeCostSourceAbility(Cost cost) {
+<b class="fc"><i>59</i>&nbsp;        this(cost, null);</b>
+<b class="fc"><i>60</i>&nbsp;    }</b>
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public AlternativeCostSourceAbility(Condition conditon) {
+<b class="nc"><i>63</i>&nbsp;        this(null, conditon, null);</b>
+<b class="nc"><i>64</i>&nbsp;    }</b>
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public AlternativeCostSourceAbility(Cost cost, Condition conditon) {
+<b class="fc"><i>67</i>&nbsp;        this(cost, conditon, null);</b>
+<b class="fc"><i>68</i>&nbsp;    }</b>
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule) {
+<b class="fc"><i>71</i>&nbsp;        this(cost, condition, rule, null, true);</b>
+<b class="fc"><i>72</i>&nbsp;    }</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    /**
+<i>75</i>&nbsp;     *
+<i>76</i>&nbsp;     * @param cost alternate cost to pay
+<i>77</i>&nbsp;     * @param condition only if the condition is true it&#39;s possible to use the
+<i>78</i>&nbsp;     * alternate costs
+<i>79</i>&nbsp;     * @param rule if != null used as rule text
+<i>80</i>&nbsp;     * @param filter filters the cards this alternate cost can be applied to
+<i>81</i>&nbsp;     * @param onlyMana if true only the mana costs are replaced by this costs,
+<i>82</i>&nbsp;     * other costs stay untouched
+<i>83</i>&nbsp;     */
+<i>84</i>&nbsp;    public AlternativeCostSourceAbility(Cost cost, Condition condition, String rule, FilterCard filter, boolean onlyMana) {
+<b class="fc"><i>85</i>&nbsp;        super(Zone.ALL, null);</b>
+<b class="fc"><i>86</i>&nbsp;        this.addCost(cost);</b>
+<b class="fc"><i>87</i>&nbsp;        this.setRuleAtTheTop(true);</b>
+<b class="fc"><i>88</i>&nbsp;        this.condition = condition;</b>
+<b class="fc"><i>89</i>&nbsp;        this.rule = rule;</b>
+<b class="fc"><i>90</i>&nbsp;        this.filter = filter;</b>
+<b class="fc"><i>91</i>&nbsp;        this.onlyMana = onlyMana;</b>
+<b class="fc"><i>92</i>&nbsp;    }</b>
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    public AlternativeCostSourceAbility(Condition condition, String rule, FilterCard filter, boolean onlyMana, DynamicCost dynamicCost) {
+<b class="nc"><i>95</i>&nbsp;        super(Zone.ALL, null);</b>
+<b class="nc"><i>96</i>&nbsp;        this.setRuleAtTheTop(true);</b>
+<b class="nc"><i>97</i>&nbsp;        this.condition = condition;</b>
+<b class="nc"><i>98</i>&nbsp;        this.rule = rule;</b>
+<b class="nc"><i>99</i>&nbsp;        this.filter = filter;</b>
+<b class="nc"><i>100</i>&nbsp;        this.onlyMana = onlyMana;</b>
+<b class="nc"><i>101</i>&nbsp;        this.dynamicCost = dynamicCost;</b>
+<b class="nc"><i>102</i>&nbsp;    }</b>
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    public AlternativeCostSourceAbility(final AlternativeCostSourceAbility ability) {
+<b class="fc"><i>105</i>&nbsp;        super(ability);</b>
+<b class="fc"><i>106</i>&nbsp;        this.alternateCosts = ability.alternateCosts;</b>
+<b class="fc"><i>107</i>&nbsp;        this.condition = ability.condition;</b>
+<b class="fc"><i>108</i>&nbsp;        this.rule = ability.rule;</b>
+<b class="fc"><i>109</i>&nbsp;        this.filter = ability.filter;</b>
+<b class="fc"><i>110</i>&nbsp;        this.onlyMana = ability.onlyMana;</b>
+<b class="fc"><i>111</i>&nbsp;        this.dynamicCost = ability.dynamicCost;</b>
+<b class="fc"><i>112</i>&nbsp;    }</b>
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    @Override
+<i>115</i>&nbsp;    public void addCost(Cost cost) {
+<b class="fc"><i>116</i>&nbsp;        AlternativeCost2 alternativeCost = convertToAlternativeCost(cost);</b>
+<b class="fc"><i>117</i>&nbsp;        if (alternativeCost != null) {</b>
+<b class="fc"><i>118</i>&nbsp;            this.alternateCosts.add(alternativeCost);</b>
+<i>119</i>&nbsp;        }
+<b class="fc"><i>120</i>&nbsp;    }</b>
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    private AlternativeCost2 convertToAlternativeCost(Cost cost) {
+<i>123</i>&nbsp;        //return cost != null ? new AlternativeCost2Impl(null, cost.getText(), cost) : null;
+<b class="fc"><i>124</i>&nbsp;        return cost != null ? new AlternativeCost2Impl(null, &quot;&quot;, cost) : null;</b>
+<i>125</i>&nbsp;    }
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    @Override
+<i>128</i>&nbsp;    public AlternativeCostSourceAbility copy() {
+<b class="fc"><i>129</i>&nbsp;        return new AlternativeCostSourceAbility(this);</b>
+<i>130</i>&nbsp;    }
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    @Override
+<i>133</i>&nbsp;    public boolean isAvailable(Ability source, Game game) {
+<b class="fc"><i>134</i>&nbsp;        if (condition != null) {</b>
+<b class="fc"><i>135</i>&nbsp;            return condition.apply(game, source);</b>
+<i>136</i>&nbsp;        }
+<b class="fc"><i>137</i>&nbsp;        return true;</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    @Override
+<i>141</i>&nbsp;    public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
+<b class="fc"><i>142</i>&nbsp;        if (ability != null &amp;&amp; AbilityType.SPELL.equals(ability.getAbilityType())) {</b>
+<b class="fc"><i>143</i>&nbsp;            if (filter != null) {</b>
+<b class="fc"><i>144</i>&nbsp;                Card card = game.getCard(ability.getSourceId());</b>
+<b class="fc"><i>145</i>&nbsp;                if (!filter.match(card, ability.getSourceId(), ability.getControllerId(), game)) {</b>
+<b class="nc"><i>146</i>&nbsp;                    return false;</b>
+<i>147</i>&nbsp;                }
+<i>148</i>&nbsp;            }
+<b class="fc"><i>149</i>&nbsp;            Player player = game.getPlayer(ability.getControllerId());</b>
+<b class="fc"><i>150</i>&nbsp;            if (player != null) {</b>
+<i>151</i>&nbsp;                Costs&lt;AlternativeCost2&gt; alternativeCostsToCheck;
+<b class="fc"><i>152</i>&nbsp;                if (dynamicCost != null) {</b>
+<b class="nc"><i>153</i>&nbsp;                    alternativeCostsToCheck = new CostsImpl&lt;&gt;();</b>
+<b class="nc"><i>154</i>&nbsp;                    alternativeCostsToCheck.add(convertToAlternativeCost(dynamicCost.getCost(ability, game)));</b>
+<i>155</i>&nbsp;                } else {
+<b class="fc"><i>156</i>&nbsp;                    alternativeCostsToCheck = this.alternateCosts;</b>
+<i>157</i>&nbsp;                }
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;                String costChoiceText;
+<b class="fc"><i>160</i>&nbsp;                if (dynamicCost != null) {</b>
+<b class="nc"><i>161</i>&nbsp;                    costChoiceText = dynamicCost.getText(ability, game);</b>
+<i>162</i>&nbsp;                } else {
+<b class="fc"><i>163</i>&nbsp;                    costChoiceText = alternativeCostsToCheck.isEmpty() ? &quot;Cast without paying its mana cost?&quot; : &quot;Pay alternative costs? (&quot; + alternativeCostsToCheck.getText() + &quot;)&quot;;</b>
+<i>164</i>&nbsp;                }
+<i>165</i>&nbsp;
+<b class="fc"><i>166</i>&nbsp;                if (alternativeCostsToCheck.canPay(ability, ability.getSourceId(), ability.getControllerId(), game)</b>
+<b class="fc"><i>167</i>&nbsp;                        &amp;&amp; player.chooseUse(Outcome.Benefit, costChoiceText, this, game)) {</b>
+<b class="fc"><i>168</i>&nbsp;                    if (ability instanceof SpellAbility) {</b>
+<b class="fc"><i>169</i>&nbsp;                        for (Iterator&lt;ManaCost&gt; iterator = ability.getManaCostsToPay().iterator(); iterator.hasNext();) {</b>
+<b class="fc"><i>170</i>&nbsp;                            ManaCost manaCost = iterator.next();</b>
+<b class="fc"><i>171</i>&nbsp;                            if (manaCost instanceof VariableCost) {</b>
+<b class="fc"><i>172</i>&nbsp;                                iterator.remove();</b>
+<i>173</i>&nbsp;                            }
+<b class="fc"><i>174</i>&nbsp;                        }</b>
+<b class="fc"><i>175</i>&nbsp;                        CardUtil.reduceCost((SpellAbility) ability, ability.getManaCosts());</b>
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;                    } else {
+<b class="nc"><i>178</i>&nbsp;                        ability.getManaCostsToPay().clear();</b>
+<i>179</i>&nbsp;                    }
+<b class="fc"><i>180</i>&nbsp;                    if (!onlyMana) {</b>
+<b class="nc"><i>181</i>&nbsp;                        ability.getCosts().clear();</b>
+<i>182</i>&nbsp;                    }
+<b class="fc"><i>183</i>&nbsp;                    for (Cost cost : alternativeCostsToCheck) {</b>
+<b class="fc"><i>184</i>&nbsp;                        AlternativeCost2 alternateCost = (AlternativeCost2) cost;</b>
+<b class="fc"><i>185</i>&nbsp;                        alternateCost.activate();</b>
+<b class="fc"><i>186</i>&nbsp;                        for (Iterator it = ((Costs) alternateCost).iterator(); it.hasNext();) {</b>
+<b class="fc"><i>187</i>&nbsp;                            Cost costDeailed = (Cost) it.next();</b>
+<b class="fc"><i>188</i>&nbsp;                            if (costDeailed instanceof ManaCost) {</b>
+<b class="fc"><i>189</i>&nbsp;                                ability.getManaCostsToPay().add((ManaCost) costDeailed.copy());</b>
+<i>190</i>&nbsp;                            } else {
+<b class="fc"><i>191</i>&nbsp;                                ability.getCosts().add(costDeailed.copy());</b>
+<i>192</i>&nbsp;                            }
+<b class="fc"><i>193</i>&nbsp;                        }</b>
+<b class="fc"><i>194</i>&nbsp;                    }</b>
+<i>195</i>&nbsp;                } else {
+<b class="fc"><i>196</i>&nbsp;                    return false;</b>
+<i>197</i>&nbsp;                }
+<b class="fc"><i>198</i>&nbsp;            } else {</b>
+<b class="nc"><i>199</i>&nbsp;                return false;</b>
+<i>200</i>&nbsp;            }
+<i>201</i>&nbsp;        }
+<b class="fc"><i>202</i>&nbsp;        return isActivated(ability, game);</b>
+<i>203</i>&nbsp;    }
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;    @Override
+<i>206</i>&nbsp;    public boolean isActivated(Ability source, Game game) {
+<i>207</i>&nbsp;        Costs&lt;AlternativeCost2&gt; alternativeCostsToCheck;
+<b class="fc"><i>208</i>&nbsp;        if (dynamicCost != null) {</b>
+<b class="nc"><i>209</i>&nbsp;            alternativeCostsToCheck = new CostsImpl&lt;&gt;();</b>
+<b class="nc"><i>210</i>&nbsp;            alternativeCostsToCheck.add(convertToAlternativeCost(dynamicCost.getCost(source, game)));</b>
+<i>211</i>&nbsp;        } else {
+<b class="fc"><i>212</i>&nbsp;            alternativeCostsToCheck = this.alternateCosts;</b>
+<i>213</i>&nbsp;        }
+<b class="fc"><i>214</i>&nbsp;        for (AlternativeCost2 cost : alternativeCostsToCheck) {</b>
+<b class="fc"><i>215</i>&nbsp;            if (cost.isActivated(game)) {</b>
+<b class="fc"><i>216</i>&nbsp;                return true;</b>
+<i>217</i>&nbsp;            }
+<b class="fc"><i>218</i>&nbsp;        }</b>
+<b class="fc"><i>219</i>&nbsp;        return false;</b>
+<i>220</i>&nbsp;    }
+<i>221</i>&nbsp;
+<i>222</i>&nbsp;    @Override
+<i>223</i>&nbsp;    public String getCastMessageSuffix(Game game) {
+<b class="fc"><i>224</i>&nbsp;        return alternateCosts.isEmpty() ? &quot; without paying its mana costs&quot; : &quot; using alternative casting costs&quot;;</b>
+<i>225</i>&nbsp;    }
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;    @Override
+<i>228</i>&nbsp;    public String getRule() {
+<b class="fc"><i>229</i>&nbsp;        if (rule != null) {</b>
+<b class="nc"><i>230</i>&nbsp;            return rule;</b>
+<i>231</i>&nbsp;        }
+<b class="fc"><i>232</i>&nbsp;        StringBuilder sb = new StringBuilder();</b>
+<b class="fc"><i>233</i>&nbsp;        if (condition != null) {</b>
+<b class="nc"><i>234</i>&nbsp;            sb.append(condition.toString());</b>
+<b class="nc"><i>235</i>&nbsp;            if (alternateCosts.size() &gt; 1) {</b>
+<b class="nc"><i>236</i>&nbsp;                sb.append(&quot;, rather than pay {source}&#39;s mana cost, &quot;);</b>
+<i>237</i>&nbsp;            } else {
+<b class="nc"><i>238</i>&nbsp;                sb.append(&quot;, you may &quot;);</b>
+<i>239</i>&nbsp;            }
+<i>240</i>&nbsp;        } else {
+<b class="fc"><i>241</i>&nbsp;            sb.append(&quot;You may &quot;);</b>
+<i>242</i>&nbsp;        }
+<b class="fc"><i>243</i>&nbsp;        int numberCosts = 0;</b>
+<b class="fc"><i>244</i>&nbsp;        String remarkText = &quot;&quot;;</b>
+<b class="fc"><i>245</i>&nbsp;        for (AlternativeCost2 alternativeCost : alternateCosts) {</b>
+<b class="fc"><i>246</i>&nbsp;            if (numberCosts == 0) {</b>
+<b class="fc"><i>247</i>&nbsp;                if (alternativeCost.getCost() instanceof ManaCost) {</b>
+<b class="fc"><i>248</i>&nbsp;                    sb.append(&quot;pay &quot;);</b>
+<i>249</i>&nbsp;                }
+<b class="fc"><i>250</i>&nbsp;                sb.append(alternativeCost.getText(false));</b>
+<b class="fc"><i>251</i>&nbsp;                remarkText = alternativeCost.getReminderText();</b>
+<i>252</i>&nbsp;            } else {
+<b class="fc"><i>253</i>&nbsp;                sb.append(&quot; and &quot;);</b>
+<b class="fc"><i>254</i>&nbsp;                if (alternativeCost.getCost() instanceof ManaCost) {</b>
+<b class="nc"><i>255</i>&nbsp;                    sb.append(&quot;pay &quot;);</b>
+<i>256</i>&nbsp;                }
+<b class="fc"><i>257</i>&nbsp;                sb.append(alternativeCost.getText(true));</b>
+<i>258</i>&nbsp;            }
+<b class="fc"><i>259</i>&nbsp;            ++numberCosts;</b>
+<b class="fc"><i>260</i>&nbsp;        }</b>
+<b class="fc"><i>261</i>&nbsp;        if (condition == null || alternateCosts.size() == 1) {</b>
+<b class="fc"><i>262</i>&nbsp;            sb.append(&quot; rather than pay {source}&#39;s mana cost&quot;);</b>
+<b class="nc"><i>263</i>&nbsp;        } else if (alternateCosts.isEmpty()) {</b>
+<b class="nc"><i>264</i>&nbsp;            sb.append(&quot;cast {this} without paying its mana cost&quot;);</b>
+<i>265</i>&nbsp;        }
+<b class="fc"><i>266</i>&nbsp;        sb.append(&quot;.&quot;);</b>
+<b class="fc"><i>267</i>&nbsp;        if (numberCosts == 1 &amp;&amp; remarkText != null) {</b>
+<b class="nc"><i>268</i>&nbsp;            sb.append(&quot; &quot;).append(remarkText);</b>
+<i>269</i>&nbsp;        }
+<b class="fc"><i>270</i>&nbsp;        return sb.toString();</b>
+<i>271</i>&nbsp;    }
+<i>272</i>&nbsp;
+<i>273</i>&nbsp;    @Override
+<i>274</i>&nbsp;    public Costs&lt;Cost&gt; getCosts() {
+<b class="fc"><i>275</i>&nbsp;        Costs&lt;Cost&gt; alterCosts = new CostsImpl&lt;&gt;();</b>
+<b class="fc"><i>276</i>&nbsp;        alterCosts.addAll(alternateCosts);</b>
+<b class="fc"><i>277</i>&nbsp;        return alterCosts;</b>
+<i>278</i>&nbsp;    }
+<i>279</i>&nbsp;
+<i>280</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

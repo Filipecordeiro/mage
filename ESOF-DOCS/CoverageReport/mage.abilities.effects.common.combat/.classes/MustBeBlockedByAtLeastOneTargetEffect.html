@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MustBeBlockedByAtLeastOneTargetEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.abilities.effects.common.combat</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MustBeBlockedByAtLeastOneTargetEffect (mage.abilities.effects.common.combat)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MustBeBlockedByAtLeastOneTargetEffect</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; *  Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp; *  permitted provided that the following conditions are met:
+<i>6</i>&nbsp; *
+<i>7</i>&nbsp; *     1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp; *        conditions and the following disclaimer.
+<i>9</i>&nbsp; *
+<i>10</i>&nbsp; *     2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp; *        of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp; *        provided with the distribution.
+<i>13</i>&nbsp; *
+<i>14</i>&nbsp; *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp; *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp; *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp; *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp; *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp; *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp; *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp; *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp; *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp; *
+<i>24</i>&nbsp; *  The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp; *  authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp; *  or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;package mage.abilities.effects.common.combat;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;import java.util.UUID;
+<i>32</i>&nbsp;import mage.abilities.Ability;
+<i>33</i>&nbsp;import mage.abilities.effects.RequirementEffect;
+<i>34</i>&nbsp;import mage.constants.Duration;
+<i>35</i>&nbsp;import mage.game.Game;
+<i>36</i>&nbsp;import mage.game.permanent.Permanent;
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;/**
+<i>40</i>&nbsp; * !! This effect does only support one target.
+<i>41</i>&nbsp; *
+<i>42</i>&nbsp; *
+<i>43</i>&nbsp; * http://tappedout.net/mtg-questions/must-be-blocked-if-able-effect-makes-other-attacking-creatures-essentially-unblockable/
+<i>44</i>&nbsp; *
+<i>45</i>&nbsp; * When you Declare Blockers, you choose an arrangement for your blockers,
+<i>46</i>&nbsp; * then check to see if there are any restrictions or requirements.
+<i>47</i>&nbsp; *
+<i>48</i>&nbsp; * If any restrictions are violated, the block is illegal. (For example,
+<i>49</i>&nbsp; * trying to block with Sightless Ghoul)
+<i>50</i>&nbsp; * If any requirements are violated, the least possible number of requirements
+<i>51</i>&nbsp; * must be violated, otherwise the block is illegal. (For example, your opponent
+<i>52</i>&nbsp; * control two creatures that he has cast Deadly Allure on, but you control only
+<i>53</i>&nbsp; * one creature. Blocking either one will violate a requirement, &quot;This creature
+<i>54</i>&nbsp; * must be blocked this turn if able&quot;, but it will also violate the least
+<i>55</i>&nbsp; * possible number of requirements, thus it is legal.)
+<i>56</i>&nbsp; * If the block is illegal, the game state backs up and you declare blockers
+<i>57</i>&nbsp; * again. (Note that while you can, in some cases, circumvent requirements
+<i>58</i>&nbsp; * such as &quot;This creature must be blocked&quot; or &quot;This creature must block
+<i>59</i>&nbsp; * any attacking creature&quot; you can never circumvent restrictions: &quot;This creature
+<i>60</i>&nbsp; * can&#39;t block&quot; or &quot;Only one creature may block this turn.&quot;)
+<i>61</i>&nbsp; * Because you declare ALL your blockers at once, THEN check for
+<i>62</i>&nbsp; * restrictions/requirements, you may block Deadly Allure&#39;d creatures
+<i>63</i>&nbsp; * with only one creature, if you choose.
+<i>64</i>&nbsp; * This still works with Lure: This card sets up a requirement that ALL
+<i>65</i>&nbsp; * creatures must block it if able. Any block that violates more than
+<i>66</i>&nbsp; * the minimum number of requirements is still illegal.
+<i>67</i>&nbsp; *
+<i>68</i>&nbsp; * @author LevelX2
+<i>69</i>&nbsp; */
+<i>70</i>&nbsp;public class MustBeBlockedByAtLeastOneTargetEffect extends RequirementEffect {
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public MustBeBlockedByAtLeastOneTargetEffect() {
+<b class="fc"><i>73</i>&nbsp;        this(Duration.EndOfTurn);</b>
+<b class="fc"><i>74</i>&nbsp;    }</b>
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    public MustBeBlockedByAtLeastOneTargetEffect(Duration duration) {
+<b class="fc"><i>77</i>&nbsp;        super(duration);</b>
+<b class="fc"><i>78</i>&nbsp;        staticText = &quot;Target creature must be blocked this turn if able&quot;;</b>
+<b class="fc"><i>79</i>&nbsp;    }</b>
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    public MustBeBlockedByAtLeastOneTargetEffect(final MustBeBlockedByAtLeastOneTargetEffect effect) {
+<b class="fc"><i>82</i>&nbsp;        super(effect);</b>
+<b class="fc"><i>83</i>&nbsp;    }</b>
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    @Override
+<i>86</i>&nbsp;    public boolean applies(Permanent permanent, Ability source, Game game) {
+<b class="fc"><i>87</i>&nbsp;        return permanent.canBlock(this.getTargetPointer().getFirst(game, source), game);</b>
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    @Override
+<i>91</i>&nbsp;    public boolean mustAttack(Game game) {
+<b class="fc"><i>92</i>&nbsp;        return false;</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    @Override
+<i>96</i>&nbsp;    public boolean mustBlock(Game game) {
+<b class="fc"><i>97</i>&nbsp;        return false;</b>
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    @Override
+<i>101</i>&nbsp;    public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
+<b class="fc"><i>102</i>&nbsp;        return this.getTargetPointer().getFirst(game, source);</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;    @Override
+<i>106</i>&nbsp;    public MustBeBlockedByAtLeastOneTargetEffect copy() {
+<b class="fc"><i>107</i>&nbsp;        return new MustBeBlockedByAtLeastOneTargetEffect(this);</b>
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:33</div>
+</div>
+</body>
+</html>

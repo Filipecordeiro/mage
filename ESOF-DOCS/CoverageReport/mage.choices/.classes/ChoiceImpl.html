@@ -1,0 +1,236 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ChoiceImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">mage.choices</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ChoiceImpl (mage.choices)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChoiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55.6%
+  </span>
+  <span class="absValue">
+    (10/ 18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    52.3%
+  </span>
+  <span class="absValue">
+    (23/ 44)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp;* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+<i>3</i>&nbsp;*
+<i>4</i>&nbsp;* Redistribution and use in source and binary forms, with or without modification, are
+<i>5</i>&nbsp;* permitted provided that the following conditions are met:
+<i>6</i>&nbsp;*
+<i>7</i>&nbsp;*    1. Redistributions of source code must retain the above copyright notice, this list of
+<i>8</i>&nbsp;*       conditions and the following disclaimer.
+<i>9</i>&nbsp;*
+<i>10</i>&nbsp;*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+<i>11</i>&nbsp;*       of conditions and the following disclaimer in the documentation and/or other materials
+<i>12</i>&nbsp;*       provided with the distribution.
+<i>13</i>&nbsp;*
+<i>14</i>&nbsp;* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS&#39;&#39; AND ANY EXPRESS OR IMPLIED
+<i>15</i>&nbsp;* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+<i>16</i>&nbsp;* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+<i>17</i>&nbsp;* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+<i>18</i>&nbsp;* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+<i>19</i>&nbsp;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+<i>20</i>&nbsp;* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+<i>21</i>&nbsp;* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+<i>22</i>&nbsp;* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+<i>23</i>&nbsp;*
+<i>24</i>&nbsp;* The views and conclusions contained in the software and documentation are those of the
+<i>25</i>&nbsp;* authors and should not be interpreted as representing official policies, either expressed
+<i>26</i>&nbsp;* or implied, of BetaSteward_at_googlemail.com.
+<i>27</i>&nbsp;*/
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;package mage.choices;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;import java.io.Serializable;
+<i>32</i>&nbsp;import java.util.LinkedHashMap;
+<i>33</i>&nbsp;import java.util.LinkedHashSet;
+<i>34</i>&nbsp;import java.util.Map;
+<i>35</i>&nbsp;import java.util.Set;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;/**
+<i>38</i>&nbsp; *
+<i>39</i>&nbsp; * @author BetaSteward_at_googlemail.com
+<i>40</i>&nbsp; */
+<i>41</i>&nbsp;public class ChoiceImpl implements Choice, Serializable {
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    protected boolean chosen;
+<i>44</i>&nbsp;    protected boolean required;
+<i>45</i>&nbsp;    protected String choice;
+<i>46</i>&nbsp;    protected String choiceKey;
+<b class="fc"><i>47</i>&nbsp;    protected Set&lt;String&gt; choices = new LinkedHashSet&lt;&gt;();</b>
+<b class="fc"><i>48</i>&nbsp;    protected Map&lt;String, String&gt; keyChoices = new LinkedHashMap&lt;&gt;();</b>
+<i>49</i>&nbsp;    protected String message;
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    public ChoiceImpl() {
+<b class="fc"><i>52</i>&nbsp;        this(false);</b>
+<b class="fc"><i>53</i>&nbsp;    }</b>
+<i>54</i>&nbsp;
+<b class="fc"><i>55</i>&nbsp;    public ChoiceImpl(boolean required) {</b>
+<b class="fc"><i>56</i>&nbsp;        this.required = required;</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<b class="nc"><i>59</i>&nbsp;    public ChoiceImpl(ChoiceImpl choice) {</b>
+<b class="nc"><i>60</i>&nbsp;        this.choice = choice.choice;</b>
+<b class="nc"><i>61</i>&nbsp;        this.chosen = choice.chosen;</b>
+<b class="nc"><i>62</i>&nbsp;        this.required = choice.required;</b>
+<b class="nc"><i>63</i>&nbsp;        this.message = choice.message;</b>
+<b class="nc"><i>64</i>&nbsp;        this.choices.addAll(choice.choices);</b>
+<b class="nc"><i>65</i>&nbsp;        this.choiceKey = choice.choiceKey;</b>
+<b class="nc"><i>66</i>&nbsp;        this.keyChoices = choice.keyChoices; // list should never change for the same object so copy by reference</b>
+<b class="nc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @Override
+<i>70</i>&nbsp;    public boolean isChosen() {
+<b class="fc"><i>71</i>&nbsp;        return chosen;</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    @Override
+<i>75</i>&nbsp;    public void clearChoice() {
+<b class="fc"><i>76</i>&nbsp;        choice = null;</b>
+<b class="fc"><i>77</i>&nbsp;        choiceKey = null;</b>
+<b class="fc"><i>78</i>&nbsp;        chosen = false;</b>
+<b class="fc"><i>79</i>&nbsp;    }</b>
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    @Override
+<i>82</i>&nbsp;    public String getMessage() {
+<b class="fc"><i>83</i>&nbsp;        return message;</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    @Override
+<i>87</i>&nbsp;    public void setMessage(String message) {
+<b class="fc"><i>88</i>&nbsp;        this.message = message;</b>
+<b class="fc"><i>89</i>&nbsp;    }</b>
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    @Override
+<i>92</i>&nbsp;    public Set&lt;String&gt; getChoices() {
+<b class="fc"><i>93</i>&nbsp;        return choices;</b>
+<i>94</i>&nbsp;    }
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    @Override
+<i>97</i>&nbsp;    public void setChoices(Set&lt;String&gt; choices) {
+<b class="fc"><i>98</i>&nbsp;        this.choices = choices;</b>
+<b class="fc"><i>99</i>&nbsp;    }</b>
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    @Override
+<i>102</i>&nbsp;    public String getChoice() {
+<b class="fc"><i>103</i>&nbsp;        return choice;</b>
+<i>104</i>&nbsp;    }
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    @Override
+<i>107</i>&nbsp;    public void setChoice(String choice) {
+<b class="fc"><i>108</i>&nbsp;        if (choices.contains(choice)) {</b>
+<b class="fc"><i>109</i>&nbsp;            this.choice = choice;</b>
+<b class="fc"><i>110</i>&nbsp;            this.chosen = true;</b>
+<i>111</i>&nbsp;        }
+<b class="fc"><i>112</i>&nbsp;    }</b>
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    @Override
+<i>115</i>&nbsp;    public boolean isRequired() {
+<b class="nc"><i>116</i>&nbsp;        return this.required;</b>
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    @Override
+<i>120</i>&nbsp;    public ChoiceImpl copy() {
+<b class="nc"><i>121</i>&nbsp;        return new ChoiceImpl(this);</b>
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    @Override
+<i>125</i>&nbsp;    public Map&lt;String, String&gt; getKeyChoices() {
+<b class="nc"><i>126</i>&nbsp;        return keyChoices;</b>
+<i>127</i>&nbsp;    }
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;    @Override
+<i>130</i>&nbsp;    public void setKeyChoices(Map&lt;String, String&gt; choices) {
+<b class="nc"><i>131</i>&nbsp;        keyChoices = choices;</b>
+<b class="nc"><i>132</i>&nbsp;    }</b>
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    @Override
+<i>135</i>&nbsp;    public String getChoiceKey() {
+<b class="nc"><i>136</i>&nbsp;        return choiceKey;</b>
+<i>137</i>&nbsp;    }
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;    @Override
+<i>140</i>&nbsp;    public void setChoiceByKey(String choiceKey) {
+<b class="nc"><i>141</i>&nbsp;        String choiceToSet = keyChoices.get(choiceKey);</b>
+<b class="nc"><i>142</i>&nbsp;        if (choiceToSet != null) {</b>
+<b class="nc"><i>143</i>&nbsp;            this.choice = choiceToSet;</b>
+<b class="nc"><i>144</i>&nbsp;            this.choiceKey = choiceKey;</b>
+<i>145</i>&nbsp;        }
+<b class="nc"><i>146</i>&nbsp;    }</b>
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;    @Override
+<i>149</i>&nbsp;    public boolean isKeyChoice() {
+<b class="nc"><i>150</i>&nbsp;        return !keyChoices.isEmpty();</b>
+<i>151</i>&nbsp;    }
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2016-12-08 20:34</div>
+</div>
+</body>
+</html>
