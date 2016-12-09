@@ -22,6 +22,8 @@ __Bugs__
 
 To end this assignement we searched for a bug within the project. We found an [issue with the card Jaddi Lifestrider](https://github.com/magefree/mage/issues/2469). This card is supposed to be able to select multiple cards that he/she owns to tap. However it was forcing the player to choose all cards owned, instead of allowing him/her to choose how many and which cards should be selected. The bug was fixed and it is now possible to properly choose the cards to be selected.
 
+[Jaddi Lifestrider card](https://github.com/PedroTav/mage/blob/master/Mage.Sets/src/mage/cards/j/JaddiLifestrider.java)
+
 __Team Contribution__
 
 Everyone worked together to test the project and identify bugs. We analysed testing providing statistics regarding coverage
