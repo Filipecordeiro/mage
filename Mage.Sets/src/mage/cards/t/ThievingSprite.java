@@ -66,7 +66,9 @@ public class ThievingSprite extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Thieving Sprite enters the battlefield, target player reveals X cards from his or her hand, where X is the number of Faeries you control. You choose one of those cards. That player discards that card.
+        
+        // When Thieving Sprite enters the battlefield, target player reveals X cards from his or her hand, where X is the number of Faeries you control.
+        // You choose one of those cards. That player discards that card.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ThievingSpriteEffect(), false);
         TargetPlayer target = new TargetPlayer();
         ability.addTarget(target);
@@ -88,7 +90,8 @@ class ThievingSpriteEffect extends OneShotEffect {
 
     public ThievingSpriteEffect() {
         super(Outcome.Discard);
-        this.staticText = "target player reveals X cards from his or her hand, where X is the number of Faeries you control. You choose one of those cards. That player discards that card";
+        this.staticText = "target player reveals X cards from his or her hand, where X is the number of Faeries you control. You choose one of those cards. "
+                + "That player discards that card";
     }
 
     public ThievingSpriteEffect(final ThievingSpriteEffect effect) {
@@ -127,11 +130,11 @@ class ThievingSpriteEffect extends OneShotEffect {
                         revealedCards.add(card);
                     }
                 }
-            }            
+            }
         } else {
             revealedCards.addAll(targetPlayer.getHand());
         }
-        
+
         TargetCard targetInHand = new TargetCard(Zone.HAND, new FilterCard("card to discard"));
 
         if (!revealedCards.isEmpty()) {
@@ -143,7 +146,7 @@ class ThievingSpriteEffect extends OneShotEffect {
             } else {
                 card = revealedCards.getRandom(game);
             }
-            
+
             if (card != null) {
                 targetPlayer.discard(card, source, game);
             }

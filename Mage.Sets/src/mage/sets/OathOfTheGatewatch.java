@@ -6,17 +6,15 @@
 package mage.sets;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.w.Wastes;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -33,7 +31,7 @@ public class OathOfTheGatewatch extends ExpansionSet {
     protected final List<CardInfo> savedSpecialLand = new ArrayList<>();
 
     private OathOfTheGatewatch() {
-        super("Oath of the Gatewatch", "OGW", "mage.sets.oathofthegatewatch", new GregorianCalendar(2016, 1, 22).getTime(), SetType.EXPANSION);
+        super("Oath of the Gatewatch", "OGW", ExpansionSet.buildDate(2016, 1, 22), SetType.EXPANSION);
         this.blockName = "Battle for Zendikar";
         this.parentSet = BattleForZendikar.getInstance();
         this.hasBoosters = true;
@@ -220,8 +218,8 @@ public class OathOfTheGatewatch extends ExpansionSet {
         cards.add(new SetCardInfo("Wandering Fumarole", 182, Rarity.RARE, mage.cards.w.WanderingFumarole.class));
         cards.add(new SetCardInfo("Warden of Geometries", 11, Rarity.COMMON, mage.cards.w.WardenOfGeometries.class));
         cards.add(new SetCardInfo("Warping Wail", 12, Rarity.UNCOMMON, mage.cards.w.WarpingWail.class));
-        cards.add(new SetCardInfo("Wastes", 183, Rarity.COMMON, mage.cards.w.Wastes1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Wastes", 184, Rarity.COMMON, mage.cards.w.Wastes1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Wastes", 183, Rarity.COMMON, Wastes.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Wastes", 184, Rarity.COMMON, Wastes.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Weapons Trainer", 160, Rarity.UNCOMMON, mage.cards.w.WeaponsTrainer.class));
         cards.add(new SetCardInfo("Witness the End", 82, Rarity.COMMON, mage.cards.w.WitnessTheEnd.class));
         cards.add(new SetCardInfo("World Breaker", 126, Rarity.MYTHIC, mage.cards.w.WorldBreaker.class));

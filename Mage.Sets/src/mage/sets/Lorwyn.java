@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
-import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.constants.SetType;
 
 /**
  *
@@ -49,7 +45,7 @@ public class Lorwyn extends ExpansionSet {
     }
 
     private Lorwyn() {
-        super("Lorwyn", "LRW", "mage.sets.lorwyn", new GregorianCalendar(2007, 9, 12).getTime(), SetType.EXPANSION);
+        super("Lorwyn", "LRW", ExpansionSet.buildDate(2007, 10, 12), SetType.EXPANSION);
         this.blockName = "Lorwyn";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -90,6 +86,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Brion Stoutarm", 246, Rarity.RARE, mage.cards.b.BrionStoutarm.class));
         cards.add(new SetCardInfo("Broken Ambitions", 54, Rarity.COMMON, mage.cards.b.BrokenAmbitions.class));
         cards.add(new SetCardInfo("Burrenton Forge-Tender", 7, Rarity.UNCOMMON, mage.cards.b.BurrentonForgeTender.class));
+        cards.add(new SetCardInfo("Cairn Wanderer", 105, Rarity.RARE, mage.cards.c.CairnWanderer.class));
         cards.add(new SetCardInfo("Caterwauling Boggart", 157, Rarity.COMMON, mage.cards.c.CaterwaulingBoggart.class));
         cards.add(new SetCardInfo("Ceaseless Searblades", 158, Rarity.UNCOMMON, mage.cards.c.CeaselessSearblades.class));
         cards.add(new SetCardInfo("Cenn's Heir", 8, Rarity.COMMON, mage.cards.c.CennsHeir.class));
@@ -100,6 +97,8 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudcrown Oak", 201, Rarity.COMMON, mage.cards.c.CloudcrownOak.class));
         cards.add(new SetCardInfo("Cloudgoat Ranger", 10, Rarity.UNCOMMON, mage.cards.c.CloudgoatRanger.class));
         cards.add(new SetCardInfo("Cloudthresher", 202, Rarity.RARE, mage.cards.c.Cloudthresher.class));
+        cards.add(new SetCardInfo("Colfenor's Plans", 106, Rarity.RARE, mage.cards.c.ColfenorsPlans.class));
+        cards.add(new SetCardInfo("Colfenor's Urn", 254, Rarity.RARE, mage.cards.c.ColfenorsUrn.class));
         cards.add(new SetCardInfo("Consuming Bonfire", 161, Rarity.COMMON, mage.cards.c.ConsumingBonfire.class));
         cards.add(new SetCardInfo("Crib Swap", 11, Rarity.UNCOMMON, mage.cards.c.CribSwap.class));
         cards.add(new SetCardInfo("Crush Underfoot", 162, Rarity.UNCOMMON, mage.cards.c.CrushUnderfoot.class));
@@ -208,10 +207,13 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Meadowgrain", 28, Rarity.UNCOMMON, mage.cards.k.KnightOfMeadowgrain.class));
         cards.add(new SetCardInfo("Knucklebone Witch", 120, Rarity.RARE, mage.cards.k.KnuckleboneWitch.class));
         cards.add(new SetCardInfo("Lace with Moonglove", 225, Rarity.COMMON, mage.cards.l.LaceWithMoonglove.class));
+        cards.add(new SetCardInfo("Lairwatch Giant", 29, Rarity.COMMON, mage.cards.l.LairwatchGiant.class));
+        cards.add(new SetCardInfo("Lammastide Weave", 226, Rarity.UNCOMMON, mage.cards.l.LammastideWeave.class));
         cards.add(new SetCardInfo("Lash Out", 183, Rarity.COMMON, mage.cards.l.LashOut.class));
         cards.add(new SetCardInfo("Leaf Gilder", 227, Rarity.COMMON, mage.cards.l.LeafGilder.class));
         cards.add(new SetCardInfo("Lignify", 228, Rarity.COMMON, mage.cards.l.Lignify.class));
         cards.add(new SetCardInfo("Liliana Vess", 121, Rarity.RARE, mage.cards.l.LilianaVess.class));
+        cards.add(new SetCardInfo("Lowland Oaf", 184, Rarity.COMMON, mage.cards.l.LowlandOaf.class));
         cards.add(new SetCardInfo("Lys Alana Huntmaster", 229, Rarity.COMMON, mage.cards.l.LysAlanaHuntmaster.class));
         cards.add(new SetCardInfo("Lys Alana Scarblade", 122, Rarity.UNCOMMON, mage.cards.l.LysAlanaScarblade.class));
         cards.add(new SetCardInfo("Mad Auntie", 123, Rarity.RARE, mage.cards.m.MadAuntie.class));
@@ -261,6 +263,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Profane Command", 135, Rarity.RARE, mage.cards.p.ProfaneCommand.class));
         cards.add(new SetCardInfo("Protective Bubble", 80, Rarity.COMMON, mage.cards.p.ProtectiveBubble.class));
         cards.add(new SetCardInfo("Prowess of the Fair", 136, Rarity.UNCOMMON, mage.cards.p.ProwessOfTheFair.class));
+        cards.add(new SetCardInfo("Purity", 37, Rarity.RARE, mage.cards.p.Purity.class));
         cards.add(new SetCardInfo("Quill-Slinger Boggart", 137, Rarity.COMMON, mage.cards.q.QuillSlingerBoggart.class));
         cards.add(new SetCardInfo("Rebellion of the Flamekin", 188, Rarity.UNCOMMON, mage.cards.r.RebellionOfTheFlamekin.class));
         cards.add(new SetCardInfo("Ringskipper", 81, Rarity.COMMON, mage.cards.r.Ringskipper.class));
@@ -273,6 +276,7 @@ public class Lorwyn extends ExpansionSet {
         cards.add(new SetCardInfo("Secluded Glen", 271, Rarity.RARE, mage.cards.s.SecludedGlen.class));
         cards.add(new SetCardInfo("Seedguide Ash", 235, Rarity.UNCOMMON, mage.cards.s.SeedguideAsh.class));
         cards.add(new SetCardInfo("Sentinels of Glen Elendra", 84, Rarity.COMMON, mage.cards.s.SentinelsOfGlenElendra.class));
+        cards.add(new SetCardInfo("Sentry Oak", 38, Rarity.UNCOMMON, mage.cards.s.SentryOak.class));
         cards.add(new SetCardInfo("Shapesharer", 85, Rarity.RARE, mage.cards.s.Shapesharer.class));
         cards.add(new SetCardInfo("Shelldock Isle", 272, Rarity.RARE, mage.cards.s.ShelldockIsle.class));
         cards.add(new SetCardInfo("Shields of Velis Vel", 39, Rarity.COMMON, mage.cards.s.ShieldsOfVelisVel.class));

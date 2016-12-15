@@ -3,9 +3,7 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
 
 public class Darksteel extends ExpansionSet {
 
@@ -16,7 +14,7 @@ public class Darksteel extends ExpansionSet {
     }
 
     public Darksteel() {
-        super("Darksteel", "DST", "mage.sets.darksteel", new GregorianCalendar(2004, 1, 6).getTime(), SetType.EXPANSION);
+        super("Darksteel", "DST", ExpansionSet.buildDate(2004, 1, 6), SetType.EXPANSION);
         this.blockName = "Mirrodin";
         this.parentSet = Mirrodin.getInstance();
         this.hasBasicLands = false;
@@ -46,6 +44,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Barbed Lightning", 55, Rarity.COMMON, mage.cards.b.BarbedLightning.class));
         cards.add(new SetCardInfo("Blinkmoth Nexus", 163, Rarity.RARE, mage.cards.b.BlinkmothNexus.class));
         cards.add(new SetCardInfo("Burden of Greed", 38, Rarity.COMMON, mage.cards.b.BurdenOfGreed.class));
+        cards.add(new SetCardInfo("Chimeric Egg", 106, Rarity.UNCOMMON, mage.cards.c.ChimericEgg.class));
         cards.add(new SetCardInfo("Chittering Rats", 39, Rarity.COMMON, mage.cards.c.ChitteringRats.class));
         cards.add(new SetCardInfo("Chromescale Drake", 20, Rarity.RARE, mage.cards.c.ChromescaleDrake.class));
         cards.add(new SetCardInfo("Coretapper", 107, Rarity.UNCOMMON, mage.cards.c.Coretapper.class));
@@ -139,6 +138,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Slobad, Goblin Tinkerer", 69, Rarity.RARE, mage.cards.s.SlobadGoblinTinkerer.class));
         cards.add(new SetCardInfo("Soulscour", 14, Rarity.RARE, mage.cards.s.Soulscour.class));
         cards.add(new SetCardInfo("Spawning Pit", 141, Rarity.UNCOMMON, mage.cards.s.SpawningPit.class));
+        cards.add(new SetCardInfo("Specter's Shroud", 142, Rarity.UNCOMMON, mage.cards.s.SpectersShroud.class));
         cards.add(new SetCardInfo("Spellbinder", 143, Rarity.RARE, mage.cards.s.Spellbinder.class));
         cards.add(new SetCardInfo("Spincrusher", 144, Rarity.UNCOMMON, mage.cards.s.Spincrusher.class));
         cards.add(new SetCardInfo("Spire Golem", 145, Rarity.COMMON, mage.cards.s.SpireGolem.class));
@@ -159,6 +159,7 @@ public class Darksteel extends ExpansionSet {
         cards.add(new SetCardInfo("Test of Faith", 17, Rarity.UNCOMMON, mage.cards.t.TestOfFaith.class));
         cards.add(new SetCardInfo("Thunderstaff", 153, Rarity.UNCOMMON, mage.cards.t.Thunderstaff.class));
         cards.add(new SetCardInfo("Trinisphere", 154, Rarity.RARE, mage.cards.t.Trinisphere.class));
+	cards.add(new SetCardInfo("Turn the Tables", 18, Rarity.RARE, mage.cards.t.TurnTheTables.class));
         cards.add(new SetCardInfo("Unforge", 71, Rarity.COMMON, mage.cards.u.Unforge.class));
         cards.add(new SetCardInfo("Ur-Golem's Eye", 155, Rarity.COMMON, mage.cards.u.UrGolemsEye.class));
         cards.add(new SetCardInfo("Vedalken Engineer", 35, Rarity.COMMON, mage.cards.v.VedalkenEngineer.class));

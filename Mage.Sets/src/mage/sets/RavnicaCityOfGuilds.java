@@ -31,12 +31,8 @@ package mage.sets;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
     }
 
     private RavnicaCityOfGuilds() {
-        super("Ravnica: City of Guilds", "RAV", "mage.sets.ravnica", new GregorianCalendar(2005, 9, 24).getTime(), SetType.EXPANSION);
+        super("Ravnica: City of Guilds", "RAV", ExpansionSet.buildDate(2005, 9, 24), SetType.EXPANSION);
         this.blockName = "Ravnica";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -61,6 +57,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Agrus Kos, Wojek Veteran", 190, Rarity.RARE, mage.cards.a.AgrusKosWojekVeteran.class));
         cards.add(new SetCardInfo("Autochthon Wurm", 191, Rarity.RARE, mage.cards.a.AutochthonWurm.class));
         cards.add(new SetCardInfo("Barbarian Riftcutter", 114, Rarity.COMMON, mage.cards.b.BarbarianRiftcutter.class));
+        cards.add(new SetCardInfo("Bathe in Light", 2, Rarity.UNCOMMON, mage.cards.b.BatheInLight.class));
         cards.add(new SetCardInfo("Belltower Sphinx", 38, Rarity.UNCOMMON, mage.cards.b.BelltowerSphinx.class));
         cards.add(new SetCardInfo("Benevolent Ancestor", 3, Rarity.COMMON, mage.cards.b.BenevolentAncestor.class));
         cards.add(new SetCardInfo("Birds of Paradise", 153, Rarity.RARE, mage.cards.b.BirdsOfParadise.class));
@@ -134,6 +131,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Eye of the Storm", 48, Rarity.RARE, mage.cards.e.EyeOfTheStorm.class));
         cards.add(new SetCardInfo("Faith's Fetters", 16, Rarity.COMMON, mage.cards.f.FaithsFetters.class));
         cards.add(new SetCardInfo("Farseek", 163, Rarity.COMMON, mage.cards.f.Farseek.class));
+	cards.add(new SetCardInfo("Festival of the Guildpact", 17, Rarity.UNCOMMON, mage.cards.f.FestivalOfTheGuildpact.class));
         cards.add(new SetCardInfo("Fiery Conclusion", 122, Rarity.COMMON, mage.cards.f.FieryConclusion.class));
         cards.add(new SetCardInfo("Firemane Angel", 205, Rarity.RARE, mage.cards.f.FiremaneAngel.class));
         cards.add(new SetCardInfo("Fists of Ironwood", 164, Rarity.COMMON, mage.cards.f.FistsOfIronwood.class));
@@ -182,6 +180,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Hunted Lammasu", 22, Rarity.RARE, mage.cards.h.HuntedLammasu.class));
         cards.add(new SetCardInfo("Hunted Phantasm", 55, Rarity.RARE, mage.cards.h.HuntedPhantasm.class));
         cards.add(new SetCardInfo("Hunted Troll", 170, Rarity.RARE, mage.cards.h.HuntedTroll.class));
+        cards.add(new SetCardInfo("Incite Hysteria", 132, Rarity.COMMON, mage.cards.i.InciteHysteria.class));
         cards.add(new SetCardInfo("Induce Paranoia", 56, Rarity.COMMON, mage.cards.i.InduceParanoia.class));
         cards.add(new SetCardInfo("Infectious Host", 91, Rarity.COMMON, mage.cards.i.InfectiousHost.class));
         cards.add(new SetCardInfo("Island", 291, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
@@ -285,6 +284,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Sunhome Enforcer", 233, Rarity.UNCOMMON, mage.cards.s.SunhomeEnforcer.class));
         cards.add(new SetCardInfo("Sunhome, Fortress of the Legion", 282, Rarity.UNCOMMON, mage.cards.s.SunhomeFortressOfTheLegion.class));
         cards.add(new SetCardInfo("Suppression Field", 31, Rarity.UNCOMMON, mage.cards.s.SuppressionField.class));
+        cards.add(new SetCardInfo("Surge of Zeal", 146, Rarity.COMMON, mage.cards.s.SurgeOfZeal.class));
         cards.add(new SetCardInfo("Surveilling Sprite", 67, Rarity.COMMON, mage.cards.s.SurveillingSprite.class));
         cards.add(new SetCardInfo("Svogthos, the Restless Tomb", 283, Rarity.UNCOMMON, mage.cards.s.SvogthosTheRestlessTomb.class));
         cards.add(new SetCardInfo("Swamp", 295, Rarity.LAND, mage.cards.basiclands.Swamp.class, new CardGraphicInfo(null, true)));
@@ -325,7 +325,9 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
         cards.add(new SetCardInfo("Watchwolf", 239, Rarity.UNCOMMON, mage.cards.w.Watchwolf.class));
         cards.add(new SetCardInfo("Watery Grave", 286, Rarity.RARE, mage.cards.w.WateryGrave.class));
         cards.add(new SetCardInfo("Wizened Snitches", 75, Rarity.UNCOMMON, mage.cards.w.WizenedSnitches.class));
+        cards.add(new SetCardInfo("Wojek Apothecary", 36, Rarity.UNCOMMON, mage.cards.w.WojekApothecary.class));
         cards.add(new SetCardInfo("Wojek Embermage", 152, Rarity.UNCOMMON, mage.cards.w.WojekEmbermage.class));
+        cards.add(new SetCardInfo("Wojek Siren", 37, Rarity.COMMON, mage.cards.w.WojekSiren.class));
         cards.add(new SetCardInfo("Woodwraith Strangler", 241, Rarity.COMMON, mage.cards.w.WoodwraithStrangler.class));
     }
 }

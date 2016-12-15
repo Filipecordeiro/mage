@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -51,7 +47,7 @@ public class Commander extends ExpansionSet {
     }
 
     private Commander() {
-        super("Commander", "CMD", "mage.sets.commander", new GregorianCalendar(2011, 6, 17).getTime(), SetType.SUPPLEMENTAL);
+        super("Commander", "CMD", ExpansionSet.buildDate(2011, 6, 17), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Acidic Slime", 140, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Acorn Catapult", 241, Rarity.RARE, mage.cards.a.AcornCatapult.class));
@@ -82,6 +78,7 @@ public class Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Baloth Woodcrasher", 143, Rarity.UNCOMMON, mage.cards.b.BalothWoodcrasher.class));
         cards.add(new SetCardInfo("Barren Moor", 266, Rarity.COMMON, mage.cards.b.BarrenMoor.class));
         cards.add(new SetCardInfo("Basandra, Battle Seraph", 184, Rarity.RARE, mage.cards.b.BasandraBattleSeraph.class));
+        cards.add(new SetCardInfo("Bathe in Light", 9, Rarity.UNCOMMON, mage.cards.b.BatheInLight.class));
         cards.add(new SetCardInfo("Bestial Menace", 144, Rarity.UNCOMMON, mage.cards.b.BestialMenace.class));
         cards.add(new SetCardInfo("Bladewing the Risen", 185, Rarity.RARE, mage.cards.b.BladewingTheRisen.class));
         cards.add(new SetCardInfo("Bojuka Bog", 267, Rarity.COMMON, mage.cards.b.BojukaBog.class));
@@ -271,6 +268,7 @@ public class Commander extends ExpansionSet {
         cards.add(new SetCardInfo("Relic Crush", 168, Rarity.COMMON, mage.cards.r.RelicCrush.class));
         cards.add(new SetCardInfo("Repulse", 58, Rarity.COMMON, mage.cards.r.Repulse.class));
         cards.add(new SetCardInfo("Return to Dust", 28, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
+	cards.add(new SetCardInfo("Riddlekeeper", 59, Rarity.RARE, mage.cards.r.Riddlekeeper.class));
         cards.add(new SetCardInfo("Righteous Cause", 29, Rarity.UNCOMMON, mage.cards.r.RighteousCause.class));
         cards.add(new SetCardInfo("Riku of Two Reflections", 220, Rarity.MYTHIC, mage.cards.r.RikuOfTwoReflections.class));
         cards.add(new SetCardInfo("Rise from the Grave", 96, Rarity.UNCOMMON, mage.cards.r.RiseFromTheGrave.class));

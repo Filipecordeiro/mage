@@ -27,15 +27,17 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
+import mage.cards.a.ArmyOfAllah;
+import mage.cards.f.FishliverOil;
+import mage.cards.n.NafsAsp;
+import mage.cards.o.Oubliette;
+import mage.cards.p.Piety;
+import mage.cards.r.RukhEgg;
+import mage.cards.s.StoneThrowingDevils;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +52,7 @@ public class ArabianNights extends ExpansionSet {
     }
 
     private ArabianNights() {
-        super("Arabian Nights", "ARN", "mage.sets.arabiannights", new GregorianCalendar(1993, 11, 1).getTime(), SetType.EXPANSION);
+        super("Arabian Nights", "ARN", ExpansionSet.buildDate(1993, 11, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
@@ -64,8 +66,8 @@ public class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Aladdin's Ring", 71, Rarity.RARE, mage.cards.a.AladdinsRing.class));
         cards.add(new SetCardInfo("Ali Baba", 43, Rarity.UNCOMMON, mage.cards.a.AliBaba.class));
         cards.add(new SetCardInfo("Ali from Cairo", 44, Rarity.RARE, mage.cards.a.AliFromCairo.class));
-        cards.add(new SetCardInfo("Army of Allah", 56, Rarity.COMMON, mage.cards.a.ArmyOfAllah1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Army of Allah", 57, Rarity.COMMON, mage.cards.a.ArmyOfAllah1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Army of Allah", 56, Rarity.COMMON, ArmyOfAllah.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Army of Allah", 57, Rarity.COMMON, ArmyOfAllah.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Bazaar of Baghdad", 84, Rarity.UNCOMMON, mage.cards.b.BazaarOfBaghdad.class));
         cards.add(new SetCardInfo("Bird Maiden", 45, Rarity.COMMON, mage.cards.b.BirdMaiden.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Bird Maiden", 46, Rarity.COMMON, mage.cards.b.BirdMaiden.class, new CardGraphicInfo(null, true)));
@@ -89,8 +91,8 @@ public class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Erg Raiders", 4, Rarity.COMMON, mage.cards.e.ErgRaiders.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Erhnam Djinn", 32, Rarity.RARE, mage.cards.e.ErhnamDjinn.class));
         cards.add(new SetCardInfo("Eye for an Eye", 59, Rarity.UNCOMMON, mage.cards.e.EyeForAnEye.class));
-        cards.add(new SetCardInfo("Fishliver Oil", 17, Rarity.COMMON, mage.cards.f.FishliverOil1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Fishliver Oil", 18, Rarity.COMMON, mage.cards.f.FishliverOil1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Fishliver Oil", 17, Rarity.COMMON, FishliverOil.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Fishliver Oil", 18, Rarity.COMMON, FishliverOil.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Flying Carpet", 77, Rarity.UNCOMMON, mage.cards.f.FlyingCarpet.class));
         cards.add(new SetCardInfo("Flying Men", 19, Rarity.COMMON, mage.cards.f.FlyingMen.class));
         cards.add(new SetCardInfo("Ghazban Ogre", 33, Rarity.COMMON, mage.cards.g.GhazbanOgre.class));
@@ -119,18 +121,18 @@ public class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Moorish Cavalry", 62, Rarity.COMMON, mage.cards.m.MoorishCavalry.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Moorish Cavalry", 63, Rarity.COMMON, mage.cards.m.MoorishCavalry.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 91, Rarity.COMMON, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Nafs Asp", 36, Rarity.COMMON, mage.cards.n.NafsAsp1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Nafs Asp", 37, Rarity.COMMON, mage.cards.n.NafsAsp1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Nafs Asp", 36, Rarity.COMMON, NafsAsp.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Nafs Asp", 37, Rarity.COMMON, NafsAsp.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Oasis", 92, Rarity.UNCOMMON, mage.cards.o.Oasis.class));
         cards.add(new SetCardInfo("Old Man of the Sea", 24, Rarity.RARE, mage.cards.o.OldManOfTheSea.class));
-        cards.add(new SetCardInfo("Oubliette", 11, Rarity.COMMON, mage.cards.o.Oubliette1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Oubliette", 12, Rarity.COMMON, mage.cards.o.Oubliette1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Piety", 64, Rarity.COMMON, mage.cards.p.Piety1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Piety", 65, Rarity.COMMON, mage.cards.p.Piety1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Oubliette", 11, Rarity.COMMON, Oubliette.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Oubliette", 12, Rarity.COMMON, Oubliette.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Piety", 64, Rarity.COMMON, Piety.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Piety", 65, Rarity.COMMON, Piety.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Pyramids", 81, Rarity.RARE, mage.cards.p.Pyramids.class));
         cards.add(new SetCardInfo("Repentant Blacksmith", 66, Rarity.RARE, mage.cards.r.RepentantBlacksmith.class));
-        cards.add(new SetCardInfo("Rukh Egg", 52, Rarity.COMMON, mage.cards.r.RukhEgg1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Rukh Egg", 53, Rarity.COMMON, mage.cards.r.RukhEgg1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Rukh Egg", 52, Rarity.COMMON, RukhEgg.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Rukh Egg", 53, Rarity.COMMON, RukhEgg.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Sandals of Abdallah", 83, Rarity.UNCOMMON, mage.cards.s.SandalsOfAbdallah.class));
         cards.add(new SetCardInfo("Sandstorm", 38, Rarity.COMMON, mage.cards.s.Sandstorm.class));
         cards.add(new SetCardInfo("Serendib Djinn", 25, Rarity.RARE, mage.cards.s.SerendibDjinn.class));
@@ -138,8 +140,8 @@ public class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Sindbad", 27, Rarity.UNCOMMON, mage.cards.s.Sindbad.class));
         cards.add(new SetCardInfo("Singing Tree", 39, Rarity.RARE, mage.cards.s.SingingTree.class));
         cards.add(new SetCardInfo("Sorceress Queen", 13, Rarity.UNCOMMON, mage.cards.s.SorceressQueen.class));
-        cards.add(new SetCardInfo("Stone-Throwing Devils", 14, Rarity.COMMON, mage.cards.s.StoneThrowingDevils1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Stone-Throwing Devils", 15, Rarity.COMMON, mage.cards.s.StoneThrowingDevils1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Stone-Throwing Devils", 14, Rarity.COMMON, StoneThrowingDevils.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Stone-Throwing Devils", 15, Rarity.COMMON, StoneThrowingDevils.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Unstable Mutation", 28, Rarity.COMMON, mage.cards.u.UnstableMutation.class));
         cards.add(new SetCardInfo("Wyluli Wolf", 40, Rarity.COMMON, mage.cards.w.WyluliWolf.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Wyluli Wolf", 41, Rarity.COMMON, mage.cards.w.WyluliWolf.class, new CardGraphicInfo(null, true)));

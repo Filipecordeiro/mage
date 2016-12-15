@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Legends extends ExpansionSet {
     }
 
     private Legends() {
-        super("Legends", "LEG", "mage.sets.legends", new GregorianCalendar(1994, 5, 1).getTime(), SetType.EXPANSION);
+        super("Legends", "LEG", ExpansionSet.buildDate(1994, 6, 1), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -102,6 +99,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Durkwood Boars", 96, Rarity.COMMON, mage.cards.d.DurkwoodBoars.class));
         cards.add(new SetCardInfo("Dwarven Song", 141, Rarity.UNCOMMON, mage.cards.d.DwarvenSong.class));
         cards.add(new SetCardInfo("Elven Riders", 97, Rarity.RARE, mage.cards.e.ElvenRiders.class));
+        cards.add(new SetCardInfo("Emerald Dragonfly", 98, Rarity.COMMON, mage.cards.e.EmeraldDragonfly.class));
         cards.add(new SetCardInfo("Energy Tap", 54, Rarity.COMMON, mage.cards.e.EnergyTap.class));
         cards.add(new SetCardInfo("Eternal Warrior", 142, Rarity.UNCOMMON, mage.cards.e.EternalWarrior.class));
         cards.add(new SetCardInfo("Eureka", 99, Rarity.RARE, mage.cards.e.Eureka.class));
@@ -117,6 +115,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Ghosts of the Damned", 12, Rarity.COMMON, mage.cards.g.GhostsOfTheDamned.class));
         cards.add(new SetCardInfo("Giant Strength", 147, Rarity.COMMON, mage.cards.g.GiantStrength.class));
         cards.add(new SetCardInfo("Gravity Sphere", 149, Rarity.RARE, mage.cards.g.GravitySphere.class));
+        cards.add(new SetCardInfo("Great Defender", 185, Rarity.UNCOMMON, mage.cards.g.GreatDefender.class));
         cards.add(new SetCardInfo("Greed", 15, Rarity.RARE, mage.cards.g.Greed.class));
         cards.add(new SetCardInfo("Gwendlyn Di Corci", 268, Rarity.RARE, mage.cards.g.GwendlynDiCorci.class));
         cards.add(new SetCardInfo("Hazezon Tamar", 270, Rarity.RARE, mage.cards.h.HazezonTamar.class));
@@ -193,7 +192,7 @@ public class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Ring of Immortals", 238, Rarity.RARE, mage.cards.r.RingOfImmortals.class));
         cards.add(new SetCardInfo("Riven Turnbull", 294, Rarity.UNCOMMON, mage.cards.r.RivenTurnbull.class));
         cards.add(new SetCardInfo("Rubinia Soulsinger", 296, Rarity.RARE, mage.cards.r.RubiniaSoulsinger.class));
-        cards.add(new SetCardInfo("Sea King's Blessing", 75, Rarity.UNCOMMON, mage.cards.s.SeaKingsBlessing.class));
+        cards.add(new SetCardInfo("Sea Kings' Blessing", 75, Rarity.UNCOMMON, mage.cards.s.SeaKingsBlessing.class));
         cards.add(new SetCardInfo("Segovian Leviathan", 76, Rarity.UNCOMMON, mage.cards.s.SegovianLeviathan.class));
         cards.add(new SetCardInfo("Sentinel", 239, Rarity.RARE, mage.cards.s.Sentinel.class));
         cards.add(new SetCardInfo("Serpent Generator", 240, Rarity.RARE, mage.cards.s.SerpentGenerator.class));

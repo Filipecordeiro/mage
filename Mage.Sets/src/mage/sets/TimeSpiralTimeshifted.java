@@ -27,11 +27,11 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
+import mage.cards.i.IcatianJavelineers;
+import mage.cards.s.SwampMosquito;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +46,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
     }
 
     private TimeSpiralTimeshifted() {
-        super("Time Spiral \"Timeshifted\"", "TSB", "mage.sets.timeshifted", new GregorianCalendar(2006, 9, 9).getTime(), SetType.EXPANSION);
+        super("Time Spiral \"Timeshifted\"", "TSB", ExpansionSet.buildDate(2006, 9, 9), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;
@@ -63,6 +63,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Claws of Gix", 107, Rarity.COMMON, mage.cards.c.ClawsOfGix.class));
         cards.add(new SetCardInfo("Coalition Victory", 91, Rarity.RARE, mage.cards.c.CoalitionVictory.class));
         cards.add(new SetCardInfo("Cockatrice", 75, Rarity.SPECIAL, mage.cards.c.Cockatrice.class));
+        cards.add(new SetCardInfo("Consecrate Land", 4, Rarity.SPECIAL, mage.cards.c.ConsecrateLand.class));
         cards.add(new SetCardInfo("Conspiracy", 39, Rarity.SPECIAL, mage.cards.c.Conspiracy.class));
         cards.add(new SetCardInfo("Craw Giant", 76, Rarity.SPECIAL, mage.cards.c.CrawGiant.class));
         cards.add(new SetCardInfo("Dandan", 19, Rarity.SPECIAL, mage.cards.d.Dandan.class));
@@ -87,12 +88,13 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Flying Men", 20, Rarity.COMMON, mage.cards.f.FlyingMen.class));
         cards.add(new SetCardInfo("Funeral Charm", 44, Rarity.COMMON, mage.cards.f.FuneralCharm.class));
         cards.add(new SetCardInfo("Gaea's Blessing", 77, Rarity.SPECIAL, mage.cards.g.GaeasBlessing.class));
+        cards.add(new SetCardInfo("Gaea's Liege", 78, Rarity.SPECIAL, mage.cards.g.GaeasLiege.class));
         cards.add(new SetCardInfo("Gemstone Mine", 119, Rarity.RARE, mage.cards.g.GemstoneMine.class));
         cards.add(new SetCardInfo("Ghost Ship", 21, Rarity.SPECIAL, mage.cards.g.GhostShip.class));
         cards.add(new SetCardInfo("Goblin Snowman", 64, Rarity.UNCOMMON, mage.cards.g.GoblinSnowman.class));
         cards.add(new SetCardInfo("Grinning Totem", 110, Rarity.SPECIAL, mage.cards.g.GrinningTotem.class));
         cards.add(new SetCardInfo("Hunting Moa", 80, Rarity.COMMON, mage.cards.h.HuntingMoa.class));
-        cards.add(new SetCardInfo("Icatian Javelineers", 10, Rarity.SPECIAL, mage.cards.i.IcatianJavelineers1.class));
+        cards.add(new SetCardInfo("Icatian Javelineers", 10, Rarity.SPECIAL, IcatianJavelineers.class));
         cards.add(new SetCardInfo("Jasmine Boreal", 93, Rarity.COMMON, mage.cards.j.JasmineBoreal.class));
         cards.add(new SetCardInfo("Jolrael, Empress of Beasts", 81, Rarity.SPECIAL, mage.cards.j.JolraelEmpressOfBeasts.class));
         cards.add(new SetCardInfo("Kobold Taskmaster", 65, Rarity.SPECIAL, mage.cards.k.KoboldTaskmaster.class));
@@ -133,7 +135,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
         cards.add(new SetCardInfo("Stormscape Familiar", 32, Rarity.COMMON, mage.cards.s.StormscapeFamiliar.class));
         cards.add(new SetCardInfo("Stupor", 48, Rarity.COMMON, mage.cards.s.Stupor.class));
         cards.add(new SetCardInfo("Suq'Ata Lancer", 69, Rarity.COMMON, mage.cards.s.SuqAtaLancer.class));
-        cards.add(new SetCardInfo("Swamp Mosquito", 49, Rarity.SPECIAL, mage.cards.s.SwampMosquito1.class));
+        cards.add(new SetCardInfo("Swamp Mosquito", 49, Rarity.SPECIAL, SwampMosquito.class));
         cards.add(new SetCardInfo("Teferi's Moat", 103, Rarity.SPECIAL, mage.cards.t.TeferisMoat.class));
         cards.add(new SetCardInfo("Thallid", 86, Rarity.COMMON, mage.cards.t.Thallid.class));
         cards.add(new SetCardInfo("The Rack", 113, Rarity.SPECIAL, mage.cards.t.TheRack.class));

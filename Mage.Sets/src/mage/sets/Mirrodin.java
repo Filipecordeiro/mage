@@ -3,12 +3,8 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class Mirrodin extends ExpansionSet {
     private static final Mirrodin fINSTANCE = new Mirrodin();
@@ -18,7 +14,7 @@ public class Mirrodin extends ExpansionSet {
     }
 
     private Mirrodin() {
-        super("Mirrodin", "MRD", "mage.sets.mirrodin", new GregorianCalendar(2003, 9, 2).getTime(), SetType.EXPANSION);
+        super("Mirrodin", "MRD", ExpansionSet.buildDate(2003, 9, 2), SetType.EXPANSION);
         this.blockName = "Mirrodin";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -119,6 +115,7 @@ public class Mirrodin extends ExpansionSet {
         cards.add(new SetCardInfo("Groffskithur", 121, Rarity.COMMON, mage.cards.g.Groffskithur.class));
         cards.add(new SetCardInfo("Heartwood Shard", 184, Rarity.UNCOMMON, mage.cards.h.HeartwoodShard.class));
         cards.add(new SetCardInfo("Hematite Golem", 185, Rarity.COMMON, mage.cards.h.HematiteGolem.class));
+        cards.add(new SetCardInfo("Hum of the Radix", 122, Rarity.RARE, mage.cards.h.HumOfTheRadix.class));
         cards.add(new SetCardInfo("Icy Manipulator", 186, Rarity.UNCOMMON, mage.cards.i.IcyManipulator.class));
         cards.add(new SetCardInfo("Incite War", 96, Rarity.COMMON, mage.cards.i.InciteWar.class));
         cards.add(new SetCardInfo("Inertia Bubble", 37, Rarity.COMMON, mage.cards.i.InertiaBubble.class));

@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Stronghold extends ExpansionSet {
     }
 
     private Stronghold() {
-        super("Stronghold", "STH", "mage.sets.stronghold", new GregorianCalendar(1998, 1, 21).getTime(), SetType.EXPANSION);
+        super("Stronghold", "STH", ExpansionSet.buildDate(1998, 3, 2), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.parentSet = Tempest.getInstance();
         this.hasBasicLands = false;
@@ -124,6 +121,7 @@ public class Stronghold extends ExpansionSet {
         cards.add(new SetCardInfo("Mogg Infestation", 93, Rarity.RARE, mage.cards.m.MoggInfestation.class));
         cards.add(new SetCardInfo("Mogg Maniac", 94, Rarity.UNCOMMON, mage.cards.m.MoggManiac.class));
         cards.add(new SetCardInfo("Morgue Thrull", 15, Rarity.COMMON, mage.cards.m.MorgueThrull.class));
+        cards.add(new SetCardInfo("Mortuary", 16, Rarity.RARE, mage.cards.m.Mortuary.class));
         cards.add(new SetCardInfo("Mox Diamond", 132, Rarity.RARE, mage.cards.m.MoxDiamond.class));
         cards.add(new SetCardInfo("Mulch", 60, Rarity.COMMON, mage.cards.m.Mulch.class));
         cards.add(new SetCardInfo("Nomads en-Kor", 109, Rarity.COMMON, mage.cards.n.NomadsEnKor.class));

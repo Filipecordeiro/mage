@@ -31,10 +31,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumMap;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
-
-import mage.ObjectColor;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -46,12 +45,13 @@ import mage.util.RandomUtil;
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
+
     public class SetCardInfo implements Serializable {
+
         private final String name;
         private final String cardNumber;
         private final Rarity rarity;
         private final Class<?> cardClass;
-        private final boolean usesVariousArt;
         private final CardGraphicInfo graphicInfo;
 
         public SetCardInfo(String name, int cardNumber, Rarity rarity, Class<?> cardClass) {
@@ -71,21 +71,28 @@ public abstract class ExpansionSet implements Serializable {
             this.cardNumber = cardNumber;
             this.rarity = rarity;
             this.cardClass = cardClass;
-            this.usesVariousArt = false;
             this.graphicInfo = graphicInfo;
         }
 
-        public String getName() { return this.name; }
+        public String getName() {
+            return this.name;
+        }
 
-        public String getCardNumber() { return this.cardNumber; }
+        public String getCardNumber() {
+            return this.cardNumber;
+        }
 
-        public Rarity getRarity() { return this.rarity; }
+        public Rarity getRarity() {
+            return this.rarity;
+        }
 
-        public Class<?> getCardClass() { return this.cardClass; }
+        public Class<?> getCardClass() {
+            return this.cardClass;
+        }
 
-        public boolean getUsesVariousArt() { return this.usesVariousArt; }
-
-        public CardGraphicInfo getGraphicInfo() { return this.graphicInfo; }
+        public CardGraphicInfo getGraphicInfo() {
+            return this.graphicInfo;
+        }
     }
 
     protected final List<SetCardInfo> cards = new ArrayList<>();
@@ -110,17 +117,15 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
     protected int ratioBoosterMythic;
 
-    protected String packageName;
-    protected int maxCardNumberInBooster; // used to ommit cards with collector numbers beyond the regular cards in a set for boosters
+    protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
 
     protected final EnumMap<Rarity, List<CardInfo>> savedCards;
 
-    public ExpansionSet(String name, String code, String packageName, Date releaseDate, SetType setType) {
+    public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
         this.name = name;
         this.code = code;
         this.releaseDate = releaseDate;
         this.setType = setType;
-        this.packageName = packageName;
         this.maxCardNumberInBooster = Integer.MAX_VALUE;
         savedCards = new EnumMap<>(Rarity.class);
     }
@@ -145,15 +150,13 @@ public abstract class ExpansionSet implements Serializable {
         return setType;
     }
 
-    public String getPackageName() {
-        return packageName;
-    }
-
     public String getBlockName() {
         return blockName;
     }
 
-    public List<SetCardInfo> getSetCardInfo() { return cards; }
+    public List<SetCardInfo> getSetCardInfo() {
+        return cards;
+    }
 
     @Override
     public String toString() {
@@ -180,8 +183,11 @@ public abstract class ExpansionSet implements Serializable {
 
         if (15 > theBooster.size()) {
             List<CardInfo> commons = getCardsByRarity(Rarity.COMMON);
-            while (15 > theBooster.size()) {
+            while (15 > theBooster.size() && !commons.isEmpty()) {
                 addToBooster(theBooster, commons);
+                if (commons.isEmpty()) {
+                    commons = getCardsByRarity(Rarity.COMMON);
+                }
             }
         }
 
@@ -278,6 +284,11 @@ public abstract class ExpansionSet implements Serializable {
             List<CardInfo> doubleFacedCards = CardRepository.instance.findCards(criteria);
             addToBooster(booster, doubleFacedCards);
         }
+    }
+
+    public static Date buildDate(int year, int month, int day) {
+        // The month starts with 0 = jan ... dec = 11
+        return new GregorianCalendar(year, month - 1, day).getTime();
     }
 
     /**

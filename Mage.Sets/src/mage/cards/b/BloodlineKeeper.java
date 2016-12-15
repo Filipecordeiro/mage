@@ -62,7 +62,7 @@ public class BloodlineKeeper extends CardImpl {
     }
 
     public BloodlineKeeper(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.subtype.add("Vampire");
 
         this.power = new MageInt(3);
@@ -72,7 +72,7 @@ public class BloodlineKeeper extends CardImpl {
         this.secondSideCardClazz = LordOfLineage.class;
 
         this.addAbility(FlyingAbility.getInstance());
-        // {T}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
+        // {T}: Create a 2/2 black Vampire creature token with flying.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
         // {B}: Transform Bloodline Keeper. Activate this ability only if you control five or more Vampires.
         this.addAbility(new TransformAbility());
@@ -92,15 +92,16 @@ public class BloodlineKeeper extends CardImpl {
         return new BloodlineKeeper(this);
     }
 
-    class VampireToken extends Token {
-        VampireToken() {
-            super("Vampire", "a 2/2 black Vampire creature token with flying");
-            cardType.add(CardType.CREATURE);
-            color.setBlack(true);
-            subtype.add("Vampire");
-            power = new MageInt(2);
-            toughness = new MageInt(2);
-            addAbility(FlyingAbility.getInstance());
-        }
+}
+
+class VampireToken extends Token {
+    VampireToken() {
+        super("Vampire", "2/2 black Vampire creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color.setBlack(true);
+        subtype.add("Vampire");
+        power = new MageInt(2);
+        toughness = new MageInt(2);
+        addAbility(FlyingAbility.getInstance());
     }
 }

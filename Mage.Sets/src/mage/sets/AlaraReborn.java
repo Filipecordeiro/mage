@@ -24,15 +24,12 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -47,7 +44,7 @@ public class AlaraReborn extends ExpansionSet {
     }
 
     private AlaraReborn() {
-        super("Alara Reborn", "ARB", "mage.sets.alarareborn", new GregorianCalendar(2009, 3, 25).getTime(), SetType.EXPANSION);
+        super("Alara Reborn", "ARB", ExpansionSet.buildDate(2009, 3, 25), SetType.EXPANSION);
         this.blockName = "Shards of Alara";
         this.parentSet = ShardsOfAlara.getInstance();
         this.hasBasicLands = false;

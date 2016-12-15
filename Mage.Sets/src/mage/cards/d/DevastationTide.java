@@ -27,23 +27,14 @@
  */
 package mage.cards.d;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.keyword.MiracleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -52,10 +43,10 @@ import mage.players.Player;
 public class DevastationTide extends CardImpl {
 
     public DevastationTide(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{U}{U}");
 
         // Return all nonland permanents to their owners' hands.
-        this.getSpellAbility().addEffect(new DevastationTideEffect());
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent("nonland permanents")));
 
         // Miracle {1}{U}
         this.addAbility(new MiracleAbility(this, new ManaCostsImpl("{1}{U}")));
@@ -69,37 +60,4 @@ public class DevastationTide extends CardImpl {
     public DevastationTide copy() {
         return new DevastationTide(this);
     }
-}
-
-class DevastationTideEffect extends OneShotEffect {
-
-    public DevastationTideEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Return all nonland permanents to their owners' hands";
-    }
-
-    public DevastationTideEffect(final DevastationTideEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Set<Card> cardsToHand = new LinkedHashSet<>();
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-                cardsToHand.add((Card) permanent);
-            }
-            controller.moveCards(cardsToHand, Zone.HAND, source, game);
-            return true;
-
-        }
-        return false;
-    }
-
-    @Override
-    public DevastationTideEffect copy() {
-        return new DevastationTideEffect(this);
-    }
-
 }

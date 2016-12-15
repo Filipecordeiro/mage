@@ -39,8 +39,6 @@ import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -59,7 +57,7 @@ public class HuntedHorror extends CardImpl {
         this.toughness = new MageInt(7);
 
         this.addAbility(TrampleAbility.getInstance());
-        // When Hunted Horror enters the battlefield, put two 3/3 green Centaur creature tokens with protection from black onto the battlefield under target opponent's control.
+        // When Hunted Horror enters the battlefield, create two 3/3 green Centaur creature tokens with protection from black under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new CentaurToken(), 2), false);
         Target target = new TargetOpponent();
         ability.addTarget(target);
@@ -77,13 +75,6 @@ public class HuntedHorror extends CardImpl {
 }
 
 class CentaurToken extends Token {
-
-    private static final FilterCard filter = new FilterCard("black");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-    }
-
     CentaurToken() {
         super("Centaur", "3/3 green Centaur creature tokens with protection from black");
         cardType.add(CardType.CREATURE);
@@ -91,7 +82,7 @@ class CentaurToken extends Token {
         subtype.add("Centaur");
         power = new MageInt(3);
         toughness = new MageInt(3);
-        this.addAbility(new ProtectionAbility(filter));
+        this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
     }
 }
 

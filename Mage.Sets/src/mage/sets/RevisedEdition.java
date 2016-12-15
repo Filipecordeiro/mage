@@ -1,14 +1,9 @@
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -23,7 +18,7 @@ public class RevisedEdition extends ExpansionSet {
     }
 
     private RevisedEdition() {
-        super("Revised Edition", "3ED", "mage.sets.revisededition", new GregorianCalendar(1994, 3, 1).getTime(), SetType.CORE);
+        super("Revised Edition", "3ED", ExpansionSet.buildDate(1994, 3, 1), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
@@ -33,6 +28,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Air Elemental", 47, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Aladdin's Lamp", 231, Rarity.RARE, mage.cards.a.AladdinsLamp.class));
         cards.add(new SetCardInfo("Aladdin's Ring", 232, Rarity.RARE, mage.cards.a.AladdinsRing.class));
+        cards.add(new SetCardInfo("Animate Artifact", 48, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));
         cards.add(new SetCardInfo("Animate Dead", 1, Rarity.UNCOMMON, mage.cards.a.AnimateDead.class));
         cards.add(new SetCardInfo("Animate Wall", 185, Rarity.RARE, mage.cards.a.AnimateWall.class));
         cards.add(new SetCardInfo("Ankh of Mishra", 233, Rarity.RARE, mage.cards.a.AnkhOfMishra.class));
@@ -75,6 +71,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Copy Artifact", 53, Rarity.RARE, mage.cards.c.CopyArtifact.class));
         cards.add(new SetCardInfo("Counterspell", 54, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Craw Wurm", 97, Rarity.COMMON, mage.cards.c.CrawWurm.class));
+        cards.add(new SetCardInfo("Creature Bond", 55, Rarity.COMMON, mage.cards.c.CreatureBond.class));
         cards.add(new SetCardInfo("Crumble", 98, Rarity.UNCOMMON, mage.cards.c.Crumble.class));
         cards.add(new SetCardInfo("Crusade", 199, Rarity.RARE, mage.cards.c.Crusade.class));
         cards.add(new SetCardInfo("Crystal Rod", 242, Rarity.UNCOMMON, mage.cards.c.CrystalRod.class));
@@ -125,6 +122,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Fork", 152, Rarity.RARE, mage.cards.f.Fork.class));
         cards.add(new SetCardInfo("Frozen Shade", 20, Rarity.COMMON, mage.cards.f.FrozenShade.class));
         cards.add(new SetCardInfo("Fungusaur", 104, Rarity.RARE, mage.cards.f.Fungusaur.class));
+        cards.add(new SetCardInfo("Gaea's Liege", 105, Rarity.RARE, mage.cards.g.GaeasLiege.class));
         cards.add(new SetCardInfo("Giant Growth", 106, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Giant Spider", 107, Rarity.COMMON, mage.cards.g.GiantSpider.class));
         cards.add(new SetCardInfo("Glasses of Urza", 249, Rarity.UNCOMMON, mage.cards.g.GlassesOfUrza.class));
@@ -195,6 +193,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 291, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Mountain", 292, Rarity.LAND, mage.cards.basiclands.Mountain.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Nether Shadow", 26, Rarity.RARE, mage.cards.n.NetherShadow.class));
+        cards.add(new SetCardInfo("Nettling Imp", 27, Rarity.UNCOMMON, mage.cards.n.NettlingImp.class));
         cards.add(new SetCardInfo("Nevinyrral's Disk", 267, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("Nightmare", 28, Rarity.RARE, mage.cards.n.Nightmare.class));
         cards.add(new SetCardInfo("Northern Paladin", 213, Rarity.RARE, mage.cards.n.NorthernPaladin.class));
@@ -205,6 +204,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Ornithopter", 270, Rarity.UNCOMMON, mage.cards.o.Ornithopter.class));
         cards.add(new SetCardInfo("Paralyze", 29, Rarity.COMMON, mage.cards.p.Paralyze.class));
         cards.add(new SetCardInfo("Pearled Unicorn", 214, Rarity.COMMON, mage.cards.p.PearledUnicorn.class));
+        cards.add(new SetCardInfo("Personal Incarnation", 215, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Pestilence", 30, Rarity.COMMON, mage.cards.p.Pestilence.class));
         cards.add(new SetCardInfo("Phantasmal Forces", 69, Rarity.UNCOMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 70, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
@@ -216,6 +216,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 295, Rarity.LAND, mage.cards.basiclands.Plains.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Plateau", 296, Rarity.RARE, mage.cards.p.Plateau.class));
         cards.add(new SetCardInfo("Power Sink", 74, Rarity.COMMON, mage.cards.p.PowerSink.class));
+        cards.add(new SetCardInfo("Power Surge", 169, Rarity.RARE, mage.cards.p.PowerSurge.class));
         cards.add(new SetCardInfo("Primal Clay", 271, Rarity.RARE, mage.cards.p.PrimalClay.class));
         cards.add(new SetCardInfo("Prodigal Sorcerer", 75, Rarity.COMMON, mage.cards.p.ProdigalSorcerer.class));
         cards.add(new SetCardInfo("Psychic Venom", 76, Rarity.COMMON, mage.cards.p.PsychicVenom.class));
@@ -229,8 +230,10 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Resurrection", 218, Rarity.UNCOMMON, mage.cards.r.Resurrection.class));
         cards.add(new SetCardInfo("Reverse Damage", 219, Rarity.RARE, mage.cards.r.ReverseDamage.class));
         cards.add(new SetCardInfo("Righteousness", 221, Rarity.RARE, mage.cards.r.Righteousness.class));
+        cards.add(new SetCardInfo("Rock Hydra", 172, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Rocket Launcher", 272, Rarity.RARE, mage.cards.r.RocketLauncher.class));
         cards.add(new SetCardInfo("Roc of Kher Ridges", 171, Rarity.RARE, mage.cards.r.RocOfKherRidges.class));
+        cards.add(new SetCardInfo("Rock Hydra", 172, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Rod of Ruin", 273, Rarity.UNCOMMON, mage.cards.r.RodOfRuin.class));
         cards.add(new SetCardInfo("Royal Assassin", 33, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
         cards.add(new SetCardInfo("Sacrifice", 34, Rarity.UNCOMMON, mage.cards.s.Sacrifice.class));
@@ -250,6 +253,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Shatter", 174, Rarity.COMMON, mage.cards.s.Shatter.class));
         cards.add(new SetCardInfo("Shatterstorm", 175, Rarity.UNCOMMON, mage.cards.s.Shatterstorm.class));
         cards.add(new SetCardInfo("Shivan Dragon", 176, Rarity.RARE, mage.cards.s.ShivanDragon.class));
+        cards.add(new SetCardInfo("Simulacrum", 38, Rarity.UNCOMMON, mage.cards.s.Simulacrum.class));
         cards.add(new SetCardInfo("Siren's Call", 80, Rarity.UNCOMMON, mage.cards.s.SirensCall.class));
         cards.add(new SetCardInfo("Smoke", 177, Rarity.RARE, mage.cards.s.Smoke.class));
         cards.add(new SetCardInfo("Sol Ring", 274, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
@@ -286,6 +290,7 @@ public class RevisedEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Uthden Troll", 181, Rarity.UNCOMMON, mage.cards.u.UthdenTroll.class));
         cards.add(new SetCardInfo("Verduran Enchantress", 130, Rarity.RARE, mage.cards.v.VerduranEnchantress.class));
         cards.add(new SetCardInfo("Vesuvan Doppelganger", 88, Rarity.RARE, mage.cards.v.VesuvanDoppelganger.class));
+        cards.add(new SetCardInfo("Veteran Bodyguard", 226, Rarity.RARE, mage.cards.v.VeteranBodyguard.class));
         cards.add(new SetCardInfo("Volcanic Eruption", 89, Rarity.RARE, mage.cards.v.VolcanicEruption.class));
         cards.add(new SetCardInfo("Volcanic Island", 306, Rarity.RARE, mage.cards.v.VolcanicIsland.class));
         cards.add(new SetCardInfo("Wall of Air", 90, Rarity.UNCOMMON, mage.cards.w.WallOfAir.class));

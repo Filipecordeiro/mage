@@ -117,6 +117,12 @@ public class GameEvent implements Serializable {
          flag        true = from comabat damage - other from non combat damage
          */
         PLAY_LAND, LAND_PLAYED,
+        CREATURE_CHAMPIONED,
+        /* CREATURE_CHAMPIONED
+         targetId    the id of the creature that was championed
+         sourceId    sourceId of the creature using the champion ability
+         playerId    the id of the controlling player
+         */
         CREW_VEHICLE,
         /* CREW_VEHICLE
          targetId    the id of the creature that crewed a vehicle
@@ -171,6 +177,13 @@ public class GameEvent implements Serializable {
         MANA_PAYED,
         LOSES, LOST, WINS,
         TARGET, TARGETED,
+        /* TARGETS_VALID
+         targetId    id of the spell or id of stack ability the targets were set to
+         sourceId    = targetId
+         playerId    controller of the spell or stack ability
+         amount      not used for this event
+         */
+        TARGETS_VALID,
         /* COUNTER
          targetId    id of the spell or id of stack ability
          sourceId    sourceId of the ability countering the spell or stack ability
@@ -224,6 +237,14 @@ public class GameEvent implements Serializable {
         TRANSFORM, TRANSFORMED,
         BECOMES_MONSTROUS,
         BECOMES_RENOWNED,
+        /* BECOMES_MONARCH
+         targetId    playerId of the player that becomes the monarch
+         sourceId    id of the source object that created that effect, if no effect exist it's null
+         playerId    playerId of the player that becomes the monarch
+         amount      not used for this event
+         flag        not used for this event
+         */
+        BECOMES_MONARCH,
         MEDITATED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
@@ -250,6 +271,7 @@ public class GameEvent implements Serializable {
         EXPLOITED_CREATURE,
         EVOLVED_CREATURE,
         ATTACH, ATTACHED,
+        STAY_ATTACHED,
         UNATTACH, UNATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,

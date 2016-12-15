@@ -841,10 +841,6 @@ public class Spell extends StackObjImpl implements Card {
     }
 
     @Override
-    public void build() {
-    }
-
-    @Override
     public Counters getCounters(Game game) {
         return card.getCounters(game);
     }
@@ -899,7 +895,7 @@ public class Spell extends StackObjImpl implements Card {
 
     @Override
     public void checkForCountersToAdd(Permanent permanent, Game game) {
-        throw new UnsupportedOperationException("Not supported for Spell");
+        card.checkForCountersToAdd(permanent, game);
     }
 
     @Override

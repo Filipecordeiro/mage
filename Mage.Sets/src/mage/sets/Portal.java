@@ -28,14 +28,13 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
+import mage.cards.d.DrySpell;
+import mage.cards.e.EliteCatWarrior;
+import mage.cards.w.WarriorsCharge;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -55,7 +54,7 @@ public class Portal extends ExpansionSet {
     }
 
     private Portal() {
-        super("Portal", "POR", "mage.sets.portal", new GregorianCalendar(1997, 5, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Portal", "POR", ExpansionSet.buildDate(1997, 5, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Beginner";
         this.hasBasicLands = true;
         this.hasBoosters = true;
@@ -110,11 +109,11 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Devoted Hero", 175, Rarity.COMMON, mage.cards.d.DevotedHero.class));
         cards.add(new SetCardInfo("Djinn of the Lamp", 54, Rarity.RARE, mage.cards.d.DjinnOfTheLamp.class));
         cards.add(new SetCardInfo("Dread Reaper", 11, Rarity.RARE, mage.cards.d.DreadReaper.class));
-        cards.add(new SetCardInfo("Dry Spell", 12, Rarity.UNCOMMON, mage.cards.d.DrySpell1.class));
+        cards.add(new SetCardInfo("Dry Spell", 12, Rarity.UNCOMMON, DrySpell.class));
         cards.add(new SetCardInfo("Earthquake", 129, Rarity.RARE, mage.cards.e.Earthquake.class));
         cards.add(new SetCardInfo("Ebon Dragon", 13, Rarity.RARE, mage.cards.e.EbonDragon.class));
-        cards.add(new SetCardInfo("Elite Cat Warrior", 87, Rarity.COMMON, mage.cards.e.EliteCatWarrior1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Elite Cat Warrior", 88, Rarity.COMMON, mage.cards.e.EliteCatWarrior1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Elite Cat Warrior", 87, Rarity.COMMON, EliteCatWarrior.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Elite Cat Warrior", 88, Rarity.COMMON, EliteCatWarrior.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Elven Cache", 89, Rarity.COMMON, mage.cards.e.ElvenCache.class));
         cards.add(new SetCardInfo("Elvish Ranger", 90, Rarity.COMMON, mage.cards.e.ElvishRanger.class));
         cards.add(new SetCardInfo("Endless Cockroaches", 14, Rarity.RARE, mage.cards.e.EndlessCockroaches.class));
@@ -128,6 +127,7 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Tempest", 133, Rarity.RARE, mage.cards.f.FireTempest.class));
         cards.add(new SetCardInfo("Flashfires", 134, Rarity.UNCOMMON, mage.cards.f.Flashfires.class));
         cards.add(new SetCardInfo("Fleet-Footed Monk", 177, Rarity.COMMON, mage.cards.f.FleetFootedMonk.class));
+	cards.add(new SetCardInfo("Flux", 56, Rarity.UNCOMMON, mage.cards.f.Flux.class));
         cards.add(new SetCardInfo("Foot Soldiers", 178, Rarity.COMMON, mage.cards.f.FootSoldiers.class));
         cards.add(new SetCardInfo("Forest", 203, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Forest", 204, Rarity.LAND, mage.cards.basiclands.Forest.class, new CardGraphicInfo(null, true)));
@@ -262,8 +262,8 @@ public class Portal extends ExpansionSet {
         cards.add(new SetCardInfo("Volcanic Hammer", 160, Rarity.COMMON, mage.cards.v.VolcanicHammer.class));
         cards.add(new SetCardInfo("Wall of Granite", 161, Rarity.UNCOMMON, mage.cards.w.WallOfGranite.class));
         cards.add(new SetCardInfo("Wall of Swords", 199, Rarity.UNCOMMON, mage.cards.w.WallOfSwords.class));
-        cards.add(new SetCardInfo("Warrior's Charge", 200, Rarity.COMMON, mage.cards.w.WarriorsCharge1.class, new CardGraphicInfo(null, true)));
-        cards.add(new SetCardInfo("Warrior's Charge", 201, Rarity.COMMON, mage.cards.w.WarriorsCharge1.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Warrior's Charge", 200, Rarity.COMMON, WarriorsCharge.class, new CardGraphicInfo(null, true)));
+        cards.add(new SetCardInfo("Warrior's Charge", 201, Rarity.COMMON, WarriorsCharge.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Whiptail Wurm", 118, Rarity.UNCOMMON, mage.cards.w.WhiptailWurm.class));
         cards.add(new SetCardInfo("Wicked Pact", 40, Rarity.RARE, mage.cards.w.WickedPact.class));
         cards.add(new SetCardInfo("Willow Dryad", 119, Rarity.COMMON, mage.cards.w.WillowDryad.class));

@@ -27,15 +27,12 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
+import mage.cards.g.GoblinWarDrums;
+import mage.cards.s.StormShaman;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +47,7 @@ public class SeventhEdition extends ExpansionSet {
     }
 
     private SeventhEdition() {
-        super("Seventh Edition", "7ED", "mage.sets.seventhedition", new GregorianCalendar(2001, 3, 11).getTime(), SetType.CORE);
+        super("Seventh Edition", "7ED", ExpansionSet.buildDate(2001, 3, 11), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
@@ -181,7 +178,7 @@ public class SeventhEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Matron", 191, Rarity.UNCOMMON, mage.cards.g.GoblinMatron.class));
         cards.add(new SetCardInfo("Goblin Raider", 192, Rarity.COMMON, mage.cards.g.GoblinRaider.class));
         cards.add(new SetCardInfo("Goblin Spelunkers", 193, Rarity.COMMON, mage.cards.g.GoblinSpelunkers.class));
-        cards.add(new SetCardInfo("Goblin War Drums", 194, Rarity.UNCOMMON, mage.cards.g.GoblinWarDrums1.class));
+        cards.add(new SetCardInfo("Goblin War Drums", 194, Rarity.UNCOMMON, GoblinWarDrums.class));
         cards.add(new SetCardInfo("Gorilla Chieftain", 250, Rarity.COMMON, mage.cards.g.GorillaChieftain.class));
         cards.add(new SetCardInfo("Grafted Skullcap", 298, Rarity.RARE, mage.cards.g.GraftedSkullcap.class));
         cards.add(new SetCardInfo("Granite Grip", 195, Rarity.COMMON, mage.cards.g.GraniteGrip.class));
@@ -348,7 +345,7 @@ public class SeventhEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Stone Rain", 221, Rarity.COMMON, mage.cards.s.StoneRain.class));
         cards.add(new SetCardInfo("Storm Cauldron", 320, Rarity.RARE, mage.cards.s.StormCauldron.class));
         cards.add(new SetCardInfo("Storm Crow", 100, Rarity.COMMON, mage.cards.s.StormCrow.class));
-        cards.add(new SetCardInfo("Storm Shaman", 222, Rarity.UNCOMMON, mage.cards.s.StormShaman1.class));
+        cards.add(new SetCardInfo("Storm Shaman", 222, Rarity.UNCOMMON, StormShaman.class));
         cards.add(new SetCardInfo("Strands of Night", 165, Rarity.UNCOMMON, mage.cards.s.StrandsOfNight.class));
         cards.add(new SetCardInfo("Stream of Life", 272, Rarity.COMMON, mage.cards.s.StreamOfLife.class));
         cards.add(new SetCardInfo("Stronghold Assassin", 166, Rarity.RARE, mage.cards.s.StrongholdAssassin.class));

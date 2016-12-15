@@ -28,11 +28,9 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -48,7 +46,7 @@ public class Conspiracy extends ExpansionSet {
     }
 
     private Conspiracy() {
-        super("Conspiracy", "CNS", "mage.sets.conspiracy", new GregorianCalendar(2014, 6, 6).getTime(), SetType.SUPPLEMENTAL);
+        super("Conspiracy", "CNS", ExpansionSet.buildDate(2014, 6, 6), SetType.SUPPLEMENTAL);
         this.blockName = "Conspiracy";
         this.hasBasicLands = false;
         this.hasBoosters = true;
@@ -79,6 +77,7 @@ public class Conspiracy extends ExpansionSet {
         cards.add(new SetCardInfo("Coercive Portal", 56, Rarity.MYTHIC, mage.cards.c.CoercivePortal.class));
         cards.add(new SetCardInfo("Compulsive Research", 93, Rarity.COMMON, mage.cards.c.CompulsiveResearch.class));
         cards.add(new SetCardInfo("Copperhorn Scout", 160, Rarity.COMMON, mage.cards.c.CopperhornScout.class));
+        cards.add(new SetCardInfo("Council Guardian", 15, Rarity.UNCOMMON, mage.cards.c.CouncilGuardian.class));
         cards.add(new SetCardInfo("Council's Judgment", 16, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
         cards.add(new SetCardInfo("Courier Hawk", 68, Rarity.COMMON, mage.cards.c.CourierHawk.class));
         cards.add(new SetCardInfo("Crookclaw Transmuter", 94, Rarity.COMMON, mage.cards.c.CrookclawTransmuter.class));

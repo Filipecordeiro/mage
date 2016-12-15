@@ -5,11 +5,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
+import mage.cards.i.IcatianJavelineers;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -24,7 +23,7 @@ public class WPNGateway extends ExpansionSet {
     }
 
     private WPNGateway() {
-        super("WPN Gateway", "GRC", "mage.sets.wpngateway", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
+        super("WPN Gateway", "GRC", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Auramancer", 77, Rarity.SPECIAL, mage.cards.a.Auramancer.class));
@@ -49,7 +48,7 @@ public class WPNGateway extends ExpansionSet {
         cards.add(new SetCardInfo("Gravedigger", 16, Rarity.SPECIAL, mage.cards.g.Gravedigger.class));
         cards.add(new SetCardInfo("Hada Freeblade", 38, Rarity.SPECIAL, mage.cards.h.HadaFreeblade.class));
         cards.add(new SetCardInfo("Hellspark Elemental", 25, Rarity.SPECIAL, mage.cards.h.HellsparkElemental.class));
-        cards.add(new SetCardInfo("Icatian Javelineers", 2, Rarity.SPECIAL, mage.cards.i.IcatianJavelineers1.class));
+        cards.add(new SetCardInfo("Icatian Javelineers", 2, Rarity.SPECIAL, IcatianJavelineers.class));
         cards.add(new SetCardInfo("Kalastria Highborn", 39, Rarity.SPECIAL, mage.cards.k.KalastriaHighborn.class));
         cards.add(new SetCardInfo("Kor Duelist", 32, Rarity.SPECIAL, mage.cards.k.KorDuelist.class));
         cards.add(new SetCardInfo("Kor Firewalker", 36, Rarity.SPECIAL, mage.cards.k.KorFirewalker.class));

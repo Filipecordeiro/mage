@@ -43,7 +43,7 @@ import mage.cards.repository.CardRepository;
  */
 public class DckDeckImporter extends DeckImporter {
 
-    private static final Pattern pattern = Pattern.compile("(SB:)?\\s*(\\d*)\\s*\\[([^]:]+):([^]:]+)\\].*");
+    private static final Pattern pattern = Pattern.compile("(SB:)?\\s*(\\d*)\\s*\\[([^]:]+):([^]:]+)\\]\\s*(.*)\\s*$");
 
     private static final Pattern layoutPattern = Pattern.compile("LAYOUT (\\w+):\\((\\d+),(\\d+)\\)([^|]+)\\|(.*)$");
 
@@ -70,6 +70,17 @@ public class DckDeckImporter extends DeckImporter {
 
             DeckCardInfo deckCardInfo = null;
             CardInfo cardInfo = CardRepository.instance.findCard(setCode, cardNum);
+            if (cardInfo == null) {
+                // Try alternate based on name
+                String cardName = m.group(5);
+                if (cardName != null && cardName.length() > 0) {
+                    cardInfo = CardRepository.instance.findPreferedCoreExpansionCard(cardName, false);
+                    sbMessage.append("Could not find card '").append(cardName).append("' in set ").append(setCode).append(" of number ").append(cardNum).append(".\n");
+                    if (cardInfo != null) {
+                        sbMessage.append("Made substitution of ").append(cardInfo.getCardNumber()).append(", ").append(cardInfo.getCard().getExpansionSetCode()).append(" instead.\n");
+                    }
+                }
+            }
             if (cardInfo != null) {
                 deckCardInfo = new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode());
             }
@@ -121,18 +132,22 @@ public class DckDeckImporter extends DeckImporter {
                 //
                 DeckCardLayout layout = new DeckCardLayout(grid, settings);
                 int expectedCount = 0;
-                if (target.equals("MAIN")) {
-                    deckList.setCardLayout(layout);
-                    expectedCount = deckList.getCards().size();
-                } else if (target.equals("SIDEBOARD")) {
-                    deckList.setSideboardLayout(layout);
-                    expectedCount = deckList.getSideboard().size();
-                } else {
-                    sbMessage.append("Bad target `" + target + "` for layout.\n");
+                switch (target) {
+                    case "MAIN":
+                        deckList.setCardLayout(layout);
+                        expectedCount = deckList.getCards().size();
+                        break;
+                    case "SIDEBOARD":
+                        deckList.setSideboardLayout(layout);
+                        expectedCount = deckList.getSideboard().size();
+                        break;
+                    default:
+                        sbMessage.append("Bad target `").append(target).append("` for layout.\n");
+                        break;
                 }
                 //
                 if (totalCardCount != expectedCount) {
-                    sbMessage.append("Layout mismatch: Expected " + expectedCount + " cards, but got " + totalCardCount + " in layout `" + target + "`\n.");
+                    sbMessage.append("Layout mismatch: Expected ").append(expectedCount).append(" cards, but got ").append(totalCardCount).append(" in layout `").append(target).append("`\n.");
                 }
 
             } else {

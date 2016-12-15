@@ -27,14 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +45,7 @@ public class Chronicles extends ExpansionSet {
     }
 
     private Chronicles() {
-        super("Chronicles", "CHR", "mage.sets.chronicles", new GregorianCalendar(1995, 6, 1).getTime(), SetType.SUPPLEMENTAL);
+        super("Chronicles", "CHR", ExpansionSet.buildDate(1995, 6, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Reprint";
         this.hasBasicLands = false;
         this.hasBoosters = true;
@@ -86,6 +82,7 @@ public class Chronicles extends ExpansionSet {
         cards.add(new SetCardInfo("Dandan", 18, Rarity.COMMON, mage.cards.d.Dandan.class));
         cards.add(new SetCardInfo("D'Avenant Archer", 61, Rarity.COMMON, mage.cards.d.DAvenantArcher.class));
         cards.add(new SetCardInfo("Divine Offering", 62, Rarity.COMMON, mage.cards.d.DivineOffering.class));
+        cards.add(new SetCardInfo("Emerald Dragonfly", 35, Rarity.COMMON, mage.cards.e.EmeraldDragonfly.class));
         cards.add(new SetCardInfo("Erhnam Djinn", 36, Rarity.UNCOMMON, mage.cards.e.ErhnamDjinn.class));
         cards.add(new SetCardInfo("Fallen Angel", 4, Rarity.UNCOMMON, mage.cards.f.FallenAngel.class));
         cards.add(new SetCardInfo("Feldon's Cane", 77, Rarity.COMMON, mage.cards.f.FeldonsCane.class));

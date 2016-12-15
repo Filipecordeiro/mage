@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Exodus extends ExpansionSet {
     }
 
     private Exodus() {
-        super("Exodus", "EXO", "mage.sets.exodus", new GregorianCalendar(1998, 5, 6).getTime(), SetType.EXPANSION);
+        super("Exodus", "EXO", ExpansionSet.buildDate(1998, 6, 15), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.parentSet = Tempest.getInstance();
         this.hasBasicLands = false;
@@ -60,6 +57,7 @@ public class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Allay", 1, Rarity.COMMON, mage.cards.a.Allay.class));
         cards.add(new SetCardInfo("Anarchist", 79, Rarity.COMMON, mage.cards.a.Anarchist.class));
         cards.add(new SetCardInfo("Angelic Blessing", 2, Rarity.COMMON, mage.cards.a.AngelicBlessing.class));
+        cards.add(new SetCardInfo("Avenging Druid", 105, Rarity.COMMON, mage.cards.a.AvengingDruid.class));
         cards.add(new SetCardInfo("Bequeathal", 106, Rarity.COMMON, mage.cards.b.Bequeathal.class));
         cards.add(new SetCardInfo("Carnophage", 53, Rarity.COMMON, mage.cards.c.Carnophage.class));
         cards.add(new SetCardInfo("Cartographer", 107, Rarity.UNCOMMON, mage.cards.c.Cartographer.class));

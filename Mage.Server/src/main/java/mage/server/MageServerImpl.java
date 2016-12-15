@@ -68,9 +68,7 @@ import mage.server.game.GamesRoom;
 import mage.server.game.GamesRoomManager;
 import mage.server.game.PlayerFactory;
 import mage.server.game.ReplayManager;
-import mage.server.services.LogKeys;
 import mage.server.services.impl.FeedbackServiceImpl;
-import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ConfigSettings;
@@ -185,19 +183,10 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException {
-        // This method is deprecated, so just inform the server version.
-        logger.info("MageVersionException: userName=" + userName + ", version=" + version);
-        LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
-        throw new MageVersionException(version, Main.getVersion());
-    }
-
-    @Override
     public boolean connectUser(String userName, String password, String sessionId, MageVersion version) throws MageException {
         try {
             if (version.compareTo(Main.getVersion()) != 0) {
                 logger.info("MageVersionException: userName=" + userName + ", version=" + version);
-                LogServiceImpl.instance.log(LogKeys.KEY_WRONG_VERSION, userName, version.toString(), Main.getVersion().toString(), sessionId);
                 throw new MageVersionException(version, Main.getVersion());
             }
             return SessionManager.getInstance().connectUser(sessionId, userName, password);
@@ -211,11 +200,11 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
-    public boolean setUserData(final String userName, final String sessionId, final UserData userData) throws MageException {
+    public boolean setUserData(final String userName, final String sessionId, final UserData userData, final String clientVersion) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {
-                return SessionManager.getInstance().setUserData(userName, sessionId, userData);
+                return SessionManager.getInstance().setUserData(userName, sessionId, userData, clientVersion);
             }
         });
     }
@@ -266,7 +255,6 @@ public class MageServerImpl implements MageServer {
                     logger.debug("- " + user.getName() + " userId: " + user.getId());
                     logger.debug("- chatId: " + TableManager.getInstance().getChatId(table.getTableId()));
                 }
-                LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
                 return table;
             }
         });
@@ -315,7 +303,6 @@ public class MageServerImpl implements MageServer {
                     }
                     TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(userId, options);
                     logger.debug("Tournament table " + table.getTableId() + " created");
-                    LogServiceImpl.instance.log(LogKeys.KEY_TOURNAMENT_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
                     return table;
                 } catch (Exception ex) {
                     handleException(ex);
@@ -1073,7 +1060,8 @@ public class MageServerImpl implements MageServer {
                             user.getConnectionTime(),
                             user.getGameInfo(),
                             user.getUserState().toString(),
-                            user.getChatLockedUntil()
+                            user.getChatLockedUntil(),
+                            user.getClientVersion()
                     ));
                 }
                 return users;
@@ -1189,7 +1177,6 @@ public class MageServerImpl implements MageServer {
                 public void execute() {
                     String host = SessionManager.getInstance().getSession(sessionId).getHost();
                     FeedbackServiceImpl.instance.feedback(username, title, type, message, email, host);
-                    LogServiceImpl.instance.log(LogKeys.KEY_FEEDBACK_ADDED, sessionId, username, host);
                 }
             });
         }
@@ -1225,7 +1212,6 @@ public class MageServerImpl implements MageServer {
     protected void execute(final String actionName, final String sessionId, final Action action, boolean checkAdminRights) throws MageException {
         if (checkAdminRights) {
             if (!SessionManager.getInstance().isAdmin(sessionId)) {
-                LogServiceImpl.instance.log(LogKeys.KEY_NOT_ADMIN, actionName, sessionId);
                 return;
             }
         }
@@ -1245,8 +1231,6 @@ public class MageServerImpl implements MageServer {
                             } catch (MageException me) {
                                 throw new RuntimeException(me);
                             }
-                        } else {
-                            LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION_INTERNAL, actionName, sessionId);
                         }
                     }
                 }
@@ -1254,15 +1238,12 @@ public class MageServerImpl implements MageServer {
             } catch (Exception ex) {
                 handleException(ex);
             }
-        } else {
-            LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION, actionName, sessionId);
         }
     }
 
     protected <T> T executeWithResult(String actionName, final String sessionId, final ActionWithResult<T> action, boolean checkAdminRights) throws MageException {
         if (checkAdminRights) {
             if (!SessionManager.getInstance().isAdmin(sessionId)) {
-                LogServiceImpl.instance.log(LogKeys.KEY_NOT_ADMIN, actionName, sessionId);
                 return action.negativeResult();
             }
         }
@@ -1277,8 +1258,6 @@ public class MageServerImpl implements MageServer {
             } catch (Exception ex) {
                 handleException(ex);
             }
-        } else {
-            LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION, actionName, sessionId);
         }
         return action.negativeResult();
     }

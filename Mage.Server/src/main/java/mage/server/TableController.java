@@ -62,8 +62,6 @@ import mage.server.game.GameFactory;
 import mage.server.game.GameManager;
 import mage.server.game.PlayerFactory;
 import mage.server.record.TableRecorderImpl;
-import mage.server.services.LogKeys;
-import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentController;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
@@ -298,6 +296,19 @@ public class TableController {
                     .append("% is higher than the table requirement ").append(quitRatio).append("%").toString();
             user.showUserMessage("Join Table", message);
             return false;
+        }
+        
+        // Check power level for table (currently only used for EDH/Commander table)
+        int edhPowerLevel = table.getMatch().getOptions().getEdhPowerLevel();
+        if (edhPowerLevel > 0 && table.getValidator().getName().toLowerCase().equals("commander")) {
+            int deckEdhPowerLevel = table.getValidator().getEdhPowerLevel(deck);
+            if (deckEdhPowerLevel > edhPowerLevel) {
+                String message = new StringBuilder("Your deck appears to be too powerful for this table.\n\nReduce the number of extra turn cards, infect, counters, fogs, reconsider your commander. ")
+                        .append("\nThe table requirement has a maximum power level of ").append(edhPowerLevel).append (" whilst your deck has a calculated power level of ")
+                        .append(deckEdhPowerLevel).toString();
+                user.showUserMessage("Join Table", message);
+                return false;
+            }
         }
 
         Player player = createPlayer(name, seat.getPlayerType(), skill);
@@ -606,7 +617,6 @@ public class TableController {
             if (match.getGame() != null) {
                 logger.debug("- chatId:  " + GameManager.getInstance().getChatId(match.getGame().getId()));
             }
-            LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent.toString());
         } catch (Exception ex) {
             logger.fatal("Error starting game table: " + table.getId(), ex);
             if (table != null) {

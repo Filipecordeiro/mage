@@ -3,12 +3,9 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
 import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class Onslaught extends ExpansionSet {
     private static final Onslaught fINSTANCE = new Onslaught();
@@ -18,7 +15,7 @@ public class Onslaught extends ExpansionSet {
     }
 
     private Onslaught() {
-        super("Onslaught", "ONS", "mage.sets.onslaught", new GregorianCalendar(2002, 10, 7).getTime(), SetType.EXPANSION);
+        super("Onslaught", "ONS", ExpansionSet.buildDate(2002, 10, 7), SetType.EXPANSION);
         this.blockName = "Onslaught";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -56,8 +53,10 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Blackmail", 127, Rarity.UNCOMMON, mage.cards.b.Blackmail.class));
         cards.add(new SetCardInfo("Blatant Thievery", 71, Rarity.RARE, mage.cards.b.BlatantThievery.class));
         cards.add(new SetCardInfo("Blistering Firecat", 189, Rarity.RARE, mage.cards.b.BlisteringFirecat.class));
+	cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
         cards.add(new SetCardInfo("Bloodstained Mire", 313, Rarity.RARE, mage.cards.b.BloodstainedMire.class, new CardGraphicInfo(new ObjectColor("RB"), null,
                 false)));
+	cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
         cards.add(new SetCardInfo("Boneknitter", 128, Rarity.UNCOMMON, mage.cards.b.Boneknitter.class));
         cards.add(new SetCardInfo("Brightstone Ritual", 191, Rarity.COMMON, mage.cards.b.BrightstoneRitual.class));
         cards.add(new SetCardInfo("Broodhatch Nantuko", 250, Rarity.UNCOMMON, mage.cards.b.BroodhatchNantuko.class));
@@ -172,6 +171,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Ixidor's Will", 90, Rarity.COMMON, mage.cards.i.IxidorsWill.class));
+        cards.add(new SetCardInfo("Ixidor, Reality Sculptor", 89, Rarity.RARE, mage.cards.i.IxidorRealitySculptor.class));
         cards.add(new SetCardInfo("Jareth, Leonine Titan", 43, Rarity.RARE, mage.cards.j.JarethLeonineTitan.class));
         cards.add(new SetCardInfo("Kamahl, Fist of Krosa", 268, Rarity.RARE, mage.cards.k.KamahlFistOfKrosa.class));
         cards.add(new SetCardInfo("Krosan Colossus", 270, Rarity.RARE, mage.cards.k.KrosanColossus.class));
@@ -303,6 +303,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Whipcorder", 60, Rarity.UNCOMMON, mage.cards.w.Whipcorder.class));
         cards.add(new SetCardInfo("Windswept Heath", 328, Rarity.RARE, mage.cards.w.WindsweptHeath.class, new CardGraphicInfo(new ObjectColor("GW"), null,
                 false)));
+	cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
         cards.add(new SetCardInfo("Wirewood Elf", 301, Rarity.COMMON, mage.cards.w.WirewoodElf.class));
         cards.add(new SetCardInfo("Wirewood Herald", 302, Rarity.COMMON, mage.cards.w.WirewoodHerald.class));
         cards.add(new SetCardInfo("Wirewood Lodge", 329, Rarity.RARE, mage.cards.w.WirewoodLodge.class));
@@ -310,6 +311,7 @@ public class Onslaught extends ExpansionSet {
         cards.add(new SetCardInfo("Wirewood Savage", 304, Rarity.COMMON, mage.cards.w.WirewoodSavage.class));
         cards.add(new SetCardInfo("Wooded Foothills", 330, Rarity.RARE, mage.cards.w.WoodedFoothills.class, new CardGraphicInfo(new ObjectColor("RG"), null,
                 false)));
+	cards.add(new SetCardInfo("Bloodline Shaman", 249, Rarity.UNCOMMON, mage.cards.b.BloodlineShaman.class));
         cards.add(new SetCardInfo("Words of War", 244, Rarity.RARE, mage.cards.w.WordsOfWar.class));
         cards.add(new SetCardInfo("Words of Wind", 122, Rarity.RARE, mage.cards.w.WordsOfWind.class));
         cards.add(new SetCardInfo("Words of Worship", 61, Rarity.RARE, mage.cards.w.WordsOfWorship.class));

@@ -24,18 +24,13 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
-import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.constants.SetType;
 
 /**
  *
@@ -50,7 +45,7 @@ public class Magic2011 extends ExpansionSet {
     }
 
     private Magic2011() {
-        super("Magic 2011", "M11", "mage.sets.magic2011", new GregorianCalendar(2010, 6, 16).getTime(), SetType.CORE);
+        super("Magic 2011", "M11", ExpansionSet.buildDate(2010, 7, 16), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

@@ -1,13 +1,11 @@
 package mage.sets;
 
-import java.util.GregorianCalendar;
+import mage.cards.o.OrcishSpy;
+import mage.cards.r.RukhEgg;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class EighthEdition extends ExpansionSet {
 
@@ -18,7 +16,7 @@ public class EighthEdition extends ExpansionSet {
     }
 
     private EighthEdition() {
-        super("Eighth Edition", "8ED", "mage.sets.eighthedition", new GregorianCalendar(2003, 7, 28).getTime(), SetType.CORE);
+        super("Eighth Edition", "8ED", ExpansionSet.buildDate(2003, 7, 28), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
@@ -230,7 +228,7 @@ public class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Okk", 206, Rarity.RARE, mage.cards.o.Okk.class));
         cards.add(new SetCardInfo("Oracle's Attendants", 32, Rarity.RARE, mage.cards.o.OraclesAttendants.class));
         cards.add(new SetCardInfo("Orcish Artillery", 207, Rarity.UNCOMMON, mage.cards.o.OrcishArtillery.class));
-        cards.add(new SetCardInfo("Orcish Spy", 208, Rarity.COMMON, mage.cards.o.OrcishSpy1.class));
+        cards.add(new SetCardInfo("Orcish Spy", 208, Rarity.COMMON, OrcishSpy.class));
         cards.add(new SetCardInfo("Pacifism", 33, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Panic Attack", 209, Rarity.COMMON, mage.cards.p.PanicAttack.class));
         cards.add(new SetCardInfo("Patagia Golem", 308, Rarity.UNCOMMON, mage.cards.p.PatagiaGolem.class));
@@ -272,7 +270,7 @@ public class EighthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Rod of Ruin", 312, Rarity.UNCOMMON, mage.cards.r.RodOfRuin.class));
         cards.add(new SetCardInfo("Rolling Stones", 38, Rarity.RARE, mage.cards.r.RollingStones.class));
         cards.add(new SetCardInfo("Royal Assassin", 159, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
-        cards.add(new SetCardInfo("Rukh Egg", 216, Rarity.RARE, mage.cards.r.RukhEgg1.class));
+        cards.add(new SetCardInfo("Rukh Egg", 216, Rarity.RARE, RukhEgg.class));
         cards.add(new SetCardInfo("Rushwood Dryad", 278, Rarity.COMMON, mage.cards.r.RushwoodDryad.class));
         cards.add(new SetCardInfo("Sabretooth Tiger", 217, Rarity.COMMON, mage.cards.s.SabretoothTiger.class));
         cards.add(new SetCardInfo("Sacred Ground", 39, Rarity.RARE, mage.cards.s.SacredGround.class));

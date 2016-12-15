@@ -265,12 +265,6 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         return abilities;
     }
 
-    @Override
-    @Deprecated
-    public void addAbility(Ability ability) {
-        throw new UnsupportedOperationException("Unsupported operation: use addAbility(Ability ability, Game game) instead");
-    }
-
     /**
      *
      * @param ability
@@ -932,6 +926,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                     && !ability.canTarget(source, game)) {
                 return true;
             }
+        }
+        if (game.getContinuousEffects().preventedByRuleModification(GameEvent.getEvent(EventType.STAY_ATTACHED, objectId, source.getId(), null), null, game, false)) {
+            return true;
         }
         return false;
     }

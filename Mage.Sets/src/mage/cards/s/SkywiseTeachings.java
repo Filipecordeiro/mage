@@ -57,7 +57,7 @@ public class SkywiseTeachings extends CardImpl {
     public SkywiseTeachings(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{U}");
 
-        // Whenever you cast a noncreature spell, you may pay {1}{U}. If you do, put a 2/2 blue Djinn Monk creature token with flying onto the battlefield.
+        // Whenever you cast a noncreature spell, you may pay {1}{U}. If you do, create a 2/2 blue Djinn Monk creature token with flying.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(new SkywiseTeachingsToken()), new ManaCostsImpl("{1}{U}")), filter, false));
 
     }
@@ -75,7 +75,7 @@ public class SkywiseTeachings extends CardImpl {
 class SkywiseTeachingsToken extends Token {
 
     SkywiseTeachingsToken() {
-        super("Djinn Monk", "a 2/2 blue Djinn Monk creature token with flying");
+        super("Djinn Monk", "2/2 blue Djinn Monk creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         this.subtype.add("Djinn");

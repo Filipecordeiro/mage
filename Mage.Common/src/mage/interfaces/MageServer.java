@@ -62,16 +62,9 @@ public interface MageServer {
 
     boolean resetPassword(String sessionId, String email, String authToken, String password) throws MageException;
 
-    // connection methods
-    // DEPRECATED - Use connectUser instead. This is only kept for older clients.
-    // This can be deleted once users transitioned to newer clients (1.4.6v1 and later).
-    boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException;
-
     boolean connectUser(String userName, String password, String sessionId, MageVersion version) throws MageException;
 
     boolean connectAdmin(String password, String sessionId, MageVersion version) throws MageException;
-// Not used
-//    void deregisterClient(String sessionId) throws MageException;
 
     // update methods
     List<ExpansionInfo> getMissingExpansionData(List<String> codes);
@@ -79,7 +72,7 @@ public interface MageServer {
     List<CardInfo> getMissingCardsData(List<String> classNames);
 
     // user methods
-    boolean setUserData(String userName, String sessionId, UserData userData) throws MageException;
+    boolean setUserData(String userName, String sessionId, UserData userData, String clientVersion) throws MageException;
 
     void sendFeedbackMessage(String sessionId, String username, String title, String type, String message, String email) throws MageException;
 

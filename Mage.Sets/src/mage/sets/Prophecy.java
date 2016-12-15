@@ -27,12 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
-import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -47,7 +44,7 @@ public class Prophecy extends ExpansionSet {
     }
 
     private Prophecy() {
-        super("Prophecy", "PCY", "mage.sets.prophecy", new GregorianCalendar(2000, 4, 27).getTime(), SetType.EXPANSION);
+        super("Prophecy", "PCY", ExpansionSet.buildDate(2000, 4, 27), SetType.EXPANSION);
         this.blockName = "Masques";
         this.parentSet = MercadianMasques.getInstance();
         this.hasBasicLands = false;
@@ -87,6 +84,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Flowering Field", 9, Rarity.UNCOMMON, mage.cards.f.FloweringField.class));
         cards.add(new SetCardInfo("Foil", 34, Rarity.UNCOMMON, mage.cards.f.Foil.class));
         cards.add(new SetCardInfo("Greel's Caress", 67, Rarity.COMMON, mage.cards.g.GreelsCaress.class));
+        cards.add(new SetCardInfo("Greel, Mind Raker", 66, Rarity.RARE, mage.cards.g.GreelMindRaker.class));
         cards.add(new SetCardInfo("Gulf Squid", 35, Rarity.COMMON, mage.cards.g.GulfSquid.class));
         cards.add(new SetCardInfo("Hazy Homunculus", 36, Rarity.COMMON, mage.cards.h.HazyHomunculus.class));
         cards.add(new SetCardInfo("Heightened Awareness", 37, Rarity.RARE, mage.cards.h.HeightenedAwareness.class));
@@ -151,6 +149,7 @@ public class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Whipstitched Zombie", 81, Rarity.COMMON, mage.cards.w.WhipstitchedZombie.class));
         cards.add(new SetCardInfo("Wild Might", 134, Rarity.COMMON, mage.cards.w.WildMight.class));
         cards.add(new SetCardInfo("Wintermoon Mesa", 143, Rarity.RARE, mage.cards.w.WintermoonMesa.class));
+        cards.add(new SetCardInfo("Withdraw", 54, Rarity.COMMON, mage.cards.w.Withdraw.class));
         cards.add(new SetCardInfo("Zerapa Minotaur", 108, Rarity.COMMON, mage.cards.z.ZerapaMinotaur.class));
     }
 }

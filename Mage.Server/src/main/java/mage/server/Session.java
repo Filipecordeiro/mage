@@ -185,9 +185,15 @@ public class Session {
         AuthorizedUser authorizedUser = null;
         if (ConfigSettings.getInstance().isAuthenticationActivated()) {
             authorizedUser = AuthorizedUserRepository.instance.getByName(userName);
-            if (authorizedUser == null || !authorizedUser.doCredentialsMatch(userName, password)) {
-                return "Wrong username or password. In case you haven't, please register your account first.";
+            String errorMsg = "Wrong username or password. In case you haven't, please register your account first.";
+            if (authorizedUser == null) {
+                return errorMsg;
             }
+
+            if (!Main.isTestMode() && !authorizedUser.doCredentialsMatch(userName, password)) {
+                return errorMsg;
+            }
+
             if (!authorizedUser.active) {
                 return "Your profile is deactivated, you can't sign on.";
             }
@@ -251,9 +257,12 @@ public class Session {
         this.userId = user.getId();
     }
 
-    public boolean setUserData(String userName, UserData userData) {
+    public boolean setUserData(String userName, UserData userData, String clientVersion) {
         User user = UserManager.getInstance().getUserByName(userName);
         if (user != null) {
+            if (clientVersion != null) {
+                user.setClientVersion(clientVersion);
+            }
             if (user.getUserData() == null || user.getUserData().getGroupId() == UserGroup.DEFAULT.getGroupId()) {
                 user.setUserData(userData);
             } else {

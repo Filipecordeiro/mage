@@ -27,15 +27,10 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +44,7 @@ public class Mirage extends ExpansionSet {
     }
 
     private Mirage() {
-        super("Mirage", "MIR", "mage.sets.mirage", new GregorianCalendar(1996, 8, 21).getTime(), SetType.EXPANSION);
+        super("Mirage", "MIR", ExpansionSet.buildDate(1996, 8, 21), SetType.EXPANSION);
         this.blockName = "Mirage";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -182,6 +177,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Lion's Eye Diamond", 272, Rarity.RARE, mage.cards.l.LionsEyeDiamond.class));
         cards.add(new SetCardInfo("Locust Swarm", 124, Rarity.UNCOMMON, mage.cards.l.LocustSwarm.class));
         cards.add(new SetCardInfo("Mana Prism", 273, Rarity.UNCOMMON, mage.cards.m.ManaPrism.class));
+        cards.add(new SetCardInfo("Mangara's Tome", 274, Rarity.RARE, mage.cards.m.MangarasTome.class));
         cards.add(new SetCardInfo("Marble Diamond", 275, Rarity.UNCOMMON, mage.cards.m.MarbleDiamond.class));
         cards.add(new SetCardInfo("Maro", 126, Rarity.RARE, mage.cards.m.Maro.class));
         cards.add(new SetCardInfo("Melesse Spirit", 231, Rarity.UNCOMMON, mage.cards.m.MelesseSpirit.class));
@@ -238,6 +234,7 @@ public class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Searing Spear Askari", 191, Rarity.COMMON, mage.cards.s.SearingSpearAskari.class));
         cards.add(new SetCardInfo("Sea Scryer", 90, Rarity.COMMON, mage.cards.s.SeaScryer.class));
         cards.add(new SetCardInfo("Seedling Charm", 138, Rarity.COMMON, mage.cards.s.SeedlingCharm.class));
+        cards.add(new SetCardInfo("Seeds of Innocence", 139, Rarity.RARE, mage.cards.s.SeedsOfInnocence.class));
         cards.add(new SetCardInfo("Serene Heart", 140, Rarity.COMMON, mage.cards.s.SereneHeart.class));
         cards.add(new SetCardInfo("Sewer Rats", 37, Rarity.COMMON, mage.cards.s.SewerRats.class));
         cards.add(new SetCardInfo("Shadow Guildmage", 38, Rarity.COMMON, mage.cards.s.ShadowGuildmage.class));

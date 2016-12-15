@@ -54,7 +54,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.Token;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -70,24 +69,24 @@ public class CaribouRange extends CardImpl {
     }
 
     public CaribouRange(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
         this.subtype.add("Aura");
 
         // Enchant land you control
-        TargetPermanent auraTarget = new TargetControlledPermanent(new FilterControlledLandPermanent("land you control"));
+        TargetPermanent auraTarget = new TargetPermanent(new FilterControlledLandPermanent());
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Enchanted land has "{W}{W}, {T}: Put a 0/1 white Caribou creature token onto the battlefield."
+        // Enchanted land has "{W}{W}, {T}: Create a 0/1 white Caribou creature token."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CaribouToken()), new ManaCostsImpl("{W}{W}"));
         ability.addCost(new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
-        effect.setText("Enchanted land has \"{W}{W}, {T}: Put a 0/1 white Caribou creature token onto the battlefield.\"");
+        effect.setText("Enchanted land has \"{W}{W}, {T}: Create a 0/1 white Caribou creature token.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Sacrifice a Caribou token: You gain 1 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1),
-            new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter))));
+                new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter))));
     }
 
     public CaribouRange(final CaribouRange card) {

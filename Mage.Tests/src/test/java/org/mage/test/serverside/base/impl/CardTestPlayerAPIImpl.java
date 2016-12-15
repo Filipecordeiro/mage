@@ -714,8 +714,9 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         Assert.assertNotNull("There is no such permanent on the battlefield, cardName=" + cardName, found);
 
         Assert.assertTrue("(Battlefield) card type not found (" + cardName + ":" + type + ")", found.getCardType().contains(type));
-
-        Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ":" + subType + ")", found.getSubtype(currentGame).contains(subType));
+        if (subType != null) {
+            Assert.assertTrue("(Battlefield) card sub-type not equal (" + cardName + ":" + subType + ")", found.getSubtype(currentGame).contains(subType));
+        }
     }
 
     /**
@@ -915,6 +916,10 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      */
     public void assertActionCount(TestPlayer player, int count) {
         Assert.assertEquals("Actions left are not equal: ", count, player.getActionCount());
+    }
+
+    public void assertActivePlayer(TestPlayer player) {
+        Assert.assertEquals("message", currentGame.getState().getActivePlayerId(), player.getId());
     }
 
     public Permanent getPermanent(String cardName, Player player) {

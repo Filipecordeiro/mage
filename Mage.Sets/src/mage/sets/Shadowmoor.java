@@ -27,14 +27,11 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
+import mage.cards.t.Torture;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -49,7 +46,7 @@ public class Shadowmoor extends ExpansionSet {
     }
 
     private Shadowmoor() {
-        super("Shadowmoor", "SHM", "mage.sets.shadowmoor", new GregorianCalendar(2008, 4, 2).getTime(), SetType.EXPANSION);
+        super("Shadowmoor", "SHM", ExpansionSet.buildDate(2008, 4, 2), SetType.EXPANSION);
         this.blockName = "Shadowmoor";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -327,7 +324,7 @@ public class Shadowmoor extends ExpansionSet {
         cards.add(new SetCardInfo("Toil to Renown", 130, Rarity.COMMON, mage.cards.t.ToilToRenown.class));
         cards.add(new SetCardInfo("Torpor Dust", 177, Rarity.COMMON, mage.cards.t.TorporDust.class));
         cards.add(new SetCardInfo("Torrent of Souls", 199, Rarity.UNCOMMON, mage.cards.t.TorrentOfSouls.class));
-        cards.add(new SetCardInfo("Torture", 80, Rarity.COMMON, mage.cards.t.Torture1.class));
+        cards.add(new SetCardInfo("Torture", 80, Rarity.COMMON, Torture.class));
         cards.add(new SetCardInfo("Tower Above", 131, Rarity.UNCOMMON, mage.cards.t.TowerAbove.class));
         cards.add(new SetCardInfo("Traitor's Roar", 200, Rarity.COMMON, mage.cards.t.TraitorsRoar.class));
         cards.add(new SetCardInfo("Trip Noose", 266, Rarity.UNCOMMON, mage.cards.t.TripNoose.class));

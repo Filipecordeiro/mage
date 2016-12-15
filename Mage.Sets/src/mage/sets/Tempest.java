@@ -1,16 +1,12 @@
 package mage.sets;
 
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
-import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
-
 public class Tempest extends ExpansionSet {
+
     private static final Tempest fINSTANCE = new Tempest();
 
     public static Tempest getInstance() {
@@ -18,7 +14,7 @@ public class Tempest extends ExpansionSet {
     }
 
     private Tempest() {
-        super("Tempest", "TMP", "mage.sets.tempest", new GregorianCalendar(1997, 9, 1).getTime(), SetType.EXPANSION);
+        super("Tempest", "TMP", ExpansionSet.buildDate(1997, 10, 1), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -262,6 +258,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Rootwater Hunter", 82, Rarity.COMMON, mage.cards.r.RootwaterHunter.class));
         cards.add(new SetCardInfo("Rootwater Matriarch", 83, Rarity.RARE, mage.cards.r.RootwaterMatriarch.class));
         cards.add(new SetCardInfo("Ruby Medallion", 295, Rarity.RARE, mage.cards.r.RubyMedallion.class));
+        cards.add(new SetCardInfo("Sacred Guide", 250, Rarity.RARE, mage.cards.s.SacredGuide.class));
         cards.add(new SetCardInfo("Sadistic Glee", 47, Rarity.COMMON, mage.cards.s.SadisticGlee.class));
         cards.add(new SetCardInfo("Safeguard", 251, Rarity.RARE, mage.cards.s.Safeguard.class));
         cards.add(new SetCardInfo("Salt Flats", 330, Rarity.RARE, mage.cards.s.SaltFlats.class));
@@ -339,6 +336,7 @@ public class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquility", 155, Rarity.COMMON, mage.cards.t.Tranquility.class));
         cards.add(new SetCardInfo("Trumpeting Armodon", 156, Rarity.UNCOMMON, mage.cards.t.TrumpetingArmodon.class));
         cards.add(new SetCardInfo("Twitch", 99, Rarity.COMMON, mage.cards.t.Twitch.class));
+        cards.add(new SetCardInfo("Unstable Shapeshifter", 100, Rarity.RARE, mage.cards.u.UnstableShapeshifter.class));
         cards.add(new SetCardInfo("Vec Townships", 339, Rarity.UNCOMMON, mage.cards.v.VecTownships.class));
         cards.add(new SetCardInfo("Verdant Force", 157, Rarity.RARE, mage.cards.v.VerdantForce.class));
         cards.add(new SetCardInfo("Verdigris", 158, Rarity.UNCOMMON, mage.cards.v.Verdigris.class));

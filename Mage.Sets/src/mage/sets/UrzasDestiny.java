@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
+import mage.constants.SetType;
 
 /**
  *
@@ -46,7 +44,7 @@ public class UrzasDestiny extends ExpansionSet {
     }
 
     private UrzasDestiny() {
-        super("Urza's Destiny", "UDS", "mage.sets.urzasdestiny", new GregorianCalendar(1999, 6, 23).getTime(), SetType.EXPANSION);
+        super("Urza's Destiny", "UDS", ExpansionSet.buildDate(1999, 6, 7), SetType.EXPANSION);
         this.blockName = "Urza";
         this.parentSet = UrzasSaga.getInstance();
         this.hasBasicLands = false;
@@ -163,6 +161,7 @@ public class UrzasDestiny extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Incubator", 142, Rarity.RARE, mage.cards.u.UrzasIncubator.class));
         cards.add(new SetCardInfo("Voice of Duty", 23, Rarity.UNCOMMON, mage.cards.v.VoiceOfDuty.class));
         cards.add(new SetCardInfo("Voice of Reason", 24, Rarity.UNCOMMON, mage.cards.v.VoiceOfReason.class));
+        cards.add(new SetCardInfo("Wake of Destruction", 99, Rarity.RARE, mage.cards.w.WakeOfDestruction.class));
         cards.add(new SetCardInfo("Wall of Glare", 25, Rarity.COMMON, mage.cards.w.WallOfGlare.class));
         cards.add(new SetCardInfo("Wild Colos", 100, Rarity.COMMON, mage.cards.w.WildColos.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 124, Rarity.COMMON, mage.cards.y.YavimayaElder.class));

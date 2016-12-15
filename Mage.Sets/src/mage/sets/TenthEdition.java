@@ -28,14 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -50,7 +46,7 @@ public class TenthEdition extends ExpansionSet {
     }
 
     private TenthEdition() {
-        super("Tenth Edition", "10E", "mage.sets.tenthedition", new GregorianCalendar(2007, 6, 14).getTime(), SetType.CORE);
+        super("Tenth Edition", "10E", ExpansionSet.buildDate(2007, 6, 14), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
@@ -238,6 +234,7 @@ public class TenthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Warhammer", 332, Rarity.RARE, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Loyal Sentry", 27, Rarity.RARE, mage.cards.l.LoyalSentry.class));
         cards.add(new SetCardInfo("Lumengrid Warden", 89, Rarity.COMMON, mage.cards.l.LumengridWarden.class));
+        cards.add(new SetCardInfo("Luminesce", 28, Rarity.UNCOMMON, mage.cards.l.Luminesce.class));
         cards.add(new SetCardInfo("Lure", 276, Rarity.UNCOMMON, mage.cards.l.Lure.class));
         cards.add(new SetCardInfo("Mahamoti Djinn", 90, Rarity.RARE, mage.cards.m.MahamotiDjinn.class));
         cards.add(new SetCardInfo("Manabarbs", 218, Rarity.RARE, mage.cards.m.Manabarbs.class));

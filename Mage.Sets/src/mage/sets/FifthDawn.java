@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +44,7 @@ public class FifthDawn extends ExpansionSet {
     }
 
     private FifthDawn() {
-        super("Fifth Dawn", "5DN", "mage.sets.fifthdawn", new GregorianCalendar(2004, 5, 4).getTime(), SetType.EXPANSION);
+        super("Fifth Dawn", "5DN", ExpansionSet.buildDate(2004, 5, 4), SetType.EXPANSION);
         this.blockName = "Mirrodin";
         this.parentSet = Mirrodin.getInstance();
         this.hasBasicLands = false;
@@ -87,7 +85,7 @@ public class FifthDawn extends ExpansionSet {
         cards.add(new SetCardInfo("Cackling Imp", 44, Rarity.COMMON, mage.cards.c.CacklingImp.class));
         cards.add(new SetCardInfo("Channel the Suns", 84, Rarity.UNCOMMON, mage.cards.c.ChannelTheSuns.class));
         cards.add(new SetCardInfo("Chimeric Coils", 108, Rarity.UNCOMMON, mage.cards.c.ChimericCoils.class));
-        cards.add(new SetCardInfo("Circle of Protection: Artifacts", 8, Rarity.COMMON, mage.cards.c.CircleOfProtectionArtifacts.class));
+        cards.add(new SetCardInfo("Circle of Protection: Artifacts", 8, Rarity.UNCOMMON, mage.cards.c.CircleOfProtectionArtifacts.class));
         cards.add(new SetCardInfo("Clearwater Goblet", 109, Rarity.RARE, mage.cards.c.ClearwaterGoblet.class));
         cards.add(new SetCardInfo("Clock of Omens", 110, Rarity.UNCOMMON, mage.cards.c.ClockOfOmens.class));
         cards.add(new SetCardInfo("Composite Golem", 111, Rarity.UNCOMMON, mage.cards.c.CompositeGolem.class));

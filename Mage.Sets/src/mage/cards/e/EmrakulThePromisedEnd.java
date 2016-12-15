@@ -37,7 +37,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.abilities.effects.common.turn.ControlTargetPlayerNextTurnEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -64,12 +63,13 @@ import mage.util.CardUtil;
 public class EmrakulThePromisedEnd extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("instants");
+
     static {
         filter.add(new CardTypePredicate(CardType.INSTANT));
     }
 
     public EmrakulThePromisedEnd(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{13}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{13}");
         this.supertype.add("Legendary");
         this.subtype.add("Eldrazi");
         this.power = new MageInt(13);
@@ -143,10 +143,10 @@ class EmrakulThePromisedEndCostReductionEffect extends CostModificationEffectImp
     }
 }
 
-class EmrakulThePromisedEndGainControlEffect extends ControlTargetPlayerNextTurnEffect {
+class EmrakulThePromisedEndGainControlEffect extends OneShotEffect {
 
     EmrakulThePromisedEndGainControlEffect() {
-        super();
+        super(Outcome.GainControl);
         this.staticText = "you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn";
     }
 
@@ -164,8 +164,12 @@ class EmrakulThePromisedEndGainControlEffect extends ControlTargetPlayerNextTurn
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (controller != null && targetPlayer != null) {
-            game.getState().getTurnMods().add(new TurnMod(targetPlayer.getId(), false));
+            TurnMod controlPlayerTurnMod = new TurnMod(targetPlayer.getId(), controller.getId());
+            TurnMod extraTurnMod = new TurnMod(targetPlayer.getId(), false);
+            controlPlayerTurnMod.setSubsequentTurnMod(extraTurnMod);
+            game.getState().getTurnMods().add(controlPlayerTurnMod);
+            return true;
         }
-        return super.apply(game, source);
+        return false;
     }
 }

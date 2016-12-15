@@ -57,10 +57,6 @@ public class AjaniCallerOfThePride extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{1}{W}{W}");
         this.subtype.add("Ajani");
 
-    }
-
-    @Override
-    public void build() {
         this.addAbility(new PlanswalkerEntersWithLoyalityCountersAbility(4));
         // +1: Put a +1/+1 counter on up to one target creature.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
@@ -75,7 +71,7 @@ public class AjaniCallerOfThePride extends CardImpl {
         ability = new LoyaltyAbility(effects, -3);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        // -8: Put X 2/2 white Cat creature tokens onto the battlefield, where X is your life total.
+        // -8: create X 2/2 white Cat creature tokens, where X is your life total.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new CatToken(), new ControllerLifeCount()), -8));
     }
 

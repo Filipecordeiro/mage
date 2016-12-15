@@ -27,14 +27,11 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.constants.SetType;
-import mage.cards.ExpansionSet;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.cards.ExpansionSet;
+import mage.cards.g.GoblinGrenade;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -49,7 +46,7 @@ public class Magic2012 extends ExpansionSet {
     }
 
     private Magic2012() {
-        super("Magic 2012", "M12", "mage.sets.magic2012", new GregorianCalendar(2011, 6, 9).getTime(), SetType.CORE);
+        super("Magic 2012", "M12", ExpansionSet.buildDate(2011, 7, 15), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
@@ -159,7 +156,7 @@ public class Magic2012 extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Bangchuckers", 137, Rarity.UNCOMMON, mage.cards.g.GoblinBangchuckers.class));
         cards.add(new SetCardInfo("Goblin Chieftain", 138, Rarity.RARE, mage.cards.g.GoblinChieftain.class));
         cards.add(new SetCardInfo("Goblin Fireslinger", 139, Rarity.COMMON, mage.cards.g.GoblinFireslinger.class));
-        cards.add(new SetCardInfo("Goblin Grenade", 140, Rarity.UNCOMMON, mage.cards.g.GoblinGrenade.class));
+        cards.add(new SetCardInfo("Goblin Grenade", 140, Rarity.UNCOMMON, GoblinGrenade.class));
         cards.add(new SetCardInfo("Goblin Piker", 141, Rarity.COMMON, mage.cards.g.GoblinPiker.class));
         cards.add(new SetCardInfo("Goblin Tunneler", 142, Rarity.COMMON, mage.cards.g.GoblinTunneler.class));
         cards.add(new SetCardInfo("Goblin War Paint", 143, Rarity.COMMON, mage.cards.g.GoblinWarPaint.class));

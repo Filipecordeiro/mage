@@ -45,9 +45,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetOpponent;
 
@@ -58,26 +55,20 @@ import mage.target.common.TargetOpponent;
  */
 public class QuestingPhelddagrif extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("black and from red");
-
-    static {
-        filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLACK), new ColorPredicate(ObjectColor.RED)));
-    }
-
     public QuestingPhelddagrif(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}{W}{U}");
         this.subtype.add("Phelddagrif");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // {G}: Questing Phelddagrif gets +1/+1 until end of turn. Target opponent puts a 1/1 green Hippo creature token onto the battlefield.
+        // {G}: Questing Phelddagrif gets +1/+1 until end of turn. Target opponent creates a 1/1 green Hippo creature token.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
             new ManaCostsImpl("{G}"));
         ability.addEffect(new CreateTokenTargetEffect(new HippoToken()));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         // {W}: Questing Phelddagrif gains protection from black and from red until end of turn. Target opponent gains 2 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new ProtectionAbility(filter),
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED),
             Duration.EndOfTurn), new ManaCostsImpl("{W}"));
         ability.addEffect(new GainLifeTargetEffect(2));
         ability.addTarget(new TargetOpponent());

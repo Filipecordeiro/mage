@@ -31,9 +31,7 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.SetType;
 
-import java.util.GregorianCalendar;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA. User: Loki Date: 20.12.10 Time: 21:01
@@ -46,7 +44,7 @@ public class Guildpact extends ExpansionSet {
     }
 
     private Guildpact() {
-        super("Guildpact", "GPT", "mage.sets.guildpact", new GregorianCalendar(2006, 1, 3).getTime(), SetType.EXPANSION);
+        super("Guildpact", "GPT", ExpansionSet.buildDate(2006, 1, 3), SetType.EXPANSION);
         this.blockName = "Ravnica";
         this.parentSet = RavnicaCityOfGuilds.getInstance();
         this.hasBasicLands = false;
@@ -63,6 +61,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Battering Wurm", 79, Rarity.UNCOMMON, mage.cards.b.BatteringWurm.class));
         cards.add(new SetCardInfo("Beastmaster's Magemark", 80, Rarity.COMMON, mage.cards.b.BeastmastersMagemark.class));
         cards.add(new SetCardInfo("Belfry Spirit", 2, Rarity.UNCOMMON, mage.cards.b.BelfrySpirit.class));
+        cards.add(new SetCardInfo("Benediction of Moons", 3, Rarity.COMMON, mage.cards.b.BenedictionOfMoons.class));
         cards.add(new SetCardInfo("Blind Hunter", 102, Rarity.COMMON, mage.cards.b.BlindHunter.class));
         cards.add(new SetCardInfo("Bloodscale Prowler", 64, Rarity.COMMON, mage.cards.b.BloodscaleProwler.class));
         cards.add(new SetCardInfo("Borborygmos", 103, Rarity.RARE, mage.cards.b.Borborygmos.class));
@@ -154,6 +153,7 @@ public class Guildpact extends ExpansionSet {
         cards.add(new SetCardInfo("Revenant Patriarch", 59, Rarity.UNCOMMON, mage.cards.r.RevenantPatriarch.class));
         cards.add(new SetCardInfo("Rumbling Slum", 126, Rarity.RARE, mage.cards.r.RumblingSlum.class));
         cards.add(new SetCardInfo("Runeboggle", 33, Rarity.COMMON, mage.cards.r.Runeboggle.class));
+        cards.add(new SetCardInfo("Sanguine Praetor", 60, Rarity.RARE, mage.cards.s.SanguinePraetor.class));
         cards.add(new SetCardInfo("Savage Twister", 127, Rarity.UNCOMMON, mage.cards.s.SavageTwister.class));
         cards.add(new SetCardInfo("Scab-Clan Mauler", 128, Rarity.COMMON, mage.cards.s.ScabClanMauler.class));
         cards.add(new SetCardInfo("Schismotivate", 129, Rarity.UNCOMMON, mage.cards.s.Schismotivate.class));

@@ -32,6 +32,7 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -213,33 +214,34 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized boolean connect(final Connection connection) {
-        return establishJBossRemotingConnection(connection) && handleRemotingTaskExceptions(new RemotingTask() {
-            @Override
-            public boolean run() throws Throwable {
-                logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
-                boolean registerResult;
-                if (connection.getAdminPassword() == null) {
-                    // for backward compatibility. don't remove twice call - first one does nothing but for version checking
-                    registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
-                    if (registerResult) {
-                        server.setUserData(connection.getUsername(), sessionId, connection.getUserData());
+        return establishJBossRemotingConnection(connection)
+                && handleRemotingTaskExceptions(new RemotingTask() {
+                    @Override
+                    public boolean run() throws Throwable {
+                        logger.info("Trying to log-in as " + getUserName() + " to XMAGE server at " + connection.getHost() + ":" + connection.getPort());
+                        boolean registerResult;
+                        if (connection.getAdminPassword() == null) {
+                            // for backward compatibility. don't remove twice call - first one does nothing but for version checking
+                            registerResult = server.connectUser(connection.getUsername(), connection.getPassword(), sessionId, client.getVersion());
+                            if (registerResult) {
+                                server.setUserData(connection.getUsername(), sessionId, connection.getUserData(), client.getVersion().toString());
+                            }
+                        } else {
+                            registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
+                        }
+                        if (registerResult) {
+                            serverState = server.getServerState();
+                            if (!connection.getUsername().equals("Admin")) {
+                                updateDatabase(connection.isForceDBComparison(), serverState);
+                            }
+                            logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
+                            client.connected(getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
+                            return true;
+                        }
+                        disconnect(false);
+                        return false;
                     }
-                } else {
-                    registerResult = server.connectAdmin(connection.getAdminPassword(), sessionId, client.getVersion());
-                }
-                if (registerResult) {
-                    serverState = server.getServerState();
-                    if (!connection.getUsername().equals("Admin")) {
-                        updateDatabase(connection.isForceDBComparison(), serverState);
-                    }
-                    logger.info("Logged-in as " + getUserName() + " to MAGE server at " + connection.getHost() + ":" + connection.getPort());
-                    client.connected(getUserName() + "@" + connection.getHost() + ":" + connection.getPort() + " ");
-                    return true;
-                }
-                disconnect(false);
-                return false;
-            }
-        });
+                });
     }
 
     @Override
@@ -488,7 +490,7 @@ public class SessionImpl implements Session {
             sessionState = SessionState.DISCONNECTED;
             logger.info("Disconnected ... ");
             if (askForReconnect) {
-                client.showError("Network error.  You have been disconnected");
+                client.showError("Network error.  You have been disconnected from " + connection.getHost());
             }
             client.disconnected(askForReconnect); // MageFrame with check to reconnect
             pingTime.clear();
@@ -675,6 +677,11 @@ public class SessionImpl implements Session {
     public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                if (deckList != null) {
+                    deckList.setCardLayout(null);
+                    deckList.setSideboardLayout(null);
+                }
                 return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (InvalidDeckException iex) {
@@ -693,6 +700,11 @@ public class SessionImpl implements Session {
     public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList, String password) {
         try {
             if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                if (deckList != null) {
+                    deckList.setCardLayout(null);
+                    deckList.setSideboardLayout(null);
+                }
                 return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList, password);
             }
         } catch (GameException ex) {
@@ -1175,6 +1187,11 @@ public class SessionImpl implements Session {
     public boolean submitDeck(UUID tableId, DeckCardLists deck) {
         try {
             if (isConnected()) {
+                // Workaround to fix Can't join table problem
+                if (deck != null) {
+                    deck.setCardLayout(null);
+                    deck.setSideboardLayout(null);
+                }
                 return server.submitDeck(sessionId, tableId, deck);
             }
         } catch (GameException ex) {
@@ -1191,6 +1208,10 @@ public class SessionImpl implements Session {
     public boolean updateDeck(UUID tableId, DeckCardLists deck) {
         try {
             if (isConnected()) {
+                if (deck != null) {
+                    deck.setCardLayout(null);
+                    deck.setSideboardLayout(null);
+                }
                 server.updateDeck(sessionId, tableId, deck);
                 return true;
             }
@@ -1413,9 +1434,12 @@ public class SessionImpl implements Session {
     @Override
     public boolean endUserSession(String userSessionId) {
         try {
-            if (isConnected()) {
-                server.endUserSession(sessionId, userSessionId);
-                return true;
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute userSessionId " + userSessionId + "?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.endUserSession(sessionId, userSessionId);
+                    return true;
+                }
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1428,9 +1452,12 @@ public class SessionImpl implements Session {
     @Override
     public boolean muteUserChat(String userName, long durationMinutes) {
         try {
-            if (isConnected()) {
-                server.muteUser(sessionId, userName, durationMinutes);
-                return true;
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to mute user " + userName + " for " + durationMinutes + " minutes?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.muteUser(sessionId, userName, durationMinutes);
+                    return true;
+                }
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1443,9 +1470,12 @@ public class SessionImpl implements Session {
     @Override
     public boolean toggleActivation(String userName) {
         try {
-            if (isConnected()) {
-                server.toggleActivation(sessionId, userName);
-                return true;
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to activate/deactivate user: " + userName + " for?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.toggleActivation(sessionId, userName);
+                    return true;
+                }
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1458,9 +1488,12 @@ public class SessionImpl implements Session {
     @Override
     public boolean lockUser(String userName, long durationMinute) {
         try {
-            if (isConnected()) {
-                server.lockUser(sessionId, userName, durationMinute);
-                return true;
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you mean to lock user: " + userName + " for " + durationMinute + " minutes?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (isConnected()) {
+                    server.lockUser(sessionId, userName, durationMinute);
+                    return true;
+                }
             }
         } catch (MageException ex) {
             handleMageException(ex);
@@ -1512,7 +1545,7 @@ public class SessionImpl implements Session {
     public boolean updatePreferencesForServer(UserData userData) {
         try {
             if (isConnected()) {
-                server.setUserData(connection.getUsername(), sessionId, userData);
+                server.setUserData(connection.getUsername(), sessionId, userData, null);
             }
             return true;
         } catch (MageException ex) {

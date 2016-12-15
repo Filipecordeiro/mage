@@ -24,18 +24,13 @@
 * The views and conclusions contained in the software and documentation are those of the
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
-*/
-
+ */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.constants.SetType;
+import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
-import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.constants.SetType;
 
 /**
  *
@@ -50,7 +45,7 @@ public class UrzasSaga extends ExpansionSet {
     }
 
     private UrzasSaga() {
-        super("Urza's Saga", "USG", "mage.sets.urzassaga", new GregorianCalendar(1998, 10, 1).getTime(), SetType.EXPANSION);
+        super("Urza's Saga", "USG", ExpansionSet.buildDate(1998, 10, 12), SetType.EXPANSION);
         this.blockName = "Urza";
         this.hasBoosters = true;
         this.numBoosterLands = 0;
@@ -204,10 +199,12 @@ public class UrzasSaga extends ExpansionSet {
         cards.add(new SetCardInfo("Karn, Silver Golem", 298, Rarity.RARE, mage.cards.k.KarnSilverGolem.class));
         cards.add(new SetCardInfo("Launch", 82, Rarity.COMMON, mage.cards.l.Launch.class));
         cards.add(new SetCardInfo("Lay Waste", 201, Rarity.COMMON, mage.cards.l.LayWaste.class));
+        cards.add(new SetCardInfo("Lifeline", 299, Rarity.RARE, mage.cards.l.Lifeline.class));
         cards.add(new SetCardInfo("Lightning Dragon", 202, Rarity.RARE, mage.cards.l.LightningDragon.class));
         cards.add(new SetCardInfo("Lilting Refrain", 83, Rarity.UNCOMMON, mage.cards.l.LiltingRefrain.class));
         cards.add(new SetCardInfo("Lingering Mirage", 84, Rarity.UNCOMMON, mage.cards.l.LingeringMirage.class));
         cards.add(new SetCardInfo("Looming Shade", 139, Rarity.COMMON, mage.cards.l.LoomingShade.class));
+        cards.add(new SetCardInfo("Lotus Blossom", 300, Rarity.RARE, mage.cards.l.LotusBlossom.class));
         cards.add(new SetCardInfo("Lull", 267, Rarity.COMMON, mage.cards.l.Lull.class));
         cards.add(new SetCardInfo("Lurking Evil", 140, Rarity.RARE, mage.cards.l.LurkingEvil.class));
         cards.add(new SetCardInfo("Mana Leech", 141, Rarity.UNCOMMON, mage.cards.m.ManaLeech.class));

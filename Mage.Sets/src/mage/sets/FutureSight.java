@@ -27,11 +27,9 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -46,7 +44,7 @@ public class FutureSight extends ExpansionSet {
     }
 
     private FutureSight() {
-        super("Future Sight", "FUT", "mage.sets.futuresight", new GregorianCalendar(2007, 4, 4).getTime(), SetType.EXPANSION);
+        super("Future Sight", "FUT", ExpansionSet.buildDate(2007, 4, 4), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;
@@ -178,6 +176,7 @@ public class FutureSight extends ExpansionSet {
         cards.add(new SetCardInfo("Scourge of Kher Ridges", 107, Rarity.RARE, mage.cards.s.ScourgeOfKherRidges.class));
         cards.add(new SetCardInfo("Scout's Warning", 16, Rarity.RARE, mage.cards.s.ScoutsWarning.class));
         cards.add(new SetCardInfo("Second Wind", 57, Rarity.UNCOMMON, mage.cards.s.SecondWind.class));
+        cards.add(new SetCardInfo("Shapeshifter's Marrow", 58, Rarity.RARE, mage.cards.s.ShapeshiftersMarrow.class));
         cards.add(new SetCardInfo("Shimian Specter", 76, Rarity.RARE, mage.cards.s.ShimianSpecter.class));
         cards.add(new SetCardInfo("Skirk Ridge Exhumer", 77, Rarity.UNCOMMON, mage.cards.s.SkirkRidgeExhumer.class));
         cards.add(new SetCardInfo("Skizzik Surger", 120, Rarity.UNCOMMON, mage.cards.s.SkizzikSurger.class));

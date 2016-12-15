@@ -28,11 +28,10 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
 import mage.cards.CardGraphicInfo;
+import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 /**
  *
@@ -47,7 +46,7 @@ public class FridayNightMagic extends ExpansionSet {
     }
 
     private FridayNightMagic() {
-        super("Friday Night Magic", "FNMP", "mage.sets.fridaynightmagic", new GregorianCalendar(2011, 6, 17).getTime(), SetType.PROMOTIONAL);
+        super("Friday Night Magic", "FNMP", ExpansionSet.buildDate(2011, 6, 17), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Abzan Beastmaster", 180, Rarity.UNCOMMON, mage.cards.a.AbzanBeastmaster.class));
@@ -127,6 +126,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Forbid", 27, Rarity.UNCOMMON, mage.cards.f.Forbid.class));
         cards.add(new SetCardInfo("Forbidden Alchemy", 146, Rarity.COMMON, mage.cards.f.ForbiddenAlchemy.class));
         cards.add(new SetCardInfo("Force Spike", 91, Rarity.COMMON, mage.cards.f.ForceSpike.class));
+        cards.add(new SetCardInfo("Fortune's Favor", 201, Rarity.COMMON, mage.cards.f.FortunesFavor.class));
         cards.add(new SetCardInfo("Frenzied Goblin", 176, Rarity.UNCOMMON, mage.cards.f.FrenziedGoblin.class));
         cards.add(new SetCardInfo("Frost Walker", 181, Rarity.UNCOMMON, mage.cards.f.FrostWalker.class));
         cards.add(new SetCardInfo("Gatekeeper of Malakir", 126, Rarity.UNCOMMON, mage.cards.g.GatekeeperOfMalakir.class));
@@ -175,6 +175,7 @@ public class FridayNightMagic extends ExpansionSet {
         cards.add(new SetCardInfo("Muscle Sliver", 33, Rarity.COMMON, mage.cards.m.MuscleSliver.class));
         cards.add(new SetCardInfo("Myr Enforcer", 105, Rarity.COMMON, mage.cards.m.MyrEnforcer.class));
         cards.add(new SetCardInfo("Nissa's Pilgrimage", 188, Rarity.COMMON, mage.cards.n.NissasPilgrimage.class));
+        cards.add(new SetCardInfo("Noose Constrictor", 200, Rarity.SPECIAL, mage.cards.n.NooseConstrictor.class));
         cards.add(new SetCardInfo("Oblivion Ring", 114, Rarity.COMMON, mage.cards.o.OblivionRing.class));
         cards.add(new SetCardInfo("Ophidian", 13, Rarity.UNCOMMON, mage.cards.o.Ophidian.class));
         cards.add(new SetCardInfo("Orator of Ojutai", 184, Rarity.UNCOMMON, mage.cards.o.OratorOfOjutai.class));

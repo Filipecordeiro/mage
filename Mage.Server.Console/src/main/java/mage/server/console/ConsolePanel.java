@@ -36,7 +36,9 @@ package mage.server.console;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -388,8 +390,9 @@ class TableUserModel extends AbstractTableModel {
     public static final int POS_GAME_INFO = 4;
     public static final int POS_USER_STATE = 5;
     public static final int POS_CHAT_MUTE = 6;
+    public static final int POS_CLIENT_VERSION = 7;
 
-    private final String[] columnNames = new String[]{"User Name", "Host", "Time Connected", "SessionId", "Gameinfo", "User state", "Chat mute"};
+    private final String[] columnNames = new String[]{"User Name", "Host", "Time Connected", "SessionId", "Gameinfo", "User state", "Chat mute", "Client Version"};
     private UserView[] users = new UserView[0];
     private static final DateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
     private static final DateFormat formatterTimeStamp = new SimpleDateFormat("yy-M-dd HH:mm:ss");
@@ -417,7 +420,7 @@ class TableUserModel extends AbstractTableModel {
             case POS_HOST:
                 return users[arg0].getHost();
             case POS_TIME_CONNECTED:
-                return formatterTime.format(users[arg0].getConnectionTime());
+                return formatterTime.format(users[arg0].getTimeConnected());
             case POS_SESSION_ID:
                 return users[arg0].getSessionId();
             case POS_GAME_INFO:
@@ -429,6 +432,8 @@ class TableUserModel extends AbstractTableModel {
                     return "";
                 }
                 return formatterTimeStamp.format(users[arg0].getMuteChatUntil());
+            case POS_CLIENT_VERSION:
+                return users[arg0].getClientVersion();
         }
         return "";
     }
@@ -535,6 +540,7 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
     private List<UserView> previousUsers;
 
     private static final Logger logger = Logger.getLogger(UpdateUsersTask.class);
+    Map<String, String> peopleIps = new HashMap<>();
 
     UpdateUsersTask(Session session, ConsolePanel panel) {
         this.session = session;
@@ -569,6 +575,16 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
             for (UserView u2 : usersToCheck) {
                 if (u1.getUserName().equals(u2.getUserName())) {
                     found = true;
+                    String s = u1.getUserName() + "," + u1.getHost();
+                    if (peopleIps.get(s) == null) {
+                        logger.warn("Found new user: " + u1.getUserName() + "," + u1.getHost());
+                        peopleIps.put(s, "1");
+                    }
+                    s = u2.getUserName() + "," + u2.getHost();
+                    if (peopleIps.get(s) == null) {
+                        logger.warn("Found new user: " + u1.getUserName() + "," + u1.getHost());
+                        peopleIps.put(s, "1");
+                    }                    
                     break;
                 }
             }

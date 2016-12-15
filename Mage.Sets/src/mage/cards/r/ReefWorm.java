@@ -49,7 +49,7 @@ public class ReefWorm extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // When Reef Worm dies, put a 3/3 blue Fish creature token onto the battlefield with "When this creature dies, put a 6/6 blue Whale creature token onto the battlefield with "When this creature dies, put a 9/9 blue Kraken creature token onto the battlefield.""
+        // When Reef Worm dies, create a 3/3 blue Fish creature token with "When this creature dies, create a 6/6 blue Whale creature token with "When this creature dies, create a 9/9 blue Kraken creature token.""
         addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new ReefWormFishToken())));
     }
 
@@ -66,7 +66,7 @@ public class ReefWorm extends CardImpl {
 class ReefWormFishToken extends Token {
 
     ReefWormFishToken() {
-        super("Fish", "a 3/3 blue Fish creature token onto the battlefield with \"When this creature dies, put a 6/6 blue Whale creature token onto the battlefield with \"When this creature dies, put a 9/9 blue Kraken creature token onto the battlefield.\"\"");
+        super("Fish", "3/3 blue Fish creature token with \"When this creature dies, create a 6/6 blue Whale creature token with \"When this creature dies, create a 9/9 blue Kraken creature token.\"\"");
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
@@ -81,7 +81,7 @@ class ReefWormFishToken extends Token {
 class ReefWormWhaleToken extends Token {
 
     ReefWormWhaleToken() {
-        super("Whale", "a 6/6 blue Whale creature token with \"When this creature dies, put a 9/9 blue Kraken creature token onto the battlefield.\"");
+        super("Whale", "6/6 blue Whale creature token with \"When this creature dies, create a 9/9 blue Kraken creature token.\"");
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
@@ -96,7 +96,7 @@ class ReefWormWhaleToken extends Token {
 class ReefWormKrakenToken extends Token {
 
     ReefWormKrakenToken() {
-        super("Kraken", "a 9/9 blue Kraken creature token");
+        super("Kraken", "9/9 blue Kraken creature token");
         setOriginalExpansionSetCode("C14");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);

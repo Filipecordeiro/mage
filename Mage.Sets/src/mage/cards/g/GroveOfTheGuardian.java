@@ -61,12 +61,12 @@ public class GroveOfTheGuardian extends CardImpl {
     }
 
     public GroveOfTheGuardian(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {C} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 0, 0, 0, 0, 1), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new TapSourceCost()));
 
-        // {3}{G}{W}, {T}, Tap two untapped creatures you control, Sacrifice Grove of the Guardian: Put an 8/8 green and white Elemental creature token with vigilance onto the battlefield.
+        // {3}{G}{W}, {T}, Tap two untapped creatures you control, Sacrifice Grove of the Guardian: Create an 8/8 green and white Elemental creature token with vigilance.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ElementalToken(), 1), new ManaCostsImpl("{3}{G}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
@@ -86,7 +86,7 @@ public class GroveOfTheGuardian extends CardImpl {
     private class ElementalToken extends Token {
 
         ElementalToken() {
-            super("Elemental", "an 8/8 green and white Elemental creature token with vigilance");
+            super("Elemental", "8/8 green and white Elemental creature token with vigilance");
 
             cardType.add(CardType.CREATURE);
             color.setGreen(true);

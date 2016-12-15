@@ -27,14 +27,11 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
+import mage.cards.i.IcatianJavelineers;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -48,7 +45,7 @@ public class ElspethVsKiora extends ExpansionSet {
     }
 
     private ElspethVsKiora() {
-        super("Duel Decks: Elspeth vs. Kiora", "DDO", "mage.sets.elspethvskiora", new GregorianCalendar(2015, 2, 27).getTime(), SetType.SUPPLEMENTAL);
+        super("Duel Decks: Elspeth vs. Kiora", "DDO", ExpansionSet.buildDate(2015, 2, 27), SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks";
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Accumulated Knowledge", 35, Rarity.COMMON, mage.cards.a.AccumulatedKnowledge.class));
@@ -74,7 +71,7 @@ public class ElspethVsKiora extends ExpansionSet {
         cards.add(new SetCardInfo("Gustcloak Savior", 11, Rarity.RARE, mage.cards.g.GustcloakSavior.class));
         cards.add(new SetCardInfo("Gustcloak Sentinel", 12, Rarity.UNCOMMON, mage.cards.g.GustcloakSentinel.class));
         cards.add(new SetCardInfo("Gustcloak Skirmisher", 13, Rarity.UNCOMMON, mage.cards.g.GustcloakSkirmisher.class));
-        cards.add(new SetCardInfo("Icatian Javelineers", 14, Rarity.COMMON, mage.cards.i.IcatianJavelineers1.class));
+        cards.add(new SetCardInfo("Icatian Javelineers", 14, Rarity.COMMON, IcatianJavelineers.class));
         cards.add(new SetCardInfo("Inkwell Leviathan", 37, Rarity.RARE, mage.cards.i.InkwellLeviathan.class));
         cards.add(new SetCardInfo("Island", 60, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 61, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));

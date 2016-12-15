@@ -61,7 +61,7 @@ import mage.watchers.Watcher;
  * @author LevelX2
  */
 public class LullmageMentor extends CardImpl {
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Merfolks you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Merfolk you control");
 
     static {
         filter.add(new SubtypePredicate("Merfolk"));
@@ -75,7 +75,7 @@ public class LullmageMentor extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever a spell or ability you control counters a spell, you may put a 1/1 blue Merfolk creature token onto the battlefield.
+        // Whenever a spell or ability you control counters a spell, you may create a 1/1 blue Merfolk creature token.
         this.addAbility(new LullmageMentorTriggeredAbility(), new CastedSpellsWithSpellTarget());
         // Tap seven untapped Merfolk you control: Counter target spell.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, filter, true)));

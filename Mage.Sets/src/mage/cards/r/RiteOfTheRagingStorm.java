@@ -65,14 +65,14 @@ public class RiteOfTheRagingStorm extends CardImpl {
     }
 
     public RiteOfTheRagingStorm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
         // Creatures named Lightning Rager can't attack you or planeswalkers you control.
         Effect effect = new CantAttackYouOrPlaneswalkerAllEffect(Duration.WhileOnBattlefield, filter);
         effect.setText("Creatures named Lightning Rager can't attack you or planeswalkers you control");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
-        // At the beginning of each player's upkeep, that player puts a 5/1 red Elemental creature token named Lightning Rager onto the battlefield.
+        // At the beginning of each player's upkeep, that player creates a 5/1 red Elemental creature token named Lightning Rager.
         // It has trample, haste, and "At the beginning of the end step, sacrifice this creature."
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RiteOfTheRagingStormEffect(), TargetController.ANY, false));
     }
@@ -89,12 +89,10 @@ public class RiteOfTheRagingStorm extends CardImpl {
 
 class RiteOfTheRagingStormEffect extends OneShotEffect {
 
-    private static final String effectText = "that player puts a 5/1 red Elemental creature token named Lightning Rager onto the battlefield. "
-            + "It has trample, haste, and \"At the beginning of the end step, sacrifice this creature.\"";
-
     RiteOfTheRagingStormEffect() {
         super(Outcome.Sacrifice);
-        staticText = effectText;
+        staticText = "that player creates a 5/1 red Elemental creature token named Lightning Rager. "
+                + "It has trample, haste, and \"At the beginning of the end step, sacrifice this creature.\"";
     }
 
     RiteOfTheRagingStormEffect(RiteOfTheRagingStormEffect effect) {
@@ -105,8 +103,7 @@ class RiteOfTheRagingStormEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            Token lightningRagerToken = new LightningRagerToken();
-            lightningRagerToken.putOntoBattlefield(1, game, this.getId(), player.getId());
+            return new LightningRagerToken().putOntoBattlefield(1, game, source.getSourceId(), player.getId());
         }
         return false;
     }
@@ -120,7 +117,7 @@ class RiteOfTheRagingStormEffect extends OneShotEffect {
 class LightningRagerToken extends Token {
 
     LightningRagerToken() {
-        super("Lightning Rager", "5/1 red Elemental creature token named Lightning Rager onto the battlefield."
+        super("Lightning Rager", "5/1 red Elemental creature token named Lightning Rager."
                 + "It has trample, haste, and \"At the beginning of the end step, sacrifice this creature.\"");
         this.setOriginalExpansionSetCode("C15");
         cardType.add(CardType.CREATURE);

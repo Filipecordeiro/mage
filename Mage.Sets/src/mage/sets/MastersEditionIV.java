@@ -27,11 +27,11 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
+import mage.cards.a.AesthirGlider;
+import mage.cards.e.EliteCatWarrior;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
 
 /**
  *
@@ -47,7 +47,7 @@ public class MastersEditionIV extends ExpansionSet {
     }
 
     private MastersEditionIV() {
-        super("Masters Edition IV", "ME4", "mage.sets.masterseditioniv", new GregorianCalendar(2011, 1, 10).getTime(), SetType.MAGIC_ONLINE);
+        super("Masters Edition IV", "ME4", ExpansionSet.buildDate(2011, 1, 10), SetType.MAGIC_ONLINE);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
@@ -56,7 +56,7 @@ public class MastersEditionIV extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         cards.add(new SetCardInfo("Acid Rain", 36, Rarity.RARE, mage.cards.a.AcidRain.class));
-        cards.add(new SetCardInfo("Aesthir Glider", 176, Rarity.COMMON, mage.cards.a.AesthirGlider1.class));
+        cards.add(new SetCardInfo("Aesthir Glider", 176, Rarity.COMMON, AesthirGlider.class));
         cards.add(new SetCardInfo("Air Elemental", 37, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Alaborn Musketeer", 1, Rarity.COMMON, mage.cards.a.AlabornMusketeer.class));
         cards.add(new SetCardInfo("Alaborn Trooper", 2, Rarity.COMMON, mage.cards.a.AlabornTrooper.class));
@@ -65,6 +65,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Ali from Cairo", 107, Rarity.RARE, mage.cards.a.AliFromCairo.class));
         cards.add(new SetCardInfo("Alluring Scent", 141, Rarity.COMMON, mage.cards.a.AlluringScent.class));
         cards.add(new SetCardInfo("Amulet of Kroog", 179, Rarity.COMMON, mage.cards.a.AmuletOfKroog.class));
+        cards.add(new SetCardInfo("Animate Artifact", 38, Rarity.UNCOMMON, mage.cards.a.AnimateArtifact.class));
         cards.add(new SetCardInfo("Argivian Blacksmith", 4, Rarity.UNCOMMON, mage.cards.a.ArgivianBlacksmith.class));
         cards.add(new SetCardInfo("Argothian Pixies", 142, Rarity.COMMON, mage.cards.a.ArgothianPixies.class));
         cards.add(new SetCardInfo("Argothian Treefolk", 143, Rarity.UNCOMMON, mage.cards.a.ArgothianTreefolk.class));
@@ -123,7 +124,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Ebony Horse", 198, Rarity.COMMON, mage.cards.e.EbonyHorse.class));
         cards.add(new SetCardInfo("Ebony Rhino", 199, Rarity.COMMON, mage.cards.e.EbonyRhino.class));
         cards.add(new SetCardInfo("Elephant Graveyard", 244, Rarity.UNCOMMON, mage.cards.e.ElephantGraveyard.class));
-        cards.add(new SetCardInfo("Elite Cat Warrior", 151, Rarity.COMMON, mage.cards.e.EliteCatWarrior1.class));
+        cards.add(new SetCardInfo("Elite Cat Warrior", 151, Rarity.COMMON, EliteCatWarrior.class));
         cards.add(new SetCardInfo("Energy Flux", 48, Rarity.UNCOMMON, mage.cards.e.EnergyFlux.class));
         cards.add(new SetCardInfo("Eye for an Eye", 12, Rarity.RARE, mage.cards.e.EyeForAnEye.class));
         cards.add(new SetCardInfo("False Summoning", 49, Rarity.COMMON, mage.cards.f.FalseSummoning.class));
@@ -197,6 +198,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Overwhelming Forces", 92, Rarity.RARE, mage.cards.o.OverwhelmingForces.class));
         cards.add(new SetCardInfo("Owl Familiar", 54, Rarity.COMMON, mage.cards.o.OwlFamiliar.class));
         cards.add(new SetCardInfo("Pentagram of the Ages", 220, Rarity.UNCOMMON, mage.cards.p.PentagramOfTheAges.class));
+        cards.add(new SetCardInfo("Personal Incarnation", 22, Rarity.RARE, mage.cards.p.PersonalIncarnation.class));
         cards.add(new SetCardInfo("Phantasmal Forces", 55, Rarity.COMMON, mage.cards.p.PhantasmalForces.class));
         cards.add(new SetCardInfo("Phantasmal Terrain", 56, Rarity.COMMON, mage.cards.p.PhantasmalTerrain.class));
         cards.add(new SetCardInfo("Planar Gate", 221, Rarity.UNCOMMON, mage.cards.p.PlanarGate.class));
@@ -213,8 +215,10 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Regrowth", 163, Rarity.RARE, mage.cards.r.Regrowth.class));
         cards.add(new SetCardInfo("Righteous Charge", 23, Rarity.COMMON, mage.cards.r.RighteousCharge.class));
         cards.add(new SetCardInfo("Ring of Renewal", 224, Rarity.RARE, mage.cards.r.RingOfRenewal.class));
+        cards.add(new SetCardInfo("Rock Hydra", 133, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Rockslide Ambush", 134, Rarity.COMMON, mage.cards.r.RockslideAmbush.class));
         cards.add(new SetCardInfo("Roc of Kher Ridges", 132, Rarity.UNCOMMON, mage.cards.r.RocOfKherRidges.class));
+        cards.add(new SetCardInfo("Rock Hydra", 133, Rarity.RARE, mage.cards.r.RockHydra.class));
         cards.add(new SetCardInfo("Sandstorm", 164, Rarity.COMMON, mage.cards.s.Sandstorm.class));
         cards.add(new SetCardInfo("Savannah", 250, Rarity.RARE, mage.cards.s.Savannah.class));
         cards.add(new SetCardInfo("Savannah Lions", 24, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
@@ -270,6 +274,7 @@ public class MastersEditionIV extends ExpansionSet {
         cards.add(new SetCardInfo("Urza's Miter", 237, Rarity.RARE, mage.cards.u.UrzasMiter.class));
         cards.add(new SetCardInfo("Urza's Power Plant", 258, Rarity.LAND, mage.cards.u.UrzasPowerPlant.class));
         cards.add(new SetCardInfo("Urza's Tower", 259, Rarity.LAND, mage.cards.u.UrzasTower.class));
+        cards.add(new SetCardInfo("Veteran Bodyguard", 32, Rarity.RARE, mage.cards.v.VeteranBodyguard.class));
         cards.add(new SetCardInfo("Volcanic Island", 260, Rarity.RARE, mage.cards.v.VolcanicIsland.class));
         cards.add(new SetCardInfo("War Mammoth", 172, Rarity.COMMON, mage.cards.w.WarMammoth.class));
         cards.add(new SetCardInfo("Warp Artifact", 100, Rarity.COMMON, mage.cards.w.WarpArtifact.class));

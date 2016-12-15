@@ -27,16 +27,14 @@
  */
 package mage.sets;
 
-import java.util.GregorianCalendar;
-import mage.cards.ExpansionSet;
-import mage.constants.SetType;
-import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
+import mage.cards.ExpansionSet;
+import mage.cards.h.HighTide;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 
 public class MediaInserts extends ExpansionSet {
+
     private static final MediaInserts fINSTANCE = new MediaInserts();
 
     public static MediaInserts getInstance() {
@@ -44,7 +42,7 @@ public class MediaInserts extends ExpansionSet {
     }
 
     private MediaInserts() {
-        super("Media Inserts", "MBP", "mage.sets.mediainserts", new GregorianCalendar(1990, 1, 1).getTime(), SetType.PROMOTIONAL);
+        super("Media Inserts", "MBP", ExpansionSet.buildDate(1990, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
         cards.add(new SetCardInfo("Acquire", 83, Rarity.RARE, mage.cards.a.Acquire.class));
@@ -97,6 +95,7 @@ public class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Eidolon of Blossoms", 85, Rarity.RARE, mage.cards.e.EidolonOfBlossoms.class));
         cards.add(new SetCardInfo("Electrolyze", 42, Rarity.UNCOMMON, mage.cards.e.Electrolyze.class));
         cards.add(new SetCardInfo("Elusive Tormentor", 154, Rarity.RARE, mage.cards.e.ElusiveTormentor.class));
+        cards.add(new SetCardInfo("Emrakul, the Aeons Torn", 163, Rarity.MYTHIC, mage.cards.e.EmrakulTheAeonsTorn.class));
         cards.add(new SetCardInfo("Evolving Wilds", 121, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Faithless Looting", 39, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
         cards.add(new SetCardInfo("Fated Conflagration", 79, Rarity.RARE, mage.cards.f.FatedConflagration.class));
@@ -122,7 +121,7 @@ public class MediaInserts extends ExpansionSet {
         cards.add(new SetCardInfo("Hamletback Goliath", 71, Rarity.RARE, mage.cards.h.HamletbackGoliath.class));
         cards.add(new SetCardInfo("Harbinger of the Hunt", 116, Rarity.SPECIAL, mage.cards.h.HarbingerOfTheHunt.class));
         cards.add(new SetCardInfo("Hero of Goma Fada", 136, Rarity.SPECIAL, mage.cards.h.HeroOfGomaFada.class));
-        cards.add(new SetCardInfo("High Tide", 80, Rarity.COMMON, mage.cards.h.HighTide1.class));
+        cards.add(new SetCardInfo("High Tide", 80, Rarity.COMMON, HighTide.class));
         cards.add(new SetCardInfo("Hixus, Prison Warden", 126, Rarity.SPECIAL, mage.cards.h.HixusPrisonWarden.class));
         cards.add(new SetCardInfo("Honored Hierarch", 129, Rarity.SPECIAL, mage.cards.h.HonoredHierarch.class));
         cards.add(new SetCardInfo("Honor of the Pure", 20, Rarity.RARE, mage.cards.h.HonorOfThePure.class));

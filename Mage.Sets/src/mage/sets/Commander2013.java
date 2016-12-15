@@ -28,14 +28,11 @@
 
 package mage.sets;
 
-import java.util.GregorianCalendar;
 import mage.cards.ExpansionSet;
+import mage.cards.n.NightSoil;
 import mage.constants.SetType;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 /**
  *
@@ -51,7 +48,7 @@ public class Commander2013 extends ExpansionSet {
     }
 
     private Commander2013() {
-        super("Commander 2013 Edition", "C13", "mage.sets.commander2013", new GregorianCalendar(2013, 11, 01).getTime(), SetType.SUPPLEMENTAL);
+        super("Commander 2013 Edition", "C13", ExpansionSet.buildDate(2013, 11, 01), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Acidic Slime", 134, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Act of Authority", 1, Rarity.RARE, mage.cards.a.ActOfAuthority.class));
@@ -246,7 +243,7 @@ public class Commander2013 extends ExpansionSet {
         cards.add(new SetCardInfo("Nevinyrral's Disk", 248, Rarity.RARE, mage.cards.n.NevinyrralsDisk.class));
         cards.add(new SetCardInfo("New Benalia", 309, Rarity.UNCOMMON, mage.cards.n.NewBenalia.class));
         cards.add(new SetCardInfo("Nightscape Familiar", 83, Rarity.COMMON, mage.cards.n.NightscapeFamiliar.class));
-        cards.add(new SetCardInfo("Night Soil", 158, Rarity.COMMON, mage.cards.n.NightSoil1.class));
+        cards.add(new SetCardInfo("Night Soil", 158, Rarity.COMMON, NightSoil.class));
         cards.add(new SetCardInfo("Nihil Spellbomb", 249, Rarity.COMMON, mage.cards.n.NihilSpellbomb.class));
         cards.add(new SetCardInfo("Nivix Guildmage", 202, Rarity.UNCOMMON, mage.cards.n.NivixGuildmage.class));
         cards.add(new SetCardInfo("Obelisk of Esper", 250, Rarity.COMMON, mage.cards.o.ObeliskOfEsper.class));

@@ -1,13 +1,11 @@
 package mage.sets;
 
-import java.util.GregorianCalendar;
+import mage.cards.f.FishliverOil;
+import mage.cards.r.RukhEgg;
 import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
-import java.util.List;
-import mage.ObjectColor;
 import mage.cards.CardGraphicInfo;
-import mage.cards.FrameStyle;
 
 public class NinthEdition extends ExpansionSet {
 
@@ -18,7 +16,7 @@ public class NinthEdition extends ExpansionSet {
     }
 
     private NinthEdition() {
-        super("Ninth Edition", "9ED", "mage.sets.ninthedition", new GregorianCalendar(2005, 7, 29).getTime(), SetType.CORE);
+        super("Ninth Edition", "9ED", ExpansionSet.buildDate(2005, 7, 29), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
@@ -115,7 +113,7 @@ public class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Festering Goblin", 130, Rarity.COMMON, mage.cards.f.FesteringGoblin.class));
         cards.add(new SetCardInfo("Final Punishment", 131, Rarity.RARE, mage.cards.f.FinalPunishment.class));
         cards.add(new SetCardInfo("Firebreathing", 181, Rarity.COMMON, mage.cards.f.Firebreathing.class));
-        cards.add(new SetCardInfo("Fishliver Oil", 77, Rarity.COMMON, mage.cards.f.FishliverOil1.class));
+        cards.add(new SetCardInfo("Fishliver Oil", 77, Rarity.COMMON, FishliverOil.class));
         cards.add(new SetCardInfo("Flame Wave", 182, Rarity.UNCOMMON, mage.cards.f.FlameWave.class));
         cards.add(new SetCardInfo("Flashfires", 183, Rarity.UNCOMMON, mage.cards.f.Flashfires.class));
         cards.add(new SetCardInfo("Fleeting Image", 78, Rarity.RARE, mage.cards.f.FleetingImage.class));
@@ -175,6 +173,7 @@ public class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 337, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Island", 338, Rarity.LAND, mage.cards.basiclands.Island.class, new CardGraphicInfo(null, true)));
         cards.add(new SetCardInfo("Ivory Mask", 23, Rarity.RARE, mage.cards.i.IvoryMask.class));
+        cards.add(new SetCardInfo("Jade Statue", 300, Rarity.RARE, mage.cards.j.JadeStatue.class));
         cards.add(new SetCardInfo("Jester's Cap", 301, Rarity.RARE, mage.cards.j.JestersCap.class));
         cards.add(new SetCardInfo("Kami of Old Stone", 24, Rarity.UNCOMMON, mage.cards.k.KamiOfOldStone.class));
         cards.add(new SetCardInfo("Karplusan Forest", 321, Rarity.RARE, mage.cards.k.KarplusanForest.class));
@@ -271,7 +270,7 @@ public class NinthEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Rootbreaker Wurm", 267, Rarity.UNCOMMON, mage.cards.r.RootbreakerWurm.class));
         cards.add(new SetCardInfo("Rootwalla", 268, Rarity.COMMON, mage.cards.r.Rootwalla.class));
         cards.add(new SetCardInfo("Royal Assassin", 159, Rarity.RARE, mage.cards.r.RoyalAssassin.class));
-        cards.add(new SetCardInfo("Rukh Egg", 214, Rarity.RARE, mage.cards.r.RukhEgg1.class));
+        cards.add(new SetCardInfo("Rukh Egg", 214, Rarity.RARE, RukhEgg.class));
         cards.add(new SetCardInfo("Sacred Ground", 37, Rarity.RARE, mage.cards.s.SacredGround.class));
         cards.add(new SetCardInfo("Sacred Nectar", 38, Rarity.COMMON, mage.cards.s.SacredNectar.class));
         cards.add(new SetCardInfo("Sage Aven", 95, Rarity.COMMON, mage.cards.s.SageAven.class));
