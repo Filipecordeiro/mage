@@ -24,6 +24,8 @@ To end this assignement we searched for a bug within the project. We found an [i
 
 [Jaddi Lifestrider card](https://github.com/PedroTav/mage/blob/master/Mage.Sets/src/mage/cards/j/JaddiLifestrider.java)
 
+[Pull request] (https://github.com/PedroTav/mage/commit/38ff0c2024449831ef48d5fe4723d965804d10bf)
+
 __Team Contribution__
 
 Everyone worked together to test the project and identify bugs. We analysed testing providing statistics regarding coverage
