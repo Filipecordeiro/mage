@@ -25,61 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.UnearthAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.continuous.BoostTargetEffect;
+import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.target.TargetPlayer;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author jeffwadsworth
- *
+ * @author Styxo
  */
-public class ExtractorDemon extends CardImpl {
+public class ArmedProtocolDroid extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
 
     static {
-        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
-    public ExtractorDemon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.subtype.add("Demon");
+    public ArmedProtocolDroid(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{U}");
+        this.subtype.add("Droid");
+        this.subtype.add("Rogue");
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(3);
 
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // Whenever another creature leaves the battlefield, you may have target player put the top two cards of his or her library into his or her graveyard.
-        Ability ability = new LeavesBattlefieldAllTriggeredAbility(new PutLibraryIntoGraveTargetEffect(2), filter, true);
-        ability.addTarget(new TargetPlayer());
+        // When {this} enters the battlefield, target nonartifact creature gets -2/-0 until end of turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, 0, Duration.EndOfTurn), false);
+        ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 
-        // Unearth {2}{B}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{B}")));
+        // Repair 3
+        this.addAbility(new RepairAbility(3));
     }
 
-    public ExtractorDemon(final ExtractorDemon card) {
+    public ArmedProtocolDroid(final ArmedProtocolDroid card) {
         super(card);
     }
 
     @Override
-    public ExtractorDemon copy() {
-        return new ExtractorDemon(this);
+    public ArmedProtocolDroid copy() {
+        return new ArmedProtocolDroid(this);
     }
 }

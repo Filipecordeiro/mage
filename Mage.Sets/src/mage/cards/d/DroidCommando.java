@@ -25,61 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.e;
+package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.UnearthAbility;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.keyword.RepairAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPlayer;
 
 /**
  *
- * @author jeffwadsworth
- *
+ * @author Styxo
  */
-public class ExtractorDemon extends CardImpl {
+public class DroidCommando extends CardImpl {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    public DroidCommando(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{B}");
+        this.subtype.add("Droid");
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-    static {
-        filter.add(new AnotherPredicate());
-    }
-
-    public ExtractorDemon(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
-        this.subtype.add("Demon");
-
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // Whenever another creature leaves the battlefield, you may have target player put the top two cards of his or her library into his or her graveyard.
-        Ability ability = new LeavesBattlefieldAllTriggeredAbility(new PutLibraryIntoGraveTargetEffect(2), filter, true);
+        // When Droid Commando dies, target player loses 2 life and you gain 2 life.
+        Ability ability = new DiesTriggeredAbility(new LoseLifeTargetEffect(2));
+        ability.addEffect(new GainLifeEffect(2));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
-        // Unearth {2}{B}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{2}{B}")));
+        // Repair 3
+        this.addAbility(new RepairAbility(3));
     }
 
-    public ExtractorDemon(final ExtractorDemon card) {
+    public DroidCommando(final DroidCommando card) {
         super(card);
     }
 
     @Override
-    public ExtractorDemon copy() {
-        return new ExtractorDemon(this);
+    public DroidCommando copy() {
+        return new DroidCommando(this);
     }
 }
