@@ -8,7 +8,7 @@ __Software Maintainability__
 __Evolution Process__
 
 In this section we take a closer look at the feature we develop. The first thing we needed to know was what to evolve. Given
-the fact that this is a card game, the answer was obvious: develop a new card. XMage has over 1000 unimplemented cards, so we
+the fact that this is a card game, the answer was obvious: develop a new card. Of course one might ask why not implement another feature. The fact is that the project was built for contributors to create new cards. Making changes in the core of the game can be very complex in this project, because that was not the goal of the developers when they made it open source. Creating cards is, therefore, much simpler and straightforward. XMage has over 1000 unimplemented cards, so we
 took a look at the list to see which card poped our interest. We ended up choosing [Dark Suspicions](http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=26414).
 In order to properly create the card, we followed the instructions given by the developers. For starters, we used a Perl script
 created by developers to generate the basic structure of the card and implement any needed dependencies in the project. All
